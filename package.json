@@ -1,0 +1,37 @@
+{
+  "name": "react-auth-tool",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\""
+  },
+  "author": "",
+  "license": "MIT",
+  "source": "src/index.tsx",
+  "main": "dist/index.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "directories": {
+    "src": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.1.1",
+    "rollup": "^4.9.0",
+    "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.3.3"
+  }
+}
