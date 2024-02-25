@@ -1,27 +1,35 @@
 import * as React from 'react'
 import { PropsWithChildren } from 'react'
-import { Tooltip as ReactTooltip } from 'react-tooltip'
-// import uuid from '../utils/uuid'
-// import cn from '../utils/cn'
+import { Tooltip as ReactTooltip, PlacesType } from 'react-tooltip'
+import uuid from '../utils/uuid'
+import cn from '../utils/cn'
 
 export interface TooltipProps extends PropsWithChildren {
-  content?: string
+  content: string
+  clickable?: boolean
+  place?: PlacesType
+  theme?: TooltipTheme
 }
 
-const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content }) => {
-  //   const randomKey = uuid(10)
+type TooltipTheme = 'primary' | 'error'
+
+const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, clickable, place, theme }) => {
+  const randomKey = uuid(10)
   return (
-    <div>
-      <div data-tooltip-id={'test'} data-tooltip-content={content}>
+    <>
+      <div data-tooltip-id={randomKey} data-tooltip-content={content}>
         {children}
       </div>
       <ReactTooltip
-        id={'test'}
-        className={
-          '!dj-bg-primary-500 dj-text-white dark:dj-bg-primary-400 dj-max-w-[250px] !dj-px-2 !dj-py-1 !dj-whitespace-normal dj-z-40'
-        }
+        id={randomKey}
+        clickable={clickable}
+        place={place}
+        className={cn('dj-text-white dj-max-w-[250px] !dj-px-2 !dj-py-1 !dj-whitespace-normal dj-z-40', {
+          '!dj-bg-primary-500 dark:dj-bg-primary-400': theme === undefined || theme === 'primary',
+          '!dj-bg-red-500 dark:dj-bg-red-500': theme === 'error',
+        })}
       />
-    </div>
+    </>
   )
 }
 

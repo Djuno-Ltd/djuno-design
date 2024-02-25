@@ -11,6 +11,11 @@
     "outDir": "./dist/esm",
     "declaration": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "react": ["./node_modules/react"],
+      "react-dom": ["./node_modules/react-dom"]
+    },
     "lib": ["dom", "es2015", "es2017.object"],
     "typeRoots": ["./node_modules/@types", "./types"]
   },

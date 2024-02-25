@@ -28,6 +28,7 @@ export default [
       }),
       filesize(),
     ],
+    external: ['react', 'react-dom'],
   },
   {
     input: 'src/index.tsx',
@@ -55,6 +56,6 @@ export default [
       terser(),
       filesize(),
     ],
-    external: ['react', 'react-router-dom'],
+    external: ['react', 'react-dom'],
   },
 ]
