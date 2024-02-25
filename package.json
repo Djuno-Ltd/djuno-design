@@ -1,13 +1,15 @@
 {
-  "name": "react-auth-tool",
+  "name": "djuno-design",
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm run prettier && npm run rollup && npm run link",
+    "link": "npm link",
+    "rollup": "rollup -c",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\""
   },
-  "author": "",
+  "author": "Ansar Mirzayi <ansarmirzayi@gmail.com>",
   "license": "MIT",
   "source": "src/index.tsx",
   "main": "dist/index.js",
@@ -18,20 +20,37 @@
     "src": "src"
   },
   "files": [
-    "src"
+    "dist"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "eslint": "^8.56.0",
+    "@types/react": "^18.2.58",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "autoprefixer": "^10.4.17",
+    "classnames": "^2.5.1",
+    "clsx": "^2.1.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.4.35",
+    "postcss-prefixer": "^3.0.0",
     "prettier": "^3.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup": "^4.9.0",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
-    "typescript": "^5.3.3"
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^7.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0 || ^17.x || ^18.x",
+    "react-dom": ">=16.8.0 || ^17.x || ^18.x"
   }
 }
