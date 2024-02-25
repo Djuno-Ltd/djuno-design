@@ -1,5 +1,5 @@
 {
-  "name": "djuno-design",
+  "name": "ansar-design",
   "version": "0.0.1",
   "description": "",
   "scripts": {
@@ -23,6 +23,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@headlessui/react": "^1.7.18",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -32,6 +33,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.0",
     "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.35",
@@ -39,6 +41,7 @@
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-tooltip": "^5.26.3",
     "rollup": "^4.9.0",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",

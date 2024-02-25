@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import terser from '@rollup/plugin-terser'
 import filesize from 'rollup-plugin-filesize'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
-import postcss from 'rollup-plugin-postcss';
+import postcss from 'rollup-plugin-postcss'
 
 export default [
   {
@@ -17,10 +17,17 @@ export default [
         preserveModules: false,
       },
     ],
-    plugins: [peerDepsExternal(), resolve(),commonjs(), typescript(),postcss({
-      extract: true,
-      minimize: true,
-    }),filesize()],
+    plugins: [
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      typescript(),
+      postcss({
+        extract: true,
+        minimize: true,
+      }),
+      filesize(),
+    ],
   },
   {
     input: 'src/index.tsx',
