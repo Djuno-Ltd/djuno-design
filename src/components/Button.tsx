@@ -3,20 +3,32 @@ import { ButtonHTMLAttributes } from 'react'
 import cn from './../utils/cn'
 import Tooltip, { TooltipProps } from './Tooltip'
 import { Size } from '../types'
+import Loading, { LoadingType } from './Loading'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   uiType?: ButtonTypes
   size?: Size
   tooltip?: TooltipProps
+  loading?: boolean
+  loadingType?: LoadingType
 }
 export type ButtonTypes = 'simple' | 'primary' | 'light' | 'icon' | 'danger'
 
-const Button: React.FunctionComponent<ButtonProps> = ({ children, className, uiType, size, tooltip, ...props }) => {
+const Button: React.FunctionComponent<ButtonProps> = ({
+  children,
+  className,
+  uiType,
+  size,
+  tooltip,
+  loading,
+  loadingType,
+  ...props
+}) => {
   const renderButton = () => (
     <button
       {...props}
       className={cn(
-        'dj-rounded-xl focus:dj-outline-none dj-transition-all disabled:dj-cursor-not-allowed dj-w-max',
+        'dj-rounded-xl focus:dj-outline-none dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400',
         {
           'dj-text-primary-500 dj-bg-transparent hover:dj-bg-primary-50 hover:dj-text-primary-500 hover:dj-border-primary-100 dj-border-2 dj-border-slate-200 dark:dj-bg-secondary-800 dark:hover:dj-bg-secondary-700 dark:dj-text-white dark:dj-border-secondary-700 disabled:dj-border-secondary-400 disabled:hover:dj-bg-transparent disabled:dj-text-secondary-400 disabled:dark:dj-text-secondary-400':
             uiType === 'simple' || uiType === undefined,
@@ -29,6 +41,13 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, className, uiT
         className,
       )}
     >
+      {loading && (
+        <Loading
+          type={loadingType || 'simple'}
+          borderSize={1.5}
+          size={size === 'medium' || size === undefined ? 14 : size === 'small' ? 12 : 18}
+        />
+      )}
       {children}
     </button>
   )

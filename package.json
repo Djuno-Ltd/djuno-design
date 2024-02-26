@@ -42,6 +42,7 @@
     "react-tooltip": "^5.26.3",
     "rollup": "^4.9.0",
     "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-import-css": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",

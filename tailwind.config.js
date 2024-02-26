@@ -40,7 +40,31 @@ export default {
         error: '#D52B1E',
       },
       animation: {
-        'spin-slow': 'spin 4.5s linear infinite',
+        'cutoff-spin': 'spin 0.8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'cutoff-spin-slow': 'spin 4.5s linear infinite',
+        rotate: 'rotate 0.8s linear infinite',
+        'stroke-dash': 'stroke-dash 1.6s ease-in infinite',
+      },
+      keyframes: {
+        rotate: {
+          to: {
+            transform: 'rotate(1turn)',
+          },
+        },
+        'stroke-dash': {
+          '0%': {
+            strokeDasharray: '1, 100',
+            strokeDashoffset: '0',
+          },
+          '50%': {
+            strokeDasharray: '80, 100',
+            strokeDashoffset: '46',
+          },
+          to: {
+            strokeDasharray: '1, 100',
+            strokeDashoffset: '0',
+          },
+        },
       },
     },
   },

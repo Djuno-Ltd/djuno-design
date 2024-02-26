@@ -5,6 +5,7 @@ import terser from '@rollup/plugin-terser'
 import filesize from 'rollup-plugin-filesize'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
+// import css from 'rollup-plugin-import-css'
 
 export default [
   {
@@ -27,6 +28,7 @@ export default [
         minimize: true,
       }),
       filesize(),
+      // css({ inject: true }),
     ],
     external: ['react', 'react-dom'],
   },
@@ -55,6 +57,7 @@ export default [
       }),
       terser(),
       filesize(),
+      // css({ inject: true }),
     ],
     external: ['react', 'react-dom'],
   },
