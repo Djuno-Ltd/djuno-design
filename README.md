@@ -16,7 +16,7 @@ yarn
 
     yarn add djuno-design
 
-### 2. Import styles to top of your component tree
+### 2. Import styles at the top of your component tree
 
 ```jsx
 import 'djuno-design/dist/index.css'
@@ -29,9 +29,9 @@ import { Button } from 'djuno-design'
 
 function App() {
   return (
-    <div>
+    <>
       <Button>Click!</Button>
-    </div>
+    </>
   )
 }
 ```
