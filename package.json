@@ -1,7 +1,12 @@
 {
   "name": "djuno-design",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Djuno design lib for React projects",
+  "keywords": [
+    "djuno",
+    "design",
+    "react"
+  ],
   "scripts": {
     "build": "npm run prettier && npm run rollup && npm run link",
     "link": "npm link",
@@ -10,7 +15,7 @@
     "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\""
   },
   "author": "Ansar Mirzayi <ansarmirzayi@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "source": "src/index.tsx",
   "main": "dist/index.js",
   "unpkg": "dist/index.umd.js",
@@ -20,7 +25,9 @@
     "src": "src"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -52,7 +59,7 @@
     "typescript-eslint": "^7.0.2"
   },
   "peerDependencies": {
-    "react": ">=16.8.0 || ^17.x || ^18.x",
-    "react-dom": ">=16.8.0 || ^17.x || ^18.x"
+    "react": "^18.x",
+    "react-dom": "^18.x"
   }
 }

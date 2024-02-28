@@ -40,6 +40,7 @@ function App() {
 
 1. Button
 2. Tooltip
+3. Loading
 
 ## APIs
 
@@ -47,17 +48,27 @@ function App() {
 
 | Name    | Type         | Required | default   | Description |
 | ------- | ------------ | -------- | --------- | ----------- |
-| uiType  | string       | no       | simple    |             |
-| size    | string       | no       | medium    |             |
+| uiType  | ButtonTypes  | no       | simple    |             |
+| size    | SizeTypes    | no       | medium    |             |
 | tooltip | TooltipProps | no       | undefined |             |
 
 ### Tooltip
 
-| Name    | Type         | Required | default | Description |
-| ------- | ------------ | -------- | ------- | ----------- |
-| content | string       | yes      |         |             |
-| place   | string       | no       | top     |             |
-| theme   | TooltipTheme | no       | primary |             |
+| Name    | Type          | Required | default | Description |
+| ------- | ------------- | -------- | ------- | ----------- |
+| content | string        | yes      |         |             |
+| place   | TooltipPlaces | no       | top     |             |
+| theme   | ColorTypes    | no       | primary |             |
+
+### Loading
+
+| Name       | Type        | Required | default | Description |
+| ---------- | ----------- | -------- | ------- | ----------- |
+| className  | string      | no       |         |             |
+| type       | LoadingType | no       | simple  |             |
+| size       | number      | no       | 24px    |             |
+| borderSize | number      | no       | 2px     |             |
+| theme      | ColorTypes  | no       | primary |             |
 
 ## Contributor ✨
 

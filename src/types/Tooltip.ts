@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Types index file
+ * @fileoverview Tooltip types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,9 +18,14 @@
  * limitations under the License.
  */
 
-export * from './Button'
-export * from './Tooltip'
-export * from './Loading'
+import { PropsWithChildren } from 'react'
+import { PlacesType } from 'react-tooltip'
+import { ColorTypes } from '.'
 
-export type SizeTypes = 'small' | 'medium' | 'large'
-export type ColorTypes = 'primary' | 'error'
+export type TooltipPlaces = PlacesType
+export interface TooltipProps extends PropsWithChildren {
+  content: string
+  clickable?: boolean
+  place?: TooltipPlaces
+  theme?: ColorTypes
+}

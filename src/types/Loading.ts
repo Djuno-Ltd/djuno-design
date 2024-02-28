@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Types index file
+ * @fileoverview Loading types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,9 +18,14 @@
  * limitations under the License.
  */
 
-export * from './Button'
-export * from './Tooltip'
-export * from './Loading'
+import { HTMLAttributes } from 'react'
+import { ColorTypes } from '.'
 
-export type SizeTypes = 'small' | 'medium' | 'large'
-export type ColorTypes = 'primary' | 'error'
+export type LoadingType = 'simple' | 'cutoff' | 'elastic'
+export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string
+  type?: LoadingType
+  size?: number
+  borderSize?: number
+  theme?: ColorTypes
+}

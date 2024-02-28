@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Types index file
+ * @fileoverview Button types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,9 +18,15 @@
  * limitations under the License.
  */
 
-export * from './Button'
-export * from './Tooltip'
-export * from './Loading'
+import { ButtonHTMLAttributes } from 'react'
+import { LoadingType, SizeTypes, TooltipProps } from '.'
 
-export type SizeTypes = 'small' | 'medium' | 'large'
-export type ColorTypes = 'primary' | 'error'
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  uiType?: ButtonTypes
+  size?: SizeTypes
+  tooltip?: TooltipProps
+  loading?: boolean
+  loadingType?: LoadingType
+}
+
+export type ButtonTypes = 'simple' | 'primary' | 'light' | 'icon' | 'danger'
