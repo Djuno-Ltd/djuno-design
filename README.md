@@ -46,11 +46,13 @@ function App() {
 
 ### Button
 
-| Name    | Type         | Required | default   | Description |
-| ------- | ------------ | -------- | --------- | ----------- |
-| uiType  | ButtonTypes  | no       | simple    |             |
-| size    | SizeTypes    | no       | medium    |             |
-| tooltip | TooltipProps | no       | undefined |             |
+| Name        | Type         | Required | default   | Description |
+| ----------- | ------------ | -------- | --------- | ----------- |
+| uiType      | ButtonTypes  | no       | simple    |             |
+| size        | SizeTypes    | no       | medium    |             |
+| tooltip     | TooltipProps | no       | undefined |             |
+| loading     | boolean      | no       | false     |             |
+| loadingType | LoadingType  | no       | simple    |             |
 
 ### Tooltip
 
@@ -72,4 +74,4 @@ function App() {
 
 ## Contributor ✨
 
-[![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar/react-search-hook/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)

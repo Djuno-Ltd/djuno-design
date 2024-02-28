@@ -29,14 +29,16 @@ const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size,
         <g className='dj-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
           <path
             className={cn({
-              'dj-fill-primary-50 dark:dj-fill-zinc-600': theme === 'primary' || theme === undefined,
+              'dj-fill-primary-50 dark:dj-fill-zinc-600': theme === 'primary',
               'dj-fill-red-50 dark:dj-fill-red-700/10': theme === 'error',
+              'dj-fill-transparent dark:dj-fill-transparent': theme === 'transparent' || theme === undefined,
             })}
             d='M8,16a8,8,0,1,1,8-8A8,8,0,0,1,8,16ZM8,2a6,6,0,1,0,6,6A6,6,0,0,0,8,2Z'
           ></path>
           <circle
             className={cn('dj-animate-stroke-dash dj-fill-none', {
-              'dj-stroke-primary-500': theme === 'primary' || theme === undefined,
+              'dj-stroke-white': theme === undefined,
+              'dj-stroke-primary-500': theme === 'primary' || theme === 'transparent',
               'dj-stroke-red-500': theme === 'error',
             })}
             style={{
@@ -69,9 +71,11 @@ const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size,
           'dj-animate-cutoff-spin': type === 'cutoff',
 
           // specify theme
+          'dj-border-transparent dj-border-t-white': theme === undefined,
           'dj-border-primary-50 dj-border-t-primary-500 dark:dj-border-zinc-600 dark:dj-border-t-primary-300':
-            theme === 'primary' || theme === undefined,
+            theme === 'primary',
           'dj-border-red-50 dj-border-t-red-500 dark:dj-border-red-700/10 dark:dj-border-t-red-500': theme === 'error',
+          'dj-border-transparent dj-border-t-primary-500': theme === 'transparent',
         },
         className,
       )}
