@@ -22,6 +22,29 @@ import * as React from 'react'
 import cn from '../utils/cn'
 import { LoadingProps } from '../types'
 
+/**
+ * Loading component that displays a loading indicator based on the specified type and theme.
+ *
+ * @param {object} props - Loading props.
+ * @param {string} [props.className] - Additional classes to apply to the loading component.
+ * @param {LoadingType} [props.type] - Type of loading indicator: 'simple' or 'elastic'.
+ * @param {number} [props.size] - Size of the loading indicator.
+ * @param {number} [props.borderSize] - Size of the loading indicator's border.
+ * @param {LoadingThemeTypes} [props.theme] - Theme of the loading indicator, defining its appearance.
+ *
+ * @returns {React.ReactNode} Rendered Loading component.
+ *
+ * @version 0.0.3
+ * @see
+ *
+ * @example
+ * // Example usage of Loading component:
+ * <Loading type="simple" size={20} theme="primary" />
+ *
+ * @example
+ * // Example usage of Loading component with elastic type:
+ * <Loading type="elastic" size={32} borderSize={2} theme="error" />
+ */
 const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size, borderSize, theme }) => {
   if (type === 'elastic') {
     return (

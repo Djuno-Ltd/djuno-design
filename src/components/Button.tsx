@@ -24,6 +24,37 @@ import Tooltip from './Tooltip'
 import Loading from './Loading'
 import { ButtonProps } from '../types'
 
+/**
+ * Button component that allows for customization of UI type, size, loading state, and more.
+ *
+ *
+ * @param {object} props - Button props.
+ * @param {React.ReactNode} [props.children] - The content inside the button.
+ * @param {string} [props.className] - Additional classes to apply to the button.
+ * @param {string} [props.uiType] - Type of UI for the button: 'simple' or 'primary'.
+ * @param {string} [props.size] - Size of the button: 'small', 'medium', or 'large'.
+ * @param {object} [props.tooltip] - Tooltip configuration for the button.
+ * @param {React.ReactNode} [props.tooltip.content] - Content of the tooltip.
+ * @param {boolean} [props.loading] - Indicates if the button is in a loading state.
+ * @param {string} [props.loadingType] - Type of loading indicator: 'simple' or custom.
+ *
+ * @returns {React.ReactNode} Rendered Button component.
+ *
+ * @version 0.0.1
+ * @see
+ *
+ * @example
+ * // Example usage of Button component:
+ * <Button onClick={() => console.log("Button clicked")} uiType="primary" size="large">
+ *   Submit
+ * </Button>
+ *
+ * @example
+ * // Example usage of Button component with loading state:
+ * <Button loading={true} loadingType="simple" uiType="simple">
+ *   Save Changes
+ * </Button>
+ */
 const Button: React.FunctionComponent<ButtonProps> = ({
   children,
   className,

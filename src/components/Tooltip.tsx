@@ -24,6 +24,33 @@ import uuid from '../utils/uuid'
 import cn from '../utils/cn'
 import { TooltipProps } from '../types'
 
+/**
+ * Tooltip component that provides contextual information on hover or click events.
+ *
+ * @param {object} props - Tooltip props.
+ * @param {React.ReactNode} props.children - The content to which the tooltip is attached.
+ * @param {string | React.ReactNode} props.content - The content of the tooltip.
+ * @param {boolean} [props.clickable] - Determines if the tooltip is clickable.
+ * @param {TooltipPlaces} [props.place] - The placement of the tooltip relative to its parent element.
+ * @param {TooltipThemeTypes} [props.theme] - The theme of the tooltip, defining its appearance.
+ *
+ * @returns {React.ReactNode} Rendered Tooltip component.
+ *
+ * @version 0.0.2
+ * @see
+ *
+ * @example
+ * // Example usage of Tooltip component:
+ * <Tooltip content="This is a tooltip" place="top" theme="primary">
+ *   <button>Hover me</button>
+ * </Tooltip>
+ *
+ * @example
+ * // Example usage of Tooltip component with custom content:
+ * <Tooltip content={<div>This is a custom tooltip content</div>} clickable={true} place="bottom">
+ *   <span>Click me</span>
+ * </Tooltip>
+ */
 const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, clickable, place, theme }) => {
   const randomKey = uuid(10)
   return (
