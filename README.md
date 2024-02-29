@@ -56,21 +56,22 @@ function App() {
 
 ### Tooltip
 
-| Name    | Type          | Required | default | Description |
-| ------- | ------------- | -------- | ------- | ----------- |
-| content | string        | yes      |         |             |
-| place   | TooltipPlaces | no       | top     |             |
-| theme   | ColorTypes    | no       | primary |             |
+| Name      | Type              | Required | default | Description |
+| --------- | ----------------- | -------- | ------- | ----------- |
+| content   | string, ReactNode | yes      |         |             |
+| place     | TooltipPlaces     | no       | top     |             |
+| theme     | TooltipThemeTypes | no       | primary |             |
+| clickable | boolean           | no       | false   |             |
 
 ### Loading
 
-| Name       | Type        | Required | default | Description |
-| ---------- | ----------- | -------- | ------- | ----------- |
-| className  | string      | no       |         |             |
-| type       | LoadingType | no       | simple  |             |
-| size       | number      | no       | 24px    |             |
-| borderSize | number      | no       | 2px     |             |
-| theme      | ColorTypes  | no       | primary |             |
+| Name       | Type              | Required | default | Description |
+| ---------- | ----------------- | -------- | ------- | ----------- |
+| className  | string            | no       |         |             |
+| type       | LoadingType       | no       | simple  |             |
+| size       | number            | no       | 24px    |             |
+| borderSize | number            | no       | 2px     |             |
+| theme      | LoadingThemeTypes | no       | primary |             |
 
 ## Contributor ✨
 

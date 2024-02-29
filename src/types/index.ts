@@ -23,4 +23,3 @@ export * from './Tooltip'
 export * from './Loading'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
-export type ColorTypes = 'primary' | 'error' | 'transparent' | 'white'

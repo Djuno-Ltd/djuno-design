@@ -7,6 +7,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 // import css from 'rollup-plugin-import-css'
 
+const makeSourcemap = false
 export default [
   {
     input: 'src/index.tsx',
@@ -14,7 +15,7 @@ export default [
       {
         dir: 'dist',
         format: 'esm',
-        sourcemap: true,
+        sourcemap: makeSourcemap,
         preserveModules: false,
       },
     ],
@@ -38,7 +39,7 @@ export default [
       file: 'dist/index.umd.js',
       format: 'umd',
       name: 'DjunoDesign',
-      sourcemap: true,
+      sourcemap: makeSourcemap,
       globals: {
         react: 'React',
         'react-router-dom': 'ReactRouterDOM',

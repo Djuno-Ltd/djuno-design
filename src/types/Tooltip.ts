@@ -20,12 +20,13 @@
 
 import { PropsWithChildren } from 'react'
 import { PlacesType } from 'react-tooltip'
-import { ColorTypes } from '.'
 
 export type TooltipPlaces = PlacesType
+export type TooltipThemeTypes = 'primary' | 'error'
+
 export interface TooltipProps extends PropsWithChildren {
-  content: string
+  content: string | React.ReactNode
   clickable?: boolean
   place?: TooltipPlaces
-  theme?: ColorTypes
+  theme?: TooltipThemeTypes
 }

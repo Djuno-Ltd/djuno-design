@@ -56,7 +56,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
           type={loadingType || 'simple'}
           borderSize={1.5}
           size={size === 'medium' || size === undefined ? 14 : size === 'small' ? 12 : 18}
-          theme={uiType === 'primary' ? undefined : 'transparent'}
+          theme={uiType === 'primary' ? 'white' : 'transparent'}
         />
       )}
       {children}

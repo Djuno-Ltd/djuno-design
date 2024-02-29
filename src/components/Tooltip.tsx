@@ -28,9 +28,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, cli
   const randomKey = uuid(10)
   return (
     <>
-      <div data-tooltip-id={randomKey} data-tooltip-content={content}>
-        {children}
-      </div>
+      <div data-tooltip-id={randomKey}>{children}</div>
       <ReactTooltip
         id={randomKey}
         clickable={clickable}
@@ -39,7 +37,9 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, cli
           '!dj-bg-primary-500 dark:dj-bg-primary-400': theme === undefined || theme === 'primary',
           '!dj-bg-red-500 dark:dj-bg-red-500': theme === 'error',
         })}
-      />
+      >
+        {content}
+      </ReactTooltip>
     </>
   )
 }

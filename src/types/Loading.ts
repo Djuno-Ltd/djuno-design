@@ -19,13 +19,14 @@
  */
 
 import { HTMLAttributes } from 'react'
-import { ColorTypes } from '.'
 
 export type LoadingType = 'simple' | 'cutoff' | 'elastic'
+export type LoadingThemeTypes = 'primary' | 'error' | 'transparent' | 'white'
+
 export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
   type?: LoadingType
   size?: number
   borderSize?: number
-  theme?: ColorTypes
+  theme?: LoadingThemeTypes
 }
