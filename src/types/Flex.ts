@@ -19,13 +19,14 @@
  */
 
 import { HTMLAttributes } from 'react'
+import { IMediaQuery } from '.'
 
 export type FlexDirection = 'row' | 'row-reverse' | 'col' | 'col-reverce'
 export type FlexItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch'
 export type FlexJustify = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch'
 
 export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
-  direction?: FlexDirection
-  items?: FlexItems
-  justify?: FlexJustify
+  direction?: FlexDirection | IMediaQuery<FlexDirection>
+  items?: FlexItems | IMediaQuery<FlexItems>
+  justify?: FlexJustify | IMediaQuery<FlexJustify>
 }

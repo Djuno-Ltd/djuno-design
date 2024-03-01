@@ -24,3 +24,11 @@ export * from './Loading'
 export * from './Flex'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
+export interface IMediaQuery<T> {
+  default?: T
+  sm?: T
+  md?: T
+  lg?: T
+  xl?: T
+  '2xl'?: T
+}
