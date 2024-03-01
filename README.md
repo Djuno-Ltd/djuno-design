@@ -41,6 +41,7 @@ function App() {
 1. Button
 2. Tooltip
 3. Loading
+4. Flex
 
 ## APIs
 
@@ -67,11 +68,18 @@ function App() {
 
 | Name       | Type              | Required | default | Description |
 | ---------- | ----------------- | -------- | ------- | ----------- |
-| className  | string            | no       |         |             |
 | type       | LoadingType       | no       | simple  |             |
 | size       | number            | no       | 24px    |             |
 | borderSize | number            | no       | 2px     |             |
 | theme      | LoadingThemeTypes | no       | primary |             |
+
+### Flex
+
+| Name      | Type          | Required | default | Description                   |
+| --------- | ------------- | -------- | ------- | ----------------------------- |
+| direction | FlexDirection | no       | row     | Specifies the main-axis       |
+| justify   | FlexJustify   | no       | start   | Alignment along the main-axis |
+| items     | FlexItems     | no       | start   | Alignment along the sub-axis  |
 
 ## Contributor ✨
 

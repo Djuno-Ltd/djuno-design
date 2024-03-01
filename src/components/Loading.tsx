@@ -35,7 +35,7 @@ import { LoadingProps } from '../types'
  * @returns {React.ReactNode} Rendered Loading component.
  *
  * @version 0.0.3
- * @see
+ * @see https://www.npmjs.com/package/djuno-design#loading
  *
  * @example
  * // Example usage of Loading component:

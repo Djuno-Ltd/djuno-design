@@ -41,7 +41,7 @@ import { ButtonProps } from '../types'
  * @returns {React.ReactNode} Rendered Button component.
  *
  * @version 0.0.1
- * @see
+ * @see https://www.npmjs.com/package/djuno-design#button
  *
  * @example
  * // Example usage of Button component:

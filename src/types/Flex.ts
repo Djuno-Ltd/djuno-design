@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Types index file
+ * @fileoverview Flex types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,9 +18,14 @@
  * limitations under the License.
  */
 
-export * from './Button'
-export * from './Tooltip'
-export * from './Loading'
-export * from './Flex'
+import { HTMLAttributes } from 'react'
 
-export type SizeTypes = 'small' | 'medium' | 'large'
+export type FlexDirection = 'row' | 'row-reverse' | 'col' | 'col-reverce'
+export type FlexItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch'
+export type FlexJustify = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch'
+
+export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
+  direction?: FlexDirection
+  items?: FlexItems
+  justify?: FlexJustify
+}

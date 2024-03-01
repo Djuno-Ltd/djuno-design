@@ -29,6 +29,7 @@ import './index.css'
 import Button from './components/Button'
 import Tooltip from './components/Tooltip'
 import Loading from './components/Loading'
+import Flex from './components/Flex'
 
 // export all types
 export * from './types'
@@ -36,4 +37,4 @@ export * from './types'
 /**
  * export components
  */
-export { Button, Tooltip, Loading }
+export { Button, Tooltip, Loading, Flex }

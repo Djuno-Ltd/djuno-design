@@ -37,7 +37,7 @@ import { TooltipProps } from '../types'
  * @returns {React.ReactNode} Rendered Tooltip component.
  *
  * @version 0.0.2
- * @see
+ * @see https://www.npmjs.com/package/djuno-design#tooltip
  *
  * @example
  * // Example usage of Tooltip component:
