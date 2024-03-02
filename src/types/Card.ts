@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Main file
+ * @fileoverview Card types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,24 +18,15 @@
  * limitations under the License.
  */
 
-/**
- * import styles
- */
-import './index.css'
+import { PropsWithChildren } from 'react'
 
-/**
- * import components
- */
-import Button from './components/Button'
-import Tooltip from './components/Tooltip'
-import Loading from './components/Loading'
-import Flex from './components/Flex'
-import Card from './components/Card'
-
-// export all types
-export * from './types'
-
-/**
- * export components
- */
-export { Button, Tooltip, Loading, Flex, Card }
+export interface CardProps extends PropsWithChildren {
+  id?: string
+  title?: string | React.ReactNode
+  description?: string | React.ReactNode
+  setting?: React.ReactNode
+  className?: string
+  headerClassName?: string
+  titleClassName?: string
+  descriptionClassName?: string
+}

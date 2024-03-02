@@ -42,6 +42,7 @@ function App() {
 2. Tooltip
 3. Loading
 4. Flex
+5. Card
 
 ## APIs
 
@@ -80,6 +81,16 @@ function App() {
 | direction | FlexDirection | no       | row     | Specifies the main-axis       |
 | justify   | FlexJustify   | no       | start   | Alignment along the main-axis |
 | items     | FlexItems     | no       | start   | Alignment along the sub-axis  |
+
+### Card
+
+| Name                          | Type              | Required | default | Description |
+| ----------------------------- | ----------------- | -------- | ------- | ----------- |
+| id                            | string            | no       |         |             |
+| title                         | string, ReactNode | no       |         |             |
+| description                   | string, ReactNode | no       |         |             |
+| setting                       | string, ReactNode | no       |         |             |
+| class names for main sections | string            | no       |         |             |
 
 ## Contributor ✨
 
