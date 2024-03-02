@@ -8,7 +8,7 @@ import postcss from 'rollup-plugin-postcss'
 // import css from 'rollup-plugin-import-css'
 
 const makeSourcemap = false
-const minimizeCss = false
+const minimizeCss = true
 
 export default [
   {
@@ -30,17 +30,17 @@ export default [
         extract: true,
         minimize: minimizeCss,
       }),
-      // terser({
-      //   compress: {
-      //     passes: 20,
-      //     drop_console: true,
-      //     ecma: 2018,
-      //   },
-      //   output: {
-      //     ecma: 5,
-      //     comments: false,
-      //   },
-      // }),
+      terser({
+        compress: {
+          passes: 20,
+          drop_console: true,
+          ecma: 2018,
+        },
+        output: {
+          ecma: 5,
+          comments: false,
+        },
+      }),
       filesize(),
       // css({ inject: true }),
     ],
