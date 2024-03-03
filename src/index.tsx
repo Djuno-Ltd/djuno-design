@@ -31,6 +31,7 @@ import Tooltip from './components/Tooltip'
 import Loading from './components/Loading'
 import Flex from './components/Flex'
 import Card from './components/Card'
+import Typography from './components/Typography'
 
 // export all types
 export * from './types'
@@ -38,4 +39,4 @@ export * from './types'
 /**
  * export components
  */
-export { Button, Tooltip, Loading, Flex, Card }
+export { Button, Tooltip, Loading, Flex, Card, Typography }

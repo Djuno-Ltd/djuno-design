@@ -43,6 +43,7 @@ function App() {
 3. Loading
 4. Flex
 5. Card
+6. Typography
 
 ## APIs
 
@@ -91,6 +92,19 @@ function App() {
 | description                   | string, ReactNode | no       |         |             |
 | setting                       | string, ReactNode | no       |         |             |
 | class names for main sections | string            | no       |         |             |
+
+### Typography
+
+#### Typography.Title
+
+| Name  | Type              | Required | default | Description |
+| ----- | ----------------- | -------- | ------- | ----------- |
+| level | number [1,2,..,6] | no       | 1       |             |
+
+#### Typography.Text
+
+| Name | Type | Required | default | Description |
+| ---- | ---- | -------- | ------- | ----------- |
 
 ## Contributor ✨
 
