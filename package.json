@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "0.0.51",
+  "version": "0.0.6-beta",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -61,5 +61,8 @@
   "peerDependencies": {
     "react": "^18.x",
     "react-dom": "^18.x"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0"
   }
 }
