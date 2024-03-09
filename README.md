@@ -1,8 +1,6 @@
-## Djuno Design
+## ![Djuno-design](/src/assets/djuno-design-logo.svg) Djuno Design
 
-### Introduction
-
-**djuno-design** is a lightweight library for React to develop front-end projects easily.
+**djuno-design** is a lightweight, tailwindCSS-based, and wrapper-approach library for React to develop front-end projects easily.
 
 ## Documentation
 
