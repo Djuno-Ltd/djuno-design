@@ -25,8 +25,9 @@ export type TooltipPlaces = PlacesType
 export type TooltipThemeTypes = 'primary' | 'error'
 
 export interface TooltipProps extends PropsWithChildren {
-  content: string | React.ReactNode
+  content?: string | React.ReactNode
   clickable?: boolean
   place?: TooltipPlaces
   theme?: TooltipThemeTypes
+  className?: string
 }

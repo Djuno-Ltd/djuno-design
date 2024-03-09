@@ -22,6 +22,7 @@ import * as React from 'react'
 import { CardProps } from '../types'
 import cn from '../utils/cn'
 import Flex from './Flex'
+import Typography from './Typography'
 
 /**
  * Card component renders a customizable card with optional title, description, and setting.
@@ -78,23 +79,34 @@ const Card: React.FunctionComponent<CardProps> = ({
       id={id ? id : typeof title === 'string' ? title : undefined}
       direction='col'
       className={cn(
-        'dj-w-full dj-rounded-xl dark:dj-bg-dark-3 dj-border dj-border-slate-200 dark:dj-border-dark-2 dj-p-6',
+        'dj-w-full dj-rounded-xl dark:dj-bg-dark-3 dj-border dj-border-secondary-300 dark:dj-border-dark-2 dj-p-6',
         { 'dj-pt-4': title },
         className,
       )}
     >
       {(title || description || setting) && (
         <div
-          className={cn(
-            'dj-w-full dj-pb-2 dj-border-b dj-border-slate-200 dark:dj-border-dark-2 dj-mb-6',
-            headerClassName,
-          )}
+          className={cn('dj-w-full dj-border-b dj-border-secondary-300 dark:dj-border-dark-2 dj-mb-6', headerClassName)}
         >
-          <Flex items='start' justify='between' className={cn('dj-w-full', titleClassName)}>
-            {title ? <div className='dj-font-medium'>{title}</div> : <div className='dj-text-sm'>{description}</div>}
+          <Flex items='start' justify='between' className={'dj-w-full dj-mb-2'}>
+            <Flex direction='col'>
+              {typeof title === 'string' ? (
+                <Typography.Title level={4} className={cn(titleClassName, 'dj-mb-0')}>
+                  {title}
+                </Typography.Title>
+              ) : (
+                title
+              )}
+              {typeof description === 'string' ? (
+                <Typography.Text uiType='secondary' className={cn(descriptionClassName)}>
+                  {description}
+                </Typography.Text>
+              ) : (
+                description
+              )}
+            </Flex>
             {setting}
           </Flex>
-          {title && description && <div className={cn('dj-text-sm', descriptionClassName)}>{description}</div>}
         </div>
       )}
       {children}

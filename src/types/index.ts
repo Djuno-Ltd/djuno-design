@@ -23,6 +23,7 @@ export * from './Tooltip'
 export * from './Loading'
 export * from './Flex'
 export * from './Card'
+export * from './Typography'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

@@ -25,6 +25,10 @@ import Loading from './Loading'
 import { ButtonProps } from '../types'
 import { cva } from 'class-variance-authority'
 
+/**
+ * Define button variants using the `cva` utility function.
+ * This function generates CSS classes for button styles based on specified variants.
+ */
 const buttonVariants = cva(
   'dj-rounded-xl focus:dj-outline-none dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400',
   {
@@ -89,21 +93,21 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   loadingType,
   ...props
 }) => {
-  const renderButton = () => (
-    <button {...props} className={cn(buttonVariants({ uiType, size }), className)}>
-      {loading && (
-        <Loading
-          type={loadingType || 'simple'}
-          borderSize={1.5}
-          size={size === 'medium' || size === undefined ? 14 : size === 'small' ? 12 : 18}
-          theme={uiType === 'primary' ? 'white' : 'transparent'}
-        />
-      )}
-      {children}
-    </button>
+  return (
+    <Tooltip {...tooltip}>
+      <button {...props} className={cn(buttonVariants({ uiType, size }), className)}>
+        {loading && (
+          <Loading
+            type={loadingType || 'simple'}
+            borderSize={1.5}
+            size={size === 'medium' || size === undefined ? 14 : size === 'small' ? 12 : 18}
+            theme={uiType === 'primary' ? 'white' : 'transparent'}
+          />
+        )}
+        {children}
+      </button>
+    </Tooltip>
   )
-  if (tooltip?.content) return <Tooltip {...tooltip}>{renderButton()}</Tooltip>
-  return renderButton()
 }
 
 export default Button

@@ -44,44 +44,48 @@ function App() {
 4. Flex
 5. Card
 6. Typography
+   - Title
+   - Text
+   - Paragraph
+   - Link
 
 ## APIs
 
 ### Button
 
-| Name        | Type         | Required | default   | Description |
-| ----------- | ------------ | -------- | --------- | ----------- |
-| uiType      | ButtonTypes  | no       | simple    |             |
-| size        | SizeTypes    | no       | medium    |             |
-| tooltip     | TooltipProps | no       | undefined |             |
-| loading     | boolean      | no       | false     |             |
-| loadingType | LoadingType  | no       | simple    |             |
+| Name        | Type           | Required | default   | Description |
+| ----------- | -------------- | -------- | --------- | ----------- |
+| uiType      | `ButtonTypes`  | no       | simple    |             |
+| size        | `SizeTypes`    | no       | medium    |             |
+| tooltip     | `TooltipProps` | no       | undefined |             |
+| loading     | boolean        | no       | false     |             |
+| loadingType | `LoadingType`  | no       | simple    |             |
 
 ### Tooltip
 
-| Name      | Type              | Required | default | Description |
-| --------- | ----------------- | -------- | ------- | ----------- |
-| content   | string, ReactNode | yes      |         |             |
-| place     | TooltipPlaces     | no       | top     |             |
-| theme     | TooltipThemeTypes | no       | primary |             |
-| clickable | boolean           | no       | false   |             |
+| Name      | Type                | Required | default | Description |
+| --------- | ------------------- | -------- | ------- | ----------- |
+| content   | string, ReactNode   | yes      |         |             |
+| place     | `TooltipPlaces`     | no       | top     |             |
+| theme     | `TooltipThemeTypes` | no       | primary |             |
+| clickable | boolean             | no       | false   |             |
 
 ### Loading
 
-| Name       | Type              | Required | default | Description |
-| ---------- | ----------------- | -------- | ------- | ----------- |
-| type       | LoadingType       | no       | simple  |             |
-| size       | number            | no       | 24px    |             |
-| borderSize | number            | no       | 2px     |             |
-| theme      | LoadingThemeTypes | no       | primary |             |
+| Name       | Type                | Required | default | Description |
+| ---------- | ------------------- | -------- | ------- | ----------- |
+| type       | `LoadingType`       | no       | simple  |             |
+| size       | number              | no       | 24px    |             |
+| borderSize | number              | no       | 2px     |             |
+| theme      | `LoadingThemeTypes` | no       | primary |             |
 
 ### Flex
 
-| Name      | Type          | Required | default | Description                   |
-| --------- | ------------- | -------- | ------- | ----------------------------- |
-| direction | FlexDirection | no       | row     | Specifies the main-axis       |
-| justify   | FlexJustify   | no       | start   | Alignment along the main-axis |
-| items     | FlexItems     | no       | start   | Alignment along the sub-axis  |
+| Name      | Type            | Required | default | Description                   |
+| --------- | --------------- | -------- | ------- | ----------------------------- |
+| direction | `FlexDirection` | no       | row     | Specifies the main-axis       |
+| justify   | `FlexJustify`   | no       | start   | Alignment along the main-axis |
+| items     | `FlexItems`     | no       | start   | Alignment along the sub-axis  |
 
 ### Card
 
@@ -97,14 +101,60 @@ function App() {
 
 #### Typography.Title
 
-| Name  | Type              | Required | default | Description |
-| ----- | ----------------- | -------- | ------- | ----------- |
-| level | number [1,2,..,6] | no       | 1       |             |
+| Name      | Type                | Required | default   | Description |
+| --------- | ------------------- | -------- | --------- | ----------- |
+| level     | number [1,2,..,6]   | no       | 1         |             |
+| uiType    | `TypographtUiTypes` | no       | default   |             |
+| tooltip   | `TooltipProps`      | no       | undefined |             |
+| code      | boolean             | no       | false     |             |
+| mark      | boolean             | no       | false     |             |
+| underline | boolean             | no       | false     |             |
+| del       | boolean             | no       | false     |             |
+| strong    | boolean             | no       | false     |             |
+| italic    | boolean             | no       | false     |             |
 
 #### Typography.Text
 
-| Name | Type | Required | default | Description |
-| ---- | ---- | -------- | ------- | ----------- |
+| Name      | Type                  | Required | default   | Description |
+| --------- | --------------------- | -------- | --------- | ----------- |
+| size      | `TypographtSizeTypes` | no       | base      |             |
+| uiType    | `TypographtUiTypes`   | no       | default   |             |
+| tooltip   | `TooltipProps`        | no       | undefined |             |
+| code      | boolean               | no       | false     |             |
+| mark      | boolean               | no       | false     |             |
+| underline | boolean               | no       | false     |             |
+| del       | boolean               | no       | false     |             |
+| strong    | boolean               | no       | false     |             |
+| italic    | boolean               | no       | false     |             |
+
+#### Typography.Paragraph
+
+| Name      | Type                  | Required | default   | Description |
+| --------- | --------------------- | -------- | --------- | ----------- |
+| size      | `TypographtSizeTypes` | no       | base      |             |
+| uiType    | `TypographtUiTypes`   | no       | default   |             |
+| tooltip   | `TooltipProps`        | no       | undefined |             |
+| code      | boolean               | no       | false     |             |
+| mark      | boolean               | no       | false     |             |
+| underline | boolean               | no       | false     |             |
+| del       | boolean               | no       | false     |             |
+| strong    | boolean               | no       | false     |             |
+| italic    | boolean               | no       | false     |             |
+
+#### Typography.Link
+
+| Name            | Type                         | Required | default   | Description |
+| --------------- | ---------------------------- | -------- | --------- | ----------- |
+| all `<a>` props | `React.AnchorHTMLAttributes` | no       |           |             |
+| size            | `TypographtSizeTypes`        | no       | base      |             |
+| uiType          | `TypographtUiTypes`          | no       | default   |             |
+| tooltip         | `TooltipProps`               | no       | undefined |             |
+| code            | boolean                      | no       | false     |             |
+| mark            | boolean                      | no       | false     |             |
+| underline       | boolean                      | no       | false     |             |
+| del             | boolean                      | no       | false     |             |
+| strong          | boolean                      | no       | false     |             |
+| italic          | boolean                      | no       | false     |             |
 
 ## Contributor ✨
 

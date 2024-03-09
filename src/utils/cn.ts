@@ -1,5 +1,9 @@
 import classNames from 'classnames'
-import { twMerge } from 'tailwind-merge'
+import { extendTailwindMerge } from 'tailwind-merge'
+
+const twMerge = extendTailwindMerge({
+  prefix: 'dj-',
+})
 
 const cn = (...args: classNames.ArgumentArray) => {
   return twMerge(classNames(args))
