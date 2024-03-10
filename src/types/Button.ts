@@ -29,4 +29,4 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loadingType?: LoadingType
 }
 
-export type ButtonTypes = 'simple' | 'primary' //| 'light' | 'icon' | 'danger'
+export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' //| 'icon'

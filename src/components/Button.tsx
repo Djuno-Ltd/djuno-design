@@ -30,14 +30,18 @@ import { cva } from 'class-variance-authority'
  * This function generates CSS classes for button styles based on specified variants.
  */
 const buttonVariants = cva(
-  'dj-rounded-xl focus:dj-outline-none dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400',
+  'dj-rounded-xl focus:dj-outline-0 dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400 dj-border-2 focus:dj-ring-4',
   {
     variants: {
       uiType: {
         simple:
-          'dj-text-primary-500 dj-bg-transparent hover:dj-bg-primary-50 hover:dj-text-primary-500 hover:dj-border-primary-100 dj-border-2 dj-border-slate-200 dark:dj-bg-secondary-800 dark:hover:dj-bg-secondary-700 dark:dj-text-white dark:dj-border-secondary-700 disabled:dj-border-secondary-300 disabled:hover:dj-bg-transparent disabled:dj-text-secondary-300 disabled:dark:dj-text-secondary-400',
+          'dj-bg-transparent dj-text-primary-400 hover:dj-bg-primary-50 hover:dj-text-primary-500 dj-border-slate-200 hover:dj-border-primary-100 dark:dj-bg-dark-800 dark:dj-text-dark-100 dark:hover:dj-bg-dark-700 dark:hover:dj-text-dark-50 dark:dj-border-dark-700 dark:hover:dj-border-dark-600 disabled:hover:dj-bg-transparent disabled:dj-text-secondary-300 disabled:dj-border-secondary-200 disabled:dark:dj-bg-dark-900 disabled:dark:dj-text-dark-400 disabled:dark:hover:dj-border-dark-700 focus:dj-ring-primary-100/20 dark:focus:dj-ring-dark-700/50',
         primary:
-          'dj-text-white dj-bg-primary-500 hover:dj-bg-primary-500 hover:dj-shadow-lg hover:dj-shadow-primary-200 dark:hover:dj-shadow-lg dark:hover:dj-shadow-secondary-700 border-2 dj-border-primary-500 focus:dj-ring-2 focus:dj-ring-primary-300 dark:focus:dj-ring-secondary-600 disabled:dj-border-secondary-300 disabled:dj-bg-secondary-200 disabled:dj-text-secondary-400 disabled:dark:dj-bg-secondary-500 disabled:dark:dj-border-secondary-500 disabled:dark:dj-text-secondary-300 disabled:hover:dj-shadow-none',
+          'dj-bg-primary-400 dj-text-white hover:dj-bg-primary-500 dj-border-primary-400 hover:dj-border-primary-500 dark:dj-bg-primary-500 dark:hover:dj-bg-primary-600 dark:dj-border-primary-500 dark:hover:dj-border-primary-600 disabled:dj-border-secondary-300 disabled:dj-bg-secondary-200 disabled:dj-text-secondary-400 disabled:dark:dj-bg-primary-300 disabled:dark:dj-text-white disabled:dark:dj-border-primary-300 focus:dj-ring-primary-100 dark:focus:dj-ring-primary-600/50',
+        light:
+          'dj-bg-primary-50 dj-text-primary-400 hover:dj-bg-primary-100 hover:dj-text-primary-500 dj-border-primary-100 hover:dj-border-primary-100 dark:dj-bg-primary-600/20 dark:dj-text-dark-100 dark:hover:dj-bg-primary-600/30 dark:hover:dj-text-dark-50 dark:dj-border-primary-400 dark:hover:dj-border-primary-500 disabled:dj-bg-transparent disabled:dj-text-secondary-300 disabled:dj-border-primary-100/60 disabled:dark:dj-bg-dark-900 disabled:dark:dj-text-dark-400 disabled:dark:dj-border-primary-300/60 focus:dj-ring-primary-100/20 dark:focus:dj-ring-dark-700/50',
+        danger:
+          'dj-bg-red-500 dj-text-white hover:dj-bg-red-600 dj-border-red-500 hover:dj-border-red-600 dark:dj-bg-red-500 dark:hover:dj-bg-red-600 dark:dj-border-red-500 dark:hover:dj-border-red-600 disabled:dj-border-red-400 disabled:dj-bg-red-400 disabled:dj-text-white disabled:dark:dj-bg-red-400 disabled:dark:dj-text-secondary-200 disabled:dark:dj-border-red-400 focus:dj-ring-red-100 dark:focus:dj-ring-red-600/50',
       },
       size: {
         small: 'dj-text-xs dj-px-3 dj-h-7',

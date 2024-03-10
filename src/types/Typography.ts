@@ -20,6 +20,7 @@
 
 import { TooltipProps } from './Tooltip'
 
+export type TypographtTitleLevels = 1 | 2 | 3 | 4 | 5 | 6
 export type TypographtUiTypes = 'secondary' | 'success' | 'warning' | 'danger' | 'disabled'
 export type TypographtSizeTypes =
   | 'xs'
@@ -52,7 +53,7 @@ export interface TypographyProps extends TypographyBaseProps {
 }
 
 export interface TypographyTitleProps extends TypographyProps, React.HtmlHTMLAttributes<HTMLHeadingElement> {
-  level?: 1 | 2 | 3 | 4 | 5 | 6
+  level?: TypographtTitleLevels
 }
 
 export interface TypographyTextProps extends TypographyProps, React.HtmlHTMLAttributes<HTMLSpanElement> {

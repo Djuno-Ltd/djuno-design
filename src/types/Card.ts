@@ -19,10 +19,12 @@
  */
 
 import { PropsWithChildren } from 'react'
+import { TypographtTitleLevels } from './Typography'
 
 export interface CardProps extends PropsWithChildren {
   id?: string
   title?: string | React.ReactNode
+  titleLevel?: TypographtTitleLevels
   description?: string | React.ReactNode
   setting?: React.ReactNode
   className?: string

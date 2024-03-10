@@ -91,6 +91,7 @@ function App() {
 | ----------------------------- | ----------------- | -------- | ------- | ----------- |
 | id                            | string            | no       |         |             |
 | title                         | string, ReactNode | no       |         |             |
+| titleLevel                    | number [1,2,..,6] | no       | 5       |             |
 | description                   | string, ReactNode | no       |         |             |
 | setting                       | string, ReactNode | no       |         |             |
 | class names for main sections | string            | no       |         |             |

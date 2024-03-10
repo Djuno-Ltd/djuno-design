@@ -67,6 +67,7 @@ const Card: React.FunctionComponent<CardProps> = ({
   children,
   id,
   title,
+  titleLevel,
   description,
   setting,
   className,
@@ -79,26 +80,29 @@ const Card: React.FunctionComponent<CardProps> = ({
       id={id ? id : typeof title === 'string' ? title : undefined}
       direction='col'
       className={cn(
-        'dj-w-full dj-rounded-xl dark:dj-bg-dark-3 dj-border dj-border-secondary-300 dark:dj-border-dark-2 dj-p-6',
+        'dj-w-full dj-rounded-xl dj-bg-white dark:dj-bg-dark-900 dj-border dj-border-secondary-200 dark:dj-border-dark-800 dj-p-6',
         { 'dj-pt-4': title },
         className,
       )}
     >
       {(title || description || setting) && (
         <div
-          className={cn('dj-w-full dj-border-b dj-border-secondary-300 dark:dj-border-dark-2 dj-mb-6', headerClassName)}
+          className={cn(
+            'dj-w-full dj-border-b dj-border-secondary-200 dark:dj-border-dark-800 dj-mb-6',
+            headerClassName,
+          )}
         >
           <Flex items='start' justify='between' className={'dj-w-full dj-mb-2'}>
             <Flex direction='col'>
               {typeof title === 'string' ? (
-                <Typography.Title level={4} className={cn(titleClassName, 'dj-mb-0')}>
+                <Typography.Title level={titleLevel || 5} className={cn(titleClassName, 'dj-mb-0')}>
                   {title}
                 </Typography.Title>
               ) : (
                 title
               )}
               {typeof description === 'string' ? (
-                <Typography.Text uiType='secondary' className={cn(descriptionClassName)}>
+                <Typography.Text uiType='secondary' size='sm' className={cn(descriptionClassName)}>
                   {description}
                 </Typography.Text>
               ) : (

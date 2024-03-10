@@ -39,15 +39,16 @@ import Tooltip from './Tooltip'
 const textVariants = cva('', {
   variants: {
     uiType: {
-      default: 'dj-text-black/85',
+      default: 'dj-text-black/85 dark:dj-text-secondary-100',
       secondary: 'dj-text-secondary-500/85 dark:dj-text-secondary-400/85',
       success: 'dj-text-success/85',
       warning: 'dj-text-warning/85',
       danger: 'dj-text-error/85',
-      disabled: 'dj-cursor-not-allowed dj-text-black/20',
+      disabled: 'dj-cursor-not-allowed dj-text-black/20 dark:dj-text-dark-100/30',
     },
     link: {
-      default: 'dj-text-primary-300 hover:dj-text-primary-500 dj-transition-colors dj-duration-200',
+      default:
+        'dj-text-primary-300 hover:dj-text-primary-500 dark:dj-text-primary-300 dark:hover:dj-text-primary-500 dj-transition-colors dj-duration-200',
       otherUi: ' dj-transition-colors dj-duration-200',
     },
     size: {
@@ -88,14 +89,35 @@ const textVariants = cva('', {
 })
 
 /**
- * Typography component ...
+ * Typography component that renders various types of text elements such as titles, paragraphs, and links.
+ * It allows customization through props like code, mark, underline, delete, strong, and italic.
  *
+ * @param {object} props - Typography props.
+ * @param {React.ReactNode} props.children - The content to be displayed within the Typography component.
+ * @param {boolean} [props.code] - Determines if the content should be displayed as code.
+ * @param {boolean} [props.mark] - Determines if the content should be highlighted.
+ * @param {boolean} [props.underline] - Determines if the content should be underlined.
+ * @param {boolean} [props.del] - Determines if the content should be struck through.
+ * @param {boolean} [props.strong] - Determines if the content should be displayed as strong.
+ * @param {boolean} [props.italic] - Determines if the content should be displayed in italics.
+ * @param {object} [props.tooltip] - Additional props for the tooltip functionality.
  *
  * @returns {React.ReactNode} Rendered Typography component.
  *
  * @version 0.1.0
  * @see https://www.npmjs.com/package/djuno-design#typography
  *
+ * @example
+ * // Example usage of Typography component:
+ * <Typography>
+ *   <Typography.Title>Sample Title</Typography.Title>
+ *   <Typography.Paragraph>
+ *     This is a sample paragraph with <Typography.Link>link</Typography.Link>.
+ *   </Typography.Paragraph>
+ *   <Typography.Text>
+ *     This is a sample text with <strong>strong</strong> and <i>italic</i> formatting.
+ *   </Typography.Text>
+ * </Typography>
  */
 // eslint-disable-next-line react/prop-types
 const Typography: React.FC<TypographyProps> & TypographyComponents = ({ children }): React.ReactNode => {
@@ -111,7 +133,9 @@ const Base: React.FC<TypographyBaseProps> = ({ children, code, mark, underline, 
 
   if (code) {
     content = (
-      <code className='dj-mx-0 dj-my-1 dj-bg-secondary-100 dj-border dj-rounded dj-px-1 dj-py-0.5'>{content}</code>
+      <code className='dj-mx-0 dj-my-1 dj-bg-secondary-100 dark:dj-bg-dark-700 dj-border dark:dj-border-dark-500 dj-rounded dj-px-1 dj-py-0.5'>
+        {content}
+      </code>
     )
   }
 
