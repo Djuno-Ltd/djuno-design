@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -33,6 +33,8 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-url": "^8.0.2",
+    "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.58",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "autoprefixer": "^10.4.17",

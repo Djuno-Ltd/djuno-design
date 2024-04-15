@@ -6,6 +6,8 @@ import filesize from 'rollup-plugin-filesize'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 // import css from 'rollup-plugin-import-css'
+import svgr from '@svgr/rollup'
+import url from '@rollup/plugin-url'
 
 const makeSourcemap = false
 const minimizeCss = true
@@ -22,6 +24,8 @@ export default [
       },
     ],
     plugins: [
+      url(),
+      svgr({ icon: true, dimensions: false }),
       peerDepsExternal(),
       resolve(),
       commonjs(),
@@ -59,6 +63,8 @@ export default [
       },
     },
     plugins: [
+      url(),
+      svgr({ icon: true, dimensions: false }),
       peerDepsExternal(),
       resolve(),
       commonjs(),

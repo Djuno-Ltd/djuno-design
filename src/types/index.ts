@@ -24,6 +24,7 @@ export * from './Loading'
 export * from './Flex'
 export * from './Card'
 export * from './Typography'
+export * from './Alert'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

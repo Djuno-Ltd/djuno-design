@@ -46,6 +46,7 @@ function App() {
    - Text
    - Paragraph
    - Link
+7. Alert
 
 ## APIs
 
@@ -154,6 +155,16 @@ function App() {
 | del             | boolean                      | no       | false     |             |
 | strong          | boolean                      | no       | false     |             |
 | italic          | boolean                      | no       | false     |             |
+
+### Alert
+
+| Name        | Type              | Required | default | Description               |
+| ----------- | ----------------- | -------- | ------- | ------------------------- |
+| message     | string, ReactNode | no       |         |                           |
+| description | string, ReactNode | no       |         |                           |
+| type        | `AlertTypes`      | no       | neutral |                           |
+| showIcon    | boolean           | no       | false   |                           |
+| banner      | boolean           | no       | false   | Display Alert as a banner |
 
 ## Contributor ✨
 

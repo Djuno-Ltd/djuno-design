@@ -19,6 +19,6 @@
     "lib": ["dom", "es2015", "es2017.object"],
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "custom.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Main file
+ * @fileoverview Button types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,26 +18,15 @@
  * limitations under the License.
  */
 
-/**
- * import styles
- */
-import './index.css'
+import React from 'react'
 
-/**
- * import components
- */
-import Button from './components/Button'
-import Tooltip from './components/Tooltip'
-import Loading from './components/Loading'
-import Flex from './components/Flex'
-import Card from './components/Card'
-import Typography from './components/Typography'
-import Alert from './components/Alert'
+export interface AlertProps {
+  message?: string | React.ReactNode
+  description?: string | React.ReactNode
+  type?: AlertTypes
+  showIcon?: boolean
+  banner?: boolean
+  className?: string
+}
 
-// export all types
-export * from './types'
-
-/**
- * export components
- */
-export { Button, Tooltip, Loading, Flex, Card, Typography, Alert }
+export type AlertTypes = 'neutral' | 'success' | 'info' | 'warning' | 'error'
