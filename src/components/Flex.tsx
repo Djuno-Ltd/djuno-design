@@ -20,7 +20,7 @@
 
 import * as React from 'react'
 import { FlexProps } from '../types'
-import cn from '../utils/cn'
+import { cn } from '../utils/cn'
 
 /**
  * Flex component that provides flexible layout options.

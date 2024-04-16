@@ -49,6 +49,17 @@ function App() {
 7. Alert
 8. Steps
 
+## Available utility functions
+
+1. uuid
+2. localStorage
+   - getLocalStorage
+   - setLocalStorage
+   - removeLocalStorage
+3. sleep
+4. copy
+   - copyToClipboard
+
 ## APIs
 
 ### Button
@@ -102,60 +113,64 @@ function App() {
 
 #### Typography.Title
 
-| Name      | Type                | Required | default   | Description |
-| --------- | ------------------- | -------- | --------- | ----------- |
-| level     | number [1,2,..,6]   | no       | 1         |             |
-| uiType    | `TypographtUiTypes` | no       | default   |             |
-| tooltip   | `TooltipProps`      | no       | undefined |             |
-| code      | boolean             | no       | false     |             |
-| mark      | boolean             | no       | false     |             |
-| underline | boolean             | no       | false     |             |
-| del       | boolean             | no       | false     |             |
-| strong    | boolean             | no       | false     |             |
-| italic    | boolean             | no       | false     |             |
+| Name      | Type                                | Required | default   | Description |
+| --------- | ----------------------------------- | -------- | --------- | ----------- |
+| level     | number [1,2,..,6]                   | no       | 1         |             |
+| uiType    | `TypographtUiTypes`                 | no       | default   |             |
+| tooltip   | `TooltipProps`                      | no       | undefined |             |
+| code      | boolean                             | no       | false     |             |
+| mark      | boolean                             | no       | false     |             |
+| underline | boolean                             | no       | false     |             |
+| del       | boolean                             | no       | false     |             |
+| strong    | boolean                             | no       | false     |             |
+| italic    | boolean                             | no       | false     |             |
+| copyable  | boolean or `TypographyCopyableProp` | no       | false     |             |
 
 #### Typography.Text
 
-| Name      | Type                  | Required | default   | Description |
-| --------- | --------------------- | -------- | --------- | ----------- |
-| size      | `TypographtSizeTypes` | no       | base      |             |
-| uiType    | `TypographtUiTypes`   | no       | default   |             |
-| tooltip   | `TooltipProps`        | no       | undefined |             |
-| code      | boolean               | no       | false     |             |
-| mark      | boolean               | no       | false     |             |
-| underline | boolean               | no       | false     |             |
-| del       | boolean               | no       | false     |             |
-| strong    | boolean               | no       | false     |             |
-| italic    | boolean               | no       | false     |             |
+| Name      | Type                                | Required | default   | Description |
+| --------- | ----------------------------------- | -------- | --------- | ----------- |
+| size      | `TypographtSizeTypes`               | no       | base      |             |
+| uiType    | `TypographtUiTypes`                 | no       | default   |             |
+| tooltip   | `TooltipProps`                      | no       | undefined |             |
+| code      | boolean                             | no       | false     |             |
+| mark      | boolean                             | no       | false     |             |
+| underline | boolean                             | no       | false     |             |
+| del       | boolean                             | no       | false     |             |
+| strong    | boolean                             | no       | false     |             |
+| italic    | boolean                             | no       | false     |             |
+| copyable  | boolean or `TypographyCopyableProp` | no       | false     |             |
 
 #### Typography.Paragraph
 
-| Name      | Type                  | Required | default   | Description |
-| --------- | --------------------- | -------- | --------- | ----------- |
-| size      | `TypographtSizeTypes` | no       | base      |             |
-| uiType    | `TypographtUiTypes`   | no       | default   |             |
-| tooltip   | `TooltipProps`        | no       | undefined |             |
-| code      | boolean               | no       | false     |             |
-| mark      | boolean               | no       | false     |             |
-| underline | boolean               | no       | false     |             |
-| del       | boolean               | no       | false     |             |
-| strong    | boolean               | no       | false     |             |
-| italic    | boolean               | no       | false     |             |
+| Name      | Type                                | Required | default   | Description |
+| --------- | ----------------------------------- | -------- | --------- | ----------- |
+| size      | `TypographtSizeTypes`               | no       | base      |             |
+| uiType    | `TypographtUiTypes`                 | no       | default   |             |
+| tooltip   | `TooltipProps`                      | no       | undefined |             |
+| code      | boolean                             | no       | false     |             |
+| mark      | boolean                             | no       | false     |             |
+| underline | boolean                             | no       | false     |             |
+| del       | boolean                             | no       | false     |             |
+| strong    | boolean                             | no       | false     |             |
+| italic    | boolean                             | no       | false     |             |
+| copyable  | boolean or `TypographyCopyableProp` | no       | false     |             |
 
 #### Typography.Link
 
-| Name            | Type                         | Required | default   | Description |
-| --------------- | ---------------------------- | -------- | --------- | ----------- |
-| all `<a>` props | `React.AnchorHTMLAttributes` | no       |           |             |
-| size            | `TypographtSizeTypes`        | no       | base      |             |
-| uiType          | `TypographtUiTypes`          | no       | default   |             |
-| tooltip         | `TooltipProps`               | no       | undefined |             |
-| code            | boolean                      | no       | false     |             |
-| mark            | boolean                      | no       | false     |             |
-| underline       | boolean                      | no       | false     |             |
-| del             | boolean                      | no       | false     |             |
-| strong          | boolean                      | no       | false     |             |
-| italic          | boolean                      | no       | false     |             |
+| Name            | Type                                | Required | default   | Description |
+| --------------- | ----------------------------------- | -------- | --------- | ----------- |
+| all `<a>` props | `React.AnchorHTMLAttributes`        | no       |           |             |
+| size            | `TypographtSizeTypes`               | no       | base      |             |
+| uiType          | `TypographtUiTypes`                 | no       | default   |             |
+| tooltip         | `TooltipProps`                      | no       | undefined |             |
+| code            | boolean                             | no       | false     |             |
+| mark            | boolean                             | no       | false     |             |
+| underline       | boolean                             | no       | false     |             |
+| del             | boolean                             | no       | false     |             |
+| strong          | boolean                             | no       | false     |             |
+| italic          | boolean                             | no       | false     |             |
+| copyable        | boolean or `TypographyCopyableProp` | no       | false     |             |
 
 ### Alert
 

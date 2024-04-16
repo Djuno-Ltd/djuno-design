@@ -19,7 +19,7 @@
  */
 
 import * as React from 'react'
-import cn from '../utils/cn'
+import { cn } from '../utils/cn'
 import Typography from './Typography'
 import { StepsProps } from '../types'
 import { ReactComponent as CheckIcon } from './../assets/icons/check-circle.svg'
@@ -48,7 +48,7 @@ const { Text } = Typography
  *   step="step2"
  * />
  */
-const Steps = <T extends string>({ className, ...props }: StepsProps<T>): React.ReactNode => {
+const Steps = <T extends string>({ className, ...props }: StepsProps<T>): React.JSX.Element => {
   const { steps, step } = props
   const stepsKeys = steps.map((s) => s.value)
 

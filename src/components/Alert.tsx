@@ -19,7 +19,7 @@
  */
 
 import * as React from 'react'
-import cn from '../utils/cn'
+import { cn } from '../utils/cn'
 import Typography from './Typography'
 import { AlertProps } from '../types'
 import { cva } from 'class-variance-authority'

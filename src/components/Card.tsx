@@ -20,7 +20,7 @@
 
 import * as React from 'react'
 import { CardProps } from '../types'
-import cn from '../utils/cn'
+import { cn } from '../utils/cn'
 import Flex from './Flex'
 import Typography from './Typography'
 

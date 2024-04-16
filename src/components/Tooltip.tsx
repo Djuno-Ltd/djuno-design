@@ -20,8 +20,8 @@
 
 import * as React from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-import uuid from '../utils/uuid'
-import cn from '../utils/cn'
+import { uuid } from '../utils/uuid'
+import { cn } from '../utils/cn'
 import { TooltipProps } from '../types'
 import { cva } from 'class-variance-authority'
 

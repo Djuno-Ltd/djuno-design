@@ -19,7 +19,7 @@
  */
 
 import * as React from 'react'
-import cn from './../utils/cn'
+import { cn } from './../utils/cn'
 import Tooltip from './Tooltip'
 import Loading from './Loading'
 import { ButtonProps } from '../types'

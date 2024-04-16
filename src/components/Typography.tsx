@@ -19,11 +19,12 @@
  */
 
 import * as React from 'react'
-import cn from '../utils/cn'
+import { cn } from '../utils/cn'
 import { cva } from 'class-variance-authority'
 import {
   TypographyBaseProps,
   TypographyComponents,
+  TypographyCopyableProp,
   TypographyLinkProps,
   TypographyParagraphProps,
   TypographyProps,
@@ -31,6 +32,9 @@ import {
   TypographyTitleProps,
 } from '../types/Typography'
 import Tooltip from './Tooltip'
+import { ReactComponent as CopyIcon } from './../assets/icons/document-duplicate.svg'
+import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
+import { copyToClipboard } from '../utils/copy'
 
 /**
  * Define Typographt variants using the `cva` utility function.
@@ -128,10 +132,6 @@ const Typography: React.FC<TypographyProps> & TypographyComponents = ({ children
 const Base: React.FC<TypographyBaseProps> = ({ children, code, mark, underline, del, strong, italic }) => {
   let content = children
 
-  // if (tooltip) {
-  //   content = <Tooltip {...tooltip}>{content}</Tooltip>
-  // }
-
   if (code) {
     content = (
       <code className='dj-mx-0 dj-my-1 dj-bg-secondary-100 dark:dj-bg-dark-700 dj-border dark:dj-border-dark-500 dj-rounded dj-px-1 dj-py-0.5'>
@@ -175,6 +175,7 @@ const Title: React.FC<TypographyTitleProps> = ({
   del,
   strong,
   italic,
+  copyable,
   ...props
 }) => {
   const Heading = `h${level}` as keyof JSX.IntrinsicElements
@@ -195,6 +196,7 @@ const Title: React.FC<TypographyTitleProps> = ({
       >
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
+          {copyable && <CopyableText copyable={copyable} textChildren={children} />}
         </Base>
       </Heading>
     </Tooltip>
@@ -213,6 +215,7 @@ const Text: React.FC<TypographyTextProps> = ({
   del,
   strong,
   italic,
+  copyable,
   ...props
 }) => {
   return (
@@ -220,6 +223,7 @@ const Text: React.FC<TypographyTextProps> = ({
       <span {...props} className={cn(textVariants({ uiType, size }), className)}>
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
+          {copyable && <CopyableText copyable={copyable} textChildren={children} />}
         </Base>
       </span>
     </Tooltip>
@@ -238,6 +242,7 @@ const Paragraph: React.FC<TypographyParagraphProps> = ({
   del,
   strong,
   italic,
+  copyable,
   ...props
 }) => {
   return (
@@ -245,6 +250,7 @@ const Paragraph: React.FC<TypographyParagraphProps> = ({
       <div {...props} className={cn(textVariants({ uiType, size }), className)}>
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
+          {copyable && <CopyableText copyable={copyable} textChildren={children} />}
         </Base>
       </div>
     </Tooltip>
@@ -263,6 +269,7 @@ const Link: React.FC<TypographyLinkProps> = ({
   del,
   strong,
   italic,
+  copyable,
   ...props
 }) => {
   return (
@@ -270,9 +277,107 @@ const Link: React.FC<TypographyLinkProps> = ({
       <a {...props} className={cn(textVariants({ uiType, link: uiType ? 'otherUi' : 'default', size }), className)}>
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
+          {copyable && <CopyableText copyable={copyable} textChildren={children} />}
         </Base>
       </a>
     </Tooltip>
+  )
+}
+
+const CopyableText: React.FC<{ copyable: boolean | TypographyCopyableProp; textChildren: React.ReactNode }> = ({
+  copyable,
+  textChildren,
+}) => {
+  const text: string = React.useMemo(() => {
+    if (
+      copyable &&
+      typeof copyable !== 'undefined' &&
+      typeof copyable !== 'boolean' &&
+      typeof copyable.text !== 'undefined'
+    ) {
+      return copyable.text
+    } else {
+      if (typeof textChildren !== 'undefined' && textChildren !== null) {
+        return textChildren.toString()
+      } else {
+        return ''
+      }
+    }
+  }, [])
+
+  const tooltipTexts: [string, string] = React.useMemo(() => {
+    const txts: [string, string] = ['Copy', 'Copied']
+    const empty_txts: [string, string] = ['', '']
+
+    if (typeof copyable === 'boolean') {
+      if (copyable) {
+        return txts
+      } else {
+        return empty_txts
+      }
+    } else {
+      if (typeof copyable.tooltips === 'undefined') {
+        return txts
+      } else {
+        if (typeof copyable.tooltips === 'boolean') {
+          if (copyable.tooltips) {
+            return txts
+          } else {
+            return empty_txts
+          }
+        } else {
+          return copyable.tooltips
+        }
+      }
+    }
+  }, [copyable])
+
+  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
+    const defaultIcons: [React.ReactNode, React.ReactNode] = [
+      <CopyIcon key='copy-icon' />,
+      <CheckIcon key='copied-icon' />,
+    ]
+    if (
+      copyable &&
+      typeof copyable !== 'undefined' &&
+      typeof copyable !== 'boolean' &&
+      typeof copyable.icon !== 'undefined'
+    ) {
+      return copyable.icon
+    }
+    return defaultIcons
+  }, [copyable])
+
+  // current datas
+  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
+  const [icon, setIcon] = React.useState(icons[0])
+
+  const handleCopy = React.useCallback(() => {
+    copyToClipboard(text)
+      .then(() => {
+        setTooltipText(tooltipTexts[1])
+        setIcon(icons[1])
+        setTimeout(() => {
+          setTooltipText(tooltipTexts[0])
+          setIcon(icons[0])
+        }, 4000)
+      })
+      .catch()
+  }, [])
+
+  return (
+    <div className='dj-inline-block dj-ms-1 dj-text-sm'>
+      <Tooltip content={tooltipText}>
+        <span className='dj-inline-flex dj-items-center dj-text-inherit dj-h-full dj-w-full'>
+          <span
+            onClick={handleCopy}
+            className='dj-cursor-pointer hover:dj-scale-110 dj-transition-all dj-duration-300 dj-text-primary-500 hover:dj-text-primary-600 dj-w-4 dj-aspect-square'
+          >
+            {icon}
+          </span>
+        </span>
+      </Tooltip>
+    </div>
   )
 }
 

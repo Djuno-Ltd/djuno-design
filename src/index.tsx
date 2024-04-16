@@ -38,6 +38,12 @@ import Steps from './components/Steps'
 // export all types
 export * from './types'
 
+// export utils
+export * from './utils'
+export * from './utils/uuid'
+export * from './utils/localStorage'
+export * from './utils/copy'
+
 /**
  * export components
  */
