@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Main file
+ * @fileoverview Button types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,27 +18,14 @@
  * limitations under the License.
  */
 
-/**
- * import styles
- */
-import './index.css'
+export interface StepsProps<T = string> {
+  className?: string
+  steps: Array<StepItem<T>>
+  step: T
+}
 
-/**
- * import components
- */
-import Button from './components/Button'
-import Tooltip from './components/Tooltip'
-import Loading from './components/Loading'
-import Flex from './components/Flex'
-import Card from './components/Card'
-import Typography from './components/Typography'
-import Alert from './components/Alert'
-import Steps from './components/Steps'
-
-// export all types
-export * from './types'
-
-/**
- * export components
- */
-export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps }
+export interface StepItem<T = string> {
+  label: string | React.ReactNode
+  value: T
+  callback?: (clickedValue: T) => void
+}

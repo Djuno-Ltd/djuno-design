@@ -45,6 +45,7 @@ const textVariants = cva('', {
       warning: 'dj-text-warning/85',
       danger: 'dj-text-error/85',
       disabled: 'dj-cursor-not-allowed dj-text-black/20 dark:dj-text-dark-100/30',
+      transparent: '',
     },
     link: {
       default:

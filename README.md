@@ -47,6 +47,7 @@ function App() {
    - Paragraph
    - Link
 7. Alert
+8. Steps
 
 ## APIs
 
@@ -165,6 +166,13 @@ function App() {
 | type        | `AlertTypes`      | no       | neutral |                           |
 | showIcon    | boolean           | no       | false   |                           |
 | banner      | boolean           | no       | false   | Display Alert as a banner |
+
+### Steps
+
+| Name  | Type         | Required | default | Description |
+| ----- | ------------ | -------- | ------- | ----------- |
+| steps | `StepItem[]` | yes      |         |             |
+| step  | string       | yes      |         |             |
 
 ## Contributor ✨
 

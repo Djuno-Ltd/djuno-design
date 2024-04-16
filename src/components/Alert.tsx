@@ -119,7 +119,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
       })}
     >
       <Flex items={description ? 'start' : 'center'}>
-        {showIcon && (
+        {showIcon && type !== undefined && type !== 'neutral' && (
           <div className={cn(alertIconVariants({ type, widthType: description ? 'large' : 'small' }))}>
             {type === 'error' && <ErrorIcon />}
             {type === 'success' && <SuccessIcon />}

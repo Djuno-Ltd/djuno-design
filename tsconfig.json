@@ -16,7 +16,7 @@
       "react": ["./node_modules/react"],
       "react-dom": ["./node_modules/react-dom"]
     },
-    "lib": ["dom", "es2015", "es2017.object"],
+    "lib": ["dom", "es2015", "es2016", "es2017.object"],
     "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "custom.d.ts"],

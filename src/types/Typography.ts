@@ -21,7 +21,7 @@
 import { TooltipProps } from './Tooltip'
 
 export type TypographtTitleLevels = 1 | 2 | 3 | 4 | 5 | 6
-export type TypographtUiTypes = 'secondary' | 'success' | 'warning' | 'danger' | 'disabled'
+export type TypographtUiTypes = 'secondary' | 'success' | 'warning' | 'danger' | 'disabled' | 'transparent'
 export type TypographtSizeTypes =
   | 'xs'
   | 'sm'
