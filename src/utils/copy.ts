@@ -18,18 +18,20 @@
  * });
  */
 const copyToClipboard = (
-  text: string,
+  text: string | number,
   options?: {
     successMessage?: string
     faildMessage?: string
   },
 ): Promise<string> => {
+  const _text = text.toString()
+
   const successMessage = options?.successMessage || 'Text copied to clipboard successfully!'
   const faildMessage = options?.faildMessage || 'Failed to copy data to clipboard.'
   return new Promise((resolve, reject) => {
     if (navigator.clipboard && window.isSecureContext) {
       window.navigator.clipboard
-        .writeText(text)
+        .writeText(_text)
         .then(() => {
           resolve(successMessage)
         })
@@ -39,7 +41,7 @@ const copyToClipboard = (
     } else {
       // Use the 'out of viewport hidden text area' trick
       const textArea = document.createElement('textarea')
-      textArea.value = text
+      textArea.value = _text
 
       // Move textarea out of the viewport so it's not visible
       textArea.style.position = 'absolute'

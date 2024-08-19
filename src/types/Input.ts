@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Types index file
+ * @fileoverview Button types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,22 +18,25 @@
  * limitations under the License.
  */
 
-export * from './Button'
-export * from './Tooltip'
-export * from './Loading'
-export * from './Flex'
-export * from './Card'
-export * from './Typography'
-export * from './Alert'
-export * from './Steps'
-export * from './Input'
+import React from 'react'
+import { TooltipProps } from './Tooltip'
+import { LoadingType } from './Loading'
 
-export type SizeTypes = 'small' | 'medium' | 'large'
-export interface IMediaQuery<T> {
-  default?: T
-  sm?: T
-  md?: T
-  lg?: T
-  xl?: T
-  '2xl'?: T
+export interface InputProps {
+  label?: string
+  inputProps?: React.HTMLProps<HTMLInputElement>
+  loading?: boolean
+  loadingType?: LoadingType
+  type?: InputTypes
+  placeholder?: string
+  className?: string
+  labelClassName?: string
+  required?: boolean
+  error?: string | boolean
+  hint?: string | React.ReactNode
+  tooltip?: TooltipProps
+  AfterComponent?: React.ReactNode
+  copyableFn?: () => string | number | null | undefined
 }
+
+export type InputTypes = 'default' | 'simple'
