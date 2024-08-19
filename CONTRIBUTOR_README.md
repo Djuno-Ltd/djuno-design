@@ -1,1 +1,0 @@
-## Djuno Design - contributors guide
