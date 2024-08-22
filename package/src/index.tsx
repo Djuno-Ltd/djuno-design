@@ -34,6 +34,7 @@ import Card from './components/Card'
 import Typography from './components/Typography'
 import Alert from './components/Alert'
 import Steps from './components/Steps'
+import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
 
 // export all types
@@ -48,4 +49,4 @@ export * from './utils/copy'
 /**
  * export components
  */
-export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input }
+export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input, Skeleton }
