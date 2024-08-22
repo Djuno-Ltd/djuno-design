@@ -35,6 +35,18 @@ import Typography from './components/Typography'
 import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Input from './components/form/Input'
+<<<<<<< Updated upstream
+=======
+import EmptyState from './components/EmptyState'
+import SimpleTable from './components/SimpleTable'
+import {
+  SimpleTableRow,
+  SimpleTableHead,
+  SimpleTableBody,
+  SimpleTableTH,
+  SimpleTableTD,
+} from './components/SimpleTable'
+>>>>>>> Stashed changes
 
 // export all types
 export * from './types'
@@ -48,4 +60,25 @@ export * from './utils/copy'
 /**
  * export components
  */
+<<<<<<< Updated upstream
 export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input }
+=======
+export {
+  Button,
+  Tooltip,
+  Loading,
+  Flex,
+  Card,
+  Typography,
+  Alert,
+  Steps,
+  Input,
+  EmptyState,
+  SimpleTable,
+  SimpleTableBody,
+  SimpleTableHead,
+  SimpleTableRow,
+  SimpleTableTD,
+  SimpleTableTH,
+}
+>>>>>>> Stashed changes
