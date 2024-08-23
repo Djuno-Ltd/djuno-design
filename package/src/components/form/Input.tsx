@@ -20,27 +20,23 @@
 
 import * as React from 'react'
 import { cn } from './../../utils/cn'
-// import Typography from './../Typography'
+import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
 import Tooltip from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
-// import Flex from './Flex'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { uuid } from '../../utils/uuid'
-// import { ReactComponent as SuccessIcon } from './../assets/icons/check-circle.svg'
-// import { ReactComponent as InfoIcon } from './../assets/icons/information-circle.svg'
-// import { ReactComponent as WarningIcon } from './../assets/icons/exclamation-circle.svg'
-
-// const { Text } = Typography
+// import { packageReadmeUrl } from '../../config'
 
 /**
  * Define input variants using the `cva` utility function.
  * This function generates CSS classes for alert styles based on specified variants.
  */
 const inputVariants = cva(
-  'dj-bg-secondary-100 dark:dj-bg-zinc-700 focus:dj-ring-0 dj-text-sm dj-rounded-lg dj-block dj-w-full dj-p-2.5 dark:dj-bg-dark-2 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
+  'dj-bg-secondary-100 focus:dj-ring-0 dj-text-sm dj-block dj-w-full dark:dj-bg-dark-800 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
   {
     variants: {
       type: {
@@ -49,12 +45,23 @@ const inputVariants = cva(
       },
       hasError: {
         yes: 'dj-border dj-border-red-500 dj-text-red-900 dj-placeholder-red-700 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500',
-        no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200',
+        no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200 dark:dj-border-dark-700 dark:focus:dj-bg-dark-700 dark:focus:dj-border-dark-600',
+      },
+      size: {
+        small: 'dj-rounded-lg dj-text-xs dj-px-1 dj-h-7',
+        medium: 'dj-rounded-lg dj-text-sm dj-px-2 dj-h-9',
+        large: 'dj-rounded-xl dj-text-base dj-px-2 dj-h-11',
+      },
+      copyable: {
+        yes: 'dj-pr-7',
+        no: '',
       },
     },
     defaultVariants: {
       type: 'default',
       hasError: 'no',
+      size: 'medium',
+      copyable: 'no',
     },
   },
 )
@@ -79,26 +86,38 @@ const labelVariants = cva(
 )
 
 /**
- * Inpt component.
+ * Input component.
  *
- * @param {object} props - Input props.
+ * @param {object} props - Input component props.
+ * @param {React.ReactNode} [props.label] - Label of the input.
+ * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
+ * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
+ * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
+ * @param {InputTypes} [props.type] - Type of the input field.
+ * @param {string} [props.placeholder] - Placeholder text for the input.
  * @param {string} [props.className] - Additional classes to apply to the input.
- * @param {string | React.ReactNode} [props.message] - Message of the alert
- * @param {string | React.ReactNode} [props.description] - Description of the alert
- * @param {string} [props.type] - Type of UI for the alert.
- * @param {boolean} [props.showIcon] - Indicates if the alert has the icon.
- * @param {boolean} [props.banner] - Indicates if the alert is a banner or not.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label.
+ * @param {boolean} [props.required] - Indicates if the input is required.
+ * @param {string | boolean} [props.error] - Error message or boolean to indicate input validity.
+ * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
+ * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the input.
+ * @param {SizeTypes} [props.size] - Size of the input field.
+ * @param {React.ReactNode} [props.AfterComponent] - Component to render after the input field.
+ * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)} [props.copyable] - Indicates if the input value can be copied, or a function to handle the copy operation.
  *
- * @returns {React.ReactNode} Rendered Alert component.
+ * @returns {React.ReactNode} Rendered Input component.
  *
- * @version 0.1.2
- * @see https://www.npmjs.com/package/djuno-design#alert
+ * @version 0.3.5
+ * @see https://www.npmjs.com/package/djuno-design#input
  *
  * @example
  * // Example usage of Input component:
- * <Input  />
- *
- *
+ * <Input
+ *   label="Username"
+ *   placeholder="Enter your username"
+ *   required
+ *   error="Username is required"
+ * />
  */
 const Input: React.FunctionComponent<InputProps> = ({
   label,
@@ -113,51 +132,72 @@ const Input: React.FunctionComponent<InputProps> = ({
   hint,
   placeholder,
   tooltip,
+  size,
   AfterComponent,
-  copyableFn,
+  copyable,
 }) => {
   const id = uuid(10)
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
   const handleCopyToClipboard = () => {
-    if (copyableFn) {
-      const value = copyableFn()
-      if (typeof value === 'string' || typeof value === 'number') {
-        copyToClipboard(value)
-      }
+    let textToCopy: string | number | null | undefined = ''
+    const inputValue = inputRef.current?.value
+
+    if (typeof copyable === 'function') {
+      textToCopy = copyable(inputValue)
+    }
+
+    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+      copyToClipboard(textToCopy)
     }
   }
 
   return (
     <div className='dj-flex dj-flex-col'>
       <div
-        className={cn('dj-flex dj-items-center', {
+        className={cn('dj-flex dj-items-center dj-px-1', {
           [labelClassName || '']: labelClassName,
-          'dj-justify-between': label,
-          'dj-justify-end': !label,
-          'dj-mb-1': label || required || tooltip || hint,
+          'dj-justify-between': label || required,
+          'dj-justify-end': !label && !required,
+          'dj-mb-0.5': label || required || tooltip || hint,
         })}
       >
         <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
-          {label}
-          {required && <span className='dj-text-red-500'>*</span>}
+          {label && <Typography.Text size='sm'>{label}</Typography.Text>}
+          {required && (
+            <Typography.Text uiType='danger' className='dj-h-5'>
+              *
+            </Typography.Text>
+          )}
           {tooltip && <Tooltip {...tooltip}>i</Tooltip>}
         </label>
         {hint && <span className='dj-text-[11px] dj-text-slate-500'>{hint}</span>}
       </div>
       <div className='dj-w-full dj-relative dj-block dj-z-0'>
-        {copyableFn && (
-          <div className='dj-absolute dj-z-30 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-3'>
+        {typeof copyable !== 'undefined' && !loading && (
+          <div className='dj-absolute dj-z-30 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2'>
             <CopyIcon
               onClick={handleCopyToClipboard}
-              className='dj-w-5 dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300'
+              className={cn(
+                'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
+                { 'dj-w-[15px]': size === 'small' },
+              )}
             />
           </div>
         )}
         <input
           id={id}
+          ref={inputRef}
           {...inputProps}
-          className={cn(inputVariants({ type, hasError: error ? 'yes' : 'no' }), className, {
-            'dj-pr-10': copyableFn,
-          })}
+          className={cn(
+            inputVariants({
+              type,
+              hasError: error ? 'yes' : 'no',
+              size,
+              copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
+            }),
+            className,
+          )}
           placeholder={placeholder}
         />
         {loading && (
@@ -167,17 +207,17 @@ const Input: React.FunctionComponent<InputProps> = ({
         )}
         <div className='dj-absolute dj-inset-y-0 dj-end-0 dj-flex'>{AfterComponent}</div>
       </div>
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {error && typeof error === 'string' && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
           >
-            <p className='mt-2 text-xs text-red-600 dark:text-red-500'>{error}</p>
+            <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </div>
   )
 }

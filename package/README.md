@@ -48,6 +48,9 @@ function App() {
    - Link
 7. Alert
 8. Steps
+9. Form
+   - Input
+10. Skeleton
 
 ## Available utility functions
 
@@ -188,6 +191,31 @@ function App() {
 | ----- | ------------ | -------- | ------- | ----------- |
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
+
+### Input
+
+| Name        | Type                          | Required | default | Description |
+| ----------- | ----------------------------- | -------- | ------- | ----------- |
+| inputProps  | `HTMLProps<HTMLInputElement>` | no       |         |             |
+| label       | string                        | no       |         |             |
+| type        | `InputTypes`                  | no       |         |             |
+| required    | boolean                       | no       |         |             |
+| error       | string , boolean              | no       |         |             |
+| hint        | boolean                       | no       |         |             |
+| loading     | boolean                       | no       |         |             |
+| loadingType | `LoadingType`                 | no       |         |             |
+| placeholder | string                        | no       |         |             |
+| tooltip     | `TooltipProps`                | no       |         |             |
+| size        | `LoadingType`                 | no       | medium  |             |
+| copyable    | `boolean or function`         | no       |         |             |
+
+### Skeleton
+
+| Name      | Type                 | Required | default   | Description |
+| --------- | -------------------- | -------- | --------- | ----------- |
+| shape     | `SkeletonShapes`     | no       | rectangle |             |
+| size      | `SizeTypes`          | no       | medium    |             |
+| animation | `SkeletonAnimations` | no       | pulse     |             |
 
 ## Contributor ✨
 

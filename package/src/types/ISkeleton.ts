@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Button types
+ * @fileoverview Skleton types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,27 +18,14 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import { TooltipProps } from './Tooltip'
-import { LoadingType } from './Loading'
 import { SizeTypes } from '.'
 
-export interface InputProps {
-  label?: React.ReactNode
-  inputProps?: React.HTMLProps<HTMLInputElement>
-  loading?: boolean
-  loadingType?: LoadingType
-  type?: InputTypes
-  placeholder?: string
-  className?: string
-  labelClassName?: string
-  required?: boolean
-  error?: string | boolean
-  hint?: string | React.ReactNode
-  tooltip?: TooltipProps
+export interface SkeletonProps {
   size?: SizeTypes
-  AfterComponent?: React.ReactNode
-  copyable?: boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
+  className?: string
+  shape?: SkeletonShapes
+  animation?: SkeletonAnimations
 }
 
-export type InputTypes = 'default' | 'simple'
+export type SkeletonShapes = 'rectangle' | 'circle' | 'square'
+export type SkeletonAnimations = 'none' | 'pulse'
