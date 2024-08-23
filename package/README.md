@@ -189,6 +189,33 @@ function App() {
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
 
+### SimpleTable
+
+| Name               | Type    | Required | default | Description |
+| ------------------ | ------- | -------- | ------- | ----------- |
+| loading            | boolean | no       |         |             |
+| className          | string  | no       |         |             |
+| containerClassName | string  |          |         |             |
+
+### SimpleTable.SimpleTableRow
+
+| Name              | Type    | Required | default | Description |
+| ----------------- | ------- | -------- | ------- | ----------- |
+| className         | string  | no       |         |             |
+| withoutHoverStyle | boolean |          |         |             |
+
+### SimpleTable.SimpleTableTD
+
+| Name      | Type   | Required | default | Description |
+| --------- | ------ | -------- | ------- | ----------- |
+| className | string | no       |         |             |
+
+### SimpleTable.SimpleTableTH
+
+| Name  | Type              | Required | default | Description |
+| ----- | ----------------- | -------- | ------- | ----------- |
+| label | string, ReactNode | no       |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
