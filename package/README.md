@@ -48,6 +48,7 @@ function App() {
    - Link
 7. Alert
 8. Steps
+9. EmptyState
 
 ## Available utility functions
 
@@ -188,6 +189,18 @@ function App() {
 | ----- | ------------ | -------- | ------- | ----------- |
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
+
+### EmptyState
+
+| Name          | Type              | Required | default                 | Description |
+| ------------- | ----------------- | -------- | ----------------------- | ----------- |
+| text          | string, ReactNode | no       | No data                 |             |
+| icon          | ReactNode         | no       | PRESENTED_IMAGE_DEFAULT |             |
+| className     | string            | no       |                         |             |
+| iconClassName | boolean           | no       |                         |             |
+| textClassName | string            | no       |                         |             |
+| usingIcon     | boolean           | no       | true                    |             |
+| usingText     | boolean           | no       | true                    |             |
 
 ## Contributor ✨
 
