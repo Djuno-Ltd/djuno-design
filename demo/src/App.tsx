@@ -8,7 +8,6 @@ import {
   Alert,
   Steps,
   Input,
-  EmptyState,
   SimpleTable,
   SimpleTableRow,
   SimpleTableHead,
@@ -29,12 +28,6 @@ function App() {
     setTimeout(() => setBtnLoading(false), 3000);
   };
 
-  interface TableData {
-    data1: string;
-    data2: string;
-    data3: string;
-  }
-  const [data, setData] = useState<TableData[]>([]);
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -74,74 +67,21 @@ function App() {
                 </SimpleTableRow>
               </SimpleTableHead>
               <SimpleTableBody>
-                {data.length > 0 ? (
-                  data.map((item, index) => (
-                    <SimpleTableRow key={index}>
-                      <SimpleTableTD>{item.data1}</SimpleTableTD>
-                      <SimpleTableTD>{item.data2}</SimpleTableTD>
-                      <SimpleTableTD>{item.data3}</SimpleTableTD>
-                    </SimpleTableRow>
-                  ))
-                ) : (
-                  <SimpleTableRow>
-                    <SimpleTableTD colSpan={3} className="text-center py-10">
-                      <Flex className="w-full justify-center">
-                        <EmptyState
+                <SimpleTableRow>
+                  <SimpleTableTD colSpan={3} className="text-center py-10">
+                    <Flex className="w-full justify-center">
+                      {/* <EmptyState
                           text="No data available"
                           icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
-                        />
-                      </Flex>
-                    </SimpleTableTD>
-                  </SimpleTableRow>
-                )}
+                        /> */}
+                    </Flex>
+                  </SimpleTableTD>
+                </SimpleTableRow>
               </SimpleTableBody>
             </SimpleTable>
           </Flex>
         </Card>
-        <Card title="Empty State">
-          <Text strong size="sm">
-            Empty state with simple icon
-          </Text>
-          <Flex className="gap-3 w-full">
-            <EmptyState
-              text="Empty state"
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
-            />
-          </Flex>
-          <Text strong size="sm">
-            Empty state with default icon
-          </Text>
-          <Flex className="gap-3 w-full">
-            <EmptyState
-              text="Empty state"
-              icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
-            />
-          </Flex>
-          <Text strong size="sm">
-            Empty state with undefined icon
-          </Text>
-          <Flex className="gap-3 w-full">
-            <EmptyState text="Empty state" />
-          </Flex>
-          <Text strong size="sm">
-            Empty state without icon
-          </Text>
-          <Flex className="gap-3 w-full">
-            <EmptyState text="Empty state" usingIcon={false} />
-          </Flex>
-          <Text strong size="sm">
-            Empty state without icon and with default text
-          </Text>
-          <Flex className="gap-3 w-full">
-            <EmptyState usingIcon={false} />
-          </Flex>
-          <Text strong size="sm">
-            Empty state without text
-          </Text>
-          <Flex className="gap-3 w-full">
-            <EmptyState usingText={false} />
-          </Flex>
-        </Card>
+
         <Card title="Inputs">
           <Flex className="gap-3 w-full">
             <Input
