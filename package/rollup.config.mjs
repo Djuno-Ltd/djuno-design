@@ -23,6 +23,17 @@ export default [
         preserveModules: false,
       },
     ],
+    build: {
+      chunkSizeWarningLimit: 100,
+      rollupOptions: {
+        onwarn(warning, warn) {
+          if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+            return
+          }
+          warn(warning)
+        },
+      },
+    },
     plugins: [
       url(),
       svgr({ icon: true, dimensions: false }),
@@ -60,6 +71,17 @@ export default [
       globals: {
         react: 'React',
         'react-router-dom': 'ReactRouterDOM',
+      },
+    },
+    build: {
+      chunkSizeWarningLimit: 100,
+      rollupOptions: {
+        onwarn(warning, warn) {
+          if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+            return
+          }
+          warn(warning)
+        },
       },
     },
     plugins: [

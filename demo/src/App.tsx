@@ -9,6 +9,7 @@ import {
   Steps,
   Input,
   Skeleton,
+  Switcher,
 } from "djuno-design";
 import { FormEvent, useState } from "react";
 import Header from "./Header";
@@ -27,6 +28,12 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Swither">
+          <Flex direction="col" className="gap-5 w-full">
+            <Switcher />
+          </Flex>
+        </Card>
+
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
             <Flex items="end" className="gap-3 w-full flex justify-end">
