@@ -57,6 +57,7 @@ function App() {
     - Body
     - Row
     - TD
+12. EmptyState
 
 ## Available utility functions
 
@@ -198,8 +199,6 @@ function App() {
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
 
-<<<<<<< HEAD
-
 ### Input
 
 | Name        | Type                          | Required | default | Description |
@@ -225,33 +224,43 @@ function App() {
 | size      | `SizeTypes`          | no       | medium    |             |
 | animation | `SkeletonAnimations` | no       | pulse     |             |
 
-## SimpleTable
+### SimpleTable
 
 | Name               | Type   | Required | default | Description |
 | ------------------ | ------ | -------- | ------- | ----------- |
 | className          | string | no       |         |             |
 | containerClassName | string |          |         |             |
 
-### SimpleTable.Row
+#### SimpleTable.Row
 
 | Name              | Type    | Required | default | Description |
 | ----------------- | ------- | -------- | ------- | ----------- |
 | className         | string  | no       |         |             |
 | withoutHoverStyle | boolean |          |         |             |
 
-### SimpleTable.TD
+#### SimpleTable.TD
 
 | Name      | Type   | Required | default | Description |
 | --------- | ------ | -------- | ------- | ----------- |
 | className | string | no       |         |             |
 
-### SimpleTable.TH
+#### SimpleTable.TH
 
 | Name  | Type              | Required | default | Description |
 | ----- | ----------------- | -------- | ------- | ----------- |
 | label | string, ReactNode | no       |         |             |
 
-> > > > > > > simple-table-component
+### EmptyState
+
+| Name          | Type        | Required | default                 | Description |
+| ------------- | ----------- | -------- | ----------------------- | ----------- |
+| text          | `ReactNode` | no       | No data                 |             |
+| icon          | `ReactNode` | no       | PRESENTED_IMAGE_DEFAULT |             |
+| className     | string      | no       |                         |             |
+| iconClassName | string      | no       |                         |             |
+| textClassName | string      | no       |                         |             |
+| usingIcon     | boolean     | no       | true                    |             |
+| usingText     | boolean     | no       | true                    |             |
 
 ## Contributor ✨
 

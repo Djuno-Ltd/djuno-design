@@ -10,6 +10,7 @@ import {
   Input,
   Skeleton,
   SimpleTable,
+  EmptyState,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -119,6 +120,51 @@ function App() {
                 </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>
+          </Flex>
+        </Card>
+
+        <Card title="Empty State">
+          <Text strong size="sm">
+            Empty state with simple icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState
+              text="Empty state"
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
+            />
+          </Flex>
+          <Text strong size="sm">
+            Empty state with default icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState
+              text="Empty state"
+              icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
+            />
+          </Flex>
+          <Text strong size="sm">
+            Empty state with undefined icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState text="Empty state" />
+          </Flex>
+          <Text strong size="sm">
+            Empty state without icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState text="Empty state" usingIcon={false} />
+          </Flex>
+          <Text strong size="sm">
+            Empty state without icon and with default text
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState usingIcon={false} />
+          </Flex>
+          <Text strong size="sm">
+            Empty state without text
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState usingText={false} />
           </Flex>
         </Card>
 
