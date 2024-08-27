@@ -22,7 +22,6 @@ import * as React from 'react'
 import { cn } from './../utils/cn'
 import { cva } from 'class-variance-authority'
 import { DividerProps } from '../types/Divider'
-import classNames from 'classnames'
 
 /**
  * Define divider variants using the `cva` utility function.
@@ -57,7 +56,7 @@ const dividerVariants = cva('dj-w-full dj-border-secondary-400 dark:after:dj-bor
  *
  * @returns {React.ReactNode} Rendered Divider component.
  *
- * @version 0.0.4
+ * @version 0.0.0
  * @see https://www.npmjs.com/package/djuno-design#divider
  *
  * @example
@@ -84,7 +83,7 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   const leftOrientationClass = 'dj-ml-4'
   const rightOrientationClass = 'dj-mr-4'
 
-  const parentClassName = classNames(dividerClass, className, {
+  const parentClassName = cn(dividerClass, className, {
     'dj-divider-using-text': usingText,
     [`dj-divider-${orientation}`]: usingText, //class based on orientation and usingText prop
   })
@@ -96,26 +95,26 @@ const Divider: React.FunctionComponent<DividerProps> = ({
           <>
             {orientation === 'left' && (
               <>
-                <span className={classNames(textClass, textClassName)}>{text || 'Djuno Design'}</span>
-                <div className={classNames(dividerClass, commonDividerClass, leftOrientationClass)}></div>
+                <span className={cn(textClass, textClassName)}>{text || 'Djuno Design'}</span>
+                <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)}></div>
               </>
             )}
             {orientation === 'center' && (
               <>
-                <div className={classNames(dividerClass, commonDividerClass, rightOrientationClass)}></div>
-                <span className={classNames(textClass, textClassName)}>{text || 'Djuno Design'}</span>
-                <div className={classNames(dividerClass, commonDividerClass, leftOrientationClass)}></div>
+                <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)}></div>
+                <span className={cn(textClass, textClassName)}>{text || 'Djuno Design'}</span>
+                <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)}></div>
               </>
             )}
             {orientation === 'right' && (
               <>
-                <div className={classNames(dividerClass, commonDividerClass, rightOrientationClass)}></div>
-                <span className={classNames(textClass, textClassName)}>{text || 'Djuno Design'}</span>
+                <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)}></div>
+                <span className={cn(textClass, textClassName)}>{text || 'Djuno Design'}</span>
               </>
             )}
           </>
         ) : (
-          <div className={classNames(dividerClass, commonDividerClass)}></div>
+          <div className={cn(dividerClass, commonDividerClass)}></div>
         )}
       </div>
       {children}
