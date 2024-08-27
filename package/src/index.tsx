@@ -42,6 +42,8 @@ import TableHead from './components/SimpleTable'
 import TableRow from './components/SimpleTable'
 import TableTD from './components/SimpleTable'
 import TableTH from './components/SimpleTable'
+import Divider from './components/Divider'
+import DividerWithText from './components/Divider'
 
 // export all types
 export * from './types'
@@ -72,4 +74,6 @@ export {
   TableRow,
   TableTD,
   TableTH,
+  Divider,
+  DividerWithText,
 }

@@ -189,6 +189,17 @@ function App() {
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
 
+### Divider
+
+| Name          | Type               | Required | default | Description |
+| ------------- | ------------------ | -------- | ------- | ----------- |
+| uiType        | `DividerTypes`     |          |         |             |
+| className     | string             |          |         |             |
+| orientation   | `OrientationTypes` |          |         |             |
+| text          | string             |          |         |             |
+| textClassName | string             |          |         |             |
+| usingText     | boolean            |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
