@@ -11,6 +11,7 @@ import {
   Skeleton,
   SimpleTable,
   EmptyState,
+  Divider,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -165,6 +166,33 @@ function App() {
           </Text>
           <Flex className="gap-3 w-full">
             <EmptyState usingText={false} />
+          </Flex>
+        </Card>
+
+        <Card title="Divider">
+          <Flex className="gap-3 w-full">
+            <Divider uiType="simple" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dashed" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dotted" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="simple" usingText={true} />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dashed" usingText={true} />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dotted" usingText={true} text="Text" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dashed" usingText={true} orientation="left" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dotted" usingText={true} orientation="right" />
           </Flex>
         </Card>
 

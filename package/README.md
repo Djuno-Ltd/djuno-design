@@ -58,6 +58,7 @@ function App() {
     - Row
     - TD
 12. EmptyState
+13. Divider
 
 ## Available utility functions
 
@@ -261,6 +262,17 @@ function App() {
 | textClassName | string      | no       |                         |             |
 | usingIcon     | boolean     | no       | true                    |             |
 | usingText     | boolean     | no       | true                    |             |
+
+### Divider
+
+| Name          | Type               | Required | default | Description |
+| ------------- | ------------------ | -------- | ------- | ----------- |
+| uiType        | `DividerTypes`     |          |         |             |
+| className     | string             |          |         |             |
+| orientation   | `OrientationTypes` |          |         |             |
+| text          | string             |          |         |             |
+| textClassName | string             |          |         |             |
+| usingText     | boolean            |          |         |             |
 
 ## Contributor ✨
 
