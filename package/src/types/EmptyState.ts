@@ -20,8 +20,8 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface EmptyStateProps extends PropsWithChildren {
-  text?: string | React.ReactNode
+export interface EmptyStateBodyProps extends PropsWithChildren {
+  text?: React.ReactNode
   icon?: React.ReactNode
   className?: string
   iconClassName?: string
@@ -30,16 +30,13 @@ export interface EmptyStateProps extends PropsWithChildren {
   usingText?: boolean
 }
 
-export interface PRESENTED_IMAGE_SIMPLE {
-  iconClassName?: string
-}
-export interface PRESENTED_IMAGE_DEFAULT {
-  iconClassName?: string
+export interface EmptyStateProps extends EmptyStateBodyProps {}
+
+export interface EmptyStateIconProps {
+  className?: string
 }
 
 export interface EmptyStateIcons {
-  PRESENTED_IMAGE_DEFAULT: React.FC<PRESENTED_IMAGE_SIMPLE>
-  PRESENTED_IMAGE_SIMPLE: React.FC<PRESENTED_IMAGE_DEFAULT>
+  PRESENTED_IMAGE_DEFAULT: React.FC<EmptyStateIconProps>
+  PRESENTED_IMAGE_SIMPLE: React.FC<EmptyStateIconProps>
 }
-
-// export type EmptyState = '' | ''

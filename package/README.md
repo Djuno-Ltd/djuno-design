@@ -192,15 +192,15 @@ function App() {
 
 ### EmptyState
 
-| Name          | Type              | Required | default                 | Description |
-| ------------- | ----------------- | -------- | ----------------------- | ----------- |
-| text          | string, ReactNode | no       | No data                 |             |
-| icon          | ReactNode         | no       | PRESENTED_IMAGE_DEFAULT |             |
-| className     | string            | no       |                         |             |
-| iconClassName | boolean           | no       |                         |             |
-| textClassName | string            | no       |                         |             |
-| usingIcon     | boolean           | no       | true                    |             |
-| usingText     | boolean           | no       | true                    |             |
+| Name          | Type        | Required | default                 | Description |
+| ------------- | ----------- | -------- | ----------------------- | ----------- |
+| text          | `ReactNode` | no       | No data                 |             |
+| icon          | `ReactNode` | no       | PRESENTED_IMAGE_DEFAULT |             |
+| className     | string      | no       |                         |             |
+| iconClassName | string      | no       |                         |             |
+| textClassName | string      | no       |                         |             |
+| usingIcon     | boolean     | no       | true                    |             |
+| usingText     | boolean     | no       | true                    |             |
 
 ## Contributor ✨
 
