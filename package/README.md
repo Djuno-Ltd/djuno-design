@@ -48,6 +48,12 @@ function App() {
    - Link
 7. Alert
 8. Steps
+9. SimpleTable
+   - Head
+   - TH
+   - Body
+   - Row
+   - TD
 
 ## Available utility functions
 
@@ -191,26 +197,25 @@ function App() {
 
 ### SimpleTable
 
-| Name               | Type    | Required | default | Description |
-| ------------------ | ------- | -------- | ------- | ----------- |
-| loading            | boolean | no       |         |             |
-| className          | string  | no       |         |             |
-| containerClassName | string  |          |         |             |
+| Name               | Type   | Required | default | Description |
+| ------------------ | ------ | -------- | ------- | ----------- |
+| className          | string | no       |         |             |
+| containerClassName | string |          |         |             |
 
-### SimpleTable.SimpleTableRow
+### SimpleTable.Row
 
 | Name              | Type    | Required | default | Description |
 | ----------------- | ------- | -------- | ------- | ----------- |
 | className         | string  | no       |         |             |
 | withoutHoverStyle | boolean |          |         |             |
 
-### SimpleTable.SimpleTableTD
+### SimpleTable.TD
 
 | Name      | Type   | Required | default | Description |
 | --------- | ------ | -------- | ------- | ----------- |
 | className | string | no       |         |             |
 
-### SimpleTable.SimpleTableTH
+### SimpleTable.TH
 
 | Name  | Type              | Required | default | Description |
 | ----- | ----------------- | -------- | ------- | ----------- |

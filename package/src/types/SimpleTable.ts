@@ -19,6 +19,20 @@
  */
 import { HTMLProps, PropsWithChildren } from 'react'
 
+export interface SimpletableProps extends PropsWithChildren {
+  loading?: boolean
+  className?: string
+  containerClassName?: string
+}
+
+export interface TableHeadProps extends React.PropsWithChildren {}
+
+export interface TableTHProps extends React.PropsWithChildren {
+  label?: string | React.ReactNode
+}
+
+export interface TableBodyProps extends React.PropsWithChildren {}
+
 export interface TableRowProps extends HTMLProps<HTMLTableRowElement> {
   className?: string
   withoutHoverStyle?: boolean
@@ -28,12 +42,10 @@ export interface TableTDProps extends HTMLProps<HTMLTableCellElement> {
   className?: string
 }
 
-export interface TableTHProps extends React.PropsWithChildren {
-  label?: string | React.ReactNode
-}
-
-export interface SimpletableProps extends PropsWithChildren {
-  loading?: boolean
-  className?: string
-  containerClassName?: string
+export interface TableComponents {
+  Head: React.FC<TableHeadProps>
+  TH: React.FC<TableTHProps>
+  Body: React.FC<TableBodyProps>
+  Row: React.FC<TableRowProps>
+  TD: React.FC<TableTDProps>
 }

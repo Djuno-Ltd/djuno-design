@@ -35,13 +35,7 @@ import Typography from './components/Typography'
 import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Input from './components/form/Input'
-import SimpleTable, {
-  SimpleTableRow,
-  SimpleTableHead,
-  SimpleTableBody,
-  SimpleTableTH,
-  SimpleTableTD,
-} from './components/SimpleTable'
+import SimpleTable from './components/SimpleTable'
 
 // export all types
 export * from './types'
@@ -55,20 +49,4 @@ export * from './utils/copy'
 /**
  * export components
  */
-export {
-  Button,
-  Tooltip,
-  Loading,
-  Flex,
-  Card,
-  Typography,
-  Alert,
-  Steps,
-  Input,
-  SimpleTable,
-  SimpleTableBody,
-  SimpleTableHead,
-  SimpleTableRow,
-  SimpleTableTD,
-  SimpleTableTH,
-}
+export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input, SimpleTable }

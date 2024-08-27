@@ -9,11 +9,6 @@ import {
   Steps,
   Input,
   SimpleTable,
-  SimpleTableRow,
-  SimpleTableHead,
-  SimpleTableBody,
-  SimpleTableTH,
-  SimpleTableTD,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -38,20 +33,20 @@ function App() {
           </Text>
           <Flex className="gap-3 w-full">
             <SimpleTable className="gap-3 w-full">
-              <SimpleTableHead>
-                <SimpleTableRow>
-                  <SimpleTableTH>Header 1</SimpleTableTH>
-                  <SimpleTableTH>Header 2</SimpleTableTH>
-                  <SimpleTableTH>Header 3</SimpleTableTH>
-                </SimpleTableRow>
-              </SimpleTableHead>
-              <SimpleTableBody>
-                <SimpleTableRow>
-                  <SimpleTableTD>Data 1</SimpleTableTD>
-                  <SimpleTableTD>Data 2</SimpleTableTD>
-                  <SimpleTableTD>Data 3</SimpleTableTD>
-                </SimpleTableRow>
-              </SimpleTableBody>
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
             </SimpleTable>
           </Flex>
           <Text strong size="sm">
@@ -59,25 +54,25 @@ function App() {
           </Text>
           <Flex className="w-full">
             <SimpleTable className="gap-3 w-full">
-              <SimpleTableHead>
-                <SimpleTableRow>
-                  <SimpleTableTH>Header 1</SimpleTableTH>
-                  <SimpleTableTH>Header 2</SimpleTableTH>
-                  <SimpleTableTH>Header 3</SimpleTableTH>
-                </SimpleTableRow>
-              </SimpleTableHead>
-              <SimpleTableBody>
-                <SimpleTableRow>
-                  <SimpleTableTD colSpan={3} className="text-center py-10">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
                       {/* <EmptyState
                           text="No data available"
                           icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
                         /> */}
                     </Flex>
-                  </SimpleTableTD>
-                </SimpleTableRow>
-              </SimpleTableBody>
+                  </SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
             </SimpleTable>
           </Flex>
         </Card>
