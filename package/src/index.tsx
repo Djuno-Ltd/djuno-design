@@ -36,6 +36,7 @@ import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
+import SimpleTable from './components/SimpleTable'
 
 // export all types
 export * from './types'
@@ -49,4 +50,4 @@ export * from './utils/copy'
 /**
  * export components
  */
-export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input, Skeleton }
+export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input, Skeleton, SimpleTable }

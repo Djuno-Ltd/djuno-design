@@ -9,10 +9,12 @@ import {
   Steps,
   Input,
   Skeleton,
+  SimpleTable,
 } from "djuno-design";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
+
 const { Text, Title, Paragraph, Link } = Typography;
 
 function App() {
@@ -67,6 +69,56 @@ function App() {
             <Skeleton size="small" />
             <Skeleton shape="square" />
             <Skeleton shape="circle" />
+          </Flex>
+        </Card>
+
+        <Card title="Simple Table">
+          <Text strong size="sm">
+            Simple table with data
+          </Text>
+          <Flex className="gap-3 w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
+          </Flex>
+          <Text strong size="sm">
+            Simple table without data
+          </Text>
+          <Flex className="w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD colSpan={3} className="text-center py-10">
+                    <Flex className="w-full justify-center">
+                      {/* <EmptyState
+                          text="No data available"
+                          icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
+                        /> */}
+                    </Flex>
+                  </SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
           </Flex>
         </Card>
 

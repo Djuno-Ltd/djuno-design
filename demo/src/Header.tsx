@@ -14,13 +14,13 @@ const Header = () => {
     <Flex
       justify="between"
       items="center"
-      className="px-8 py-4 border-b sticky top-0 bg-white dark:bg-[#161A1D] dark:border-b-[#22272B]"
+      className="px-8 py-4 border-b sticky top-0 bg-white dark:bg-[#161A1D] dark:border-b-[#22272B] z-50"
     >
       <Flex items="center" className="gap-1">
         <Logo className="w-6" />
         <Text>djuno-design</Text>
         <Text uiType="secondary" size="xs">
-          v0.3.5
+          v0.3.6
         </Text>
       </Flex>
       <Flex items="center" className="gap-3">

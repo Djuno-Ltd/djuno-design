@@ -51,6 +51,12 @@ function App() {
 9. Form
    - Input
 10. Skeleton
+11. SimpleTable
+    - Head
+    - TH
+    - Body
+    - Row
+    - TD
 
 ## Available utility functions
 
@@ -192,6 +198,8 @@ function App() {
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
 
+<<<<<<< HEAD
+
 ### Input
 
 | Name        | Type                          | Required | default | Description |
@@ -216,6 +224,34 @@ function App() {
 | shape     | `SkeletonShapes`     | no       | rectangle |             |
 | size      | `SizeTypes`          | no       | medium    |             |
 | animation | `SkeletonAnimations` | no       | pulse     |             |
+
+## SimpleTable
+
+| Name               | Type   | Required | default | Description |
+| ------------------ | ------ | -------- | ------- | ----------- |
+| className          | string | no       |         |             |
+| containerClassName | string |          |         |             |
+
+### SimpleTable.Row
+
+| Name              | Type    | Required | default | Description |
+| ----------------- | ------- | -------- | ------- | ----------- |
+| className         | string  | no       |         |             |
+| withoutHoverStyle | boolean |          |         |             |
+
+### SimpleTable.TD
+
+| Name      | Type   | Required | default | Description |
+| --------- | ------ | -------- | ------- | ----------- |
+| className | string | no       |         |             |
+
+### SimpleTable.TH
+
+| Name  | Type              | Required | default | Description |
+| ----- | ----------------- | -------- | ------- | ----------- |
+| label | string, ReactNode | no       |         |             |
+
+> > > > > > > simple-table-component
 
 ## Contributor ✨
 
