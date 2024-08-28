@@ -5,6 +5,34 @@ import Loading from './../Loading'
 import { SwitcherProps } from '../../types/ISwitcher'
 import { cn } from '../../utils/cn'
 
+/**
+ * Switcher component.
+ *
+ * A toggle switch component that can be used to represent an on/off state with various sizes, loading states, and disabled options.
+ *
+ * @param {object} props - Switcher component props.
+ * @param {boolean} [props.on] - Initial state of the switch (on or off).
+ * @param {Function} [props.onToggle] - Callback function that gets called when the switch is toggled. It receives the new state as an argument.
+ * @param {boolean} [props.disabled] - If true, the switch will be disabled and not clickable.
+ * @param {boolean} [props.loading] - If true, the switch will show a loading indicator instead of its normal state.
+ * @param {LoadingProps} [props.loadingSetting] - Configuration for the loading indicator, including size, border size, and type.
+ * @param {SizeTypes} [props.size] - Size of the switch. Options are 'small', 'medium', or 'large'.
+ *
+ * @returns {React.ReactNode} Rendered Switcher component.
+ *
+ * @version 0.0.0
+ * @see https://www.npmjs.com/package/djuno-design#switcher
+ *
+ * @example
+ * // Example usage of Switcher component:
+ * <Switcher
+ *   on={true}
+ *   onToggle={(value) => console.log('Switch is now:', value)}
+ *   disabled={false}
+ *   size="medium"
+ *   loading={false}
+ * />
+ */
 const Switcher: React.FC<SwitcherProps> = ({ on, onToggle, disabled, size, loading, loadingSetting }) => {
   const [enabled, setEnabled] = useState<boolean>(on || false)
 
