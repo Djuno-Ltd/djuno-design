@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "nodemon --watch src --ext ts,tsx,js,jsx,css,mjs --exec npm run build",
-    "build": "npm run prettier && npm run rollup && npm run link",
+    "build": "npm run prettier && npm run rollup",
     "link": "npm link",
     "rollup": "rollup -c",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
