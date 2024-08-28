@@ -36,14 +36,7 @@ import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Input from './components/form/Input'
 import EmptyState from './components/EmptyState'
-import SimpleTable from './components/SimpleTable'
-import TableBody from './components/SimpleTable'
-import TableHead from './components/SimpleTable'
-import TableRow from './components/SimpleTable'
-import TableTD from './components/SimpleTable'
-import TableTH from './components/SimpleTable'
-import Divider from './components/Divider'
-import DividerWithText from './components/Divider'
+import CopyHide from './components/CopyHide'
 
 // export all types
 export * from './types'
@@ -57,23 +50,4 @@ export * from './utils/copy'
 /**
  * export components
  */
-export {
-  Button,
-  Tooltip,
-  Loading,
-  Flex,
-  Card,
-  Typography,
-  Alert,
-  Steps,
-  Input,
-  EmptyState,
-  SimpleTable,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableTD,
-  TableTH,
-  Divider,
-  DividerWithText,
-}
+export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input, EmptyState, CopyHide }

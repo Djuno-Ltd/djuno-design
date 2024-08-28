@@ -8,8 +8,7 @@ import {
   Alert,
   Steps,
   Input,
-  Divider,
-  DividerWithText,
+  CopyHide,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -28,33 +27,18 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
-        <Card title="Divider">
+        <Card title="CopyHide">
           <Flex className="gap-3 w-full">
-            <Divider uiType="simple" />
+            <div className="text-sm dark:text-slate-200">
+              <CopyHide />
+            </div>
           </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="simple" usingText={true} />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" usingText={true} />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" usingText={true} text="Text" />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" usingText={true} orientation="left" />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" usingText={true} orientation="right" />
+          <Flex className="gap-3 w-full mt-5">
+            <div className="text-sm dark:text-slate-200">
+              <CopyHide text="Text" />
+            </div>
           </Flex>
         </Card>
-
         <Card title="Inputs">
           <Flex className="gap-3 w-full">
             <Input
