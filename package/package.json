@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "0.3.8",
+  "version": "0.4.0",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -8,7 +8,7 @@
     "react"
   ],
   "scripts": {
-    "start": "nodemon --watch src --ext ts,tsx,js,jsx,css --exec npm run build",
+    "start": "nodemon --watch src --ext ts,tsx,js,jsx,css,mjs --exec npm run build",
     "build": "npm run prettier && npm run rollup && npm run link",
     "link": "npm link",
     "rollup": "rollup -c",
@@ -31,6 +31,7 @@
     "README.md"
   ],
   "devDependencies": {
+    "@headlessui/react": "^2.1.2",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",

@@ -50,6 +50,7 @@ function App() {
 8. Steps
 9. Form
    - Input
+   - Switcher
 10. Skeleton
 11. SimpleTable
     - Head
@@ -211,11 +212,22 @@ function App() {
 | error       | string , boolean              | no       |         |             |
 | hint        | boolean                       | no       |         |             |
 | loading     | boolean                       | no       |         |             |
-| loadingType | `LoadingType`                 | no       |         |             |
+| loadingType | `LoadingProps`                | no       |         |             |
 | placeholder | string                        | no       |         |             |
 | tooltip     | `TooltipProps`                | no       |         |             |
-| size        | `LoadingType`                 | no       | medium  |             |
+| size        | `SizeTypes`                   | no       | medium  |             |
 | copyable    | `boolean or function`         | no       |         |             |
+
+### Switcher
+
+| Name        | Type                       | Required | default | Description |
+| ----------- | -------------------------- | -------- | ------- | ----------- |
+| on          | boolean                    |          |         |             |
+| onToggle    | `(value: boolean) => void` |          |         |             |
+| disabled    | boolean                    |          |         |             |
+| loading     | boolean                    |          |         |             |
+| loadingType | `LoadingProps`             |          |         |             |
+| size        | `SizeTypes`                |          | medium  |             |
 
 ### Skeleton
 

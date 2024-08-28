@@ -39,6 +39,7 @@ import Input from './components/form/Input'
 import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
+import Switcher from './components/form/Switcher'
 
 // export all types
 export * from './types'
@@ -66,4 +67,5 @@ export {
   SimpleTable,
   EmptyState,
   Divider,
+  Switcher,
 }
