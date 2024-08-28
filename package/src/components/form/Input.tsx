@@ -138,6 +138,8 @@ const Input: React.FunctionComponent<InputProps> = ({
 }) => {
   const id = uuid(10)
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const value = inputProps?.value
+  const onChange = inputProps?.onChange
 
   const handleCopyToClipboard = () => {
     let textToCopy: string | number | null | undefined = ''
@@ -189,6 +191,8 @@ const Input: React.FunctionComponent<InputProps> = ({
           id={id}
           ref={inputRef}
           {...inputProps}
+          value={value}
+          onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
               type,

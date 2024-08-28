@@ -8,7 +8,7 @@
     "react"
   ],
   "scripts": {
-    "start": "nodemon --watch src --ext ts,tsx,js,jsx,css --exec npm run build",
+    "start": "nodemon --watch src --ext ts,tsx,js,jsx,css,mjs --exec npm run build",
     "build": "npm run prettier && npm run rollup && npm run link",
     "link": "npm link",
     "rollup": "rollup -c",

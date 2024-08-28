@@ -18,12 +18,13 @@
  * limitations under the License.
  */
 
-import { SizeTypes } from '.'
+import { LoadingProps, SizeTypes } from '.'
 
 export interface SwitcherProps {
   on?: boolean
   onToggle?: (value: boolean) => void
   disabled?: boolean
   loading?: boolean
+  loadingSetting?: LoadingProps
   size?: SizeTypes
 }
