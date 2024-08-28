@@ -34,7 +34,12 @@ import Card from './components/Card'
 import Typography from './components/Typography'
 import Alert from './components/Alert'
 import Steps from './components/Steps'
+import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
+import SimpleTable from './components/SimpleTable'
+import EmptyState from './components/EmptyState'
+import Divider from './components/Divider'
+import Switcher from './components/form/Switcher'
 
 // export all types
 export * from './types'
@@ -48,4 +53,19 @@ export * from './utils/copy'
 /**
  * export components
  */
-export { Button, Tooltip, Loading, Flex, Card, Typography, Alert, Steps, Input }
+export {
+  Button,
+  Tooltip,
+  Loading,
+  Flex,
+  Card,
+  Typography,
+  Alert,
+  Steps,
+  Input,
+  Skeleton,
+  SimpleTable,
+  EmptyState,
+  Divider,
+  Switcher,
+}

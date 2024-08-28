@@ -48,6 +48,18 @@ function App() {
    - Link
 7. Alert
 8. Steps
+9. Form
+   - Input
+   - Switcher
+10. Skeleton
+11. SimpleTable
+    - Head
+    - TH
+    - Body
+    - Row
+    - TD
+12. EmptyState
+13. Divider
 
 ## Available utility functions
 
@@ -188,6 +200,91 @@ function App() {
 | ----- | ------------ | -------- | ------- | ----------- |
 | steps | `StepItem[]` | yes      |         |             |
 | step  | string       | yes      |         |             |
+
+### Input
+
+| Name        | Type                          | Required | default | Description |
+| ----------- | ----------------------------- | -------- | ------- | ----------- |
+| inputProps  | `HTMLProps<HTMLInputElement>` | no       |         |             |
+| label       | string                        | no       |         |             |
+| type        | `InputTypes`                  | no       |         |             |
+| required    | boolean                       | no       |         |             |
+| error       | string , boolean              | no       |         |             |
+| hint        | boolean                       | no       |         |             |
+| loading     | boolean                       | no       |         |             |
+| loadingType | `LoadingProps`                | no       |         |             |
+| placeholder | string                        | no       |         |             |
+| tooltip     | `TooltipProps`                | no       |         |             |
+| size        | `SizeTypes`                   | no       | medium  |             |
+| copyable    | `boolean or function`         | no       |         |             |
+
+### Switcher
+
+| Name        | Type                       | Required | default | Description |
+| ----------- | -------------------------- | -------- | ------- | ----------- |
+| on          | boolean                    |          |         |             |
+| onToggle    | `(value: boolean) => void` |          |         |             |
+| disabled    | boolean                    |          |         |             |
+| loading     | boolean                    |          |         |             |
+| loadingType | `LoadingProps`             |          |         |             |
+| size        | `SizeTypes`                |          | medium  |             |
+
+### Skeleton
+
+| Name      | Type                 | Required | default   | Description |
+| --------- | -------------------- | -------- | --------- | ----------- |
+| shape     | `SkeletonShapes`     | no       | rectangle |             |
+| size      | `SizeTypes`          | no       | medium    |             |
+| animation | `SkeletonAnimations` | no       | pulse     |             |
+
+### SimpleTable
+
+| Name               | Type   | Required | default | Description |
+| ------------------ | ------ | -------- | ------- | ----------- |
+| className          | string | no       |         |             |
+| containerClassName | string |          |         |             |
+
+#### SimpleTable.Row
+
+| Name              | Type    | Required | default | Description |
+| ----------------- | ------- | -------- | ------- | ----------- |
+| className         | string  | no       |         |             |
+| withoutHoverStyle | boolean |          |         |             |
+
+#### SimpleTable.TD
+
+| Name      | Type   | Required | default | Description |
+| --------- | ------ | -------- | ------- | ----------- |
+| className | string | no       |         |             |
+
+#### SimpleTable.TH
+
+| Name  | Type              | Required | default | Description |
+| ----- | ----------------- | -------- | ------- | ----------- |
+| label | string, ReactNode | no       |         |             |
+
+### EmptyState
+
+| Name          | Type        | Required | default                 | Description |
+| ------------- | ----------- | -------- | ----------------------- | ----------- |
+| text          | `ReactNode` | no       | No data                 |             |
+| icon          | `ReactNode` | no       | PRESENTED_IMAGE_DEFAULT |             |
+| className     | string      | no       |                         |             |
+| iconClassName | string      | no       |                         |             |
+| textClassName | string      | no       |                         |             |
+| usingIcon     | boolean     | no       | true                    |             |
+| usingText     | boolean     | no       | true                    |             |
+
+### Divider
+
+| Name          | Type               | Required | default | Description |
+| ------------- | ------------------ | -------- | ------- | ----------- |
+| uiType        | `DividerTypes`     |          |         |             |
+| className     | string             |          |         |             |
+| orientation   | `OrientationTypes` |          |         |             |
+| text          | string             |          |         |             |
+| textClassName | string             |          |         |             |
+| usingText     | boolean            |          |         |             |
 
 ## Contributor ✨
 

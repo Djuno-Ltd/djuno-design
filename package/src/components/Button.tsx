@@ -30,7 +30,7 @@ import { cva } from 'class-variance-authority'
  * This function generates CSS classes for button styles based on specified variants.
  */
 const buttonVariants = cva(
-  'dj-rounded-xl focus:dj-outline-0 dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400 dj-border-2 focus:dj-ring-4',
+  'focus:dj-outline-0 dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400 dj-border-2 focus:dj-ring-4',
   {
     variants: {
       uiType: {
@@ -44,9 +44,9 @@ const buttonVariants = cva(
           'dj-bg-red-500 dj-text-white hover:dj-bg-red-600 dj-border-red-500 hover:dj-border-red-600 dark:dj-bg-red-500 dark:hover:dj-bg-red-600 dark:dj-border-red-500 dark:hover:dj-border-red-600 disabled:dj-border-red-400 disabled:dj-bg-red-400 disabled:dj-text-white disabled:dark:dj-bg-red-400 disabled:dark:dj-text-secondary-200 disabled:dark:dj-border-red-400 focus:dj-ring-red-100 dark:focus:dj-ring-red-600/50',
       },
       size: {
-        small: 'dj-text-xs dj-px-3 dj-h-7',
-        medium: 'dj-text-sm dj-px-4 dj-h-9',
-        large: 'dj-text-base dj-px-5 dj-h-11',
+        small: 'dj-rounded-lg dj-text-xs dj-px-3 dj-h-7',
+        medium: 'dj-rounded-lg dj-text-sm dj-px-4 dj-h-9',
+        large: 'dj-rounded-xl dj-text-base dj-px-5 dj-h-11',
       },
     },
     defaultVariants: {

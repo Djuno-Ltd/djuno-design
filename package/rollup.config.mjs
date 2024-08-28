@@ -23,6 +23,12 @@ export default [
         preserveModules: false,
       },
     ],
+    onwarn(warning, warn) {
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+        return
+      }
+      warn(warning)
+    },
     plugins: [
       url(),
       svgr({ icon: true, dimensions: false }),
@@ -61,6 +67,12 @@ export default [
         react: 'React',
         'react-router-dom': 'ReactRouterDOM',
       },
+    },
+    onwarn(warning, warn) {
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+        return
+      }
+      warn(warning)
     },
     plugins: [
       url(),
