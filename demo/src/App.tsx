@@ -13,6 +13,7 @@ import {
   EmptyState,
   Divider,
   Switcher,
+  Modal,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -29,10 +30,28 @@ function App() {
 
   const [inputValue, setInputValue] = useState("");
   const [swith, setSwitch] = useState(false);
+  const [modal, setModal] = useState(false);
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Modal">
+          <Flex direction="col" className="gap-3">
+            <Flex items={{ default: "center" }} className="gap-2">
+              <Button onClick={() => setModal(true)}>Click to open!</Button>
+              <Modal
+                isOpen={modal}
+                onClose={() => setModal(false)}
+                title="Modal title"
+                contentClassName="max-w-md"
+              >
+                <EmptyState />
+              </Modal>
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Swither">
           <Flex direction="col" className="gap-5">
             <div>
