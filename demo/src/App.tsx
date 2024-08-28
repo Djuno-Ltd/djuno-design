@@ -33,7 +33,7 @@ function App() {
               <CopyHide />
             </div>
           </Flex>
-          <Flex className="gap-3 w-full mt-5">
+          <Flex className="gap-3 w-full">
             <div className="text-sm dark:text-slate-200">
               <CopyHide text="Text" />
             </div>
