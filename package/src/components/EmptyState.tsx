@@ -18,38 +18,11 @@
  * limitations under the License.
  */
 import * as React from 'react'
-import { cva } from 'class-variance-authority'
-import classNames from 'classnames'
 import { cn } from '../utils/cn'
-import { EmptyStateIcons, EmptyStateProps, PRESENTED_IMAGE_DEFAULT, PRESENTED_IMAGE_SIMPLE } from '../types/EmptyState'
+import { EmptyStateBodyProps, EmptyStateIconProps, EmptyStateIcons, EmptyStateProps } from '../types/EmptyState'
 import { ReactComponent as InboxIcon } from './../assets/icons/inbox.svg'
 import { ReactComponent as InboxArrowIcon } from './../assets/icons/inbox-arrow-down.svg'
-
-/**
- * Define emptyState variants using the `cva` utility function.
- * This function generates CSS classes for alert styles based on specified variants.
- */
-const emptyStateVariants = cva(
-  'dj-w-full dj-min-h-[150px] dj-flex dj-flex-col dj-gap-1 dj-justify-center dj-items-center  dj-text-slate-400 dj-dark:text-gray-600',
-  {
-    variants: {
-      //   uiType: {
-      //     simple: '',
-      //     primary: '',
-      //     light: '',
-      // //   },
-      //   size: {
-      //     small: 'dj-text-xs dj-px-3 dj-h-7',
-      //     medium: 'dj-text-sm dj-px-4 dj-h-9',
-      //     large: 'dj-text-base dj-px-5 dj-h-11',
-      //   },
-    },
-    // defaultVariants: {
-    //   uiType: 'simple',
-    //   size: 'medium',
-    // },
-  },
-)
+import Typography from './Typography'
 
 /**
  * EmptyState component that allows for customization of UI type, size, loading state, and more.
@@ -64,17 +37,32 @@ const emptyStateVariants = cva(
  *
  * @returns {React.ReactNode} Rendered EmptyState component.
  *
- * @version 0.0.4
+ * @version 0.3.7
  * @see https://www.npmjs.com/package/djuno-design#emptySate
  *
  * @example
  * // Example usage of EmptyState component:
  *
- *
- *
+ * function MyComponent() {
+ *   return (
+ *     <EmptyState
+ *       className="my-custom-class"
+ *       icon={<CustomIcon />}
+ *       iconClassName="custom-icon-class"
+ *       textClassName="custom-text-class"
+ *       usingIcon={true}
+ *       usingText={true}
+ *       text="No items found"
+ *     />
+ *   );
+ * }
  */
+// eslint-disable-next-line react/prop-types
+const EmptyState: React.FC<EmptyStateProps> & EmptyStateIcons = (props): React.ReactNode => {
+  return <EmptyStateBody {...props} />
+}
 
-const EmptyState: React.FC<EmptyStateProps> & EmptyStateIcons = ({
+const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
   text,
   icon,
   className,
@@ -82,28 +70,31 @@ const EmptyState: React.FC<EmptyStateProps> & EmptyStateIcons = ({
   textClassName,
   usingIcon,
   usingText,
-  ...props
-}) => {
+}): React.ReactNode => {
   return (
-    <div className={cn(emptyStateVariants({}), className, {})}>
-      {usingIcon || usingIcon === undefined
-        ? icon || <EmptyState.PRESENTED_IMAGE_DEFAULT {...{ iconClassName }} />
-        : null}
-      <span className={classNames('dj-text-sm dj-font-medium', textClassName)}>
+    <div
+      className={cn(
+        'dj-w-full dj-min-h-[150px] dj-flex dj-flex-col dj-gap-1 dj-justify-center dj-items-center dj-text-slate-400 dj-dark:text-gray-600',
+        className,
+      )}
+    >
+      {usingIcon || usingIcon === undefined ? icon || <DefaultIcon className={iconClassName} /> : null}
+      <Typography.Text uiType='transparent' size='sm' className={textClassName}>
         {usingText || usingText === undefined ? text || 'No data' : null}
-      </span>
+      </Typography.Text>
     </div>
   )
 }
 
-const PRESENTED_IMAGE_SIMPLE: React.FC<PRESENTED_IMAGE_SIMPLE> = ({ iconClassName }) => {
-  return <InboxIcon className={classNames('dj-w-14', iconClassName)} />
-}
-const PRESENTED_IMAGE_DEFAULT: React.FC<PRESENTED_IMAGE_DEFAULT> = ({ iconClassName }) => {
-  return <InboxArrowIcon className={classNames('dj-w-14', iconClassName)} />
+const SimpleIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
+  return <InboxIcon className={cn('dj-w-14', className)} />
 }
 
-EmptyState.PRESENTED_IMAGE_SIMPLE = PRESENTED_IMAGE_SIMPLE
-EmptyState.PRESENTED_IMAGE_DEFAULT = PRESENTED_IMAGE_DEFAULT
+const DefaultIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
+  return <InboxArrowIcon className={cn('dj-w-14', className)} />
+}
+
+EmptyState.PRESENTED_IMAGE_SIMPLE = SimpleIcon
+EmptyState.PRESENTED_IMAGE_DEFAULT = DefaultIcon
 
 export default EmptyState

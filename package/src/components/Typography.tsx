@@ -99,6 +99,7 @@ const textVariants = cva('', {
  *
  * @param {object} props - Typography props.
  * @param {React.ReactNode} props.children - The content to be displayed within the Typography component.
+ * @param {TypographtUiTypes} [props.uiType] - The UI type to determine the text's appearance (e.g., secondary, success, warning, etc.).
  * @param {boolean} [props.code] - Determines if the content should be displayed as code.
  * @param {boolean} [props.mark] - Determines if the content should be highlighted.
  * @param {boolean} [props.underline] - Determines if the content should be underlined.
@@ -106,6 +107,7 @@ const textVariants = cva('', {
  * @param {boolean} [props.strong] - Determines if the content should be displayed as strong.
  * @param {boolean} [props.italic] - Determines if the content should be displayed in italics.
  * @param {object} [props.tooltip] - Additional props for the tooltip functionality.
+ * @param {boolean | TypographyCopyableProp} [props.copyable] - Determines if the content should be copyable, with optional copyable configurations.
  *
  * @returns {React.ReactNode} Rendered Typography component.
  *

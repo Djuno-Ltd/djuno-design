@@ -8,49 +8,195 @@ import {
   Alert,
   Steps,
   Input,
+  Skeleton,
+  SimpleTable,
+  EmptyState,
+  Divider,
   CopyHide,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
-
 const { Text, Title, Paragraph, Link } = Typography;
-
 function App() {
   const [btnLoading, setBtnLoading] = useState(false);
   const handleClick = () => {
     setBtnLoading(true);
     setTimeout(() => setBtnLoading(false), 3000);
   };
-
+  const [inputValue, setInputValue] = useState("");
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="CopyHide">
-          <Flex className="gap-3 w-full">
-            <div className="text-sm dark:text-slate-200">
-              <CopyHide />
-            </div>
+          <Flex direction="col" className="gap-5 w-full">
+            <CopyHide />
           </Flex>
-          <Flex className="gap-3 w-full">
-            <div className="text-sm dark:text-slate-200">
-              <CopyHide text="Text" />
-            </div>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <CopyHide text="Text" />
           </Flex>
         </Card>
         <Card title="Inputs">
-          <Flex className="gap-3 w-full">
-            <Input
-              label="input label"
-              loading={false}
-              loadingType="elastic"
-              copyableFn={() => "test text"}
-            />
-            <Button>Add</Button>
+          <Flex direction="col" className="gap-5 w-full">
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input label="small" size="small" />
+              <Input label="medium" size="medium" />
+              <Input label="large" size="large" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input label="loading" loading loadingType="elastic" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input
+                label="copyable"
+                copyable={(v) => `Hi ${v}`}
+                inputProps={{
+                  value: "djuno-design",
+                }}
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input
+                label="error"
+                loadingType="elastic"
+                inputProps={{
+                  value: inputValue,
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                    setInputValue(e.target?.value),
+                }}
+                error={inputValue === "" ? "Field is required" : ""}
+              />
+            </Flex>
           </Flex>
         </Card>
-
+        <Card title="Skeleton">
+          <Flex direction="col" className="gap-5 w-full">
+            <Skeleton />
+            <Skeleton size="small" />
+            <Skeleton shape="square" />
+            <Skeleton shape="circle" />
+          </Flex>
+        </Card>
+        <Card title="Simple Table">
+          <Text strong size="sm">
+            Simple table with data
+          </Text>
+          <Flex className="gap-3 w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
+          </Flex>
+          <Text strong size="sm">
+            Simple table without data
+          </Text>
+          <Flex className="w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD colSpan={3} className="text-center py-10">
+                    <Flex className="w-full justify-center">
+                      {/* <EmptyState
+                          text="No data available"
+                          icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
+                        /> */}
+                    </Flex>
+                  </SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
+          </Flex>
+        </Card>
+        <Card title="Empty State">
+          <Text strong size="sm">
+            Empty state with simple icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState
+              text="Empty state"
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
+            />
+          </Flex>
+          <Text strong size="sm">
+            Empty state with default icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState
+              text="Empty state"
+              icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
+            />
+          </Flex>
+          <Text strong size="sm">
+            Empty state with undefined icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState text="Empty state" />
+          </Flex>
+          <Text strong size="sm">
+            Empty state without icon
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState text="Empty state" usingIcon={false} />
+          </Flex>
+          <Text strong size="sm">
+            Empty state without icon and with default text
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState usingIcon={false} />
+          </Flex>
+          <Text strong size="sm">
+            Empty state without text
+          </Text>
+          <Flex className="gap-3 w-full">
+            <EmptyState usingText={false} />
+          </Flex>
+        </Card>
+        <Card title="Divider">
+          <Flex className="gap-3 w-full">
+            <Divider uiType="simple" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dashed" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dotted" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="simple" usingText={true} />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dashed" usingText={true} />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dotted" usingText={true} text="Text" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dashed" usingText={true} orientation="left" />
+          </Flex>
+          <Flex className="gap-3 w-full">
+            <Divider uiType="dotted" usingText={true} orientation="right" />
+          </Flex>
+        </Card>
         <Card title="Steps">
           <Flex direction={"col"} className="gap-3 w-full">
             <Steps
@@ -60,7 +206,6 @@ function App() {
               ]}
               step="1"
             />
-
             <Steps
               steps={[
                 { label: "label 1", value: "1" },
@@ -81,7 +226,6 @@ function App() {
             <Alert type="warning" message="Djuno Design. Warning Alert" />
             <Alert type="success" message="Djuno Design. Success Alert" />
             <Alert type="error" message="Djuno Design. Error Alert" />
-
             <Text strong size="sm" className="mt-4">
               with description
             </Text>
@@ -90,7 +234,6 @@ function App() {
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
               type="info"
             />
-
             <Text strong size="sm" className="mt-4">
               with icon
             </Text>
@@ -113,7 +256,6 @@ function App() {
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
               type="info"
             />
-
             <Text strong size="sm" className="mt-4">
               banner mode
             </Text>
@@ -125,7 +267,6 @@ function App() {
             />
           </Flex>
         </Card>
-
         <Card title="Typography" description="different types of heading">
           <Title>h1. Djuno Design</Title>
           <Title level={2}>h2. Djuno Design</Title>
@@ -178,7 +319,6 @@ function App() {
             </Text>
           </Flex>
         </Card>
-
         <Card title="Typography" description="copyable options">
           <Flex direction={"col"} className="gap-3 w-full">
             <Paragraph copyable>This is a copyable text.</Paragraph>
@@ -196,13 +336,11 @@ function App() {
             <Text copyable={{ tooltips: false }}>Hide Copy tooltips.</Text>
           </Flex>
         </Card>
-
         <Card title="Card">
           <Card title="Title" description="description" setting="setting">
             content
           </Card>
         </Card>
-
         <Card title="Flex">
           <Flex direction="col" className="gap-2 dj-w-full">
             <Flex items="center" className="gap-2 dj-w-full">
@@ -227,7 +365,6 @@ function App() {
             </Flex>
           </Flex>
         </Card>
-
         <Card title="Loading">
           <Flex items="center" className="gap-7 pl-3">
             <Flex items="center" className="gap-2">
@@ -244,7 +381,6 @@ function App() {
             </Flex>
           </Flex>
         </Card>
-
         <Card title="Tooltip">
           <Flex className="gap-4 pl-3">
             <Tooltip content="I'm a tooltip">
@@ -268,7 +404,6 @@ function App() {
             </Tooltip>
           </Flex>
         </Card>
-
         <Card title="Button">
           <Flex direction="col" className="gap-3">
             <Flex items={{ default: "center" }} className="gap-2">
@@ -284,7 +419,6 @@ function App() {
               <Button uiType="light">Light</Button>
               <Button uiType="danger">Danger</Button>
             </Flex>
-            cd
             <Flex items="center" className="gap-2">
               <Button disabled>Default</Button>
               <Button
@@ -308,5 +442,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

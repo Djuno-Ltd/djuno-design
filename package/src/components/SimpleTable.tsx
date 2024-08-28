@@ -3,8 +3,6 @@
  * @fileoverview Card Component
  * @copyright Djuno Design 2024
  *
- * Copyright 2024 Djuno Design
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,172 +17,96 @@
  */
 
 import * as React from 'react'
-import { cva } from 'class-variance-authority'
-import classNames from 'classnames'
 import { cn } from '../utils/cn'
-import { SimpletableProps, TableRowProps, TableTDProps } from '../types/SimpleTable'
+import { SimpletableProps, TableComponents, TableRowProps, TableTDProps } from '../types/SimpleTable'
 
 /**
- * Define simpleTable variants using the `cva` utility function.
- * This function generates CSS classes for alert styles based on specified variants.
- */
-
-const simpleTableVariants = cva(
-  'dj-rounded-md dj-border dj-border-transparent dj-border-separate dj-border-spacing-0 dj-w-full dj-space-y-4',
-  {
-    variants: {
-      //   uiType: {
-      //     simple: '',
-      //     primary: '',
-      //     light: '',
-      // //   },
-      //   size: {
-      //     small: 'dj-text-xs dj-px-3 dj-h-7',
-      //     medium: 'dj-text-sm dj-px-4 dj-h-9',
-      //     large: 'dj-text-base dj-px-5 dj-h-11',
-      //   },
-    },
-    // defaultVariants: {
-    //   uiType: 'simple',
-    //   size: 'medium',
-    // },
-  },
-)
-const simpleTableRowVariants = cva('dj-group duration-200 dj-transition-colors dj-bg-white dark:dj-bg-dark-3', {
-  variants: {
-    //   uiType: {
-    //     simple: '',
-    //     primary: '',
-    //     light: '',
-    // //   },
-    //   size: {
-    //     small: 'dj-text-xs dj-px-3 dj-h-7',
-    //     medium: 'dj-text-sm dj-px-4 dj-h-9',
-    //     large: 'dj-text-base dj-px-5 dj-h-11',
-    //   },
-  },
-  // defaultVariants: {
-  //   uiType: 'simple',
-  //   size: 'medium',
-  // },
-})
-const simpleTableHVariants = cva(
-  'dj-text-left dj-bg-white dark:dj-bg-dark-3 dj-border-b darkdj-:border-dark-2 dj-p-2',
-  {
-    variants: {
-      //   uiType: {
-      //     simple: '',
-      //     primary: '',
-      //     light: '',
-      // //   },
-      //   size: {
-      //     small: 'dj-text-xs dj-px-3 dj-h-7',
-      //     medium: 'dj-text-sm dj-px-4 dj-h-9',
-      //     large: 'dj-text-base dj-px-5 dj-h-11',
-      //   },
-    },
-    // defaultVariants: {
-    //   uiType: 'simple',
-    //   size: 'medium',
-    // },
-  },
-)
-const simpleTableTDVariants = cva(
-  'dj-text-md py-3 dj-px-2 dj-text-[#475569] dark:dj-text-slate-100 dj-border-b dark:dj-border-dark-2',
-  {
-    variants: {
-      //   uiType: {
-      //     simple: '',
-      //     primary: '',
-      //     light: '',
-      // //   },
-      //   size: {
-      //     small: 'dj-text-xs dj-px-3 dj-h-7',
-      //     medium: 'dj-text-sm dj-px-4 dj-h-9',
-      //     large: 'dj-text-base dj-px-5 dj-h-11',
-      //   },
-    },
-    // defaultVariants: {
-    //   uiType: 'simple',
-    //   size: 'medium',
-    // },
-  },
-)
-
-/**
- * SimpleTable component that allows for customization of UI type, size, loading state, and more.
- *
+ * SimpleTable component that renders a table structure.
  *
  * @param {object} props - SimpleTable props.
- * @param {React.ReactNode} [props.children] - The content inside the emptystate.
- * @param {string} [props.className] - Additional classes to apply to the simpleTable.
- * @param {boolean} [props.containerClassName] - Indicates if the emptystate has the containerClassName.
- *
+ * @param {React.ReactNode} props.children - The content to be displayed within the Typography component.
  * @returns {React.ReactNode} Rendered SimpleTable component.
  *
- * @version 0.0.4
- * @see https://www.npmjs.com/package/djuno-design#simpleTable
+ * @version 0.3.6
+ * @see https://www.npmjs.com/package/djuno-design#simple-table
  *
  * @example
- * // Example usage of SimpleTable component:
- *
- *
- *
+ * Example usage of Typography component:
+ * <SimpleTable className="gap-3 w-full">
+ *   <SimpleTable.Head>
+ *     <SimpleTable.Row>
+ *       <SimpleTable.TH>Header 1</SimpleTable.TH>
+ *       <SimpleTable.TH>Header 2</SimpleTable.TH>
+ *       <SimpleTable.TH>Header 3</SimpleTable.TH>
+ *     </SimpleTable.Row>
+ *   </SimpleTable.Head>
+ *   <SimpleTable.Body>
+ *     <SimpleTable.Row>
+ *       <SimpleTable.TD>Data 1</SimpleTable.TD>
+ *       <SimpleTable.TD>Data 2</SimpleTable.TD>
+ *       <SimpleTable.TD>Data 3</SimpleTable.TD>
+ *     </SimpleTable.Row>
+ *   </SimpleTable.Body>
+ * </SimpleTable>
  */
-
-const SimpleTable: React.FC<SimpletableProps> = ({ loading, className, containerClassName, ...props }) => {
+// eslint-disable-next-line react/prop-types
+const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({ className, containerClassName, children }) => {
   return (
-    <div className={classNames('relative min-h-[200px]', containerClassName)}>
-      <div className='overflow-x-auto overflow-y-hidden'>
+    <div className={cn('dj-w-full dj-relative dj-min-h-[200px]', containerClassName)}>
+      <div className='dj-overflow-x-auto dj-overflow-y-hidden'>
         <table
-          className={cn(simpleTableVariants({}), {
-            // [tagLoadingClass]: props.loading,
-            [className || '']: className,
-          })}
+          className={cn(
+            'dj-rounded-md dj-border dj-border-transparent dj-border-separate dj-border-spacing-0 dj-w-full dj-space-y-4',
+            className,
+          )}
         >
-          {props.children}
+          {children}
         </table>
       </div>
       {/* <AnimatePresence>
-          {(props.loading || testLoading) && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute w-full h-full top-0 left-0 bg-gray-400/10 dark:bg-gray-800/10 backdrop-blur-[1.1px] flex justify-center items-center"
-            >
-              <LoadingSpin borderSize={2.3} />
-            </motion.div>
-          )}
-        </AnimatePresence> */}
+        {(props.loading || testLoading) && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute w-full h-full top-0 left-0 bg-gray-400/10 dark:bg-gray-800/10 backdrop-blur-[1.1px] flex justify-center items-center"
+          >
+            <LoadingSpin borderSize={2.3} />
+          </motion.div>
+        )}
+      </AnimatePresence> */}
     </div>
   )
 }
 
-const TableRow = (props: React.PropsWithChildren<TableRowProps>) => {
-  const { className, withoutHoverStyle, selected, disabled, onClick, ...rest } = props
+const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
+  const { className, withoutHoverStyle, selected, disabled, onClick, children, ...rest } = props
   return (
     <tr
       {...rest}
-      onClick={(e: any) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(simpleTableRowVariants, {
-        'dark:hover:dj-bg-dark-2 hover:dj-bg-[#f8fafc] ':
-          (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
-        'dark:dj-bg-white/10 dj-bg-[#eff5fe] ': selected,
-        'dj-cursor-not-allowed': disabled,
-        'dj-cursor-pointer': !disabled && onClick,
-      })}
+      onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
+      className={cn(
+        'dj-group duration-200 dj-transition-colors dj-bg-white dark:dj-bg-dark-850',
+        {
+          'dark:hover:dj-bg-dark-700 hover:dj-bg-[#f8fafc]':
+            (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
+          'dark:dj-bg-white/10 dj-bg-[#eff5fe]': selected,
+          'dj-cursor-not-allowed': disabled,
+          'dj-cursor-pointer': !disabled && onClick,
+        },
+        className,
+      )}
     >
-      {props.children}
+      {children}
     </tr>
   )
 }
 
-const TableHead = (props: React.PropsWithChildren) => <thead>{props.children}</thead>
+const SimpleTableHead = (props: React.PropsWithChildren) => <thead>{props.children}</thead>
 
-const TableTH = (props: React.PropsWithChildren<{ lable?: string | React.ReactNode }>) => {
+const SimpleTableTH = (props: React.PropsWithChildren<{ lable?: string | React.ReactNode }>) => {
   return (
-    <th className={cn(simpleTableHVariants, {})}>
+    <th className='dj-text-left dj-bg-white dark:dj-bg-dark-850 dj-border-b dark:dj-border-dark-700 dj-p-2'>
       <div className='dj-text-slate-400 dark:dj-text-slate-100 dj-font-light dj-overflow-hidden dj-whitespace-nowrap'>
         {props.children || props.lable}
       </div>
@@ -192,16 +114,27 @@ const TableTH = (props: React.PropsWithChildren<{ lable?: string | React.ReactNo
   )
 }
 
-const TableBody = (props: React.PropsWithChildren) => <tbody>{props.children}</tbody>
+const SimpleTableBody = (props: React.PropsWithChildren) => <tbody>{props.children}</tbody>
 
-const TableTD = (props: React.PropsWithChildren<TableTDProps>) => {
+const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
   const { className, children, ...rest } = props
   return (
-    <td {...rest} className={cn(simpleTableTDVariants, props.className)}>
-      <div className='dj-h-full dj-w-full dj-flex dj-items-center'>{props.children}</div>
+    <td
+      {...rest}
+      className={cn(
+        'dj-text-md dj-py-3 dj-px-2 dj-text-[#475569] dark:dj-text-slate-100 dj-border-b dark:dj-border-dark-700',
+        className,
+      )}
+    >
+      <div className='dj-h-full dj-w-full dj-flex dj-items-center'>{children}</div>
     </td>
   )
 }
 
-export { TableRow, TableHead, TableBody, TableTH, TableTD }
+SimpleTable.Head = SimpleTableHead
+SimpleTable.TH = SimpleTableTH
+SimpleTable.Body = SimpleTableBody
+SimpleTable.Row = SimpleTableRow
+SimpleTable.TD = SimpleTableTD
+
 export default SimpleTable
