@@ -14,6 +14,7 @@ import {
   Divider,
   CopyHide,
   Switcher,
+  Accordion,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -31,6 +32,26 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Accordion">
+          <Flex direction="col" className="gap-5 w-full">
+            <Accordion
+              items={[
+                {
+                  label: "Filters",
+                  panel: (
+                    <div className="">
+                      <Input
+                        inputProps={{
+                          value: "djuno-design",
+                        }}
+                      />
+                    </div>
+                  ),
+                },
+              ]}
+            />
+          </Flex>
+        </Card>
         <Card title="CopyHide">
           <Flex direction="col" className="gap-5 w-full">
             <CopyHide type="hide" />

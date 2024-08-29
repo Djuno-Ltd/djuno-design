@@ -41,6 +41,7 @@ import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
 import CopyHide from './components/CopyHide'
 import Switcher from './components/form/Switcher'
+import Accordion from './components/Accordion'
 
 // export all types
 export * from './types'
@@ -70,4 +71,5 @@ export {
   Divider,
   CopyHide,
   Switcher,
+  Accordion,
 }
