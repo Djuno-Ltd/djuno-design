@@ -40,6 +40,7 @@ import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
 import CopyHide from './components/CopyHide'
+import Switcher from './components/form/Switcher'
 
 // export all types
 export * from './types'
@@ -68,4 +69,5 @@ export {
   EmptyState,
   Divider,
   CopyHide,
+  Switcher,
 }

@@ -58,7 +58,7 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  *
  * @returns {React.ReactNode} Rendered CopyHide component.
  *
- * @version 0.0.4
+ * @version 0.0.0
  * @see https://www.npmjs.com/package/djuno-design#copyHide
  *
  * @example

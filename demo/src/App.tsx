@@ -13,6 +13,7 @@ import {
   EmptyState,
   Divider,
   CopyHide,
+  Switcher,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -25,6 +26,7 @@ function App() {
     setTimeout(() => setBtnLoading(false), 3000);
   };
   const [inputValue, setInputValue] = useState("");
+  const [swith, setSwitch] = useState(false);
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -43,6 +45,46 @@ function App() {
             <CopyHide text="Text" type="copy" />
           </Flex>
         </Card>
+        <Card title="Swither">
+          <Flex direction="col" className="gap-5">
+            <div>
+              <Text>sizes:</Text>
+              <Flex className="gap-5 w-full">
+                <Flex direction="col">
+                  <Text uiType="secondary" size="sm">
+                    small
+                  </Text>
+                  <Switcher on={swith} onToggle={setSwitch} size="small" />
+                </Flex>
+                <Flex direction="col">
+                  <Text uiType="secondary" size="sm">
+                    medium
+                  </Text>
+                  <Switcher on={swith} onToggle={setSwitch} />
+                </Flex>
+                <Flex direction="col">
+                  <Text uiType="secondary" size="sm">
+                    large
+                  </Text>
+                  <Switcher on={swith} onToggle={setSwitch} size="large" />
+                </Flex>
+              </Flex>
+            </div>
+            <div>
+              <Text>disabled:</Text>
+              <Flex items="center" className="gap-5 w-full">
+                <Switcher on={swith} onToggle={setSwitch} disabled />
+              </Flex>
+            </div>
+            <div>
+              <Text>loading:</Text>
+              <Flex items="center" className="gap-5 w-full">
+                <Switcher on={swith} onToggle={setSwitch} loading />
+              </Flex>
+            </div>
+          </Flex>
+        </Card>
+
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
             <Flex items="end" className="gap-3 w-full flex justify-end">
