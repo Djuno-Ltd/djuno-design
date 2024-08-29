@@ -18,8 +18,6 @@
  * limitations under the License.
  */
 import * as React from 'react'
-import { cva } from 'class-variance-authority'
-import classNames from 'classnames'
 import { cn } from '../utils/cn'
 import { CopyHideProps } from '../types/CopyHide'
 import { copyToClipboard } from '../utils/copy'
@@ -27,20 +25,22 @@ import Typography from './Typography'
 const { Text } = Typography
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
+import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
+import Input from './form/Input'
+import { cva } from 'class-variance-authority'
 
-/**
- * Define emptyState variants using the `cva` utility function.
- * This function generates CSS classes for alert styles based on specified variants.
- */
-const copyHideVariants = cva('dj-flex dj-items-center dj-gap-1', {
+const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-duration-300', {
   variants: {
-    //   uiType: {
-    //     hide: 'dj-w-5 dj-h-5 dj-cursor-pointer hover:dj-scale-110 dj-transition-all dj-duration-300 dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
-    //     show: 'dj-w-5 dj-h-5 dj-cursor-pointer  hover:dj-scale-110 dj-transition-all dj-duration-300 dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
-    //   },
+    state: {
+      eyelashIcon:
+        '  hover:dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyeIcon: 'hover:dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      copyIcon:
+        ' hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
+    },
   },
   defaultVariants: {
-    //   uiType: 'hide',
+    state: 'eyelashIcon',
   },
 })
 
@@ -54,6 +54,7 @@ const copyHideVariants = cva('dj-flex dj-items-center dj-gap-1', {
  * @param {boolean} [props.icon] - Indicates if the copyHide has the icon.
  * @param {boolean} [props.iconClassName] - Indicates if the copyHide has the iconClassName.
  * @param {boolean} [props.textClassName] - Indicates if the copyHide has the textClassName.
+ * @param {string} [props.type] - Type of the Action "hide" or "copy".
  *
  * @returns {React.ReactNode} Rendered CopyHide component.
  *
@@ -63,40 +64,74 @@ const copyHideVariants = cva('dj-flex dj-items-center dj-gap-1', {
  * @example
  * // Example usage of CopyHide component:
  *
- *
+ * function MyComponent() {
+ *   return (
+ *     <CopyHide
+ *       className="my-custom-class"
+ *       icon={<CustomIcon />}
+ *       iconClassName="custom-icon-class"
+ *       textClassName="custom-text-class"
+ *       showText={true}
+ *       text="Text"
+ *       type="copy"
+ *     />
+ *   );
+ * }
  *
  */
 
-const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassName, textClassName, ...props }) => {
+const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassName, textClassName, type, ...props }) => {
   const [showText, setShowText] = React.useState(false)
+
   return (
-    <div className={cn(copyHideVariants({}), className, {})}>
-      <div
-        className='dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm  dj-h-7 dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap'
-        onClick={() => text && copyToClipboard(text)}
-      >
-        {!showText && (
-          <div className='dj-bg-white/10 dark:dj-bg-black/10 dj-backdrop-blur-[2.3px] dj-absolute dj-left-0 dj-top-0 dj-right-0 dj-bottom-0 dj-w-full dj-h-full' />
-        )}
-        <div className={classNames('dj-w-full dj-overflow-hidden dj-text-ellipsis dj-truncate', textClassName)}>
-          {!text || text === undefined ? 'Djuno Design' : text}
+    <>
+      {type === 'hide' && (
+        <div className={cn('dj-flex dj-items-center dj-gap-1', className, {})}>
+          <div
+            className='dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm  dj-h-7 dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap'
+            onClick={() => text && copyToClipboard(text)}
+          >
+            {!showText && (
+              <div className='dj-bg-white/10 dark:dj-bg-black/10 dj-backdrop-blur-[2.3px] dj-absolute dj-left-0 dj-top-0 dj-right-0 dj-bottom-0 dj-w-full dj-h-full' />
+            )}
+            <Text className={cn('dj-w-full dj-overflow-hidden dj-text-ellipsis dj-truncate', textClassName)}>
+              {!text || text === undefined ? 'Djuno Design' : text}
+            </Text>
+          </div>
+
+          <div className='dj-select-none'>
+            {showText ? (
+              <EyeIcon
+                onClick={() => setShowText(false)}
+                className={cn(iconVariants({ state: 'eyeIcon' }), iconClassName)}
+              />
+            ) : (
+              <EyeSlashIcon
+                onClick={() => setShowText(true)}
+                className={cn(iconVariants({ state: 'eyelashIcon' }), iconClassName)}
+              />
+            )}
+          </div>
         </div>
-      </div>
-      <div className='dj-select-none'>
-        {showText && (
-          <EyeSlashIcon
-            onClick={() => setShowText(false)}
-            className='dj-w-5 dj-h-5 dj-cursor-pointer hover:dj-scale-110 dj-transition-all dj-duration-300 dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200'
+      )}
+      {type === 'copy' && (
+        <div className={cn('dj-flex dj-items-center dj-gap-1', className)}>
+          <Input
+            inputProps={{
+              value: text ? text : 'Djuno esign',
+              readOnly: true,
+              ...props,
+            }}
           />
-        )}
-        {!showText && (
-          <EyeIcon
-            onClick={() => setShowText(true)}
-            className='dj-w-5 dj-h-5 dj-cursor-pointer  hover:dj-scale-110 dj-transition-all dj-duration-300 dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200'
-          />
-        )}
-      </div>
-    </div>
+          <div className='dj-select-none'>
+            <CopyIcon
+              onClick={() => copyToClipboard(text || 'Djuno Design')}
+              className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
+            />
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

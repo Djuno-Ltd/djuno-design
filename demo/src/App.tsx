@@ -31,10 +31,16 @@ function App() {
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="CopyHide">
           <Flex direction="col" className="gap-5 w-full">
-            <CopyHide />
+            <CopyHide type="hide" />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" />
+            <CopyHide text="Text" type="hide" />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <CopyHide type="copy" />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <CopyHide text="Text" type="copy" />
           </Flex>
         </Card>
         <Card title="Inputs">
@@ -116,10 +122,10 @@ function App() {
                 <SimpleTable.Row>
                   <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
-                      {/* <EmptyState
-                          text="No data available"
-                          icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
-                        /> */}
+                      <EmptyState
+                        text="No data available"
+                        icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
+                      />
                     </Flex>
                   </SimpleTable.TD>
                 </SimpleTable.Row>
@@ -128,45 +134,57 @@ function App() {
           </Flex>
         </Card>
         <Card title="Empty State">
-          <Text strong size="sm">
-            Empty state with simple icon
-          </Text>
+          <Divider
+            text=" Empty state with simple icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
             />
           </Flex>
-          <Text strong size="sm">
-            Empty state with default icon
-          </Text>
+          <Divider
+            text="Empty state with default icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
             />
           </Flex>
-          <Text strong size="sm">
-            Empty state with undefined icon
-          </Text>
+          <Divider
+            text="Empty state with undefined icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" />
           </Flex>
-          <Text strong size="sm">
-            Empty state without icon
-          </Text>
+          <Divider
+            text="Empty state without icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" usingIcon={false} />
           </Flex>
-          <Text strong size="sm">
-            Empty state without icon and with default text
-          </Text>
+          <Divider
+            text="Empty state without icon and with default text"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState usingIcon={false} />
           </Flex>
-          <Text strong size="sm">
-            Empty state without text
-          </Text>
+          <Divider
+            text="Empty state without text"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState usingText={false} />
           </Flex>

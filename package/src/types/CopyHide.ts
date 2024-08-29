@@ -27,18 +27,7 @@ export interface CopyHideProps extends PropsWithChildren {
   textClassName?: string
   iconClassName?: string
   showText?: boolean
+  type?: ActionTypes
 }
 
-// export interface PRESENTED_IMAGE_SIMPLE {
-//   iconClassName?: string
-// }
-// export interface PRESENTED_IMAGE_DEFAULT {
-//   iconClassName?: string
-// }
-
-// export interface EmptyStateIcons {
-//   PRESENTED_IMAGE_DEFAULT: React.FC<PRESENTED_IMAGE_SIMPLE>
-//   PRESENTED_IMAGE_SIMPLE: React.FC<PRESENTED_IMAGE_DEFAULT>
-// }
-
-// export type EmptyState = '' | ''
+export type ActionTypes = 'copy' | 'hide'
