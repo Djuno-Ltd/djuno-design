@@ -43,7 +43,7 @@ import Typography from './Typography'
  *
  * @returns {React.ReactNode} Rendered Modal component.
  *
- * @version 0.0.0
+ * @version 0.4.1
  * @see https://www.npmjs.com/package/djuno-design#modal
  *
  * @example
