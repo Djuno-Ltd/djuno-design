@@ -60,6 +60,7 @@ function App() {
     - TD
 12. EmptyState
 13. Divider
+14. Modal
 
 ## Available utility functions
 
@@ -285,6 +286,19 @@ function App() {
 | text          | string             |          |         |             |
 | textClassName | string             |          |         |             |
 | usingText     | boolean            |          |         |             |
+
+### Modal
+
+| Name               | Type              | Required | Default | Description                                                       |
+| ------------------ | ----------------- | -------- | ------- | ----------------------------------------------------------------- |
+| title              | `React.ReactNode` |          |         | The title of the modal, which can be a string or any React node.  |
+| isOpen             | `boolean`         |          |         | Controls whether the modal is open or closed.                     |
+| onClose            | `() => void`      |          |         | Callback function triggered when the modal is requested to close. |
+| contentClassName   | `string`          |          |         | Additional CSS classes for custom styling of the modal content.   |
+| containerClassName | `string`          |          |         | Additional CSS classes for custom styling of the modal container. |
+| closable           | `boolean`         |          |         | If true, displays a close button in the modal.                    |
+| rendered           | `() => void`      |          |         | Callback function triggered when the modal is rendered.           |
+| children           | `React.ReactNode` |          |         | The content to be displayed inside the modal.                     |
 
 ## Contributor ✨
 
