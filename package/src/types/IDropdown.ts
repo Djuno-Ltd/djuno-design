@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview CopyHide types
+ * @fileoverview DropdownMenuMenu types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -20,14 +20,26 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface CopyHideProps extends PropsWithChildren {
-  text?: string
-  icon?: React.ReactNode
-  className?: string
-  textClassName?: string
-  iconClassName?: string
-  showText?: boolean
-  type?: ActionTypes
+export interface DropdownProps extends PropsWithChildren {
+  menu?: Array<DropdownElement>
+  title?: string | React.ReactNode
+  type?: 'default' | 'simple'
+  positionClassName?: string
+  buttonClassName?: string
+  itemsClassName?: string
 }
 
-export type ActionTypes = 'copy' | 'hide'
+export type DropdownItem = {
+  label: string | React.ReactNode
+  key: string
+  onClick?: (item: DropdownItem, close: () => void) => void
+  disabled?: boolean
+  danger?: boolean
+  loading?: boolean
+}
+
+export type DropdownDivider = {
+  type: 'divider'
+}
+
+export type DropdownElement = DropdownItem | DropdownDivider

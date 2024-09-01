@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Card Component
+ * @fileoverview SecureCopy Component
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -19,22 +19,21 @@
  */
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { CopyHideProps } from '../types/CopyHide'
+import { SecureCopyProps } from '../types/ISecureCopy'
 import { copyToClipboard } from '../utils/copy'
 import Typography from './Typography'
-const { Text } = Typography
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
 import Input from './form/Input'
 import { cva } from 'class-variance-authority'
+const { Text } = Typography
 
 const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-duration-300', {
   variants: {
     state: {
-      eyelashIcon:
-        '  hover:dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
-      eyeIcon: 'hover:dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyelashIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyeIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
       copyIcon:
         ' hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
     },
@@ -45,30 +44,28 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
 })
 
 /**
- * CopyHide component that allows for customization of UI type, size, loading state, and more.
+ * SecureCopy component that allows for customization of UI type, size, loading state, and more.
  *
  *
- * @param {object} props - CopyHide props.
- * @param {React.ReactNode} [props.children] - The content inside the copyHide.
- * @param {string} [props.className] - Additional classes to apply to the copyHide.
- * @param {boolean} [props.icon] - Indicates if the copyHide has the icon.
- * @param {boolean} [props.iconClassName] - Indicates if the copyHide has the iconClassName.
- * @param {boolean} [props.textClassName] - Indicates if the copyHide has the textClassName.
+ * @param {object} props - SecureCopy props.
+ * @param {React.ReactNode} [props.children] - The content inside the SecureCopy.
+ * @param {string} [props.className] - Additional classes to apply to the SecureCopy.
+ * @param {boolean} [props.iconClassName] - Indicates if the SecureCopy has the iconClassName.
+ * @param {boolean} [props.textClassName] - Indicates if the SecureCopy has the textClassName.
  * @param {string} [props.type] - Type of the Action "hide" or "copy".
  *
- * @returns {React.ReactNode} Rendered CopyHide component.
+ * @returns {React.ReactNode} Rendered SecureCopy component.
  *
- * @version 0.0.0
- * @see https://www.npmjs.com/package/djuno-design#copyHide
+ * @version 0.4.7
+ * @see https://www.npmjs.com/package/djuno-design#SecureCopy
  *
  * @example
- * // Example usage of CopyHide component:
+ * // Example usage of SecureCopy component:
  *
  * function MyComponent() {
  *   return (
- *     <CopyHide
+ *     <SecureCopy
  *       className="my-custom-class"
- *       icon={<CustomIcon />}
  *       iconClassName="custom-icon-class"
  *       textClassName="custom-text-class"
  *       showText={true}
@@ -79,8 +76,7 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  * }
  *
  */
-
-const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassName, textClassName, type, ...props }) => {
+const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName, textClassName, type, ...props }) => {
   const [showText, setShowText] = React.useState(false)
 
   return (
@@ -95,7 +91,7 @@ const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassNam
               <div className='dj-bg-white/10 dark:dj-bg-black/10 dj-backdrop-blur-[2.3px] dj-absolute dj-left-0 dj-top-0 dj-right-0 dj-bottom-0 dj-w-full dj-h-full' />
             )}
             <Text className={cn('dj-w-full dj-overflow-hidden dj-text-ellipsis dj-truncate', textClassName)}>
-              {!text || text === undefined ? 'Djuno Design' : text}
+              {!text || text === undefined ? '' : text}
             </Text>
           </div>
 
@@ -118,14 +114,14 @@ const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassNam
         <div className={cn('dj-flex dj-items-center dj-gap-1', className)}>
           <Input
             inputProps={{
-              value: text ? text : 'Djuno esign',
+              value: text ? text : '',
               readOnly: true,
               ...props,
             }}
           />
           <div className='dj-select-none'>
             <CopyIcon
-              onClick={() => copyToClipboard(text || 'Djuno Design')}
+              onClick={() => copyToClipboard(text || '')}
               className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
             />
           </div>
@@ -135,4 +131,4 @@ const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassNam
   )
 }
 
-export default CopyHide
+export default SecureCopy

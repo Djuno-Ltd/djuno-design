@@ -34,6 +34,9 @@ export * from './Divider'
 export * from './ISwitcher'
 export * from './IModal'
 export * from './ISelect'
+export * from './IDropdown'
+export * from './ISecureCopy'
+export * from './IAccordion'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

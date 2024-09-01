@@ -33,6 +33,9 @@
 12. EmptyState
 13. Divider
 14. Modal
+15. Dropdown
+16. SecureCopy
+17. Accordion
 
 ### Available utility functions
 
@@ -286,14 +289,6 @@
 | textClassName | string             |          |         |             |
 | usingText     | boolean            |          |         |             |
 
-### Accordion
-
-| Name            | Type              | Required | default | Description |
-| --------------- | ----------------- | -------- | ------- | ----------- |
-| items           | `AccordionItem[]` |          |         |             |
-| panelClassNames | string            |          |         |             |
-| loading         | boolean           |          |         |             |
-
 ### Modal
 
 | Name               | Type              | Required | Default | Description                                                       |
@@ -306,6 +301,37 @@
 | closable           | `boolean`         |          |         | If true, displays a close button in the modal.                    |
 | rendered           | `() => void`      |          |         | Callback function triggered when the modal is rendered.           |
 | children           | `React.ReactNode` |          |         | The content to be displayed inside the modal.                     |
+
+### Dropdown
+
+| Name              | Type                | Required | default | Description |
+| ----------------- | ------------------- | -------- | ------- | ----------- |
+| menu              | `DropdownElement[]` |          |         |             |
+| title             | string              |          |         |             |
+| type              | string              |          |         |             |
+| positionClassName | string              |          |         |             |
+| buttonClassName   | string              |          |         |             |
+| itemsClassName    | string              |          |         |             |
+
+### SecureCopy
+
+| Name          | Type          | Required | default | Description |
+| ------------- | ------------- | -------- | ------- | ----------- |
+| text          | string        | yes      |         |             |
+| className     | string        |          |         |             |
+| icon          | `ReactNode`   |          |         |             |
+| type          | `ActionTypes` |          |         |             |
+| textClassName | string        |          |         |             |
+| iconClassName | string        |          |         |             |
+| showText      | boolean       |          |         |             |
+
+### Accordion
+
+| Name            | Type              | Required | default | Description |
+| --------------- | ----------------- | -------- | ------- | ----------- |
+| items           | `AccordionItem[]` |          |         |             |
+| panelClassNames | string            |          |         |             |
+| loading         | boolean           |          |         |             |
 
 ## Contributor ✨
 

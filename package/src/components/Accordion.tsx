@@ -20,7 +20,7 @@
 import * as React from 'react'
 import { cn } from '../utils/cn'
 import { ReactComponent as ChevronDownIcon } from '../assets/icons/chevron-down.svg'
-import { AccordionProps } from '../types/Accordion'
+import { AccordionProps } from '../types/IAccordion'
 import Loading from './Loading'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 
@@ -35,7 +35,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  *
  * @returns {React.ReactNode} Rendered Accordion component.
  *
- * @version 0.0.0
+ * @version 0.4.8
  * @see https://www.npmjs.com/package/djuno-design#accordion
  *
  * @example
@@ -55,45 +55,42 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  * }
  */
 
-const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading, ...props }) => {
+const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading }) => {
   return (
-    <>
-      {' '}
-      <div className='dj-w-full dj-bg-secondary-100 dark:dj-bg-dark-800 border dark:dj-border-dark-600 dj-rounded-lg dj-overflow-hidden '>
-        {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
-        {items?.map((item, i) => (
-          <Disclosure key={i}>
-            {({ open }) => (
-              <>
-                <DisclosureButton className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-800 dark:hover:dj-bg-dark-850 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 border'>
-                  {item.label}
-                  {item.panel && (
-                    <ChevronDownIcon
-                      className={cn(
-                        'dj-h-4 dj-w-4 dj-text-dark-500 dark:dj-text-secondary-300 dj-transform dj-transition-transform dj-duration-300',
-                        {
-                          'dj-rotate-180': open,
-                        },
-                      )}
-                    />
-                  )}
-                </DisclosureButton>
+    <div className='dj-w-full dj-bg-secondary-100 dark:dj-bg-dark-800 border dark:dj-border-dark-600 dj-rounded-lg dj-overflow-hidden '>
+      {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
+      {items?.map((item, i) => (
+        <Disclosure key={i}>
+          {({ open }) => (
+            <>
+              <DisclosureButton className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-800 dark:hover:dj-bg-dark-850 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 border'>
+                {item.label}
                 {item.panel && (
-                  <DisclosurePanel
-                    className={cn(panelClassNames, {
-                      'dark:dj-bg-dark-800 dj-p-3 dj-border-y dark:dj-border-dark-700 dark:dj-text-dark-200':
-                        panelClassNames === undefined,
-                    })}
-                  >
-                    {item.panel}
-                  </DisclosurePanel>
+                  <ChevronDownIcon
+                    className={cn(
+                      'dj-h-4 dj-w-4 dj-text-dark-500 dark:dj-text-secondary-300 dj-transform dj-transition-transform dj-duration-300',
+                      {
+                        'dj-rotate-180': open,
+                      },
+                    )}
+                  />
                 )}
-              </>
-            )}
-          </Disclosure>
-        ))}
-      </div>
-    </>
+              </DisclosureButton>
+              {item.panel && (
+                <DisclosurePanel
+                  className={cn(panelClassNames, {
+                    'dark:dj-bg-dark-800 dj-p-3 dj-border-y dark:dj-border-dark-700 dark:dj-text-dark-200':
+                      panelClassNames === undefined,
+                  })}
+                >
+                  {item.panel}
+                </DisclosurePanel>
+              )}
+            </>
+          )}
+        </Disclosure>
+      ))}
+    </div>
   )
 }
 
