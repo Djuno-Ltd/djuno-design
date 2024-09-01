@@ -22,35 +22,35 @@ import { cn } from '../utils/cn'
 import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
 
 import { useFloating, shift, flip } from '@floating-ui/react-dom'
-import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import Button from './Button'
-import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '../types/DropDown'
+import { DropdownMenuDivider, DropdownMenuElement, DropdownMenuItem, DropdownMenuProps } from '../types/DropdownMenu'
 
 /**
- * Dropdown component that allows for customization of UI type, size, loading state, and more.
+ * DropdownMenu component that allows for customization of UI type, size, loading state, and more.
  *
- * @param {object} props - Dropdown props.
- * @param {React.ReactNode} [props.children] - The content inside the Dropdown.
- * @param {string} [props.menu] - menu of the Dropdown.
- * @param {string} [props.title] -  title of the Dropdown.
- * @param {string} [props.type] - type of the Dropdown.
- * @param {string} [props.positionClassName] - Additional positionClassName to apply to the Dropdown.
- * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the Dropdown.
- * @param {string} [props.buttonClassName] - Additional buttonClassName to apply to the Dropdown.
- * @param {Array<AccordionItem>} [props.items] - The items to display in the Dropdown, each with a label and optional panel content.
- * @param {boolean} [props.loading] - Indicates if the Dropdown is in a loading state.
+ * @param {object} props - DropdownMenu props.
+ * @param {React.ReactNode} [props.children] - The content inside the DropdownMenu.
+ * @param {string} [props.menu] - menu of the DropdownMenu.
+ * @param {string} [props.title] -  title of the DropdownMenu.
+ * @param {string} [props.type] - type of the DropdownMenu.
+ * @param {string} [props.positionClassName] - Additional positionClassName to apply to the DropdownMenu.
+ * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the DropdownMenu.
+ * @param {string} [props.buttonClassName] - Additional buttonClassName to apply to the DropdownMenu.
+ * @param {Array<AccordionItem>} [props.items] - The items to display in the DropdownMenu, each with a label and optional panel content.
+ * @param {boolean} [props.loading] - Indicates if the DropdownMenu is in a loading state.
  *
- * @returns {React.ReactNode} Rendered Dropdown component.
+ * @returns {React.ReactNode} Rendered DropdownMenu component.
  *
  * @version 0.0.0
- * @see https://www.npmjs.com/package/djuno-design#dropdown
+ * @see https://www.npmjs.com/package/djuno-design#dropdownmenu
  *
  * @example
- * // Example usage of Dropdown component:
+ * // Example usage of DropdownMenu component:
  *
  * function MyComponent() {
  *   return (
- *      <Dropdown
+ *      <DropdownMenu
  *       menu={DropdownItems}
  *       title="Options"
  *       type="default"
@@ -62,7 +62,7 @@ import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '.
  * }
  */
 
-const DropDown = (DropdownProps: React.PropsWithChildren<DropdownProps>) => {
+const DropdownMenu = (DropdownProps: React.PropsWithChildren<DropdownMenuProps>) => {
   const itemGroups = groupArrayByDivider(DropdownProps.menu || [])
   const { refs, floatingStyles } = useFloating({
     placement: 'bottom-end',
@@ -129,7 +129,7 @@ const DropDown = (DropdownProps: React.PropsWithChildren<DropdownProps>) => {
                 return (
                   <div key={groupIdx} className='dj-px-1 dj-py-1 '>
                     {items.map((item, itemIdx) => (
-                      <Menu.Item key={itemIdx}>
+                      <MenuItem key={itemIdx}>
                         {({ active, close }) => (
                           <button
                             onClick={(e) => {
@@ -154,7 +154,7 @@ const DropDown = (DropdownProps: React.PropsWithChildren<DropdownProps>) => {
                             {item.label}
                           </button>
                         )}
-                      </Menu.Item>
+                      </MenuItem>
                     ))}
                   </div>
                 )
@@ -167,9 +167,9 @@ const DropDown = (DropdownProps: React.PropsWithChildren<DropdownProps>) => {
   )
 }
 
-function groupArrayByDivider(inputArray: DropdownElement[]): DropdownItem[][] {
-  let groupedArrays: DropdownItem[][] = []
-  let currentGroup: DropdownItem[] = []
+function groupArrayByDivider(inputArray: DropdownMenuElement[]): DropdownMenuItem[][] {
+  let groupedArrays: DropdownMenuItem[][] = []
+  let currentGroup: DropdownMenuItem[] = []
 
   for (const item of inputArray) {
     if (isDivider(item)) {
@@ -189,8 +189,8 @@ function groupArrayByDivider(inputArray: DropdownElement[]): DropdownItem[][] {
   return groupedArrays
 }
 
-function isDivider(element: DropdownElement): element is DropdownDivider {
-  return (element as DropdownDivider).type === 'divider'
+function isDivider(element: DropdownMenuElement): element is DropdownMenuDivider {
+  return (element as DropdownMenuDivider).type === 'divider'
 }
 
-export default DropDown
+export default DropdownMenu

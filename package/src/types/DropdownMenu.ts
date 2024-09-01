@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Dropdown types
+ * @fileoverview DropdownMenuMenu types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -20,8 +20,8 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface DropdownProps extends PropsWithChildren {
-  menu?: Array<DropdownElement>
+export interface DropdownMenuProps extends PropsWithChildren {
+  menu?: Array<DropdownMenuElement>
   title?: string | React.ReactNode
   type?: 'default' | 'simple'
   positionClassName?: string
@@ -29,17 +29,17 @@ export interface DropdownProps extends PropsWithChildren {
   itemsClassName?: string
 }
 
-export type DropdownItem = {
+export type DropdownMenuItem = {
   label: string | React.ReactNode
   key: string
-  onClick?: (item: DropdownItem, close: () => void) => void
+  onClick?: (item: DropdownMenuItem, close: () => void) => void
   disabled?: boolean
   danger?: boolean
   loading?: boolean
 }
 
-export type DropdownDivider = {
+export type DropdownMenuDivider = {
   type: 'divider'
 }
 
-export type DropdownElement = DropdownItem | DropdownDivider
+export type DropdownMenuElement = DropdownMenuItem | DropdownMenuDivider

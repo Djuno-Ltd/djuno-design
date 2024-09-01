@@ -12,10 +12,8 @@ import {
   SimpleTable,
   EmptyState,
   Divider,
-  CopyHide,
   Switcher,
-  Accordion,
-  DropDown as Dropdown,
+  DropdownMenu,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -33,11 +31,11 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
-        <Card title="Dropdown">
+        <Card title="DropdownMenu">
           <Flex direction="col" className="gap-5 w-full">
             <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
-                <Dropdown
+                <DropdownMenu
                   // title="djuno Design"
                   menu={[
                     {
@@ -58,43 +56,9 @@ function App() {
                   <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
                     Djuno Design
                   </div>
-                </Dropdown>
+                </DropdownMenu>
               </div>
             </div>
-          </Flex>
-        </Card>
-        <Card title="Accordion">
-          <Flex direction="col" className="gap-5 w-full">
-            <Accordion
-              items={[
-                {
-                  label: "Filters",
-                  panel: (
-                    <div className="">
-                      <Input
-                        inputProps={{
-                          value: "djuno-design",
-                        }}
-                      />
-                    </div>
-                  ),
-                },
-              ]}
-            />
-          </Flex>
-        </Card>
-        <Card title="CopyHide">
-          <Flex direction="col" className="gap-5 w-full">
-            <CopyHide type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide type="copy" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" type="copy" />
           </Flex>
         </Card>
         <Card title="Swither">
