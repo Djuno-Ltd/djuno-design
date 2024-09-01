@@ -24,7 +24,7 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
 import { useFloating, shift, flip } from '@floating-ui/react-dom'
 import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react'
 import Button from './Button'
-import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '../types/Dropdown'
+import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '../types/DropDown'
 
 /**
  * Dropdown component that allows for customization of UI type, size, loading state, and more.
@@ -62,7 +62,7 @@ import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '.
  * }
  */
 
-const Dropdown = (DropdownProps: React.PropsWithChildren<DropdownProps>) => {
+const DropDown = (DropdownProps: React.PropsWithChildren<DropdownProps>) => {
   const itemGroups = groupArrayByDivider(DropdownProps.menu || [])
   const { refs, floatingStyles } = useFloating({
     placement: 'bottom-end',
@@ -193,4 +193,4 @@ function isDivider(element: DropdownElement): element is DropdownDivider {
   return (element as DropdownDivider).type === 'divider'
 }
 
-export default Dropdown
+export default DropDown

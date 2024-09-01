@@ -15,7 +15,7 @@ import {
   CopyHide,
   Switcher,
   Accordion,
-  Dropdown,
+  DropDown as Dropdown,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
