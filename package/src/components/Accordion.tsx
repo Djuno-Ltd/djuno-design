@@ -19,11 +19,7 @@
  */
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import Typography from './Typography'
-const { Text } = Typography
-import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as ChevronDownIcon } from '../assets/icons/chevron-down.svg'
-import { cva } from 'class-variance-authority'
 import { AccordionProps } from '../types/Accordion'
 import Loading from './Loading'
 import { Disclosure } from '@headlessui/react'

@@ -42,6 +42,7 @@ import Divider from './components/Divider'
 import CopyHide from './components/CopyHide'
 import Switcher from './components/form/Switcher'
 import Accordion from './components/Accordion'
+import DropDown from './components/DropDown'
 
 // export all types
 export * from './types'
@@ -72,4 +73,5 @@ export {
   CopyHide,
   Switcher,
   Accordion,
+  DropDown,
 }

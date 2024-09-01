@@ -118,7 +118,7 @@ const CopyHide: React.FC<CopyHideProps> = ({ text, icon, className, iconClassNam
         <div className={cn('dj-flex dj-items-center dj-gap-1', className)}>
           <Input
             inputProps={{
-              value: text ? text : 'Djuno esign',
+              value: text ? text : 'Djuno Design',
               readOnly: true,
               ...props,
             }}

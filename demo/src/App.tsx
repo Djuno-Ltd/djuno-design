@@ -15,6 +15,7 @@ import {
   CopyHide,
   Switcher,
   Accordion,
+  DropDown,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -32,6 +33,36 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="DropDown">
+          <Flex direction="col" className="gap-5 w-full">
+            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+              <div className="w-50 flex justify-center items-center">
+                <DropDown
+                  // title="djuno Design"
+                  menu={[
+                    {
+                      key: "1",
+                      label: "Edit",
+                    },
+                    {
+                      type: "divider",
+                    },
+                    {
+                      key: "end",
+                      label: "Delete",
+                      danger: true,
+                    },
+                  ]}
+                  // type="simple"
+                >
+                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                    Djuno Design
+                  </div>
+                </DropDown>
+              </div>
+            </div>
+          </Flex>
+        </Card>
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
             <Accordion

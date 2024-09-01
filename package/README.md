@@ -298,6 +298,17 @@ function App() {
 | iconClassName | string        |          |         |             |
 | showText      | boolean       |          |         |             |
 
+### DropDown
+
+| Name              | Type              | Required | default | Description |
+| ----------------- | ----------------- | -------- | ------- | ----------- |
+| menu              | `DropdownElement` |          |         |             |
+| title             | string            |          |         |             |
+| type              | string            |          |         |             |
+| positionClassName | string            |          |         |             |
+| buttonClassName   | string            |          |         |             |
+| itemsClassName    | string            |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
