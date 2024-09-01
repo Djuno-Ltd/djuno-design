@@ -20,8 +20,8 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface DropdownMenuProps extends PropsWithChildren {
-  menu?: Array<DropdownMenuElement>
+export interface DropdownProps extends PropsWithChildren {
+  menu?: Array<DropdownElement>
   title?: string | React.ReactNode
   type?: 'default' | 'simple'
   positionClassName?: string
@@ -29,17 +29,17 @@ export interface DropdownMenuProps extends PropsWithChildren {
   itemsClassName?: string
 }
 
-export type DropdownMenuItem = {
+export type DropdownItem = {
   label: string | React.ReactNode
   key: string
-  onClick?: (item: DropdownMenuItem, close: () => void) => void
+  onClick?: (item: DropdownItem, close: () => void) => void
   disabled?: boolean
   danger?: boolean
   loading?: boolean
 }
 
-export type DropdownMenuDivider = {
+export type DropdownDivider = {
   type: 'divider'
 }
 
-export type DropdownMenuElement = DropdownMenuItem | DropdownMenuDivider
+export type DropdownElement = DropdownItem | DropdownDivider

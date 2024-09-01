@@ -286,7 +286,7 @@ function App() {
 | textClassName | string             |          |         |             |
 | usingText     | boolean            |          |         |             |
 
-### DropDown
+### Dropdown
 
 | Name              | Type                | Required | default | Description |
 | ----------------- | ------------------- | -------- | ------- | ----------- |
