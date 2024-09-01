@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Card Component
+ * @fileoverview Accordion Component
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -19,11 +19,7 @@
  */
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import Typography from './Typography'
-const { Text } = Typography
-import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as ChevronDownIcon } from '../assets/icons/chevron-down.svg'
-import { cva } from 'class-variance-authority'
 import { AccordionProps } from '../types/Accordion'
 import Loading from './Loading'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
