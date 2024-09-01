@@ -16,20 +16,18 @@ import {
   Modal,
   Select,
   SelectOption,
+  Dropdown,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
-
 const { Text, Title, Paragraph, Link } = Typography;
-
 function App() {
   const [btnLoading, setBtnLoading] = useState(false);
   const handleClick = () => {
     setBtnLoading(true);
     setTimeout(() => setBtnLoading(false), 3000);
   };
-
   const [inputValue, setInputValue] = useState("");
   const [swith, setSwitch] = useState(false);
   const [modal, setModal] = useState(false);
@@ -59,6 +57,37 @@ function App() {
                 <EmptyState />
               </Modal>
             </Flex>
+          </Flex>
+        </Card>
+
+        <Card title="Dropdown">
+          <Flex direction="col" className="gap-5 w-full">
+            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+              <div className="w-50 flex justify-center items-center">
+                <Dropdown
+                  title="djuno Design"
+                  menu={[
+                    {
+                      key: "1",
+                      label: "Edit",
+                    },
+                    {
+                      type: "divider",
+                    },
+                    {
+                      key: "end",
+                      label: "Delete",
+                      danger: true,
+                    },
+                  ]}
+                  type="simple"
+                >
+                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                    Djuno Design
+                  </div>
+                </Dropdown>
+              </div>
+            </div>
           </Flex>
         </Card>
 
@@ -247,10 +276,10 @@ function App() {
                 <SimpleTable.Row>
                   <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
-                      {/* <EmptyState
-                          text="No data available"
-                          icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
-                        /> */}
+                      <EmptyState
+                        text="No data available"
+                        icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
+                      />
                     </Flex>
                   </SimpleTable.TD>
                 </SimpleTable.Row>
@@ -260,45 +289,57 @@ function App() {
         </Card>
 
         <Card title="Empty State">
-          <Text strong size="sm">
-            Empty state with simple icon
-          </Text>
+          <Divider
+            text=" Empty state with simple icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
             />
           </Flex>
-          <Text strong size="sm">
-            Empty state with default icon
-          </Text>
+          <Divider
+            text="Empty state with default icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
             />
           </Flex>
-          <Text strong size="sm">
-            Empty state with undefined icon
-          </Text>
+          <Divider
+            text="Empty state with undefined icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" />
           </Flex>
-          <Text strong size="sm">
-            Empty state without icon
-          </Text>
+          <Divider
+            text="Empty state without icon"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" usingIcon={false} />
           </Flex>
-          <Text strong size="sm">
-            Empty state without icon and with default text
-          </Text>
+          <Divider
+            text="Empty state without icon and with default text"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState usingIcon={false} />
           </Flex>
-          <Text strong size="sm">
-            Empty state without text
-          </Text>
+          <Divider
+            text="Empty state without text"
+            orientation="left"
+            usingText={true}
+          />
           <Flex className="gap-3 w-full">
             <EmptyState usingText={false} />
           </Flex>
@@ -340,7 +381,6 @@ function App() {
               ]}
               step="1"
             />
-
             <Steps
               steps={[
                 { label: "label 1", value: "1" },
@@ -351,6 +391,7 @@ function App() {
             />
           </Flex>
         </Card>
+
         <Card title="Alert">
           <Flex direction={"col"} className="gap-3 w-full">
             <Text strong size="sm">
@@ -361,7 +402,6 @@ function App() {
             <Alert type="warning" message="Djuno Design. Warning Alert" />
             <Alert type="success" message="Djuno Design. Success Alert" />
             <Alert type="error" message="Djuno Design. Error Alert" />
-
             <Text strong size="sm" className="mt-4">
               with description
             </Text>
@@ -370,7 +410,6 @@ function App() {
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
               type="info"
             />
-
             <Text strong size="sm" className="mt-4">
               with icon
             </Text>
@@ -393,7 +432,6 @@ function App() {
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
               type="info"
             />
-
             <Text strong size="sm" className="mt-4">
               banner mode
             </Text>
@@ -414,6 +452,7 @@ function App() {
           <Title level={5}>h5. Djuno Design</Title>
           <Title level={6}>h6. Djuno Design</Title>
         </Card>
+
         <Card title="Typography" description="different types of text">
           <Typography>
             <Flex direction="col" className="gap-2">
@@ -439,6 +478,7 @@ function App() {
             </Flex>
           </Typography>
         </Card>
+
         <Card title="Typography" description="different types of size">
           <Flex direction="col" className="gap-2">
             <Text size="xs">Djuno Design (xs)</Text>
@@ -587,5 +627,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

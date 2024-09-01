@@ -42,6 +42,7 @@ import Divider from './components/Divider'
 import Switcher from './components/form/Switcher'
 import Modal from './components/Modal'
 import Select from './components/form/Select'
+import Dropdown from './components/Dropdown'
 
 // export all types
 export * from './types'
@@ -72,4 +73,5 @@ export {
   Switcher,
   Modal,
   Select,
+  Dropdown,
 }

@@ -33,6 +33,7 @@
 12. EmptyState
 13. Divider
 14. Modal
+15. Dropdown
 
 ### Available utility functions
 
@@ -298,6 +299,17 @@
 | closable           | `boolean`         |          |         | If true, displays a close button in the modal.                    |
 | rendered           | `() => void`      |          |         | Callback function triggered when the modal is rendered.           |
 | children           | `React.ReactNode` |          |         | The content to be displayed inside the modal.                     |
+
+### Dropdown
+
+| Name              | Type                | Required | default | Description |
+| ----------------- | ------------------- | -------- | ------- | ----------- |
+| menu              | `DropdownElement[]` |          |         |             |
+| title             | string              |          |         |             |
+| type              | string              |          |         |             |
+| positionClassName | string              |          |         |             |
+| buttonClassName   | string              |          |         |             |
+| itemsClassName    | string              |          |         |             |
 
 ## Contributor ✨
 
