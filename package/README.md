@@ -286,18 +286,6 @@ function App() {
 | textClassName | string             |          |         |             |
 | usingText     | boolean            |          |         |             |
 
-### CopyHide
-
-| Name          | Type          | Required | default | Description |
-| ------------- | ------------- | -------- | ------- | ----------- |
-| text          | string        |          |         |             |
-| className     | string        |          |         |             |
-| icon          | `ReactNode`   |          |         |             |
-| type          | `ActionTypes` |          |         |             |
-| textClassName | string        |          |         |             |
-| iconClassName | string        |          |         |             |
-| showText      | boolean       |          |         |             |
-
 ### DropDown
 
 | Name              | Type                | Required | default | Description |
