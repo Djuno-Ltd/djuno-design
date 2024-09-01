@@ -4,40 +4,11 @@
 
 ## Documentation
 
-### 1. Install
-
-npm
-
-    npm i djuno-design
-
-yarn
-
-    yarn add djuno-design
-
-### 2. Import styles at the top of your component tree
-
-```jsx
-import 'djuno-design/dist/index.css'
-```
-
-### 3. Simply you can import all components everywere
-
-```jsx
-import { Button } from 'djuno-design'
-
-function App() {
-  return (
-    <>
-      <Button>Click!</Button>
-    </>
-  )
-}
-```
-
-## Available components
+### Available components
 
 1. Button
 2. Tooltip
+   - InfoTooltip
 3. Loading
 4. Flex
 5. Card
@@ -51,6 +22,7 @@ function App() {
 9. Form
    - Input
    - Switcher
+   - Select
 10. Skeleton
 11. SimpleTable
     - Head
@@ -60,8 +32,9 @@ function App() {
     - TD
 12. EmptyState
 13. Divider
+14. Modal
 
-## Available utility functions
+### Available utility functions
 
 1. uuid
 2. localStorage
@@ -229,6 +202,33 @@ function App() {
 | loadingType | `LoadingProps`             |          |         |             |
 | size        | `SizeTypes`                |          | medium  |             |
 
+### Select
+
+### Select
+
+| Name               | Type                              | Required | Default | Description                                                                |
+| ------------------ | --------------------------------- | -------- | ------- | -------------------------------------------------------------------------- |
+| `value`            | `T`                               |          |         | The currently selected value.                                              |
+| `onChange`         | `(value: T or undefined) => void` |          |         | Callback function triggered when the selected value changes.               |
+| `defaultValue`     | `T`                               |          |         | The default value of the select component.                                 |
+| `options`          | `SelectOption<T, ET>[]`           | ✔       |         | Array of options available for selection.                                  |
+| `className`        | `string`                          |          |         | Additional CSS classes for custom styling of the select component.         |
+| `buttonClassName`  | `string`                          |          |         | Additional CSS classes for custom styling of the select button.            |
+| `optionsClassName` | `string`                          |          |         | Additional CSS classes for custom styling of the options list.             |
+| `label`            | `string`                          |          |         | The label displayed above the select component.                            |
+| `error`            | `string`                          |          |         | Error message to display if there is a validation issue.                   |
+| `required`         | `boolean`                         |          |         | Indicates if the select component is required.                             |
+| `type`             | `SelectTypes`                     |          |         | The type of the select component (e.g., single select, multi-select).      |
+| `tooltip`          | `TooltipProps`                    |          |         | Tooltip properties to display additional information.                      |
+| `hint`             | `string`                          |          |         | Hint text to provide additional context or instructions.                   |
+| `loading`          | `boolean`                         |          |         | Indicates if the select component is in a loading state.                   |
+| `loadingType`      | `LoadingType`                     |          |         | Type of loading indicator to display when the select component is loading. |
+| `emptyString`      | `string`                          |          |         | Text to display when there are no options available.                       |
+| `clearable`        | `boolean`                         |          |         | If true, allows the user to clear the selected value.                      |
+| `disabled`         | `boolean`                         |          |         | If true, disables the select component.                                    |
+| `size`             | `SizeTypes`                       |          |         | Size of the select component (e.g., small, medium, large).                 |
+| `onBlur`           | `(e: FocusEvent) => void`         |          |         | Callback function triggered when the select component loses focus.         |
+
 ### Skeleton
 
 | Name      | Type                 | Required | default   | Description |
@@ -305,6 +305,19 @@ function App() {
 | items           | `AccordionItem[]` |          |         |             |
 | panelClassNames | string            |          |         |             |
 | loading         | boolean           |          |         |             |
+
+### Modal
+
+| Name               | Type              | Required | Default | Description                                                       |
+| ------------------ | ----------------- | -------- | ------- | ----------------------------------------------------------------- |
+| title              | `React.ReactNode` |          |         | The title of the modal, which can be a string or any React node.  |
+| isOpen             | `boolean`         |          |         | Controls whether the modal is open or closed.                     |
+| onClose            | `() => void`      |          |         | Callback function triggered when the modal is requested to close. |
+| contentClassName   | `string`          |          |         | Additional CSS classes for custom styling of the modal content.   |
+| containerClassName | `string`          |          |         | Additional CSS classes for custom styling of the modal container. |
+| closable           | `boolean`         |          |         | If true, displays a close button in the modal.                    |
+| rendered           | `() => void`      |          |         | Callback function triggered when the modal is rendered.           |
+| children           | `React.ReactNode` |          |         | The content to be displayed inside the modal.                     |
 
 ## Contributor ✨
 

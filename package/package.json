@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "0.4.0",
+  "version": "0.4.5",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -31,6 +31,7 @@
     "README.md"
   ],
   "devDependencies": {
+    "@floating-ui/react-dom": "^2.1.1",
     "@headlessui/react": "^2.1.2",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",

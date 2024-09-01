@@ -15,6 +15,9 @@ import {
   CopyHide,
   Switcher,
   Accordion,
+  Modal,
+  Select,
+  SelectOption,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -28,6 +31,16 @@ function App() {
   };
   const [inputValue, setInputValue] = useState("");
   const [swith, setSwitch] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const selectOptions: SelectOption<string>[] = [
+    { label: "option 1", value: "option1" },
+    { label: "option 2", value: "option2" },
+  ];
+  const [clearableValue, setClearableValue] = useState<string | undefined>(
+    selectOptions[0].value
+  );
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -66,6 +79,22 @@ function App() {
             <CopyHide text="Text" type="copy" />
           </Flex>
         </Card>
+        <Card title="Modal">
+          <Flex direction="col" className="gap-3">
+            <Flex items={{ default: "center" }} className="gap-2">
+              <Button onClick={() => setModal(true)}>Click to open!</Button>
+              <Modal
+                isOpen={modal}
+                onClose={() => setModal(false)}
+                title="Modal title"
+                contentClassName="max-w-md"
+              >
+                <EmptyState />
+              </Modal>
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Swither">
           <Flex direction="col" className="gap-5">
             <div>
@@ -139,6 +168,71 @@ function App() {
             </Flex>
           </Flex>
         </Card>
+
+        <Card title="Select">
+          <Flex direction="col" className="gap-5 w-full">
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="small"
+                size="small"
+                options={selectOptions}
+                className="w-[200px]"
+                emptyString="select an option"
+              />
+              <Select
+                label="medium"
+                size="medium"
+                options={selectOptions}
+                className="w-[200px]"
+              />
+              <Select
+                label="large"
+                size="large"
+                options={selectOptions}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="loading"
+                loading
+                options={selectOptions}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="clear"
+                clearable
+                value={clearableValue}
+                options={selectOptions}
+                onChange={setClearableValue}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select label="empty" options={[]} className="w-[200px]" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="tooltip"
+                tooltip={{ content: "This is a tooltip", clickable: true }}
+                options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="error"
+                error="Field is required"
+                required
+                options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Skeleton">
           <Flex direction="col" className="gap-5 w-full">
             <Skeleton />

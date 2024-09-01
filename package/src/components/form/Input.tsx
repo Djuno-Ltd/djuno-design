@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Card Component
+ * @fileoverview Input Component
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -23,13 +23,12 @@ import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
-import Tooltip from '../Tooltip'
+import { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { uuid } from '../../utils/uuid'
-// import { packageReadmeUrl } from '../../config'
+import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -70,7 +69,7 @@ const inputVariants = cva(
  * Define label variants using the `cva` utility function.
  * This function generates CSS classes for input label styles based on specified variants.
  */
-const labelVariants = cva(
+export const labelVariants = cva(
   'dj-flex dj-items-center dj-gap-1 dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-whitespace-nowrap',
   {
     variants: {
@@ -165,13 +164,17 @@ const Input: React.FunctionComponent<InputProps> = ({
         })}
       >
         <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
-          {label && <Typography.Text size='sm'>{label}</Typography.Text>}
+          {label && (
+            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+              {label}
+            </Typography.Text>
+          )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5'>
               *
             </Typography.Text>
           )}
-          {tooltip && <Tooltip {...tooltip}>i</Tooltip>}
+          {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
         {hint && <span className='dj-text-[11px] dj-text-slate-500'>{hint}</span>}
       </div>
@@ -211,19 +214,26 @@ const Input: React.FunctionComponent<InputProps> = ({
         )}
         <div className='dj-absolute dj-inset-y-0 dj-end-0 dj-flex'>{AfterComponent}</div>
       </div>
-      <AnimatePresence>
-        {error && typeof error === 'string' && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatedFormError error={error} />
     </div>
   )
 }
 
+const AnimatedFormError: React.FC<{ error?: string | boolean }> = ({ error }) => {
+  return (
+    <AnimatePresence>
+      {error && typeof error === 'string' && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+        >
+          <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+export { AnimatedFormError }
 export default Input

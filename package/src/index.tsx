@@ -42,6 +42,8 @@ import Divider from './components/Divider'
 import CopyHide from './components/CopyHide'
 import Switcher from './components/form/Switcher'
 import Accordion from './components/Accordion'
+import Modal from './components/Modal'
+import Select from './components/form/Select'
 
 // export all types
 export * from './types'
@@ -72,4 +74,6 @@ export {
   CopyHide,
   Switcher,
   Accordion,
+  Modal,
+  Select,
 }
