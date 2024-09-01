@@ -240,7 +240,7 @@ const Select = <T extends string | number, ET = any>({
                   className={({ focus }) =>
                     `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
                       focus
-                        ? 'dj-bg-primary-50 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
+                        ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
                         : 'dj-text-gray-900 dark:dj-text-slate-300'
                     }`
                   }
