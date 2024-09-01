@@ -298,6 +298,14 @@ function App() {
 | iconClassName | string        |          |         |             |
 | showText      | boolean       |          |         |             |
 
+### Accordion
+
+| Name            | Type              | Required | default | Description |
+| --------------- | ----------------- | -------- | ------- | ----------- |
+| items           | `AccordionItem[]` |          |         |             |
+| panelClassNames | string            |          |         |             |
+| loading         | boolean           |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)

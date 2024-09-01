@@ -26,7 +26,7 @@ import { ReactComponent as ChevronDownIcon } from '../assets/icons/chevron-down.
 import { cva } from 'class-variance-authority'
 import { AccordionProps } from '../types/Accordion'
 import Loading from './Loading'
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 
 /**
  * Accordion component that allows for customization of UI type, size, loading state, and more.
@@ -69,7 +69,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading, 
           <Disclosure key={i}>
             {({ open }) => (
               <>
-                <Disclosure.Button className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-800 dark:hover:dj-bg-dark-850 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 border'>
+                <DisclosureButton className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-800 dark:hover:dj-bg-dark-850 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 border'>
                   {item.label}
                   {item.panel && (
                     <ChevronDownIcon
@@ -81,16 +81,16 @@ const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading, 
                       )}
                     />
                   )}
-                </Disclosure.Button>
+                </DisclosureButton>
                 {item.panel && (
-                  <Disclosure.Panel
+                  <DisclosurePanel
                     className={cn(panelClassNames, {
                       'dark:dj-bg-dark-800 dj-p-3 dj-border-y dark:dj-border-dark-700 dark:dj-text-dark-200':
                         panelClassNames === undefined,
                     })}
                   >
                     {item.panel}
-                  </Disclosure.Panel>
+                  </DisclosurePanel>
                 )}
               </>
             )}
