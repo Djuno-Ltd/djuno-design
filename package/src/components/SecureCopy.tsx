@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Card Component
+ * @fileoverview SecureCopy Component
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
