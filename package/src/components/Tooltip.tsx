@@ -24,6 +24,7 @@ import { uuid } from '../utils/uuid'
 import { cn } from '../utils/cn'
 import { TooltipProps } from '../types'
 import { cva } from 'class-variance-authority'
+import { ReactComponent as TooltipIcon } from './../assets/icons/question-mark-circle.svg'
 
 /**
  * Define button variants using the `cva` utility function.
@@ -88,4 +89,14 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, cli
   )
 }
 
+const InfoTooltip: React.FC<{ tooltip?: TooltipProps }> = ({ tooltip }) => {
+  return (
+    <Tooltip {...tooltip}>
+      <TooltipIcon className='dj-w-4 dj-text-slate-500 dark:dj-text-slate-300 dark:hover:dj-text-slate-100' />
+    </Tooltip>
+  )
+}
+
+//TODO: <Tooltip.Info />
+export { InfoTooltip }
 export default Tooltip

@@ -33,6 +33,7 @@ export * from './EmptyState'
 export * from './Divider'
 export * from './ISwitcher'
 export * from './IModal'
+export * from './ISelect'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {
