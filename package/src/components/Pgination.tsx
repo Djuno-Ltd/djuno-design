@@ -19,7 +19,7 @@
  */
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { SecureCopyProps } from '../types/SecureCopy'
+import { SecureCopyProps } from '../types/ISecureCopy'
 import { copyToClipboard } from '../utils/copy'
 import Typography from './Typography'
 const { Text } = Typography

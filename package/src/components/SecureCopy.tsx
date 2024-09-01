@@ -19,22 +19,21 @@
  */
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { SecureCopyProps } from '../types/SecureCopy'
+import { SecureCopyProps } from '../types/ISecureCopy'
 import { copyToClipboard } from '../utils/copy'
 import Typography from './Typography'
-const { Text } = Typography
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
 import Input from './form/Input'
 import { cva } from 'class-variance-authority'
+const { Text } = Typography
 
 const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-duration-300', {
   variants: {
     state: {
-      eyelashIcon:
-        '  hover:dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
-      eyeIcon: 'hover:dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyelashIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyeIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
       copyIcon:
         ' hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
     },
@@ -51,7 +50,6 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  * @param {object} props - SecureCopy props.
  * @param {React.ReactNode} [props.children] - The content inside the SecureCopy.
  * @param {string} [props.className] - Additional classes to apply to the SecureCopy.
- * @param {boolean} [props.icon] - Indicates if the SecureCopy has the icon.
  * @param {boolean} [props.iconClassName] - Indicates if the SecureCopy has the iconClassName.
  * @param {boolean} [props.textClassName] - Indicates if the SecureCopy has the textClassName.
  * @param {string} [props.type] - Type of the Action "hide" or "copy".
@@ -68,7 +66,6 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  *   return (
  *     <SecureCopy
  *       className="my-custom-class"
- *       icon={<CustomIcon />}
  *       iconClassName="custom-icon-class"
  *       textClassName="custom-text-class"
  *       showText={true}
@@ -79,16 +76,7 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  * }
  *
  */
-
-const SecureCopy: React.FC<SecureCopyProps> = ({
-  text,
-  icon,
-  className,
-  iconClassName,
-  textClassName,
-  type,
-  ...props
-}) => {
+const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName, textClassName, type, ...props }) => {
   const [showText, setShowText] = React.useState(false)
 
   return (

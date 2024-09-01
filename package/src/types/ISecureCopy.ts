@@ -18,11 +18,10 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 export interface SecureCopyProps extends PropsWithChildren {
   text: string
-  icon?: React.ReactNode
   className?: string
   textClassName?: string
   iconClassName?: string
