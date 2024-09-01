@@ -16,6 +16,8 @@ import {
   Modal,
   Select,
   SelectOption,
+  PanelLayout,
+  PanelHeader,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -46,6 +48,20 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Layout">
+          <div className="h-[400px] w-full bg-purple-50">
+            <PanelLayout
+              type="mini"
+              renderSidebar={(egments: string[], isShow: boolean) => (
+                <div>{isShow && `show sidebar`}</div>
+              )}
+              renderHeader={() => <PanelHeader>Header</PanelHeader>}
+            >
+              Hi Djuno
+            </PanelLayout>
+          </div>
+        </Card>
+
         <Card title="Modal">
           <Flex direction="col" className="gap-3">
             <Flex items={{ default: "center" }} className="gap-2">

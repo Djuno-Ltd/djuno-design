@@ -33,6 +33,12 @@
 12. EmptyState
 13. Divider
 14. Modal
+15. Layouts
+    - PanelLayout
+
+### Available hooks
+
+1. useShow
 
 ### Available utility functions
 
