@@ -300,14 +300,14 @@ function App() {
 
 ### DropDown
 
-| Name              | Type              | Required | default | Description |
-| ----------------- | ----------------- | -------- | ------- | ----------- |
-| menu              | `DropdownElement` |          |         |             |
-| title             | string            |          |         |             |
-| type              | string            |          |         |             |
-| positionClassName | string            |          |         |             |
-| buttonClassName   | string            |          |         |             |
-| itemsClassName    | string            |          |         |             |
+| Name              | Type                | Required | default | Description |
+| ----------------- | ------------------- | -------- | ------- | ----------- |
+| menu              | `DropdownElement[]` |          |         |             |
+| title             | string              |          |         |             |
+| type              | string              |          |         |             |
+| positionClassName | string              |          |         |             |
+| buttonClassName   | string              |          |         |             |
+| itemsClassName    | string              |          |         |             |
 
 ## Contributor ✨
 
