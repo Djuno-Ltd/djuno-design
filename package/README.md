@@ -6,23 +6,29 @@
 
 ### Available components
 
-1. Button
-2. Tooltip
-   - InfoTooltip
-3. Loading
-4. Flex
-5. Card
-6. Typography
-   - Title
-   - Text
-   - Paragraph
-   - Link
-7. Alert
-8. Steps
-9. Form
-   - Input
-   - Switcher
-   - Select
+1.  Button
+2.  Tooltip
+
+    - InfoTooltip
+
+3.  Loading
+4.  Flex
+5.  Card
+6.  Typography
+
+    - Title
+    - Text
+    - Paragraph
+    - Link
+
+7.  Alert
+8.  Steps
+9.  Form
+
+    - Input
+    - Switcher
+    - Select
+
 10. Skeleton
 11. SimpleTable
     - Head
