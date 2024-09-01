@@ -286,18 +286,6 @@
 | textClassName | string             |          |         |             |
 | usingText     | boolean            |          |         |             |
 
-### CopyHide
-
-| Name          | Type          | Required | default | Description |
-| ------------- | ------------- | -------- | ------- | ----------- |
-| text          | string        |          |         |             |
-| className     | string        |          |         |             |
-| icon          | `ReactNode`   |          |         |             |
-| type          | `ActionTypes` |          |         |             |
-| textClassName | string        |          |         |             |
-| iconClassName | string        |          |         |             |
-| showText      | boolean       |          |         |             |
-
 ### Accordion
 
 | Name            | Type              | Required | default | Description |

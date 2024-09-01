@@ -12,7 +12,6 @@ import {
   SimpleTable,
   EmptyState,
   Divider,
-  CopyHide,
   Switcher,
   Accordion,
   Modal,
@@ -63,20 +62,6 @@ function App() {
                 },
               ]}
             />
-          </Flex>
-        </Card>
-        <Card title="CopyHide">
-          <Flex direction="col" className="gap-5 w-full">
-            <CopyHide type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide type="copy" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" type="copy" />
           </Flex>
         </Card>
         <Card title="Modal">
