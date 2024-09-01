@@ -96,7 +96,7 @@ const listboxVariants = cva(
  *
  * @returns {React.ReactNode} Rendered Select component.
  *
- * @version 0.0.0
+ * @version 0.4.5
  * @see https://www.npmjs.com/package/djuno-design#select
  *
  * @example
