@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview DropDown types
+ * @fileoverview Dropdown types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -20,7 +20,7 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface DropDownProps extends PropsWithChildren {
+export interface DropdownProps extends PropsWithChildren {
   menu?: Array<DropdownElement>
   title?: string | React.ReactNode
   type?: 'default' | 'simple'
