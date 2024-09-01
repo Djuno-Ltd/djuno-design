@@ -286,11 +286,11 @@ function App() {
 | textClassName | string             |          |         |             |
 | usingText     | boolean            |          |         |             |
 
-### CopyHide
+### SecureCopy
 
 | Name          | Type          | Required | default | Description |
 | ------------- | ------------- | -------- | ------- | ----------- |
-| text          | string        |          |         |             |
+| text          | string        | yes      |         |             |
 | className     | string        |          |         |             |
 | icon          | `ReactNode`   |          |         |             |
 | type          | `ActionTypes` |          |         |             |

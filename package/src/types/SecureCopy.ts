@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview CopyHide types
+ * @fileoverview SecureCopy types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -20,8 +20,8 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface CopyHideProps extends PropsWithChildren {
-  text?: string
+export interface SecureCopyProps extends PropsWithChildren {
+  text: string
   icon?: React.ReactNode
   className?: string
   textClassName?: string

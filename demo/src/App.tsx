@@ -12,7 +12,7 @@ import {
   SimpleTable,
   EmptyState,
   Divider,
-  CopyHide,
+  SecureCopy,
   Switcher,
 } from "djuno-design";
 import { useState } from "react";
@@ -31,18 +31,12 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
-        <Card title="CopyHide">
-          <Flex direction="col" className="gap-5 w-full">
-            <CopyHide type="hide" />
+        <Card title="SecureCopy">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <SecureCopy text="Djuno Design" type="hide" />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide type="copy" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <CopyHide text="Text" type="copy" />
+            <SecureCopy text="Djuno Design" type="copy" />
           </Flex>
         </Card>
         <Card title="Swither">
