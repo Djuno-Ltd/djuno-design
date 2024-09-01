@@ -12,6 +12,7 @@ import {
   SimpleTable,
   EmptyState,
   Divider,
+  SecureCopy,
   Switcher,
   Modal,
   Select,
@@ -44,6 +45,7 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+<<<<<<< HEAD
         <Card title="Modal">
           <Flex direction="col" className="gap-3">
             <Flex items={{ default: "center" }} className="gap-2">
@@ -57,6 +59,14 @@ function App() {
                 <EmptyState />
               </Modal>
             </Flex>
+=======
+        <Card title="SecureCopy">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <SecureCopy text="Djuno Design" type="hide" />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <SecureCopy text="Djuno Design" type="copy" />
+>>>>>>> copy-hide-component
           </Flex>
         </Card>
 

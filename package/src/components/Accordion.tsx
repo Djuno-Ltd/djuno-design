@@ -55,45 +55,42 @@ import { Disclosure } from '@headlessui/react'
  * }
  */
 
-const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading, ...props }) => {
+const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading }) => {
   return (
-    <>
-      {' '}
-      <div className='dj-w-full dj-bg-secondary-100 dark:dj-bg-dark-800 border dark:dj-border-dark-600 dj-rounded-lg dj-overflow-hidden '>
-        {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
-        {items?.map((item, i) => (
-          <Disclosure key={i}>
-            {({ open }) => (
-              <>
-                <Disclosure.Button className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-800 dark:hover:dj-bg-dark-850 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 border'>
-                  {item.label}
-                  {item.panel && (
-                    <ChevronDownIcon
-                      className={cn(
-                        'dj-h-4 dj-w-4 dj-text-dark-500 dark:dj-text-secondary-300 dj-transform dj-transition-transform dj-duration-300',
-                        {
-                          'dj-rotate-180': open,
-                        },
-                      )}
-                    />
-                  )}
-                </Disclosure.Button>
+    <div className='dj-w-full dj-bg-secondary-100 dark:dj-bg-dark-800 border dark:dj-border-dark-600 dj-rounded-lg dj-overflow-hidden '>
+      {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
+      {items?.map((item, i) => (
+        <Disclosure key={i}>
+          {({ open }) => (
+            <>
+              <Disclosure.Button className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-800 dark:hover:dj-bg-dark-850 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 border'>
+                {item.label}
                 {item.panel && (
-                  <Disclosure.Panel
-                    className={cn(panelClassNames, {
-                      'dark:dj-bg-dark-800 dj-p-3 dj-border-y dark:dj-border-dark-700 dark:dj-text-dark-200':
-                        panelClassNames === undefined,
-                    })}
-                  >
-                    {item.panel}
-                  </Disclosure.Panel>
+                  <ChevronDownIcon
+                    className={cn(
+                      'dj-h-4 dj-w-4 dj-text-dark-500 dark:dj-text-secondary-300 dj-transform dj-transition-transform dj-duration-300',
+                      {
+                        'dj-rotate-180': open,
+                      },
+                    )}
+                  />
                 )}
-              </>
-            )}
-          </Disclosure>
-        ))}
-      </div>
-    </>
+              </Disclosure.Button>
+              {item.panel && (
+                <Disclosure.Panel
+                  className={cn(panelClassNames, {
+                    'dark:dj-bg-dark-800 dj-p-3 dj-border-y dark:dj-border-dark-700 dark:dj-text-dark-200':
+                      panelClassNames === undefined,
+                  })}
+                >
+                  {item.panel}
+                </Disclosure.Panel>
+              )}
+            </>
+          )}
+        </Disclosure>
+      ))}
+    </div>
   )
 }
 

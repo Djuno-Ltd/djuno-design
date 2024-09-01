@@ -34,6 +34,7 @@
 13. Divider
 14. Modal
 15. Dropdown
+16. SecureCopy
 
 ### Available utility functions
 
@@ -310,6 +311,18 @@
 | positionClassName | string              |          |         |             |
 | buttonClassName   | string              |          |         |             |
 | itemsClassName    | string              |          |         |             |
+
+### SecureCopy
+
+| Name          | Type          | Required | default | Description |
+| ------------- | ------------- | -------- | ------- | ----------- |
+| text          | string        | yes      |         |             |
+| className     | string        |          |         |             |
+| icon          | `ReactNode`   |          |         |             |
+| type          | `ActionTypes` |          |         |             |
+| textClassName | string        |          |         |             |
+| iconClassName | string        |          |         |             |
+| showText      | boolean       |          |         |             |
 
 ## Contributor ✨
 

@@ -39,6 +39,7 @@ import Input from './components/form/Input'
 import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
+import SecureCopy from './components/SecureCopy'
 import Switcher from './components/form/Switcher'
 import Modal from './components/Modal'
 import Select from './components/form/Select'
@@ -70,6 +71,7 @@ export {
   SimpleTable,
   EmptyState,
   Divider,
+  SecureCopy,
   Switcher,
   Modal,
   Select,
