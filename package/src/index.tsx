@@ -49,6 +49,7 @@ import Accordion from './components/Accordion'
 import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
+import Texrarea from './components/Texrarea'
 
 // export hooks
 export * from './hooks/useShow'
@@ -89,4 +90,5 @@ export {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Texrarea,
 }

@@ -23,6 +23,7 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Texrarea,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -58,6 +59,33 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Texrarea">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea
+              label=""
+              placeholder="Enter custom notes if any"
+              textareaProps={{ rows: 4 }}
+            />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea
+              label=""
+              placeholder="Enter custom notes if any"
+              textareaProps={{}}
+            />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea label="" placeholder="" textareaProps={{}} />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea
+              label=""
+              placeholder="Enter custom notes if any"
+              // textareaProps={}
+              error="error"
+            />
+          </Flex>
+        </Card>
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">
