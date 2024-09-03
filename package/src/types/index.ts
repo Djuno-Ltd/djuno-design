@@ -34,6 +34,7 @@ export * from './Divider'
 export * from './ISwitcher'
 export * from './IModal'
 export * from './ISelect'
+export * from './IPanelLayouts'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

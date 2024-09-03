@@ -35,6 +35,8 @@
 14. Modal
 15. Layouts
     - PanelLayout
+    - PanelSidebar
+    - PanelHeader
 
 ### Available hooks
 
@@ -304,6 +306,34 @@
 | closable           | `boolean`         |          |         | If true, displays a close button in the modal.                    |
 | rendered           | `() => void`      |          |         | Callback function triggered when the modal is rendered.           |
 | children           | `React.ReactNode` |          |         | The content to be displayed inside the modal.                     |
+
+### PanelLayout
+
+| Name            | Type                                                                                                                              | Required | Default | Description                                                                                    |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `type`          | `PanelLayoutTypes`                                                                                                                |          |         | Defines the layout type, such as 'normal' or 'mini'.                                           |
+| `pathname`      | `string`                                                                                                                          |          |         | The current pathname used to generate segments for the sidebar.                                |
+| `renderSidebar` | `({ segments, isShowSidebar, type }: { segments: string[], isShowSidebar: boolean, type: PanelLayoutTypes }) => React.ReactNode`  |          |         | Function to render the sidebar, receiving segments, sidebar visibility state, and layout type. |
+| `renderHeader`  | `({ handleHideSidebar, handleShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void }) => React.ReactNode` |          |         | Function to render the header, receiving callbacks to show or hide the sidebar.                |
+| `children`      | `React.ReactNode`                                                                                                                 |          |         | The content to be displayed within the layout's main area.                                     |
+
+### PanelSidebar
+
+| Name            | Type               | Required | Default | Description                                                   |
+| --------------- | ------------------ | -------- | ------- | ------------------------------------------------------------- |
+| `isShowSidebar` | `boolean`          |          |         | Determines whether the sidebar is visible or hidden.          |
+| `type`          | `PanelLayoutTypes` |          |         | The type of sidebar layout, such as 'normal' or 'mini'.       |
+| `sidebarHeader` | `React.ReactNode`  |          |         | Optional header content to display at the top of the sidebar. |
+| `children`      | `React.ReactNode`  |          |         | The content to be displayed within the sidebar.               |
+
+### PanelHeader
+
+| Name                | Type              | Required | Default | Description                                                |
+| ------------------- | ----------------- | -------- | ------- | ---------------------------------------------------------- |
+| `handleHideSidebar` | `() => void`      |          |         | Callback function to hide the sidebar.                     |
+| `handleShowSidebar` | `() => void`      |          |         | Callback function to show the sidebar.                     |
+| `mobileIcon`        | `React.ReactNode` |          |         | An optional icon or element to display in the mobile view. |
+| `children`          | `React.ReactNode` |          |         | The content to be displayed within the header.             |
 
 ## Contributor ✨
 

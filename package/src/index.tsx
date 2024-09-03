@@ -44,6 +44,7 @@ import Divider from './components/Divider'
 import Modal from './components/Modal'
 import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
+import PanelSidebar from './components/layouts/PanelSidebar'
 
 // export hooks
 export * from './hooks/useShow'
@@ -79,4 +80,5 @@ export {
   Select,
   PanelLayout,
   PanelHeader,
+  PanelSidebar,
 }

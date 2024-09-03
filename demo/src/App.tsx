@@ -18,10 +18,12 @@ import {
   SelectOption,
   PanelLayout,
   PanelHeader,
+  PanelSidebar,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
+import { ReactComponent as Logo } from "./logo.svg";
 
 const { Text, Title, Paragraph, Link } = Typography;
 
@@ -49,15 +51,34 @@ function App() {
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="Layout">
-          <div className="h-[400px] w-full bg-purple-50">
+          <div className="h-[400px] w-full border border-slate-500 overflow-hidden">
             <PanelLayout
               type="mini"
-              renderSidebar={(egments: string[], isShow: boolean) => (
-                <div>{isShow && `show sidebar`}</div>
+              pathname="/"
+              renderSidebar={({ segments, ...sidebarProps }) => (
+                <PanelSidebar
+                  {...sidebarProps}
+                  sidebarHeader={
+                    <div className="flex items-center gap-1 px-1">
+                      <Logo />
+                      <Text size="xs">djuno-design</Text>
+                    </div>
+                  }
+                >
+                  <Text size="xs">sidebar</Text>
+                </PanelSidebar>
               )}
-              renderHeader={() => <PanelHeader>Header</PanelHeader>}
+              renderHeader={(headerProps) => (
+                <PanelHeader {...headerProps} mobileIcon={<Logo />}>
+                  <Text size="xs">header</Text>
+                </PanelHeader>
+              )}
             >
-              Hi Djuno
+              <iframe
+                src="https://google.com"
+                className="w-full h-96"
+                title="djuno-design"
+              />
             </PanelLayout>
           </div>
         </Card>
