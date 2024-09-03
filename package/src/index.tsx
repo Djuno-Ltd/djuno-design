@@ -45,6 +45,7 @@ import Modal from './components/Modal'
 import Select from './components/form/Select'
 import Dropdown from './components/Dropdown'
 import Accordion from './components/Accordion'
+import Tabs from './components/Tabs'
 
 // export all types
 export * from './types'
@@ -78,4 +79,5 @@ export {
   Select,
   Dropdown,
   Accordion,
+  Tabs,
 }
