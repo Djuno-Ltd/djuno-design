@@ -42,6 +42,7 @@
 15. Dropdown
 16. SecureCopy
 17. Accordion
+18. Pagination
 
 ### Available utility functions
 

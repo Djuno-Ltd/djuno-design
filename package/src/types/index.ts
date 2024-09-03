@@ -37,6 +37,7 @@ export * from './ISelect'
 export * from './IDropdown'
 export * from './ISecureCopy'
 export * from './IAccordion'
+export * from './IPagination'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

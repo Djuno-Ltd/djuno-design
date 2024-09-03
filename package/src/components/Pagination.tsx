@@ -40,7 +40,7 @@ import { ReactComponent as ArrowIcon } from '../assets/icons/arrow-right.svg'
  *
  * @returns {React.ReactNode} Rendered Pagination component.
  *
- * @version 0.0.0
+ * @version 0.4.9
  * @see https://www.npmjs.com/package/djuno-design#pagination
  *
  * @example
