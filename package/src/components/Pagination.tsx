@@ -112,9 +112,9 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
         className={cn(
           'dj-w-7 dj-h-7 dj-flex dj-justify-center dj-items-center  dj-rounded-full dj-cursor-pointer dj-transition-all dj-duration-100 dj-select-none',
           {
-            'dj-bg-slate-100 dj-text-slate-500 hover:dj-bg-primary-500 hover:dj-text-white  dark:dj-bg-dark-1 dark:hover:dj-bg-dark-2 dark:dj-text-slate-100':
+            'dj-bg-slate-100 dj-text-slate-500 hover:dj-bg-primary-500 hover:dj-text-white dark:dj-bg-dark-1 dark:hover:dj-bg-dark-700 dark:dj-text-slate-100':
               currentPage !== 1, //enable
-            'dj-bg-slate-100 dj-text-slate-300 hover:dj-bg-slate-100 hover:dj-text-slate-300  dark:dj-bg-dark-1 dark:hover:dj-bg-dark-2 dark:dj-text-slate-500 !dj-cursor-not-allowed':
+            'dj-bg-slate-100 dj-text-slate-300 hover:dj-bg-slate-100 hover:dj-text-slate-300 dark:dj-bg-dark-1 dark:hover:dj-bg-dark-700 dark:dj-text-slate-500 !dj-cursor-not-allowed':
               currentPage === 1, //disable
           },
         )}
@@ -146,7 +146,7 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
               className={cn(
                 'dj-w-7 dj-h-7 dj-flex dj-justify-center dj-items-center dj-rounded-full dj-cursor-pointer dj-transition-all dj-duration-100 dj-select-none dj-text-sm',
                 {
-                  'dj-bg-slate-100 dj-text-slate-500 hover:dj-bg-primary-500 hover:dj-text-white dark:dj-bg-dark-1 dark:hover:dj-bg-dark-2 dark:dj-text-slate-300':
+                  'dj-bg-slate-100 dj-text-slate-500 hover:dj-bg-primary-500 hover:dj-text-white dark:dj-bg-dark-600 dark:hover:dj-bg-dark-700 dark:dj-text-slate-300':
                     pageNumber !== currentPage, //not-selected
                   'dj-bg-primary-500 dj-text-white hover:dj-bg-primary-500 hover:dj-text-white':
                     pageNumber === currentPage, //selected
@@ -162,18 +162,18 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
       {/*  Right Navigation arrow */}
       <li
         className={cn(
-          'dj-w-7 dj-h-7 dj-flex dj-justify-center dj-items-center  dj-rounded-full dj-cursor-pointer dj-transition-all dj-duration-100 dj-select-none',
+          'dj-w-7 dj-h-7 dj-flex dj-justify-center dj-items-center dj-rounded-full dj-cursor-pointer dj-transition-all dj-duration-100 dj-select-none ',
           {
-            'dj-bg-slate-100 dj-text-slate-500 hover:dj-bg-primary-500 hover:dj-text-white dark:dj-bg-dark-1 dark:hover:dj-bg-dark-2 dark:dj-text-slate-100':
+            'dj-bg-slate-100 dj-text-slate-500 hover:dj-bg-primary-500 hover:dj-text-white dark:dj-bg-dark-600 dark:hover:dj-bg-dark-700 dark:dj-text-slate-100':
               currentPage !== lastPage, //enable
-            'dj-bg-slate-100 dj-text-slate-300 hover:dj-bg-slate-100 hover:dj-text-slate-300 dark:dj-bg-dark-1 dark:hover:dj-bg-dark-2 dark:dj-text-slate-500 !dj-cursor-not-allowed':
+            'dj-bg-slate-100 dj-text-slate-300 hover:dj-bg-slate-100 hover:dj-text-slate-300 dark:dj-bg-dark-600 dark:hover:dj-bg-dark-700 dark:dj-text-slate-500 !dj-cursor-not-allowed':
               currentPage === lastPage, //disable
             '!dj-cursor-not-allowed': loading,
           },
         )}
         onClick={onNext}
       >
-        <ArrowIcon className='w-4' />
+        <ArrowIcon className='dj-w-4' />
       </li>
     </ul>
   )

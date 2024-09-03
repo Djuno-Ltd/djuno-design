@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Types index file
+ * @fileoverview Modal types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,32 +18,14 @@
  * limitations under the License.
  */
 
-export * from './Button'
-export * from './Tooltip'
-export * from './Loading'
-export * from './Flex'
-export * from './Card'
-export * from './Typography'
-export * from './Alert'
-export * from './Steps'
-export * from './ISkeleton'
-export * from './Input'
-export * from './SimpleTable'
-export * from './EmptyState'
-export * from './Divider'
-export * from './ISwitcher'
-export * from './IModal'
-export * from './ISelect'
-export * from './IDropdown'
-export * from './ISecureCopy'
-export * from './IAccordion'
+import { PropsWithChildren } from 'react'
 
-export type SizeTypes = 'small' | 'medium' | 'large'
-export interface IMediaQuery<T> {
-  default?: T
-  sm?: T
-  md?: T
-  lg?: T
-  xl?: T
-  '2xl'?: T
+export interface ModalProps extends PropsWithChildren {
+  title?: React.ReactNode
+  isOpen?: boolean
+  onClose?: () => void
+  contentClassName?: string
+  containerClassName?: string
+  closable?: boolean
+  rendered?: () => void
 }

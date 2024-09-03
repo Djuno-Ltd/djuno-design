@@ -15,6 +15,11 @@ import {
   SecureCopy,
   Switcher,
   Pagination,
+  Modal,
+  Select,
+  SelectOption,
+  Dropdown,
+  Accordion,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -31,11 +36,18 @@ function App() {
 
   // Pagination states
   const [offset, setOffset] = useState(0);
-  const [total, setTotal] = useState(30);
-  const limit = 3;
-  const handlePageChange = (newOffset: number, newLimit: number) => {
-    setOffset(newOffset);
+  const handlePageChange = (Offset: number, limit: number) => {
+    setOffset(Offset);
   };
+  const [modal, setModal] = useState(false);
+
+  const selectOptions: SelectOption<string>[] = [
+    { label: "option 1", value: "option1" },
+    { label: "option 2", value: "option2" },
+  ];
+  const [clearableValue, setClearableValue] = useState<string | undefined>(
+    selectOptions[0].value
+  );
 
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
@@ -45,15 +57,51 @@ function App() {
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">
               <Pagination
-                limit={limit}
+                limit={3}
                 offset={offset}
-                total={total}
+                total={30}
                 siblingCount={1}
                 onPageChange={handlePageChange}
                 loading={false}
                 className="my-pagination-class"
               />
             </div>
+          </Flex>
+        </Card>
+        <Card title="Accordion">
+          <Flex direction="col" className="gap-5 w-full">
+            <Accordion
+              items={[
+                {
+                  label: "Filters",
+                  panel: (
+                    <div className="">
+                      <Input
+                        inputProps={{
+                          value: "djuno-design",
+                        }}
+                      />
+                    </div>
+                  ),
+                },
+              ]}
+            />
+          </Flex>
+        </Card>
+
+        <Card title="Modal">
+          <Flex direction="col" className="gap-3">
+            <Flex items={{ default: "center" }} className="gap-2">
+              <Button onClick={() => setModal(true)}>Click to open!</Button>
+              <Modal
+                isOpen={modal}
+                onClose={() => setModal(false)}
+                title="Modal title"
+                contentClassName="max-w-md"
+              >
+                <EmptyState />
+              </Modal>
+            </Flex>
           </Flex>
         </Card>
         <Card title="SecureCopy">
@@ -64,6 +112,76 @@ function App() {
             <SecureCopy text="Djuno Design" type="copy" />
           </Flex>
         </Card>
+
+        <Card title="Dropdown">
+          <Divider
+            text=" Default dropdown"
+            orientation="left"
+            usingText={true}
+          />
+          <Flex direction="col" className="gap-5 w-full">
+            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+              <div className="w-50 flex justify-center items-center">
+                <Dropdown
+                  title="djuno Design"
+                  menu={[
+                    {
+                      key: "1",
+                      label: "Edit",
+                    },
+                    {
+                      type: "divider",
+                    },
+                    {
+                      key: "end",
+                      label: "Delete",
+                      danger: true,
+                    },
+                  ]}
+                  type="default"
+                >
+                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                    Djuno Design
+                  </div>
+                </Dropdown>
+              </div>
+            </div>
+          </Flex>
+          <Divider
+            text=" Simple dropdown"
+            orientation="left"
+            usingText={true}
+          />
+          <Flex direction="col" className="gap-5 w-full">
+            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+              <div className="w-50 flex justify-center items-center">
+                <Dropdown
+                  title="djuno Design"
+                  menu={[
+                    {
+                      key: "1",
+                      label: "Edit",
+                    },
+                    {
+                      type: "divider",
+                    },
+                    {
+                      key: "end",
+                      label: "Delete",
+                      danger: true,
+                    },
+                  ]}
+                  type="simple"
+                >
+                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                    Djuno Design
+                  </div>
+                </Dropdown>
+              </div>
+            </div>
+          </Flex>
+        </Card>
+
         <Card title="Swither">
           <Flex direction="col" className="gap-5">
             <div>
@@ -137,6 +255,71 @@ function App() {
             </Flex>
           </Flex>
         </Card>
+
+        <Card title="Select">
+          <Flex direction="col" className="gap-5 w-full">
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="small"
+                size="small"
+                options={selectOptions}
+                className="w-[200px]"
+                emptyString="select an option"
+              />
+              <Select
+                label="medium"
+                size="medium"
+                options={selectOptions}
+                className="w-[200px]"
+              />
+              <Select
+                label="large"
+                size="large"
+                options={selectOptions}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="loading"
+                loading
+                options={selectOptions}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="clear"
+                clearable
+                value={clearableValue}
+                options={selectOptions}
+                onChange={setClearableValue}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select label="empty" options={[]} className="w-[200px]" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="tooltip"
+                tooltip={{ content: "This is a tooltip", clickable: true }}
+                options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="error"
+                error="Field is required"
+                required
+                options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Skeleton">
           <Flex direction="col" className="gap-5 w-full">
             <Skeleton />
@@ -145,6 +328,7 @@ function App() {
             <Skeleton shape="circle" />
           </Flex>
         </Card>
+
         <Card title="Simple Table">
           <Text strong size="sm">
             Simple table with data
@@ -163,6 +347,56 @@ function App() {
                   <SimpleTable.TD>Data 1</SimpleTable.TD>
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
+          </Flex>
+          <Text strong size="sm">
+            Simple table with data and dropdown
+          </Text>
+          <Flex className="gap-3 w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                  <SimpleTable.TH></SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                  <SimpleTable.TD>
+                    <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+                      <div className=" flex justify-center items-center">
+                        <Dropdown
+                          title="djuno Design"
+                          menu={[
+                            {
+                              key: "1",
+                              label: "Edit",
+                            },
+                            {
+                              type: "divider",
+                            },
+                            {
+                              key: "end",
+                              label: "Delete",
+                              danger: true,
+                            },
+                          ]}
+                          type="simple"
+                        >
+                          <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                            Djuno Design
+                          </div>
+                        </Dropdown>
+                      </div>
+                    </div>
+                  </SimpleTable.TD>
                 </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>
@@ -194,6 +428,7 @@ function App() {
             </SimpleTable>
           </Flex>
         </Card>
+
         <Card title="Empty State">
           <Divider
             text=" Empty state with simple icon"
@@ -250,6 +485,7 @@ function App() {
             <EmptyState usingText={false} />
           </Flex>
         </Card>
+
         <Card title="Divider">
           <Flex className="gap-3 w-full">
             <Divider uiType="simple" />
@@ -276,6 +512,7 @@ function App() {
             <Divider uiType="dotted" usingText={true} orientation="right" />
           </Flex>
         </Card>
+
         <Card title="Steps">
           <Flex direction={"col"} className="gap-3 w-full">
             <Steps
@@ -295,6 +532,7 @@ function App() {
             />
           </Flex>
         </Card>
+
         <Card title="Alert">
           <Flex direction={"col"} className="gap-3 w-full">
             <Text strong size="sm">
@@ -346,6 +584,7 @@ function App() {
             />
           </Flex>
         </Card>
+
         <Card title="Typography" description="different types of heading">
           <Title>h1. Djuno Design</Title>
           <Title level={2}>h2. Djuno Design</Title>
@@ -354,6 +593,7 @@ function App() {
           <Title level={5}>h5. Djuno Design</Title>
           <Title level={6}>h6. Djuno Design</Title>
         </Card>
+
         <Card title="Typography" description="different types of text">
           <Typography>
             <Flex direction="col" className="gap-2">
@@ -379,6 +619,7 @@ function App() {
             </Flex>
           </Typography>
         </Card>
+
         <Card title="Typography" description="different types of size">
           <Flex direction="col" className="gap-2">
             <Text size="xs">Djuno Design (xs)</Text>
@@ -398,6 +639,7 @@ function App() {
             </Text>
           </Flex>
         </Card>
+
         <Card title="Typography" description="copyable options">
           <Flex direction={"col"} className="gap-3 w-full">
             <Paragraph copyable>This is a copyable text.</Paragraph>
@@ -415,11 +657,13 @@ function App() {
             <Text copyable={{ tooltips: false }}>Hide Copy tooltips.</Text>
           </Flex>
         </Card>
+
         <Card title="Card">
           <Card title="Title" description="description" setting="setting">
             content
           </Card>
         </Card>
+
         <Card title="Flex">
           <Flex direction="col" className="gap-2 dj-w-full">
             <Flex items="center" className="gap-2 dj-w-full">
@@ -444,6 +688,7 @@ function App() {
             </Flex>
           </Flex>
         </Card>
+
         <Card title="Loading">
           <Flex items="center" className="gap-7 pl-3">
             <Flex items="center" className="gap-2">
@@ -460,6 +705,7 @@ function App() {
             </Flex>
           </Flex>
         </Card>
+
         <Card title="Tooltip">
           <Flex className="gap-4 pl-3">
             <Tooltip content="I'm a tooltip">
@@ -483,6 +729,7 @@ function App() {
             </Tooltip>
           </Flex>
         </Card>
+
         <Card title="Button">
           <Flex direction="col" className="gap-3">
             <Flex items={{ default: "center" }} className="gap-2">

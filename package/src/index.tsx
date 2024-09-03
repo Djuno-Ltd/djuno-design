@@ -42,6 +42,10 @@ import Divider from './components/Divider'
 import SecureCopy from './components/SecureCopy'
 import Switcher from './components/form/Switcher'
 import Pagination from './components/Pagination'
+import Modal from './components/Modal'
+import Select from './components/form/Select'
+import Dropdown from './components/Dropdown'
+import Accordion from './components/Accordion'
 
 // export all types
 export * from './types'
@@ -72,4 +76,8 @@ export {
   SecureCopy,
   Switcher,
   Pagination,
+  Modal,
+  Select,
+  Dropdown,
+  Accordion,
 }

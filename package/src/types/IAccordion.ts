@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview SecureCopy types
+ * @fileoverview Accordion types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -20,14 +20,13 @@
 
 import React, { PropsWithChildren } from 'react'
 
-export interface SecureCopyProps extends PropsWithChildren {
-  text: string
-  icon?: React.ReactNode
-  className?: string
-  textClassName?: string
-  iconClassName?: string
-  showText?: boolean
-  type?: ActionTypes
+export interface AccordionProps extends PropsWithChildren {
+  items?: Array<AccordionItem>
+  panelClassNames?: string
+  loading?: boolean
 }
 
-export type ActionTypes = 'copy' | 'hide'
+export type AccordionItem = {
+  label: string | React.ReactNode
+  panel?: string | React.ReactNode
+}
