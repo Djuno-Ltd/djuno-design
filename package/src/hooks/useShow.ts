@@ -1,6 +1,6 @@
 /**
- * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Pagination types
+ * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
+ * @fileoverview useShow hook
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -17,15 +17,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react'
 
-import { PropsWithChildren } from 'react'
+function useShow(initialValue: boolean = false, callback?: (d?: any) => void) {
+  const [isShow, setShow] = React.useState(initialValue)
 
-export interface PaginationProps extends PropsWithChildren {
-  limit: number
-  offset: number
-  total: number
-  siblingCount?: number
-  onPageChange: (offset: number, limit: number) => void
-  className?: string
-  loading?: boolean
+  const show = React.useCallback(
+    (d?: any) => {
+      setShow(true)
+      callback && callback(d)
+    },
+    [callback],
+  )
+
+  const hide = React.useCallback(() => setShow(false), [])
+  const toggle = React.useCallback(() => setShow((prev) => !prev), [])
+
+  return [isShow, { show, hide, toggle }] as const
 }
+
+export default useShow
