@@ -59,12 +59,13 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
-        <Card title="Texrarea">
+        <Card title="Textarea">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea
-              label=""
+              label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{ rows: 4 }}
+              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
+              hint="Djuno Design"
             />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">

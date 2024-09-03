@@ -23,13 +23,17 @@ import { TextareaProps } from '../types/ITextarea'
 import { motion, AnimatePresence } from 'framer-motion'
 
 /**
- * Textarea component that allows for customization of UI type, size, loading state, and more.
+ * Textarea component that allows for customization of appearance and behavior, including validation and additional styling options.
  *
  * @param {object} props - Textarea props.
- * @param {React.ReactNode} [props.children] - The content inside the Textarea.
- * @param {string} [props.panelcn] - Additional panelcn to apply to the Textarea.
- * @param {Array<AccordionItem>} [props.items] - The items to display in the Textarea, each with a label and optional panel content.
- * @param {boolean} [props.loading] - Indicates if the Textarea is in a loading state.
+ * @param {string} [props.id] - Unique identifier for the textarea element.
+ * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, etc.
+ * @param {string} [props.textareaClassName] - Additional CSS classes to apply to the textarea for custom styling.
+ * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
+ * @param {string} [props.label] - Label text to display above the textarea.
+ * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
+ * @param {string} [props.error] - Error message to display if validation fails.
+ * @param {string} [props.hint] - Hint text to provide additional guidance to the user.
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *
@@ -41,9 +45,16 @@ import { motion, AnimatePresence } from 'framer-motion'
  *
  * function MyComponent() {
  *   return (
- *     <Textarea
- *
- *     />
+ *    <Textarea
+ *         id="description"
+ *         textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
+ *         textareaClassName="custom-textarea"
+ *         placeholder="Enter your description here"
+ *         label="label"
+ *         required={true}
+ *         error={error}
+ *         hint="Provide a detailed description"
+ *       />
  *   );
  * }
  */

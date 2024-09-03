@@ -388,6 +388,19 @@
 | `mobileIcon`        | `React.ReactNode` |          |         | An optional icon or element to display in the mobile view. |
 | `children`          | `React.ReactNode` |          |         | The content to be displayed within the header.             |
 
+### Textarea
+
+| Name              | Type                             | Required | default | Description |
+| ----------------- | -------------------------------- | -------- | ------- | ----------- |
+| id                | string                           |          |         |             |
+| textareaProps     | `HTMLProps<HTMLTextAreaElement>` |          |         |             |
+| textareaClassName | string                           |          |         |             |
+| placeholder       | string                           |          |         |             |
+| label             | string                           |          |         |             |
+| required          | boolean                          |          |         |             |
+| error             | string                           |          |         |             |
+| hint              | string                           |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
