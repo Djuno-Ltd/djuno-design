@@ -23,32 +23,50 @@ import { PaginationProps } from '../types/IPagination'
 import { ReactComponent as ArrowIcon } from '../assets/icons/arrow-right.svg'
 
 // /**
-//  * Pagination component that allows for customization of UI type, size, loading state, and more.
-//  *
-//  *
-//  * @param {object} props - Pagination props.
-//  * @param {React.ReactNode} [props.children] - The content inside the Pagination.
-//  * @param {string} [props.className] - Additional classes to apply to the Pagination.
-//  * @param {boolean} [props.icon] - Indicates if the Pagination has the icon.
-//  * @param {boolean} [props.iconClassName] - Indicates if the Pagination has the iconClassName.
-//  * @param {boolean} [props.textClassName] - Indicates if the Pagination has the textClassName.
-//  * @param {string} [props.type] - Type of the Action "hide" or "copy".
-//  *
-//  * @returns {React.ReactNode} Rendered Pagination component.
-//  *
-//  * @version 0.0.0
-//  * @see https://www.npmjs.com/package/djuno-design#pagination
-//  *
-//  * @example
-//  * // Example usage of SecureCopy component:
-//  *
-//  * function MyComponent() {
-//  *   return (
-
-//  *   );
-//  * }
-//  *
-//  */
+// * Pagination component that allows for customization of UI type, size, loading state, and more.
+// *
+// *
+// * @param {object} props - Pagination props.
+// * @param {number} props.limit - Number of items per page.
+// * @param {number} props.offset - Current offset for pagination.
+// * @param {number} props.total - Total number of items.
+// * @param {number} [props.siblingCount] - Number of sibling pages to display around the current page.
+// * @param {Function} props.onPageChange - Callback function triggered when page changes.
+// * @param {number} props.onPageChange.offset - New offset value.
+// * @param {number} props.onPageChange.limit - Number of items per page.
+// * @param {React.ReactNode} [props.children] - Optional children to be rendered within the pagination.
+// * @param {string} [props.className] - Additional CSS classes to apply to the pagination container.
+// * @param {boolean} [props.loading] - Indicates if the component should display a loading state.
+// *
+// * @returns {React.ReactNode} Rendered Pagination component.
+// *
+// * @version 0.0.0
+// * @see https://www.npmjs.com/package/djuno-design#pagination
+// *
+// * @example
+// * // Example usage of Pagination component:
+// *
+// * function MyComponent() {
+// *   const handlePageChange = (offset, limit) => {
+// *     console.log(`Page changed to offset: ${offset}, limit: ${limit}`);
+// *   };
+// *
+// *   return (
+// *     <Pagination
+// *       limit={limit}
+// *       offset={offset}
+// *       total={total}
+// *       siblingCount={siblingCount}
+// *       onPageChange={handlePageChange}
+// *       className="custom-pagination"
+// *       loading={false}
+// *     >
+// *       {/* Optional children can go here */}
+// *     </Pagination>
+// *   );
+// * }
+// *
+// */
 
 const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
   limit,

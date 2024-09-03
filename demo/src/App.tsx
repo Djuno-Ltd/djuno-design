@@ -36,8 +36,8 @@ function App() {
 
   // Pagination states
   const [offset, setOffset] = useState(0);
-  const handlePageChange = (Offset: number, limit: number) => {
-    setOffset(Offset);
+  const handlePageChange = (offset: number, limit: number) => {
+    setOffset(offset);
   };
   const [modal, setModal] = useState(false);
 
