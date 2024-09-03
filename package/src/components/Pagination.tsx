@@ -22,57 +22,57 @@ import { cn } from '../utils/cn'
 import { PaginationProps } from '../types/IPagination'
 import { ReactComponent as ArrowIcon } from '../assets/icons/arrow-right.svg'
 
-// /**
-// * Pagination component that allows for customization of UI type, size, loading state, and more.
-// *
-// *
-// * @param {object} props - Pagination props.
-// * @param {number} props.limit - Number of items per page.
-// * @param {number} props.offset - Current offset for pagination.
-// * @param {number} props.total - Total number of items.
-// * @param {number} [props.siblingCount] - Number of sibling pages to display around the current page.
-// * @param {Function} props.onPageChange - Callback function triggered when page changes.
-// * @param {number} props.onPageChange.offset - New offset value.
-// * @param {number} props.onPageChange.limit - Number of items per page.
-// * @param {React.ReactNode} [props.children] - Optional children to be rendered within the pagination.
-// * @param {string} [props.className] - Additional CSS classes to apply to the pagination container.
-// * @param {boolean} [props.loading] - Indicates if the component should display a loading state.
-// *
-// * @returns {React.ReactNode} Rendered Pagination component.
-// *
-// * @version 0.0.0
-// * @see https://www.npmjs.com/package/djuno-design#pagination
-// *
-// * @example
-// * // Example usage of Pagination component:
-// *
-// * function MyComponent() {
-// *   const handlePageChange = (offset, limit) => {
-// *     console.log(`Page changed to offset: ${offset}, limit: ${limit}`);
-// *   };
-// *
-// *   return (
-// *     <Pagination
-// *       limit={limit}
-// *       offset={offset}
-// *       total={total}
-// *       siblingCount={siblingCount}
-// *       onPageChange={handlePageChange}
-// *       className="custom-pagination"
-// *       loading={false}
-// *     >
-// *       {/* Optional children can go here */}
-// *     </Pagination>
-// *   );
-// * }
-// *
-// */
+/**
+ * Pagination component that allows for customization of UI type, size, loading state, and more.
+ *
+ *
+ * @param {object} props - Pagination props.
+ * @param {number} props.limit - Number of items per page.
+ * @param {number} props.offset - Current offset for pagination.
+ * @param {number} props.total - Total number of items.
+ * @param {number} [props.siblingCount] - Number of sibling pages to display around the current page.
+ * @param {Function} props.onPageChange - Callback function triggered when page changes.
+ * @param {number} props.onPageChange.offset - New offset value.
+ * @param {number} props.onPageChange.limit - Number of items per page.
+ * @param {React.ReactNode} [props.children] - Optional children to be rendered within the pagination.
+ * @param {string} [props.className] - Additional CSS classes to apply to the pagination container.
+ * @param {boolean} [props.loading] - Indicates if the component should display a loading state.
+ *
+ * @returns {React.ReactNode} Rendered Pagination component.
+ *
+ * @version 0.0.0
+ * @see https://www.npmjs.com/package/djuno-design#pagination
+ *
+ * @example
+ * // Example usage of Pagination component:
+ *
+ * function MyComponent() {
+ *   const handlePageChange = (offset, limit) => {
+ *     console.log(`Page changed to offset: ${offset}, limit: ${limit}`);
+ *   };
+ *
+ *   return (
+ *     <Pagination
+ *       limit={limit}
+ *       offset={offset}
+ *       total={total}
+ *       siblingCount={siblingCount}
+ *       onPageChange={handlePageChange}
+ *       className="custom-pagination"
+ *       loading={false}
+ *     >
+ *       Optional children can go here
+ *     </Pagination>
+ *   );
+ * }
+ *
+ */
 
 const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
   limit,
   offset,
   total,
-  siblingCount,
+  // siblingCount,
   onPageChange,
   className,
   loading,
@@ -86,7 +86,7 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
     limit,
   })
 
-  let lastPage = paginationRange && paginationRange[paginationRange.length - 1]
+  const lastPage = paginationRange && paginationRange[paginationRange.length - 1]
 
   // If there are less than 2 times in pagination range we shall not render the component
   if (currentPage === 0 || Number(paginationRange?.length) < 2) {
@@ -198,11 +198,11 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
 }
 
 const range = (start: number, end: number) => {
-  let length = end - start + 1
+  const length = end - start + 1
   /*
-            Create an array of certain length and set the elements within it from
-          start value to end value.
-        */
+    Create an array of certain length and set the elements within it from
+    start value to end value.
+  */
   return Array.from({ length }, (_, idx) => idx + start)
 }
 
@@ -226,23 +226,23 @@ export const usePagination = ({
     const totalPageNumbers = siblingCount + 5
 
     /*
-            Case 1:
-            If the number of pages is less than the page numbers we want to show in our
-            paginationComponent, we return the range [1..totalPageCount]
-          */
+      Case 1:
+      If the number of pages is less than the page numbers we want to show in our
+      paginationComponent, we return the range [1..totalPageCount]
+    */
     if (totalPageNumbers >= totalPageCount) {
       return range(1, totalPageCount)
     }
 
     /*
-              Calculate left and right sibling index and make sure they are within range 1 and totalPageCount
-          */
+      Calculate left and right sibling index and make sure they are within range 1 and totalPageCount
+    */
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1)
     const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPageCount)
 
     /*
-            We do not show dots just when there is just one page number to be inserted between the extremes of sibling and the page limits i.e 1 and totalPageCount. Hence we are using leftSiblingIndex > 2 and rightSiblingIndex < totalPageCount - 2
-          */
+      We do not show dots just when there is just one page number to be inserted between the extremes of sibling and the page limits i.e 1 and totalPageCount. Hence we are using leftSiblingIndex > 2 and rightSiblingIndex < totalPageCount - 2
+    */
     const shouldShowLeftDots = leftSiblingIndex > 2
     const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2
 
@@ -250,29 +250,29 @@ export const usePagination = ({
     const lastPageIndex = totalPageCount
 
     /*
-              Case 2: No left dots to show, but rights dots to be shown
-          */
+      Case 2: No left dots to show, but rights dots to be shown
+    */
     if (!shouldShowLeftDots && shouldShowRightDots) {
-      let leftItemCount = 3 + 2 * siblingCount
-      let leftRange = range(1, leftItemCount)
+      const leftItemCount = 3 + 2 * siblingCount
+      const leftRange = range(1, leftItemCount)
 
       return [...leftRange, DOTS, totalPageCount]
     }
 
     /*
-              Case 3: No right dots to show, but left dots to be shown
-          */
+      Case 3: No right dots to show, but left dots to be shown
+    */
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      let rightItemCount = 3 + 2 * siblingCount
-      let rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount)
+      const rightItemCount = 3 + 2 * siblingCount
+      const rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount)
       return [firstPageIndex, DOTS, ...rightRange]
     }
 
     /*
-              Case 4: Both left and right dots to be shown
-          */
+      Case 4: Both left and right dots to be shown
+    */
     if (shouldShowLeftDots && shouldShowRightDots) {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex)
+      const middleRange = range(leftSiblingIndex, rightSiblingIndex)
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex]
     }
   }, [total, limit, siblingCount, currentPage])

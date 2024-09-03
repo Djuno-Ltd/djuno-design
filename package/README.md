@@ -341,15 +341,15 @@
 
 ### Pagination
 
-| Name         | Type         | Required | default | Description |
-| ------------ | ------------ | -------- | ------- | ----------- |
-| limit        | number       |          |         |             |
-| offset       | number       |          |         |             |
-| total        | number       |          |         |             |
-| siblingCount | number       |          |         |             |
-| onPageChange | `() => void` |          |         |             |
-| className    | string       |          |         |             |
-| loading      | boolean      |          |         |             |
+| Name         | Type                                      | Required | default | Description |
+| ------------ | ----------------------------------------- | -------- | ------- | ----------- |
+| limit        | number                                    |          |         |             |
+| offset       | number                                    |          |         |             |
+| total        | number                                    |          |         |             |
+| siblingCount | number                                    |          |         |             |
+| onPageChange | `(offset: number, limit: number) => void` |          |         |             |
+| className    | string                                    |          |         |             |
+| loading      | boolean                                   |          |         |             |
 
 ## Contributor ✨
 
