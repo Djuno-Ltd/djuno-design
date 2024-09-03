@@ -14,6 +14,7 @@ import {
   Divider,
   SecureCopy,
   Switcher,
+  Pagination,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -27,10 +28,34 @@ function App() {
   };
   const [inputValue, setInputValue] = useState("");
   const [swith, setSwitch] = useState(false);
+
+  // Pagination states
+  const [offset, setOffset] = useState(0);
+  const [total, setTotal] = useState(30);
+  const limit = 3;
+  const handlePageChange = (newOffset: number, newLimit: number) => {
+    setOffset(newOffset);
+  };
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Pagination">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex justify-end mt-3">
+              <Pagination
+                limit={limit}
+                offset={offset}
+                total={total}
+                siblingCount={1}
+                onPageChange={handlePageChange}
+                loading={false}
+                className="my-pagination-class"
+              />
+            </div>
+          </Flex>
+        </Card>
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <SecureCopy text="Djuno Design" type="hide" />

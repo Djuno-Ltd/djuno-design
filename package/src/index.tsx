@@ -41,6 +41,7 @@ import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
 import SecureCopy from './components/SecureCopy'
 import Switcher from './components/form/Switcher'
+import Pagination from './components/Pagination'
 
 // export all types
 export * from './types'
@@ -70,4 +71,5 @@ export {
   Divider,
   SecureCopy,
   Switcher,
+  Pagination,
 }
