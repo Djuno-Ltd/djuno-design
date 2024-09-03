@@ -19,6 +19,7 @@ import {
   SelectOption,
   Dropdown,
   Accordion,
+  Tabs,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -46,6 +47,42 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Tabs">
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs
+              listClassName="w-full mb-6"
+              options={[
+                {
+                  label: "Djuno Design 1",
+                },
+                {
+                  label: "Djuno Design 2",
+                },
+                {
+                  label: "Djuno Design 3",
+                },
+              ]}
+              tabType="creamy"
+            />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs
+              listClassName="w-full  mb-6"
+              options={[
+                {
+                  label: "Djuno Design 1",
+                },
+                {
+                  label: "Djuno Design 2",
+                },
+                {
+                  label: "Djuno Design 3",
+                },
+              ]}
+              tabType="default"
+            />
+          </Flex>
+        </Card>
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
             <Accordion
