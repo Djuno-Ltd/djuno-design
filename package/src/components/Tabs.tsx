@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 import { cn } from '../utils/cn'
-import { TabOption, TabOptions, TabsProps } from '../types/ITABS'
+import { TabOption, TabOptions, TabsProps } from '../types/ITabs'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import React, { useEffect } from 'react'
 // import { useNavigate, useLocation } from 'react-router-dom'
