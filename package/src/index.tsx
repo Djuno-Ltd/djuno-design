@@ -36,16 +36,23 @@ import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
+import Switcher from './components/form/Switcher'
+import Select from './components/form/Select'
 import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
 import SecureCopy from './components/SecureCopy'
-import Switcher from './components/form/Switcher'
+import Pagination from './components/Pagination'
 import Modal from './components/Modal'
-import Select from './components/form/Select'
 import Dropdown from './components/Dropdown'
 import Accordion from './components/Accordion'
 import Tabs from './components/Tabs'
+import PanelLayout from './components/layouts/PanelLayout'
+import PanelHeader from './components/layouts/PanelHeader'
+import PanelSidebar from './components/layouts/PanelSidebar'
+
+// export hooks
+export * from './hooks/useShow'
 
 // export all types
 export * from './types'
@@ -75,9 +82,13 @@ export {
   Divider,
   SecureCopy,
   Switcher,
+  Pagination,
   Modal,
   Select,
   Dropdown,
   Accordion,
   Tabs,
+  PanelLayout,
+  PanelHeader,
+  PanelSidebar,
 }

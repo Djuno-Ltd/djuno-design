@@ -22,36 +22,54 @@ import { TabOption, TabOptions, TabsProps } from '../types/ITabs'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import React, { useEffect } from 'react'
 // import { useNavigate, useLocation } from 'react-router-dom'
-
 /**
- * Tabs component that allows for customization of UI type, size, loading state, and more.
+ * Tabs component for managing tabbed navigation within an application.
  *
  * @param {object} props - Tabs props.
- * @param {React.ReactNode} [props.children] - The content inside the Tabs.
- * @param {string} [props.menu] - menu of the Tabs.
- * @param {string} [props.title] -  title of the Tabs.
- * @param {string} [props.type] - type of the Tabs.
- * @param {string} [props.positionClassName] - Additional positionClassName to apply to the Tabs.
- * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the Tabs.
- * @param {string} [props.buttonClassName] - Additional buttonClassName to apply to the Tabs.
- * @param {Array<AccordionItem>} [props.items] - The items to display in the Tabs, each with a label and optional panel content.
- * @param {boolean} [props.loading] - Indicates if the Tab is in a loading state.
+ * @param {TabOptions} props.options - Configuration object specifying the tabs to display. Each option should include a label and content.
+ * @param {number} [props.selectedIndex] - Index of the initially selected tab. Defaults to the first tab.
+ * @param {Function} [props.onChange] - Callback function triggered when the active tab changes.
+ * @param {number} props.onChange.index - The index of the newly selected tab.
+ * @param {boolean} [props.useUrl] - Indicates if the component should update the URL to reflect the selected tab. Defaults to false.
+ * @param {string} [props.listClassName] - Additional CSS classes to apply to the tab list container.
+ * @param {string} [props.panelClassName] - Additional CSS classes to apply to the tab panel container.
+ * @param {'default' | 'creamy'} [props.tabType] - Type of tab style to apply. Defaults to 'default'. Options are 'default' and 'creamy'.
  *
  * @returns {React.ReactNode} Rendered Tabs component.
  *
- * @version 0.4.6
- * @see https://www.npmjs.com/package/djuno-design#tabs
+ * @version 0.0.0
+ * @see https://www.npmjs.com/package/some-ui-library#tabs
  *
  * @example
  * // Example usage of Tabs component:
  *
- * function MyComponent() {
- *   return (
- *      <Tab
+ * import React from 'react';
+ * import Tabs from './Tabs';
  *
+ * const tabOptions = [
+ *   { label: 'Tab 1', content: <div>Content for Tab 1</div> },
+ *   { label: 'Tab 2', content: <div>Content for Tab 2</div> },
+ *   { label: 'Tab 3', content: <div>Content for Tab 3</div> },
+ * ];
+ *
+ * function App() {
+ *   const handleTabChange = (index) => {
+ *     console.log(`Selected tab index: ${index}`);
+ *   };
+ *
+ *   return (
+ *     <Tabs
+ *       options={tabOptions}
+ *       selectedIndex={0}
+ *       onChange={handleTabChange}
+ *       useUrl={true}
+ *       listClassName="custom-tab-list"
+ *       panelClassName="custom-tab-panel"
+ *       tabType="creamy"
  *     />
  *   );
  * }
+ *
  */
 
 const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({

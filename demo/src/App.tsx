@@ -14,16 +14,22 @@ import {
   Divider,
   SecureCopy,
   Switcher,
+  Pagination,
   Modal,
   Select,
   SelectOption,
   Dropdown,
   Accordion,
   Tabs,
+  PanelLayout,
+  PanelHeader,
+  PanelSidebar,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
+import { ReactComponent as Logo } from "./logo.svg";
+
 const { Text, Title, Paragraph, Link } = Typography;
 function App() {
   const [btnLoading, setBtnLoading] = useState(false);
@@ -33,6 +39,12 @@ function App() {
   };
   const [inputValue, setInputValue] = useState("");
   const [swith, setSwitch] = useState(false);
+
+  // Pagination states
+  const [offset, setOffset] = useState(0);
+  const handlePageChange = (offset: number, limit: number) => {
+    setOffset(offset);
+  };
   const [modal, setModal] = useState(false);
 
   const selectOptions: SelectOption<string>[] = [
@@ -83,6 +95,21 @@ function App() {
             />
           </Flex>
         </Card>
+        <Card title="Pagination">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex justify-end mt-3">
+              <Pagination
+                limit={3}
+                offset={offset}
+                total={30}
+                siblingCount={1}
+                onPageChange={handlePageChange}
+                loading={false}
+                className="my-pagination-class"
+              />
+            </div>
+          </Flex>
+        </Card>
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
             <Accordion
@@ -102,6 +129,38 @@ function App() {
               ]}
             />
           </Flex>
+        </Card>
+        <Card title="Layout">
+          <div className="h-[400px] w-full border border-slate-500 overflow-hidden">
+            <PanelLayout
+              type="mini"
+              pathname="/"
+              renderSidebar={({ segments, ...sidebarProps }) => (
+                <PanelSidebar
+                  {...sidebarProps}
+                  sidebarHeader={
+                    <div className="flex items-center gap-1 px-1">
+                      <Logo />
+                      <Text size="xs">djuno-design</Text>
+                    </div>
+                  }
+                >
+                  <Text size="xs">sidebar</Text>
+                </PanelSidebar>
+              )}
+              renderHeader={(headerProps) => (
+                <PanelHeader {...headerProps} mobileIcon={<Logo />}>
+                  <Text size="xs">header</Text>
+                </PanelHeader>
+              )}
+            >
+              <iframe
+                src="https://google.com"
+                className="w-full h-96"
+                title="djuno-design"
+              />
+            </PanelLayout>
+          </div>
         </Card>
 
         <Card title="Modal">
@@ -129,6 +188,44 @@ function App() {
         </Card>
 
         <Card title="Dropdown">
+          <Divider
+            text=" Default dropdown"
+            orientation="left"
+            usingText={true}
+          />
+          <Flex direction="col" className="gap-5 w-full">
+            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+              <div className="w-50 flex justify-center items-center">
+                <Dropdown
+                  title="djuno Design"
+                  menu={[
+                    {
+                      key: "1",
+                      label: "Edit",
+                    },
+                    {
+                      type: "divider",
+                    },
+                    {
+                      key: "end",
+                      label: "Delete",
+                      danger: true,
+                    },
+                  ]}
+                  type="default"
+                >
+                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                    Djuno Design
+                  </div>
+                </Dropdown>
+              </div>
+            </div>
+          </Flex>
+          <Divider
+            text=" Simple dropdown"
+            orientation="left"
+            usingText={true}
+          />
           <Flex direction="col" className="gap-5 w-full">
             <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
@@ -324,6 +421,56 @@ function App() {
                   <SimpleTable.TD>Data 1</SimpleTable.TD>
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
+          </Flex>
+          <Text strong size="sm">
+            Simple table with data and dropdown
+          </Text>
+          <Flex className="gap-3 w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                  <SimpleTable.TH></SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                  <SimpleTable.TD>
+                    <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+                      <div className=" flex justify-center items-center">
+                        <Dropdown
+                          title="djuno Design"
+                          menu={[
+                            {
+                              key: "1",
+                              label: "Edit",
+                            },
+                            {
+                              type: "divider",
+                            },
+                            {
+                              key: "end",
+                              label: "Delete",
+                              danger: true,
+                            },
+                          ]}
+                          type="simple"
+                        >
+                          <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
+                            Djuno Design
+                          </div>
+                        </Dropdown>
+                      </div>
+                    </div>
+                  </SimpleTable.TD>
                 </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>

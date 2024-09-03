@@ -20,7 +20,7 @@ const Header = () => {
         <Logo className="w-6" />
         <Text>djuno-design</Text>
         <Text uiType="secondary" size="xs">
-          v0.4.8
+          v0.5.0
         </Text>
       </Flex>
       <Flex items="center" className="gap-3">

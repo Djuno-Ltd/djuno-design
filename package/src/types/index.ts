@@ -38,6 +38,8 @@ export * from './IDropdown'
 export * from './ISecureCopy'
 export * from './IAccordion'
 export * from './ITabs'
+export * from './IPagination'
+export * from './IPanelLayouts'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

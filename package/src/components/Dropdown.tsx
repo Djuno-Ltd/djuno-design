@@ -87,14 +87,13 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
           })}
           as='div'
         >
-          <Button>
-            {children}
-            {type !== 'simple' && (
-              <div className='dj-h-6 dj-flex dj-items-center dj-ml-auto'>
-                <ArrowDownIcon className='dj-h-4 dj-w-4' />
-              </div>
-            )}
-          </Button>
+          {type !== 'simple' ? (
+            <Button>{children}</Button>
+          ) : (
+            <div className='dj-h-6 dj-flex dj-items-center dj-ml-auto dj-cursor-pointer'>
+              <ArrowDownIcon className='dj-h-4 dj-w-4 dark:dj-text-secondary-100' />
+            </div>
+          )}
         </MenuButton>
       </div>
 
@@ -113,7 +112,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
             style={floatingStyles}
             // style={{ clip: "rect(auto, auto, auto, auto)" }}
             className={cn(
-              'dj-absolute dj-z-50 dj-w-56 dj-origin-top-right dj-divide-y dj-divide-dark-100 dark:dj-divide-dark-600 dj-rounded-md dj-bg-white dark:dj-bg-dark-800 dj-shadow-lg  dj-ring-1 dark:dj-ring-dark-600 focus:dj-outline-none',
+              'dj-absolute dj-z-50 dj-mt-1 dj-max-h-60 dj-w-48 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm dj-divide-y dj-divide-dark-100 dark:dj-divide-dark-600',
               {
                 [positionClassName || '']: positionClassName,
                 [itemsClassName || '']: itemsClassName,
