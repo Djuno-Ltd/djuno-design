@@ -20,10 +20,15 @@ import {
   SelectOption,
   Dropdown,
   Accordion,
+  PanelLayout,
+  PanelHeader,
+  PanelSidebar,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
+import { ReactComponent as Logo } from "./logo.svg";
+
 const { Text, Title, Paragraph, Link } = Typography;
 function App() {
   const [btnLoading, setBtnLoading] = useState(false);
@@ -87,6 +92,38 @@ function App() {
               ]}
             />
           </Flex>
+        </Card>
+        <Card title="Layout">
+          <div className="h-[400px] w-full border border-slate-500 overflow-hidden">
+            <PanelLayout
+              type="mini"
+              pathname="/"
+              renderSidebar={({ segments, ...sidebarProps }) => (
+                <PanelSidebar
+                  {...sidebarProps}
+                  sidebarHeader={
+                    <div className="flex items-center gap-1 px-1">
+                      <Logo />
+                      <Text size="xs">djuno-design</Text>
+                    </div>
+                  }
+                >
+                  <Text size="xs">sidebar</Text>
+                </PanelSidebar>
+              )}
+              renderHeader={(headerProps) => (
+                <PanelHeader {...headerProps} mobileIcon={<Logo />}>
+                  <Text size="xs">header</Text>
+                </PanelHeader>
+              )}
+            >
+              <iframe
+                src="https://google.com"
+                className="w-full h-96"
+                title="djuno-design"
+              />
+            </PanelLayout>
+          </div>
         </Card>
 
         <Card title="Modal">
