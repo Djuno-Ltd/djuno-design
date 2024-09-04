@@ -127,13 +127,14 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
             disabled={option.disabled}
             data-testid={option.testId}
             className={({ selected }) =>
-              cn('dj-hover:dark:text-slate-100 dj-hover:text-gray-900 dj-outline-none dj-disabled:cursor-not-allowed', {
-                'dj-font-semibold dj-bg-primary-50 dj-dark:bg-dark-2 dj-text-blue-500 dj-hover:!text-blue-600 dj-hover:dark:text-blue-600 dj-rounded-lg':
+              cn('hover:dark:dj-text-slate-100 hover:dj-text-gray-900 dj-outline-none disabled:dj-cursor-not-allowed', {
+                'dj-font-semibold dj-bg-primary-50 dark:dj-bg-dark-700 dj-text-blue-500 hover:!dj-text-blue-600 hover:dark:dj-text-blue-600 dj-rounded-lg':
                   selected && (!tabType || tabType === 'default'),
                 'dj-font-normal dj-text-xs sm:dj-text-sm dj-whitespace-nowrap dj-px-3 dj-h-9 dj-w-full':
                   tabType === 'creamy',
-                'dj-bg-white dj-dark:bg-dark-3 dj-dark:text-slate-300 dj-rounded-lg': tabType === 'creamy' && selected,
-                'dj-text-gray-400 dj-dark:text-slate-400': !selected,
+                'dj-bg-white dark:dj-bg-dark-900 dark:dj-text-slate-300 dj-rounded-lg':
+                  tabType === 'creamy' && selected,
+                'dj-text-gray-400 dark:dj-text-slate-400': !selected,
               })
             }
           >
@@ -150,7 +151,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         {options.map((option, i) => (
           <TabPanel
             key={i}
-            className={cn('dj-bg-white dj-dark:bg-dark-2 dj-rounded-md', {
+            className={cn('dj-bg-white dark:dj-bg-dark-700 dj-rounded-md', {
               'dj-py-6': (!tabType || tabType === 'default') && option.element,
               [panelClassName || '']: panelClassName,
             })}
