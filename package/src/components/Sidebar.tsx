@@ -43,6 +43,9 @@ import { PanelLayoutTypes, SidebarItem, SidebarItemLabel, SidebarLoadingModes, S
  *
  * @returns {React.ReactNode} Rendered Sidebar component.
  *
+ * @version 0.5.1
+ * @see https://www.npmjs.com/package/djuno-design#sidebar
+ *
  * @example
  * // Example usage of Sidebar component:
  * <Sidebar
