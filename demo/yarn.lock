@@ -3895,6 +3895,8 @@ dir-glob@^3.0.1:
 "djuno-design@file:../package":
   version "0.5.0"
   resolved "file:../package"
+  dependencies:
+    "@uiw/react-json-view" "^2.0.0-alpha.27"
 
 dlv@^1.1.3:
   version "1.1.3"

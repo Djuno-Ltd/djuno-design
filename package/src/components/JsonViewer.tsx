@@ -20,10 +20,10 @@
 import * as React from 'react'
 import { cn } from '../utils/cn'
 import { JsonViewerProps } from '../types/IJsonViewer'
-// import JsonView from "@uiw/react-json-view";
-// import { lightTheme } from "@uiw/react-json-view/light";
-// import { darkTheme } from "@uiw/react-json-view/dark";
-// import useDarkMode from "../../hooks/useDarkMode";
+import JsonView from '@uiw/react-json-view'
+import { lightTheme } from '@uiw/react-json-view/light'
+import { darkTheme } from '@uiw/react-json-view/dark'
+import useDarkMode from '../hooks/useDarkMode'
 
 /**
  * JsonViewer component that allows for customization of UI type, size, loading state, and more.
@@ -52,17 +52,17 @@ import { JsonViewerProps } from '../types/IJsonViewer'
  */
 
 const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed }) => {
-  //   const { mode } = useDarkMode()
+  const { mode } = useDarkMode()
   return (
     <>
-      {/* <JsonView
+      <JsonView
         style={mode === 'dark' ? darkTheme : lightTheme}
         value={value || {}}
         enableClipboard={false}
         displayDataTypes={false}
         shortenTextAfterLength={20}
         collapsed={collapsed !== undefined ? collapsed : 2}
-      /> */}
+      />
     </>
   )
 }

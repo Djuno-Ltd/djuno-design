@@ -23,6 +23,7 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  JsonViewer,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -53,11 +54,37 @@ function App() {
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
   );
+  const exampleJson = {
+    block_number: 38733960,
+    topic: "raw-avalanchec-mainnet",
+    chain: "avalanchec-mainnet",
+    block: {
+      baseFeePerGas: "0x5f9ed8fd3",
+      difficulty: "0x1",
+      gasLimit: "0xe4e1c0",
+      gasUsed: "0x46f0b1",
+      hash: "0x42a9043d4a8b0d57a37dba1ec579aadca2bdeea44ec9383c05aae8d4b534abbc",
+      miner: "0x0100000000000000000000000000000000000000",
+      nonce: "0x0000000000000000",
+      number: "0x24f0888",
+      parentHash:
+        "0x7a3654a7b66a5244c5993af3f8d49fb3c3ce68964485bbd589af6d9fa4ff33c1",
+      size: "0x5ba6",
+      timestamp: "0x6571aeb3",
+      transactions: [],
+    },
+  };
 
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="JsonViewer">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Text></Text>
+            <JsonViewer value={exampleJson} />
+          </Flex>
+        </Card>
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">

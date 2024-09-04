@@ -69,5 +69,8 @@
   "peerDependencies": {
     "react": "^18.x",
     "react-dom": "^18.x"
+  },
+  "dependencies": {
+    "@uiw/react-json-view": "^2.0.0-alpha.27"
   }
 }
