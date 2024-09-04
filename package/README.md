@@ -390,4 +390,15 @@
 
 ## Contributor ✨
 
+### Popover
+
+| Name             | Type                  | Required | default | Description |
+| ---------------- | --------------------- | -------- | ------- | ----------- |
+| buttonEl         | `React.ReactNode`     | yes      |         |             |
+| open             | boolean               | yes      | false   |             |
+| anchorEl         | `HTMLElement or null` |          |         |             |
+| `children`       | `React.ReactNode`     |          |         |             |
+| className        | string                |          |         |             |
+| popoverClassName | `React.CSSProperties` |          |         |             |
+
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)

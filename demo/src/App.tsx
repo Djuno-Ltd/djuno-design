@@ -23,8 +23,9 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Popover,
 } from "djuno-design";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -54,10 +55,36 @@ function App() {
     selectOptions[0].value
   );
 
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const handleToggle = () => {
+    setOpen((prev) => !prev);
+  };
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Popover">
+          <Flex direction="col" className="gap-5 w-full  my-10">
+            <Popover
+              open={open}
+              anchorEl={anchorRef.current}
+              buttonEl={<Button onClick={handleToggle}>Popover</Button>}
+              popoverClassName={{
+                zIndex: 1000,
+                minWidth: 600,
+                maxWidth: 600,
+                whiteSpace: "nowrap",
+              }}
+            >
+              <div className="w-40">
+                {" "}
+                <Text>Djuno Design</Text>
+              </div>
+            </Popover>
+          </Flex>
+        </Card>
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">

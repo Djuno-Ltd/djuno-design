@@ -39,6 +39,7 @@ export * from './ISecureCopy'
 export * from './IAccordion'
 export * from './IPagination'
 export * from './IPanelLayouts'
+export * from './IPopover'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {
