@@ -23,6 +23,7 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Checkbox,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -58,6 +59,27 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Checkbox">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox id="delete" label="Djuno Design" inputProps={{}} />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox
+              inputProps={{}}
+              id="isRequired"
+              label="Djuno Design"
+              required
+            />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox
+              inputProps={{}}
+              id="isRequired"
+              label="is required?"
+              error=" "
+            />
+          </Flex>
+        </Card>
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">

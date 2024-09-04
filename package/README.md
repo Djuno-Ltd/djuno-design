@@ -388,6 +388,16 @@
 | `mobileIcon`        | `React.ReactNode` |          |         | An optional icon or element to display in the mobile view. |
 | `children`          | `React.ReactNode` |          |         | The content to be displayed within the header.             |
 
+### Checkbox
+
+| Name       | Type                          | Required | default | Description |
+| ---------- | ----------------------------- | -------- | ------- | ----------- |
+| id         | string                        |          |         |             |
+| inputprops | `HTMLProps<HTMLInputElement>` |          |         |             |
+| label      | `React.ReactNode`             |          |         |             |
+| required   | boolean                       |          | false   |             |
+| error      | string                        |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
