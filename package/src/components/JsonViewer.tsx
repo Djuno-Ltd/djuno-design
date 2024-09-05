@@ -18,7 +18,6 @@
  * limitations under the License.
  */
 import * as React from 'react'
-import { cn } from '../utils/cn'
 import { JsonViewerProps } from '../types/IJsonViewer'
 import JsonView from '@uiw/react-json-view'
 import { lightTheme } from '@uiw/react-json-view/light'
@@ -26,13 +25,12 @@ import { darkTheme } from '@uiw/react-json-view/dark'
 import useDarkMode from '../hooks/useDarkMode'
 
 /**
- * JsonViewer component that allows for customization of UI type, size, loading state, and more.
+ * JsonViewer component that allows for the display and customization of JSON data.
  *
  * @param {object} props - JsonViewer props.
- * @param {React.ReactNode} [props.children] - The content inside the JsonViewer.
- * @param {string} [props.panelClassNames] - Additional panelClassNames to apply to the JsonViewer.
- * @param {Array<AccordionItem>} [props.items] - The items to display in the JsonViewer, each with a label and optional panel content.
- * @param {boolean} [props.loading] - Indicates if the JsonViewer is in a loading state.
+ * @param {object | null} [props.value] - The JSON data to display. If null or undefined, an empty object will be rendered.
+ * @param {number | boolean} [props.collapsed] - Controls how the JSON is displayed. If true, all levels will be collapsed. If a number, only the specified number of levels will be expanded.
+ * @param {string} [props.theme] - The theme of the JSON viewer. Can be `'light'` or `'dark'`. (Optional)
  *
  * @returns {React.ReactNode} Rendered JsonViewer component.
  *
@@ -43,20 +41,34 @@ import useDarkMode from '../hooks/useDarkMode'
  * // Example usage of JsonViewer component:
  *
  * function MyComponent() {
+ *   const exampleJson = {
+ *     name: "John Doe",
+ *     age: 30,
+ *     address: {
+ *       street: "123 Main St",
+ *       city: "Anytown",
+ *       state: "CA"
+ *     },
+ *     hobbies: ["reading", "traveling", "coding"]
+ *   };
+ *
  *   return (
  *     <JsonViewer
-
+ *       value={exampleJson} // The JSON data to display
+ *       collapsed={2}       // Collapse all levels after the second level
+ *       theme="dark"        // Set the theme to 'dark' (optional)
  *     />
  *   );
  * }
  */
-
 const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed }) => {
   const { mode } = useDarkMode()
+  const currentTheme = mode === 'dark' ? darkTheme : lightTheme
+
   return (
     <>
       <JsonView
-        style={mode === 'dark' ? darkTheme : lightTheme}
+        style={currentTheme}
         value={value || {}}
         enableClipboard={false}
         displayDataTypes={false}

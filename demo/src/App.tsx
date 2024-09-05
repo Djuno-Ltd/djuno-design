@@ -24,6 +24,8 @@ import {
   PanelHeader,
   PanelSidebar,
   JsonViewer,
+  Sidebar,
+  SidebarItem,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -75,13 +77,48 @@ function App() {
     },
   };
 
+  //sidebar
+  const [sidebarLoading, setSidebarLoading] = useState(false);
+  const handleTogleSidebarLoading = () => {
+    setSidebarLoading((prev) => !prev);
+  };
+  const sidebarItems: SidebarItem[] = [
+    {
+      id: 1,
+      label: "item1",
+      activeCondition: {
+        segmentIndex: 0,
+        activeString: "",
+      },
+      onClick: (item) => console.log(item),
+    },
+    {
+      id: 2,
+      label: "item2",
+      activeCondition: {
+        segmentIndex: 1,
+        activeString: "",
+      },
+      onClick: (item) => console.log(item),
+    },
+    {
+      id: 3,
+      label: "item3",
+      activeCondition: {
+        segmentIndex: 1,
+        activeString: "home",
+      },
+      link: "/item3",
+      onClick: (item) => console.log(item?.link),
+    },
+  ];
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <Text></Text>
             <JsonViewer value={exampleJson} />
           </Flex>
         </Card>
@@ -120,7 +157,10 @@ function App() {
             />
           </Flex>
         </Card>
-        <Card title="Layout">
+        <Card
+          title="Layout"
+          description="PanelLayout - PanelSidebar - PanelHeader"
+        >
           <div className="h-[400px] w-full border border-slate-500 overflow-hidden">
             <PanelLayout
               type="mini"
@@ -151,6 +191,41 @@ function App() {
               />
             </PanelLayout>
           </div>
+        </Card>
+
+        <Card
+          title="Sidebar"
+          setting={
+            <Flex items="center" className="gap-1">
+              <Text size="xs">Loading?</Text>
+              <Switcher
+                onToggle={handleTogleSidebarLoading}
+                on={sidebarLoading}
+              />
+            </Flex>
+          }
+        >
+          <Flex className="gap-5">
+            <div className="h-96 w-60 border border-slate-400 mt-2">
+              <Sidebar
+                type="normal"
+                items={sidebarItems}
+                subItems={sidebarItems}
+                segments={["home", "projects"]}
+                loading={sidebarLoading}
+                loadingMode="skeleton"
+              />
+            </div>
+            <div className="h-96 w-60 border border-slate-400 mt-2">
+              <Sidebar
+                type="normal"
+                items={sidebarItems}
+                segments={["home", "projects"]}
+                loading={sidebarLoading}
+                loadingMode="elastic"
+              />
+            </div>
+          </Flex>
         </Card>
 
         <Card title="Modal">

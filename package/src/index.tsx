@@ -50,6 +50,7 @@ import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
 import JsonViewer from './components/JsonViewer'
+import Sidebar from './components/Sidebar'
 
 // export hooks
 export * from './hooks/useShow'
@@ -91,4 +92,5 @@ export {
   PanelHeader,
   PanelSidebar,
   JsonViewer,
+  Sidebar,
 }
