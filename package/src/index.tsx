@@ -38,6 +38,7 @@ import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
 import Switcher from './components/form/Switcher'
 import Select from './components/form/Select'
+import Texrarea from './components/form/Texrarea'
 import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
@@ -91,4 +92,5 @@ export {
   PanelHeader,
   PanelSidebar,
   Sidebar,
+  Texrarea,
 }
