@@ -37,7 +37,7 @@ export * from './ISelect'
 export * from './IDropdown'
 export * from './ISecureCopy'
 export * from './IAccordion'
-export * from './ITabs'
+export * from './ITab'
 export * from './IPagination'
 export * from './IPanelLayouts'
 
