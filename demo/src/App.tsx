@@ -67,8 +67,8 @@ function App() {
       id: 1,
       label: "item1",
       activeCondition: {
-        segmentIndex: 0,
-        activeString: "",
+        segmentIndex: 1,
+        activeString: "item1",
       },
       onClick: (item) => console.log(item),
     },
@@ -77,7 +77,7 @@ function App() {
       label: "item2",
       activeCondition: {
         segmentIndex: 1,
-        activeString: "",
+        activeString: "item2",
       },
       onClick: (item) => console.log(item),
     },
@@ -86,7 +86,7 @@ function App() {
       label: "item3",
       activeCondition: {
         segmentIndex: 1,
-        activeString: "home",
+        activeString: "item3",
       },
       link: "/item3",
       onClick: (item) => console.log(item?.link),
@@ -225,7 +225,7 @@ function App() {
                 type="normal"
                 items={sidebarItems}
                 subItems={sidebarItems}
-                segments={["home", "projects"]}
+                segments={["components", "item3"]}
                 loading={sidebarLoading}
                 loadingMode="skeleton"
               />
@@ -234,7 +234,7 @@ function App() {
               <Sidebar
                 type="normal"
                 items={sidebarItems}
-                segments={["home", "projects"]}
+                segments={["components", "item1"]}
                 loading={sidebarLoading}
                 loadingMode="elastic"
               />
