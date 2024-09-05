@@ -68,22 +68,33 @@ function App() {
               hint="Djuno Design"
             />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
+          <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label=""
+              label="Textarea"
               placeholder="Enter custom notes if any"
               textareaProps={{}}
             />
+            <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Texrarea label="" placeholder="" textareaProps={{}} />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
+          <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label=""
+              label="Textarea"
+              placeholder=""
+              textareaProps={{}}
+              tooltip={{ content: "test" }}
+            />
+            <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
               placeholder="Enter custom notes if any"
-              // textareaProps={}
-              error="error"
+              error="field is required!"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
             />
           </Flex>
         </Card>

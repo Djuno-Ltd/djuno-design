@@ -209,6 +209,22 @@
 | size        | `SizeTypes`                   | no       | medium  |             |
 | copyable    | `boolean or function`         | no       |         |             |
 
+### Textarea
+
+| Name              | Type                             | Required | default | Description |
+| ----------------- | -------------------------------- | -------- | ------- | ----------- |
+| id                | string                           |          |         |             |
+| textareaProps     | `HTMLProps<HTMLTextAreaElement>` |          |         |             |
+| textareaClassName | string                           |          |         |             |
+| placeholder       | string                           |          |         |             |
+| label             | string                           |          |         |             |
+| required          | boolean                          |          |         |             |
+| error             | string                           |          |         |             |
+| hint              | string                           |          |         |             |
+| type              | `InputTypes`                     |          |         |             |
+| tooltip           | `TooltipProps`                   |          |         |             |
+| size              | `SizeTypes`                      |          | medium  |             |
+
 ### Switcher
 
 | Name        | Type                       | Required | default | Description |
@@ -219,8 +235,6 @@
 | loading     | boolean                    |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |
 | size        | `SizeTypes`                |          | medium  |             |
-
-### Select
 
 ### Select
 
@@ -387,19 +401,6 @@
 | `handleShowSidebar` | `() => void`      |          |         | Callback function to show the sidebar.                     |
 | `mobileIcon`        | `React.ReactNode` |          |         | An optional icon or element to display in the mobile view. |
 | `children`          | `React.ReactNode` |          |         | The content to be displayed within the header.             |
-
-### Textarea
-
-| Name              | Type                             | Required | default | Description |
-| ----------------- | -------------------------------- | -------- | ------- | ----------- |
-| id                | string                           |          |         |             |
-| textareaProps     | `HTMLProps<HTMLTextAreaElement>` |          |         |             |
-| textareaClassName | string                           |          |         |             |
-| placeholder       | string                           |          |         |             |
-| label             | string                           |          |         |             |
-| required          | boolean                          |          |         |             |
-| error             | string                           |          |         |             |
-| hint              | string                           |          |         |             |
 
 ## Contributor ✨
 

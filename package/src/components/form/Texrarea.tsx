@@ -18,9 +18,11 @@
  * limitations under the License.
  */
 import * as React from 'react'
-import { cn } from '../utils/cn'
-import { TextareaProps } from '../types/ITextarea'
-import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from './../../utils/cn'
+import { TextareaProps } from './../../types/ITextarea'
+import { AnimatedFormError, inputVariants, labelVariants } from './Input'
+import Typography from '../Typography'
+import { InfoTooltip } from '../Tooltip'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation and additional styling options.
@@ -28,16 +30,19 @@ import { motion, AnimatePresence } from 'framer-motion'
  * @param {object} props - Textarea props.
  * @param {string} [props.id] - Unique identifier for the textarea element.
  * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, etc.
- * @param {string} [props.textareaClassName] - Additional CSS classes to apply to the textarea for custom styling.
+ * @param {InputTypes} [props.type] - Type of the textarea field.
+ * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
  * @param {string} [props.label] - Label text to display above the textarea.
  * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
  * @param {string} [props.error] - Error message to display if validation fails.
  * @param {string} [props.hint] - Hint text to provide additional guidance to the user.
+ * @param {SizeTypes} [props.size] - Size of the textarea field.
+ * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the textarea.
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *
- * @version 0.4.8
+ * @version 0.0.0
  * @see https://www.npmjs.com/package/djuno-design#textarea
  *
  * @example
@@ -48,7 +53,7 @@ import { motion, AnimatePresence } from 'framer-motion'
  *    <Textarea
  *         id="description"
  *         textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
- *         textareaClassName="custom-textarea"
+ *         className="custom-textarea"
  *         placeholder="Enter your description here"
  *         label="label"
  *         required={true}
@@ -63,11 +68,14 @@ const Textarea: React.FC<TextareaProps> = ({
   id,
   textareaProps,
   placeholder,
-  textareaClassName,
+  className,
   label,
   error,
   required,
   hint,
+  tooltip,
+  size,
+  type,
 }) => {
   return (
     <div className='dj-flex dj-flex-col'>
@@ -77,45 +85,36 @@ const Textarea: React.FC<TextareaProps> = ({
           'dj-justify-end': !label,
         })}
       >
-        {label && (
-          <label
-            htmlFor={id}
-            className={cn('dj-block dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-whitespace-nowrap', {
-              'dj-text-red-700 dark:dj-text-red-500': error,
-            })}
-          >
-            {label}
-            {required && <span className='dj-text-red-500 dj-mx-1'>*</span>}
-          </label>
-        )}
+        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+          {label && (
+            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+              {label}
+            </Typography.Text>
+          )}
+          {required && (
+            <Typography.Text uiType='danger' className='dj-h-5'>
+              *
+            </Typography.Text>
+          )}
+          {tooltip && <InfoTooltip tooltip={tooltip} />}
+        </label>
         {hint && <span className='dj-text-xs dj-text-slate-500'>{hint}</span>}
       </div>
       <textarea
         id={id}
         {...textareaProps}
         className={cn(
-          textareaClassName,
-          ' dj-text-sm dj-rounded-lg dj-block dj-w-full dj-p-2.5 dj-bg-secondary-100 focus:dj-ring-2 focus:dj-ring-slate-200 focus:dj-bg-slate-50  dark:dj-bg-dark-800 dark:focus:dj-ring-slate-600 dj-outline-none',
-          {
-            ' dj-border-red-500 dj-text-red-900 dj-placeholder-red-700 focus:dj-ring-red-500 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500':
-              error,
-            'dark:dj-border-zinc-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 focus:dj-ring-secondary-200 focus:dj-border-blue-500  dark:focus:dj-border-slate-600 ':
-              !error,
-          },
+          inputVariants({
+            type,
+            hasError: error ? 'yes' : 'no',
+            size,
+            copyable: 'no', //typeof copyable === 'undefined' ? 'no' : 'yes',
+          }),
+          className,
         )}
         placeholder={placeholder}
       />
-      <AnimatePresence>
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <p className='dj-mt-2 dj-text-xs dj-text-red-600 dark:dj-text-red-500'>{error}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatedFormError error={error} />
     </div>
   )
 }

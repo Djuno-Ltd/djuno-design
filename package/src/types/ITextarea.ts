@@ -19,14 +19,19 @@
  */
 
 import React, { PropsWithChildren } from 'react'
+import { TooltipProps } from './Tooltip'
+import { InputTypes, SizeTypes } from '.'
 
 export interface TextareaProps extends PropsWithChildren {
   id?: string
   textareaProps?: React.HTMLProps<HTMLTextAreaElement>
-  textareaClassName?: string
+  className?: string
   placeholder?: string
   label?: string
   required?: boolean
   error?: string
   hint?: string
+  tooltip?: TooltipProps
+  size?: SizeTypes
+  type?: InputTypes
 }
