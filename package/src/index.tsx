@@ -38,6 +38,7 @@ import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
 import Switcher from './components/form/Switcher'
 import Select from './components/form/Select'
+import Texrarea from './components/form/Texrarea'
 import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
@@ -50,6 +51,7 @@ import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
 import Checkbox from './components/form/Checkbox'
+import Sidebar from './components/Sidebar'
 
 // export hooks
 export * from './hooks/useShow'
@@ -91,4 +93,6 @@ export {
   PanelHeader,
   PanelSidebar,
   Checkbox,
+  Sidebar,
+  Texrarea,
 }

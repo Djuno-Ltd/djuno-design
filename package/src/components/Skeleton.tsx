@@ -27,7 +27,7 @@ import { SkeletonProps } from '../types/ISkeleton'
  * Define Skeleton variants using the `cva` utility function.
  * This function generates CSS classes for skeleton styles based on specified variants.
  */
-const skeletonVariants = cva('dj-bg-slate-200 dark:dj-bg-white/10 dj-rounded-sm', {
+const skeletonVariants = cva('dj-bg-slate-200/80 dark:dj-bg-white/10 dj-rounded-sm', {
   variants: {
     shape: {
       rectangle: 'dj-w-full',
