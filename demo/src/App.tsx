@@ -23,6 +23,9 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Sidebar,
+  SidebarItem,
+  Texrarea,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -54,10 +57,85 @@ function App() {
     selectOptions[0].value
   );
 
+  //sidebar
+  const [sidebarLoading, setSidebarLoading] = useState(false);
+  const handleTogleSidebarLoading = () => {
+    setSidebarLoading((prev) => !prev);
+  };
+  const sidebarItems: SidebarItem[] = [
+    {
+      id: 1,
+      label: "item1",
+      activeCondition: {
+        segmentIndex: 1,
+        activeString: "item1",
+      },
+      onClick: (item) => console.log(item),
+    },
+    {
+      id: 2,
+      label: "item2",
+      activeCondition: {
+        segmentIndex: 1,
+        activeString: "item2",
+      },
+      onClick: (item) => console.log(item),
+    },
+    {
+      id: 3,
+      label: "item3",
+      activeCondition: {
+        segmentIndex: 1,
+        activeString: "item3",
+      },
+      link: "/item3",
+      onClick: (item) => console.log(item?.link),
+    },
+  ];
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Textarea">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
+              hint="Djuno Design"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{}}
+            />
+            <Input label="Input" placeholder="Enter custom notes if any" />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder=""
+              textareaProps={{}}
+              tooltip={{ content: "test" }}
+            />
+            <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
+            />
+          </Flex>
+        </Card>
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">
@@ -93,37 +171,77 @@ function App() {
             />
           </Flex>
         </Card>
-        <Card title="Layout">
-          <div className="h-[400px] w-full border border-slate-500 overflow-hidden">
-            <PanelLayout
-              type="mini"
-              pathname="/"
-              renderSidebar={({ segments, ...sidebarProps }) => (
-                <PanelSidebar
-                  {...sidebarProps}
-                  sidebarHeader={
-                    <div className="flex items-center gap-1 px-1">
-                      <Logo />
-                      <Text size="xs">djuno-design</Text>
-                    </div>
-                  }
-                >
-                  <Text size="xs">sidebar</Text>
-                </PanelSidebar>
-              )}
-              renderHeader={(headerProps) => (
-                <PanelHeader {...headerProps} mobileIcon={<Logo />}>
-                  <Text size="xs">header</Text>
-                </PanelHeader>
-              )}
-            >
-              <iframe
-                src="https://google.com"
-                className="w-full h-96"
-                title="djuno-design"
+        <Card
+          title="Layout"
+          description="PanelLayout - PanelSidebar - PanelHeader"
+        >
+          {/* <div className=""> */}
+          <PanelLayout
+            type="mini"
+            pathname="/"
+            style={{ height: 400 }}
+            className="w-full border border-slate-500 overflow-hidden"
+            renderSidebar={({ segments, ...sidebarProps }) => (
+              <PanelSidebar
+                {...sidebarProps}
+                sidebarHeader={
+                  <div className="flex items-center gap-1 px-1">
+                    <Logo />
+                    <Text size="xs">djuno-design</Text>
+                  </div>
+                }
+              >
+                <Text size="xs">sidebar</Text>
+              </PanelSidebar>
+            )}
+            renderHeader={(headerProps) => (
+              <PanelHeader {...headerProps} mobileIcon={<Logo />}>
+                <Text size="xs">header</Text>
+              </PanelHeader>
+            )}
+          >
+            <iframe
+              src="https://google.com"
+              className="w-full h-96"
+              title="djuno-design"
+            />
+          </PanelLayout>
+          {/* </div> */}
+        </Card>
+
+        <Card
+          title="Sidebar"
+          setting={
+            <Flex items="center" className="gap-1">
+              <Text size="xs">Loading?</Text>
+              <Switcher
+                onToggle={handleTogleSidebarLoading}
+                on={sidebarLoading}
               />
-            </PanelLayout>
-          </div>
+            </Flex>
+          }
+        >
+          <Flex className="gap-5">
+            <div className="h-96 w-60 border border-slate-400 mt-2">
+              <Sidebar
+                type="normal"
+                items={sidebarItems}
+                subItems={sidebarItems}
+                segments={["components", "item3"]}
+                loading={sidebarLoading}
+                loadingMode="skeleton"
+              />
+            </div>
+            <div className="h-96 w-60 border border-slate-400 mt-2">
+              <Sidebar
+                type="normal"
+                items={sidebarItems}
+                segments={["components", "item1"]}
+                loading={sidebarLoading}
+                loadingMode="elastic"
+              />
+            </div>
+          </Flex>
         </Card>
 
         <Card title="Modal">

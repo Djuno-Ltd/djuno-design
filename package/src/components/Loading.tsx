@@ -48,7 +48,11 @@ import { LoadingProps } from '../types'
 const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size, borderSize, theme }) => {
   if (type === 'elastic') {
     return (
-      <svg style={{ ...(size ? { width: size, height: size } : { width: 24, height: 24 }) }} viewBox='0 0 16 16'>
+      <svg
+        className={cn(className)}
+        style={{ ...(size ? { width: size, height: size } : { width: 24, height: 24 }) }}
+        viewBox='0 0 16 16'
+      >
         <g className='dj-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
           <path
             className={cn({
