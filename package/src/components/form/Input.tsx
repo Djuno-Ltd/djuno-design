@@ -34,7 +34,7 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
  * Define input variants using the `cva` utility function.
  * This function generates CSS classes for alert styles based on specified variants.
  */
-const inputVariants = cva(
+export const inputVariants = cva(
   'dj-bg-secondary-100 focus:dj-ring-0 dj-text-sm dj-block dj-w-full dark:dj-bg-dark-800 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
   {
     variants: {
@@ -47,9 +47,9 @@ const inputVariants = cva(
         no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200 dark:dj-border-dark-700 dark:focus:dj-bg-dark-700 dark:focus:dj-border-dark-600',
       },
       size: {
-        small: 'dj-rounded-lg dj-text-xs dj-px-1 dj-h-7',
-        medium: 'dj-rounded-lg dj-text-sm dj-px-2 dj-h-9',
-        large: 'dj-rounded-xl dj-text-base dj-px-2 dj-h-11',
+        small: 'dj-rounded-lg dj-text-xs dj-px-1',
+        medium: 'dj-rounded-lg dj-text-sm dj-px-2',
+        large: 'dj-rounded-xl dj-text-base dj-px-2',
       },
       copyable: {
         yes: 'dj-pr-7',
@@ -203,6 +203,11 @@ const Input: React.FunctionComponent<InputProps> = ({
               size,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
+            {
+              'dj-h-7': size === 'small',
+              'dj-h-9': size === 'medium' || size === undefined,
+              'dj-h-11': size === 'large',
+            },
             className,
           )}
           placeholder={placeholder}
