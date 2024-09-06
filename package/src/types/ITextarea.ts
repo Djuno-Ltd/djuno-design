@@ -34,4 +34,5 @@ export interface TextareaProps extends PropsWithChildren {
   tooltip?: TooltipProps
   size?: SizeTypes
   type?: InputTypes
+  copyable?: boolean
 }

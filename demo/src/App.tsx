@@ -135,6 +135,18 @@ function App() {
               error="field is required!"
             />
           </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              copyable={true}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable
+            />
+          </Flex>
         </Card>
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
