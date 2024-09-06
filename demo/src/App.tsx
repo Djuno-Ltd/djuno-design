@@ -115,7 +115,7 @@ function App() {
               inputProps={{}}
               id="isRequired"
               label="is required?"
-              error=" "
+              error="error"
             />
           </Flex>
         </Card>

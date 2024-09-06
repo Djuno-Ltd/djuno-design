@@ -88,19 +88,25 @@ const Checkbox: React.FC<CheckboxProps> = ({ id, inputProps, label, error, requi
           </label>
         )}
       </div>
-      <AnimatePresence>
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'dj-auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <p className='dj-mt-2 dj-text-xs dj-text-red-600 dark:dj-text-red-500'>{error}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatedFormError error={error} />
     </div>
   )
 }
 
+const AnimatedFormError: React.FC<{ error?: string | boolean }> = ({ error }) => {
+  return (
+    <AnimatePresence>
+      {error && typeof error === 'string' && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+        >
+          <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+export { AnimatedFormError }
 export default Checkbox
