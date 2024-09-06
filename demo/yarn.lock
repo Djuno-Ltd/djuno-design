@@ -3893,7 +3893,7 @@ dir-glob@^3.0.1:
     path-type "^4.0.0"
 
 "djuno-design@file:../package":
-  version "0.5.1"
+  version "0.5.2"
   resolved "file:../package"
   dependencies:
     "@uiw/react-json-view" "^2.0.0-alpha.27"

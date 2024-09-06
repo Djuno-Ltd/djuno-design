@@ -4,13 +4,17 @@ export type ThemeModes = 'light' | 'dark'
 type ThemeModeRefrences = 'manual' | 'system'
 
 const useDarkMode = () => {
+  // const [mode, setMode] = useState<ThemeModes>(() => {
+  //   const storedMode = localStorage.getItem('theme-mode')
+  //   if (storedMode) {
+  //     return storedMode === 'light' ? 'light' : 'dark'
+  //   }
+
+  //   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  // })
   const [mode, setMode] = useState<ThemeModes>(() => {
     const storedMode = localStorage.getItem('theme-mode')
-    if (storedMode) {
-      return storedMode === 'light' ? 'light' : 'dark'
-    }
-
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    return storedMode === 'dark' ? 'dark' : 'light' // Default to 'light' if no stored theme
   })
 
   const [modeRefrence, setModeRefrence] = useState<ThemeModeRefrences>(() => {
@@ -60,15 +64,18 @@ const useDarkMode = () => {
   }, [modeRefrence])
 
   // Function to toggle between 'light' and 'dark' modes
-  const changeMode = (selectedMode: ThemeModes | 'system') => {
-    let mode =
-      selectedMode !== 'system'
-        ? selectedMode
-        : window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light'
-    setMode(mode)
-    setModeRefrence(selectedMode !== 'system' ? 'manual' : 'system')
+  // const changeMode = (selectedMode: ThemeModes | 'system') => {
+  //   let mode =
+  //     selectedMode !== 'system'
+  //       ? selectedMode
+  //       : window.matchMedia('(prefers-color-scheme: dark)').matches
+  //         ? 'dark'
+  //         : 'light'
+  //   setMode(mode)
+  //   setModeRefrence(selectedMode !== 'system' ? 'manual' : 'system')
+  // }
+  const changeMode = (selectedMode: ThemeModes) => {
+    setMode(selectedMode) // Update the theme mode
   }
 
   return { mode, modeRefrence, changeMode }

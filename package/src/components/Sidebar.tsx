@@ -59,6 +59,7 @@ import { PanelLayoutTypes, SidebarItem, SidebarItemLabel, SidebarLoadingModes, S
  */
 const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, loadingMode, type, children }) => {
   const [hover, setHover] = React.useState<string | number | undefined>()
+
   const activeItem = useMemo(() => {
     return items.find((item) => {
       if (item.activeCondition && segments) {
@@ -67,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
         return
       }
     })
-  }, [])
+  }, [segments])
 
   const [pointerPosition, setPointerPosition] = React.useState(() => {
     if (!activeItem) return activeItem

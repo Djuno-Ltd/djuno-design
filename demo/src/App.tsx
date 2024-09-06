@@ -26,6 +26,7 @@ import {
   JsonViewer,
   Sidebar,
   SidebarItem,
+  Texrarea,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -87,8 +88,8 @@ function App() {
       id: 1,
       label: "item1",
       activeCondition: {
-        segmentIndex: 0,
-        activeString: "",
+        segmentIndex: 1,
+        activeString: "item1",
       },
       onClick: (item) => console.log(item),
     },
@@ -97,7 +98,7 @@ function App() {
       label: "item2",
       activeCondition: {
         segmentIndex: 1,
-        activeString: "",
+        activeString: "item2",
       },
       onClick: (item) => console.log(item),
     },
@@ -106,7 +107,7 @@ function App() {
       label: "item3",
       activeCondition: {
         segmentIndex: 1,
-        activeString: "home",
+        activeString: "item3",
       },
       link: "/item3",
       onClick: (item) => console.log(item?.link),
@@ -120,6 +121,45 @@ function App() {
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <JsonViewer value={exampleJson} />
+          </Flex>
+        </Card>
+        <Card title="Textarea">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
+              hint="Djuno Design"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{}}
+            />
+            <Input label="Input" placeholder="Enter custom notes if any" />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder=""
+              textareaProps={{}}
+              tooltip={{ content: "test" }}
+            />
+            <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
+            />
           </Flex>
         </Card>
         <Card title="Pagination">
@@ -211,7 +251,7 @@ function App() {
                 type="normal"
                 items={sidebarItems}
                 subItems={sidebarItems}
-                segments={["home", "projects"]}
+                segments={["components", "item3"]}
                 loading={sidebarLoading}
                 loadingMode="skeleton"
               />
@@ -220,7 +260,7 @@ function App() {
               <Sidebar
                 type="normal"
                 items={sidebarItems}
-                segments={["home", "projects"]}
+                segments={["components", "item1"]}
                 loading={sidebarLoading}
                 loadingMode="elastic"
               />

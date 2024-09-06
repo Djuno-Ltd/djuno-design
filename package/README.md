@@ -26,6 +26,7 @@
 9.  Form
 
     - Input
+    - Textarea
     - Switcher
     - Select
 
@@ -212,6 +213,22 @@
 | size        | `SizeTypes`                   |          | medium  |             |
 | copyable    | `boolean or function`         |          |         |             |
 
+### Textarea
+
+| Name              | Type                             | Required | default | Description |
+| ----------------- | -------------------------------- | -------- | ------- | ----------- |
+| id                | string                           |          |         |             |
+| textareaProps     | `HTMLProps<HTMLTextAreaElement>` |          |         |             |
+| textareaClassName | string                           |          |         |             |
+| placeholder       | string                           |          |         |             |
+| label             | string                           |          |         |             |
+| required          | boolean                          |          |         |             |
+| error             | string                           |          |         |             |
+| hint              | string                           |          |         |             |
+| type              | `InputTypes`                     |          |         |             |
+| tooltip           | `TooltipProps`                   |          |         |             |
+| size              | `SizeTypes`                      |          | medium  |             |
+
 ### Switcher
 
 | Name        | Type                       | Required | default | Description |
@@ -222,8 +239,6 @@
 | loading     | boolean                    |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |
 | size        | `SizeTypes`                |          | medium  |             |
-
-### Select
 
 ### Select
 
