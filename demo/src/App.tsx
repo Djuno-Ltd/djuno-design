@@ -104,7 +104,7 @@ function App() {
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="Popover">
-          <Flex direction="col" className="gap-5 w-full  my-10">
+          <Flex direction="col" className="gap-5 w-full  mb-10">
             <Popover
               open={open}
               anchorEl={anchorRef.current}
@@ -117,7 +117,11 @@ function App() {
               }}
             >
               <div className="w-40">
-                <Text>Djuno Design</Text>
+                <Input
+                  inputProps={{
+                    value: "djuno-design",
+                  }}
+                />
               </div>
             </Popover>
           </Flex>

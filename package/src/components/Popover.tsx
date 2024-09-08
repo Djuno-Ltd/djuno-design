@@ -75,14 +75,7 @@ import { PopoverProps } from '../types'
  * }
  */
 
-const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
-  buttonEl,
-  open,
-  anchorEl,
-  children,
-  className,
-  popoverClassName,
-}) => {
+const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({ buttonEl, children, popoverClassName }) => {
   const { refs, floatingStyles } = useFloating({
     placement: 'bottom-start',
     middleware: [flip(), shift()],
@@ -94,7 +87,7 @@ const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
         <>
           <PopoverButton
             className={`
-        ${open ? 'dj-text-white' : 'dj-text-white/90'}
+        ${open ? 'dj-text-white' : 'dj-text-white/90'},  focus:dj-outline-none focus:dj-ring-0
         `}
             ref={refs.setReference}
           >
@@ -111,7 +104,7 @@ const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
           >
             <PopoverPanel
               ref={refs.setFloating}
-              style={floatingStyles}
+              style={{ ...floatingStyles, ...popoverClassName }}
               className='dj-absolute dj-left-0 dj-z-10 mt-3 dj-transform dj-px-4 sm:dj-px-0'
             >
               {children}
