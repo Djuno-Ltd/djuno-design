@@ -26,6 +26,7 @@ import {
   Sidebar,
   SidebarItem,
   Texrarea,
+  ThemeChanger,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -97,6 +98,14 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="ThemeChanger">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex items-center gap-2 md:gap-4 text-slate-500 dark:text-slate-300">
+              {" "}
+              <ThemeChanger />
+            </div>
+          </Flex>
+        </Card>
         <Card title="Textarea">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea

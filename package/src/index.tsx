@@ -51,6 +51,7 @@ import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
 import Sidebar from './components/Sidebar'
+import ThemeChanger from './components/ThemeChanger'
 
 // export hooks
 export * from './hooks/useShow'
@@ -93,4 +94,5 @@ export {
   PanelSidebar,
   Sidebar,
   Texrarea,
+  ThemeChanger,
 }

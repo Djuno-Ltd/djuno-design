@@ -432,6 +432,12 @@
 | `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
 
+### ThemeChanger
+
+| Name           | Type   | Required | default | Description |
+| -------------- | ------ | -------- | ------- | ----------- |
+| itemsClassName | string |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
