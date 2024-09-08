@@ -27,6 +27,7 @@ import {
   Sidebar,
   SidebarItem,
   Texrarea,
+  PanelLayoutTypes,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -65,15 +66,23 @@ function App() {
   };
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
+  const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
+  const [pathname, setPathname] = useState<string>("/item1");
   const handleTogleSidebarLoading = () => {
     setSidebarLoading((prev) => !prev);
+  };
+  const handleToglePanelType = () => {
+    setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
+  };
+  const handleChangePathname = () => {
+    setPathname((prev) => (prev === "/item1" ? "/item2" : "/item1"));
   };
   const sidebarItems: SidebarItem[] = [
     {
       id: 1,
       label: "item1",
       activeCondition: {
-        segmentIndex: 1,
+        segmentIndex: 0,
         activeString: "item1",
       },
       onClick: (item) => console.log(item),
@@ -82,7 +91,7 @@ function App() {
       id: 2,
       label: "item2",
       activeCondition: {
-        segmentIndex: 1,
+        segmentIndex: 0,
         activeString: "item2",
       },
       onClick: (item) => console.log(item),
@@ -91,7 +100,7 @@ function App() {
       id: 3,
       label: "item3",
       activeCondition: {
-        segmentIndex: 1,
+        segmentIndex: 0,
         activeString: "item3",
       },
       link: "/item3",
@@ -241,35 +250,87 @@ function App() {
         <Card
           title="Sidebar"
           setting={
-            <Flex items="center" className="gap-1">
-              <Text size="xs">Loading?</Text>
-              <Switcher
-                onToggle={handleTogleSidebarLoading}
-                on={sidebarLoading}
-              />
+            <Flex items="center" className="gap-4">
+              <Flex items="center" className="gap-1">
+                <Text size="xs">mini?</Text>
+                <Switcher
+                  onToggle={handleToglePanelType}
+                  on={panelType === "mini"}
+                />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">change selected?</Text>
+                <Switcher
+                  onToggle={handleChangePathname}
+                  on={pathname === "/item2"}
+                />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">Loading?</Text>
+                <Switcher
+                  onToggle={handleTogleSidebarLoading}
+                  on={sidebarLoading}
+                />
+              </Flex>
             </Flex>
           }
         >
           <Flex className="gap-5">
-            <div className="h-96 w-60 border border-slate-400 mt-2">
+            <div className="h-96 w-60 border border-slate-400">
               <Sidebar
-                type="normal"
+                type={panelType}
                 items={sidebarItems}
                 subItems={sidebarItems}
-                segments={["components", "item3"]}
+                segments={["item3"]}
                 loading={sidebarLoading}
                 loadingMode="skeleton"
               />
             </div>
-            <div className="h-96 w-60 border border-slate-400 mt-2">
+            <div className="h-96 w-60 border border-slate-400">
               <Sidebar
-                type="normal"
+                type={panelType}
                 items={sidebarItems}
-                segments={["components", "item1"]}
+                segments={["item1"]}
                 loading={sidebarLoading}
                 loadingMode="elastic"
               />
             </div>
+            <PanelLayout
+              type={panelType}
+              pathname={pathname}
+              className="h-96 w-full border border-slate-500 overflow-hidden"
+              renderSidebar={({ segments, isShowSidebar, type }) => (
+                <PanelSidebar
+                  isShowSidebar={isShowSidebar}
+                  type={type}
+                  sidebarHeader={
+                    <div className="flex items-center gap-1 px-1">
+                      <Logo />
+                      <Text size="xs">djuno-design</Text>
+                    </div>
+                  }
+                >
+                  <Sidebar
+                    type={type}
+                    items={sidebarItems}
+                    segments={segments}
+                    loading={sidebarLoading}
+                    loadingMode="skeleton"
+                  />
+                </PanelSidebar>
+              )}
+              renderHeader={(headerProps) => (
+                <PanelHeader {...headerProps} mobileIcon={<Logo />}>
+                  <Text size="xs">header</Text>
+                </PanelHeader>
+              )}
+            >
+              <iframe
+                src="https://google.com"
+                className="w-full h-96"
+                title="djuno-design"
+              />
+            </PanelLayout>
           </Flex>
         </Card>
 
