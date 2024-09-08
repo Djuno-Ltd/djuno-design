@@ -33,6 +33,7 @@ import { PanelHeaderProps } from '../../types/IPanelLayouts'
  * @param {() => void} [props.handleHideSidebar] - Callback function to hide the sidebar.
  * @param {() => void} [props.handleShowSidebar] - Callback function to show the sidebar.
  * @param {React.ReactNode} [props.mobileIcon] - An optional icon or element to display in the mobile view.
+ * @param {boolean} [props.isShowSidebar] - An optional icon or element to display in the mobile view.
  * @param {React.ReactNode} [props.children] - The content to be displayed within the header.
  *
  * @returns {React.ReactNode} Rendered PanelHeader component.
@@ -50,7 +51,14 @@ import { PanelHeaderProps } from '../../types/IPanelLayouts'
  *   <HeaderContent />
  * </PanelHeader>
  */
-const PanelHeader: React.FC<PanelHeaderProps> = ({ children, handleHideSidebar, handleShowSidebar, mobileIcon }) => {
+const PanelHeader: React.FC<PanelHeaderProps> = ({
+  children,
+  handleHideSidebar,
+  handleShowSidebar,
+  mobileIcon,
+  // isShowSidebar,
+}) => {
+  // console.log(typeof children)
   useWindowOnClick(
     () => {
       if (handleHideSidebar) handleHideSidebar()

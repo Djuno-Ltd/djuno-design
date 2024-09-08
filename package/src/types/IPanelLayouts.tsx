@@ -37,9 +37,11 @@ export interface PanelLayoutProps extends React.PropsWithChildren {
   renderHeader?: ({
     handleHideSidebar,
     handleShowSidebar,
+    isShowSidebar,
   }: {
     handleHideSidebar: () => void
     handleShowSidebar: () => void
+    isShowSidebar: boolean
   }) => React.ReactNode
 }
 
@@ -47,6 +49,7 @@ export interface PanelHeaderProps extends React.PropsWithChildren {
   handleHideSidebar?: () => void
   handleShowSidebar?: () => void
   mobileIcon?: React.ReactNode
+  isShowSidebar?: boolean
 }
 
 export interface PanelSidebarProps extends React.PropsWithChildren {
