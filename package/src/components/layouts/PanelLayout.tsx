@@ -56,7 +56,15 @@ import { PanelLayoutProps } from '../../types/IPanelLayouts'
  *   <MainContent />
  * </PanelLayout>
  */
-const PanelLayout: React.FC<PanelLayoutProps> = ({ type, children, pathname, renderSidebar, renderHeader }) => {
+const PanelLayout: React.FC<PanelLayoutProps> = ({
+  className,
+  style,
+  type,
+  children,
+  pathname,
+  renderSidebar,
+  renderHeader,
+}) => {
   const [isShowSidebar, { hide: handleHideSidebar, show: handleShowSidebar }] = useShow(false)
 
   const segments = React.useMemo(() => {
@@ -68,7 +76,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({ type, children, pathname, ren
   }, [])
 
   return (
-    <div className='dj-flex dj-flex-col dj-min-h-full md:dj-flex-row dj-relative'>
+    <div className={cn('dj-flex dj-flex-col dj-min-h-full md:dj-flex-row dj-relative', className)} style={style}>
       {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal' })}
       <div
         className={cn('dj-min-h-full dj-w-full dj-ml-auto dj-transition-all dj-duration-200', {

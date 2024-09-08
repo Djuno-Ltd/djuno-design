@@ -21,6 +21,8 @@
 export type PanelLayoutTypes = 'normal' | 'mini'
 
 export interface PanelLayoutProps extends React.PropsWithChildren {
+  className?: string
+  style?: React.CSSProperties
   type?: PanelLayoutTypes
   pathname?: string
   renderSidebar?: ({
