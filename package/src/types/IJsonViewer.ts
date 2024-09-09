@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview DropdownMenu types
+ * @fileoverview JsonViewer types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,28 +18,9 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
-export interface DropdownProps extends PropsWithChildren {
-  menu?: Array<DropdownElement>
-  title?: string | React.ReactNode
-  type?: 'default' | 'simple'
-  positionClassName?: string
-  buttonClassName?: string
-  itemsClassName?: string
+export interface JsonViewerProps extends PropsWithChildren {
+  value?: object | null
+  collapsed?: number | boolean
 }
-
-export type DropdownItem = {
-  label: string | React.ReactNode
-  key: string
-  onClick?: (item: DropdownItem, close: () => void) => void
-  disabled?: boolean
-  danger?: boolean
-  loading?: boolean
-}
-
-export type DropdownDivider = {
-  type: 'divider'
-}
-
-export type DropdownElement = DropdownItem | DropdownDivider

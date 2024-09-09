@@ -40,6 +40,9 @@ export * from './IAccordion'
 export * from './ITab'
 export * from './IPagination'
 export * from './IPanelLayouts'
+export * from './ISidebar'
+export * from './ITextarea'
+export * from './IJsonViewer'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

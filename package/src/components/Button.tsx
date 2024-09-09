@@ -87,7 +87,7 @@ const buttonVariants = cva(
  *   Save Changes
  * </Button>
  */
-const Button: React.FunctionComponent<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   className,
   uiType,

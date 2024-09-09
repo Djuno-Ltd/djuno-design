@@ -24,6 +24,11 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  JsonViewer,
+  Sidebar,
+  SidebarItem,
+  Texrarea,
+  PanelLayoutTypes,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -54,6 +59,87 @@ function App() {
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
   );
+  const exampleJson = {
+    block_number: 38733960,
+    topic: "raw-avalanchec-mainnet",
+    chain: "avalanchec-mainnet",
+    block: {
+      baseFeePerGas: "0x5f9ed8fd3",
+      difficulty: "0x1",
+      gasLimit: "0xe4e1c0",
+      gasUsed: "0x46f0b1",
+      hash: "0x42a9043d4a8b0d57a37dba1ec579aadca2bdeea44ec9383c05aae8d4b534abbc",
+      miner: "0x0100000000000000000000000000000000000000",
+      nonce: "0x0000000000000000",
+      number: "0x24f0888",
+      parentHash:
+        "0x7a3654a7b66a5244c5993af3f8d49fb3c3ce68964485bbd589af6d9fa4ff33c1",
+      size: "0x5ba6",
+      timestamp: "0x6571aeb3",
+      transactions: [
+        {
+          baseFeePerGas: "0x5f9ed8fd3",
+          difficulty: "0x1",
+          gasLimit: "0xe4e1c0",
+          gasUsed: "0x46f0b1",
+          hash: "0x42a9043d4a8b0d57a37dba1ec579aadca2bdeea44ec9383c05aae8d4b534abbc",
+          miner: "0x0100000000000000000000000000000000000000",
+          nonce: "0x0000000000000000",
+          number: "0x24f0888",
+          parentHash:
+            "0x7a3654a7b66a5244c5993af3f8d49fb3c3ce68964485bbd589af6d9fa4ff33c1",
+          size: "0x5ba6",
+          timestamp: "0x6571aeb3",
+          transactions: [],
+        },
+      ],
+    },
+  };
+
+  //sidebar
+  const [sidebarLoading, setSidebarLoading] = useState(false);
+  const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
+  const [pathname, setPathname] = useState<string>("/item1");
+  const handleTogleSidebarLoading = () => {
+    setSidebarLoading((prev) => !prev);
+  };
+  const handleToglePanelType = () => {
+    setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
+  };
+  const handleChangePathname = () => {
+    setPathname((prev) => (prev === "/item1" ? "/item2" : "/item1"));
+  };
+
+  const sidebarItems: SidebarItem[] = [
+    {
+      id: 1,
+      label: "item1",
+      activeCondition: {
+        segmentIndex: 0,
+        activeString: "item1",
+      },
+      onClick: (item) => console.log(item),
+    },
+    {
+      id: 2,
+      label: "item2",
+      activeCondition: {
+        segmentIndex: 0,
+        activeString: "item2",
+      },
+      onClick: (item) => console.log(item),
+    },
+    {
+      id: 3,
+      label: "item3",
+      activeCondition: {
+        segmentIndex: 0,
+        activeString: "item3",
+      },
+      link: "/item3",
+      onClick: (item) => console.log(item?.link),
+    },
+  ];
 
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
@@ -95,6 +181,64 @@ function App() {
             />
           </Flex>
         </Card>
+        <Card title="JsonViewer">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <JsonViewer value={exampleJson} />
+          </Flex>
+        </Card>
+
+        <Card title="Textarea">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
+              hint="Djuno Design"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{}}
+            />
+            <Input label="Input" placeholder="Enter custom notes if any" />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder=""
+              textareaProps={{}}
+              tooltip={{ content: "test" }}
+            />
+            <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error="field is required!"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              copyable={true}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable
+            />
+          </Flex>
+        </Card>
+
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">
@@ -110,6 +254,7 @@ function App() {
             </div>
           </Flex>
         </Card>
+
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
             <Accordion
@@ -130,14 +275,101 @@ function App() {
             />
           </Flex>
         </Card>
-        <Card title="Layout">
-          <div className="h-[400px] w-full border border-slate-500 overflow-hidden">
+
+        <Card
+          title="Layout"
+          description="PanelLayout - PanelSidebar - PanelHeader"
+        >
+          {/* <div className=""> */}
+          <PanelLayout
+            type="mini"
+            pathname="/"
+            style={{ height: 400 }}
+            className="w-full border border-slate-500 overflow-hidden"
+            renderSidebar={({ segments, ...sidebarProps }) => (
+              <PanelSidebar
+                {...sidebarProps}
+                sidebarHeader={
+                  <div className="flex items-center gap-1 px-1">
+                    <Logo />
+                    <Text size="xs">djuno-design</Text>
+                  </div>
+                }
+              >
+                <Text size="xs">sidebar</Text>
+              </PanelSidebar>
+            )}
+            renderHeader={(headerProps) => (
+              <PanelHeader {...headerProps} mobileIcon={<Logo />}>
+                <Text size="xs">header</Text>
+              </PanelHeader>
+            )}
+          >
+            <iframe
+              src="https://google.com"
+              className="w-full h-96"
+              title="djuno-design"
+            />
+          </PanelLayout>
+          {/* </div> */}
+        </Card>
+
+        <Card
+          title="Sidebar"
+          setting={
+            <Flex items="center" className="gap-4">
+              <Flex items="center" className="gap-1">
+                <Text size="xs">mini?</Text>
+                <Switcher
+                  onToggle={handleToglePanelType}
+                  on={panelType === "mini"}
+                />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">change selected?</Text>
+                <Switcher
+                  onToggle={handleChangePathname}
+                  on={pathname === "/item2"}
+                />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">Loading?</Text>
+                <Switcher
+                  onToggle={handleTogleSidebarLoading}
+                  on={sidebarLoading}
+                />
+              </Flex>
+            </Flex>
+          }
+        >
+          <Flex className="gap-5">
+            <div className="h-96 w-60 border border-slate-400">
+              <Sidebar
+                type={panelType}
+                items={sidebarItems}
+                subItems={sidebarItems}
+                segments={["item3"]}
+                loading={sidebarLoading}
+                loadingMode="skeleton"
+              />
+            </div>
+            <div className="h-96 w-60 border border-slate-400">
+              <Sidebar
+                type={panelType}
+                items={sidebarItems}
+                segments={["item1"]}
+                loading={sidebarLoading}
+                loadingMode="elastic"
+              />
+            </div>
             <PanelLayout
-              type="mini"
-              pathname="/"
-              renderSidebar={({ segments, ...sidebarProps }) => (
+              type={panelType}
+              pathname={pathname}
+              className="h-96 w-full border border-slate-500 overflow-hidden"
+              renderSidebar={({ segments, isShowSidebar, type }) => (
                 <PanelSidebar
-                  {...sidebarProps}
+                  isShowSidebar={isShowSidebar}
+                  type={type}
                   sidebarHeader={
                     <div className="flex items-center gap-1 px-1">
                       <Logo />
@@ -145,7 +377,13 @@ function App() {
                     </div>
                   }
                 >
-                  <Text size="xs">sidebar</Text>
+                  <Sidebar
+                    type={type}
+                    items={sidebarItems}
+                    segments={segments}
+                    loading={sidebarLoading}
+                    loadingMode="skeleton"
+                  />
                 </PanelSidebar>
               )}
               renderHeader={(headerProps) => (
@@ -160,7 +398,7 @@ function App() {
                 title="djuno-design"
               />
             </PanelLayout>
-          </div>
+          </Flex>
         </Card>
 
         <Card title="Modal">
