@@ -39,8 +39,6 @@ import useDarkMode from '../hooks/useDarkMode'
  *
  * @example
  * // Example usage of JsonViewer component:
- *
- * function MyComponent() {
  *   const exampleJson = {
  *     name: "John Doe",
  *     age: 30,
@@ -52,30 +50,31 @@ import useDarkMode from '../hooks/useDarkMode'
  *     hobbies: ["reading", "traveling", "coding"]
  *   };
  *
- *   return (
- *     <JsonViewer
- *       value={exampleJson} // The JSON data to display
- *       collapsed={2}       // Collapse all levels after the second level
- *       theme="dark"        // Set the theme to 'dark' (optional)
- *     />
- *   );
- * }
+ *   <JsonViewer
+ *     value={exampleJson} // The JSON data to display
+ *     collapsed={2}       // Collapse all levels after the second level
+ *   />
+ *
+ *
  */
 const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed }) => {
   const { mode } = useDarkMode()
-  const currentTheme = mode === 'dark' ? darkTheme : lightTheme
+  const [currentTheme, setCurrentTheme] = React.useState(mode === 'dark' ? darkTheme : lightTheme)
+
+  React.useEffect(() => {
+    const theme = mode === 'dark' ? darkTheme : lightTheme
+    setCurrentTheme(theme)
+  }, [mode])
 
   return (
-    <>
-      <JsonView
-        style={currentTheme}
-        value={value || {}}
-        enableClipboard={false}
-        displayDataTypes={false}
-        shortenTextAfterLength={20}
-        collapsed={collapsed !== undefined ? collapsed : 2}
-      />
-    </>
+    <JsonView
+      style={currentTheme}
+      value={value || {}}
+      enableClipboard={false}
+      displayDataTypes={false}
+      shortenTextAfterLength={20}
+      collapsed={collapsed !== undefined ? collapsed : 2}
+    />
   )
 }
 

@@ -40,6 +40,7 @@
     "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.58",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@uiw/react-json-view": "^2.0.0-alpha.27",
     "autoprefixer": "^10.4.17",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
@@ -69,8 +70,5 @@
   "peerDependencies": {
     "react": "^18.x",
     "react-dom": "^18.x"
-  },
-  "dependencies": {
-    "@uiw/react-json-view": "^2.0.0-alpha.27"
   }
 }

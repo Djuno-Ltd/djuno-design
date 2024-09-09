@@ -43,7 +43,7 @@ export default [
       terser({
         compress: {
           passes: 20,
-          drop_console: true,
+          drop_console: false,
           ecma: 2018,
         },
         output: {
@@ -90,7 +90,7 @@ export default [
       terser({
         compress: {
           passes: 20,
-          drop_console: true,
+          drop_console: false,
           ecma: 2018,
         },
         output: {
