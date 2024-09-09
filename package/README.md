@@ -82,6 +82,7 @@ function App() {
 
 20. Sidebar
 21. JsonViewer
+22. Tabs
 
 ### Available hooks
 
