@@ -92,7 +92,7 @@ export {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
-  JsonViewer,
   Sidebar,
   Texrarea,
+  JsonViewer,
 }

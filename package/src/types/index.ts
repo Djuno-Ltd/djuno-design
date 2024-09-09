@@ -39,9 +39,9 @@ export * from './ISecureCopy'
 export * from './IAccordion'
 export * from './IPagination'
 export * from './IPanelLayouts'
-export * from './IJsonViewer'
 export * from './ISidebar'
 export * from './ITextarea'
+export * from './IJsonViewer'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

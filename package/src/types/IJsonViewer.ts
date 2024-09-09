@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 export interface JsonViewerProps extends PropsWithChildren {
   value?: object | null

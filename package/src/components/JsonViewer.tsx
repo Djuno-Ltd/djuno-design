@@ -34,7 +34,7 @@ import useDarkMode from '../hooks/useDarkMode'
  *
  * @returns {React.ReactNode} Rendered JsonViewer component.
  *
- * @version 0.4.8
+ * @version 0.0.0
  * @see https://www.npmjs.com/package/djuno-design#jsonViewer
  *
  * @example

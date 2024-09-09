@@ -21,6 +21,8 @@
 export type PanelLayoutTypes = 'normal' | 'mini'
 
 export interface PanelLayoutProps extends React.PropsWithChildren {
+  className?: string
+  style?: React.CSSProperties
   type?: PanelLayoutTypes
   pathname?: string
   renderSidebar?: ({
@@ -35,9 +37,11 @@ export interface PanelLayoutProps extends React.PropsWithChildren {
   renderHeader?: ({
     handleHideSidebar,
     handleShowSidebar,
+    isShowSidebar,
   }: {
     handleHideSidebar: () => void
     handleShowSidebar: () => void
+    isShowSidebar: boolean
   }) => React.ReactNode
 }
 
@@ -45,6 +49,7 @@ export interface PanelHeaderProps extends React.PropsWithChildren {
   handleHideSidebar?: () => void
   handleShowSidebar?: () => void
   mobileIcon?: React.ReactNode
+  isShowSidebar?: boolean
 }
 
 export interface PanelSidebarProps extends React.PropsWithChildren {
