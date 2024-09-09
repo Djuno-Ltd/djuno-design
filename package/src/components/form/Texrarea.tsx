@@ -41,6 +41,7 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
  * @param {string} [props.hint] - Hint text to provide additional guidance to the user.
  * @param {SizeTypes} [props.size] - Size of the textarea field.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the textarea.
+ * @param {boolean} [props.copyable] - Indicates if the input value can be copied.
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *

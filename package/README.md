@@ -228,6 +228,7 @@
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
 | size              | `SizeTypes`                      |          | medium  |             |
+| copyable          | `boolean`                        |          |         |             |
 
 ### Switcher
 
