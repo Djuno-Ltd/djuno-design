@@ -2,6 +2,36 @@
 
 **djuno-design** is a lightweight, tailwindCSS-based, and wrapper-approach library for React to develop front-end projects easily.
 
+### 1. Install
+
+npm
+
+    npm i djuno-design
+
+yarn
+
+    yarn add djuno-design
+
+### 2. Import styles at the top of your component tree
+
+```jsx
+import 'djuno-design/dist/index.css'
+```
+
+### 3. Simply you can import all components everywere
+
+```jsx
+import { Button } from 'djuno-design'
+
+function App() {
+  return (
+    <>
+      <Button>Click!</Button>
+    </>
+  )
+}
+```
+
 ## Documentation
 
 ### Available components
@@ -51,10 +81,12 @@
     - PanelHeader
 
 20. Sidebar
+21. JsonViewer
 
 ### Available hooks
 
 1. useShow
+2. useWindowOnClick
 
 ### Available utility functions
 
@@ -381,13 +413,13 @@
 
 ### PanelLayout
 
-| Name            | Type                                                                                                                              | Required | Default | Description                                                                                    |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `type`          | `PanelLayoutTypes`                                                                                                                |          |         | Defines the layout type, such as 'normal' or 'mini'.                                           |
-| `pathname`      | `string`                                                                                                                          |          |         | The current pathname used to generate segments for the sidebar.                                |
-| `renderSidebar` | `({ segments, isShowSidebar, type }: { segments: string[], isShowSidebar: boolean, type: PanelLayoutTypes }) => React.ReactNode`  |          |         | Function to render the sidebar, receiving segments, sidebar visibility state, and layout type. |
-| `renderHeader`  | `({ handleHideSidebar, handleShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void }) => React.ReactNode` |          |         | Function to render the header, receiving callbacks to show or hide the sidebar.                |
-| `children`      | `React.ReactNode`                                                                                                                 |          |         | The content to be displayed within the layout's main area.                                     |
+| Name            | Type                                                                                                                                                                     | Required | Default | Description                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `type`          | `PanelLayoutTypes`                                                                                                                                                       |          |         | Defines the layout type, such as 'normal' or 'mini'.                                           |
+| `pathname`      | `string`                                                                                                                                                                 |          |         | The current pathname used to generate segments for the sidebar.                                |
+| `renderSidebar` | `({ segments, isShowSidebar, type }: { segments: string[], isShowSidebar: boolean, type: PanelLayoutTypes }) => React.ReactNode`                                         |          |         | Function to render the sidebar, receiving segments, sidebar visibility state, and layout type. |
+| `renderHeader`  | `({ handleHideSidebar, handleShowSidebar, isShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void, isShowSidebar: boolean }) => React.ReactNode` |          |         | Function to render the header, receiving callbacks to show or hide the sidebar.                |
+| `children`      | `React.ReactNode`                                                                                                                                                        |          |         | The content to be displayed within the layout's main area.                                     |
 
 ### PanelSidebar
 
@@ -432,6 +464,13 @@
 | `icon`            | `React.FunctionComponent<React.SVGProps<SVGSVGElement>>` |          |         | Icon component for the item.                                         |
 | `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
+
+### JsonViewer
+
+| Name      | Type              | Required | default | Description |
+| --------- | ----------------- | -------- | ------- | ----------- |
+| value     | object or null    |          | {}      |             |
+| collapsed | number or boolean |          |         |             |
 
 ## Contributor ✨
 
