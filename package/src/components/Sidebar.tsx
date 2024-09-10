@@ -70,15 +70,14 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
     })
   }, [segments])
 
-  const [pointerPosition, setPointerPosition] = React.useState(() => {
-    if (!activeItem) return activeItem
-    return items.indexOf(activeItem) * 36
-  })
+  const [pointerPosition, setPointerPosition] = React.useState<undefined | number>(undefined)
 
   React.useEffect(() => {
     const item = items.find((item) => item.id === hover) || activeItem
+    const itemIds = items.map((i) => i.id)
     if (item) {
-      setPointerPosition(items.indexOf(item) * 36)
+      const activeIndex = itemIds.indexOf(item.id)
+      setPointerPosition(activeIndex !== -1 ? activeIndex * 36 : undefined)
     }
   }, [activeItem, hover, items])
 

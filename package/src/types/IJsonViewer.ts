@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Textarea types
+ * @fileoverview JsonViewer types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,21 +18,9 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
-import { TooltipProps } from './Tooltip'
-import { InputTypes, SizeTypes } from '.'
+import { PropsWithChildren } from 'react'
 
-export interface TextareaProps extends PropsWithChildren {
-  id?: string
-  textareaProps?: React.HTMLProps<HTMLTextAreaElement>
-  className?: string
-  placeholder?: string
-  label?: string
-  required?: boolean
-  error?: string
-  hint?: string
-  tooltip?: TooltipProps
-  size?: SizeTypes
-  type?: InputTypes
-  copyable?: boolean
+export interface JsonViewerProps extends PropsWithChildren {
+  value?: object | null
+  collapsed?: number | boolean
 }

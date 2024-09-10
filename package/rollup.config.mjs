@@ -11,6 +11,7 @@ import url from '@rollup/plugin-url'
 
 const makeSourcemap = false
 const minimizeCss = true
+const drop_console = true
 
 export default [
   {
@@ -43,7 +44,7 @@ export default [
       terser({
         compress: {
           passes: 20,
-          drop_console: true,
+          drop_console,
           ecma: 2018,
         },
         output: {
@@ -90,7 +91,7 @@ export default [
       terser({
         compress: {
           passes: 20,
-          drop_console: true,
+          drop_console,
           ecma: 2018,
         },
         output: {

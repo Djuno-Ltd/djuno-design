@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Textarea types
+ * @fileoverview Tabs types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -19,20 +19,25 @@
  */
 
 import React, { PropsWithChildren } from 'react'
-import { TooltipProps } from './Tooltip'
-import { InputTypes, SizeTypes } from '.'
 
-export interface TextareaProps extends PropsWithChildren {
-  id?: string
-  textareaProps?: React.HTMLProps<HTMLTextAreaElement>
-  className?: string
-  placeholder?: string
-  label?: string
-  required?: boolean
-  error?: string
-  hint?: string
-  tooltip?: TooltipProps
-  size?: SizeTypes
-  type?: InputTypes
-  copyable?: boolean
+export interface TabsProps extends PropsWithChildren {
+  options: TabOptions
+  selectedIndex?: number
+  onChange?: (index: number) => void
+  useUrl?: boolean
+  listClassName?: string
+  panelClassName?: string
+  tabType?: 'default' | 'creamy'
 }
+
+export interface TabOption<T = undefined> {
+  label: React.ReactNode
+  url?: string
+  element?: string | React.ReactNode
+  icon?: string | React.ReactNode
+  setting?: T
+  disabled?: boolean
+  testId?: string
+}
+
+export type TabOptions<T = undefined> = Array<TabOption<T>>

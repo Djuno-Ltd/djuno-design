@@ -33,7 +33,7 @@ import { PanelLayoutProps } from '../../types/IPanelLayouts'
  * @param {PanelLayoutTypes} [props.type] - Defines the layout type, such as 'normal' or 'mini'.
  * @param {string} [props.pathname] - The current pathname used to generate segments for the sidebar.
  * @param {({ segments, isShowSidebar, type }: { segments: string[], isShowSidebar: boolean, type: PanelLayoutTypes }) => React.ReactNode} [props.renderSidebar] - A function to render the sidebar, receiving segments, sidebar visibility state, and layout type.
- * @param {({ handleHideSidebar, handleShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void }) => React.ReactNode} [props.renderHeader] - A function to render the header, receiving callbacks to show or hide the sidebar.
+ * @param {({ handleHideSidebar, handleShowSidebar,isShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void, isShowSidebar: boolean }) => React.ReactNode} [props.renderHeader] - A function to render the header, receiving callbacks to show or hide the sidebar.
  * @param {React.ReactNode} [props.children] - The content to be displayed within the layout's main area.
  *
  * @returns {React.ReactNode} Rendered PanelLayout component.
@@ -56,7 +56,15 @@ import { PanelLayoutProps } from '../../types/IPanelLayouts'
  *   <MainContent />
  * </PanelLayout>
  */
-const PanelLayout: React.FC<PanelLayoutProps> = ({ type, children, pathname, renderSidebar, renderHeader }) => {
+const PanelLayout: React.FC<PanelLayoutProps> = ({
+  className,
+  style,
+  type,
+  children,
+  pathname,
+  renderSidebar,
+  renderHeader,
+}) => {
   const [isShowSidebar, { hide: handleHideSidebar, show: handleShowSidebar }] = useShow(false)
 
   const segments = React.useMemo(() => {
@@ -65,10 +73,10 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({ type, children, pathname, ren
       .split('/')
       .filter((segment) => segment !== '')
       .filter(Boolean)
-  }, [])
+  }, [pathname])
 
   return (
-    <div className='dj-flex dj-flex-col dj-min-h-full md:dj-flex-row dj-relative'>
+    <div className={cn('dj-flex dj-flex-col dj-h-full md:dj-flex-row dj-relative', className)} style={style}>
       {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal' })}
       <div
         className={cn('dj-min-h-full dj-w-full dj-ml-auto dj-transition-all dj-duration-200', {
@@ -76,10 +84,8 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({ type, children, pathname, ren
           'lg:dj-w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar })}
-        <div className='dj-max-w-7xl dj-mx-auto dj-min-w-full  dj-min-h-[calc(100%-4rem)] dj-overflow-auto'>
-          {children}
-        </div>
+        {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
+        <div className='dj-max-w-7xl dj-mx-auto dj-min-w-full  dj-h-[calc(100%-4rem)] dj-overflow-auto'>{children}</div>
       </div>
     </div>
   )
