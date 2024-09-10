@@ -28,6 +28,7 @@ import {
   Texrarea,
   ThemeChanger,
   PanelLayoutTypes,
+  ThemeSwitcher,
 } from "djuno-design";
 import { useState } from "react";
 import Header from "./Header";
@@ -108,11 +109,9 @@ function App() {
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="ThemeChanger">
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <div className="flex items-center gap-2 md:gap-4 text-slate-500 dark:text-slate-300">
-              {" "}
-              <ThemeChanger />
-            </div>
+          <Flex className="gap-5 w-full mt-5">
+            <ThemeChanger />
+            <ThemeSwitcher />
           </Flex>
         </Card>
         <Card title="Textarea">

@@ -463,7 +463,7 @@ function App() {
 | `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
 
-### ThemeChanger
+### ThemeChanger , ThemeSwitcher
 
 | Name           | Type   | Required | default | Description |
 | -------------- | ------ | -------- | ------- | ----------- |

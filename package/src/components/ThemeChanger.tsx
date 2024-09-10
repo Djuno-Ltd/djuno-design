@@ -21,11 +21,12 @@
 import * as React from 'react'
 import { cn } from './../utils/cn'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import useDarkMode from '../utils/useDarkMode'
+import { useTheme } from '../hooks/useTheme'
 import { ReactComponent as SunIcon } from '../assets/icons/sun.svg'
 import { ReactComponent as MoonIcon } from '../assets/icons//moon.svg'
 import { ReactComponent as SystemIcon } from '../assets/icons//computer-desktop.svg'
 import { ThemeChangerProps } from '../types/IThemeChanger'
+import Switcher from './form/Switcher'
 
 /**
  * ThemeChanger component.
@@ -37,7 +38,7 @@ import { ThemeChangerProps } from '../types/IThemeChanger'
  *
  * @returns {React.ReactNode} Rendered ThemeChanger component.
  *
- * @version 0.1.0
+ * @version 0.0.0
  * @see https://www.npmjs.com/package/djuno-design#themeChanger
  *
  * @example
@@ -47,11 +48,11 @@ import { ThemeChangerProps } from '../types/IThemeChanger'
  * <ThemeChanger itemsClassName="custom-theme"/>
  *
  */
-const ThemeChanger: React.FunctionComponent<ThemeChangerProps> = ({ itemsClassName }) => {
-  const { mode, modeRefrence, changeMode } = useDarkMode()
+const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
+  const { mode, modeRefrence, changeMode } = useTheme()
   return (
     <Menu as='div' className='dj-relative dj-text-left dj-flex dj-justify-center'>
-      <MenuButton className='dj-inline-flex dj-w-full dj-justify-center dj-items-center dj-text-sm dj-font-medium focus:dj-outline-none focus-visible:dj-ring-0'>
+      <MenuButton className='dj-inline-flex dj-w-full dj-justify-center dj-items-center dj-text-sm dj-font-medium focus:dj-outline-none focus-visible:dj-ring-0 dj-text-slate-800 dark:dj-text-slate-200'>
         {mode === 'light' && <SunIcon className='dj-w-6 dj-h-6 hover:dj-scale-110' />}
         {mode === 'dark' && <MoonIcon className='dj-w-6 dj-h-6 hover:dj-scale-110' />}
       </MenuButton>
@@ -75,13 +76,13 @@ const ThemeChanger: React.FunctionComponent<ThemeChangerProps> = ({ itemsClassNa
           )}
         >
           <MenuItem>
-            {({ active }) => (
+            {({ focus }) => (
               <div
                 onClick={() => changeMode('light')}
                 className={cn(
                   'dj-group dj-flex dj-w-full dj-items-center dj-rounded-md dj-px-2 dj-py-1 dj-text-sm dj-cursor-pointer ',
                   {
-                    'dj-bg-slate-50 dark:dj-bg-zinc-800': active,
+                    'dj-bg-slate-50 dark:dj-bg-zinc-800': focus,
                     'dj-text-gray-900 dark:dj-text-slate-300':
                       modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'dark'),
                     'dj-text-sky-500 dark:dj-text-sky-500': mode === 'light' && modeRefrence === 'manual',
@@ -94,14 +95,15 @@ const ThemeChanger: React.FunctionComponent<ThemeChangerProps> = ({ itemsClassNa
             )}
           </MenuItem>
           <MenuItem>
-            {({ active }) => (
+            {({ focus }) => (
               <div
                 onClick={() => changeMode('dark')}
                 className={cn(
                   'dj-group dj-flex w-full dj-items-center dj-rounded-md dj-px-2 dj-py-1 dj-text-sm dj-cursor-pointer',
                   {
-                    'dj-bg-slate-50 dark:dj-bg-zinc-800': active,
-                    'dj-text-gray-900 dark:dj-text-slate-300': modeRefrence !== 'manual',
+                    'dj-bg-slate-50 dark:dj-bg-zinc-800': focus,
+                    'dj-text-gray-900 dark:dj-text-slate-300':
+                      modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'light'),
                     'dark:dj-text-sky-500': mode === 'dark' && modeRefrence === 'manual',
                   },
                 )}
@@ -112,13 +114,13 @@ const ThemeChanger: React.FunctionComponent<ThemeChangerProps> = ({ itemsClassNa
             )}
           </MenuItem>
           <MenuItem>
-            {({ active }) => (
+            {({ focus }) => (
               <div
                 onClick={() => changeMode('system')}
                 className={cn(
                   'dj-group dj-flex dj-w-full dj-items-center dj-rounded-md dj-px-2 dj-py-1 dj-text-sm dj-cursor-pointer',
                   {
-                    'dj-bg-slate-50 dark:dj-bg-zinc-800': active,
+                    'dj-bg-slate-50 dark:dj-bg-zinc-800': focus,
                     'dj-text-gray-900 dark:dj-text-slate-300': modeRefrence !== 'system',
                     'dj-text-sky-500 dark:dj-text-sky-500': modeRefrence === 'system',
                   },
@@ -135,4 +137,11 @@ const ThemeChanger: React.FunctionComponent<ThemeChangerProps> = ({ itemsClassNa
   )
 }
 
+const ThemeSwitcher: React.FC<ThemeChangerProps> = () => {
+  const { mode, changeMode } = useTheme()
+  return <Switcher size='medium' on={mode === 'dark'} onToggle={(v) => changeMode(v ? 'dark' : 'light')} />
+  return null
+}
+
+export { ThemeSwitcher }
 export default ThemeChanger
