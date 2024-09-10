@@ -89,12 +89,12 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
 
     if (typeof copyable === 'function') {
       textToCopy = copyable(inputValue)
+    } else {
+      textToCopy = inputValue
     }
 
     if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
       copyToClipboard(textToCopy)
-    } else {
-      textToCopy = inputValue
     }
   }
 
