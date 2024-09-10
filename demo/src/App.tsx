@@ -234,7 +234,19 @@ function App() {
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
-              copyable
+              copyable={true}
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              copyable={(v) => `Hi ${v}`}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={(v) => `Hi ${v}`}
             />
           </Flex>
         </Card>

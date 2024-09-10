@@ -261,7 +261,7 @@ function App() {
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
 | size              | `SizeTypes`                      |          | medium  |             |
-| copyable          | `boolean`                        |          |         |             |
+| copyable          | `boolean or function`            |          |         |             |
 
 ### Switcher
 
