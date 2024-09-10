@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -40,6 +40,7 @@
     "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.58",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@uiw/react-json-view": "^2.0.0-alpha.27",
     "autoprefixer": "^10.4.17",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
@@ -69,5 +70,6 @@
   "peerDependencies": {
     "react": "^18.x",
     "react-dom": "^18.x"
-  }
+  },
+  "dependencies": {}
 }

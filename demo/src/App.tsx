@@ -20,9 +20,11 @@ import {
   SelectOption,
   Dropdown,
   Accordion,
+  Tabs,
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  JsonViewer,
   Sidebar,
   SidebarItem,
   Texrarea,
@@ -59,6 +61,42 @@ function App() {
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
   );
+  const exampleJson = {
+    block_number: 38733960,
+    topic: "raw-avalanchec-mainnet",
+    chain: "avalanchec-mainnet",
+    block: {
+      baseFeePerGas: "0x5f9ed8fd3",
+      difficulty: "0x1",
+      gasLimit: "0xe4e1c0",
+      gasUsed: "0x46f0b1",
+      hash: "0x42a9043d4a8b0d57a37dba1ec579aadca2bdeea44ec9383c05aae8d4b534abbc",
+      miner: "0x0100000000000000000000000000000000000000",
+      nonce: "0x0000000000000000",
+      number: "0x24f0888",
+      parentHash:
+        "0x7a3654a7b66a5244c5993af3f8d49fb3c3ce68964485bbd589af6d9fa4ff33c1",
+      size: "0x5ba6",
+      timestamp: "0x6571aeb3",
+      transactions: [
+        {
+          baseFeePerGas: "0x5f9ed8fd3",
+          difficulty: "0x1",
+          gasLimit: "0xe4e1c0",
+          gasUsed: "0x46f0b1",
+          hash: "0x42a9043d4a8b0d57a37dba1ec579aadca2bdeea44ec9383c05aae8d4b534abbc",
+          miner: "0x0100000000000000000000000000000000000000",
+          nonce: "0x0000000000000000",
+          number: "0x24f0888",
+          parentHash:
+            "0x7a3654a7b66a5244c5993af3f8d49fb3c3ce68964485bbd589af6d9fa4ff33c1",
+          size: "0x5ba6",
+          timestamp: "0x6571aeb3",
+          transactions: [],
+        },
+      ],
+    },
+  };
 
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
@@ -73,6 +111,7 @@ function App() {
   const handleChangePathname = () => {
     setPathname((prev) => (prev === "/item1" ? "/item2" : "/item1"));
   };
+
   const sidebarItems: SidebarItem[] = [
     {
       id: 1,
@@ -114,6 +153,48 @@ function App() {
             <ThemeSwitcher />
           </Flex>
         </Card>
+        <Card title="Tabs">
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs
+              listClassName="w-full mb-6"
+              options={[
+                {
+                  label: "Djuno Design 1",
+                },
+                {
+                  label: "Djuno Design 2",
+                },
+                {
+                  label: "Djuno Design 3",
+                },
+              ]}
+              tabType="creamy"
+            />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs
+              listClassName="w-full  mb-6"
+              options={[
+                {
+                  label: "Djuno Design 1",
+                },
+                {
+                  label: "Djuno Design 2",
+                },
+                {
+                  label: "Djuno Design 3",
+                },
+              ]}
+              tabType="default"
+            />
+          </Flex>
+        </Card>
+        <Card title="JsonViewer">
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <JsonViewer value={exampleJson} />
+          </Flex>
+        </Card>
+
         <Card title="Textarea">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea
@@ -152,7 +233,20 @@ function App() {
               error="field is required!"
             />
           </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              copyable={true}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable
+            />
+          </Flex>
         </Card>
+
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <div className="flex justify-end mt-3">
@@ -168,6 +262,7 @@ function App() {
             </div>
           </Flex>
         </Card>
+
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
             <Accordion
@@ -188,6 +283,7 @@ function App() {
             />
           </Flex>
         </Card>
+
         <Card
           title="Layout"
           description="PanelLayout - PanelSidebar - PanelHeader"

@@ -47,14 +47,17 @@ import Pagination from './components/Pagination'
 import Modal from './components/Modal'
 import Dropdown from './components/Dropdown'
 import Accordion from './components/Accordion'
+import Tabs from './components/Tabs'
 import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
+import JsonViewer from './components/JsonViewer'
 import Sidebar from './components/Sidebar'
 import ThemeChanger from './components/ThemeChanger'
 import { ThemeSwitcher } from './components/ThemeChanger'
 
 // export hooks
+export * from './hooks/useWindowOnClick'
 export * from './hooks/useShow'
 export * from './hooks/useTheme'
 
@@ -91,11 +94,13 @@ export {
   Select,
   Dropdown,
   Accordion,
+  Tabs,
   PanelLayout,
   PanelHeader,
   PanelSidebar,
   Sidebar,
   Texrarea,
+  JsonViewer,
   ThemeChanger,
   ThemeSwitcher,
 }

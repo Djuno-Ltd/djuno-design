@@ -20,7 +20,7 @@
 
 import React from 'react'
 import { cn } from '../../utils/cn'
-import useShow from '../../hooks/useShow'
+import { useShow } from '../../hooks/useShow'
 import { PanelLayoutProps } from '../../types/IPanelLayouts'
 
 /**
@@ -76,7 +76,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   }, [pathname])
 
   return (
-    <div className={cn('dj-flex dj-flex-col dj-min-h-full md:dj-flex-row dj-relative', className)} style={style}>
+    <div className={cn('dj-flex dj-flex-col dj-h-full md:dj-flex-row dj-relative', className)} style={style}>
       {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal' })}
       <div
         className={cn('dj-min-h-full dj-w-full dj-ml-auto dj-transition-all dj-duration-200', {
@@ -85,9 +85,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
         })}
       >
         {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
-        <div className='dj-max-w-7xl dj-mx-auto dj-min-w-full  dj-min-h-[calc(100%-4rem)] dj-overflow-auto'>
-          {children}
-        </div>
+        <div className='dj-max-w-7xl dj-mx-auto dj-min-w-full  dj-h-[calc(100%-4rem)] dj-overflow-auto'>{children}</div>
       </div>
     </div>
   )

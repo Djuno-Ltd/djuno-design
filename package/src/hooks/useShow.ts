@@ -20,7 +20,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
-function useShow(initialValue: boolean = false, callback?: (d?: any) => void) {
+export function useShow(initialValue: boolean = false, callback?: (d?: any) => void) {
   const [isShow, setShow] = React.useState(initialValue)
 
   const show = React.useCallback(
@@ -36,5 +36,3 @@ function useShow(initialValue: boolean = false, callback?: (d?: any) => void) {
 
   return [isShow, { show, hide, toggle }] as const
 }
-
-export default useShow

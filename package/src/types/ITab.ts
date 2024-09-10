@@ -1,6 +1,6 @@
 /**
- * @author Sanaz Zerrati <szeraati69@gmail.com>
- * @fileoverview ThemeChanger types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview Tabs types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,6 +18,26 @@
  * limitations under the License.
  */
 
-export interface ThemeChangerProps {
-  itemsClassName?: string
+import React, { PropsWithChildren } from 'react'
+
+export interface TabsProps extends PropsWithChildren {
+  options: TabOptions
+  selectedIndex?: number
+  onChange?: (index: number) => void
+  useUrl?: boolean
+  listClassName?: string
+  panelClassName?: string
+  tabType?: 'default' | 'creamy'
 }
+
+export interface TabOption<T = undefined> {
+  label: React.ReactNode
+  url?: string
+  element?: string | React.ReactNode
+  icon?: string | React.ReactNode
+  setting?: T
+  disabled?: boolean
+  testId?: string
+}
+
+export type TabOptions<T = undefined> = Array<TabOption<T>>

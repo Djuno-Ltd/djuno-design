@@ -1,6 +1,6 @@
 /**
- * @author Sanaz Zerrati <szeraati69@gmail.com>
- * @fileoverview ThemeChanger types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview JsonViewer types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
-export interface ThemeChangerProps {
-  itemsClassName?: string
+import { PropsWithChildren } from 'react'
+
+export interface JsonViewerProps extends PropsWithChildren {
+  value?: object | null
+  collapsed?: number | boolean
 }

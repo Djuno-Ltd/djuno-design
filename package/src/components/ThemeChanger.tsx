@@ -33,12 +33,11 @@ import Switcher from './form/Switcher'
  *
  *
  * @param {object} props - ThemeChanger props.
- * @param {React.ReactNode} [props.children] - The content inside the ThemeChanger.
  * @param {string} [props.itemsClassName] - Additional classes to apply to the items within the ThemeChanger.
  *
  * @returns {React.ReactNode} Rendered ThemeChanger component.
  *
- * @version 0.0.0
+ * @version 0.6.0
  * @see https://www.npmjs.com/package/djuno-design#themeChanger
  *
  * @example
@@ -137,6 +136,25 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
   )
 }
 
+/**
+ * ThemeSwitcher component.
+ *
+ *
+ * @param {object} props - ThemeSwitcher props.
+ * @param {string} [props.itemsClassName] - Additional classes to apply to the items within the ThemeChanger.
+ *
+ * @returns {React.ReactNode} Rendered ThemeSwitcher component.
+ *
+ * @version 0.6.0
+ * @see https://www.npmjs.com/package/djuno-design#themeSwicher
+ *
+ * @example
+ * // Example usage of ThemeSwitcher component:
+ *
+ *
+ * <ThemeSwitcher itemsClassName="custom-theme"/>
+ *
+ */
 const ThemeSwitcher: React.FC<ThemeChangerProps> = () => {
   const { mode, changeMode } = useTheme()
   return <Switcher size='medium' on={mode === 'dark'} onToggle={(v) => changeMode(v ? 'dark' : 'light')} />

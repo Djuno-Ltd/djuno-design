@@ -23,6 +23,8 @@ import { TextareaProps } from './../../types/ITextarea'
 import { AnimatedFormError, inputVariants, labelVariants } from './Input'
 import Typography from '../Typography'
 import { InfoTooltip } from '../Tooltip'
+import { copyToClipboard } from '../../utils/copy'
+import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation and additional styling options.
@@ -39,6 +41,7 @@ import { InfoTooltip } from '../Tooltip'
  * @param {string} [props.hint] - Hint text to provide additional guidance to the user.
  * @param {SizeTypes} [props.size] - Size of the textarea field.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the textarea.
+ * @param {boolean} [props.copyable] - Indicates if the input value can be copied.
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *
@@ -76,7 +79,18 @@ const Textarea: React.FC<TextareaProps> = ({
   tooltip,
   size,
   type,
+  copyable,
 }) => {
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+
+  const handleCopyToClipboard = () => {
+    if (textareaRef.current) {
+      const textToCopy = textareaRef.current.value
+      if (textToCopy) {
+        copyToClipboard(textToCopy)
+      }
+    }
+  }
   return (
     <div className='dj-flex dj-flex-col'>
       <div
@@ -96,24 +110,38 @@ const Textarea: React.FC<TextareaProps> = ({
               *
             </Typography.Text>
           )}
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          <div className='dj-flex dj-items-center dj-gap-1'>
+            {tooltip && <InfoTooltip tooltip={tooltip} />}
+            {typeof copyable !== 'undefined' && (
+              <CopyIcon
+                onClick={handleCopyToClipboard}
+                className={cn(
+                  'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
+                  { 'dj-w-[15px]': size === 'small' },
+                )}
+              />
+            )}
+          </div>
         </label>
         {hint && <span className='dj-text-xs dj-text-slate-500'>{hint}</span>}
       </div>
+
       <textarea
         id={id}
+        ref={textareaRef}
         {...textareaProps}
         className={cn(
           inputVariants({
             type,
             hasError: error ? 'yes' : 'no',
             size,
-            copyable: 'no', //typeof copyable === 'undefined' ? 'no' : 'yes',
+            copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
           }),
           className,
         )}
         placeholder={placeholder}
       />
+
       <AnimatedFormError error={error} />
     </div>
   )

@@ -81,11 +81,15 @@ function App() {
     - PanelHeader
 
 20. Sidebar
+21. JsonViewer
+22. Tabs
+23. ThemeChanger & ThemeSwitcher
 
 ### Available hooks
 
 1. useShow
 2. useWindowOnClick
+3. useTheme
 
 ### Available utility functions
 
@@ -259,6 +263,7 @@ function App() {
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
 | size              | `SizeTypes`                      |          | medium  |             |
+| copyable          | `boolean`                        |          |         |             |
 
 ### Switcher
 
@@ -462,6 +467,25 @@ function App() {
 | `icon`            | `React.FunctionComponent<React.SVGProps<SVGSVGElement>>` |          |         | Icon component for the item.                                         |
 | `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
+
+### JsonViewer
+
+| Name      | Type              | Required | default | Description |
+| --------- | ----------------- | -------- | ------- | ----------- |
+| value     | object or null    |          | {}      |             |
+| collapsed | number or boolean |          |         |             |
+
+### Tabs
+
+| Name           | Type         | Required | Default | Description |
+| -------------- | ------------ | -------- | ------- | ----------- |
+| options        | `TabOptions` |          |         |             |
+| selectedIndex  | number       |          |         |             |
+| onChange       | `() => void` |          |         |             |
+| useUrl         | boolean      |          |         |             |
+| listClassName  | string       |          |         |             |
+| panelClassName | string       |          |         |             |
+| tabType        | string       |          |         |             |
 
 ### ThemeChanger , ThemeSwitcher
 
