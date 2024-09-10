@@ -406,7 +406,6 @@
 | `mobileIcon`        | `React.ReactNode` |          |         | An optional icon or element to display in the mobile view. |
 | `children`          | `React.ReactNode` |          |         | The content to be displayed within the header.             |
 
-<<<<<<< HEAD
 ### Checkbox
 
 | Name       | Type                          | Required | default | Description |
@@ -416,7 +415,7 @@
 | label      | `React.ReactNode`             |          |         |             |
 | required   | boolean                       |          | false   |             |
 | error      | string                        |          |         |             |
-=======
+
 ### Sidebar
 
 | Name          | Type                  | Required | Default | Description                                                     |
@@ -442,7 +441,6 @@
 | `icon`            | `React.FunctionComponent<React.SVGProps<SVGSVGElement>>` |          |         | Icon component for the item.                                         |
 | `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
->>>>>>> 99d296f1327ddabf18be5a2d08355e60de855ac6
 
 ## Contributor ✨
 

@@ -100,23 +100,20 @@ function App() {
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="Checkbox">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox id="delete" label="Djuno Design" inputProps={{}} />
+            <Checkbox id="delete" label="Djuno Design" />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Checkbox
-              inputProps={{}}
-              id="isRequired"
+              id="delete"
               label="Djuno Design"
-              required
+              tooltip={{ content: "This is a tooltip" }}
             />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox
-              inputProps={{}}
-              id="isRequired"
-              label="is required?"
-              error="error"
-            />
+            <Checkbox id="isRequired" label="Djuno Design" required />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox id="isRequired" label="is required?" error="error" />
           </Flex>
         </Card>
         <Card title="Textarea">

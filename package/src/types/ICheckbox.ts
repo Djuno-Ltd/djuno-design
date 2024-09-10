@@ -18,12 +18,13 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { TooltipProps } from './Tooltip'
 
-export interface CheckboxProps extends PropsWithChildren {
+export interface CheckboxProps {
   id?: string
   inputProps?: React.HTMLProps<HTMLInputElement>
   label?: React.ReactNode
   required?: boolean
   error?: string
+  tooltip?: TooltipProps
 }

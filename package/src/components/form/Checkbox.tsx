@@ -20,9 +20,13 @@
 
 import * as React from 'react'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { CheckboxProps } from '../../types/ICheckbox'
 import { cn } from '../../utils/cn'
+import { AnimatedFormError, labelVariants } from './Input'
+import { Checkbox as HeadlessCheckbox } from '@headlessui/react'
+import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
+import Typography from './../Typography'
+import { InfoTooltip } from '../Tooltip'
 
 /**
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
@@ -47,7 +51,7 @@ import { cn } from '../../utils/cn'
  *   return (
  *     <Checkbox
  *       id="checkbox-id"
- *       inputProps={{}}
+ *       inputProps={{inputProps}}
  *       label="checkboc-label"
  *       required={true}
  *       error="checkbox-error"
@@ -55,58 +59,55 @@ import { cn } from '../../utils/cn'
  *   );
  * }
  */
-const Checkbox: React.FC<CheckboxProps> = ({ id, inputProps, label, error, required }) => {
+
+const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
+  id,
+  inputProps,
+  label,
+  error,
+  required,
+  tooltip,
+}) => {
+  const [checked, setChecked] = React.useState<boolean>(true)
+
   return (
-    <div className='dj-flex dj-flex-col'>
-      <div className='dj-flex dj-gap-1 dj-cursor-pointer'>
-        <input
-          type='checkbox'
-          id={id}
-          {...inputProps}
-          className={cn(
-            'dj-border dj-text-sm dj-rounded-lg  dj-block dj-w-4 dj-h-4 dark:dj-bg-zinc-800 dj-outline-none dj-mt-[0.1rem] dj-cursor-pointer',
-            {
-              'dj-bg-red-50 dj-border-red-500 dj-text-red-900 dj-placeholder-red-700  focus:dj-ring-red-500 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500':
-                error,
-              'dark:dj-border-zinc-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500  dark:focus:dj-ring-blue-500 dark:focus:dj-border-blue-500':
-                !error,
-            },
+    <div className='dj-flex dj-flex-col dj-gap-1'>
+      <div className='dj-flex dj-items-center dj-gap-1 dj-cursor-pointer'>
+        <HeadlessCheckbox
+          checked={checked}
+          onChange={setChecked}
+          className={cn('dj-group dj-flex dj-items-center dj-justify-center dj-rounded dj-border dj-w-4 dj-h-4', {
+            // Unchecked style
+            'dj-bg-white dj-border-dark-500': !checked,
+            // Checked style
+            'dj-bg-primary-600 dj-border-primary-600 dj-text-white': checked,
+            'dj-w-4 dj-h-4': true,
+          })}
+        >
+          <CheckIcon
+            className={cn('dj-hidden', { 'dj-block dj-text-white': checked })}
+            style={{
+              strokeWidth: '2.5',
+            }}
+          />
+        </HeadlessCheckbox>
+        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+          {label && (
+            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+              {label}
+            </Typography.Text>
           )}
-        />
-        {label && (
-          <label
-            htmlFor={id}
-            className={cn(
-              'dj-block dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-select-none dj-cursor-pointer',
-              {
-                'dj-text-red-700 dark:dj-text-red-500': error,
-              },
-            )}
-          >
-            {label}
-            {required && <span className='dj-text-red-500 dj-mx-1'>*</span>}
-          </label>
-        )}
+          {required && (
+            <Typography.Text uiType='danger' className='dj-h-5'>
+              *
+            </Typography.Text>
+          )}
+          {tooltip && <InfoTooltip tooltip={tooltip} />}
+        </label>
       </div>
       <AnimatedFormError error={error} />
     </div>
   )
 }
 
-const AnimatedFormError: React.FC<{ error?: string | boolean }> = ({ error }) => {
-  return (
-    <AnimatePresence>
-      {error && typeof error === 'string' && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-        >
-          <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )
-}
-export { AnimatedFormError }
 export default Checkbox
