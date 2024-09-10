@@ -47,10 +47,12 @@ import Pagination from './components/Pagination'
 import Modal from './components/Modal'
 import Dropdown from './components/Dropdown'
 import Accordion from './components/Accordion'
+import Tabs from './components/Tabs'
 import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
 import Popover from './components/Popover'
+import JsonViewer from './components/JsonViewer'
 import Sidebar from './components/Sidebar'
 
 // export hooks
@@ -89,10 +91,12 @@ export {
   Select,
   Dropdown,
   Accordion,
+  Tabs,
   PanelLayout,
   PanelHeader,
   PanelSidebar,
   Popover,
   Sidebar,
   Texrarea,
+  JsonViewer,
 }

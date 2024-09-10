@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Popover types
+ * @fileoverview Tabs types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,9 +18,26 @@
  * limitations under the License.
  */
 
-export interface PopoverProps {
-  contentNode: React.ReactNode
-  children?: React.ReactNode
+import React, { PropsWithChildren } from 'react'
+
+export interface TabsProps extends PropsWithChildren {
+  options: TabOptions
+  selectedIndex?: number
+  onChange?: (index: number) => void
+  useUrl?: boolean
+  listClassName?: string
   panelClassName?: string
-  panelStyle?: React.CSSProperties
+  tabType?: 'default' | 'creamy'
 }
+
+export interface TabOption<T = undefined> {
+  label: React.ReactNode
+  url?: string
+  element?: string | React.ReactNode
+  icon?: string | React.ReactNode
+  setting?: T
+  disabled?: boolean
+  testId?: string
+}
+
+export type TabOptions<T = undefined> = Array<TabOption<T>>

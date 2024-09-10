@@ -81,6 +81,8 @@ function App() {
     - PanelHeader
 
 20. Sidebar
+21. JsonViewer
+22. Tabs
 
 ### Available hooks
 
@@ -259,6 +261,7 @@ function App() {
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
 | size              | `SizeTypes`                      |          | medium  |             |
+| copyable          | `boolean`                        |          |         |             |
 
 ### Switcher
 
@@ -463,17 +466,34 @@ function App() {
 | `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
 
-## Contributor ✨
+### JsonViewer
+
+| Name      | Type              | Required | default | Description |
+| --------- | ----------------- | -------- | ------- | ----------- |
+| value     | object or null    |          | {}      |             |
+| collapsed | number or boolean |          |         |             |
+
+### Tabs
+
+| Name           | Type         | Required | Default | Description |
+| -------------- | ------------ | -------- | ------- | ----------- |
+| options        | `TabOptions` |          |         |             |
+| selectedIndex  | number       |          |         |             |
+| onChange       | `() => void` |          |         |             |
+| useUrl         | boolean      |          |         |             |
+| listClassName  | string       |          |         |             |
+| panelClassName | string       |          |         |             |
+| tabType        | string       |          |         |             |
 
 ### Popover
 
-| Name             | Type                  | Required | default | Description |
-| ---------------- | --------------------- | -------- | ------- | ----------- |
-| buttonEl         | `React.ReactNode`     | yes      |         |             |
-| open             | boolean               | yes      | false   |             |
-| anchorEl         | `HTMLElement or null` |          |         |             |
-| `children`       | `React.ReactNode`     |          |         |             |
-| className        | string                |          |         |             |
-| popoverClassName | `React.CSSProperties` |          |         |             |
+| Name           | Type                  | Required | default | Description |
+| -------------- | --------------------- | -------- | ------- | ----------- |
+| contentNode    | `React.ReactNode`     | yes      |         |             |
+| `children`     | `React.ReactNode`     |          |         |             |
+| panelclassName | string                |          |         |             |
+| panelStyle     | `React.CSSProperties` |          |         |             |
+
+## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)

@@ -20,21 +20,17 @@
 import * as React from 'react'
 import { cn } from '../utils/cn'
 import { PopoverButton, PopoverPanel, Popover as Popper, Transition } from '@headlessui/react'
-import { Fragment, PropsWithChildren } from 'react'
+import { Fragment } from 'react'
 import { useFloating, shift, flip } from '@floating-ui/react-dom'
 import { PopoverProps } from '../types'
-
 /**
- * Popover component that allows for customization of UI type, size, loading state, and more.
- *
+ * Popover component that allows for customization of the popover's appearance and behavior.
  *
  * @param {object} props - Popover props.
- * @param {React.ReactNode} props.buttonEl - The element that triggers the popover when clicked.
- * @param {boolean} props.open - Controls whether the popover is open or closed.
- * @param {HTMLElement | null} props.anchorEl - The DOM element to which the popover is anchored.
+ * @param {React.ReactNode} props.contentNode - The content or element that triggers the popover when clicked.
  * @param {React.ReactNode} [props.children] - Optional children to be rendered inside the popover.
- * @param {string} [props.className] - Additional CSS classes to apply to the popover container.
- * @param {React.CSSProperties} [props.popoverClassName] - Additional inline styles to apply to the popover.
+ * @param {string} [props.panelClassName] - Additional CSS classes to apply to the popover panel.
+ * @param {React.CSSProperties} [props.panelStyle] - Additional inline styles to apply to the popover panel.
  *
  * @returns {React.ReactNode} Rendered Popover component.
  *
@@ -46,36 +42,29 @@ import { PopoverProps } from '../types'
  *
  * function MyComponent() {
  *   const [open, setOpen] = useState(false);
- *   const anchorRef = useRef<HTMLDivElement | null>(null);
- *
- *   const handleToggle = () => setOpen((prev) => !prev);
- *   const handleClose = () => setOpen(false);
+ *    const handleToggle = () => setOpen(!open);
  *
  *   return (
  *     <div>
- *       <div ref={anchorRef} onClick={handleToggle}>
- *         Open Popover
- *       </div>
- *
- *       <Popover
- *         buttonEl={<div>Trigger Element</div>}
- *         open={open}
- *         anchorEl={anchorRef.current}
- *         className="custom-popover"
- *         sx={{ zIndex: 1000, minWidth: 350, maxWidth: 400 }}
+ *      <Popover
+ *       contentNode={<div>Popover Content</div>}
+ *       open={open}
+ *       panelClassName="custom-panel-class"
+ *       panelStyle={{panelStyle}}
  *       >
- *         <div className="p-3">
- *           <h4>Popover Content</h4>
- *           <p>This is an example of popover content.</p>
- *           <button onClick={handleClose}>Close</button>
- *         </div>
- *       </Popover>
+ *       <button onClick={handleToggle}>Toggle Popover</button>
+ *      </Popover>
  *     </div>
  *   );
  * }
  */
 
-const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({ buttonEl, children, popoverClassName }) => {
+const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
+  contentNode,
+  children,
+  panelClassName,
+  panelStyle,
+}) => {
   const { refs, floatingStyles } = useFloating({
     placement: 'bottom-start',
     middleware: [flip(), shift()],
@@ -86,13 +75,16 @@ const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({ buttonEl, ch
       {({ open }) => (
         <>
           <PopoverButton
-            className={`
-        ${open ? 'dj-text-white' : 'dj-text-white/90'},  focus:dj-outline-none focus:dj-ring-0
-        `}
+            as='div'
+            className={cn('focus:dj-outline-none focus:dj-ring-0', {
+              '': open,
+              '': !open,
+            })}
             ref={refs.setReference}
           >
-            {buttonEl}
+            {children}
           </PopoverButton>
+
           <Transition
             as={Fragment}
             enter='dj-transition dj-ease-out dj-duration-200'
@@ -104,10 +96,10 @@ const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({ buttonEl, ch
           >
             <PopoverPanel
               ref={refs.setFloating}
-              style={{ ...floatingStyles, ...popoverClassName }}
-              className='dj-absolute dj-left-0 dj-z-10 mt-3 dj-transform dj-px-4 sm:dj-px-0'
+              style={{ ...floatingStyles, ...panelStyle }}
+              className={cn('dj-absolute dj-left-0 dj-z-10 mt-3 dj-transform dj-px-4 sm:dj-px-0', panelClassName)}
             >
-              {children}
+              {contentNode}
             </PopoverPanel>
           </Transition>
         </>

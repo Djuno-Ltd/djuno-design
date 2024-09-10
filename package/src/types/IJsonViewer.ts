@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Popover types
+ * @fileoverview JsonViewer types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-export interface PopoverProps {
-  contentNode: React.ReactNode
-  children?: React.ReactNode
-  panelClassName?: string
-  panelStyle?: React.CSSProperties
+import { PropsWithChildren } from 'react'
+
+export interface JsonViewerProps extends PropsWithChildren {
+  value?: object | null
+  collapsed?: number | boolean
 }
