@@ -489,7 +489,7 @@ function App() {
 
 | Name           | Type                  | Required | default | Description |
 | -------------- | --------------------- | -------- | ------- | ----------- |
-| contentNode    | `React.ReactNode`     | yes      |         |             |
+| contentNode    | `React.ReactNode`     | ✔       |         |             |
 | `children`     | `React.ReactNode`     |          |         |             |
 | panelclassName | string                |          |         |             |
 | panelStyle     | `React.CSSProperties` |          |         |             |
