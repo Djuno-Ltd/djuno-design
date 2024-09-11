@@ -142,17 +142,24 @@ function App() {
     },
   ];
 
+  const [isChecked, setIsChecked] = useState(false);
+
+  // const handleCheckboxChange = (checked: boolean) => {
+  //   setIsChecked(checked);
+  //   console.log("Checkbox is now:", checked);
+  // };
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="Checkbox">
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox id="delete" label="Djuno Design" />
+          {/* <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox id="my-checkbox" label="Djuno Design" />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Checkbox
-              id="delete"
+              id="my-checkbox"
               label="Djuno Design"
               tooltip={{ content: "This is a tooltip" }}
             />
@@ -161,7 +168,68 @@ function App() {
             <Checkbox id="isRequired" label="Djuno Design" required />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox id="isRequired" label="is required?" error="error" />
+            <Checkbox id="my-checkbox" label="is required?" error="error" />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox
+              id="my-checkbox"
+              label="Djuno Design"
+              checked={isChecked}
+              onChangeCheck={handleCheckboxChange}
+            />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <Checkbox
+              id="my-checkbox"
+              label="Djuno Design"
+              checked={isChecked}
+              onChangeCheck={handleCheckboxChange}
+              disabled
+            />
+          </Flex> */}
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-5 w-full">
+              <Flex direction="col">
+                <Checkbox
+                  label="Djuno Design"
+                  checked={isChecked}
+                  onChangeCheckbox={setIsChecked}
+                />
+              </Flex>
+            </Flex>
+
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                checked={isChecked}
+                onChangeCheckbox={setIsChecked}
+                disabled
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="is required?"
+                checked={isChecked}
+                onChangeCheckbox={setIsChecked}
+                required
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                checked={isChecked}
+                onChangeCheckbox={setIsChecked}
+                tooltip={{ content: "it's a tooltip" }}
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                checked={isChecked}
+                onChangeCheckbox={setIsChecked}
+                error="error"
+              />
+            </Flex>
           </Flex>
         </Card>
         <Card title="Tabs">
