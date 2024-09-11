@@ -51,11 +51,16 @@ import Tabs from './components/Tabs'
 import PanelLayout from './components/layouts/PanelLayout'
 import PanelHeader from './components/layouts/PanelHeader'
 import PanelSidebar from './components/layouts/PanelSidebar'
+import Popover from './components/Popover'
 import JsonViewer from './components/JsonViewer'
 import Sidebar from './components/Sidebar'
+import ThemeChanger from './components/ThemeChanger'
+import { ThemeSwitcher } from './components/ThemeChanger'
 
 // export hooks
+export * from './hooks/useWindowOnClick'
 export * from './hooks/useShow'
+export * from './hooks/useTheme'
 
 // export all types
 export * from './types'
@@ -94,7 +99,10 @@ export {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Popover,
   Sidebar,
   Texrarea,
   JsonViewer,
+  ThemeChanger,
+  ThemeSwitcher,
 }

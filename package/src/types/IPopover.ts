@@ -1,6 +1,6 @@
 /**
- * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview useShow hook
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview Popover types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -17,22 +17,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
 
-export function useShow(initialValue: boolean = false, callback?: (d?: any) => void) {
-  const [isShow, setShow] = React.useState(initialValue)
-
-  const show = React.useCallback(
-    (d?: any) => {
-      setShow(true)
-      callback && callback(d)
-    },
-    [callback],
-  )
-
-  const hide = React.useCallback(() => setShow(false), [])
-  const toggle = React.useCallback(() => setShow((prev) => !prev), [])
-
-  return [isShow, { show, hide, toggle }] as const
+export interface PopoverProps {
+  contentNode: React.ReactNode
+  children?: React.ReactNode
+  panelClassName?: string
+  panelStyle?: React.CSSProperties
 }

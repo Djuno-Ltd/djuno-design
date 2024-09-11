@@ -24,13 +24,16 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  PanelLayoutTypes,
+  Popover,
   JsonViewer,
   Sidebar,
   SidebarItem,
   Texrarea,
-  PanelLayoutTypes,
+  ThemeChanger,
+  ThemeSwitcher,
 } from "djuno-design";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -96,6 +99,9 @@ function App() {
     },
   };
 
+  const [open, setOpen] = useState<boolean>(false);
+  const handleToggle = () => setOpen(!open);
+
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
@@ -145,6 +151,31 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Popover">
+          <Flex direction="col" className="gap-5 w-full  mb-10">
+            <Popover
+              contentNode={
+                <Input
+                  inputProps={{
+                    value: "djuno-design",
+                  }}
+                />
+              }
+              panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
+              panelStyle={{}}
+            >
+              <div className="w-40">
+                <Button onClick={handleToggle}>Popover</Button>
+              </div>
+            </Popover>
+          </Flex>
+        </Card>
+        <Card title="ThemeChanger">
+          <Flex className="gap-5 w-full mt-5">
+            <ThemeChanger />
+            <ThemeSwitcher />
+          </Flex>
+        </Card>
         <Card title="Tabs">
           <Flex direction="col" className="gap-5 w-full">
             <Tabs

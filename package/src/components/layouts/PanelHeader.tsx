@@ -20,7 +20,7 @@
 
 import React from 'react'
 import { ReactComponent as MenuIcon } from './../../assets/icons/menu.svg'
-import useWindowOnClick from '../../hooks/useWindowOnClick'
+import { useWindowOnClick } from '../../hooks/useWindowOnClick'
 import { PanelHeaderProps } from '../../types/IPanelLayouts'
 
 /**
