@@ -43,6 +43,7 @@ export * from './IPanelLayouts'
 export * from './IPopover'
 export * from './ISidebar'
 export * from './ITextarea'
+export * from './IThemeChanger'
 export * from './IJsonViewer'
 
 export type SizeTypes = 'small' | 'medium' | 'large'

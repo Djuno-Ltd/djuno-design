@@ -20,7 +20,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
-function useWindowOnClick(
+export function useWindowOnClick(
   callbackFn: (ev: MouseEvent) => any,
   deps: React.DependencyList,
   options: AddEventListenerOptions & { ignore?: Element[] } = {},
@@ -40,5 +40,3 @@ function useWindowOnClick(
     }
   }, [...deps, ...(options.ignore || [])])
 }
-
-export default useWindowOnClick

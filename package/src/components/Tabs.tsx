@@ -37,7 +37,7 @@ import React, { useEffect } from 'react'
  *
  * @returns {React.ReactNode} Rendered Tabs component.
  *
- * @version 0.0.0
+ * @version 0.6.0
  * @see https://www.npmjs.com/package/some-ui-library#tabs
  *
  * @example

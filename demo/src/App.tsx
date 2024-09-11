@@ -24,12 +24,14 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  PanelLayoutTypes,
   Popover,
   JsonViewer,
   Sidebar,
   SidebarItem,
   Texrarea,
-  PanelLayoutTypes,
+  ThemeChanger,
+  ThemeSwitcher,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -166,6 +168,12 @@ function App() {
                 <Button onClick={handleToggle}>Popover</Button>
               </div>
             </Popover>
+          </Flex>
+        </Card>
+        <Card title="ThemeChanger">
+          <Flex className="gap-5 w-full mt-5">
+            <ThemeChanger />
+            <ThemeSwitcher />
           </Flex>
         </Card>
         <Card title="Tabs">
