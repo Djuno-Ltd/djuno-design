@@ -25,13 +25,16 @@ import {
   PanelHeader,
   PanelSidebar,
   Checkbox,
+  PanelLayoutTypes,
+  Popover,
   JsonViewer,
   Sidebar,
   SidebarItem,
   Texrarea,
-  PanelLayoutTypes,
+  ThemeChanger,
+  ThemeSwitcher,
 } from "djuno-design";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -97,6 +100,9 @@ function App() {
     },
   };
 
+  const [open, setOpen] = useState<boolean>(false);
+  const handleToggle = () => setOpen(!open);
+
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
@@ -154,39 +160,6 @@ function App() {
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
         <Card title="Checkbox">
-          {/* <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox id="my-checkbox" label="Djuno Design" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox
-              id="my-checkbox"
-              label="Djuno Design"
-              tooltip={{ content: "This is a tooltip" }}
-            />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox id="isRequired" label="Djuno Design" required />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox id="my-checkbox" label="is required?" error="error" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox
-              id="my-checkbox"
-              label="Djuno Design"
-              checked={isChecked}
-              onChangeCheck={handleCheckboxChange}
-            />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <Checkbox
-              id="my-checkbox"
-              label="Djuno Design"
-              checked={isChecked}
-              onChangeCheck={handleCheckboxChange}
-              disabled
-            />
-          </Flex> */}
           <Flex direction="col" className="gap-5">
             <Flex className="gap-5 w-full">
               <Flex direction="col">
@@ -230,6 +203,31 @@ function App() {
                 error="error"
               />
             </Flex>
+          </Flex>
+        </Card>
+        <Card title="Popover">
+          <Flex direction="col" className="gap-5 w-full  mb-10">
+            <Popover
+              contentNode={
+                <Input
+                  inputProps={{
+                    value: "djuno-design",
+                  }}
+                />
+              }
+              panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
+              panelStyle={{}}
+            >
+              <div className="w-40">
+                <Button onClick={handleToggle}>Popover</Button>
+              </div>
+            </Popover>
+          </Flex>
+        </Card>
+        <Card title="ThemeChanger">
+          <Flex className="gap-5 w-full mt-5">
+            <ThemeChanger />
+            <ThemeSwitcher />
           </Flex>
         </Card>
         <Card title="Tabs">
@@ -321,7 +319,19 @@ function App() {
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
-              copyable
+              copyable={true}
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              copyable={(v) => `Hi ${v}`}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={(v) => `Hi ${v}`}
             />
           </Flex>
         </Card>

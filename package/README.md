@@ -83,11 +83,14 @@ function App() {
 20. Sidebar
 21. JsonViewer
 22. Tabs
+23. ThemeChanger & ThemeSwitcher
+24. Popover
 
 ### Available hooks
 
 1. useShow
 2. useWindowOnClick
+3. useTheme
 
 ### Available utility functions
 
@@ -261,7 +264,7 @@ function App() {
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
 | size              | `SizeTypes`                      |          | medium  |             |
-| copyable          | `boolean`                        |          |         |             |
+| copyable          | `boolean or function`            |          |         |             |
 
 ### Switcher
 
@@ -496,6 +499,21 @@ function App() {
 | listClassName  | string       |          |         |             |
 | panelClassName | string       |          |         |             |
 | tabType        | string       |          |         |             |
+
+### ThemeChanger , ThemeSwitcher
+
+| Name           | Type   | Required | default | Description |
+| -------------- | ------ | -------- | ------- | ----------- |
+| itemsClassName | string |          |         |             |
+
+### Popover
+
+| Name           | Type                  | Required | default | Description |
+| -------------- | --------------------- | -------- | ------- | ----------- |
+| contentNode    | `React.ReactNode`     | ✔       |         |             |
+| `children`     | `React.ReactNode`     |          |         |             |
+| panelclassName | string                |          |         |             |
+| panelStyle     | `React.CSSProperties` |          |         |             |
 
 ## Contributor ✨
 

@@ -20,7 +20,7 @@
 
 import React from 'react'
 import { cn } from '../../utils/cn'
-import useShow from '../../hooks/useShow'
+import { useShow } from '../../hooks/useShow'
 import { PanelLayoutProps } from '../../types/IPanelLayouts'
 
 /**

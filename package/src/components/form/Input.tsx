@@ -146,6 +146,8 @@ const Input: React.FunctionComponent<InputProps> = ({
 
     if (typeof copyable === 'function') {
       textToCopy = copyable(inputValue)
+    } else {
+      textToCopy = inputValue
     }
 
     if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
