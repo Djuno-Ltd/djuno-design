@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react'
 import { CheckboxProps } from '../../types/ICheckbox'
 import { cn } from '../../utils/cn'
 import { AnimatedFormError, labelVariants } from './Input'
-import { Checkbox as HeadlessCheckbox } from '@headlessui/react'
+import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react'
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 import Typography from './../Typography'
 import { InfoTooltip } from '../Tooltip'
@@ -60,9 +60,9 @@ import { InfoTooltip } from '../Tooltip'
  *       id="checkbox-id"
  *       inputProps={{ 'aria-label': 'custom-checkbox' }}
  *       label="Checkbox Label"
- *       checked={false}
+ *       value={false}
  *       required={true}
- *       onChangeCheckbox={handleCheckboxChange}
+ *       onChange={handleCheckboxChange}
  *       error="This field is required."
  *       tooltip="Additional information about this checkbox."
  *     />
@@ -76,37 +76,39 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   error,
   required,
   tooltip,
-  checked = false,
-  onChangeCheckbox,
+  value,
+  onChange,
   disabled,
 }) => {
-  const [checkedState, setCheckedState] = React.useState<boolean>(checked)
+  const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
   React.useEffect(() => {
-    setCheckedState(checked)
-  }, [checked])
+    setCheckedState(value || false)
+  }, [value])
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleChange = (v: boolean) => {
     if (!disabled) {
-      const newCheckedState = !checkedState
-      setCheckedState(newCheckedState)
-      onChangeCheckbox && onChangeCheckbox(newCheckedState)
+      onChange && onChange(v)
     }
   }
 
   return (
     <div className='dj-flex dj-flex-col dj-gap-1'>
-      <div className='dj-flex dj-items-center dj-gap-2 ' onClick={handleClick}>
+      <Field className='dj-flex dj-items-center dj-gap-2'>
         <HeadlessCheckbox
           checked={checkedState}
-          className={cn('dj-group dj-flex dj-items-center dj-justify-center dj-rounded dj-border dj-w-4 dj-h-4', {
-            'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2':
-              !checkedState,
-            'dj-bg-primary-600 dj-border-primary-600 dj-text-white': checkedState,
-            'dj-bg-primary-200 dj-border-primary-200 dark:dj-bg-dark-400 dark:dj-border-dark-700 dj-text-white dj-cursor-not-allowed':
-              checkedState && disabled,
-            'dj-w-4 dj-h-4': true,
-          })}
+          onChange={handleChange}
+          className={cn(
+            'dj-group dj-flex dj-items-center dj-justify-center dj-rounded dj-border dj-w-4 dj-h-4 dj-cursor-pointer',
+            {
+              'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2':
+                !checkedState,
+              'dj-bg-primary-600 dj-border-primary-600 dj-text-white': checkedState,
+              'dj-bg-primary-200 dj-border-primary-200 dark:dj-bg-dark-400 dark:dj-border-dark-700 dj-text-white dj-cursor-not-allowed':
+                checkedState && disabled,
+              'dj-w-4 dj-h-4': true,
+            },
+          )}
         >
           <CheckIcon
             className={cn('dj-hidden', { 'dj-block dj-text-white': checkedState })}
@@ -115,13 +117,13 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             }}
           />
         </HeadlessCheckbox>
-        <label
+        <Label
           htmlFor={id}
           className={cn(
             'dj-flex dj-items-center dj-cursor-pointer',
             labelVariants({ hasError: error ? 'yes' : 'no' }),
             {
-              ' dj-cursor-not-allowed': disabled,
+              ' dj-cursor-not-allowed': checkedState && disabled,
             },
           )}
         >
@@ -136,8 +138,9 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             </Typography.Text>
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
-        </label>
-      </div>
+        </Label>
+      </Field>
+
       <AnimatedFormError error={error} />
     </div>
   )

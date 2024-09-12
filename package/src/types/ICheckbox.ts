@@ -27,7 +27,7 @@ export interface CheckboxProps {
   required?: boolean
   error?: string
   tooltip?: TooltipProps
-  checked?: boolean
-  onChangeCheckbox?: (checked: boolean) => void
+  value?: boolean
+  onChange?: (checked: boolean) => void
   disabled?: boolean
 }

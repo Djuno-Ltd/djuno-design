@@ -445,15 +445,16 @@ function App() {
 
 ### Checkbox
 
-| Name             | Type                          | Required | default | Description |
-| ---------------- | ----------------------------- | -------- | ------- | ----------- |
-| id               | string                        |          |         |             |
-| inputprops       | `HTMLProps<HTMLInputElement>` |          |         |             |
-| label            | `React.ReactNode`             |          |         |             |
-| required         | boolean                       |          | false   |             |
-| error            | string                        |          |         |             |
-| onChangeCheckbox | `() => void`                  |          |         |             |
-| disabled         | boolean                       |          |         |             |
+| Name       | Type                          | Required | default | Description |
+| ---------- | ----------------------------- | -------- | ------- | ----------- |
+| id         | string                        |          |         |             |
+| inputprops | `HTMLProps<HTMLInputElement>` |          |         |             |
+| label      | `React.ReactNode`             |          |         |             |
+| required   | boolean                       |          | false   |             |
+| error      | string                        |          |         |             |
+| value      | boolean                       |          |         |             |
+| onChange   | `() => void`                  |          |         |             |
+| disabled   | boolean                       |          |         |             |
 
 ### Sidebar
 

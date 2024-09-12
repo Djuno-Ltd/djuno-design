@@ -150,11 +150,6 @@ function App() {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  // const handleCheckboxChange = (checked: boolean) => {
-  //   setIsChecked(checked);
-  //   console.log("Checkbox is now:", checked);
-  // };
-
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -165,8 +160,8 @@ function App() {
               <Flex direction="col">
                 <Checkbox
                   label="Djuno Design"
-                  checked={isChecked}
-                  onChangeCheckbox={setIsChecked}
+                  value={isChecked}
+                  onChange={setIsChecked}
                 />
               </Flex>
             </Flex>
@@ -174,32 +169,32 @@ function App() {
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Djuno Design"
-                checked={isChecked}
-                onChangeCheckbox={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 disabled
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="is required?"
-                checked={isChecked}
-                onChangeCheckbox={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 required
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Djuno Design"
-                checked={isChecked}
-                onChangeCheckbox={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 tooltip={{ content: "it's a tooltip" }}
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Djuno Design"
-                checked={isChecked}
-                onChangeCheckbox={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 error="error"
               />
             </Flex>
@@ -354,6 +349,7 @@ function App() {
 
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
+            handleChange
             <Accordion
               items={[
                 {
