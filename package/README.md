@@ -270,8 +270,8 @@ function App() {
 
 | Name        | Type                       | Required | default | Description |
 | ----------- | -------------------------- | -------- | ------- | ----------- |
-| on          | boolean                    |          |         |             |
-| onToggle    | `(value: boolean) => void` |          |         |             |
+| value       | boolean                    |          |         |             |
+| onChange    | `(value: boolean) => void` |          |         |             |
 | disabled    | boolean                    |          |         |             |
 | loading     | boolean                    |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |

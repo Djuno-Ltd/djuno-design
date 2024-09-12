@@ -157,7 +157,7 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
  */
 const ThemeSwitcher: React.FC<ThemeChangerProps> = () => {
   const { mode, changeMode } = useTheme()
-  return <Switcher size='medium' on={mode === 'dark'} onToggle={(v) => changeMode(v ? 'dark' : 'light')} />
+  return <Switcher size='medium' value={mode === 'dark'} onChange={(v) => changeMode(v ? 'dark' : 'light')} />
   return null
 }
 

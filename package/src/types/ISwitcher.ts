@@ -21,8 +21,8 @@
 import { LoadingProps, SizeTypes } from '.'
 
 export interface SwitcherProps {
-  on?: boolean
-  onToggle?: (value: boolean) => void
+  value?: boolean
+  onChange?: (value: boolean) => void
   disabled?: boolean
   loading?: boolean
   loadingSetting?: LoadingProps
