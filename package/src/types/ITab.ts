@@ -1,6 +1,6 @@
 /**
- * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview Tabs types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,13 +18,26 @@
  * limitations under the License.
  */
 
-import { LoadingProps, SizeTypes } from '.'
+import React, { PropsWithChildren } from 'react'
 
-export interface SwitcherProps {
-  value?: boolean
-  onChange?: (value: boolean) => void
-  disabled?: boolean
-  loading?: boolean
-  loadingSetting?: LoadingProps
-  size?: SizeTypes
+export interface TabsProps extends PropsWithChildren {
+  options: TabOptions
+  selectedIndex?: number
+  onChange?: (index: number) => void
+  useUrl?: boolean
+  listClassName?: string
+  panelClassName?: string
+  tabType?: 'default' | 'creamy'
 }
+
+export interface TabOption<T = undefined> {
+  label: React.ReactNode
+  url?: string
+  element?: string | React.ReactNode
+  icon?: string | React.ReactNode
+  setting?: T
+  disabled?: boolean
+  testId?: string
+}
+
+export type TabOptions<T = undefined> = Array<TabOption<T>>

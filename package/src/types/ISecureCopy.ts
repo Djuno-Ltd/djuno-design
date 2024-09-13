@@ -1,6 +1,6 @@
 /**
- * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview SecureCopy types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,13 +18,15 @@
  * limitations under the License.
  */
 
-import { LoadingProps, SizeTypes } from '.'
+import { PropsWithChildren } from 'react'
 
-export interface SwitcherProps {
-  value?: boolean
-  onChange?: (value: boolean) => void
-  disabled?: boolean
-  loading?: boolean
-  loadingSetting?: LoadingProps
-  size?: SizeTypes
+export interface SecureCopyProps extends PropsWithChildren {
+  text: string
+  className?: string
+  textClassName?: string
+  iconClassName?: string
+  showText?: boolean
+  type?: ActionTypes
 }
+
+export type ActionTypes = 'copy' | 'hide'

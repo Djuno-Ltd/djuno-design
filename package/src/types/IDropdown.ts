@@ -1,6 +1,6 @@
 /**
- * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview DropdownMenu types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,13 +18,28 @@
  * limitations under the License.
  */
 
-import { LoadingProps, SizeTypes } from '.'
+import React, { PropsWithChildren } from 'react'
 
-export interface SwitcherProps {
-  value?: boolean
-  onChange?: (value: boolean) => void
-  disabled?: boolean
-  loading?: boolean
-  loadingSetting?: LoadingProps
-  size?: SizeTypes
+export interface DropdownProps extends PropsWithChildren {
+  menu?: Array<DropdownElement>
+  title?: string | React.ReactNode
+  type?: 'default' | 'simple'
+  positionClassName?: string
+  buttonClassName?: string
+  itemsClassName?: string
 }
+
+export type DropdownItem = {
+  label: string | React.ReactNode
+  key: string
+  onClick?: (item: DropdownItem, close: () => void) => void
+  disabled?: boolean
+  danger?: boolean
+  loading?: boolean
+}
+
+export type DropdownDivider = {
+  type: 'divider'
+}
+
+export type DropdownElement = DropdownItem | DropdownDivider

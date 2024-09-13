@@ -11,8 +11,8 @@ import { cn } from '../../utils/cn'
  * A toggle switch component that can be used to represent an on/off state with various sizes, loading states, and disabled options.
  *
  * @param {object} props - Switcher component props.
- * @param {boolean} [props.on] - Initial state of the switch (on or off).
- * @param {Function} [props.onToggle] - Callback function that gets called when the switch is toggled. It receives the new state as an argument.
+ * @param {boolean} [props.value] - Initial state of the switch (on or off).
+ * @param {Function} [props.onChange] - Callback function that gets called when the switch is toggled. It receives the new state as an argument.
  * @param {boolean} [props.disabled] - If true, the switch will be disabled and not clickable.
  * @param {boolean} [props.loading] - If true, the switch will show a loading indicator instead of its normal state.
  * @param {LoadingProps} [props.loadingSetting] - Configuration for the loading indicator, including size, border size, and type.
@@ -26,23 +26,23 @@ import { cn } from '../../utils/cn'
  * @example
  * // Example usage of Switcher component:
  * <Switcher
- *   on={true}
- *   onToggle={(value) => console.log('Switch is now:', value)}
+ *   value={true}
+ *   onChange={(value) => console.log('Switch is now:', value)}
  *   disabled={false}
  *   size="medium"
  *   loading={false}
  * />
  */
-const Switcher: React.FC<SwitcherProps> = ({ on, onToggle, disabled, size, loading, loadingSetting }) => {
-  const [enabled, setEnabled] = useState<boolean>(on || false)
+const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, loading, loadingSetting }) => {
+  const [enabled, setEnabled] = useState<boolean>(value || false)
 
   useEffect(() => {
-    setEnabled(on || false)
-  }, [on])
+    setEnabled(value || false)
+  }, [value])
 
   const handleChange = (v: boolean) => {
     if (!disabled && !loading) {
-      onToggle && onToggle(v)
+      onChange && onChange(v)
     }
   }
   return (

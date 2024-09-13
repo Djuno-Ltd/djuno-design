@@ -1,11 +1,10 @@
-import { Flex, Typography } from "djuno-design";
+import { Flex, Typography, useTheme } from "djuno-design";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as NPM } from "./npm.svg";
-import useDarkMode from "./useDarkMode";
 
 const { Text, Link } = Typography;
 const Header = () => {
-  const { mode, changeMode } = useDarkMode();
+  const { mode, changeMode } = useTheme();
   const handleChangeTheme = (e: any) => {
     const isDark = e.target.checked;
     changeMode(isDark ? "dark" : "light");
@@ -18,9 +17,9 @@ const Header = () => {
     >
       <Flex items="center" className="gap-1">
         <Logo className="w-6" />
-        <Text>djuno-design</Text>
+        <Text>djuno-design lab🧪</Text>
         <Text uiType="secondary" size="xs">
-          v0.4.1
+          v0.6.1
         </Text>
       </Flex>
       <Flex items="center" className="gap-3">

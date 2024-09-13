@@ -1,6 +1,6 @@
 /**
- * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview Textarea types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,13 +18,20 @@
  * limitations under the License.
  */
 
-import { LoadingProps, SizeTypes } from '.'
+import { TooltipProps } from './Tooltip'
+import { InputTypes, SizeTypes } from '.'
 
-export interface SwitcherProps {
-  value?: boolean
-  onChange?: (value: boolean) => void
-  disabled?: boolean
-  loading?: boolean
-  loadingSetting?: LoadingProps
+export interface TextareaProps {
+  id?: string
+  textareaProps?: React.HTMLProps<HTMLTextAreaElement>
+  className?: string
+  placeholder?: string
+  label?: string
+  required?: boolean
+  error?: string
+  hint?: string
+  tooltip?: TooltipProps
   size?: SizeTypes
+  type?: InputTypes
+  copyable?: boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
 }

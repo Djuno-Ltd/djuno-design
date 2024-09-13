@@ -19,6 +19,8 @@
 import * as React from 'react'
 import { cn } from '../utils/cn'
 import { SimpletableProps, TableComponents, TableRowProps, TableTDProps } from '../types/SimpleTable'
+import { motion, AnimatePresence } from 'framer-motion'
+import Loading from './Loading'
 
 /**
  * SimpleTable component that renders a table structure.
@@ -50,7 +52,13 @@ import { SimpletableProps, TableComponents, TableRowProps, TableTDProps } from '
  * </SimpleTable>
  */
 // eslint-disable-next-line react/prop-types
-const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({ className, containerClassName, children }) => {
+const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
+  className,
+  containerClassName,
+  children,
+  loading,
+}) => {
+  const testLoading = false
   return (
     <div className={cn('dj-w-full dj-relative dj-min-h-[200px]', containerClassName)}>
       <div className='dj-overflow-x-auto dj-overflow-y-hidden'>
@@ -63,18 +71,18 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({ className, 
           {children}
         </table>
       </div>
-      {/* <AnimatePresence>
-        {(props.loading || testLoading) && (
+      <AnimatePresence>
+        {(loading || testLoading) && (
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute w-full h-full top-0 left-0 bg-gray-400/10 dark:bg-gray-800/10 backdrop-blur-[1.1px] flex justify-center items-center"
+            className='absolute w-full h-full top-0 left-0 bg-gray-400/10 dark:bg-gray-800/10 backdrop-blur-[1.1px] flex justify-center items-center'
           >
-            <LoadingSpin borderSize={2.3} />
+            <Loading type={'simple'} borderSize={2.3} theme={'primary'} />
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </div>
   )
 }

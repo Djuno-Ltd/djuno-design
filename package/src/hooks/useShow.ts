@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @fileoverview useShow hook
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -17,14 +17,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react'
 
-import { LoadingProps, SizeTypes } from '.'
+export function useShow(initialValue: boolean = false, callback?: (d?: any) => void) {
+  const [isShow, setShow] = React.useState(initialValue)
 
-export interface SwitcherProps {
-  value?: boolean
-  onChange?: (value: boolean) => void
-  disabled?: boolean
-  loading?: boolean
-  loadingSetting?: LoadingProps
-  size?: SizeTypes
+  const show = React.useCallback(
+    (d?: any) => {
+      setShow(true)
+      callback && callback(d)
+    },
+    [callback],
+  )
+
+  const hide = React.useCallback(() => setShow(false), [])
+  const toggle = React.useCallback(() => setShow((prev) => !prev), [])
+
+  return [isShow, { show, hide, toggle }] as const
 }
