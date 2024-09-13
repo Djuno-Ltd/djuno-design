@@ -106,6 +106,9 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
               'dj-bg-primary-600 dj-border-primary-600 dj-text-white': checkedState,
               'dj-bg-primary-200 dj-border-primary-200 dark:dj-bg-dark-400 dark:dj-border-dark-700 dj-text-white dj-cursor-not-allowed':
                 checkedState && disabled,
+              'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2 dj-cursor-not-allowed':
+                !checkedState && disabled,
+
               'dj-w-4 dj-h-4': true,
             },
           )}
@@ -123,7 +126,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             'dj-flex dj-items-center dj-cursor-pointer',
             labelVariants({ hasError: error ? 'yes' : 'no' }),
             {
-              ' dj-cursor-not-allowed': checkedState && disabled,
+              ' dj-cursor-not-allowed': disabled,
             },
           )}
         >
