@@ -414,22 +414,22 @@ function App() {
               <Flex items="center" className="gap-1">
                 <Text size="xs">mini?</Text>
                 <Switcher
-                  onToggle={handleToglePanelType}
-                  on={panelType === "mini"}
+                  onChange={handleToglePanelType}
+                  value={panelType === "mini"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
                 <Text size="xs">change selected?</Text>
                 <Switcher
-                  onToggle={handleChangePathname}
-                  on={pathname === "/item2"}
+                  onChange={handleChangePathname}
+                  value={pathname === "/item2"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
                 <Text size="xs">Loading?</Text>
                 <Switcher
-                  onToggle={handleTogleSidebarLoading}
-                  on={sidebarLoading}
+                  onChange={handleTogleSidebarLoading}
+                  value={sidebarLoading}
                 />
               </Flex>
             </Flex>
@@ -596,32 +596,32 @@ function App() {
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher on={swith} onToggle={setSwitch} size="small" />
+                  <Switcher value={swith} onChange={setSwitch} size="small" />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     medium
                   </Text>
-                  <Switcher on={swith} onToggle={setSwitch} />
+                  <Switcher value={swith} onChange={setSwitch} />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher on={swith} onToggle={setSwitch} size="large" />
+                  <Switcher value={swith} onChange={setSwitch} size="large" />
                 </Flex>
               </Flex>
             </div>
             <div>
               <Text>disabled:</Text>
               <Flex items="center" className="gap-5 w-full">
-                <Switcher on={swith} onToggle={setSwitch} disabled />
+                <Switcher value={swith} onChange={setSwitch} disabled />
               </Flex>
             </div>
             <div>
               <Text>loading:</Text>
               <Flex items="center" className="gap-5 w-full">
-                <Switcher on={swith} onToggle={setSwitch} loading />
+                <Switcher value={swith} onChange={setSwitch} loading />
               </Flex>
             </div>
           </Flex>
