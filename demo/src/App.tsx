@@ -97,9 +97,6 @@ function App() {
     },
   };
 
-  const [open, setOpen] = useState<boolean>(false);
-  const handleToggle = () => setOpen(!open);
-
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
@@ -163,7 +160,7 @@ function App() {
               panelStyle={{}}
             >
               <div className="w-40">
-                <Button onClick={handleToggle}>Popover</Button>
+                <Button>Popover</Button>
               </div>
             </Popover>
           </Flex>

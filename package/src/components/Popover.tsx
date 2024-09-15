@@ -41,8 +41,6 @@ import { PopoverProps } from '../types'
  * // Example usage of Popover component:
  *
  * function MyComponent() {
- *   const [open, setOpen] = useState(false);
- *    const handleToggle = () => setOpen(!open);
  *
  *   return (
  *     <div>
@@ -52,7 +50,7 @@ import { PopoverProps } from '../types'
  *       panelClassName="custom-panel-class"
  *       panelStyle={{panelStyle}}
  *       >
- *       <button onClick={handleToggle}>Toggle Popover</button>
+ *       <button>Toggle Popover</button>
  *      </Popover>
  *     </div>
  *   );
