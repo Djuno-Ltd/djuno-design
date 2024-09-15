@@ -34,7 +34,7 @@ import {
   ThemeChanger,
   ThemeSwitcher,
 } from "djuno-design";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
