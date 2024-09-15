@@ -19,9 +19,19 @@
  */
 
 import { PropsWithChildren } from 'react'
-import { PlacesType } from 'react-tooltip'
-
-export type TooltipPlaces = PlacesType
+export type TooltipPlaces =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end'
 export type TooltipThemeTypes = 'primary' | 'error'
 
 export interface TooltipProps extends PropsWithChildren {

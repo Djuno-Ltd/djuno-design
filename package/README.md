@@ -83,11 +83,14 @@ function App() {
 20. Sidebar
 21. JsonViewer
 22. Tabs
+23. ThemeChanger & ThemeSwitcher
+24. Popover
 
 ### Available hooks
 
 1. useShow
 2. useWindowOnClick
+3. useTheme
 
 ### Available utility functions
 
@@ -261,14 +264,14 @@ function App() {
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
 | size              | `SizeTypes`                      |          | medium  |             |
-| copyable          | `boolean`                        |          |         |             |
+| copyable          | `boolean or function`            |          |         |             |
 
 ### Switcher
 
 | Name        | Type                       | Required | default | Description |
 | ----------- | -------------------------- | -------- | ------- | ----------- |
-| on          | boolean                    |          |         |             |
-| onToggle    | `(value: boolean) => void` |          |         |             |
+| value       | boolean                    |          |         |             |
+| onChange    | `(value: boolean) => void` |          |         |             |
 | disabled    | boolean                    |          |         |             |
 | loading     | boolean                    |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |
@@ -440,6 +443,19 @@ function App() {
 | `mobileIcon`        | `React.ReactNode` |          |         | An optional icon or element to display in the mobile view. |
 | `children`          | `React.ReactNode` |          |         | The content to be displayed within the header.             |
 
+### Checkbox
+
+| Name       | Type                          | Required | default | Description |
+| ---------- | ----------------------------- | -------- | ------- | ----------- |
+| id         | string                        |          |         |             |
+| inputprops | `HTMLProps<HTMLInputElement>` |          |         |             |
+| label      | `React.ReactNode`             |          |         |             |
+| required   | boolean                       |          | false   |             |
+| error      | string                        |          |         |             |
+| value      | boolean                       |          |         |             |
+| onChange   | `() => void`                  |          |         |             |
+| disabled   | boolean                       |          |         |             |
+
 ### Sidebar
 
 | Name          | Type                  | Required | Default | Description                                                     |
@@ -485,11 +501,17 @@ function App() {
 | panelClassName | string       |          |         |             |
 | tabType        | string       |          |         |             |
 
+### ThemeChanger , ThemeSwitcher
+
+| Name           | Type   | Required | default | Description |
+| -------------- | ------ | -------- | ------- | ----------- |
+| itemsClassName | string |          |         |             |
+
 ### Popover
 
 | Name           | Type                  | Required | default | Description |
 | -------------- | --------------------- | -------- | ------- | ----------- |
-| contentNode    | `React.ReactNode`     | yes      |         |             |
+| contentNode    | `React.ReactNode`     | ✔       |         |             |
 | `children`     | `React.ReactNode`     |          |         |             |
 | panelclassName | string                |          |         |             |
 | panelStyle     | `React.CSSProperties` |          |         |             |

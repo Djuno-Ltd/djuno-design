@@ -67,7 +67,7 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
  * }
  */
 
-const Textarea: React.FC<TextareaProps> = ({
+const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   id,
   textareaProps,
   placeholder,
@@ -84,13 +84,20 @@ const Textarea: React.FC<TextareaProps> = ({
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
   const handleCopyToClipboard = () => {
-    if (textareaRef.current) {
-      const textToCopy = textareaRef.current.value
-      if (textToCopy) {
-        copyToClipboard(textToCopy)
-      }
+    let textToCopy: string | number | null | undefined = ''
+    const inputValue = textareaRef.current?.value
+
+    if (typeof copyable === 'function') {
+      textToCopy = copyable(inputValue)
+    } else {
+      textToCopy = inputValue
+    }
+
+    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+      copyToClipboard(textToCopy)
     }
   }
+
   return (
     <div className='dj-flex dj-flex-col'>
       <div

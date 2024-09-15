@@ -1,6 +1,6 @@
 /**
- * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @author Sanaz Zeraati <szeraati69@gmail.com>
+ * @fileoverview Accordion types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,13 +18,16 @@
  * limitations under the License.
  */
 
-import { LoadingProps, SizeTypes } from '.'
+import { TooltipProps } from './Tooltip'
 
-export interface SwitcherProps {
+export interface CheckboxProps {
+  id?: string
+  inputProps?: React.HTMLProps<HTMLInputElement>
+  label?: React.ReactNode
+  required?: boolean
+  error?: string
+  tooltip?: TooltipProps
   value?: boolean
-  onChange?: (value: boolean) => void
+  onChange?: (checked: boolean) => void
   disabled?: boolean
-  loading?: boolean
-  loadingSetting?: LoadingProps
-  size?: SizeTypes
 }

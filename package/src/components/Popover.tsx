@@ -34,7 +34,7 @@ import { PopoverProps } from '../types'
  *
  * @returns {React.ReactNode} Rendered Popover component.
  *
- * @version 0.0.0
+ * @version 0.6.1
  * @see https://www.npmjs.com/package/djuno-design#popover
  *
  * @example

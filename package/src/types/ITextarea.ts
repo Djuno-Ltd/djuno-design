@@ -18,11 +18,10 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
 import { TooltipProps } from './Tooltip'
 import { InputTypes, SizeTypes } from '.'
 
-export interface TextareaProps extends PropsWithChildren {
+export interface TextareaProps {
   id?: string
   textareaProps?: React.HTMLProps<HTMLTextAreaElement>
   className?: string
@@ -34,5 +33,5 @@ export interface TextareaProps extends PropsWithChildren {
   tooltip?: TooltipProps
   size?: SizeTypes
   type?: InputTypes
-  copyable?: boolean
+  copyable?: boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
 }

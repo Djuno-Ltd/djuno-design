@@ -24,12 +24,15 @@ import {
   PanelLayout,
   PanelHeader,
   PanelSidebar,
+  Checkbox,
+  PanelLayoutTypes,
   Popover,
   JsonViewer,
   Sidebar,
   SidebarItem,
   Texrarea,
-  PanelLayoutTypes,
+  ThemeChanger,
+  ThemeSwitcher,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -142,10 +145,58 @@ function App() {
     },
   ];
 
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Checkbox">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-5 w-full">
+              <Flex direction="col">
+                <Checkbox
+                  label="Djuno Design"
+                  value={isChecked}
+                  onChange={setIsChecked}
+                />
+              </Flex>
+            </Flex>
+
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                value={isChecked}
+                onChange={setIsChecked}
+                disabled
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="is required?"
+                value={isChecked}
+                onChange={setIsChecked}
+                required
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                value={isChecked}
+                onChange={setIsChecked}
+                tooltip={{ content: "it's a tooltip" }}
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                value={isChecked}
+                onChange={setIsChecked}
+                error="error"
+              />
+            </Flex>
+          </Flex>
+        </Card>
         <Card title="Popover">
           <Flex direction="col" className="gap-5 w-full  mb-10">
             <Popover
@@ -163,6 +214,12 @@ function App() {
                 <Button>Popover</Button>
               </div>
             </Popover>
+          </Flex>
+        </Card>
+        <Card title="ThemeChanger">
+          <Flex className="gap-5 w-full mt-5">
+            <ThemeChanger />
+            <ThemeSwitcher />
           </Flex>
         </Card>
         <Card title="Tabs">
@@ -254,7 +311,19 @@ function App() {
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
-              copyable
+              copyable={true}
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              copyable={(v) => `Hi ${v}`}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={(v) => `Hi ${v}`}
             />
           </Flex>
         </Card>
@@ -277,6 +346,7 @@ function App() {
 
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
+            handleChange
             <Accordion
               items={[
                 {
@@ -341,22 +411,22 @@ function App() {
               <Flex items="center" className="gap-1">
                 <Text size="xs">mini?</Text>
                 <Switcher
-                  onToggle={handleToglePanelType}
-                  on={panelType === "mini"}
+                  onChange={handleToglePanelType}
+                  value={panelType === "mini"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
                 <Text size="xs">change selected?</Text>
                 <Switcher
-                  onToggle={handleChangePathname}
-                  on={pathname === "/item2"}
+                  onChange={handleChangePathname}
+                  value={pathname === "/item2"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
                 <Text size="xs">Loading?</Text>
                 <Switcher
-                  onToggle={handleTogleSidebarLoading}
-                  on={sidebarLoading}
+                  onChange={handleTogleSidebarLoading}
+                  value={sidebarLoading}
                 />
               </Flex>
             </Flex>
@@ -523,32 +593,32 @@ function App() {
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher on={swith} onToggle={setSwitch} size="small" />
+                  <Switcher value={swith} onChange={setSwitch} size="small" />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     medium
                   </Text>
-                  <Switcher on={swith} onToggle={setSwitch} />
+                  <Switcher value={swith} onChange={setSwitch} />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher on={swith} onToggle={setSwitch} size="large" />
+                  <Switcher value={swith} onChange={setSwitch} size="large" />
                 </Flex>
               </Flex>
             </div>
             <div>
               <Text>disabled:</Text>
               <Flex items="center" className="gap-5 w-full">
-                <Switcher on={swith} onToggle={setSwitch} disabled />
+                <Switcher value={swith} onChange={setSwitch} disabled />
               </Flex>
             </div>
             <div>
               <Text>loading:</Text>
               <Flex items="center" className="gap-5 w-full">
-                <Switcher on={swith} onToggle={setSwitch} loading />
+                <Switcher value={swith} onChange={setSwitch} loading />
               </Flex>
             </div>
           </Flex>
