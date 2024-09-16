@@ -33,7 +33,6 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
  * @param {string} [props.menu] - menu of the DropdownMenu.
  * @param {string} [props.title] -  title of the DropdownMenu.
  * @param {string} [props.type] - type of the DropdownMenu.
- * @param {string} [props.positionClassName] - Additional positionClassName to apply to the DropdownMenu.
  * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the DropdownMenu.
  * @param {string} [props.buttonClassName] - Additional buttonClassName to apply to the DropdownMenu.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the DropdownMenu, each with a label and optional panel content.
@@ -67,7 +66,6 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
   type,
   buttonClassName,
   itemsClassName,
-  positionClassName,
   children,
 }) => {
   const itemGroups = groupArrayByDivider(menu || [])
@@ -114,7 +112,6 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
             className={cn(
               'dj-absolute dj-z-50 dj-mt-1 dj-max-h-60 dj-w-48 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm dj-divide-y dj-divide-dark-100 dark:dj-divide-dark-600',
               {
-                [positionClassName || '']: positionClassName,
                 [itemsClassName || '']: itemsClassName,
               },
             )}

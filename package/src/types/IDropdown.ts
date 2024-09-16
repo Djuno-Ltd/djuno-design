@@ -23,11 +23,11 @@ import React, { PropsWithChildren } from 'react'
 export interface DropdownProps extends PropsWithChildren {
   menu?: Array<DropdownElement>
   title?: string | React.ReactNode
-  type?: 'default' | 'simple'
-  positionClassName?: string
+  type?: DropdownTypes
   buttonClassName?: string
   itemsClassName?: string
 }
+export type DropdownTypes = 'default' | 'simple'
 
 export type DropdownItem = {
   label: string | React.ReactNode

@@ -37,7 +37,7 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
  * @param {string} [props.label] - Label text to display above the textarea.
  * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
- * @param {string} [props.error] - Error message to display if validation fails.
+ * @param {string|boolean} [props.error] - Error message to display if validation fails.
  * @param {string} [props.hint] - Hint text to provide additional guidance to the user.
  * @param {SizeTypes} [props.size] - Size of the textarea field.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the textarea.

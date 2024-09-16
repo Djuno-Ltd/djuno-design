@@ -259,7 +259,7 @@ function App() {
 | placeholder       | string                           |          |         |             |
 | label             | string                           |          |         |             |
 | required          | boolean                          |          |         |             |
-| error             | string                           |          |         |             |
+| error             | string or boolean                |          |         |             |
 | hint              | string                           |          |         |             |
 | type              | `InputTypes`                     |          |         |             |
 | tooltip           | `TooltipProps`                   |          |         |             |
@@ -289,7 +289,7 @@ function App() {
 | `buttonClassName`  | `string`                          |          |         | Additional CSS classes for custom styling of the select button.            |
 | `optionsClassName` | `string`                          |          |         | Additional CSS classes for custom styling of the options list.             |
 | `label`            | `string`                          |          |         | The label displayed above the select component.                            |
-| `error`            | `string`                          |          |         | Error message to display if there is a validation issue.                   |
+| `error`            | `string or boolean`               |          |         | Error message to display if there is a validation issue.                   |
 | `required`         | `boolean`                         |          |         | Indicates if the select component is required.                             |
 | `type`             | `SelectTypes`                     |          |         | The type of the select component (e.g., single select, multi-select).      |
 | `tooltip`          | `TooltipProps`                    |          |         | Tooltip properties to display additional information.                      |
@@ -374,14 +374,13 @@ function App() {
 
 ### Dropdown
 
-| Name              | Type                | Required | default | Description |
-| ----------------- | ------------------- | -------- | ------- | ----------- |
-| menu              | `DropdownElement[]` |          |         |             |
-| title             | string              |          |         |             |
-| type              | string              |          |         |             |
-| positionClassName | string              |          |         |             |
-| buttonClassName   | string              |          |         |             |
-| itemsClassName    | string              |          |         |             |
+| Name            | Type                | Required | default | Description |
+| --------------- | ------------------- | -------- | ------- | ----------- |
+| menu            | `DropdownElement[]` |          |         |             |
+| title           | string              |          |         |             |
+| type            | `DropdownTypes`     |          |         |             |
+| buttonClassName | string              |          |         |             |
+| itemsClassName  | string              |          |         |             |
 
 ### SecureCopy
 
@@ -451,7 +450,7 @@ function App() {
 | inputprops | `HTMLProps<HTMLInputElement>` |          |         |             |
 | label      | `React.ReactNode`             |          |         |             |
 | required   | boolean                       |          | false   |             |
-| error      | string                        |          |         |             |
+| error      | string or boolean             |          |         |             |
 | value      | boolean                       |          |         |             |
 | onChange   | `() => void`                  |          |         |             |
 | disabled   | boolean                       |          |         |             |

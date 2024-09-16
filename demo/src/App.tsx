@@ -198,6 +198,14 @@ function App() {
                 error="error"
               />
             </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                value={isChecked}
+                onChange={setIsChecked}
+                error={true}
+              />
+            </Flex>
           </Flex>
         </Card>
         <Card title="Popover">
@@ -327,6 +335,18 @@ function App() {
               label="Input"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              error={true}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error={true}
             />
           </Flex>
         </Card>
@@ -718,6 +738,14 @@ function App() {
                 label="error"
                 error="Field is required"
                 required
+                options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="error"
+                error={true}
                 options={[]}
                 className="w-[200px]"
               />

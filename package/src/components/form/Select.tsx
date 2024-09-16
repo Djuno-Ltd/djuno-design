@@ -81,7 +81,7 @@ const listboxVariants = cva(
  * @param {string} [props.buttonClassName] - Additional CSS classes for custom styling of the select button.
  * @param {string} [props.optionsClassName] - Additional CSS classes for custom styling of the options list.
  * @param {string} [props.label] - The label displayed above the select component.
- * @param {string} [props.error] - Error message to display if there is a validation issue.
+ * @param {string|boolean} [props.error] - Error message to display if there is a validation issue.
  * @param {boolean} [props.required] - Indicates if the select component is required.
  * @param {SelectTypes} [props.type] - The type of the select component (e.g., single select, multi-select).
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information.

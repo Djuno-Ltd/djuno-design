@@ -28,7 +28,7 @@ export interface TextareaProps {
   placeholder?: string
   label?: string
   required?: boolean
-  error?: string
+  error?: string | boolean
   hint?: string
   tooltip?: TooltipProps
   size?: SizeTypes

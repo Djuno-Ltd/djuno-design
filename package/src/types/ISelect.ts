@@ -42,7 +42,7 @@ export type SelectProps<T, ET = any> = {
   buttonClassName?: string
   optionsClassName?: string
   label?: string
-  error?: string
+  error?: string | boolean
   required?: boolean
   type?: SelectTypes
   tooltip?: TooltipProps

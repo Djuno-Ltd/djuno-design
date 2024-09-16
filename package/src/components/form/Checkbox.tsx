@@ -19,7 +19,6 @@
  */
 
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { CheckboxProps } from '../../types/ICheckbox'
 import { cn } from '../../utils/cn'
 import { AnimatedFormError, labelVariants } from './Input'
@@ -39,7 +38,7 @@ import { InfoTooltip } from '../Tooltip'
  * @param {Function} [props.onChangeCheckbox] - Callback function called when the checkbox state changes.
  * @param {boolean} [props.required] - Specifies if the checkbox is required.
  * @param {boolean} [props.disabled] - Disables the checkbox interaction.
- * @param {string} [props.error] - An error message to display if there's an issue with the checkbox.
+ * @param {string|boolean} [props.error] - An error message to display if there's an issue with the checkbox.
  * @param {React.ReactNode} [props.tooltip] - Additional information to display in a tooltip next to the checkbox.
  *
  * @returns {React.ReactNode} Rendered Checkbox component.
