@@ -64,7 +64,7 @@ export interface SelectProps<ExtraDataType = any> extends SelectBaseProps {
 export interface MultiSelectProps<ExtraDataType = any> extends SelectBaseProps {
   id?: string
   values?: Array<string>
-  onChange?: (values: Array<string> | undefined) => void
+  onChange?: (values: Array<string>) => void
   defaultValues?: Array<string>
   options: Array<SelectOption<ExtraDataType>>
 }
