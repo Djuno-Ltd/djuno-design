@@ -43,7 +43,7 @@ export * from './IPanelLayouts'
 export * from './ICheckbox'
 export * from './IPopover'
 export * from './ISidebar'
-export * from './ITextarea'
+export * from './ITexrarea'
 export * from './IThemeChanger'
 export * from './IJsonViewer'
 

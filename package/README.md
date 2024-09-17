@@ -234,37 +234,37 @@ function App() {
 
 ### Input
 
-| Name        | Type                          | Required | default | Description |
-| ----------- | ----------------------------- | -------- | ------- | ----------- |
-| inputProps  | `HTMLProps<HTMLInputElement>` |          |         |             |
-| label       | string                        |          |         |             |
-| type        | `InputTypes`                  |          |         |             |
-| required    | boolean                       |          |         |             |
-| error       | string , boolean              |          |         |             |
-| hint        | boolean                       |          |         |             |
-| loading     | boolean                       |          |         |             |
-| loadingType | `LoadingProps`                |          |         |             |
-| placeholder | string                        |          |         |             |
-| tooltip     | `TooltipProps`                |          |         |             |
-| size        | `SizeTypes`                   |          | medium  |             |
-| copyable    | `boolean or function`         |          |         |             |
+| Name        | Type                                       | Required | default | Description |
+| ----------- | ------------------------------------------ | -------- | ------- | ----------- |
+| inputProps  | `HTMLProps<HTMLInputElement>`              |          |         |             |
+| label       | string                                     |          |         |             |
+| type        | `InputTypes`                               |          |         |             |
+| required    | boolean                                    |          |         |             |
+| error       | string , boolean                           |          |         |             |
+| hint        | boolean                                    |          |         |             |
+| loading     | boolean                                    |          |         |             |
+| loadingType | `LoadingProps`                             |          |         |             |
+| placeholder | string                                     |          |         |             |
+| tooltip     | `TooltipProps`                             |          |         |             |
+| size        | `SizeTypes`                                |          | medium  |             |
+| copyable    | `boolean or function or InputCopyableProp` |          |         |             |
 
 ### Textarea
 
-| Name              | Type                             | Required | default | Description |
-| ----------------- | -------------------------------- | -------- | ------- | ----------- |
-| id                | string                           |          |         |             |
-| textareaProps     | `HTMLProps<HTMLTextAreaElement>` |          |         |             |
-| textareaClassName | string                           |          |         |             |
-| placeholder       | string                           |          |         |             |
-| label             | string                           |          |         |             |
-| required          | boolean                          |          |         |             |
-| error             | string or boolean                |          |         |             |
-| hint              | string                           |          |         |             |
-| type              | `InputTypes`                     |          |         |             |
-| tooltip           | `TooltipProps`                   |          |         |             |
-| size              | `SizeTypes`                      |          | medium  |             |
-| copyable          | `boolean or function`            |          |         |             |
+| Name              | Type                                       | Required | default | Description |
+| ----------------- | ------------------------------------------ | -------- | ------- | ----------- |
+| id                | string                                     |          |         |             |
+| textareaProps     | `HTMLProps<HTMLTextAreaElement>`           |          |         |             |
+| textareaClassName | string                                     |          |         |             |
+| placeholder       | string                                     |          |         |             |
+| label             | string                                     |          |         |             |
+| required          | boolean                                    |          |         |             |
+| error             | string or boolean                          |          |         |             |
+| hint              | string                                     |          |         |             |
+| type              | `InputTypes`                               |          |         |             |
+| tooltip           | `TooltipProps`                             |          |         |             |
+| size              | `SizeTypes`                                |          | medium  |             |
+| copyable          | `boolean or function or InputCopyableProp` |          |         |             |
 
 ### Switcher
 

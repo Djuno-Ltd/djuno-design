@@ -32,7 +32,7 @@ export type TooltipPlaces =
   | 'left'
   | 'left-start'
   | 'left-end'
-export type TooltipThemeTypes = 'primary' | 'error'
+export type TooltipThemeTypes = 'primary' | 'error' | 'black'
 
 export interface TooltipProps extends PropsWithChildren {
   content?: string | React.ReactNode

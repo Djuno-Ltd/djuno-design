@@ -23,12 +23,14 @@ import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
-import { InfoTooltip } from '../Tooltip'
+import Tooltip, { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
 import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
+import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
+import { useState } from 'react'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -92,21 +94,21 @@ export const labelVariants = cva(
  * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
- * @param {InputTypes} [props.type] - Type of the input field.
+ * @param {InputTypes} [props.type] - Type of the input field (e.g., 'default', 'simple').
  * @param {string} [props.placeholder] - Placeholder text for the input.
- * @param {string} [props.className] - Additional classes to apply to the input.
- * @param {string} [props.labelClassName] - Additional classes to apply to the label.
+ * @param {string} [props.className] - Additional classes to apply to the input element.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element.
  * @param {boolean} [props.required] - Indicates if the input is required.
  * @param {string | boolean} [props.error] - Error message or boolean to indicate input validity.
  * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the input.
  * @param {SizeTypes} [props.size] - Size of the input field.
  * @param {React.ReactNode} [props.AfterComponent] - Component to render after the input field.
- * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)} [props.copyable] - Indicates if the input value can be copied, or a function to handle the copy operation.
+ * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined) | InputCopyableProp} [props.copyable] - Indicates if the input value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
  *
  * @returns {React.ReactNode} Rendered Input component.
  *
- * @version 0.3.5
+ * @version 0.3.6
  * @see https://www.npmjs.com/package/djuno-design#input
  *
  * @example
@@ -116,8 +118,14 @@ export const labelVariants = cva(
  *   placeholder="Enter your username"
  *   required
  *   error="Username is required"
+ *   copyable={{
+ *     text: "Copy this username",
+ *     icon: [<CustomCopyIcon />, <CustomCopiedIcon />],
+ *     tooltips: ["Click to copy", "Copied!"]
+ *   }}
  * />
  */
+
 const Input: React.FunctionComponent<InputProps> = ({
   label,
   inputProps,
@@ -140,7 +148,29 @@ const Input: React.FunctionComponent<InputProps> = ({
   const value = inputProps?.value
   const onChange = inputProps?.onChange
 
-  const handleCopyToClipboard = () => {
+  const tooltipTexts: [string, string] = React.useMemo(() => {
+    const defaultTexts: [string, string] = ['Copy', 'Copied']
+    if (typeof copyable === 'object' && copyable?.tooltips) {
+      return typeof copyable.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+    }
+    return defaultTexts
+  }, [copyable])
+
+  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
+    const defaultIcons: [React.ReactNode, React.ReactNode] = [
+      <CopyIcon key='copy-icon' />,
+      <CheckIcon key='copied-icon' />,
+    ]
+    if (typeof copyable === 'object' && copyable?.icon) {
+      return copyable.icon
+    }
+    return defaultIcons
+  }, [copyable])
+
+  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
+  const [icon, setIcon] = React.useState(icons[0])
+
+  const handleCopyToClipboard = React.useCallback(() => {
     let textToCopy: string | number | null | undefined = ''
     const inputValue = inputRef.current?.value
 
@@ -151,10 +181,18 @@ const Input: React.FunctionComponent<InputProps> = ({
     }
 
     if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy)
-    }
-  }
+      copyToClipboard(textToCopy.toString()).then(() => {
+        setTooltipText(tooltipTexts[1])
+        setIcon(icons[1])
 
+        // Revert back after some time
+        setTimeout(() => {
+          setTooltipText(tooltipTexts[0])
+          setIcon(icons[0])
+        }, 2000)
+      })
+    }
+  }, [copyable, tooltipTexts, icons])
   return (
     <div className='dj-flex dj-flex-col'>
       <div
@@ -165,7 +203,7 @@ const Input: React.FunctionComponent<InputProps> = ({
           'dj-mb-0.5': label || required || tooltip || hint,
         })}
       >
-        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+        <label htmlFor={id} className={cn({ 'dj-text-error': error })}>
           {label && (
             <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
               {label}
@@ -183,13 +221,15 @@ const Input: React.FunctionComponent<InputProps> = ({
       <div className='dj-w-full dj-relative dj-block dj-z-0'>
         {typeof copyable !== 'undefined' && !loading && (
           <div className='dj-absolute dj-z-30 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2'>
-            <CopyIcon
+            <div
               onClick={handleCopyToClipboard}
               className={cn(
                 'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
                 { 'dj-w-[15px]': size === 'small' },
               )}
-            />
+            >
+              <Tooltip content={tooltipText}> {icon}</Tooltip>
+            </div>
           </div>
         )}
         <input
@@ -225,7 +265,6 @@ const Input: React.FunctionComponent<InputProps> = ({
     </div>
   )
 }
-
 const AnimatedFormError: React.FC<{ error?: string | boolean }> = ({ error }) => {
   return (
     <AnimatePresence>

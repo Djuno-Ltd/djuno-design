@@ -33,5 +33,14 @@ export interface TextareaProps {
   tooltip?: TooltipProps
   size?: SizeTypes
   type?: InputTypes
-  copyable?: boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
+  copyable?:
+    | boolean
+    | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
+    | TextareaCopyableProp
+}
+
+export interface TextareaCopyableProp {
+  text?: string
+  icon?: [React.ReactNode, React.ReactNode]
+  tooltips?: boolean | [string, string]
 }

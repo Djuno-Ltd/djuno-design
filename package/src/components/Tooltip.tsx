@@ -35,6 +35,7 @@ const tooltipVariants = cva('dj-text-white dj-max-w-[250px] !dj-px-2 !dj-py-1 !d
     theme: {
       primary: '!dj-bg-primary-500 dark:dj-bg-primary-400',
       error: '!dj-bg-red-500 dark:dj-bg-red-500',
+      black: '!dj-bg-black dark:!dj-bg-white dark:!dj-text-black',
     },
   },
   defaultVariants: {

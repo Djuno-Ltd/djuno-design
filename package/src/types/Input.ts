@@ -38,7 +38,16 @@ export interface InputProps {
   tooltip?: TooltipProps
   size?: SizeTypes
   AfterComponent?: React.ReactNode
-  copyable?: boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
+  copyable?:
+    | boolean
+    | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
+    | InputCopyableProp
 }
 
 export type InputTypes = 'default' | 'simple'
+
+export interface InputCopyableProp {
+  text?: string
+  icon?: [React.ReactNode, React.ReactNode]
+  tooltips?: boolean | [string, string]
+}

@@ -275,10 +275,10 @@ function App() {
           </Flex>
         </Card>
 
-        <Card title="Textarea">
+        <Card title="Texrarea">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
               hint="Djuno Design"
@@ -286,7 +286,7 @@ function App() {
           </Flex>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               textareaProps={{}}
             />
@@ -294,7 +294,7 @@ function App() {
           </Flex>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder=""
               textareaProps={{}}
               tooltip={{ content: "test" }}
@@ -303,7 +303,7 @@ function App() {
           </Flex>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               error="field is required!"
             />
@@ -315,7 +315,7 @@ function App() {
           </Flex>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={true}
             />
@@ -327,7 +327,7 @@ function App() {
           </Flex>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
             />
@@ -339,7 +339,7 @@ function App() {
           </Flex>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               error={true}
             />
@@ -347,6 +347,30 @@ function App() {
               label="Input"
               placeholder="Enter custom notes if any"
               error={true}
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                // icon: [
+                // <CustomCopyIcon key="custom-copy-icon" />,
+                // <CustomCopiedIcon key="custom-copied-icon" />
+                // ],
+                tooltips: ["Click to copy", "Text copied!"],
+              }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                // icon: [
+                // <CustomCopyIcon key="custom-copy-icon" />,
+                // <CustomCopiedIcon key="custom-copied-icon" />
+                // ],
+                tooltips: ["Click to copy", "Text copied!"],
+              }}
             />
           </Flex>
         </Card>
@@ -676,6 +700,18 @@ function App() {
                     setInputValue(e.target?.value),
                 }}
                 error={inputValue === "" ? "Field is required" : ""}
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input
+                label="Input"
+                copyable={{
+                  // icon: [
+                  // <CustomCopyIcon key="custom-copy-icon" />,
+                  // <CustomCopiedIcon key="custom-copied-icon" />
+                  // ],
+                  tooltips: ["Click to copy", "Text copied!"],
+                }}
               />
             </Flex>
           </Flex>
@@ -1142,6 +1178,9 @@ function App() {
         <Card title="Tooltip">
           <Flex className="gap-4 pl-3">
             <Tooltip content="I'm a tooltip">
+              <Text size="sm">Tooltip</Text>
+            </Tooltip>
+            <Tooltip content="I'm a tooltip" theme="black" place="top">
               <Text size="sm">Tooltip</Text>
             </Tooltip>
             <Tooltip
