@@ -31,6 +31,7 @@ import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import { useState } from 'react'
+import Flex from '../Flex'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -150,9 +151,16 @@ const Input: React.FunctionComponent<InputProps> = ({
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
-    if (typeof copyable === 'object' && copyable?.tooltips) {
-      return typeof copyable.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+    const emptyTexts: [string, string] = ['', '']
+
+    if (typeof copyable === 'object') {
+      if (copyable?.tooltips === false) {
+        return emptyTexts
+      } else if (copyable?.tooltips) {
+        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+      }
     }
+
     return defaultTexts
   }, [copyable])
 
@@ -203,19 +211,21 @@ const Input: React.FunctionComponent<InputProps> = ({
           'dj-mb-0.5': label || required || tooltip || hint,
         })}
       >
-        <label htmlFor={id} className={cn({ 'dj-text-error': error })}>
+        <label htmlFor={id} className={cn('dj-flex dj-items-center', { 'dj-text-error': error })}>
           {label && (
             <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
               {label}
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='dj-h-5 dj-ml-1'>
               *
             </Typography.Text>
           )}
+
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
+
         {hint && <span className='dj-text-[11px] dj-text-slate-500'>{hint}</span>}
       </div>
       <div className='dj-w-full dj-relative dj-block dj-z-0'>

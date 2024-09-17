@@ -86,12 +86,18 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
-  // Manage the state for the tooltip text and icon
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
-    if (typeof copyable === 'object' && copyable?.tooltips) {
-      return typeof copyable.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+    const emptyTexts: [string, string] = ['', '']
+
+    if (typeof copyable === 'object') {
+      if (copyable?.tooltips === false) {
+        return emptyTexts
+      } else if (copyable?.tooltips) {
+        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+      }
     }
+
     return defaultTexts
   }, [copyable])
 
@@ -188,7 +194,11 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
         )}
         placeholder={placeholder}
       />
-
+      {/* {loading && (
+              <div className='dj-absolute dj-z-40 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2.5'>
+                <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+              </div>
+            )} */}
       <AnimatedFormError error={error} />
     </div>
   )

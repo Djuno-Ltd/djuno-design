@@ -281,6 +281,9 @@ function App() {
         </Card>
 
         <Card title="Textarea">
+          <Text size="sm" className="font-semibold ">
+            Have hit:
+          </Text>
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
@@ -289,6 +292,9 @@ function App() {
               hint="Djuno Design"
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Simple form:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
@@ -297,6 +303,9 @@ function App() {
             />
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Replace copy text.:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
@@ -306,6 +315,9 @@ function App() {
             />
             <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have error with error text:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Texrarea"
@@ -320,6 +332,9 @@ function App() {
               error="field is required!"
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Copyable without function:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Texrarea"
@@ -332,6 +347,9 @@ function App() {
               copyable={true}
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Copyable with function:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Texrarea"
@@ -344,6 +362,9 @@ function App() {
               copyable={(v) => `Hi ${v}`}
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have error without error text:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Texrarea"
@@ -356,15 +377,15 @@ function App() {
               error={true}
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Custom Copy icon and replace tooltips text:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
-                // icon: [
-                // <CustomCopyIcon key="custom-copy-icon" />,
-                // <CustomCopiedIcon key="custom-copied-icon" />
-                // ],
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
                 tooltips: ["Click to copy", "Text copied!"],
               }}
             />
@@ -372,11 +393,29 @@ function App() {
               label="Input"
               placeholder="Enter custom notes if any"
               copyable={{
-                // icon: [
-                // <CustomCopyIcon key="custom-copy-icon" />,
-                // <CustomCopiedIcon key="custom-copied-icon" />
-                // ],
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
                 tooltips: ["Click to copy", "Text copied!"],
+              }}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Hide Copy tooltips:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: false,
+              }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: false,
               }}
             />
           </Flex>
@@ -713,13 +752,16 @@ function App() {
               <Input
                 label="Input"
                 copyable={{
-                  // icon: [
-                  // <CustomCopyIcon key="custom-copy-icon" />,
-                  // <CustomCopiedIcon key="custom-copied-icon" />
-                  // ],
+                  icon: [
+                    <FaceSmile />,
+                    <FaceSmile className="text-green-500" />,
+                  ],
                   tooltips: ["Click to copy", "Text copied!"],
                 }}
               />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input label="Input" tooltip={{ content: "I'm a tooltip" }} />
             </Flex>
           </Flex>
         </Card>
