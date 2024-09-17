@@ -22,7 +22,7 @@ import { JsonViewerProps } from '../types/IJsonViewer'
 import JsonView from '@uiw/react-json-view'
 import { lightTheme } from '@uiw/react-json-view/light'
 import { darkTheme } from '@uiw/react-json-view/dark'
-import { useTheme } from '../hooks/useTheme'
+import { useDjunoDesign } from '../hooks/useDjunoDesign'
 
 /**
  * JsonViewer component that allows for the display and customization of JSON data.
@@ -58,7 +58,9 @@ import { useTheme } from '../hooks/useTheme'
  *
  */
 const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed }) => {
-  const { mode } = useTheme()
+  const {
+    theme: { mode },
+  } = useDjunoDesign({ stric: false })
   const [currentTheme, setCurrentTheme] = React.useState(mode === 'dark' ? darkTheme : lightTheme)
 
   React.useEffect(() => {

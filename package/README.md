@@ -34,6 +34,10 @@ function App() {
 
 ## Documentation
 
+### Available providers
+
+1. DjunoDesignProvider (or DDProvider)
+
 ### Available components
 
 1.  Button
@@ -90,7 +94,7 @@ function App() {
 
 1. useShow
 2. useWindowOnClick
-3. useTheme
+3. useDjunoDesign
 
 ### Available utility functions
 

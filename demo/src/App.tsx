@@ -17,6 +17,7 @@ import {
   Pagination,
   Modal,
   Select,
+  MultiSelect,
   SelectOption,
   Dropdown,
   Accordion,
@@ -149,6 +150,10 @@ function App() {
   ];
 
   const [isChecked, setIsChecked] = useState(false);
+
+  const [multiSelectValues, setMultiSelectValues] = useState<
+    string[] | undefined
+  >([selectOptions[0].value]);
 
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
@@ -756,7 +761,10 @@ function App() {
                 clearable
                 value={clearableValue}
                 options={selectOptions}
-                onChange={setClearableValue}
+                onChange={(v) => {
+                  console.log(v);
+                  setClearableValue(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>
@@ -785,6 +793,19 @@ function App() {
                 label="error"
                 error={true}
                 options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <MultiSelect
+                label="multi select"
+                clearable
+                values={multiSelectValues}
+                options={selectOptions}
+                onChange={(v) => {
+                  console.log(v);
+                  setMultiSelectValues(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>

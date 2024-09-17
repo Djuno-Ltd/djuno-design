@@ -21,12 +21,12 @@
 import * as React from 'react'
 import { cn } from './../utils/cn'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import { useTheme } from '../hooks/useTheme'
 import { ReactComponent as SunIcon } from '../assets/icons/sun.svg'
 import { ReactComponent as MoonIcon } from '../assets/icons//moon.svg'
 import { ReactComponent as SystemIcon } from '../assets/icons//computer-desktop.svg'
 import { ThemeChangerProps } from '../types/IThemeChanger'
 import Switcher from './form/Switcher'
+import { useDjunoDesign } from '../hooks/useDjunoDesign'
 
 /**
  * ThemeChanger component.
@@ -48,7 +48,10 @@ import Switcher from './form/Switcher'
  *
  */
 const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
-  const { mode, modeRefrence, changeMode } = useTheme()
+  const {
+    theme: { mode, changeMode, modeRefrence },
+  } = useDjunoDesign({ stric: false })
+
   return (
     <Menu as='div' className='dj-relative dj-text-left dj-flex dj-justify-center'>
       <MenuButton className='dj-inline-flex dj-w-full dj-justify-center dj-items-center dj-text-sm dj-font-medium focus:dj-outline-none focus-visible:dj-ring-0 dj-text-slate-800 dark:dj-text-slate-200'>
@@ -156,9 +159,11 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
  *
  */
 const ThemeSwitcher: React.FC<ThemeChangerProps> = () => {
-  const { mode, changeMode } = useTheme()
+  const {
+    theme: { mode, changeMode },
+  } = useDjunoDesign({ stric: false })
+
   return <Switcher size='medium' value={mode === 'dark'} onChange={(v) => changeMode(v ? 'dark' : 'light')} />
-  return null
 }
 
 export { ThemeSwitcher }
