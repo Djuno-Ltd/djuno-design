@@ -17,6 +17,7 @@ import {
   Pagination,
   Modal,
   Select,
+  MultiSelect,
   SelectOption,
   Dropdown,
   Accordion,
@@ -63,6 +64,11 @@ function App() {
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
   );
+
+  const [multiSelectValues, setMultiSelectValues] = useState<
+    string[] | undefined
+  >([selectOptions[0].value]);
+
   const exampleJson = {
     block_number: 38733960,
     topic: "raw-avalanchec-mainnet",
@@ -698,7 +704,10 @@ function App() {
                 clearable
                 value={clearableValue}
                 options={selectOptions}
-                onChange={setClearableValue}
+                onChange={(v) => {
+                  console.log(v);
+                  setClearableValue(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>
@@ -719,6 +728,19 @@ function App() {
                 error="Field is required"
                 required
                 options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <MultiSelect
+                label="multi select"
+                clearable
+                values={multiSelectValues}
+                options={selectOptions}
+                onChange={(v) => {
+                  console.log(v);
+                  setMultiSelectValues(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>
