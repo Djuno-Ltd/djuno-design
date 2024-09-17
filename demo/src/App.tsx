@@ -35,7 +35,7 @@ import {
   ThemeChanger,
   ThemeSwitcher,
 } from "djuno-design";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -105,9 +105,6 @@ function App() {
       ],
     },
   };
-
-  const [open, setOpen] = useState<boolean>(false);
-  const handleToggle = () => setOpen(!open);
 
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
@@ -220,7 +217,7 @@ function App() {
               panelStyle={{}}
             >
               <div className="w-40">
-                <Button onClick={handleToggle}>Popover</Button>
+                <Button>Popover</Button>
               </div>
             </Popover>
           </Flex>
