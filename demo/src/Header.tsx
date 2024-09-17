@@ -1,10 +1,13 @@
-import { Flex, Typography, useTheme } from "djuno-design";
+import { Flex, Typography, useDjunoDesign } from "djuno-design";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as NPM } from "./npm.svg";
 
 const { Text, Link } = Typography;
 const Header = () => {
-  const { mode, changeMode } = useTheme();
+  const {
+    theme: { mode, changeMode },
+  } = useDjunoDesign();
+
   const handleChangeTheme = (e: any) => {
     const isDark = e.target.checked;
     changeMode(isDark ? "dark" : "light");

@@ -58,10 +58,14 @@ import Sidebar from './components/Sidebar'
 import ThemeChanger from './components/ThemeChanger'
 import { ThemeSwitcher } from './components/ThemeChanger'
 
+// export providers
+export * from './providers/DjunoDesignProvider'
+
 // export hooks
 export * from './hooks/useWindowOnClick'
 export * from './hooks/useShow'
-export * from './hooks/useTheme'
+export * from './hooks/useDjunoDesign'
+// export * from './hooks/useTheme'
 
 // export all types
 export * from './types'
