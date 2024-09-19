@@ -25,7 +25,7 @@ import Typography from './Typography'
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
-import Input from './form/Input'
+import Input, { inputVariants } from './form/Input'
 import { cva } from 'class-variance-authority'
 const { Text } = Typography
 
@@ -76,7 +76,15 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  * }
  *
  */
-const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName, textClassName, type, ...props }) => {
+const SecureCopy: React.FC<SecureCopyProps> = ({
+  text,
+  className,
+  iconClassName,
+  textClassName,
+  type,
+  size,
+  ...props
+}) => {
   const [showText, setShowText] = React.useState(false)
 
   return (
@@ -84,7 +92,15 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
       {type === 'hide' && (
         <div className={cn('dj-flex dj-items-center dj-gap-1', className, {})}>
           <div
-            className='dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm  dj-h-7 dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap'
+            className={cn(
+              inputVariants({ size }),
+              {
+                'dj-h-7': size === 'small',
+                'dj-h-9': size === 'medium' || size === undefined,
+                'dj-h-11': size === 'large',
+              },
+              'dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap',
+            )}
             onClick={() => text && copyToClipboard(text)}
           >
             {!showText && (
@@ -113,6 +129,17 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
       {type === 'copy' && (
         <div className={cn('dj-flex dj-items-center dj-gap-1', className)}>
           <Input
+            className={cn(
+              inputVariants({
+                size,
+              }),
+              {
+                'dj-h-7': size === 'small',
+                'dj-h-9': size === 'medium' || size === undefined,
+                'dj-h-11': size === 'large',
+              },
+              className,
+            )}
             inputProps={{
               value: text ? text : '',
               readOnly: true,

@@ -483,7 +483,18 @@ function App() {
                 siblingCount={1}
                 onPageChange={handlePageChange}
                 loading={false}
-                className="my-pagination-class"
+              />
+            </div>
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex justify-end mt-3">
+              <Pagination
+                limit={5}
+                offset={0}
+                total={100}
+                siblingCount={2}
+                onPageChange={handlePageChange}
+                loading={false}
               />
             </div>
           </Flex>
@@ -654,10 +665,16 @@ function App() {
         </Card>
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="copy" />
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <SecureCopy text="Djuno Design" type="hide" size="small" />
+              <SecureCopy text="Djuno Design" type="hide" size="medium" />
+              <SecureCopy text="Djuno Design" type="hide" size="large" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <SecureCopy text="Djuno Design" type="copy" size="small" />
+              <SecureCopy text="Djuno Design" type="copy" size="medium" />
+              <SecureCopy text="Djuno Design" type="copy" size="large" />
+            </Flex>
           </Flex>
         </Card>
 
@@ -1035,6 +1052,24 @@ function App() {
                         icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
                       />
                     </Flex>
+                  </SimpleTable.TD>
+                </SimpleTable.Row>
+              </SimpleTable.Body>
+            </SimpleTable>
+          </Flex>
+          <Flex className="w-full">
+            <SimpleTable className="gap-3 w-full">
+              <SimpleTable.Head>
+                <SimpleTable.Row>
+                  <SimpleTable.TH>Header 1</SimpleTable.TH>
+                  <SimpleTable.TH>Header 2</SimpleTable.TH>
+                  <SimpleTable.TH>Header 3</SimpleTable.TH>
+                </SimpleTable.Row>
+              </SimpleTable.Head>
+              <SimpleTable.Body>
+                <SimpleTable.Row>
+                  <SimpleTable.TD colSpan={3} className="text-center py-10">
+                    <Flex className="w-full justify-center"></Flex>
                   </SimpleTable.TD>
                 </SimpleTable.Row>
               </SimpleTable.Body>

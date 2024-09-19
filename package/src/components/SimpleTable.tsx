@@ -77,7 +77,7 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className='absolute w-full h-full top-0 left-0 bg-gray-400/10 dark:bg-gray-800/10 backdrop-blur-[1.1px] flex justify-center items-center'
+            className='dj-absolute dj-w-full dj-h-full dj-top-0 dj-left-0 dj-bg-gray-400/10 dark:dj-bg-gray-800/10 dj-backdrop-blur-[1.1px] dj-flex dj-justify-center items-center'
           >
             <Loading type={'simple'} borderSize={2.3} theme={'primary'} />
           </motion.div>
