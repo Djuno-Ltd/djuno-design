@@ -33,13 +33,14 @@ export interface SidebarProps extends React.PropsWithChildren {
 export type SidebarItem = {
   id: string | number
   activeCondition?: SidebarActiveItemCondition
-  serviceTypeId?: number
+  // serviceTypeId?: number
   label?: SidebarItemLabel
   link?: string
   onClick?: (item?: SidebarItem) => void
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
   disabled?: boolean
   testId?: string
+  children?: SidebarItem[]
 }
 
 export type SidebarLoadingModes = LoadingType | 'skeleton'
