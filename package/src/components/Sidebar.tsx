@@ -24,6 +24,8 @@ import Loading from './Loading'
 import Flex from './Flex'
 import Skeleton from './Skeleton'
 import { PanelLayoutTypes, SidebarItem, SidebarItemLabel, SidebarLoadingModes, SidebarProps } from '../types'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ReactComponent as ArrowRightIcon } from './../assets/icons/arrow-right.svg'
 
 /**
  * Sidebar component.
@@ -58,28 +60,58 @@ import { PanelLayoutTypes, SidebarItem, SidebarItemLabel, SidebarLoadingModes, S
  * </Sidebar>
  */
 const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, loadingMode, type, children }) => {
+  const navItemHeight = 36
   const [hover, setHover] = React.useState<string | number | undefined>()
+  const [expandedItems, setExpandedItems] = React.useState<Array<string | number>>([])
 
-  const activeItem = useMemo(() => {
-    return items.find((item) => {
-      if (item.activeCondition && segments) {
-        return segments[item.activeCondition.segmentIndex] === item.activeCondition.activeString
+  const addToExpand = (id: string | number) => {
+    setExpandedItems((prevExpandedItems) => {
+      if (prevExpandedItems.includes(id)) {
+        return [...prevExpandedItems]
       } else {
-        return
+        return [...prevExpandedItems, id]
       }
     })
+  }
+
+  const deleteFromExpand = (id: string | number) => {
+    setExpandedItems((prevExpandedItems) => {
+      if (prevExpandedItems.includes(id)) {
+        const item = items.find((i) => i.id === id)
+        const { expandedChildIds } = calcExpandedChilds(item, expandedItems)
+        const ids = [id, ...expandedChildIds]
+        return prevExpandedItems.filter((expandedId) => !ids.includes(expandedId)) // Collapse item
+      } else {
+        return [...prevExpandedItems]
+      }
+    })
+  }
+
+  const activeItem = useMemo(() => {
+    return items.find((item) => isActiveItem(item, segments || []))
   }, [segments])
 
   const [pointerPosition, setPointerPosition] = React.useState<undefined | number>(undefined)
 
+  const calculatePointerPosition = React.useCallback(() => {
+    let topOffset = 0
+    let ended = false
+    items.forEach((item) => {
+      if (item.id === hover || (hover === undefined && item.id === activeItem?.id)) {
+        ended = true
+      }
+      if (!ended) {
+        topOffset += navItemHeight
+        const { count } = calcExpandedChilds(item, expandedItems)
+        topOffset += count * navItemHeight
+      }
+    })
+    setPointerPosition(topOffset)
+  }, [hover, activeItem, items, expandedItems])
+
   React.useEffect(() => {
-    const item = items.find((item) => item.id === hover) || activeItem
-    const itemIds = items.map((i) => i.id)
-    if (item) {
-      const activeIndex = itemIds.indexOf(item.id)
-      setPointerPosition(activeIndex !== -1 ? activeIndex * 36 : undefined)
-    }
-  }, [activeItem, hover, items])
+    calculatePointerPosition()
+  }, [hover, activeItem, items, expandedItems])
 
   const handleMouseEnter = (id: string | number) => {
     setHover(id)
@@ -103,13 +135,20 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
           {!loading &&
             items.map((item, index) => (
               <SidebarMenuItem
+                height={navItemHeight}
                 item={item}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 key={index}
+                segments={segments}
                 isActive={activeItem?.id === item.id}
                 dataTestId={item.testId}
+                expandedItems={expandedItems}
+                isExpanded={expandedItems.includes(item.id)}
+                addToExpand={addToExpand}
+                deleteFromExpand={deleteFromExpand}
                 type={type}
+                depth={0}
               />
             ))}
           {renderLoading(loading, loadingMode)}
@@ -119,7 +158,7 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
         <div className='d-w-full'>
           {children}
           {subItems && subItems.length && (
-            <div className='dj-px-6 dj-space-y-4 dj-mb-5 dj-mt-2'>
+            <div className='dj-px-2 dj-space-y-4 dj-mb-5 dj-mt-2'>
               <div className='dj-w-full dj-h-[1px] dj-bg-slate-200 dark:dj-bg-slate-700 dj-rounded-sm' />
               <div className='dj-my-2 dj-flex dj-flex-col dj-space-y-1'>
                 {subItems.map((item, index) => (
@@ -169,50 +208,139 @@ const renderLoading = (loading?: boolean, loadingMode?: SidebarLoadingModes) => 
 }
 
 const SidebarMenuItem = (props: {
+  height: number
   item: SidebarItem
   isActive?: boolean
+  isExpanded: boolean
+  expandedItems: Array<string | number>
+  addToExpand: (id: string | number) => void
+  deleteFromExpand: (id: string | number) => void
   onMouseEnter?: (id: string | number) => void
   onMouseLeave?: () => void
   dataTestId?: string
   type?: PanelLayoutTypes
+  segments?: string[]
+  depth?: number
 }) => {
-  const { item } = props
+  const {
+    item,
+    height,
+    depth,
+    isActive,
+    segments,
+    expandedItems,
+    isExpanded,
+    addToExpand,
+    deleteFromExpand,
+    onMouseEnter,
+    onMouseLeave,
+    type,
+  } = props
+
+  React.useEffect(() => {
+    if (item.children && item.children.length > 0) {
+      if (isActive && !isExpanded) addToExpand(item.id)
+      if (!isActive && isExpanded) deleteFromExpand(item.id)
+    }
+  }, [segments])
+
   const handleClick = () => {
     if (!item.disabled && item.onClick) {
       item.onClick(item)
     }
+
+    if (item.children && item.children.length > 0) {
+      if (isExpanded) {
+        deleteFromExpand(item.id)
+      } else {
+        addToExpand(item.id)
+      }
+    }
   }
+
+  const activeItem = useMemo(() => {
+    return item.children?.find((item) => isActiveItem(item, segments || []))
+  }, [segments])
 
   return (
     <div
-      onClick={handleClick}
-      onMouseLeave={props.onMouseLeave}
-      onMouseEnter={() => (props.onMouseEnter ? props.onMouseEnter(item.id) : {})}
-      className={cn(
-        'dj-py-2 dj-select-none dj-flex dj-transition dj-duration-150 dj-items-center dj-gap-4 dj-text-base dj-font-medium group/sidebar-nav',
-        {
-          'hover:dj-bg-primary-50 dj-text-slate-400 hover:dj-text-primary-500 dark:hover:dj-bg-primary-400/10 dark:hover:dj-text-primary-400':
-            !props.isActive,
-          'dj-bg-primary-50 dj-text-primary-500 dark:dj-bg-primary-400/10 dark:dj-text-primary-400 !dj-font-semibold':
-            props.isActive,
-          'dj-cursor-pointer': !item.disabled,
-          'dj-cursor-not-allowed': item.disabled,
-          'dj-px-8': props.type === undefined || props.type === 'normal',
-          'dj-px-3': props.type === 'mini',
-        },
-      )}
-      // eslint-disable-next-line react/no-unknown-property
-      test-cy={props.dataTestId}
+      onMouseLeave={onMouseLeave}
+      onMouseEnter={() => (onMouseEnter ? onMouseEnter(item.id) : {})}
+      className={cn('', { 'dj-group/item': depth === 0 })}
     >
-      {item.icon && (
-        <item.icon
-          className={cn('dj-w-6 dj-h-6', {
-            'group-hover/sidebar-nav:dj-text-primary-400': !props.isActive,
-            'dj-text-primary-400': props.isActive,
-          })}
-        />
-      )}
-      <div className='dj-text-sm dj-whitespace-nowrap dj-w-full'>{renderLabel(item.label, props.isActive)}</div>
+      <div
+        onClick={handleClick}
+        style={{ height }}
+        className={cn(
+          'dj-py-2 dj-select-none dj-flex dj-transition dj-duration-150 dj-items-center dj-gap-1 dj-text-base dj-font-medium',
+          {
+            'dj-border-l dj-border-l-slate-200 dark:dj-border-l-slate-600': depth !== 0,
+            //not-active
+            'group-hover/item:dj-bg-primary-50 dj-text-slate-400 dark:dj-text-slate-300 group-hover/item:dj-text-primary-500 dark:group-hover/item:dj-bg-primary-400/10 dark:group-hover/item:dj-text-primary-400':
+              !isActive && depth === 0,
+            'hover: dj-text-slate-400 hover:dj-text-slate-600 dark:dj-text-slate-300 dark:hover: dark:hover:dj-text-slate-200 hover:dj-border-l-primary-400 dark:hover:dj-border-l-primary-300':
+              !isActive && depth !== 0,
+
+            //active
+            'dj-bg-primary-50 dj-text-primary-500 dark:dj-bg-primary-400/10 dark:dj-text-primary-400 !dj-font-semibold':
+              isActive && depth === 0,
+            'dj-text-primary-400 dark:dj-text-primary-300 !dj-font-semibold  dj-border-l-primary-400 dark:dj-border-l-primary-300':
+              isActive && depth !== 0,
+
+            'dj-cursor-pointer': !item.disabled,
+            'dj-cursor-not-allowed': item.disabled,
+            'dj-px-4': type === undefined || type === 'normal',
+            'dj-px-2': type === 'mini',
+          },
+        )}
+        // eslint-disable-next-line react/no-unknown-property
+        test-cy={props.dataTestId}
+      >
+        <div className='dj-flex dj-flex-1 dj-items-center dj-gap-1'>
+          {item.icon && (
+            <item.icon
+              className={cn('dj-w-6 dj-h-6', {
+                'group-hover/item:dj-text-primary-400': !isActive,
+                'dj-text-primary-400': isActive,
+              })}
+            />
+          )}
+          <div className='dj-text-sm dj-whitespace-nowrap dj-w-full'>{renderLabel(item.label, isActive)}</div>
+        </div>
+        {item.children && item.children.length > 0 && (
+          <ArrowRightIcon
+            className={cn('dj-w-[14px] dj-h-[14px] dj-transition-all dj-duration-200', {
+              'dj-rotate-90': isExpanded,
+            })}
+          />
+        )}
+      </div>
+      <AnimatePresence>
+        {isExpanded && item.children && item.children.length > 0 && (
+          <motion.div
+            initial={{ height: 0 }}
+            animate={{ height: 'auto' }}
+            exit={{ height: 0 }}
+            className={cn('dj-ml-1 dj-pl-1 dj-overflow-hidden')}
+          >
+            {item.children.map((child, index) => (
+              <SidebarMenuItem
+                key={index}
+                height={height}
+                item={child}
+                isActive={activeItem?.id === child.id}
+                expandedItems={expandedItems}
+                isExpanded={expandedItems.includes(child.id)}
+                addToExpand={addToExpand}
+                deleteFromExpand={deleteFromExpand}
+                type={type}
+                segments={segments}
+                depth={1}
+              />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -229,7 +357,7 @@ const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; data
     <div
       onClick={handleClick}
       className={cn(
-        'dj-h-8 dj-px-2 dj-rounded-md dj-select-none dj-flex dj-transition dj-duration-150 dj-space-x-2 dj-items-center dj-text-sm',
+        'dj-h-8 dj-px-2 dj-rounded-md dj-select-none dj-flex dj-gap-1 dj-transition dj-duration-150 dj-items-center dj-text-sm',
         {
           'hover:dj-bg-primary-50 dj-text-slate-400 hover:dj-text-slate-800 dark:hover:dj-bg-primary-400/10 dark:hover:dj-text-slate-100 ':
             !props.isActive,
@@ -244,7 +372,7 @@ const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; data
     >
       {item.icon && (
         <item.icon
-          className={cn('w-5 h-5', {
+          className={cn('dj-w-5 dj-h-5', {
             'dark:dj-text-slate-400 hover:dark:dj-text-slate-100': !props.isActive,
             'dj-text-primary-300': props.isActive,
           })}
@@ -255,4 +383,44 @@ const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; data
   )
 }
 
+const isActiveItem = (item: SidebarItem, segments: string[]): boolean => {
+  if (
+    item.activeCondition &&
+    segments[item.activeCondition.segmentIndex] &&
+    segments[item.activeCondition.segmentIndex] === item.activeCondition.activeString
+  ) {
+    return true
+  }
+
+  if (item.children && item.children.length > 0) {
+    for (const child of item.children) {
+      if (isActiveItem(child, segments)) {
+        return true
+      }
+    }
+  }
+
+  return false
+}
+
+const calcExpandedChilds = (item: SidebarItem | undefined, expandedItems: Array<string | number>) => {
+  let count = 0
+  let expandedChildIds: Array<string | number> = []
+
+  const getCalc = (_item: SidebarItem) => {
+    if (expandedItems.includes(_item.id) && _item.children && _item.children.length > 0) {
+      count += _item.children.length
+      expandedChildIds = [...expandedChildIds, _item.id]
+    }
+
+    if (_item.children && _item.children.length > 0) {
+      for (const child of _item.children) {
+        getCalc(child)
+      }
+    }
+  }
+
+  item && getCalc(item)
+  return { count, expandedChildIds }
+}
 export default Sidebar

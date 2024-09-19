@@ -115,7 +115,7 @@ function App() {
     setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
   };
   const handleChangePathname = () => {
-    setPathname((prev) => (prev === "/item1" ? "/item2" : "/item1"));
+    setPathname((prev) => (prev === "/item1" ? "/item2-hi/item2-1" : "/item1"));
   };
 
   const sidebarItems: SidebarItem[] = [
@@ -126,7 +126,7 @@ function App() {
         segmentIndex: 0,
         activeString: "item1",
       },
-      onClick: (item) => console.log(item),
+      icon: FaceSmile,
     },
     {
       id: 2,
@@ -135,7 +135,69 @@ function App() {
         segmentIndex: 0,
         activeString: "item2",
       },
-      onClick: (item) => console.log(item),
+      children: [
+        {
+          id: "2-0",
+          label: "item2-0",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item2-0",
+          },
+        },
+        {
+          id: "2-1",
+          label: "item2-1",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item2-1",
+          },
+          children: [
+            {
+              id: "2-1-0",
+              label: "item2-1-0",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-1-0",
+              },
+            },
+            {
+              id: "2-1-1",
+              label: "item2-1-1",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-1-1",
+              },
+              children: [],
+            },
+          ],
+        },
+        {
+          id: "2-2",
+          label: "item2-2",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item2-2",
+          },
+          children: [
+            {
+              id: "2-2-0",
+              label: "item2-2-0",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-2-0",
+              },
+            },
+            {
+              id: "2-2-1",
+              label: "item2-2-1",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-2-1",
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       id: 3,
@@ -145,7 +207,24 @@ function App() {
         activeString: "item3",
       },
       link: "/item3",
-      onClick: (item) => console.log(item?.link),
+      children: [
+        {
+          id: "3-0",
+          label: "item3-0",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item3-0",
+          },
+        },
+        {
+          id: "3-1",
+          label: "item3-1",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item3-1",
+          },
+        },
+      ],
     },
   ];
 
@@ -565,7 +644,7 @@ function App() {
                 <Text size="xs">change selected?</Text>
                 <Switcher
                   onChange={handleChangePathname}
-                  value={pathname === "/item2"}
+                  value={pathname === "/item1"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
