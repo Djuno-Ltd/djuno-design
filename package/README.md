@@ -241,11 +241,11 @@ function App() {
 | Name           | Type                                       | Required | default | Description |
 | -------------- | ------------------------------------------ | -------- | ------- | ----------- |
 | inputProps     | `HTMLProps<HTMLInputElement>`              |          |         |             |
-| label          | React.ReactNode                            |          |         |             |
+| label          | string, React.ReactNode                    |          |         |             |
 | type           | `InputTypes`                               |          |         |             |
 | required       | boolean                                    |          |         |             |
 | error          | string , boolean , React.ReactNode         |          |         |             |
-| hint           | `React.ReactNode`                          |          |         |             |
+| hint           | string, React.ReactNode                    |          |         |             |
 | loading        | boolean                                    |          |         |             |
 | loadingType    | `LoadingType`                              |          |         |             |
 | placeholder    | string                                     |          |         |             |
@@ -453,17 +453,17 @@ function App() {
 
 ### Checkbox
 
-| Name           | Type                                 | Required | default | Description |
-| -------------- | ------------------------------------ | -------- | ------- | ----------- |
-| id             | string                               |          |         |             |
-| inputprops     | `HTMLProps<HTMLInputElement>`        |          |         |             |
-| label          | `React.ReactNode`                    |          |         |             |
-| required       | boolean                              |          | false   |             |
-| error          | string or boolean or React.ReactNode |          |         |             |
-| value          | boolean                              |          |         |             |
-| onChange       | `() => void`                         |          |         |             |
-| disabled       | boolean                              |          |         |             |
-| labelClassName | string                               |          |         |             |
+| Name           | Type                             | Required | default | Description |
+| -------------- | -------------------------------- | -------- | ------- | ----------- |
+| id             | string                           |          |         |             |
+| inputprops     | `HTMLProps<HTMLInputElement>`    |          |         |             |
+| label          | string, React.ReactNode          |          |         |             |
+| required       | boolean                          |          | false   |             |
+| error          | string, boolean, React.ReactNode |          |         |             |
+| value          | boolean                          |          |         |             |
+| onChange       | `() => void`                     |          |         |             |
+| disabled       | boolean                          |          |         |             |
+| labelClassName | string                           |          |         |             |
 
 ### Sidebar
 

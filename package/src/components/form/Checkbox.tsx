@@ -127,25 +127,17 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             'dj-flex dj-items-center dj-cursor-pointer',
             labelVariants({
               hasError: error ? 'yes' : 'no',
-              hasCustomLabel: labelClassName ? 'yes' : 'no',
-              className: labelClassName, // Pass the labelClassName prop
             }),
             {
               ' dj-cursor-not-allowed': disabled,
             },
+            labelClassName,
           )}
         >
-          {/* {label && (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+          {label && (
+            <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
-          )} */}
-          {label && !labelClassName ? (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
-              {label}
-            </Typography.Text>
-          ) : (
-            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5'>

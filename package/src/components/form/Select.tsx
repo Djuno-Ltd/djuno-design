@@ -161,29 +161,19 @@ const Select = <ExtraDataType extends string>({
           'dj-justify-end': !label,
         })}
       >
-        {/* <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
-          {label && (
-            <Typography.Text size='sm' uiType='transparent'>
-              {label}
-            </Typography.Text>
-          )} */}
-
         <label
           htmlFor={id}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
-              hasCustomLabel: labelClassName ? 'yes' : 'no',
-              className: labelClassName, // Pass the labelClassName prop
             }),
+            labelClassName,
           )}
         >
-          {label && !labelClassName ? (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+          {label && (
+            <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
-          ) : (
-            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5'>

@@ -164,7 +164,7 @@ function App() {
             <Flex className="gap-5 w-full">
               <Flex direction="col">
                 <Checkbox
-                  label="Djuno Design"
+                  label="Ckeckbox simple form"
                   value={isChecked}
                   onChange={setIsChecked}
                 />
@@ -173,7 +173,7 @@ function App() {
 
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox disabled form"
                 value={isChecked}
                 onChange={setIsChecked}
                 disabled
@@ -181,7 +181,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="is required?"
+                label="Ckeckbox required form"
                 value={isChecked}
                 onChange={setIsChecked}
                 required
@@ -189,7 +189,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with tooltip"
                 value={isChecked}
                 onChange={setIsChecked}
                 tooltip={{ content: "it's a tooltip" }}
@@ -197,7 +197,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with text error"
                 value={isChecked}
                 onChange={setIsChecked}
                 error="error"
@@ -205,7 +205,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with error"
                 value={isChecked}
                 onChange={setIsChecked}
                 error={true}
@@ -213,7 +213,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with custom label"
                 value={isChecked}
                 onChange={setIsChecked}
                 labelClassName="text-green-500 font-bold"
@@ -452,6 +452,20 @@ function App() {
               labelClassName="text-green-500 font-bold"
             />
             <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              error
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+            <Input
+              error
               label="Input"
               placeholder="Enter custom notes if any"
               labelClassName="text-green-500 font-bold"
@@ -725,19 +739,29 @@ function App() {
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="small" />
+                  <Switcher
+                    value={swith}
+                    onChange={setSwitch}
+                    size="small"
+                    loading
+                  />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     medium
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} />
+                  <Switcher value={swith} onChange={setSwitch} loading />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="large" />
+                  <Switcher
+                    value={swith}
+                    onChange={setSwitch}
+                    size="large"
+                    loading
+                  />
                 </Flex>
               </Flex>
             </div>
@@ -801,6 +825,12 @@ function App() {
             </Flex>
             <Flex items="end" className="gap-3 w-full flex justify-end">
               <Input label="Input" tooltip={{ content: "I'm a tooltip" }} />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input
+                label="Input with custom label"
+                labelClassName="text-green-500 font-bold"
+              />
             </Flex>
           </Flex>
         </Card>
@@ -892,7 +922,7 @@ function App() {
             </Flex>
             <Flex items="end" className="gap-3 w-full flex justify-end">
               <Select
-                label="Select"
+                label="Select with custom label"
                 size="medium"
                 options={selectOptions}
                 className="w-[200px]"

@@ -70,34 +70,17 @@ export const inputVariants = cva(
  * Define label variants using the `cva` utility function.
  * This function generates CSS classes for input label styles based on specified variants.
  */
-// export const labelVariants = cva(
-//   'dj-flex dj-items-center dj-gap-1 dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-whitespace-nowrap',
-//   {
-//     variants: {
-//       hasError: {
-//         yes: 'dj-text-red-700 dark:dj-text-red-500',
-//         no: '',
-//       },
-//     },
-//     defaultVariants: {
-//       hasError: 'no',
-//     },
-//   },
-// )
-export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj-whitespace-nowrap', {
+
+export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj-whitespace-nowrap ', {
+  // dj-text-black/85 dark:dj-text-secondary-100
   variants: {
     hasError: {
-      yes: 'dj-text-red-700 dark:dj-text-red-500',
+      yes: '!dj-text-red-700 dark:!dj-text-red-500',
       no: '',
-    },
-    hasCustomLabel: {
-      yes: '',
-      no: 'dj-text-black/85 dark:dj-text-secondary-100',
     },
   },
   defaultVariants: {
     hasError: 'no',
-    hasCustomLabel: 'no',
   },
 })
 
@@ -114,7 +97,7 @@ export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj
  * @param {string} [props.className] - Additional classes to apply to the input element.
  * @param {string} [props.labelClassName] - Additional classes to apply to the label element.
  * @param {boolean} [props.required] - Indicates if the input is required.
- * @param {string | boolean} [props.error] - Error message or boolean to indicate input validity.
+ * @param {string | boolean| React.ReactNode} [props.error] - Error message or boolean to indicate input validity.
  * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the input.
  * @param {SizeTypes} [props.size] - Size of the input field.
@@ -226,28 +209,19 @@ const Input: React.FunctionComponent<InputProps> = ({
           'dj-mb-0.5': label || required || tooltip || hint,
         })}
       >
-        {/* <label htmlFor={id} className={cn('dj-flex dj-items-center', { 'dj-text-error': error })}>
-          {label && (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
-              {label}
-            </Typography.Text>
-          )} */}
         <label
           htmlFor={id}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
-              hasCustomLabel: labelClassName ? 'yes' : 'no',
-              className: labelClassName, // Pass the labelClassName prop
             }),
+            labelClassName,
           )}
         >
-          {label && !labelClassName ? (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+          {label && (
+            <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
-          ) : (
-            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5 dj-ml-1'>

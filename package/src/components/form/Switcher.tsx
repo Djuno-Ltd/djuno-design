@@ -78,7 +78,14 @@ const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, lo
           },
         )}
       >
-        {loading && <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />}
+        {loading && (
+          <Loading
+            type={loadingType || 'simple'}
+            borderSize={size === 'small' ? 1 : 1.5}
+            size={size === 'large' ? 18 : 14}
+            theme={'primary'}
+          />
+        )}
       </span>
     </Switch>
   )
