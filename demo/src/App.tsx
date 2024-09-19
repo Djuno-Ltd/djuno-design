@@ -1196,8 +1196,11 @@ function App() {
               message="Djuno Design. Info Alert"
             />
 
+            <Text strong size="sm" className="mt-4">
+              wrap mode
+            </Text>
             <Alert type="info">
-              <Flex direction="col" className="gap-2 mt-5">
+              <Flex direction="col" className="gap-2 mt-1">
                 <Button uiType="primary" className="gap-5 ">
                   Djuno Design
                 </Button>
