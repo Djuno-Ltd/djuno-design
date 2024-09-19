@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-import { LoadingProps, LoadingType, SizeTypes } from '.'
+import { LoadingType, SizeTypes } from '.'
 
 export interface SwitcherProps {
   value?: boolean

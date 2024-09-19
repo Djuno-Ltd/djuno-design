@@ -15,7 +15,7 @@ import { cn } from '../../utils/cn'
  * @param {Function} [props.onChange] - Callback function that gets called when the switch is toggled. It receives the new state as an argument.
  * @param {boolean} [props.disabled] - If true, the switch will be disabled and not clickable.
  * @param {boolean} [props.loading] - If true, the switch will show a loading indicator instead of its normal state.
- * @param {LoadingProps} [props.loadingSetting] - Configuration for the loading indicator, including size, border size, and type.
+ * @param {LoadingProps} [props.loadingType] - Type of loading indicator: 'simple' , 'cutoff' or 'elastic'.
  * @param {SizeTypes} [props.size] - Size of the switch. Options are 'small', 'medium', or 'large'.
  *
  * @returns {React.ReactNode} Rendered Switcher component.

@@ -211,6 +211,14 @@ function App() {
                 error={true}
               />
             </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Djuno Design"
+                value={isChecked}
+                onChange={setIsChecked}
+                labelClassName="text-green-500 font-bold"
+              />
+            </Flex>
           </Flex>
         </Card>
         <Card title="Popover">

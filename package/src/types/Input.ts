@@ -24,7 +24,7 @@ import { LoadingType } from './Loading'
 import { CopyableOptionsProp, SizeTypes } from '.'
 
 export interface InputProps {
-  label?: React.ReactNode
+  label?: string | React.ReactNode
   inputProps?: React.HTMLProps<HTMLInputElement>
   loading?: boolean
   loadingType?: LoadingType

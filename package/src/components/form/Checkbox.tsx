@@ -40,6 +40,7 @@ import { InfoTooltip } from '../Tooltip'
  * @param {boolean} [props.disabled] - Disables the checkbox interaction.
  * @param {string|boolean| React.ReactNode} [props.error] - An error message to display if there's an issue with the checkbox.
  * @param {React.ReactNode} [props.tooltip] - Additional information to display in a tooltip next to the checkbox.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
  * @returns {React.ReactNode} Rendered Checkbox component.
  *
@@ -78,6 +79,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   value,
   onChange,
   disabled,
+  labelClassName,
 }) => {
   const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
@@ -123,16 +125,27 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
           htmlFor={id}
           className={cn(
             'dj-flex dj-items-center dj-cursor-pointer',
-            labelVariants({ hasError: error ? 'yes' : 'no' }),
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+              hasCustomLabel: labelClassName ? 'yes' : 'no',
+              className: labelClassName, // Pass the labelClassName prop
+            }),
             {
               ' dj-cursor-not-allowed': disabled,
             },
           )}
         >
-          {label && (
+          {/* {label && (
             <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
               {label}
             </Typography.Text>
+          )} */}
+          {label && !labelClassName ? (
+            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+              {label}
+            </Typography.Text>
+          ) : (
+            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5'>

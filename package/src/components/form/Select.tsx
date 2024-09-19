@@ -92,6 +92,7 @@ const listboxVariants = cva(
  * @param {boolean} [props.disabled] - If true, disables the select component.
  * @param {SizeTypes} [props.size] - Size of the select component (e.g., small, medium, large).
  * @param {(e: FocusEvent) => void} [props.onBlur] - Callback function triggered when the select component loses focus.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
  * @returns {React.ReactNode} Rendered Select component.
  *

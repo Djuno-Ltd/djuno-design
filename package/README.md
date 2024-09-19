@@ -238,20 +238,21 @@ function App() {
 
 ### Input
 
-| Name        | Type                                       | Required | default | Description |
-| ----------- | ------------------------------------------ | -------- | ------- | ----------- |
-| inputProps  | `HTMLProps<HTMLInputElement>`              |          |         |             |
-| label       | React.ReactNode                            |          |         |             |
-| type        | `InputTypes`                               |          |         |             |
-| required    | boolean                                    |          |         |             |
-| error       | string , boolean , React.ReactNode         |          |         |             |
-| hint        | `React.ReactNode`                          |          |         |             |
-| loading     | boolean                                    |          |         |             |
-| loadingType | `LoadingProps`                             |          |         |             |
-| placeholder | string                                     |          |         |             |
-| tooltip     | `TooltipProps`                             |          |         |             |
-| size        | `SizeTypes`                                |          | medium  |             |
-| copyable    | `boolean or function or InputCopyableProp` |          |         |             |
+| Name           | Type                                       | Required | default | Description |
+| -------------- | ------------------------------------------ | -------- | ------- | ----------- |
+| inputProps     | `HTMLProps<HTMLInputElement>`              |          |         |             |
+| label          | React.ReactNode                            |          |         |             |
+| type           | `InputTypes`                               |          |         |             |
+| required       | boolean                                    |          |         |             |
+| error          | string , boolean , React.ReactNode         |          |         |             |
+| hint           | `React.ReactNode`                          |          |         |             |
+| loading        | boolean                                    |          |         |             |
+| loadingType    | `LoadingType`                              |          |         |             |
+| placeholder    | string                                     |          |         |             |
+| tooltip        | `TooltipProps`                             |          |         |             |
+| size           | `SizeTypes`                                |          | medium  |             |
+| copyable       | `boolean or function or InputCopyableProp` |          |         |             |
+| labelClassName | string                                     |          |         |             |
 
 ### Textarea
 
@@ -269,6 +270,9 @@ function App() {
 | tooltip           | `TooltipProps`                             |          |         |             |
 | size              | `SizeTypes`                                |          | medium  |             |
 | copyable          | `boolean or function or InputCopyableProp` |          |         |             |
+| labelClassName    | string                                     |          |         |             |
+| loading           | boolean                                    |          |         |             |
+| loadingType       | `LoadingType`                              |          |         |             |
 
 ### Switcher
 
@@ -305,6 +309,7 @@ function App() {
 | `disabled`         | `boolean`                               |          |         | If true, disables the select component.                                    |
 | `size`             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
 | `onBlur`           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
+| `labelClassName`   | `string`                                |          |         | Additional CSS classes for custom label                                    |
 
 ### Skeleton
 
@@ -448,16 +453,17 @@ function App() {
 
 ### Checkbox
 
-| Name       | Type                                 | Required | default | Description |
-| ---------- | ------------------------------------ | -------- | ------- | ----------- |
-| id         | string                               |          |         |             |
-| inputprops | `HTMLProps<HTMLInputElement>`        |          |         |             |
-| label      | `React.ReactNode`                    |          |         |             |
-| required   | boolean                              |          | false   |             |
-| error      | string or boolean or React.ReactNode |          |         |             |
-| value      | boolean                              |          |         |             |
-| onChange   | `() => void`                         |          |         |             |
-| disabled   | boolean                              |          |         |             |
+| Name           | Type                                 | Required | default | Description |
+| -------------- | ------------------------------------ | -------- | ------- | ----------- |
+| id             | string                               |          |         |             |
+| inputprops     | `HTMLProps<HTMLInputElement>`        |          |         |             |
+| label          | `React.ReactNode`                    |          |         |             |
+| required       | boolean                              |          | false   |             |
+| error          | string or boolean or React.ReactNode |          |         |             |
+| value          | boolean                              |          |         |             |
+| onChange       | `() => void`                         |          |         |             |
+| disabled       | boolean                              |          |         |             |
+| labelClassName | string                               |          |         |             |
 
 ### Sidebar
 

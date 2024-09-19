@@ -46,6 +46,7 @@ import Loading from '../Loading'
  * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined) | TextareaCopyableProp} [props.copyable] - Determines if the textarea value can be copied. It can be a boolean for simple copy, a function for custom copy behavior, or an object to define custom icons, tooltips, and text.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *

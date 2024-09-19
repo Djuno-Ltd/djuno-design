@@ -105,7 +105,7 @@ export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj
  * Input component.
  *
  * @param {object} props - Input component props.
- * @param {React.ReactNode} [props.label] - Label of the input.
+ * @param {string | React.ReactNode} [props.label] - Label of the input.
  * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
