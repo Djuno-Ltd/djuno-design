@@ -304,6 +304,21 @@ function App() {
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
+            Have loading:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              textareaProps={{}}
+              loading
+              loadingType="elastic"
+            />
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input label="loading" loading loadingType="elastic" />
+            </Flex>
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
             Replace copy text.:
           </Text>
           <Flex className="gap-5 w-full mt-5">
@@ -419,6 +434,21 @@ function App() {
               }}
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Custom label:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+          </Flex>
         </Card>
 
         <Card title="Pagination">
@@ -439,7 +469,8 @@ function App() {
 
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
-            handleChange
+            <Text>handleChange</Text>
+
             <Accordion
               items={[
                 {
@@ -851,6 +882,16 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="Select"
+                size="medium"
+                options={selectOptions}
+                className="w-[200px]"
+                emptyString="select an option"
+                labelClassName="text-green-500 font-bold"
+              />
+            </Flex>
           </Flex>
         </Card>
 
@@ -1116,6 +1157,18 @@ function App() {
               type="info"
               message="Djuno Design. Info Alert"
             />
+
+            <Alert type="info">
+              <Flex direction="col" className="gap-2 mt-5">
+                <Button uiType="primary" className="gap-5 ">
+                  Djuno Design
+                </Button>
+
+                <Text size="sm" className="font-semibold">
+                  This is Alert wrap around button
+                </Text>
+              </Flex>
+            </Alert>
           </Flex>
         </Card>
 

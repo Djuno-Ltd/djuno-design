@@ -25,7 +25,7 @@ export interface CheckboxProps {
   inputProps?: React.HTMLProps<HTMLInputElement>
   label?: React.ReactNode
   required?: boolean
-  error?: string | boolean
+  error?: string | boolean | React.ReactNode
   tooltip?: TooltipProps
   value?: boolean
   onChange?: (checked: boolean) => void

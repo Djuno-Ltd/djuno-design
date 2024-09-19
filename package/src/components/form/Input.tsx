@@ -30,8 +30,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
-import { useState } from 'react'
-import Flex from '../Flex'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -72,20 +70,36 @@ export const inputVariants = cva(
  * Define label variants using the `cva` utility function.
  * This function generates CSS classes for input label styles based on specified variants.
  */
-export const labelVariants = cva(
-  'dj-flex dj-items-center dj-gap-1 dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-whitespace-nowrap',
-  {
-    variants: {
-      hasError: {
-        yes: 'dj-text-red-700 dark:dj-text-red-500',
-        no: '',
-      },
+// export const labelVariants = cva(
+//   'dj-flex dj-items-center dj-gap-1 dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-whitespace-nowrap',
+//   {
+//     variants: {
+//       hasError: {
+//         yes: 'dj-text-red-700 dark:dj-text-red-500',
+//         no: '',
+//       },
+//     },
+//     defaultVariants: {
+//       hasError: 'no',
+//     },
+//   },
+// )
+export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj-whitespace-nowrap', {
+  variants: {
+    hasError: {
+      yes: 'dj-text-red-700 dark:dj-text-red-500',
+      no: '',
     },
-    defaultVariants: {
-      hasError: 'no',
+    hasCustomLabel: {
+      yes: '',
+      no: 'dj-text-black/85 dark:dj-text-secondary-100',
     },
   },
-)
+  defaultVariants: {
+    hasError: 'no',
+    hasCustomLabel: 'no',
+  },
+})
 
 /**
  * Input component.
@@ -201,6 +215,7 @@ const Input: React.FunctionComponent<InputProps> = ({
       })
     }
   }, [copyable, tooltipTexts, icons])
+
   return (
     <div className='dj-flex dj-flex-col'>
       <div
@@ -211,11 +226,28 @@ const Input: React.FunctionComponent<InputProps> = ({
           'dj-mb-0.5': label || required || tooltip || hint,
         })}
       >
-        <label htmlFor={id} className={cn('dj-flex dj-items-center', { 'dj-text-error': error })}>
+        {/* <label htmlFor={id} className={cn('dj-flex dj-items-center', { 'dj-text-error': error })}>
           {label && (
             <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
               {label}
             </Typography.Text>
+          )} */}
+        <label
+          htmlFor={id}
+          className={cn(
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+              hasCustomLabel: labelClassName ? 'yes' : 'no',
+              className: labelClassName, // Pass the labelClassName prop
+            }),
+          )}
+        >
+          {label && !labelClassName ? (
+            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+              {label}
+            </Typography.Text>
+          ) : (
+            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5 dj-ml-1'>
@@ -275,10 +307,10 @@ const Input: React.FunctionComponent<InputProps> = ({
     </div>
   )
 }
-const AnimatedFormError: React.FC<{ error?: string | boolean }> = ({ error }) => {
+const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }> = ({ error }) => {
   return (
     <AnimatePresence>
-      {error && typeof error === 'string' && (
+      {error && typeof error !== 'boolean' && typeof error === 'string' && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}

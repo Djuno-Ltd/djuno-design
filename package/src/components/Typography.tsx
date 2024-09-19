@@ -24,7 +24,7 @@ import { cva } from 'class-variance-authority'
 import {
   TypographyBaseProps,
   TypographyComponents,
-  TypographyCopyableProp,
+  CopyableOptionsProp,
   TypographyLinkProps,
   TypographyParagraphProps,
   TypographyProps,
@@ -286,7 +286,7 @@ const Link: React.FC<TypographyLinkProps> = ({
   )
 }
 
-const CopyableText: React.FC<{ copyable: boolean | TypographyCopyableProp; textChildren: React.ReactNode }> = ({
+const CopyableText: React.FC<{ copyable: boolean | CopyableOptionsProp; textChildren: React.ReactNode }> = ({
   copyable,
   textChildren,
 }) => {

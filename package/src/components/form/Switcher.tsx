@@ -33,7 +33,7 @@ import { cn } from '../../utils/cn'
  *   loading={false}
  * />
  */
-const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, loading, loadingSetting }) => {
+const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, loading, loadingType }) => {
   const [enabled, setEnabled] = useState<boolean>(value || false)
 
   useEffect(() => {
@@ -78,13 +78,7 @@ const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, lo
           },
         )}
       >
-        {loading && (
-          <Loading
-            size={loadingSetting?.size || 13}
-            borderSize={loadingSetting?.borderSize || 2}
-            type={loadingSetting?.type || 'elastic'}
-          />
-        )}
+        {loading && <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />}
       </span>
     </Switch>
   )

@@ -26,6 +26,7 @@ import Tooltip, { InfoTooltip } from '../Tooltip'
 import { copyToClipboard } from '../../utils/copy'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
+import Loading from '../Loading'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation, additional styling options, and copyable functionality.
@@ -36,13 +37,15 @@ import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
  * @param {InputTypes} [props.type] - Type of the textarea field, which can be 'default' or 'simple'.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
- * @param {string} [props.label] - Label text to display above the textarea.
+ * @param {string| React.ReactNode} [props.label] - Label text to display above the textarea.
  * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
- * @param {string|boolean} [props.error] - Error message or boolean flag to indicate whether there is a validation error.
- * @param {string} [props.hint] - Hint text to provide additional guidance or information to the user.
+ * @param {string|boolean| React.ReactNode} [props.error] - Error message or boolean flag to indicate whether there is a validation error.
+ * @param {string| React.ReactNode} [props.hint] - Hint text to provide additional guidance or information to the user.
  * @param {SizeTypes} [props.size] - The size of the textarea field, which can be 'small', 'medium', or 'large'.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information or help text when the user hovers over an icon.
  * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined) | TextareaCopyableProp} [props.copyable] - Determines if the textarea value can be copied. It can be a boolean for simple copy, a function for custom copy behavior, or an object to define custom icons, tooltips, and text.
+ * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
+ * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *
@@ -83,6 +86,9 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   size,
   type,
   copyable,
+  loading,
+  loadingType,
+  labelClassName,
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -147,11 +153,22 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
           'dj-justify-end': !label,
         })}
       >
-        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
-          {label && (
+        <label
+          htmlFor={id}
+          className={cn(
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+              hasCustomLabel: labelClassName ? 'yes' : 'no',
+              className: labelClassName, // Pass the labelClassName prop
+            }),
+          )}
+        >
+          {label && !labelClassName ? (
             <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
               {label}
             </Typography.Text>
+          ) : (
+            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5'>
@@ -169,7 +186,6 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
                     { 'dj-w-[15px]': size === 'small' },
                   )}
                 >
-                  {/* Render the icon here */}
                   {icon && <span className='dj-w-4 dj-h-4'>{icon}</span>}
                 </span>
               </Tooltip>
@@ -178,27 +194,28 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
         </label>
         {hint && <span className='dj-text-xs dj-text-slate-500'>{hint}</span>}
       </div>
-
-      <textarea
-        id={id}
-        ref={textareaRef}
-        {...textareaProps}
-        className={cn(
-          inputVariants({
-            type,
-            hasError: error ? 'yes' : 'no',
-            size,
-            copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
-          }),
-          className,
+      <div className='dj-relative dj-w-full'>
+        <textarea
+          id={id}
+          ref={textareaRef}
+          {...textareaProps}
+          className={cn(
+            inputVariants({
+              type,
+              hasError: error ? 'yes' : 'no',
+              size,
+              copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
+            }),
+            className,
+          )}
+          placeholder={placeholder}
+        />
+        {loading && (
+          <div className='dj-absolute dj-top-0 dj-right-0 dj-m-2 dj-flex dj-items-center dj-justify-center'>
+            <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+          </div>
         )}
-        placeholder={placeholder}
-      />
-      {/* {loading && (
-              <div className='dj-absolute dj-z-40 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2.5'>
-                <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
-              </div>
-            )} */}
+      </div>
       <AnimatedFormError error={error} />
     </div>
   )

@@ -38,7 +38,7 @@ import { InfoTooltip } from '../Tooltip'
  * @param {Function} [props.onChangeCheckbox] - Callback function called when the checkbox state changes.
  * @param {boolean} [props.required] - Specifies if the checkbox is required.
  * @param {boolean} [props.disabled] - Disables the checkbox interaction.
- * @param {string|boolean} [props.error] - An error message to display if there's an issue with the checkbox.
+ * @param {string|boolean| React.ReactNode} [props.error] - An error message to display if there's an issue with the checkbox.
  * @param {React.ReactNode} [props.tooltip] - Additional information to display in a tooltip next to the checkbox.
  *
  * @returns {React.ReactNode} Rendered Checkbox component.

@@ -108,12 +108,11 @@ const Alert: React.FunctionComponent<AlertProps> = ({
   type,
   showIcon,
   banner,
-  ...props
+  children,
 }) => {
   return (
     <Flex
       items={'center'}
-      {...props}
       className={cn(alertVariants({ type, paddingType: description ? 'large' : 'small' }), className, {
         'dj-rounded-none dj-border-0': banner,
       })}
@@ -142,6 +141,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
               {typeof description !== 'string' && <>{description}</>}
             </Flex>
           )}
+          <Flex>{children}</Flex>
         </Flex>
       </Flex>
     </Flex>

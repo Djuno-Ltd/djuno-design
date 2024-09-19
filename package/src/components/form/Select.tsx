@@ -79,12 +79,12 @@ const listboxVariants = cva(
  * @param {string} [props.className] - Additional CSS classes for custom styling of the select component.
  * @param {string} [props.buttonClassName] - Additional CSS classes for custom styling of the select button.
  * @param {string} [props.optionsClassName] - Additional CSS classes for custom styling of the options list.
- * @param {string} [props.label] - The label displayed above the select component.
- * @param {string|boolean} [props.error] - Error message to display if there is a validation issue.
+ * @param {string| React.ReactNode} [props.label] - The label displayed above the select component.
+ * @param {string|boolean| React.ReactNode} [props.error] - Error message to display if there is a validation issue.
  * @param {boolean} [props.required] - Indicates if the select component is required.
  * @param {SelectTypes} [props.type] - The type of the select component (e.g., single select, multi-select).
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information.
- * @param {string} [props.hint] - Hint text to provide additional context or instructions.
+ * @param {string| React.ReactNode} [props.hint] - Hint text to provide additional context or instructions.
  * @param {boolean} [props.loading] - Indicates if the select component is in a loading state.
  * @param {LoadingType} [props.loadingType] - Type of loading indicator to display when the select component is loading.
  * @param {string} [props.emptyString] - Text to display when there are no options available.
@@ -137,6 +137,7 @@ const Select = <ExtraDataType extends string>({
   defaultValue,
   onChange,
   options,
+  labelClassName,
 }: SelectProps<ExtraDataType>) => {
   const innerId = React.useMemo(() => {
     return id || uuid(10)
@@ -159,11 +160,29 @@ const Select = <ExtraDataType extends string>({
           'dj-justify-end': !label,
         })}
       >
-        <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+        {/* <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
+          )} */}
+
+        <label
+          htmlFor={id}
+          className={cn(
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+              hasCustomLabel: labelClassName ? 'yes' : 'no',
+              className: labelClassName, // Pass the labelClassName prop
+            }),
+          )}
+        >
+          {label && !labelClassName ? (
+            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+              {label}
+            </Typography.Text>
+          ) : (
+            label
           )}
           {required && (
             <Typography.Text uiType='danger' className='dj-h-5'>
@@ -195,7 +214,11 @@ const Select = <ExtraDataType extends string>({
               selectedOption?.label
             ) : (
               <Text className='dj-text-sm' uiType='secondary'>
-                {emptyString ? emptyString : label ? `Select a ${label.toLowerCase()}` : ''}
+                {emptyString
+                  ? emptyString
+                  : label
+                    ? `Select a ${typeof label === 'string' && label.toLowerCase()}`
+                    : ''}
               </Text>
             )}
           </span>
