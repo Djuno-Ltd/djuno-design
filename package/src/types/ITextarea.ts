@@ -20,10 +20,10 @@
 
 import { TooltipProps } from './Tooltip'
 import { InputTypes, SizeTypes } from '.'
+import { TextareaHTMLAttributes } from 'react'
 
-export interface TextareaProps {
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id?: string
-  textareaProps?: React.HTMLProps<HTMLTextAreaElement>
   className?: string
   placeholder?: string
   label?: string

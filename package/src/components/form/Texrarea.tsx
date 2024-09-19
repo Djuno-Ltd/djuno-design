@@ -31,7 +31,6 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
  *
  * @param {object} props - Textarea props.
  * @param {string} [props.id] - Unique identifier for the textarea element.
- * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, etc.
  * @param {InputTypes} [props.type] - Type of the textarea field.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
@@ -69,7 +68,6 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 
 const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   id,
-  textareaProps,
   placeholder,
   className,
   label,
@@ -136,7 +134,6 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
       <textarea
         id={id}
         ref={textareaRef}
-        {...textareaProps}
         className={cn(
           inputVariants({
             type,
