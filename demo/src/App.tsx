@@ -17,6 +17,7 @@ import {
   Pagination,
   Modal,
   Select,
+  MultiSelect,
   SelectOption,
   Dropdown,
   Accordion,
@@ -34,7 +35,7 @@ import {
   ThemeChanger,
   ThemeSwitcher,
 } from "djuno-design";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -63,6 +64,11 @@ function App() {
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
   );
+
+  const [multiSelectValues, setMultiSelectValues] = useState<
+    string[] | undefined
+  >([selectOptions[0].value]);
+
   const exampleJson = {
     block_number: 38733960,
     topic: "raw-avalanchec-mainnet",
@@ -99,9 +105,6 @@ function App() {
       ],
     },
   };
-
-  const [open, setOpen] = useState<boolean>(false);
-  const handleToggle = () => setOpen(!open);
 
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
@@ -214,7 +217,7 @@ function App() {
               panelStyle={{}}
             >
               <div className="w-40">
-                <Button onClick={handleToggle}>Popover</Button>
+                <Button>Popover</Button>
               </div>
             </Popover>
           </Flex>
@@ -698,7 +701,10 @@ function App() {
                 clearable
                 value={clearableValue}
                 options={selectOptions}
-                onChange={setClearableValue}
+                onChange={(v) => {
+                  console.log(v);
+                  setClearableValue(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>
@@ -719,6 +725,19 @@ function App() {
                 error="Field is required"
                 required
                 options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <MultiSelect
+                label="multi select"
+                clearable
+                values={multiSelectValues}
+                options={selectOptions}
+                onChange={(v) => {
+                  console.log(v);
+                  setMultiSelectValues(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>

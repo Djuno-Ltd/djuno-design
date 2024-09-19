@@ -20,10 +20,9 @@
 
 import React from 'react'
 import Typography from '../Typography'
-import { SelectProps } from '../../types/ISelect'
+import { MultiSelectProps, SelectProps } from '../../types/ISelect'
 import { cn } from '../../utils/cn'
-import { Listbox, ListboxButton, ListboxOptions, ListboxOption, Transition } from '@headlessui/react'
-import { useFloating, shift, flip } from '@floating-ui/react-dom'
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
 import Loading from '../Loading'
 import EmptyState from '../EmptyState'
 import { InfoTooltip } from '../Tooltip'
@@ -71,7 +70,7 @@ const listboxVariants = cva(
  * A customizable dropdown select component that allows users to choose from a list of options.
  * The component supports various features such as custom styling, validation states, tooltips, loading indicators, and more.
  *
- * @template T, ET
+ * @template ExtraDataType
  * @param {object} props - Select component props.
  * @param {T} [props.value] - The currently selected value.
  * @param {(value: T | undefined) => void} [props.onChange] - Callback function triggered when the selected value changes.
@@ -117,8 +116,8 @@ const listboxVariants = cva(
  *   clearable={true}
  * />
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Select = <T extends string | number, ET = any>({
+const Select = <ExtraDataType extends string>({
+  id,
   className,
   buttonClassName,
   optionsClassName,
@@ -138,12 +137,10 @@ const Select = <T extends string | number, ET = any>({
   defaultValue,
   onChange,
   options,
-}: SelectProps<T, ET>) => {
-  const id = uuid(10)
-  const { refs, floatingStyles } = useFloating({
-    placement: 'bottom-start',
-    middleware: [flip(), shift()],
-  })
+}: SelectProps<ExtraDataType>) => {
+  const innerId = React.useMemo(() => {
+    return id || uuid(10)
+  }, [id])
 
   const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
     e.stopPropagation()
@@ -162,7 +159,7 @@ const Select = <T extends string | number, ET = any>({
           'dj-justify-end': !label,
         })}
       >
-        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+        <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
               {label}
@@ -178,106 +175,252 @@ const Select = <T extends string | number, ET = any>({
         {hint && <span className='dj-text-xs dj-mb-1 dj-text-slate-500'>{hint}</span>}
       </div>
       <Listbox defaultValue={defaultValue || null} value={value || null} onChange={onChange} disabled={disabled}>
-        <div className='dj-relative'>
-          <ListboxButton
-            ref={refs.setReference}
-            className={cn(
-              listboxVariants({
-                type,
-                hasError: error ? 'yes' : 'no',
-                size,
-              }),
-              buttonClassName,
-            )}
+        <ListboxButton
+          className={cn(
+            listboxVariants({
+              type,
+              hasError: error ? 'yes' : 'no',
+              size,
+            }),
+            buttonClassName,
+            'dj-relative dj-block dj-w-full',
+          )}
+        >
+          <span
+            className={cn('dj-block dj-truncate dj-text-slate-800 dark:dj-text-slate-200 dj-text-start', {
+              'dj-text-slate-300 dark:dj-text-secondary-600': loading,
+            })}
           >
-            <span
-              className={cn('dj-block dj-truncate dj-text-slate-800 dark:dj-text-slate-200 dj-text-start', {
-                '!dj-text-slate-300 dark:!dj-text-secondary-600': loading,
-              })}
-            >
-              {value ? (
-                selectedOption?.label
-              ) : (
-                <Text className='dj-text-sm' uiType='secondary'>
-                  {emptyString ? emptyString : label ? `Select a ${label.toLowerCase()}` : ''}
-                </Text>
-              )}
-            </span>
-            <span className='dj-absolute dj-inset-y-0 dj-right-0 dj-flex dj-items-center dj-pr-2 dj-gap-1'>
-              {clearable && value && (
-                <ClearIcon
-                  onClick={handleClear}
-                  className='dj-w-4 dj-cursor-pointer hover:dj-scale-110 dj-duration-300 dj-text-slate-400 hover:dj-text-slate-800'
-                />
-              )}
+            {value ? (
+              selectedOption?.label
+            ) : (
+              <Text className='dj-text-sm' uiType='secondary'>
+                {emptyString ? emptyString : label ? `Select a ${label.toLowerCase()}` : ''}
+              </Text>
+            )}
+          </span>
+          <span className='dj-absolute dj-inset-y-0 dj-right-0 dj-flex dj-items-center dj-pr-2 dj-gap-1'>
+            {clearable && value && (
+              <ClearIcon
+                onClick={handleClear}
+                className='dj-w-4 dj-cursor-pointer hover:dj-scale-110 dj-duration-300 dj-text-slate-400 hover:dj-text-slate-800'
+              />
+            )}
 
-              <ChevronUpDownIcon className='dj-h-4 dj-w-4 dj-text-gray-400' aria-hidden='true' />
+            <ChevronUpDownIcon className='dj-h-4 dj-w-4 dj-text-gray-400' aria-hidden='true' />
+          </span>
+          {loading && (
+            <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-2'>
+              <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
             </span>
-            {loading && (
-              <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-2'>
-                <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
-              </span>
-            )}
-          </ListboxButton>
-          <Transition
-            as={React.Fragment}
-            leave='transition ease-in duration-100'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
-          >
-            <ListboxOptions
-              ref={refs.setFloating}
-              style={floatingStyles}
-              className={cn(
-                'dj-absolute dj-z-50 dj-mt-1 dj-max-h-60 dj-w-full dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm',
-                { [optionsClassName || '']: optionsClassName },
-              )}
+          )}
+        </ListboxButton>
+        <ListboxOptions
+          anchor='bottom start'
+          transition
+          className={cn(
+            'dj-w-[var(--button-width)] dj-mt-1 dj-max-h-60 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm',
+            { [optionsClassName || '']: optionsClassName },
+            'origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0',
+          )}
+        >
+          {options.map((option, optionIdx) => (
+            <ListboxOption
+              disabled={option.disabled}
+              key={optionIdx}
+              className={({ focus }) =>
+                `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
+                  focus
+                    ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
+                    : 'dj-text-gray-900 dark:dj-text-slate-300'
+                }`
+              }
+              value={option.value}
             >
-              {options.map((option, optionIdx) => (
-                <ListboxOption
-                  disabled={option.disabled}
-                  key={optionIdx}
-                  className={({ focus }) =>
-                    `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
-                      focus
-                        ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
-                        : 'dj-text-gray-900 dark:dj-text-slate-300'
-                    }`
-                  }
-                  value={option.value}
+              {({ selected, disabled }) => (
+                <div
+                  className={cn({
+                    'dj-cursor-not-allowed dj-opacity-50': disabled,
+                  })}
                 >
-                  {({ selected, disabled }) => (
-                    <div
-                      className={cn({
-                        'dj-cursor-not-allowed dj-opacity-50': disabled,
-                      })}
-                    >
-                      <span className={`dj-block dj-truncate ${selected ? 'dj-font-medium' : 'dj-font-normal'}`}>
-                        {option.label}
-                      </span>
-                      {selected ? (
-                        <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-1 dj-text-primary-600 dark:dj-text-primary-300'>
-                          <CheckIcon className='dj-h-3 dj-w-3' aria-hidden='true' />
-                        </span>
-                      ) : null}
-                    </div>
-                  )}
-                </ListboxOption>
-              ))}
-              {options.length === 0 && (
-                <EmptyState
-                  icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dj-w-9' />}
-                  textClassName='dj-font-normal dj-text-xs'
-                />
+                  <span className={`dj-block dj-truncate ${selected ? 'dj-font-medium' : 'dj-font-normal'}`}>
+                    {option.label}
+                  </span>
+                  {selected ? (
+                    <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-1 dj-text-primary-600 dark:dj-text-primary-300'>
+                      <CheckIcon className='dj-h-3 dj-w-3' aria-hidden='true' />
+                    </span>
+                  ) : null}
+                </div>
               )}
-            </ListboxOptions>
-          </Transition>
-        </div>
+            </ListboxOption>
+          ))}
+          {options.length === 0 && (
+            <EmptyState
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dj-w-9' />}
+              textClassName='dj-font-normal dj-text-xs'
+            />
+          )}
+        </ListboxOptions>
       </Listbox>
       <AnimatedFormError error={error} />
     </div>
   )
 }
 
-//TODO: add multi-select component
+const MultiSelect = <ExtraDataType extends string>({
+  id,
+  className,
+  buttonClassName,
+  optionsClassName,
+  label,
+  error,
+  required,
+  tooltip,
+  hint,
+  loading,
+  loadingType,
+  type,
+  size,
+  emptyString,
+  clearable,
+  disabled,
+  values,
+  defaultValues,
+  onChange,
+  options,
+}: MultiSelectProps<ExtraDataType>) => {
+  const innerId = React.useMemo(() => {
+    return id || uuid(10)
+  }, [id])
+
+  const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
+    e.stopPropagation()
+    onChange && onChange([])
+  }
+
+  return (
+    <div className={cn('dj-flex dj-flex-col', className)}>
+      <div
+        className={cn('dj-flex dj-items-center', {
+          'dj-justify-between': label,
+          'dj-justify-end': !label,
+        })}
+      >
+        <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+          {label && (
+            <Typography.Text size='sm' uiType='transparent'>
+              {label}
+            </Typography.Text>
+          )}
+          {required && (
+            <Typography.Text uiType='danger' className='dj-h-5'>
+              *
+            </Typography.Text>
+          )}
+          {tooltip && <InfoTooltip tooltip={tooltip} />}
+        </label>
+        {hint && <span className='dj-text-xs dj-mb-1 dj-text-slate-500'>{hint}</span>}
+      </div>
+      <Listbox
+        defaultValue={defaultValues || null}
+        value={values || null}
+        onChange={onChange}
+        disabled={disabled}
+        multiple
+      >
+        <ListboxButton
+          className={cn(
+            listboxVariants({
+              type,
+              hasError: error ? 'yes' : 'no',
+              size,
+            }),
+            buttonClassName,
+            'dj-relative dj-block dj-w-full',
+          )}
+        >
+          <span
+            className={cn('dj-block dj-truncate dj-text-slate-800 dark:dj-text-slate-200 dj-text-start', {
+              'dj-text-slate-300 dark:dj-text-secondary-600': loading,
+            })}
+          >
+            {values && values.length > 0 ? (
+              values.join(' , ')
+            ) : (
+              <Text size='sm' uiType='secondary'>
+                {emptyString || ''}
+              </Text>
+            )}
+          </span>
+          <span className='dj-absolute dj-inset-y-0 dj-right-0 dj-flex dj-items-center dj-pr-2 dj-gap-1'>
+            {clearable && values && (
+              <ClearIcon
+                onClick={handleClear}
+                className='dj-w-4 dj-cursor-pointer hover:dj-scale-110 dj-duration-300 dj-text-slate-400 hover:dj-text-slate-800'
+              />
+            )}
+
+            <ChevronUpDownIcon className='dj-h-4 dj-w-4 dj-text-gray-400' aria-hidden='true' />
+          </span>
+          {loading && (
+            <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-2'>
+              <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+            </span>
+          )}
+        </ListboxButton>
+        <ListboxOptions
+          anchor='bottom start'
+          transition
+          className={cn(
+            'dj-w-[var(--button-width)] dj-mt-1 dj-max-h-60 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm',
+            { [optionsClassName || '']: optionsClassName },
+            'origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0',
+          )}
+        >
+          {options.map((option, optionIdx) => (
+            <ListboxOption
+              disabled={option.disabled}
+              key={optionIdx}
+              className={({ focus }) =>
+                `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
+                  focus
+                    ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
+                    : 'dj-text-gray-900 dark:dj-text-slate-300'
+                }`
+              }
+              value={option.value}
+            >
+              {({ selected, disabled }) => (
+                <div
+                  className={cn({
+                    'dj-cursor-not-allowed dj-opacity-50': disabled,
+                  })}
+                >
+                  <span className={`dj-block dj-truncate ${selected ? 'dj-font-medium' : 'dj-font-normal'}`}>
+                    {option.label}
+                  </span>
+                  {selected ? (
+                    <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-1 dj-text-primary-600 dark:dj-text-primary-300'>
+                      <CheckIcon className='dj-h-3 dj-w-3' aria-hidden='true' />
+                    </span>
+                  ) : null}
+                </div>
+              )}
+            </ListboxOption>
+          ))}
+          {options.length === 0 && (
+            <EmptyState
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dj-w-9' />}
+              textClassName='dj-font-normal dj-text-xs'
+            />
+          )}
+        </ListboxOptions>
+      </Listbox>
+      <AnimatedFormError error={error} />
+    </div>
+  )
+}
+
+export { MultiSelect }
 export default Select
