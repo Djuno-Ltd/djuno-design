@@ -1042,8 +1042,8 @@ function App() {
           <Text strong size="sm">
             Simple table with data
           </Text>
-          <Flex className="gap-3 w-full">
-            <SimpleTable className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
+            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1057,14 +1057,19 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                 </SimpleTable.Row>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>
           </Flex>
           <Text strong size="sm">
             Simple table with data and dropdown
           </Text>
-          <Flex className="gap-3 w-full">
-            <SimpleTable className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
+            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1123,7 +1128,7 @@ function App() {
                 </SimpleTable.Row>
               </SimpleTable.Head>
               <SimpleTable.Body>
-                <SimpleTable.Row>
+                <SimpleTable.Row withoutHoverStyle>
                   <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
                       <EmptyState
@@ -1131,24 +1136,6 @@ function App() {
                         icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
                       />
                     </Flex>
-                  </SimpleTable.TD>
-                </SimpleTable.Row>
-              </SimpleTable.Body>
-            </SimpleTable>
-          </Flex>
-          <Flex className="w-full">
-            <SimpleTable className="gap-3 w-full">
-              <SimpleTable.Head>
-                <SimpleTable.Row>
-                  <SimpleTable.TH>Header 1</SimpleTable.TH>
-                  <SimpleTable.TH>Header 2</SimpleTable.TH>
-                  <SimpleTable.TH>Header 3</SimpleTable.TH>
-                </SimpleTable.Row>
-              </SimpleTable.Head>
-              <SimpleTable.Body>
-                <SimpleTable.Row>
-                  <SimpleTable.TD colSpan={3} className="text-center py-10">
-                    <Flex className="w-full justify-center"></Flex>
                   </SimpleTable.TD>
                 </SimpleTable.Row>
               </SimpleTable.Body>

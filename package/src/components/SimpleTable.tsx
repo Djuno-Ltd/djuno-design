@@ -57,10 +57,15 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
   containerClassName,
   children,
   loading,
+  withoutDefaultHeight,
 }) => {
   const testLoading = false
   return (
-    <div className={cn('dj-w-full dj-relative dj-min-h-[200px]', containerClassName)}>
+    <div
+      className={cn('dj-w-full dj-relative ', containerClassName, {
+        'dj-min-h-[200px] ': withoutDefaultHeight === undefined || withoutDefaultHeight === false,
+      })}
+    >
       <div className='dj-overflow-x-auto dj-overflow-y-hidden'>
         <table
           className={cn(
@@ -91,19 +96,14 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
   const { className, withoutHoverStyle, selected, disabled, onClick, children, ...rest } = props
   return (
     <tr
-      {...rest}
       onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(
-        'dj-group duration-200 dj-transition-colors dj-bg-white dark:dj-bg-dark-850',
-        {
-          'dark:hover:dj-bg-dark-700 hover:dj-bg-[#f8fafc]':
-            (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
-          'dark:dj-bg-white/10 dj-bg-[#eff5fe]': selected,
-          'dj-cursor-not-allowed': disabled,
-          'dj-cursor-pointer': !disabled && onClick,
-        },
-        className,
-      )}
+      className={cn(className, 'dj-group dj-duration-200 dj-transition-colors dj-bg-white dark:dj-bg-dark-3', {
+        'dark:hover:dj-bg-dark-2 hover:dj-bg-[#f8fafc] ':
+          (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
+        'dark:!dj-bg-white/10 !dj-bg-[#eff5fe] ': selected,
+        'dj-cursor-not-allowed': disabled,
+        'dj-cursor-pointer': !disabled && onClick,
+      })}
     >
       {children}
     </tr>
@@ -130,7 +130,7 @@ const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
     <td
       {...rest}
       className={cn(
-        'dj-text-md dj-py-3 dj-px-2 dj-text-[#475569] dark:dj-text-slate-100 dj-border-b dark:dj-border-dark-700',
+        'dj-text-md dj-py-3 dj-px-2 dj-text-[#475569] dark:dj-text-slate-100 dj-border-b dark:dj-border-dark-700 ',
         className,
       )}
     >
