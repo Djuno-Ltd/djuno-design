@@ -24,6 +24,34 @@ import { ReactComponent as CloseIcon } from './../assets/icons/close.svg'
 import { cn } from '../utils/cn'
 import Typography from './Typography'
 
+/**
+ * Tag component.
+ *
+ * A customizable tag component with optional icons, colors, and a close functionality.
+ * The component supports custom content, colors for different statuses, and can be closed by the user.
+ *
+ * @param {object} tagProps - Tag component props.
+ * @param {string} [tagProps.className] - Additional class names to apply to the tag.
+ * @param {string} [tagProps.color] - The color type of the tag (e.g., 'processing', 'success', 'error', 'warning').
+ * @param {React.CSSProperties} [tagProps.style] - Inline styles for the tag.
+ * @param {React.ReactNode} [tagProps.children] - Content to be displayed inside the tag.
+ * @param {React.ReactNode} [tagProps.icon] - Icon to be displayed before the content.
+ * @param {boolean} [tagProps.closable] - If true, the tag can be closed (disappears on click).
+ * @param {boolean} [tagProps.bordered=true] - If false, the tag will not have a border.
+ * @param {() => void} [tagProps.onClose] - Callback function to be called when the tag is closed.
+ * @param {React.Ref<HTMLSpanElement>} ref - Reference to the tag element.
+ *
+ * @returns {React.ReactNode} Rendered Tag component.
+ *
+ * @version 0.7.1
+ * @see https://www.npmjs.com/package/djuno-design#tag
+ *
+ * @example
+ * // Example usage of Tag component:
+ * <Tag color="success" closable onClose={() => console.log('Tag closed')}>
+ *   Success Tag
+ * </Tag>
+ */
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
   const { className, color, style, children, icon, closable, onClose, bordered = true } = tagProps
   const [visible, setVisible] = React.useState(true)
