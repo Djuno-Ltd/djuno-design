@@ -55,8 +55,8 @@ import Checkbox from './components/form/Checkbox'
 import Popover from './components/Popover'
 import JsonViewer from './components/JsonViewer'
 import Sidebar from './components/Sidebar'
-import ThemeChanger from './components/ThemeChanger'
-import { ThemeSwitcher } from './components/ThemeChanger'
+import ThemeChanger, { ThemeSwitcher } from './components/ThemeChanger'
+import Tag from './components/Tag'
 
 // export providers
 export * from './providers/DjunoDesignProvider'
@@ -112,4 +112,5 @@ export {
   JsonViewer,
   ThemeChanger,
   ThemeSwitcher,
+  Tag,
 }

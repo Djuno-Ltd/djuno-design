@@ -34,6 +34,7 @@ import {
   Texrarea,
   ThemeChanger,
   ThemeSwitcher,
+  Tag,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -238,6 +239,28 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Tag">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-2 w-full">
+              <Tag>Default Tag</Tag>
+              <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
+              <Tag closable>Closable Tag</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag color="processing">processing</Tag>
+              <Tag color="success">success</Tag>
+              <Tag color="error">error</Tag>
+              <Tag color="warning">warning</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag bordered={false}>borderless tag</Tag>
+              <Tag color="processing" bordered={false}>
+                borderless tag
+              </Tag>
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Checkbox">
           <Flex direction="col" className="gap-5">
             <Flex className="gap-5 w-full">
