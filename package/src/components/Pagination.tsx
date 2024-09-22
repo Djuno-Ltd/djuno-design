@@ -37,6 +37,7 @@ import { ReactComponent as ArrowIcon } from '../assets/icons/arrow-right.svg'
  * @param {React.ReactNode} [props.children] - Optional children to be rendered within the pagination.
  * @param {string} [props.className] - Additional CSS classes to apply to the pagination container.
  * @param {boolean} [props.loading] - Indicates if the component should display a loading state.
+ * @param {SizeTypes} [props.size] - Size of the input field.
  *
  * @returns {React.ReactNode} Rendered Pagination component.
  *
@@ -79,10 +80,15 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
 }) => {
   const [currentPage, setCurrentPage] = React.useState(Math.floor(offset / limit) + 1)
 
+  // Ensure that siblingCount is defined and is a number
+  if (typeof siblingCount !== 'number' || siblingCount < 0) {
+    throw new Error('Invalid siblingCount provided')
+  }
+
   const paginationRange = usePagination({
     currentPage,
     total,
-    siblingCount: 1,
+    siblingCount,
     limit,
   })
 

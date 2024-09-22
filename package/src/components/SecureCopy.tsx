@@ -25,7 +25,7 @@ import Typography from './Typography'
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
-import Input from './form/Input'
+import Input, { inputVariants } from './form/Input'
 import { cva } from 'class-variance-authority'
 const { Text } = Typography
 
@@ -76,7 +76,15 @@ const iconVariants = cva('cursor-pointer w-5 h-5 transition-all duration-300', {
  * }
  *
  */
-const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName, textClassName, type, ...props }) => {
+const SecureCopy: React.FC<SecureCopyProps> = ({
+  text,
+  className,
+  iconClassName,
+  textClassName,
+  type,
+  size,
+  ...props
+}) => {
   const [showText, setShowText] = React.useState(false)
 
   return (
@@ -84,7 +92,15 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
       {type === 'hide' && (
         <div className={cn('flex items-center gap-1', className, {})}>
           <div
-            className='relative overflow-hidden cursor-pointer text-sm  h-7 dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap'
+            className={cn(
+              inputVariants({ size }),
+              {
+                'h-7': size === 'small',
+                'h-9': size === 'medium' || size === undefined,
+                'h-11': size === 'large',
+              },
+              'relative overflow-hidden cursor-pointer text-sm dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap',
+            )}
             onClick={() => text && copyToClipboard(text)}
           >
             {!showText && (
@@ -113,6 +129,17 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
       {type === 'copy' && (
         <div className={cn('flex items-center gap-1', className)}>
           <Input
+            className={cn(
+              inputVariants({
+                size,
+              }),
+              {
+                'h-7': size === 'small',
+                'h-9': size === 'medium' || size === undefined,
+                'h-11': size === 'large',
+              },
+              className,
+            )}
             inputProps={{
               value: text ? text : '',
               readOnly: true,

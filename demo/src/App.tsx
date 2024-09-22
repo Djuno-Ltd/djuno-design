@@ -34,7 +34,6 @@ import {
   Texrarea,
   ThemeChanger,
   ThemeSwitcher,
-  Tag,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -286,32 +285,16 @@ function App() {
     string[] | undefined
   >([selectOptions[0].value]);
 
+  const tabOptions = [
+    { label: "Tab 1", url: "/tab1" },
+    { label: "Tab 2", url: "/tab2" },
+    { label: "Tab 3", url: "/tab3" },
+  ];
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
-        <Card title="Tag">
-          <Flex direction="col" className="gap-5">
-            <Flex className="gap-2 w-full">
-              <Tag>Default Tag</Tag>
-              <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
-              <Tag closable>Closable Tag</Tag>
-            </Flex>
-            <Flex className="gap-2 w-full">
-              <Tag color="processing">processing</Tag>
-              <Tag color="success">success</Tag>
-              <Tag color="error">error</Tag>
-              <Tag color="warning">warning</Tag>
-            </Flex>
-            <Flex className="gap-2 w-full">
-              <Tag bordered={false}>borderless tag</Tag>
-              <Tag color="processing" bordered={false}>
-                borderless tag
-              </Tag>
-            </Flex>
-          </Flex>
-        </Card>
-
         <Card title="Checkbox">
           <Flex direction="col" className="gap-5">
             <Flex className="gap-5 w-full">
@@ -434,6 +417,9 @@ function App() {
               tabType="default"
             />
           </Flex>
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs options={tabOptions} selectedIndex={0} useUrl={true} />
+          </Flex>
         </Card>
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
@@ -475,9 +461,8 @@ function App() {
               loading
               loadingType="elastic"
             />
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Input label="loading" loading loadingType="elastic" />
-            </Flex>
+
+            <Input label="loading" loading loadingType="elastic" />
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
             Replace copy text.:
@@ -628,7 +613,7 @@ function App() {
 
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <div className="flex justify-end mt-3">
+            <div className="flex  mt-3">
               <Pagination
                 limit={3}
                 offset={offset}
@@ -636,7 +621,18 @@ function App() {
                 siblingCount={1}
                 onPageChange={handlePageChange}
                 loading={false}
-                className="my-pagination-class"
+              />
+            </div>
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex  mt-3">
+              <Pagination
+                limit={5}
+                offset={0}
+                total={100}
+                siblingCount={2}
+                onPageChange={handlePageChange}
+                loading={false}
               />
             </div>
           </Flex>
@@ -809,10 +805,16 @@ function App() {
         </Card>
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="copy" />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <SecureCopy text="Djuno Design" type="hide" size="small" />
+              <SecureCopy text="Djuno Design" type="hide" size="medium" />
+              <SecureCopy text="Djuno Design" type="hide" size="large" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <SecureCopy text="Djuno Design" type="copy" size="small" />
+              <SecureCopy text="Djuno Design" type="copy" size="medium" />
+              <SecureCopy text="Djuno Design" type="copy" size="large" />
+            </Flex>
           </Flex>
         </Card>
 
@@ -843,9 +845,7 @@ function App() {
                   ]}
                   type="default"
                 >
-                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                    Djuno Design
-                  </div>
+                  Djuno Design
                 </Dropdown>
               </div>
             </div>
@@ -876,9 +876,7 @@ function App() {
                   ]}
                   type="simple"
                 >
-                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                    Djuno Design
-                  </div>
+                  Djuno Design
                 </Dropdown>
               </div>
             </div>
@@ -937,15 +935,15 @@ function App() {
 
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="small" size="small" />
               <Input label="medium" size="medium" />
               <Input label="large" size="large" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="loading" loading loadingType="elastic" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="copyable"
                 copyable={(v) => `Hi ${v}`}
@@ -954,7 +952,7 @@ function App() {
                 }}
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="error"
                 loadingType="elastic"
@@ -966,7 +964,7 @@ function App() {
                 error={inputValue === "" ? "Field is required" : ""}
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="Input"
                 copyable={{
@@ -978,10 +976,10 @@ function App() {
                 }}
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="Input" tooltip={{ content: "I'm a tooltip" }} />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="Input with custom label"
                 labelClassName="text-green-500 font-bold"
@@ -992,7 +990,7 @@ function App() {
 
         <Card title="Select">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="small"
                 size="small"
@@ -1013,7 +1011,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="loading"
                 loading
@@ -1021,7 +1019,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="clear"
                 clearable
@@ -1034,10 +1032,10 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select label="empty" options={[]} className="w-[200px]" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="tooltip"
                 tooltip={{ content: "This is a tooltip", clickable: true }}
@@ -1045,16 +1043,8 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Select
-                label="error"
-                error="Field is required"
-                required
-                options={[]}
-                className="w-[200px]"
-              />
-            </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="error"
                 error={true}
@@ -1062,7 +1052,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <MultiSelect
                 label="multi select"
                 clearable
@@ -1075,7 +1065,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="Select with custom label"
                 size="medium"
@@ -1101,8 +1091,8 @@ function App() {
           <Text strong size="sm">
             Simple table with data
           </Text>
-          <Flex className="gap-3 w-full">
-            <SimpleTable className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
+            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1116,14 +1106,19 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                 </SimpleTable.Row>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>
           </Flex>
           <Text strong size="sm">
             Simple table with data and dropdown
           </Text>
-          <Flex className="gap-3 w-full">
-            <SimpleTable className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
+            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1138,7 +1133,7 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                   <SimpleTable.TD>
-                    <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+                    <div className="h-full w-full inline-flex items-center  gap-1 px-4">
                       <div className=" flex justify-center items-center">
                         <Dropdown
                           title="djuno Design"
@@ -1158,9 +1153,7 @@ function App() {
                           ]}
                           type="simple"
                         >
-                          <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                            Djuno Design
-                          </div>
+                          Djuno Design
                         </Dropdown>
                       </div>
                     </div>
@@ -1182,7 +1175,7 @@ function App() {
                 </SimpleTable.Row>
               </SimpleTable.Head>
               <SimpleTable.Body>
-                <SimpleTable.Row>
+                <SimpleTable.Row withoutHoverStyle>
                   <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
                       <EmptyState
