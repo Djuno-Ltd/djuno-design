@@ -766,6 +766,7 @@ function App() {
                     segments={segments}
                     loading={sidebarLoading}
                     loadingMode="skeleton"
+                    navItemHeight={30}
                   />
                 </PanelSidebar>
               )}

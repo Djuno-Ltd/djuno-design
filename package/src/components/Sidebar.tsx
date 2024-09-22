@@ -59,8 +59,16 @@ import { ReactComponent as ArrowRightIcon } from './../assets/icons/arrow-right.
  *   <CustomContent />
  * </Sidebar>
  */
-const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, loadingMode, type, children }) => {
-  const navItemHeight = 36
+const Sidebar: React.FC<SidebarProps> = ({
+  segments,
+  items,
+  subItems,
+  loading,
+  loadingMode,
+  type,
+  children,
+  navItemHeight = 36,
+}) => {
   const [hover, setHover] = React.useState<string | number | undefined>()
   const [expandedItems, setExpandedItems] = React.useState<Array<string | number>>([])
 
@@ -131,8 +139,8 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
       <div className='my-2 w-full relative'>
         {pointerPosition !== undefined && !loading && activeItem && (
           <span
-            className='w-1 h-9 block bg-primary-400 absolute transition-all top-0 rounded-r-md'
-            style={{ top: pointerPosition }}
+            className='w-1 block bg-primary-400 absolute transition-all top-0 rounded-r-md'
+            style={{ top: pointerPosition, height: navItemHeight }}
           />
         )}
 
@@ -168,6 +176,7 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
               <div className='my-2 flex flex-col space-y-1'>
                 {subItems.map((item, index) => (
                   <SidebarSubMenuItem
+                    height={navItemHeight}
                     key={index}
                     item={item}
                     isActive={activeSubItem?.id === item.id}
@@ -347,8 +356,8 @@ const SidebarMenuItem = (props: {
   )
 }
 
-const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; dataTestId?: string }) => {
-  const { item } = props
+const SidebarSubMenuItem = (props: { height: number; item: SidebarItem; isActive?: boolean; dataTestId?: string }) => {
+  const { height, item } = props
   const handleClick = () => {
     if (!item.disabled && item.onClick) {
       item.onClick(item)
@@ -358,7 +367,8 @@ const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; data
   return (
     <div
       onClick={handleClick}
-      className={cn('h-8 px-2 rounded-md select-none flex gap-1 transition duration-150 items-center text-sm', {
+      style={{ height }}
+      className={cn('px-2 rounded-md select-none flex gap-1 transition duration-150 items-center text-sm', {
         'hover:bg-primary-50 text-slate-400 hover:text-slate-800 dark:hover:bg-primary-400/10 dark:hover:text-slate-100 ':
           !props.isActive,
         'bg-white dark:bg-primary-400/10 dark:text-primary-400  shadow-sm drop-shadow-md ring-1 ring-gray-200 dark:ring-0':

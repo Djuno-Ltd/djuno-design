@@ -28,6 +28,7 @@ export interface SidebarProps extends React.PropsWithChildren {
   loading?: boolean
   loadingMode?: SidebarLoadingModes
   type?: PanelLayoutTypes
+  navItemHeight?: number
 }
 
 export type SidebarItem = {
