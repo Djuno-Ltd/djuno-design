@@ -62,14 +62,14 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
   const testLoading = false
   return (
     <div
-      className={cn('dj-w-full dj-relative ', containerClassName, {
-        'dj-min-h-[200px] ': withoutDefaultHeight === undefined || withoutDefaultHeight === false,
+      className={cn('w-full relative ', containerClassName, {
+        'min-h-[200px] ': withoutDefaultHeight === undefined || withoutDefaultHeight === false,
       })}
     >
-      <div className='dj-overflow-x-auto dj-overflow-y-hidden'>
+      <div className='overflow-x-auto overflow-y-hidden'>
         <table
           className={cn(
-            'dj-rounded-md dj-border dj-border-transparent dj-border-separate dj-border-spacing-0 dj-w-full dj-space-y-4',
+            'rounded-md border border-transparent border-separate border-spacing-0 w-full space-y-4',
             className,
           )}
         >
@@ -82,7 +82,7 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className='dj-absolute dj-w-full dj-h-full dj-top-0 dj-left-0 dj-bg-gray-400/10 dark:dj-bg-gray-800/10 dj-backdrop-blur-[1.1px] dj-flex dj-justify-center items-center'
+            className='absolute w-full h-full top-0 left-0 bg-gray-400/10 dark:bg-gray-800/10 backdrop-blur-[1.1px] flex justify-center items-center'
           >
             <Loading type={'simple'} borderSize={2.3} theme={'primary'} />
           </motion.div>
@@ -97,12 +97,12 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
   return (
     <tr
       onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(className, 'dj-group dj-duration-200 dj-transition-colors dj-bg-white dark:dj-bg-dark-3', {
-        'dark:hover:dj-bg-dark-2 hover:dj-bg-[#f8fafc] ':
+      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-3', {
+        'dark:hover:bg-dark-2 hover:bg-[#f8fafc] ':
           (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
-        'dark:!dj-bg-white/10 !dj-bg-[#eff5fe] ': selected,
-        'dj-cursor-not-allowed': disabled,
-        'dj-cursor-pointer': !disabled && onClick,
+        'dark:!bg-white/10 !bg-[#eff5fe] ': selected,
+        'cursor-not-allowed': disabled,
+        'cursor-pointer': !disabled && onClick,
       })}
     >
       {children}
@@ -114,8 +114,8 @@ const SimpleTableHead = (props: React.PropsWithChildren) => <thead>{props.childr
 
 const SimpleTableTH = (props: React.PropsWithChildren<{ lable?: string | React.ReactNode }>) => {
   return (
-    <th className='dj-text-left dj-bg-white dark:dj-bg-dark-850 dj-border-b dark:dj-border-dark-700 dj-p-2'>
-      <div className='dj-text-slate-400 dark:dj-text-slate-100 dj-font-light dj-overflow-hidden dj-whitespace-nowrap'>
+    <th className='text-left bg-white dark:bg-dark-850 border-b dark:border-dark-700 p-2'>
+      <div className='text-slate-400 dark:text-slate-100 font-light overflow-hidden whitespace-nowrap'>
         {props.children || props.lable}
       </div>
     </th>
@@ -129,12 +129,9 @@ const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
   return (
     <td
       {...rest}
-      className={cn(
-        'dj-text-md dj-py-3 dj-px-2 dj-text-[#475569] dark:dj-text-slate-100 dj-border-b dark:dj-border-dark-700 ',
-        className,
-      )}
+      className={cn('text-md py-3 px-2 text-[#475569] dark:text-slate-100 border-b dark:border-dark-700 ', className)}
     >
-      <div className='dj-h-full dj-w-full dj-flex dj-items-center'>{children}</div>
+      <div className='h-full w-full flex items-center'>{children}</div>
     </td>
   )
 }

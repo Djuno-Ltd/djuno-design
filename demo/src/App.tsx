@@ -234,6 +234,12 @@ function App() {
     string[] | undefined
   >([selectOptions[0].value]);
 
+  const tabOptions = [
+    { label: "Tab 1", url: "/tab1" },
+    { label: "Tab 2", url: "/tab2" },
+    { label: "Tab 3", url: "/tab3" },
+  ];
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -359,6 +365,9 @@ function App() {
               ]}
               tabType="default"
             />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs options={tabOptions} selectedIndex={0} useUrl={true} />
           </Flex>
         </Card>
         <Card title="JsonViewer">

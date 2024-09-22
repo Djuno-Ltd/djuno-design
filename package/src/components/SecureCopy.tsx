@@ -92,19 +92,15 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
       {type === 'hide' && (
         <div className={cn('flex items-center gap-1', className, {})}>
           <div
-<<<<<<< HEAD
             className={cn(
               inputVariants({ size }),
               {
-                'dj-h-7': size === 'small',
-                'dj-h-9': size === 'medium' || size === undefined,
-                'dj-h-11': size === 'large',
+                'h-7': size === 'small',
+                'h-9': size === 'medium' || size === undefined,
+                'h-11': size === 'large',
               },
-              'dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap',
+              'relative overflow-hidden cursor-pointer text-sm dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap',
             )}
-=======
-            className='relative overflow-hidden cursor-pointer text-sm  h-7 dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap'
->>>>>>> 66ada373c729e8ca0cd1130254aa90ebf5bb142e
             onClick={() => text && copyToClipboard(text)}
           >
             {!showText && (
@@ -138,9 +134,9 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
                 size,
               }),
               {
-                'dj-h-7': size === 'small',
-                'dj-h-9': size === 'medium' || size === undefined,
-                'dj-h-11': size === 'large',
+                'h-7': size === 'small',
+                'h-9': size === 'medium' || size === undefined,
+                'h-11': size === 'large',
               },
               className,
             )}
