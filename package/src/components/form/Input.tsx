@@ -22,7 +22,7 @@ import * as React from 'react'
 import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
-import { InputProps } from '../../types/Input'
+import { ExtendedInputProps, InputProps } from '../../types/Input'
 import Tooltip, { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
@@ -47,7 +47,7 @@ export const inputVariants = cva(
         yes: 'border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
         no: 'dark:border-dark-2 dark:focus:border-slate-600 dark:text-slate-50 dark:placeholder-gray-500 border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-700 dark:focus:bg-dark-700 dark:focus:border-dark-600',
       },
-      size: {
+      uiSize: {
         small: 'rounded-lg text-xs px-1',
         medium: 'rounded-lg text-sm px-2',
         large: 'rounded-xl text-base px-2',
@@ -60,7 +60,7 @@ export const inputVariants = cva(
     defaultVariants: {
       type: 'default',
       hasError: 'no',
-      size: 'medium',
+      uiSize: 'medium',
       copyable: 'no',
     },
   },
@@ -126,9 +126,8 @@ export const labelVariants = cva(
  * />
  */
 
-const Input: React.FunctionComponent<InputProps> = ({
+const Input: React.FunctionComponent<ExtendedInputProps> = ({
   label,
-  inputProps,
   className,
   labelClassName,
   loading,
@@ -139,14 +138,15 @@ const Input: React.FunctionComponent<InputProps> = ({
   hint,
   placeholder,
   tooltip,
-  size,
+  uiSize,
   AfterComponent,
   copyable,
+  ...props
 }) => {
   const id = uuid(10)
   const inputRef = React.useRef<HTMLInputElement>(null)
-  const value = inputProps?.value
-  const onChange = inputProps?.onChange
+  const value = props?.value
+  const onChange = props?.onChange
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -243,7 +243,7 @@ const Input: React.FunctionComponent<InputProps> = ({
               onClick={handleCopyToClipboard}
               className={cn(
                 'w-[18px] cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
-                { 'w-[15px]': size === 'small' },
+                { 'w-[15px]': uiSize === 'small' },
               )}
             >
               <Tooltip content={tooltipText}> {icon}</Tooltip>
@@ -253,20 +253,19 @@ const Input: React.FunctionComponent<InputProps> = ({
         <input
           id={id}
           ref={inputRef}
-          {...inputProps}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
               type,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
             {
-              'h-7': size === 'small',
-              'h-9': size === 'medium' || size === undefined,
-              'h-11': size === 'large',
+              'h-7': uiSize === 'small',
+              'h-9': uiSize === 'medium' || uiSize === undefined,
+              'h-11': uiSize === 'large',
             },
             className,
           )}

@@ -112,13 +112,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
       )}
       {type === 'copy' && (
         <div className={cn('flex items-center gap-1', className)}>
-          <Input
-            inputProps={{
-              value: text ? text : '',
-              readOnly: true,
-              ...props,
-            }}
-          />
+          <Input value={text ? text : ''} readOnly={true} {...props} />
           <div className='select-none'>
             <CopyIcon
               onClick={() => copyToClipboard(text || '')}

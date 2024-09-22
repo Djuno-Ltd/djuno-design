@@ -326,13 +326,7 @@ function App() {
         <Card title="Popover">
           <Flex direction="col" className="gap-5 w-full  mb-10">
             <Popover
-              contentNode={
-                <Input
-                  inputProps={{
-                    value: "djuno-design",
-                  }}
-                />
-              }
+              contentNode={<Input value="djuno-design" />}
               panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
               panelStyle={{}}
             >
@@ -424,9 +418,8 @@ function App() {
               loading
               loadingType="elastic"
             />
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Input label="loading" loading loadingType="elastic" />
-            </Flex>
+
+            <Input label="loading" loading loadingType="elastic" />
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
             Replace copy text.:
@@ -601,11 +594,7 @@ function App() {
                   label: "Filters",
                   panel: (
                     <div className="">
-                      <Input
-                        inputProps={{
-                          value: "djuno-design",
-                        }}
-                      />
+                      <Input value="djuno-design" />
                     </div>
                   ),
                 },
@@ -885,9 +874,9 @@ function App() {
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
             <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Input label="small" size="small" />
-              <Input label="medium" size="medium" />
-              <Input label="large" size="large" />
+              <Input label="small" uiSize="small" />
+              <Input label="medium" uiSize="medium" />
+              <Input label="large" uiSize="large" />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex justify-end">
               <Input label="loading" loading loadingType="elastic" />
@@ -896,20 +885,17 @@ function App() {
               <Input
                 label="copyable"
                 copyable={(v) => `Hi ${v}`}
-                inputProps={{
-                  value: "djuno-design",
-                }}
+                value="djuno-design"
               />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex justify-end">
               <Input
                 label="error"
                 loadingType="elastic"
-                inputProps={{
-                  value: inputValue,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setInputValue(e.target?.value),
-                }}
+                value={inputValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
                 error={inputValue === "" ? "Field is required" : ""}
               />
             </Flex>
