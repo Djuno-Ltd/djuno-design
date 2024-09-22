@@ -35,6 +35,7 @@ import {
   ThemeChanger,
   ThemeSwitcher,
   Tag,
+  CodeViewer,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -239,6 +240,78 @@ function App() {
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="CodeViewer">
+          <Flex direction="col" className="gap-5 w-full">
+            <Flex className="gap-2 w-full">
+              <CodeViewer
+                code={`        <Card title="Checkbox">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-5 w-full">
+              <Flex direction="col">
+                <Checkbox
+                  label="Ckeckbox simple form"
+                  value={isChecked}
+                  onChange={setIsChecked}
+                />
+              </Flex>
+            </Flex>
+
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox disabled form"
+                value={isChecked}
+                onChange={setIsChecked}
+                disabled
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox required form"
+                value={isChecked}
+                onChange={setIsChecked}
+                required
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with tooltip"
+                value={isChecked}
+                onChange={setIsChecked}
+                tooltip={{ content: "it's a tooltip" }}
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with text error"
+                value={isChecked}
+                onChange={setIsChecked}
+                error="error"
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with error"
+                value={isChecked}
+                onChange={setIsChecked}
+                error={true}
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with custom label"
+                value={isChecked}
+                onChange={setIsChecked}
+                labelClassName="text-green-500 font-bold"
+              />
+            </Flex>
+          </Flex>
+        </Card>`}
+                language="tsx"
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Tag">
           <Flex direction="col" className="gap-5">
             <Flex className="gap-2 w-full">

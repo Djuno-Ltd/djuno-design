@@ -3895,6 +3895,8 @@ dir-glob@^3.0.1:
 "djuno-design@file:../package":
   version "0.7.1"
   resolved "file:../package"
+  dependencies:
+    react-code-blocks "^0.1.6"
 
 dlv@^1.1.3:
   version "1.1.3"
