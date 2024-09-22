@@ -32,8 +32,7 @@ export interface SidebarProps extends React.PropsWithChildren {
 
 export type SidebarItem = {
   id: string | number
-  activeCondition?: SidebarActiveItemCondition
-  // serviceTypeId?: number
+  activeConditions?: SidebarActiveItemCondition[]
   label?: SidebarItemLabel
   link?: string
   onClick?: (item?: SidebarItem) => void
@@ -46,6 +45,7 @@ export type SidebarItem = {
 export type SidebarLoadingModes = LoadingType | 'skeleton'
 export type SidebarItemLabel = string | React.ReactNode | (({ isActive }: { isActive?: boolean }) => React.ReactNode)
 export interface SidebarActiveItemCondition {
-  segmentIndex: number
-  activeString: string
+  operator?: 'and' | 'or'
+  index: number
+  value: string | undefined
 }

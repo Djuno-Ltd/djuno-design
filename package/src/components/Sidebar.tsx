@@ -91,6 +91,11 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
     return items.find((item) => isActiveItem(item, segments || []))
   }, [segments])
 
+  const activeSubItem = useMemo(() => {
+    return subItems?.find((item) => isActiveItem(item, segments || []))
+  }, [segments])
+
+  console.log({ activeItem })
   const [pointerPosition, setPointerPosition] = React.useState<undefined | number>(undefined)
 
   const calculatePointerPosition = React.useCallback(() => {
@@ -124,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
   return (
     <div className='flex flex-col flex-grow justify-between overflow-y-auto w-full transition-height h-full pb-3'>
       <div className='my-2 w-full relative'>
-        {pointerPosition !== undefined && !loading && (
+        {pointerPosition !== undefined && !loading && activeItem && (
           <span
             className='w-1 h-9 block bg-primary-400 absolute transition-all top-0 rounded-r-md'
             style={{ top: pointerPosition }}
@@ -165,7 +170,7 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
                   <SidebarSubMenuItem
                     key={index}
                     item={item}
-                    isActive={activeItem?.id === item.id}
+                    isActive={activeSubItem?.id === item.id}
                     dataTestId={item.testId}
                   />
                 ))}
@@ -378,14 +383,28 @@ const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; data
 }
 
 const isActiveItem = (item: SidebarItem, segments: string[]): boolean => {
-  if (
-    item.activeCondition &&
-    segments[item.activeCondition.segmentIndex] &&
-    segments[item.activeCondition.segmentIndex] === item.activeCondition.activeString
-  ) {
-    return true
+  if (item.activeConditions && item.activeConditions.length > 0) {
+    let result = true
+
+    for (let i = 0; i < item.activeConditions.length; i++) {
+      const condition = item.activeConditions[i]
+      const segmentValue = segments[condition.index]
+      const conditionMet = segmentValue === condition.value
+
+      // If there's an 'or' operator, we return true if any condition is true
+      if (condition.operator === 'or') {
+        result = result || conditionMet
+      }
+      // If the operator is 'and' (or undefined), we only return true if all conditions are true
+      else {
+        result = result && conditionMet
+      }
+    }
+
+    if (result) return true
   }
 
+  // Recursively check children if the item has any
   if (item.children && item.children.length > 0) {
     for (const child of item.children) {
       if (isActiveItem(child, segments)) {
@@ -396,6 +415,26 @@ const isActiveItem = (item: SidebarItem, segments: string[]): boolean => {
 
   return false
 }
+
+// const isActiveItem = (item: SidebarItem, segments: string[]): boolean => {
+//   if (
+//     item.activeCondition &&
+//     segments[item.activeCondition.segmentIndex] &&
+//     segments[item.activeCondition.segmentIndex] === item.activeCondition.activeString
+//   ) {
+//     return true
+//   }
+
+//   if (item.children && item.children.length > 0) {
+//     for (const child of item.children) {
+//       if (isActiveItem(child, segments)) {
+//         return true
+//       }
+//     }
+//   }
+
+//   return false
+// }
 
 const calcExpandedChilds = (item: SidebarItem | undefined, expandedItems: Array<string | number>) => {
   let count = 0

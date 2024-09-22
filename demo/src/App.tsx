@@ -108,7 +108,7 @@ function App() {
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
-  const [pathname, setPathname] = useState<string>("/item1");
+  const [pathname, setPathname] = useState<string>("/sub-item1");
   const handleTogleSidebarLoading = () => {
     setSidebarLoading((prev) => !prev);
   };
@@ -116,58 +116,70 @@ function App() {
     setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
   };
   const handleChangePathname = () => {
-    setPathname((prev) => (prev === "/item1" ? "/item2-hi/item2-1" : "/item1"));
+    setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
   const sidebarItems: SidebarItem[] = [
     {
       id: 1,
       label: "item1",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item1",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item1",
+        },
+      ],
       icon: FaceSmile,
     },
     {
       id: 2,
       label: "item2",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item2",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item2",
+        },
+      ],
       children: [
         {
           id: "2-0",
           label: "item2-0",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item2-0",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-0",
+            },
+          ],
         },
         {
           id: "2-1",
           label: "item2-1",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item2-1",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-1",
+            },
+          ],
           children: [
             {
               id: "2-1-0",
               label: "item2-1-0",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-1-0",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-1-0",
+                },
+              ],
             },
             {
               id: "2-1-1",
               label: "item2-1-1",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-1-1",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-1-1",
+                },
+              ],
               children: [],
             },
           ],
@@ -175,26 +187,32 @@ function App() {
         {
           id: "2-2",
           label: "item2-2",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item2-2",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-2",
+            },
+          ],
           children: [
             {
               id: "2-2-0",
               label: "item2-2-0",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-2-0",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-2-0",
+                },
+              ],
             },
             {
               id: "2-2-1",
               label: "item2-2-1",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-2-1",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-2-1",
+                },
+              ],
             },
           ],
         },
@@ -203,27 +221,60 @@ function App() {
     {
       id: 3,
       label: "item3",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item3",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item3",
+        },
+      ],
       link: "/item3",
       children: [
         {
           id: "3-0",
           label: "item3-0",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item3-0",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item3-0",
+            },
+          ],
         },
         {
           id: "3-1",
           label: "item3-1",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item3-1",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item3-1",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const sidebarSubItems: SidebarItem[] = [
+    {
+      id: 1,
+      label: "item1",
+      activeConditions: [
+        {
+          index: 0,
+          value: "sub-item1",
+        },
+        {
+          index: 1,
+          value: undefined,
+        },
+      ],
+    },
+    {
+      id: 2,
+      label: "item2",
+      activeConditions: [
+        {
+          index: 1,
+          value: "sub-item2",
         },
       ],
     },
@@ -654,6 +705,7 @@ function App() {
 
         <Card
           title="Sidebar"
+          description={`pathname: ${pathname}`}
           setting={
             <Flex items="center" className="gap-4">
               <Flex items="center" className="gap-1">
@@ -718,6 +770,7 @@ function App() {
                   <Sidebar
                     type={type}
                     items={sidebarItems}
+                    subItems={sidebarSubItems}
                     segments={segments}
                     loading={sidebarLoading}
                     loadingMode="skeleton"
