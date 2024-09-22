@@ -71,18 +71,20 @@ export const inputVariants = cva(
  * This function generates CSS classes for input label styles based on specified variants.
  */
 
-export const labelVariants = cva('flex items-center gap-1 text-sm whitespace-nowrap ', {
-  // text-black/85 dark:text-secondary-100
-  variants: {
-    hasError: {
-      yes: '!text-red-700 dark:!text-red-500',
-      no: '',
+export const labelVariants = cva(
+  'flex items-center gap-1 text-sm whitespace-nowrap text-black/85 dark:text-secondary-100',
+  {
+    variants: {
+      hasError: {
+        yes: '!text-red-700 dark:!text-red-500',
+        no: '',
+      },
+    },
+    defaultVariants: {
+      hasError: 'no',
     },
   },
-  defaultVariants: {
-    hasError: 'no',
-  },
-})
+)
 
 /**
  * Input component.
