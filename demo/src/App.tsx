@@ -1395,23 +1395,23 @@ function App() {
         </Card>
 
         <Card title="Flex">
-          <Flex direction="col" className="gap-2 dj-w-full">
-            <Flex items="center" className="gap-2 dj-w-full">
+          <Flex direction="col" className="gap-2 w-full">
+            <Flex items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="center" items="center" className="gap-2 dj-w-full">
+            <Flex justify="center" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="end" items="center" className="gap-2 dj-w-full">
+            <Flex justify="end" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex direction="col" items="start" className="gap-2 dj-w-full">
+            <Flex direction="col" items="start" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>

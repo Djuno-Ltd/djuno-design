@@ -122,16 +122,16 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
   }
 
   return (
-    <div className='dj-flex dj-flex-col dj-flex-grow dj-justify-between dj-overflow-y-auto dj-w-full dj-transition-height dj-h-full dj-pb-3'>
-      <div className='dj-my-2 dj-w-full dj-relative'>
+    <div className='flex flex-col flex-grow justify-between overflow-y-auto w-full transition-height h-full pb-3'>
+      <div className='my-2 w-full relative'>
         {pointerPosition !== undefined && !loading && (
           <span
-            className='dj-w-1 dj-h-9 dj-block dj-bg-primary-400 dj-absolute dj-transition-all dj-top-0 dj-rounded-r-md'
+            className='w-1 h-9 block bg-primary-400 absolute transition-all top-0 rounded-r-md'
             style={{ top: pointerPosition }}
           />
         )}
 
-        <div className='dj-flex dj-flex-col'>
+        <div className='flex flex-col'>
           {!loading &&
             items.map((item, index) => (
               <SidebarMenuItem
@@ -158,9 +158,9 @@ const Sidebar: React.FC<SidebarProps> = ({ segments, items, subItems, loading, l
         <div className='d-w-full'>
           {children}
           {subItems && subItems.length && (
-            <div className='dj-px-2 dj-space-y-4 dj-mb-5 dj-mt-2'>
-              <div className='dj-w-full dj-h-[1px] dj-bg-slate-200 dark:dj-bg-slate-700 dj-rounded-sm' />
-              <div className='dj-my-2 dj-flex dj-flex-col dj-space-y-1'>
+            <div className='px-2 space-y-4 mb-5 mt-2'>
+              <div className='w-full h-[1px] bg-slate-200 dark:bg-slate-700 rounded-sm' />
+              <div className='my-2 flex flex-col space-y-1'>
                 {subItems.map((item, index) => (
                   <SidebarSubMenuItem
                     key={index}
@@ -182,24 +182,24 @@ const renderLabel = (label: SidebarItemLabel, isActive: boolean | undefined) => 
   if (typeof label === 'function') {
     return label({ isActive })
   } else {
-    return <div className='dj-text-sm dj-whitespace-nowrap dj-w-full'>{label}</div>
+    return <div className='text-sm whitespace-nowrap w-full'>{label}</div>
   }
 }
 
 const renderLoading = (loading?: boolean, loadingMode?: SidebarLoadingModes) => {
   if (loading && loadingMode === 'skeleton') {
     return (
-      <Flex direction='col' className='dj-gap-1.5 '>
-        <Skeleton className='dj-h-[33px] dj-bg-gradient-to-t dj-opacity-80' />
-        <Skeleton className='dj-h-[33px] dj-bg-gradient-to-t dj-opacity-60' />
-        <Skeleton className='dj-h-[33px] dj-bg-gradient-to-t dj-opacity-50' />
-        <Skeleton className='dj-h-[33px] dj-bg-gradient-to-t dj-opacity-30' />
+      <Flex direction='col' className='gap-1.5 '>
+        <Skeleton className='h-[33px] bg-gradient-to-t opacity-80' />
+        <Skeleton className='h-[33px] bg-gradient-to-t opacity-60' />
+        <Skeleton className='h-[33px] bg-gradient-to-t opacity-50' />
+        <Skeleton className='h-[33px] bg-gradient-to-t opacity-30' />
       </Flex>
     )
   }
   if (loading && loadingMode !== 'skeleton') {
     return (
-      <Flex items='center' justify='center' className='dj-min-h-[150px]'>
+      <Flex items='center' justify='center' className='min-h-[150px]'>
         <Loading borderSize={2} type={loadingMode} />
       </Flex>
     )
@@ -266,51 +266,48 @@ const SidebarMenuItem = (props: {
     <div
       onMouseLeave={onMouseLeave}
       onMouseEnter={() => (onMouseEnter ? onMouseEnter(item.id) : {})}
-      className={cn('', { 'dj-group/item': depth === 0 })}
+      className={cn('', { 'group/item': depth === 0 })}
     >
       <div
         onClick={handleClick}
         style={{ height }}
-        className={cn(
-          'dj-py-2 dj-select-none dj-flex dj-transition dj-duration-150 dj-items-center dj-gap-1 dj-text-base dj-font-medium',
-          {
-            'dj-border-l dj-border-l-slate-200 dark:dj-border-l-slate-600': depth !== 0,
-            //not-active
-            'group-hover/item:dj-bg-primary-50 dj-text-slate-400 dark:dj-text-slate-300 group-hover/item:dj-text-primary-500 dark:group-hover/item:dj-bg-primary-400/10 dark:group-hover/item:dj-text-primary-400':
-              !isActive && depth === 0,
-            'hover: dj-text-slate-400 hover:dj-text-slate-600 dark:dj-text-slate-300 dark:hover: dark:hover:dj-text-slate-200 hover:dj-border-l-primary-400 dark:hover:dj-border-l-primary-300':
-              !isActive && depth !== 0,
+        className={cn('py-2 select-none flex transition duration-150 items-center gap-1 text-base font-medium', {
+          'border-l border-l-slate-200 dark:border-l-slate-600': depth !== 0,
+          //not-active
+          'group-hover/item:bg-primary-50 text-slate-400 dark:text-slate-300 group-hover/item:text-primary-500 dark:group-hover/item:bg-primary-400/10 dark:group-hover/item:text-primary-400':
+            !isActive && depth === 0,
+          'hover: text-slate-400 hover:text-slate-600 dark:text-slate-300 dark:hover: dark:hover:text-slate-200 hover:border-l-primary-400 dark:hover:border-l-primary-300':
+            !isActive && depth !== 0,
 
-            //active
-            'dj-bg-primary-50 dj-text-primary-500 dark:dj-bg-primary-400/10 dark:dj-text-primary-400 !dj-font-semibold':
-              isActive && depth === 0,
-            'dj-text-primary-400 dark:dj-text-primary-300 !dj-font-semibold  dj-border-l-primary-400 dark:dj-border-l-primary-300':
-              isActive && depth !== 0,
+          //active
+          'bg-primary-50 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400 !font-semibold':
+            isActive && depth === 0,
+          'text-primary-400 dark:text-primary-300 !font-semibold  border-l-primary-400 dark:border-l-primary-300':
+            isActive && depth !== 0,
 
-            'dj-cursor-pointer': !item.disabled,
-            'dj-cursor-not-allowed': item.disabled,
-            'dj-px-4': type === undefined || type === 'normal',
-            'dj-px-2': type === 'mini',
-          },
-        )}
+          'cursor-pointer': !item.disabled,
+          'cursor-not-allowed': item.disabled,
+          'px-4': type === undefined || type === 'normal',
+          'px-2': type === 'mini',
+        })}
         // eslint-disable-next-line react/no-unknown-property
         test-cy={props.dataTestId}
       >
-        <div className='dj-flex dj-flex-1 dj-items-center dj-gap-1'>
+        <div className='flex flex-1 items-center gap-1'>
           {item.icon && (
             <item.icon
-              className={cn('dj-w-6 dj-h-6', {
-                'group-hover/item:dj-text-primary-400': !isActive,
-                'dj-text-primary-400': isActive,
+              className={cn('w-6 h-6', {
+                'group-hover/item:text-primary-400': !isActive,
+                'text-primary-400': isActive,
               })}
             />
           )}
-          <div className='dj-text-sm dj-whitespace-nowrap dj-w-full'>{renderLabel(item.label, isActive)}</div>
+          <div className='text-sm whitespace-nowrap w-full'>{renderLabel(item.label, isActive)}</div>
         </div>
         {item.children && item.children.length > 0 && (
           <ArrowRightIcon
-            className={cn('dj-w-[14px] dj-h-[14px] dj-transition-all dj-duration-200', {
-              'dj-rotate-90': isExpanded,
+            className={cn('w-[14px] h-[14px] transition-all duration-200', {
+              'rotate-90': isExpanded,
             })}
           />
         )}
@@ -321,7 +318,7 @@ const SidebarMenuItem = (props: {
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            className={cn('dj-ml-1 dj-pl-1 dj-overflow-hidden')}
+            className={cn('ml-1 pl-1 overflow-hidden')}
           >
             {item.children.map((child, index) => (
               <SidebarMenuItem
@@ -356,29 +353,26 @@ const SidebarSubMenuItem = (props: { item: SidebarItem; isActive?: boolean; data
   return (
     <div
       onClick={handleClick}
-      className={cn(
-        'dj-h-8 dj-px-2 dj-rounded-md dj-select-none dj-flex dj-gap-1 dj-transition dj-duration-150 dj-items-center dj-text-sm',
-        {
-          'hover:dj-bg-primary-50 dj-text-slate-400 hover:dj-text-slate-800 dark:hover:dj-bg-primary-400/10 dark:hover:dj-text-slate-100 ':
-            !props.isActive,
-          'dj-bg-white dark:dj-bg-primary-400/10 dark:dj-text-primary-400  dj-shadow-sm dj-drop-shadow-md dj-ring-1 dj-ring-gray-200 dark:dj-ring-0':
-            props.isActive,
-          'dj-cursor-pointer': !item.disabled,
-          'dj-cursor-not-allowed': item.disabled,
-        },
-      )}
+      className={cn('h-8 px-2 rounded-md select-none flex gap-1 transition duration-150 items-center text-sm', {
+        'hover:bg-primary-50 text-slate-400 hover:text-slate-800 dark:hover:bg-primary-400/10 dark:hover:text-slate-100 ':
+          !props.isActive,
+        'bg-white dark:bg-primary-400/10 dark:text-primary-400  shadow-sm drop-shadow-md ring-1 ring-gray-200 dark:ring-0':
+          props.isActive,
+        'cursor-pointer': !item.disabled,
+        'cursor-not-allowed': item.disabled,
+      })}
       // eslint-disable-next-line react/no-unknown-property
       test-cy={props.dataTestId}
     >
       {item.icon && (
         <item.icon
-          className={cn('dj-w-5 dj-h-5', {
-            'dark:dj-text-slate-400 hover:dark:dj-text-slate-100': !props.isActive,
-            'dj-text-primary-300': props.isActive,
+          className={cn('w-5 h-5', {
+            'dark:text-slate-400 hover:dark:text-slate-100': !props.isActive,
+            'text-primary-300': props.isActive,
           })}
         />
       )}
-      <div className='dj-text-sm dj-font-medium dj-whitespace-nowrap'>{renderLabel(item.label, props.isActive)}</div>
+      <div className='text-sm font-medium whitespace-nowrap'>{renderLabel(item.label, props.isActive)}</div>
     </div>
   )
 }

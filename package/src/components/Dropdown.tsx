@@ -74,8 +74,8 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
     middleware: [flip(), shift()],
   })
   return (
-    <Menu as='div' className='dj-text-left dj-w-full dj-h-full dj-inline-block dj-justify-center dj-items-center'>
-      <div className='dj-flex dj-items-center dj-justify-center'>
+    <Menu as='div' className='text-left w-full h-full inline-block justify-center items-center'>
+      <div className='flex items-center justify-center'>
         <MenuButton
           onClick={(e) => e.stopPropagation()}
           ref={refs.setReference}
@@ -88,8 +88,8 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
           {type !== 'simple' ? (
             <Button>{children}</Button>
           ) : (
-            <div className='dj-h-6 dj-flex dj-items-center dj-ml-auto dj-cursor-pointer'>
-              <ArrowDownIcon className='dj-h-4 dj-w-4 dark:dj-text-secondary-100' />
+            <div className='h-6 flex items-center ml-auto cursor-pointer'>
+              <ArrowDownIcon className='h-4 w-4 dark:text-secondary-100' />
             </div>
           )}
         </MenuButton>
@@ -98,33 +98,31 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
       {itemGroups.length > 0 && (
         <Transition
           as={React.Fragment}
-          enter='dj-transition-opacity dj-duration-75'
-          enterFrom='dj-transform opacity-0 dj-scale-95'
-          enterTo='dj-transform opacity-100 dj-scale-100'
-          leave='dj-transition dj-ease-in dj-duration-75'
-          leaveFrom='dj-transform dj-opacity-100 dj-scale-100'
-          leaveTo='dj-transform dj-opacity-0 dj-scale-95'
+          enter='transition-opacity duration-75'
+          enterFrom='transform opacity-0 scale-95'
+          enterTo='transform opacity-100 scale-100'
+          leave='transition ease-in duration-75'
+          leaveFrom='transform opacity-100 scale-100'
+          leaveTo='transform opacity-0 scale-95'
         >
           <MenuItems
             ref={refs.setFloating}
             style={floatingStyles}
             // style={{ clip: "rect(auto, auto, auto, auto)" }}
             className={cn(
-              'dj-absolute dj-z-50 dj-mt-1 dj-max-h-60 dj-w-48 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm dj-divide-y dj-divide-dark-100 dark:dj-divide-dark-600',
+              'absolute z-50 mt-1 max-h-60 w-48 overflow-auto rounded-lg bg-white dark:bg-dark-800 p-1 text-base shadow-lg border border-dark-100 dark:border-dark-600 focus:outline-none sm:text-sm divide-y divide-dark-100 dark:divide-dark-600',
               {
                 [itemsClassName || '']: itemsClassName,
               },
             )}
           >
             {title && (
-              <div className='dj-w-full dj-px-3 dj-text-xs dj-py-2 dj-text-secondary-600 dark:dj-text-secondary-300'>
-                {title}
-              </div>
+              <div className='w-full px-3 text-xs py-2 text-secondary-600 dark:text-secondary-300'>{title}</div>
             )}
 
             {itemGroups.map((items, groupIdx) => {
               return (
-                <div key={groupIdx} className='dj-px-1 dj-py-1 '>
+                <div key={groupIdx} className='px-1 py-1 '>
                   {items.map((item, itemIdx) => (
                     <MenuItem key={itemIdx}>
                       {({ focus, close }) => (
@@ -136,17 +134,14 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
                               item.onClick(item, close)
                             }
                           }}
-                          className={cn(
-                            'dj-group dj-flex dj-w-full dj-items-center dj-rounded-md dj-px-2 dj-py-2 dj-text-sm',
-                            {
-                              'dj-bg-primary-50 dark:dj-bg-dark-700': focus && !item.danger,
-                              'dj-bg-red-100 dark:dj-bg-red-600/10': focus && item.danger,
-                              'dj-cursor-not-allowed dj-text-dark-400 dark:dj-text-secondary-500': item.disabled,
-                              'dj-text-dark-900 dark:dj-text-secondary-100': !item.disabled && !item.danger,
-                              'dj-text-red-900 dark:dj-text-red-600': !item.disabled && item.danger,
-                              'dj-animate-bounce': item.loading,
-                            },
-                          )}
+                          className={cn('group flex w-full items-center rounded-md px-2 py-2 text-sm', {
+                            'bg-primary-50 dark:bg-dark-700': focus && !item.danger,
+                            'bg-red-100 dark:bg-red-600/10': focus && item.danger,
+                            'cursor-not-allowed text-dark-400 dark:text-secondary-500': item.disabled,
+                            'text-dark-900 dark:text-secondary-100': !item.disabled && !item.danger,
+                            'text-red-900 dark:text-red-600': !item.disabled && item.danger,
+                            'animate-bounce': item.loading,
+                          })}
                         >
                           {item.label}
                         </button>

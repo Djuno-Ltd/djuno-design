@@ -39,21 +39,21 @@ const { Text } = Typography
  * This function generates CSS classes for alert styles based on specified variants.
  */
 const listboxVariants = cva(
-  'dj-bg-secondary-100 focus:dj-ring-0 dj-text-sm dj-block dj-w-full dark:dj-bg-dark-800 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
+  'bg-secondary-100 focus:ring-0 text-sm block w-full dark:bg-dark-800 outline-none disabled:cursor-not-allowed disabled:bg-secondary-200 dark:disabled:bg-gray-700 dark:disabled:text-secondary-400 disabled:text-secondary-500 disabled:border-secondary-300 disabled:dark:border-gray-600',
   {
     variants: {
       type: {
-        simple: 'dj-text-secondary-600 dj-bg-transparent',
-        default: 'dj-border-2',
+        simple: 'text-secondary-600 bg-transparent',
+        default: 'border-2',
       },
       hasError: {
-        yes: 'dj-border dj-border-red-500 dj-text-red-900 dj-placeholder-red-700 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500',
-        no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200 dark:dj-border-dark-700 dark:focus:dj-bg-dark-700 dark:focus:dj-border-dark-600',
+        yes: 'border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
+        no: 'dark:border-dark-2 dark:focus:border-slate-600 dark:text-slate-50 dark:placeholder-gray-500 border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-700 dark:focus:bg-dark-700 dark:focus:border-dark-600',
       },
       size: {
-        small: 'dj-rounded-lg dj-text-xs dj-px-1 dj-h-7 dj-pr-6',
-        medium: 'dj-rounded-lg dj-text-sm dj-px-2 dj-h-9 dj-pr-6',
-        large: 'dj-rounded-xl dj-text-base dj-px-2 dj-h-11 dj-pr-6',
+        small: 'rounded-lg text-xs px-1 h-7 pr-6',
+        medium: 'rounded-lg text-sm px-2 h-9 pr-6',
+        large: 'rounded-xl text-base px-2 h-11 pr-6',
       },
     },
     defaultVariants: {
@@ -154,11 +154,11 @@ const Select = <ExtraDataType extends string>({
   }, [options, value])
 
   return (
-    <div className={cn('dj-flex dj-flex-col', className)}>
+    <div className={cn('flex flex-col', className)}>
       <div
-        className={cn('dj-flex dj-items-center', {
-          'dj-justify-between': label,
-          'dj-justify-end': !label,
+        className={cn('flex items-center', {
+          'justify-between': label,
+          'justify-end': !label,
         })}
       >
         <label
@@ -176,13 +176,13 @@ const Select = <ExtraDataType extends string>({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='dj-text-xs dj-mb-1 dj-text-slate-500'>{hint}</span>}
+        {hint && <span className='text-xs mb-1 text-slate-500'>{hint}</span>}
       </div>
       <Listbox defaultValue={defaultValue || null} value={value || null} onChange={onChange} disabled={disabled}>
         <ListboxButton
@@ -193,18 +193,18 @@ const Select = <ExtraDataType extends string>({
               size,
             }),
             buttonClassName,
-            'dj-relative dj-block dj-w-full',
+            'relative block w-full',
           )}
         >
           <span
-            className={cn('dj-block dj-truncate dj-text-slate-800 dark:dj-text-slate-200 dj-text-start', {
-              'dj-text-slate-300 dark:dj-text-secondary-600': loading,
+            className={cn('block truncate text-slate-800 dark:text-slate-200 text-start', {
+              'text-slate-300 dark:text-secondary-600': loading,
             })}
           >
             {value ? (
               selectedOption?.label
             ) : (
-              <Text className='dj-text-sm' uiType='secondary'>
+              <Text className='text-sm' uiType='secondary'>
                 {emptyString
                   ? emptyString
                   : label
@@ -213,18 +213,18 @@ const Select = <ExtraDataType extends string>({
               </Text>
             )}
           </span>
-          <span className='dj-absolute dj-inset-y-0 dj-right-0 dj-flex dj-items-center dj-pr-2 dj-gap-1'>
+          <span className='absolute inset-y-0 right-0 flex items-center pr-2 gap-1'>
             {clearable && value && (
               <ClearIcon
                 onClick={handleClear}
-                className='dj-w-4 dj-cursor-pointer hover:dj-scale-110 dj-duration-300 dj-text-slate-400 hover:dj-text-slate-800'
+                className='w-4 cursor-pointer hover:scale-110 duration-300 text-slate-400 hover:text-slate-800'
               />
             )}
 
-            <ChevronUpDownIcon className='dj-h-4 dj-w-4 dj-text-gray-400' aria-hidden='true' />
+            <ChevronUpDownIcon className='h-4 w-4 text-gray-400' aria-hidden='true' />
           </span>
           {loading && (
-            <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-2'>
+            <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
               <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
             </span>
           )}
@@ -233,7 +233,7 @@ const Select = <ExtraDataType extends string>({
           anchor='bottom start'
           transition
           className={cn(
-            'dj-w-[var(--button-width)] dj-mt-1 dj-max-h-60 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm',
+            'w-[var(--button-width)] mt-1 max-h-60 overflow-auto rounded-lg bg-white dark:bg-dark-800 p-1 text-base shadow-lg border border-dark-100 dark:border-dark-600 focus:outline-none sm:text-sm',
             { [optionsClassName || '']: optionsClassName },
             'origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0',
           )}
@@ -243,10 +243,10 @@ const Select = <ExtraDataType extends string>({
               disabled={option.disabled}
               key={optionIdx}
               className={({ focus }) =>
-                `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
+                `relative cursor-default select-none py-2 pl-5 pr-4 rounded-md ${
                   focus
-                    ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
-                    : 'dj-text-gray-900 dark:dj-text-slate-300'
+                    ? 'bg-primary-50 dark:bg-dark-900 text-primary-600 dark:bg-dark-2 dark:text-primary-300'
+                    : 'text-gray-900 dark:text-slate-300'
                 }`
               }
               value={option.value}
@@ -254,15 +254,13 @@ const Select = <ExtraDataType extends string>({
               {({ selected, disabled }) => (
                 <div
                   className={cn({
-                    'dj-cursor-not-allowed dj-opacity-50': disabled,
+                    'cursor-not-allowed opacity-50': disabled,
                   })}
                 >
-                  <span className={`dj-block dj-truncate ${selected ? 'dj-font-medium' : 'dj-font-normal'}`}>
-                    {option.label}
-                  </span>
+                  <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{option.label}</span>
                   {selected ? (
-                    <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-1 dj-text-primary-600 dark:dj-text-primary-300'>
-                      <CheckIcon className='dj-h-3 dj-w-3' aria-hidden='true' />
+                    <span className='absolute inset-y-0 left-0 flex items-center pl-1 text-primary-600 dark:text-primary-300'>
+                      <CheckIcon className='h-3 w-3' aria-hidden='true' />
                     </span>
                   ) : null}
                 </div>
@@ -271,8 +269,8 @@ const Select = <ExtraDataType extends string>({
           ))}
           {options.length === 0 && (
             <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dj-w-9' />}
-              textClassName='dj-font-normal dj-text-xs'
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='w-9' />}
+              textClassName='font-normal text-xs'
             />
           )}
         </ListboxOptions>
@@ -314,11 +312,11 @@ const MultiSelect = <ExtraDataType extends string>({
   }
 
   return (
-    <div className={cn('dj-flex dj-flex-col', className)}>
+    <div className={cn('flex flex-col', className)}>
       <div
-        className={cn('dj-flex dj-items-center', {
-          'dj-justify-between': label,
-          'dj-justify-end': !label,
+        className={cn('flex items-center', {
+          'justify-between': label,
+          'justify-end': !label,
         })}
       >
         <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
@@ -328,13 +326,13 @@ const MultiSelect = <ExtraDataType extends string>({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='dj-text-xs dj-mb-1 dj-text-slate-500'>{hint}</span>}
+        {hint && <span className='text-xs mb-1 text-slate-500'>{hint}</span>}
       </div>
       <Listbox
         defaultValue={defaultValues || null}
@@ -351,12 +349,12 @@ const MultiSelect = <ExtraDataType extends string>({
               size,
             }),
             buttonClassName,
-            'dj-relative dj-block dj-w-full',
+            'relative block w-full',
           )}
         >
           <span
-            className={cn('dj-block dj-truncate dj-text-slate-800 dark:dj-text-slate-200 dj-text-start', {
-              'dj-text-slate-300 dark:dj-text-secondary-600': loading,
+            className={cn('block truncate text-slate-800 dark:text-slate-200 text-start', {
+              'text-slate-300 dark:text-secondary-600': loading,
             })}
           >
             {values && values.length > 0 ? (
@@ -367,18 +365,18 @@ const MultiSelect = <ExtraDataType extends string>({
               </Text>
             )}
           </span>
-          <span className='dj-absolute dj-inset-y-0 dj-right-0 dj-flex dj-items-center dj-pr-2 dj-gap-1'>
+          <span className='absolute inset-y-0 right-0 flex items-center pr-2 gap-1'>
             {clearable && values && (
               <ClearIcon
                 onClick={handleClear}
-                className='dj-w-4 dj-cursor-pointer hover:dj-scale-110 dj-duration-300 dj-text-slate-400 hover:dj-text-slate-800'
+                className='w-4 cursor-pointer hover:scale-110 duration-300 text-slate-400 hover:text-slate-800'
               />
             )}
 
-            <ChevronUpDownIcon className='dj-h-4 dj-w-4 dj-text-gray-400' aria-hidden='true' />
+            <ChevronUpDownIcon className='h-4 w-4 text-gray-400' aria-hidden='true' />
           </span>
           {loading && (
-            <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-2'>
+            <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
               <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
             </span>
           )}
@@ -387,7 +385,7 @@ const MultiSelect = <ExtraDataType extends string>({
           anchor='bottom start'
           transition
           className={cn(
-            'dj-w-[var(--button-width)] dj-mt-1 dj-max-h-60 dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm',
+            'w-[var(--button-width)] mt-1 max-h-60 overflow-auto rounded-lg bg-white dark:bg-dark-800 p-1 text-base shadow-lg border border-dark-100 dark:border-dark-600 focus:outline-none sm:text-sm',
             { [optionsClassName || '']: optionsClassName },
             'origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0',
           )}
@@ -397,10 +395,10 @@ const MultiSelect = <ExtraDataType extends string>({
               disabled={option.disabled}
               key={optionIdx}
               className={({ focus }) =>
-                `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
+                `relative cursor-default select-none py-2 pl-5 pr-4 rounded-md ${
                   focus
-                    ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
-                    : 'dj-text-gray-900 dark:dj-text-slate-300'
+                    ? 'bg-primary-50 dark:bg-dark-900 text-primary-600 dark:bg-dark-2 dark:text-primary-300'
+                    : 'text-gray-900 dark:text-slate-300'
                 }`
               }
               value={option.value}
@@ -408,15 +406,13 @@ const MultiSelect = <ExtraDataType extends string>({
               {({ selected, disabled }) => (
                 <div
                   className={cn({
-                    'dj-cursor-not-allowed dj-opacity-50': disabled,
+                    'cursor-not-allowed opacity-50': disabled,
                   })}
                 >
-                  <span className={`dj-block dj-truncate ${selected ? 'dj-font-medium' : 'dj-font-normal'}`}>
-                    {option.label}
-                  </span>
+                  <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{option.label}</span>
                   {selected ? (
-                    <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-1 dj-text-primary-600 dark:dj-text-primary-300'>
-                      <CheckIcon className='dj-h-3 dj-w-3' aria-hidden='true' />
+                    <span className='absolute inset-y-0 left-0 flex items-center pl-1 text-primary-600 dark:text-primary-300'>
+                      <CheckIcon className='h-3 w-3' aria-hidden='true' />
                     </span>
                   ) : null}
                 </div>
@@ -425,8 +421,8 @@ const MultiSelect = <ExtraDataType extends string>({
           ))}
           {options.length === 0 && (
             <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dj-w-9' />}
-              textClassName='dj-font-normal dj-text-xs'
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='w-9' />}
+              textClassName='font-normal text-xs'
             />
           )}
         </ListboxOptions>

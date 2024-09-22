@@ -27,12 +27,12 @@ import { DividerProps } from '../types/Divider'
  * Define divider variants using the `cva` utility function.
  * This function generates CSS classes for divider styles based on specified variants.
  */
-const dividerVariants = cva('dj-w-full dj-border-secondary-400 dark:after:dj-border-gray-700 ', {
+const dividerVariants = cva('w-full border-secondary-400 dark:after:border-gray-700 ', {
   variants: {
     uiType: {
-      simple: 'dj-my-4',
-      dotted: 'dj-border-dotted dj-my-4 ',
-      dashed: 'dj-border-dashed dj-my-4 ',
+      simple: 'my-4',
+      dotted: 'border-dotted my-4 ',
+      dashed: 'border-dashed my-4 ',
     },
   },
   defaultVariants: {
@@ -77,19 +77,19 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   ...props
 }) => {
   const dividerClass = dividerVariants({ uiType })
-  const commonDividerClass = 'dj-border-t dj-w-full dj-h-0.5'
-  const textClass = 'dj-text-base dj-text-dark-700 dj-whitespace-nowrap dark:dj-text-dark-100'
-  const leftOrientationClass = 'dj-ml-4'
-  const rightOrientationClass = 'dj-mr-4'
+  const commonDividerClass = 'border-t w-full h-0.5'
+  const textClass = 'text-base text-dark-700 whitespace-nowrap dark:text-dark-100'
+  const leftOrientationClass = 'ml-4'
+  const rightOrientationClass = 'mr-4'
 
   const parentClassName = cn(dividerClass, className, {
-    'dj-divider-using-text': usingText,
-    [`dj-divider-${orientation}`]: usingText, //class based on orientation and usingText prop
+    'divider-using-text': usingText,
+    [`divider-${orientation}`]: usingText, //class based on orientation and usingText prop
   })
 
   return (
     <div {...props} className={parentClassName}>
-      <div className='dj-flex dj-justify-center dj-items-center'>
+      <div className='flex justify-center items-center'>
         {usingText ? (
           <>
             {orientation === 'left' && (
