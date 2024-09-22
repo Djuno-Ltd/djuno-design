@@ -30,7 +30,7 @@ export interface UseTheme {
 
 export const useTheme = (): UseTheme => {
   const [mode, setMode] = useState<ThemeModes>(() => {
-    const storedMode = window.localStorage.getItem('dj-theme-mode')
+    const storedMode = window.localStorage.getItem('theme-mode')
     if (storedMode) {
       return storedMode === 'light' ? 'light' : 'dark'
     }
@@ -39,7 +39,7 @@ export const useTheme = (): UseTheme => {
   })
 
   const [modeRefrence, setModeRefrence] = useState<ThemeModeRefrences>(() => {
-    const refrence = localStorage.getItem('dj-theme-mode-refrence')
+    const refrence = localStorage.getItem('theme-mode-refrence')
     if (refrence) {
       return refrence === 'manual' ? 'manual' : 'system'
     } else {
@@ -48,8 +48,8 @@ export const useTheme = (): UseTheme => {
   })
 
   useEffect(() => {
-    const storedMode = localStorage.getItem('dj-theme-mode')
-    const modeRefrence = localStorage.getItem('dj-theme-mode-refrence')
+    const storedMode = localStorage.getItem('theme-mode')
+    const modeRefrence = localStorage.getItem('theme-mode-refrence')
     if (storedMode) {
       // console.log("storedMode:", modeRefrence);
       setMode(storedMode === 'light' ? 'light' : 'dark')
@@ -68,22 +68,22 @@ export const useTheme = (): UseTheme => {
     // Update the HTML tag's class based on the selected mode
     const htmlTag = document.querySelector('html')
     if (mode === 'dark') {
-      htmlTag?.classList.add('dj-dark')
+      htmlTag?.classList.add('dark')
       htmlTag?.classList.add('dark')
     } else {
-      htmlTag?.classList.remove('dj-dark')
+      htmlTag?.classList.remove('dark')
       htmlTag?.classList.remove('dark')
     }
   }, [mode])
 
   // Update localStorage when the mode changes
   useEffect(() => {
-    localStorage.setItem('dj-theme-mode', mode)
+    localStorage.setItem('theme-mode', mode)
   }, [mode])
 
   // Update localStorage when the mode changes
   useEffect(() => {
-    localStorage.setItem('dj-theme-mode-refrence', modeRefrence)
+    localStorage.setItem('theme-mode-refrence', modeRefrence)
   }, [modeRefrence])
 
   // Function to toggle between 'light' and 'dark' modes

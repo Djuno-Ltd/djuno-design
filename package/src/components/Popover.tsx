@@ -69,12 +69,12 @@ const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
   })
 
   return (
-    <Popper className='dj-relative'>
+    <Popper className='relative'>
       {({ open }) => (
         <>
           <PopoverButton
             as='div'
-            className={cn('focus:dj-outline-none focus:dj-ring-0', {
+            className={cn('focus:outline-none focus:ring-0', {
               '': open,
               '': !open,
             })}
@@ -85,17 +85,17 @@ const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
 
           <Transition
             as={Fragment}
-            enter='dj-transition dj-ease-out dj-duration-200'
-            enterFrom='dj-opacity-0 dj-translate-y-1'
-            enterTo='dj-opacity-100 dj-translate-y-0'
-            leave='dj-transition dj-ease-in dj-duration-150'
-            leaveFrom='dj-opacity-100 dj-translate-y-0'
-            leaveTo='dj-opacity-0 dj-translate-y-1'
+            enter='transition ease-out duration-200'
+            enterFrom='opacity-0 translate-y-1'
+            enterTo='opacity-100 translate-y-0'
+            leave='transition ease-in duration-150'
+            leaveFrom='opacity-100 translate-y-0'
+            leaveTo='opacity-0 translate-y-1'
           >
             <PopoverPanel
               ref={refs.setFloating}
               style={{ ...floatingStyles, ...panelStyle }}
-              className={cn('dj-absolute dj-left-0 dj-z-10 mt-3 dj-transform dj-px-4 sm:dj-px-0', panelClassName)}
+              className={cn('absolute left-0 z-10 mt-3 transform px-4 sm:px-0', panelClassName)}
             >
               {contentNode}
             </PopoverPanel>

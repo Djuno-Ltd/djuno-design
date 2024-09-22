@@ -27,22 +27,22 @@ import { SkeletonProps } from '../types/ISkeleton'
  * Define Skeleton variants using the `cva` utility function.
  * This function generates CSS classes for skeleton styles based on specified variants.
  */
-const skeletonVariants = cva('dj-bg-slate-200/80 dark:dj-bg-white/10 dj-rounded-sm', {
+const skeletonVariants = cva('bg-slate-200/80 dark:bg-white/10 rounded-sm', {
   variants: {
     shape: {
-      rectangle: 'dj-w-full',
-      circle: 'dj-rounded-full dj-aspect-square',
-      square: 'dj-aspect-square',
+      rectangle: 'w-full',
+      circle: 'rounded-full aspect-square',
+      square: 'aspect-square',
     },
     size: {
-      small: 'dj-h-7',
-      medium: 'dj-h-9',
-      large: 'dj-h-11',
+      small: 'h-7',
+      medium: 'h-9',
+      large: 'h-11',
     },
     animation: {
       none: '',
       wave: '',
-      pulse: 'dj-animate-pulse',
+      pulse: 'animate-pulse',
     },
   },
   defaultVariants: {
