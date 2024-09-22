@@ -76,7 +76,6 @@ import Loading from '../Loading'
 
 const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   id,
-  textareaProps,
   placeholder,
   className,
   label,
@@ -196,7 +195,6 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
         <textarea
           id={id}
           ref={textareaRef}
-          {...textareaProps}
           className={cn(
             inputVariants({
               type,

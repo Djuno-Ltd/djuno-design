@@ -435,7 +435,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
               hint="Djuno Design"
             />
           </Flex>
@@ -446,7 +445,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{}}
             />
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
@@ -457,7 +455,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{}}
               loading
               loadingType="elastic"
             />
@@ -471,7 +468,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder=""
-              textareaProps={{}}
               tooltip={{ content: "test" }}
             />
             <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
