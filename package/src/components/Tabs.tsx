@@ -95,9 +95,13 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   }, [propsSelectedIndex, useUrl])
 
   const onChangeTab = (i: number) => {
-    // if (useUrl) {
-    //   const selectedOption = getTabOptionFromIndex(i, options)
-    // }
+    if (useUrl) {
+      const selectedOption = getTabOptionFromIndex(i, options)
+      if (selectedOption?.url) {
+        // Change the URL without reloading the page
+        window.history.pushState({}, '', selectedOption.url)
+      }
+    }
 
     if (onChange) {
       onChange(i)

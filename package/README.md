@@ -403,6 +403,7 @@ function App() {
 | textClassName | string        |          |         |             |
 | iconClassName | string        |          |         |             |
 | showText      | boolean       |          |         |             |
+| size          | `SizeTypes`   |          | medium  |             |
 
 ### Accordion
 

@@ -64,7 +64,7 @@ const PanelSidebar: React.FC<PanelSidebarProps> = ({ children, isShowSidebar, ty
       )}
     >
       {sidebarHeader && <div className='flex w-full justify-between h-16 items-center'>{sidebarHeader}</div>}
-      <div className='flex flex-col flex-grow justify-between overflow-y-auto w-full transition-height h-[calc(100vh-5rem)] pb-3'>
+      <div className='flex flex-col flex-grow justify-between overflow-y-auto w-full transition-height h-[calc(100%-3rem)] pb-3'>
         {children}
       </div>
     </div>

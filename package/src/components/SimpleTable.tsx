@@ -57,10 +57,15 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
   containerClassName,
   children,
   loading,
+  withoutDefaultHeight,
 }) => {
   const testLoading = false
   return (
-    <div className={cn('w-full relative min-h-[200px]', containerClassName)}>
+    <div
+      className={cn('w-full relative ', containerClassName, {
+        'min-h-[200px] ': withoutDefaultHeight === undefined || withoutDefaultHeight === false,
+      })}
+    >
       <div className='overflow-x-auto overflow-y-hidden'>
         <table
           className={cn(
@@ -91,19 +96,14 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
   const { className, withoutHoverStyle, selected, disabled, onClick, children, ...rest } = props
   return (
     <tr
-      {...rest}
       onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(
-        'group duration-200 transition-colors bg-white dark:bg-dark-850',
-        {
-          'dark:hover:bg-dark-700 hover:bg-[#f8fafc]':
-            (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
-          'dark:bg-white/10 bg-[#eff5fe]': selected,
-          'cursor-not-allowed': disabled,
-          'cursor-pointer': !disabled && onClick,
-        },
-        className,
-      )}
+      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-3', {
+        'dark:hover:bg-dark-2 hover:bg-[#f8fafc] ':
+          (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
+        'dark:!bg-white/10 !bg-[#eff5fe] ': selected,
+        'cursor-not-allowed': disabled,
+        'cursor-pointer': !disabled && onClick,
+      })}
     >
       {children}
     </tr>
@@ -129,7 +129,7 @@ const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
   return (
     <td
       {...rest}
-      className={cn('text-md py-3 px-2 text-[#475569] dark:text-slate-100 border-b dark:border-dark-700', className)}
+      className={cn('text-md py-3 px-2 text-[#475569] dark:text-slate-100 border-b dark:border-dark-700 ', className)}
     >
       <div className='h-full w-full flex items-center'>{children}</div>
     </td>
