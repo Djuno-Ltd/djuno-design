@@ -21,7 +21,7 @@ const Header = () => {
         <Logo className="w-6" />
         <Text>djuno-design lab🧪</Text>
         <Text uiType="secondary" size="xs">
-          v0.7.2
+          v0.7.3
         </Text>
       </Flex>
       <Flex items="center" className="gap-3">

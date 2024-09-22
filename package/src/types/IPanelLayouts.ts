@@ -43,6 +43,9 @@ export interface PanelLayoutProps extends React.PropsWithChildren {
     handleShowSidebar: () => void
     isShowSidebar: boolean
   }) => React.ReactNode
+  // containerRef?: React.MutableRefObject<HTMLDivElement>
+  enableGoToTopAfterScroll: boolean
+  enableGoToTopAfterChangeRoute: boolean
 }
 
 export interface PanelHeaderProps extends React.PropsWithChildren {
