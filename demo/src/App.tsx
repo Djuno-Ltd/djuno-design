@@ -986,15 +986,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Select
-                label="error"
-                error="Field is required"
-                required
-                options={[]}
-                className="w-[200px]"
-              />
-            </Flex>
+
             <Flex items="end" className="gap-3 w-full flex justify-end">
               <Select
                 label="error"
