@@ -29,13 +29,13 @@ import Input from './form/Input'
 import { cva } from 'class-variance-authority'
 const { Text } = Typography
 
-const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-duration-300', {
+const iconVariants = cva('cursor-pointer w-5 h-5 transition-all duration-300', {
   variants: {
     state: {
-      eyelashIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
-      eyeIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyelashIcon: 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-200',
+      eyeIcon: 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-200',
       copyIcon:
-        ' hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
+        ' hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
     },
   },
   defaultVariants: {
@@ -82,20 +82,20 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('dj-flex dj-items-center dj-gap-1', className, {})}>
+        <div className={cn('flex items-center gap-1', className, {})}>
           <div
-            className='dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm  dj-h-7 dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap'
+            className='relative overflow-hidden cursor-pointer text-sm  h-7 dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap'
             onClick={() => text && copyToClipboard(text)}
           >
             {!showText && (
-              <div className='dj-bg-white/10 dark:dj-bg-black/10 dj-backdrop-blur-[2.3px] dj-absolute dj-left-0 dj-top-0 dj-right-0 dj-bottom-0 dj-w-full dj-h-full' />
+              <div className='bg-white/10 dark:bg-black/10 backdrop-blur-[2.3px] absolute left-0 top-0 right-0 bottom-0 w-full h-full' />
             )}
-            <Text className={cn('dj-w-full dj-overflow-hidden dj-text-ellipsis dj-truncate', textClassName)}>
+            <Text className={cn('w-full overflow-hidden text-ellipsis truncate', textClassName)}>
               {!text || text === undefined ? '' : text}
             </Text>
           </div>
 
-          <div className='dj-select-none'>
+          <div className='select-none'>
             {showText ? (
               <EyeIcon
                 onClick={() => setShowText(false)}
@@ -111,7 +111,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
         </div>
       )}
       {type === 'copy' && (
-        <div className={cn('dj-flex dj-items-center dj-gap-1', className)}>
+        <div className={cn('flex items-center gap-1', className)}>
           <Input
             inputProps={{
               value: text ? text : '',
@@ -119,7 +119,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
               ...props,
             }}
           />
-          <div className='dj-select-none'>
+          <div className='select-none'>
             <CopyIcon
               onClick={() => copyToClipboard(text || '')}
               className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}

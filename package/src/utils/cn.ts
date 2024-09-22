@@ -1,9 +1,7 @@
 import classNames from 'classnames'
 import { extendTailwindMerge } from 'tailwind-merge'
 
-const twMerge = extendTailwindMerge({
-  prefix: 'dj-',
-})
+const twMerge = extendTailwindMerge({})
 
 /**
  * Creates a custom classnames function with Tailwind CSS class merging support.

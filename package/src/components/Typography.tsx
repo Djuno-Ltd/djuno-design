@@ -24,7 +24,7 @@ import { cva } from 'class-variance-authority'
 import {
   TypographyBaseProps,
   TypographyComponents,
-  TypographyCopyableProp,
+  CopyableOptionsProp,
   TypographyLinkProps,
   TypographyParagraphProps,
   TypographyProps,
@@ -43,48 +43,48 @@ import { copyToClipboard } from '../utils/copy'
 const textVariants = cva('', {
   variants: {
     uiType: {
-      default: 'dj-text-black/85 dark:dj-text-secondary-100',
-      secondary: 'dj-text-secondary-500/85 dark:dj-text-secondary-400/85',
-      success: 'dj-text-success/85',
-      warning: 'dj-text-warning/85',
-      danger: 'dj-text-error/85',
-      disabled: 'dj-cursor-not-allowed dj-text-black/20 dark:dj-text-dark-100/30',
+      default: 'text-black/85 dark:text-secondary-100',
+      secondary: 'text-secondary-500/85 dark:text-secondary-400/85',
+      success: 'text-success/85',
+      warning: 'text-warning/85',
+      danger: 'text-error/85',
+      disabled: 'cursor-not-allowed text-black/20 dark:text-dark-100/30',
       transparent: '',
     },
     link: {
       default:
-        'dj-text-primary-300 hover:dj-text-primary-500 dark:dj-text-primary-300 dark:hover:dj-text-primary-500 dj-transition-colors dj-duration-200',
-      otherUi: ' dj-transition-colors dj-duration-200',
+        'text-primary-300 hover:text-primary-500 dark:text-primary-300 dark:hover:text-primary-500 transition-colors duration-200',
+      otherUi: ' transition-colors duration-200',
     },
     size: {
-      xs: 'dj-text-xs',
-      sm: 'dj-text-sm',
-      base: 'dj-text-base',
-      lg: 'dj-text-lg',
-      xl: 'dj-text-xl',
-      '2xl': 'dj-text-2xl',
-      '3xl': 'dj-text-3xl',
-      '4xl': 'dj-text-4xl',
-      '5xl': 'dj-text-5xl',
-      '6xl': 'dj-text-6xl',
-      '7xl': 'dj-text-7xl',
-      '8xl': 'dj-text-8xl',
-      '9xl': 'dj-text-9xl',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      base: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
+      '2xl': 'text-2xl',
+      '3xl': 'text-3xl',
+      '4xl': 'text-4xl',
+      '5xl': 'text-5xl',
+      '6xl': 'text-6xl',
+      '7xl': 'text-7xl',
+      '8xl': 'text-8xl',
+      '9xl': 'text-9xl',
     },
     level: {
-      h1: 'dj-mb-4 dj-text-4xl',
-      h2: 'dj-mb-3 dj-text-3xl',
-      h3: 'dj-mb-3 dj-text-2xl',
-      h4: 'dj-mb-2 dj-text-xl',
-      h5: 'dj-mb-2 dj-text-base',
-      h6: 'dj-mb-1 dj-text-sm',
+      h1: 'mb-4 text-4xl',
+      h2: 'mb-3 text-3xl',
+      h3: 'mb-3 text-2xl',
+      h4: 'mb-2 text-xl',
+      h5: 'mb-2 text-base',
+      h6: 'mb-1 text-sm',
     },
   },
   compoundVariants: [
     {
       uiType: ['secondary', 'success', 'warning', 'danger'],
       link: 'otherUi',
-      className: 'dj-opacity-80 hover:dj-opacity-95 dj-cursor-pointer',
+      className: 'opacity-80 hover:opacity-95 cursor-pointer',
     },
   ],
   defaultVariants: {
@@ -136,14 +136,14 @@ const Base: React.FC<TypographyBaseProps> = ({ children, code, mark, underline, 
 
   if (code) {
     content = (
-      <code className='dj-mx-0 dj-my-1 dj-bg-secondary-100 dark:dj-bg-dark-700 dj-border dark:dj-border-dark-500 dj-rounded dj-px-1 dj-py-0.5'>
+      <code className='mx-0 my-1 bg-secondary-100 dark:bg-dark-700 border dark:border-dark-500 rounded px-1 py-0.5'>
         {content}
       </code>
     )
   }
 
   if (mark) {
-    content = <mark className='dj-p-0 dj-bg-[#ffe58f]'>{content}</mark>
+    content = <mark className='p-0 bg-[#ffe58f]'>{content}</mark>
   }
 
   if (underline) {
@@ -192,10 +192,7 @@ const Title: React.FC<TypographyTitleProps> = ({
 
   return (
     <Tooltip {...tooltip}>
-      <Heading
-        className={cn('dj-font-semibold', textVariants({ uiType, level: `h${level}` }), className)}
-        {...htmlProps}
-      >
+      <Heading className={cn('font-semibold', textVariants({ uiType, level: `h${level}` }), className)} {...htmlProps}>
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
           {copyable && <CopyableText copyable={copyable} textChildren={children} />}
@@ -286,7 +283,7 @@ const Link: React.FC<TypographyLinkProps> = ({
   )
 }
 
-const CopyableText: React.FC<{ copyable: boolean | TypographyCopyableProp; textChildren: React.ReactNode }> = ({
+const CopyableText: React.FC<{ copyable: boolean | CopyableOptionsProp; textChildren: React.ReactNode }> = ({
   copyable,
   textChildren,
 }) => {
@@ -368,12 +365,12 @@ const CopyableText: React.FC<{ copyable: boolean | TypographyCopyableProp; textC
   }, [])
 
   return (
-    <div className='dj-inline-block dj-ms-1 dj-text-sm'>
+    <div className='inline-block ms-1 text-sm'>
       <Tooltip content={tooltipText}>
-        <span className='dj-inline-flex dj-items-center dj-text-inherit dj-h-full dj-w-full'>
+        <span className='inline-flex items-center text-inherit h-full w-full'>
           <span
             onClick={handleCopy}
-            className='dj-cursor-pointer hover:dj-scale-110 dj-transition-all dj-duration-300 dj-text-primary-500 hover:dj-text-primary-600 dj-w-4 dj-aspect-square'
+            className='cursor-pointer hover:scale-110 transition-all duration-300 text-primary-500 hover:text-primary-600 w-4 aspect-square'
           >
             {icon}
           </span>

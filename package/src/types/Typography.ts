@@ -50,7 +50,7 @@ export interface TypographyBaseProps extends React.PropsWithChildren {
 
 export interface TypographyProps extends TypographyBaseProps {
   tooltip?: TooltipProps
-  copyable?: boolean | TypographyCopyableProp
+  copyable?: boolean | CopyableOptionsProp
 }
 
 export interface TypographyTitleProps extends TypographyProps, React.HtmlHTMLAttributes<HTMLHeadingElement> {
@@ -69,7 +69,7 @@ export interface TypographyLinkProps extends TypographyProps, React.AnchorHTMLAt
   size?: TypographtSizeTypes
 }
 
-export interface TypographyCopyableProp {
+export interface CopyableOptionsProp {
   text?: string
   icon?: [React.ReactNode, React.ReactNode]
   tooltips?: boolean | [string, string]

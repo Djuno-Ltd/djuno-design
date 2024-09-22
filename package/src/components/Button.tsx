@@ -30,23 +30,23 @@ import { cva } from 'class-variance-authority'
  * This function generates CSS classes for button styles based on specified variants.
  */
 const buttonVariants = cva(
-  'focus:dj-outline-0 dj-transition-all disabled:dj-cursor-not-allowed dj-w-max dj-flex dj-items-center dj-gap-1 dj-duration-400 dj-border-2 focus:dj-ring-4',
+  'focus:outline-0 transition-all disabled:cursor-not-allowed w-max flex items-center gap-1 duration-400 border-2 focus:ring-4',
   {
     variants: {
       uiType: {
         simple:
-          'dj-bg-transparent dj-text-primary-400 hover:dj-bg-primary-50 hover:dj-text-primary-500 dj-border-slate-200 hover:dj-border-primary-100 dark:dj-bg-dark-800 dark:dj-text-dark-100 dark:hover:dj-bg-dark-700 dark:hover:dj-text-dark-50 dark:dj-border-dark-700 dark:hover:dj-border-dark-600 disabled:hover:dj-bg-transparent disabled:dj-text-secondary-300 disabled:dj-border-secondary-200 disabled:dark:dj-bg-dark-900 disabled:dark:dj-text-dark-400 disabled:dark:hover:dj-border-dark-700 focus:dj-ring-primary-100/20 dark:focus:dj-ring-dark-700/50',
+          'bg-transparent text-primary-400 hover:bg-primary-50 hover:text-primary-500 border-slate-200 hover:border-primary-100 dark:bg-dark-800 dark:text-dark-100 dark:hover:bg-dark-700 dark:hover:text-dark-50 dark:border-dark-700 dark:hover:border-dark-600 disabled:hover:bg-transparent disabled:text-secondary-300 disabled:border-secondary-200 disabled:dark:bg-dark-900 disabled:dark:text-dark-400 disabled:dark:hover:border-dark-700 focus:ring-primary-100/20 dark:focus:ring-dark-700/50',
         primary:
-          'dj-bg-primary-400 dj-text-white hover:dj-bg-primary-500 dj-border-primary-400 hover:dj-border-primary-500 dark:dj-bg-primary-500 dark:hover:dj-bg-primary-600 dark:dj-border-primary-500 dark:hover:dj-border-primary-600 disabled:dj-border-secondary-300 disabled:dj-bg-secondary-200 disabled:dj-text-secondary-400 disabled:dark:dj-bg-primary-300 disabled:dark:dj-text-white disabled:dark:dj-border-primary-300 focus:dj-ring-primary-100 dark:focus:dj-ring-primary-600/50',
+          'bg-primary-400 text-white hover:bg-primary-500 border-primary-400 hover:border-primary-500 dark:bg-primary-500 dark:hover:bg-primary-600 dark:border-primary-500 dark:hover:border-primary-600 disabled:border-secondary-300 disabled:bg-secondary-200 disabled:text-secondary-400 disabled:dark:bg-primary-300 disabled:dark:text-white disabled:dark:border-primary-300 focus:ring-primary-100 dark:focus:ring-primary-600/50',
         light:
-          'dj-bg-primary-50 dj-text-primary-400 hover:dj-bg-primary-100 hover:dj-text-primary-500 dj-border-primary-100 hover:dj-border-primary-100 dark:dj-bg-primary-600/20 dark:dj-text-dark-100 dark:hover:dj-bg-primary-600/30 dark:hover:dj-text-dark-50 dark:dj-border-primary-400 dark:hover:dj-border-primary-500 disabled:dj-bg-transparent disabled:dj-text-secondary-300 disabled:dj-border-primary-100/60 disabled:dark:dj-bg-dark-900 disabled:dark:dj-text-dark-400 disabled:dark:dj-border-primary-300/60 focus:dj-ring-primary-100/20 dark:focus:dj-ring-dark-700/50',
+          'bg-primary-50 text-primary-400 hover:bg-primary-100 hover:text-primary-500 border-primary-100 hover:border-primary-100 dark:bg-primary-600/20 dark:text-dark-100 dark:hover:bg-primary-600/30 dark:hover:text-dark-50 dark:border-primary-400 dark:hover:border-primary-500 disabled:bg-transparent disabled:text-secondary-300 disabled:border-primary-100/60 disabled:dark:bg-dark-900 disabled:dark:text-dark-400 disabled:dark:border-primary-300/60 focus:ring-primary-100/20 dark:focus:ring-dark-700/50',
         danger:
-          'dj-bg-red-500 dj-text-white hover:dj-bg-red-600 dj-border-red-500 hover:dj-border-red-600 dark:dj-bg-red-500 dark:hover:dj-bg-red-600 dark:dj-border-red-500 dark:hover:dj-border-red-600 disabled:dj-border-red-400 disabled:dj-bg-red-400 disabled:dj-text-white disabled:dark:dj-bg-red-400 disabled:dark:dj-text-secondary-200 disabled:dark:dj-border-red-400 focus:dj-ring-red-100 dark:focus:dj-ring-red-600/50',
+          'bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600 dark:bg-red-500 dark:hover:bg-red-600 dark:border-red-500 dark:hover:border-red-600 disabled:border-red-400 disabled:bg-red-400 disabled:text-white disabled:dark:bg-red-400 disabled:dark:text-secondary-200 disabled:dark:border-red-400 focus:ring-red-100 dark:focus:ring-red-600/50',
       },
       size: {
-        small: 'dj-rounded-lg dj-text-xs dj-px-3 dj-h-7',
-        medium: 'dj-rounded-lg dj-text-sm dj-px-4 dj-h-9',
-        large: 'dj-rounded-xl dj-text-base dj-px-5 dj-h-11',
+        small: 'rounded-lg text-xs px-3 h-7',
+        medium: 'rounded-lg text-sm px-4 h-9',
+        large: 'rounded-xl text-base px-5 h-11',
       },
     },
     defaultVariants: {

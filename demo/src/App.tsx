@@ -34,8 +34,9 @@ import {
   Texrarea,
   ThemeChanger,
   ThemeSwitcher,
+  Tag,
 } from "djuno-design";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -64,11 +65,6 @@ function App() {
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
   );
-
-  const [multiSelectValues, setMultiSelectValues] = useState<
-    string[] | undefined
-  >([selectOptions[0].value]);
-
   const exampleJson = {
     block_number: 38733960,
     topic: "raw-avalanchec-mainnet",
@@ -106,6 +102,9 @@ function App() {
     },
   };
 
+  const [open, setOpen] = useState<boolean>(false);
+  const handleToggle = () => setOpen(!open);
+
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
@@ -117,7 +116,7 @@ function App() {
     setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
   };
   const handleChangePathname = () => {
-    setPathname((prev) => (prev === "/item1" ? "/item2" : "/item1"));
+    setPathname((prev) => (prev === "/item1" ? "/item2-hi/item2-1" : "/item1"));
   };
 
   const sidebarItems: SidebarItem[] = [
@@ -128,7 +127,7 @@ function App() {
         segmentIndex: 0,
         activeString: "item1",
       },
-      onClick: (item) => console.log(item),
+      icon: FaceSmile,
     },
     {
       id: 2,
@@ -137,7 +136,69 @@ function App() {
         segmentIndex: 0,
         activeString: "item2",
       },
-      onClick: (item) => console.log(item),
+      children: [
+        {
+          id: "2-0",
+          label: "item2-0",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item2-0",
+          },
+        },
+        {
+          id: "2-1",
+          label: "item2-1",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item2-1",
+          },
+          children: [
+            {
+              id: "2-1-0",
+              label: "item2-1-0",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-1-0",
+              },
+            },
+            {
+              id: "2-1-1",
+              label: "item2-1-1",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-1-1",
+              },
+              children: [],
+            },
+          ],
+        },
+        {
+          id: "2-2",
+          label: "item2-2",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item2-2",
+          },
+          children: [
+            {
+              id: "2-2-0",
+              label: "item2-2-0",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-2-0",
+              },
+            },
+            {
+              id: "2-2-1",
+              label: "item2-2-1",
+              activeCondition: {
+                segmentIndex: 2,
+                activeString: "item2-2-1",
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       id: 3,
@@ -147,22 +208,65 @@ function App() {
         activeString: "item3",
       },
       link: "/item3",
-      onClick: (item) => console.log(item?.link),
+      children: [
+        {
+          id: "3-0",
+          label: "item3-0",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item3-0",
+          },
+        },
+        {
+          id: "3-1",
+          label: "item3-1",
+          activeCondition: {
+            segmentIndex: 1,
+            activeString: "item3-1",
+          },
+        },
+      ],
     },
   ];
 
   const [isChecked, setIsChecked] = useState(false);
 
+  const [multiSelectValues, setMultiSelectValues] = useState<
+    string[] | undefined
+  >([selectOptions[0].value]);
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
       <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+        <Card title="Tag">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-2 w-full">
+              <Tag>Default Tag</Tag>
+              <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
+              <Tag closable>Closable Tag</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag color="processing">processing</Tag>
+              <Tag color="success">success</Tag>
+              <Tag color="error">error</Tag>
+              <Tag color="warning">warning</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag bordered={false}>borderless tag</Tag>
+              <Tag color="processing" bordered={false}>
+                borderless tag
+              </Tag>
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Checkbox">
           <Flex direction="col" className="gap-5">
             <Flex className="gap-5 w-full">
               <Flex direction="col">
                 <Checkbox
-                  label="Djuno Design"
+                  label="Ckeckbox simple form"
                   value={isChecked}
                   onChange={setIsChecked}
                 />
@@ -171,7 +275,7 @@ function App() {
 
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox disabled form"
                 value={isChecked}
                 onChange={setIsChecked}
                 disabled
@@ -179,7 +283,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="is required?"
+                label="Ckeckbox required form"
                 value={isChecked}
                 onChange={setIsChecked}
                 required
@@ -187,7 +291,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with tooltip"
                 value={isChecked}
                 onChange={setIsChecked}
                 tooltip={{ content: "it's a tooltip" }}
@@ -195,10 +299,26 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with text error"
                 value={isChecked}
                 onChange={setIsChecked}
                 error="error"
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with error"
+                value={isChecked}
+                onChange={setIsChecked}
+                error={true}
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with custom label"
+                value={isChecked}
+                onChange={setIsChecked}
+                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>
@@ -217,7 +337,7 @@ function App() {
               panelStyle={{}}
             >
               <div className="w-40">
-                <Button>Popover</Button>
+                <Button onClick={handleToggle}>Popover</Button>
               </div>
             </Popover>
           </Flex>
@@ -271,46 +391,74 @@ function App() {
         </Card>
 
         <Card title="Textarea">
+          <Text size="sm" className="font-semibold ">
+            Have hit:
+          </Text>
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
               hint="Djuno Design"
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Simple form:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{}}
             />
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have loading:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              loading
+              loadingType="elastic"
+            />
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input label="loading" loading loadingType="elastic" />
+            </Flex>
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Replace copy text.:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
               placeholder=""
-              textareaProps={{}}
               tooltip={{ content: "test" }}
             />
             <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have error with error text:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
+              required
               error="field is required!"
             />
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
+              required
               error="field is required!"
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Copyable without function:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={true}
             />
@@ -320,9 +468,12 @@ function App() {
               copyable={true}
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Copyable with function:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
             />
@@ -330,6 +481,92 @@ function App() {
               label="Input"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have error without error text:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              error={true}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error={true}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Custom Copy icon and replace tooltips text:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: ["Click to copy", "Text copied!"],
+              }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: ["Click to copy", "Text copied!"],
+              }}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Hide Copy tooltips:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: false,
+              }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: false,
+              }}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Custom label:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              error
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+            <Input
+              error
+              label="Input"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
             />
           </Flex>
         </Card>
@@ -352,7 +589,8 @@ function App() {
 
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
-            handleChange
+            <Text>handleChange</Text>
+
             <Accordion
               items={[
                 {
@@ -425,7 +663,7 @@ function App() {
                 <Text size="xs">change selected?</Text>
                 <Switcher
                   onChange={handleChangePathname}
-                  value={pathname === "/item2"}
+                  value={pathname === "/item1"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
@@ -599,19 +837,29 @@ function App() {
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="small" />
+                  <Switcher
+                    value={swith}
+                    onChange={setSwitch}
+                    size="small"
+                    loading
+                  />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     medium
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} />
+                  <Switcher value={swith} onChange={setSwitch} loading />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="large" />
+                  <Switcher
+                    value={swith}
+                    onChange={setSwitch}
+                    size="large"
+                    loading
+                  />
                 </Flex>
               </Flex>
             </div>
@@ -659,6 +907,27 @@ function App() {
                     setInputValue(e.target?.value),
                 }}
                 error={inputValue === "" ? "Field is required" : ""}
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input
+                label="Input"
+                copyable={{
+                  icon: [
+                    <FaceSmile />,
+                    <FaceSmile className="text-green-500" />,
+                  ],
+                  tooltips: ["Click to copy", "Text copied!"],
+                }}
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input label="Input" tooltip={{ content: "I'm a tooltip" }} />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Input
+                label="Input with custom label"
+                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>
@@ -729,6 +998,14 @@ function App() {
               />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="error"
+                error={true}
+                options={[]}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
               <MultiSelect
                 label="multi select"
                 clearable
@@ -739,6 +1016,16 @@ function App() {
                   setMultiSelectValues(v);
                 }}
                 className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex justify-end">
+              <Select
+                label="Select with custom label"
+                size="medium"
+                options={selectOptions}
+                className="w-[200px]"
+                emptyString="select an option"
+                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>
@@ -1006,6 +1293,21 @@ function App() {
               type="info"
               message="Djuno Design. Info Alert"
             />
+
+            <Text strong size="sm" className="mt-4">
+              wrap mode
+            </Text>
+            <Alert type="info">
+              <Flex direction="col" className="gap-2 mt-1">
+                <Button uiType="primary" className="gap-5 ">
+                  Djuno Design
+                </Button>
+
+                <Text size="sm" className="font-semibold">
+                  This is Alert wrap around button
+                </Text>
+              </Flex>
+            </Alert>
           </Flex>
         </Card>
 
@@ -1089,23 +1391,23 @@ function App() {
         </Card>
 
         <Card title="Flex">
-          <Flex direction="col" className="gap-2 dj-w-full">
-            <Flex items="center" className="gap-2 dj-w-full">
+          <Flex direction="col" className="gap-2 w-full">
+            <Flex items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="center" items="center" className="gap-2 dj-w-full">
+            <Flex justify="center" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="end" items="center" className="gap-2 dj-w-full">
+            <Flex justify="end" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex direction="col" items="start" className="gap-2 dj-w-full">
+            <Flex direction="col" items="start" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
@@ -1133,6 +1435,9 @@ function App() {
         <Card title="Tooltip">
           <Flex className="gap-4 pl-3">
             <Tooltip content="I'm a tooltip">
+              <Text size="sm">Tooltip</Text>
+            </Tooltip>
+            <Tooltip content="I'm a tooltip" theme="black" place="top">
               <Text size="sm">Tooltip</Text>
             </Tooltip>
             <Tooltip

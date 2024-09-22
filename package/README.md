@@ -89,6 +89,7 @@ function App() {
 22. Tabs
 23. ThemeChanger & ThemeSwitcher
 24. Popover
+25. Tag
 
 ### Available hooks
 
@@ -238,37 +239,41 @@ function App() {
 
 ### Input
 
-| Name        | Type                          | Required | default | Description |
-| ----------- | ----------------------------- | -------- | ------- | ----------- |
-| inputProps  | `HTMLProps<HTMLInputElement>` |          |         |             |
-| label       | string                        |          |         |             |
-| type        | `InputTypes`                  |          |         |             |
-| required    | boolean                       |          |         |             |
-| error       | string , boolean              |          |         |             |
-| hint        | boolean                       |          |         |             |
-| loading     | boolean                       |          |         |             |
-| loadingType | `LoadingProps`                |          |         |             |
-| placeholder | string                        |          |         |             |
-| tooltip     | `TooltipProps`                |          |         |             |
-| size        | `SizeTypes`                   |          | medium  |             |
-| copyable    | `boolean or function`         |          |         |             |
+| Name           | Type                                       | Required | default | Description |
+| -------------- | ------------------------------------------ | -------- | ------- | ----------- |
+| inputProps     | `HTMLProps<HTMLInputElement>`              |          |         |             |
+| label          | string, React.ReactNode                    |          |         |             |
+| type           | `InputTypes`                               |          |         |             |
+| required       | boolean                                    |          |         |             |
+| error          | string , boolean , React.ReactNode         |          |         |             |
+| hint           | string, React.ReactNode                    |          |         |             |
+| loading        | boolean                                    |          |         |             |
+| loadingType    | `LoadingType`                              |          |         |             |
+| placeholder    | string                                     |          |         |             |
+| tooltip        | `TooltipProps`                             |          |         |             |
+| size           | `SizeTypes`                                |          | medium  |             |
+| copyable       | `boolean or function or InputCopyableProp` |          |         |             |
+| labelClassName | string                                     |          |         |             |
 
 ### Textarea
 
-| Name              | Type                             | Required | default | Description |
-| ----------------- | -------------------------------- | -------- | ------- | ----------- |
-| id                | string                           |          |         |             |
-| textareaProps     | `HTMLProps<HTMLTextAreaElement>` |          |         |             |
-| textareaClassName | string                           |          |         |             |
-| placeholder       | string                           |          |         |             |
-| label             | string                           |          |         |             |
-| required          | boolean                          |          |         |             |
-| error             | string                           |          |         |             |
-| hint              | string                           |          |         |             |
-| type              | `InputTypes`                     |          |         |             |
-| tooltip           | `TooltipProps`                   |          |         |             |
-| size              | `SizeTypes`                      |          | medium  |             |
-| copyable          | `boolean or function`            |          |         |             |
+| Name              | Type                                       | Required | default | Description |
+| ----------------- | ------------------------------------------ | -------- | ------- | ----------- |
+| id                | string                                     |          |         |             |
+| textareaProps     | `HTMLProps<HTMLTextAreaElement>`           |          |         |             |
+| textareaClassName | string                                     |          |         |             |
+| placeholder       | string                                     |          |         |             |
+| label             | string, React.ReactNode                    |          |         |             |
+| required          | boolean                                    |          |         |             |
+| error             | string, boolean, React.ReactNode           |          |         |             |
+| hint              | string , React.ReactNode                   |          |         |             |
+| type              | `InputTypes`                               |          |         |             |
+| tooltip           | `TooltipProps`                             |          |         |             |
+| size              | `SizeTypes`                                |          | medium  |             |
+| copyable          | `boolean or function or InputCopyableProp` |          |         |             |
+| labelClassName    | string                                     |          |         |             |
+| loading           | boolean                                    |          |         |             |
+| loadingType       | `LoadingType`                              |          |         |             |
 
 ### Switcher
 
@@ -283,28 +288,29 @@ function App() {
 
 ### Select
 
-| Name               | Type                              | Required | Default | Description                                                                |
-| ------------------ | --------------------------------- | -------- | ------- | -------------------------------------------------------------------------- |
-| `value`            | `T`                               |          |         | The currently selected value.                                              |
-| `onChange`         | `(value: T or undefined) => void` |          |         | Callback function triggered when the selected value changes.               |
-| `defaultValue`     | `T`                               |          |         | The default value of the select component.                                 |
-| `options`          | `SelectOption<T, ET>[]`           | ✔       |         | Array of options available for selection.                                  |
-| `className`        | `string`                          |          |         | Additional CSS classes for custom styling of the select component.         |
-| `buttonClassName`  | `string`                          |          |         | Additional CSS classes for custom styling of the select button.            |
-| `optionsClassName` | `string`                          |          |         | Additional CSS classes for custom styling of the options list.             |
-| `label`            | `string`                          |          |         | The label displayed above the select component.                            |
-| `error`            | `string`                          |          |         | Error message to display if there is a validation issue.                   |
-| `required`         | `boolean`                         |          |         | Indicates if the select component is required.                             |
-| `type`             | `SelectTypes`                     |          |         | The type of the select component (e.g., single select, multi-select).      |
-| `tooltip`          | `TooltipProps`                    |          |         | Tooltip properties to display additional information.                      |
-| `hint`             | `string`                          |          |         | Hint text to provide additional context or instructions.                   |
-| `loading`          | `boolean`                         |          |         | Indicates if the select component is in a loading state.                   |
-| `loadingType`      | `LoadingType`                     |          |         | Type of loading indicator to display when the select component is loading. |
-| `emptyString`      | `string`                          |          |         | Text to display when there are no options available.                       |
-| `clearable`        | `boolean`                         |          |         | If true, allows the user to clear the selected value.                      |
-| `disabled`         | `boolean`                         |          |         | If true, disables the select component.                                    |
-| `size`             | `SizeTypes`                       |          |         | Size of the select component (e.g., small, medium, large).                 |
-| `onBlur`           | `(e: FocusEvent) => void`         |          |         | Callback function triggered when the select component loses focus.         |
+| Name               | Type                                    | Required | Default | Description                                                                |
+| ------------------ | --------------------------------------- | -------- | ------- | -------------------------------------------------------------------------- |
+| `value`            | `T`                                     |          |         | The currently selected value.                                              |
+| `onChange`         | `(value: T or undefined) => void`       |          |         | Callback function triggered when the selected value changes.               |
+| `defaultValue`     | `T`                                     |          |         | The default value of the select component.                                 |
+| `options`          | `SelectOption<T, ET>[]`                 | ✔       |         | Array of options available for selection.                                  |
+| `className`        | `string`                                |          |         | Additional CSS classes for custom styling of the select component.         |
+| `buttonClassName`  | `string`                                |          |         | Additional CSS classes for custom styling of the select button.            |
+| `optionsClassName` | `string`                                |          |         | Additional CSS classes for custom styling of the options list.             |
+| `label`            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
+| `error`            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
+| `required`         | `boolean`                               |          |         | Indicates if the select component is required.                             |
+| `type`             | `SelectTypes`                           |          |         | The type of the select component (e.g., single select, multi-select).      |
+| `tooltip`          | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                      |
+| `hint`             | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                   |
+| `loading`          | `boolean`                               |          |         | Indicates if the select component is in a loading state.                   |
+| `loadingType`      | `LoadingType`                           |          |         | Type of loading indicator to display when the select component is loading. |
+| `emptyString`      | `string`                                |          |         | Text to display when there are no options available.                       |
+| `clearable`        | `boolean`                               |          |         | If true, allows the user to clear the selected value.                      |
+| `disabled`         | `boolean`                               |          |         | If true, disables the select component.                                    |
+| `size`             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
+| `onBlur`           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
+| `labelClassName`   | `string`                                |          |         | Additional CSS classes for custom label                                    |
 
 ### Skeleton
 
@@ -378,14 +384,13 @@ function App() {
 
 ### Dropdown
 
-| Name              | Type                | Required | default | Description |
-| ----------------- | ------------------- | -------- | ------- | ----------- |
-| menu              | `DropdownElement[]` |          |         |             |
-| title             | string              |          |         |             |
-| type              | string              |          |         |             |
-| positionClassName | string              |          |         |             |
-| buttonClassName   | string              |          |         |             |
-| itemsClassName    | string              |          |         |             |
+| Name            | Type                | Required | default | Description |
+| --------------- | ------------------- | -------- | ------- | ----------- |
+| menu            | `DropdownElement[]` |          |         |             |
+| title           | string              |          |         |             |
+| type            | `DropdownTypes`     |          |         |             |
+| buttonClassName | string              |          |         |             |
+| itemsClassName  | string              |          |         |             |
 
 ### SecureCopy
 
@@ -449,16 +454,17 @@ function App() {
 
 ### Checkbox
 
-| Name       | Type                          | Required | default | Description |
-| ---------- | ----------------------------- | -------- | ------- | ----------- |
-| id         | string                        |          |         |             |
-| inputprops | `HTMLProps<HTMLInputElement>` |          |         |             |
-| label      | `React.ReactNode`             |          |         |             |
-| required   | boolean                       |          | false   |             |
-| error      | string                        |          |         |             |
-| value      | boolean                       |          |         |             |
-| onChange   | `() => void`                  |          |         |             |
-| disabled   | boolean                       |          |         |             |
+| Name           | Type                             | Required | default | Description |
+| -------------- | -------------------------------- | -------- | ------- | ----------- |
+| id             | string                           |          |         |             |
+| inputprops     | `HTMLProps<HTMLInputElement>`    |          |         |             |
+| label          | string, React.ReactNode          |          |         |             |
+| required       | boolean                          |          | false   |             |
+| error          | string, boolean, React.ReactNode |          |         |             |
+| value          | boolean                          |          |         |             |
+| onChange       | `() => void`                     |          |         |             |
+| disabled       | boolean                          |          |         |             |
+| labelClassName | string                           |          |         |             |
 
 ### Sidebar
 
@@ -519,6 +525,19 @@ function App() {
 | `children`     | `React.ReactNode`     |          |         |             |
 | panelclassName | string                |          |         |             |
 | panelStyle     | `React.CSSProperties` |          |         |             |
+
+### Tag
+
+| Name        | Type                  | Required | Default | Description                                             |
+| ----------- | --------------------- | -------- | ------- | ------------------------------------------------------- |
+| `className` | `string`              |          |         | Additional class names to apply to the tag.             |
+| `color`     | `PresetColorNames`    |          |         | Color type of the tag (e.g., 'processing', 'success',). |
+| `style`     | `React.CSSProperties` |          |         | Inline styles for the tag.                              |
+| `children`  | `React.ReactNode`     |          |         | Content to be displayed inside the tag.                 |
+| `icon`      | `React.ReactNode`     |          |         | Icon to be displayed before the content.                |
+| `bordered`  | `boolean`             |          | `true`  | If false, the tag will not have a border.               |
+| `closable`  | `boolean`             |          | `false` | If true, the tag can be closed (disappears on click).   |
+| `onClose`   | `() => void`          |          |         | Callback function to be called when the tag is closed.  |
 
 ## Contributor ✨
 

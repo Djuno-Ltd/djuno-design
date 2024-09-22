@@ -27,6 +27,7 @@ export interface AlertProps {
   showIcon?: boolean
   banner?: boolean
   className?: string
+  children?: React.ReactNode
 }
 
 export type AlertTypes = 'neutral' | 'success' | 'info' | 'warning' | 'error'

@@ -1,6 +1,6 @@
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
- * @fileoverview Switcher types
+ * @fileoverview Tag types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,13 +18,14 @@
  * limitations under the License.
  */
 
-import { LoadingType, SizeTypes } from '.'
-
-export interface SwitcherProps {
-  value?: boolean
-  onChange?: (value: boolean) => void
-  disabled?: boolean
-  loading?: boolean
-  loadingType?: LoadingType
-  size?: SizeTypes
+export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
+  className?: string
+  color?: PresetColorNames //TODO: also string
+  style?: React.CSSProperties
+  icon?: React.ReactNode
+  bordered?: boolean
+  closable?: boolean
+  onClose?: () => void
 }
+
+export type PresetColorNames = 'processing' | 'success' | 'error' | 'warning'

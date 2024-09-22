@@ -19,12 +19,12 @@
  */
 import * as React from 'react'
 import { cn } from './../../utils/cn'
-import { TextareaProps } from './../../types/ITextarea'
 import { AnimatedFormError, inputVariants, labelVariants } from './Input'
 import Typography from '../Typography'
 import { InfoTooltip } from '../Tooltip'
 import { copyToClipboard } from '../../utils/copy'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
+import { TextareaProps } from '../../types'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation and additional styling options.
@@ -66,7 +66,7 @@ import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
  * }
  */
 
-const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
+const Textarea: React.FC<TextareaProps> = ({
   id,
   placeholder,
   className,
@@ -78,6 +78,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   size,
   type,
   copyable,
+  ...props
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 

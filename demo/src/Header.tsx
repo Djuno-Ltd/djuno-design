@@ -1,4 +1,4 @@
-import { Flex, Typography, useDjunoDesign } from "djuno-design";
+import { Checkbox, Flex, Typography, useDjunoDesign } from "djuno-design";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as NPM } from "./npm.svg";
 
@@ -8,9 +8,8 @@ const Header = () => {
     theme: { mode, changeMode },
   } = useDjunoDesign();
 
-  const handleChangeTheme = (e: any) => {
-    const isDark = e.target.checked;
-    changeMode(isDark ? "dark" : "light");
+  const handleChangeTheme = (checked: boolean) => {
+    changeMode(checked ? "dark" : "light");
   };
   return (
     <Flex
@@ -22,23 +21,15 @@ const Header = () => {
         <Logo className="w-6" />
         <Text>djuno-design lab🧪</Text>
         <Text uiType="secondary" size="xs">
-          v0.6.4
+          v0.7.0
         </Text>
       </Flex>
       <Flex items="center" className="gap-3">
-        <Flex items="center" className="gap-1">
-          <input
-            checked={mode === "dark"}
-            id="themeMode"
-            type="checkbox"
-            onChange={handleChangeTheme}
-          />
-          <label htmlFor="themeMode">
-            <Text size="sm" className="select-none">
-              dark mode
-            </Text>
-          </label>
-        </Flex>
+        <Checkbox
+          value={mode === "dark"}
+          onChange={handleChangeTheme}
+          label="dark mode"
+        />
         <Link
           size="sm"
           href="https://www.npmjs.com/package/djuno-design"

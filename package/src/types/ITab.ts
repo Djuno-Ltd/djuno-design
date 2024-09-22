@@ -27,8 +27,9 @@ export interface TabsProps extends PropsWithChildren {
   useUrl?: boolean
   listClassName?: string
   panelClassName?: string
-  tabType?: 'default' | 'creamy'
+  tabType?: TabType
 }
+export type TabType = 'default' | 'creamy'
 
 export interface TabOption<T = undefined> {
   label: React.ReactNode

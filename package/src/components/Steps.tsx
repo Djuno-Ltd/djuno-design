@@ -55,35 +55,35 @@ const Steps = <T extends string>({ className, ...props }: StepsProps<T>): React.
   const [activeLevels, checkedLevels] = handleSelectedSteps(step, stepsKeys)
 
   return (
-    <ol className={cn('dj-flex dj-items-center dj-w-full dj-text-center dj-py-6', className)}>
+    <ol className={cn('flex items-center w-full text-center py-6', className)}>
       {steps.map((step, i) => (
         <li
           key={i}
-          className={cn(`dj-flex dj-items-center`, {
-            "md:dj-w-full md:after:dj-content-[''] after:dj-w-full after:dj-h-1 after:dj-border-b after:dj-hidden md:after:dj-inline-block after:dj-mx-4 xl:after:dj-mx-6 after:dj-border-secondary-300 dark:after:dj-border-gray-700":
+          className={cn(`flex items-center`, {
+            "md:w-full md:after:content-[''] after:w-full after:h-1 after:border-b after:hidden md:after:inline-block after:mx-4 xl:after:mx-6 after:border-secondary-300 dark:after:border-gray-700":
               steps.length !== i + 1,
-            'dj-cursor-pointer': checkedLevels.includes(step.value) && step.callback,
+            'cursor-pointer': checkedLevels.includes(step.value) && step.callback,
           })}
           onClick={() => (step.callback && checkedLevels.includes(step.value) ? step.callback(step.value) : null)}
         >
           <span
-            className={cn('dj-flex dj-items-center dj-text-dark-700 dark:dj-text-dark-100', {
-              "after:dj-content-['/'] md:after:dj-hidden after:dj-mx-1 after:dj-text-gray-200 dark:after:dj-text-gray-500":
+            className={cn('flex items-center text-dark-700 dark:text-dark-100', {
+              "after:content-['/'] md:after:hidden after:mx-1 after:text-gray-200 dark:after:text-gray-500":
                 steps.length !== i + 1,
-              '!dj-text-primary-500 dark:!dj-text-primary-500 dj-font-medium': activeLevels?.includes(step.value),
+              '!text-primary-500 dark:!text-primary-500 font-medium': activeLevels?.includes(step.value),
             })}
           >
-            <span className='dj-me-1'>
+            <span className='me-1'>
               {checkedLevels?.includes(step.value) ? (
-                <CheckIcon className='dj-w-[20px] dj-aspect-square' />
+                <CheckIcon className='w-[20px] aspect-square' />
               ) : (
-                <Text className='dj-whitespace-nowrap' size='base' uiType='transparent'>
+                <Text className='whitespace-nowrap' size='base' uiType='transparent'>
                   {i + 1} .
                 </Text>
               )}
             </span>
 
-            <Text className='dj-whitespace-nowrap' uiType='transparent'>
+            <Text className='whitespace-nowrap' uiType='transparent'>
               {step.label}
             </Text>
           </span>

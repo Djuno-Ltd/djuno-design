@@ -36,12 +36,12 @@ export interface SelectBaseProps {
   className?: string
   buttonClassName?: string
   optionsClassName?: string
-  label?: string
-  error?: string
+  label?: string | React.ReactNode
+  error?: string | boolean | React.ReactNode
   required?: boolean
   type?: SelectTypes
   tooltip?: TooltipProps
-  hint?: string
+  hint?: string | React.ReactNode
   loading?: boolean
   loadingType?: LoadingType
   emptyString?: string
@@ -49,6 +49,7 @@ export interface SelectBaseProps {
   disabled?: boolean
   size?: SizeTypes
   onBlur?: (e: FocusEvent) => void
+  labelClassName?: string
 }
 
 export type SelectTypes = InputTypes

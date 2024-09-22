@@ -19,7 +19,6 @@
  */
 
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { CheckboxProps } from '../../types/ICheckbox'
 import { cn } from '../../utils/cn'
 import { AnimatedFormError, labelVariants } from './Input'
@@ -39,8 +38,9 @@ import { InfoTooltip } from '../Tooltip'
  * @param {Function} [props.onChangeCheckbox] - Callback function called when the checkbox state changes.
  * @param {boolean} [props.required] - Specifies if the checkbox is required.
  * @param {boolean} [props.disabled] - Disables the checkbox interaction.
- * @param {string} [props.error] - An error message to display if there's an issue with the checkbox.
+ * @param {string|boolean| React.ReactNode} [props.error] - An error message to display if there's an issue with the checkbox.
  * @param {React.ReactNode} [props.tooltip] - Additional information to display in a tooltip next to the checkbox.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
  * @returns {React.ReactNode} Rendered Checkbox component.
  *
@@ -79,6 +79,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   value,
   onChange,
   disabled,
+  labelClassName,
 }) => {
   const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
@@ -93,28 +94,24 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   }
 
   return (
-    <div className='dj-flex dj-flex-col dj-gap-1'>
-      <Field className='dj-flex dj-items-center dj-gap-2'>
+    <div className='flex flex-col gap-1'>
+      <Field className='flex items-center gap-2'>
         <HeadlessCheckbox
           checked={checkedState}
           onChange={handleChange}
-          className={cn(
-            'dj-group dj-flex dj-items-center dj-justify-center dj-rounded dj-border dj-w-4 dj-h-4 dj-cursor-pointer',
-            {
-              'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2':
-                !checkedState,
-              'dj-bg-primary-600 dj-border-primary-600 dj-text-white': checkedState,
-              'dj-bg-primary-200 dj-border-primary-200 dark:dj-bg-dark-400 dark:dj-border-dark-700 dj-text-white dj-cursor-not-allowed':
-                checkedState && disabled,
-              'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2 dj-cursor-not-allowed':
-                !checkedState && disabled,
+          className={cn('group flex items-center justify-center rounded border w-4 h-4 cursor-pointer', {
+            'bg-white border-dark-500 dark:bg-dark-800 dark:border-dark-700 dark:border-2': !checkedState,
+            'bg-primary-600 border-primary-600 text-white': checkedState,
+            'bg-primary-200 border-primary-200 dark:bg-dark-400 dark:border-dark-700 text-white cursor-not-allowed':
+              checkedState && disabled,
+            'bg-white border-dark-500 dark:bg-dark-800 dark:border-dark-700 dark:border-2 cursor-not-allowed':
+              !checkedState && disabled,
 
-              'dj-w-4 dj-h-4': true,
-            },
-          )}
+            'w-4 h-4': true,
+          })}
         >
           <CheckIcon
-            className={cn('dj-hidden', { 'dj-block dj-text-white': checkedState })}
+            className={cn('hidden', { 'block text-white': checkedState })}
             style={{
               strokeWidth: '2.5',
             }}
@@ -123,20 +120,23 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
         <Label
           htmlFor={id}
           className={cn(
-            'dj-flex dj-items-center dj-cursor-pointer',
-            labelVariants({ hasError: error ? 'yes' : 'no' }),
+            'flex items-center cursor-pointer',
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+            }),
             {
-              ' dj-cursor-not-allowed': disabled,
+              ' cursor-not-allowed': disabled,
             },
+            labelClassName,
           )}
         >
           {label && (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+            <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
