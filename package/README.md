@@ -89,6 +89,7 @@ function App() {
 22. Tabs
 23. ThemeChanger & ThemeSwitcher
 24. Popover
+25. Tag
 
 ### Available hooks
 
@@ -525,6 +526,19 @@ function App() {
 | `children`     | `React.ReactNode`     |          |         |             |
 | panelclassName | string                |          |         |             |
 | panelStyle     | `React.CSSProperties` |          |         |             |
+
+### Tag
+
+| Name        | Type                  | Required | Default | Description                                             |
+| ----------- | --------------------- | -------- | ------- | ------------------------------------------------------- |
+| `className` | `string`              |          |         | Additional class names to apply to the tag.             |
+| `color`     | `PresetColorNames`    |          |         | Color type of the tag (e.g., 'processing', 'success',). |
+| `style`     | `React.CSSProperties` |          |         | Inline styles for the tag.                              |
+| `children`  | `React.ReactNode`     |          |         | Content to be displayed inside the tag.                 |
+| `icon`      | `React.ReactNode`     |          |         | Icon to be displayed before the content.                |
+| `bordered`  | `boolean`             |          | `true`  | If false, the tag will not have a border.               |
+| `closable`  | `boolean`             |          | `false` | If true, the tag can be closed (disappears on click).   |
+| `onClose`   | `() => void`          |          |         | Callback function to be called when the tag is closed.  |
 
 ## Contributor ✨
 
