@@ -104,6 +104,10 @@ function App() {
   const [open, setOpen] = useState<boolean>(false);
   const handleToggle = () => setOpen(!open);
 
+  //panelLayout
+  const [globalLoading, setGlobalLoading] = useState(false);
+  const [contentLoading, setContentLoading] = useState(false);
+
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
@@ -650,12 +654,26 @@ function App() {
         <Card
           title="Layout"
           description="PanelLayout - PanelSidebar - PanelHeader"
+          setting={
+            <Flex items="center" className="gap-4">
+              <Flex items="center" className="gap-1">
+                <Text size="xs">global loading?</Text>
+                <Switcher onChange={setGlobalLoading} value={globalLoading} />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">content loading?</Text>
+                <Switcher onChange={setContentLoading} value={contentLoading} />
+              </Flex>
+            </Flex>
+          }
         >
           {/* <div className=""> */}
           <PanelLayout
             type="mini"
             pathname="/"
             style={{ height: 400 }}
+            globalLoading={globalLoading}
+            contentLoading={contentLoading}
             className="w-full border border-slate-500 overflow-hidden"
             renderSidebar={({ segments, ...sidebarProps }) => (
               <PanelSidebar
