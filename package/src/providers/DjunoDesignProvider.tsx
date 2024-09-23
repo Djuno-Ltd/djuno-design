@@ -47,7 +47,11 @@ const DjunoDesignProvider: React.FunctionComponent<DjunoDesignProviderProps> = (
     [theme],
   )
 
-  return <DjunoDesignContext.Provider value={contextValue}>{children}</DjunoDesignContext.Provider>
+  return (
+    <DjunoDesignContext.Provider value={contextValue}>
+      <main className='fontFamilies'>{children}</main>
+    </DjunoDesignContext.Provider>
+  )
 }
 
 const DDProvider = DjunoDesignProvider
