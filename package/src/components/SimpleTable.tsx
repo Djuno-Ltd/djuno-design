@@ -57,15 +57,10 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
   containerClassName,
   children,
   loading,
-  withoutDefaultHeight,
 }) => {
   const testLoading = false
   return (
-    <div
-      className={cn('w-full relative ', containerClassName, {
-        'min-h-[200px] ': withoutDefaultHeight === undefined || withoutDefaultHeight === false,
-      })}
-    >
+    <div className={cn('w-full relative ', containerClassName, {})}>
       <div className='overflow-x-auto overflow-y-hidden'>
         <table
           className={cn(

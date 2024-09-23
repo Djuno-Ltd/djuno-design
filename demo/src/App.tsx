@@ -922,7 +922,7 @@ function App() {
 
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="small" uiSize="small" />
               <Input label="medium" uiSize="medium" />
               <Input label="large" uiSize="large" />
@@ -1076,7 +1076,7 @@ function App() {
             Simple table with data
           </Text>
           <Flex className="gap-3 w-full mb-10">
-            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
+            <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1102,7 +1102,7 @@ function App() {
             Simple table with data and dropdown
           </Text>
           <Flex className="gap-3 w-full mb-10">
-            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
+            <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
