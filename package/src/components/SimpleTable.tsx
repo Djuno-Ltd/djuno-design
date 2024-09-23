@@ -57,15 +57,10 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
   containerClassName,
   children,
   loading,
-  withoutDefaultHeight,
 }) => {
   const testLoading = false
   return (
-    <div
-      className={cn('w-full relative ', containerClassName, {
-        'min-h-[200px] ': withoutDefaultHeight === undefined || withoutDefaultHeight === false,
-      })}
-    >
+    <div className={cn('w-full relative ', containerClassName, {})}>
       <div className='overflow-x-auto overflow-y-hidden'>
         <table
           className={cn(
@@ -97,7 +92,7 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
   return (
     <tr
       onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-3', {
+      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-3 ', {
         'dark:hover:bg-dark-2 hover:bg-[#f8fafc] ':
           (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
         'dark:!bg-white/10 !bg-[#eff5fe] ': selected,

@@ -23,7 +23,6 @@ export interface SimpletableProps extends PropsWithChildren {
   loading?: boolean
   className?: string
   containerClassName?: string
-  withoutDefaultHeight?: boolean
 }
 
 export interface TableHeadProps extends React.PropsWithChildren {}

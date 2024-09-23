@@ -1089,7 +1089,7 @@ function App() {
             Simple table with data
           </Text>
           <Flex className="gap-3 w-full mb-10">
-            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
+            <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1115,7 +1115,7 @@ function App() {
             Simple table with data and dropdown
           </Text>
           <Flex className="gap-3 w-full mb-10">
-            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
+            <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1224,7 +1224,11 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState text="Empty state" usingIcon={false} />
+            <EmptyState
+              text="Empty state"
+              usingIcon={false}
+              className="min-h-[100px]"
+            />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
@@ -1232,7 +1236,7 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState usingIcon={false} />
+            <EmptyState usingIcon={false} className="min-h-[100px]" />
           </Flex>
           <Divider
             text="Empty state without text"
