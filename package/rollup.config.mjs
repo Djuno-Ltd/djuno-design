@@ -11,7 +11,7 @@ import url from '@rollup/plugin-url'
 
 const makeSourcemap = false
 const minimizeCss = true
-const drop_console = false
+const drop_console = true
 
 export default [
   {

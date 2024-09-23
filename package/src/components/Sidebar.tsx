@@ -41,6 +41,7 @@ import { ReactComponent as ArrowRightIcon } from './../assets/icons/arrow-right.
  * @param {boolean} [props.loading] - Indicates whether the sidebar is in a loading state.
  * @param {SidebarLoadingModes} [props.loadingMode] - Determines the visual loading state (e.g., spinner, skeleton).
  * @param {PanelLayoutTypes} [props.type] - Specifies the sidebar layout type (e.g., 'normal' or 'mini').
+ * @param {number} [props.navItemHeight] - Specifies the sidebar items height.
  * @param {React.ReactNode} [props.children] - Additional content to be rendered at the bottom of the sidebar.
  *
  * @returns {React.ReactNode} Rendered Sidebar component.
@@ -103,7 +104,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     return subItems?.find((item) => isActiveItem(item, segments || []))
   }, [segments])
 
-  console.log({ activeItem })
   const [pointerPosition, setPointerPosition] = React.useState<undefined | number>(undefined)
 
   const calculatePointerPosition = React.useCallback(() => {
