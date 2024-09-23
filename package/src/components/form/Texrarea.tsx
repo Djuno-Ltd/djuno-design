@@ -75,7 +75,7 @@ const Textarea: React.FC<TextareaProps> = ({
   required,
   hint,
   tooltip,
-  size,
+  uiSize,
   type,
   copyable,
   ...props
@@ -123,7 +123,7 @@ const Textarea: React.FC<TextareaProps> = ({
                 onClick={handleCopyToClipboard}
                 className={cn(
                   'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
-                  { 'dj-w-[15px]': size === 'small' },
+                  { 'dj-w-[15px]': uiSize === 'small' },
                 )}
               />
             )}
@@ -139,7 +139,7 @@ const Textarea: React.FC<TextareaProps> = ({
           inputVariants({
             type,
             hasError: error ? 'yes' : 'no',
-            size,
+            uiSize,
             copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
           }),
           className,

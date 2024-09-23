@@ -82,7 +82,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   iconClassName,
   textClassName,
   type,
-  size,
+  uiSize,
   ...props
 }) => {
   const [showText, setShowText] = React.useState(false)
@@ -93,11 +93,11 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
         <div className={cn('flex items-center gap-1', className, {})}>
           <div
             className={cn(
-              inputVariants({ size }),
+              inputVariants({ uiSize }),
               {
-                'h-7': size === 'small',
-                'h-9': size === 'medium' || size === undefined,
-                'h-11': size === 'large',
+                'h-7': uiSize === 'small',
+                'h-9': uiSize === 'medium' || uiSize === undefined,
+                'h-11': uiSize === 'large',
               },
               'relative overflow-hidden cursor-pointer text-sm dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap',
             )}
@@ -128,24 +128,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
       )}
       {type === 'copy' && (
         <div className={cn('flex items-center gap-1', className)}>
-          <Input
-            className={cn(
-              inputVariants({
-                size,
-              }),
-              {
-                'h-7': size === 'small',
-                'h-9': size === 'medium' || size === undefined,
-                'h-11': size === 'large',
-              },
-              className,
-            )}
-            inputProps={{
-              value: text ? text : '',
-              readOnly: true,
-              ...props,
-            }}
-          />
+          <Input value={text ? text : ''} readOnly={true} {...props} />
           <div className='select-none'>
             <CopyIcon
               onClick={() => copyToClipboard(text || '')}

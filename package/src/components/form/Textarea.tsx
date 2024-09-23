@@ -83,7 +83,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   required,
   hint,
   tooltip,
-  size,
+  uiSize,
   type,
   copyable,
   loading,
@@ -180,7 +180,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
                   onClick={handleCopyToClipboard}
                   className={cn(
                     'inline-flex items-center cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
-                    { 'w-[15px]': size === 'small' },
+                    { 'w-[15px]': uiSize === 'small' },
                   )}
                 >
                   {icon && <span className='w-4 h-4'>{icon}</span>}
@@ -199,7 +199,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             inputVariants({
               type,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
             className,

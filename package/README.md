@@ -251,7 +251,7 @@ function App() {
 | loadingType    | `LoadingType`                              |          |         |             |
 | placeholder    | string                                     |          |         |             |
 | tooltip        | `TooltipProps`                             |          |         |             |
-| size           | `SizeTypes`                                |          | medium  |             |
+| uiSize         | `SizeTypes`                                |          | medium  |             |
 | copyable       | `boolean or function or InputCopyableProp` |          |         |             |
 | labelClassName | string                                     |          |         |             |
 
@@ -403,7 +403,7 @@ function App() {
 | textClassName | string        |          |         |             |
 | iconClassName | string        |          |         |             |
 | showText      | boolean       |          |         |             |
-| size          | `SizeTypes`   |          | medium  |             |
+| uiSize        | `SizeTypes`   |          | medium  |             |
 
 ### Accordion
 
