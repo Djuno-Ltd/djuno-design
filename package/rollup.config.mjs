@@ -57,51 +57,51 @@ export default [
     ],
     external: ['react', 'react-dom'],
   },
-  // {
-  //   input: 'src/index.tsx',
-  //   output: {
-  //     file: 'dist/index.umd.js',
-  //     format: 'umd',
-  //     name: 'DjunoDesign',
-  //     sourcemap: makeSourcemap,
-  //     globals: {
-  //       react: 'React',
-  //       'react-router-dom': 'ReactRouterDOM',
-  //     },
-  //   },
-  //   onwarn(warning, warn) {
-  //     if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
-  //       return
-  //     }
-  //     warn(warning)
-  //   },
-  //   plugins: [
-  //     url(),
-  //     svgr({ icon: true, dimensions: false }),
-  //     peerDepsExternal(),
-  //     resolve(),
-  //     commonjs(),
-  //     typescript({
-  //       tsconfig: 'tsconfig.json',
-  //     }),
-  //     postcss({
-  //       extract: true,
-  //       minimize: minimizeCss,
-  //     }),
-  //     terser({
-  //       compress: {
-  //         passes: 20,
-  //         drop_console,
-  //         ecma: 2018,
-  //       },
-  //       output: {
-  //         ecma: 5,
-  //         comments: false,
-  //       },
-  //     }),
-  //     filesize(),
-  //     // css({ inject: true }),
-  //   ],
-  //   external: ['react', 'react-dom'],
-  // },
+  {
+    input: 'src/index.tsx',
+    output: {
+      file: 'dist/index.umd.js',
+      format: 'umd',
+      name: 'DjunoDesign',
+      sourcemap: makeSourcemap,
+      globals: {
+        react: 'React',
+        'react-router-dom': 'ReactRouterDOM',
+      },
+    },
+    onwarn(warning, warn) {
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+        return
+      }
+      warn(warning)
+    },
+    plugins: [
+      url(),
+      svgr({ icon: true, dimensions: false }),
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      typescript({
+        tsconfig: 'tsconfig.json',
+      }),
+      postcss({
+        extract: true,
+        minimize: minimizeCss,
+      }),
+      terser({
+        compress: {
+          passes: 20,
+          drop_console,
+          ecma: 2018,
+        },
+        output: {
+          ecma: 5,
+          comments: false,
+        },
+      }),
+      filesize(),
+      // css({ inject: true }),
+    ],
+    external: ['react', 'react-dom'],
+  },
 ]
