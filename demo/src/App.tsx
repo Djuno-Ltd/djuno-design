@@ -1089,7 +1089,7 @@ function App() {
             Simple table with data
           </Text>
           <Flex className="gap-3 w-full mb-10">
-            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
+            <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
@@ -1115,7 +1115,7 @@ function App() {
             Simple table with data and dropdown
           </Text>
           <Flex className="gap-3 w-full mb-10">
-            <SimpleTable className="gap-3 w-full" withoutDefaultHeight>
+            <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
                   <SimpleTable.TH>Header 1</SimpleTable.TH>
