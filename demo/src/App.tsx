@@ -1224,7 +1224,11 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState text="Empty state" usingIcon={false} />
+            <EmptyState
+              text="Empty state"
+              usingIcon={false}
+              className="min-h-[100px]"
+            />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
@@ -1232,7 +1236,7 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState usingIcon={false} />
+            <EmptyState usingIcon={false} className="min-h-[100px]" />
           </Flex>
           <Divider
             text="Empty state without text"

@@ -74,7 +74,7 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
   return (
     <div
       className={cn(
-        'w-full min-h-[150px] flex flex-col gap-1 justify-center items-center text-slate-400 dark:text-gray-600',
+        'w-full  flex flex-col gap-1 justify-center items-center text-slate-400 dark:text-gray-600',
         className,
       )}
     >
