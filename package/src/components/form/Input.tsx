@@ -22,7 +22,7 @@ import * as React from 'react'
 import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
-import { ExtendedInputProps, InputProps } from '../../types/Input'
+import { InputProps } from '../../types/Input'
 import Tooltip, { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
@@ -126,7 +126,7 @@ export const labelVariants = cva(
  * />
  */
 
-const Input: React.FunctionComponent<ExtendedInputProps> = ({
+const Input: React.FunctionComponent<InputProps> = ({
   label,
   className,
   labelClassName,
