@@ -32,7 +32,7 @@ import {
   TypographyTitleProps,
 } from '../types/Typography'
 import Tooltip from './Tooltip'
-import { ReactComponent as CopyIcon } from './../assets/icons/document-duplicate.svg'
+import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
 import { copyToClipboard } from '../utils/copy'
 

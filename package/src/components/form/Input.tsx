@@ -242,7 +242,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             <div
               onClick={handleCopyToClipboard}
               className={cn(
-                'w-[18px] cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
+                'w-[18px] cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300 text-xs',
                 { 'w-[15px]': uiSize === 'small' },
               )}
             >

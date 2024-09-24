@@ -921,7 +921,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             usingText={true}
           />
           <Flex direction="col" className="gap-5 w-full">
-            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+            <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
                 <Dropdown
                   title="djuno Design"
@@ -952,7 +952,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             usingText={true}
           />
           <Flex direction="col" className="gap-5 w-full">
-            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+            <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
                 <Dropdown
                   title="djuno Design"
@@ -1320,11 +1320,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState
-              text="Empty state"
-              usingIcon={false}
-              className="min-h-[100px]"
-            />
+            <EmptyState text="Empty state" usingIcon={false} />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
@@ -1332,7 +1328,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState usingIcon={false} className="min-h-[100px]" />
+            <EmptyState usingIcon={false} />
           </Flex>
           <Divider
             text="Empty state without text"
