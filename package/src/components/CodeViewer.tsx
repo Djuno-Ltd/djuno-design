@@ -47,7 +47,7 @@ import Tooltip from './Tooltip'
  *
  * @returns {React.ReactNode} Rendered CodeViewer component.
  *
- * @version 0.0.0
+ * @version 0.5.7
  * @see https://www.npmjs.com/package/djuno-design#codeViewer
  *
  * @example
