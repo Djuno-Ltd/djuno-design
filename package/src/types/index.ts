@@ -46,6 +46,9 @@ export * from './ISidebar'
 export * from './ITexrarea'
 export * from './IThemeChanger'
 export * from './IJsonViewer'
+export * from './ITag'
+export * from './ICodeViewer'
+export * from './IAuthLayouts'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

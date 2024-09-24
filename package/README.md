@@ -90,6 +90,7 @@ function App() {
 23. ThemeChanger & ThemeSwitcher
 24. Popover
 25. Tag
+26. CodeViewer
 
 ### Available hooks
 
@@ -206,111 +207,110 @@ function App() {
 
 #### Typography.Link
 
-| Name            | Type                                | Required | default   | Description |
-| --------------- | ----------------------------------- | -------- | --------- | ----------- |
-| all `<a>` props | `React.AnchorHTMLAttributes`        |          |           |             |
-| size            | `TypographtSizeTypes`               |          | base      |             |
-| uiType          | `TypographtUiTypes`                 |          | default   |             |
-| tooltip         | `TooltipProps`                      |          | undefined |             |
-| code            | boolean                             |          | false     |             |
-| mark            | boolean                             |          | false     |             |
-| underline       | boolean                             |          | false     |             |
-| del             | boolean                             |          | false     |             |
-| strong          | boolean                             |          | false     |             |
-| italic          | boolean                             |          | false     |             |
-| copyable        | boolean or `TypographyCopyableProp` |          | false     |             |
+| Name            | Type                              | Required | default   | Description |
+| --------------- | --------------------------------- | -------- | --------- | ----------- |
+| all `<a>` props | `React.AnchorHTMLAttributes`      |          |           |             |
+| size            | `TypographtSizeTypes`             |          | base      |             |
+| uiType          | `TypographtUiTypes`               |          | default   |             |
+| tooltip         | `TooltipProps`                    |          | undefined |             |
+| code            | `boolean`                         |          | false     |             |
+| mark            | `boolean`                         |          | false     |             |
+| underline       | `boolean`                         |          | false     |             |
+| del             | `boolean`                         |          | false     |             |
+| strong          | `boolean`                         |          | false     |             |
+| italic          | `boolean`                         |          | false     |             |
+| copyable        | `boolean, TypographyCopyableProp` |          | false     |             |
 
 ### Alert
 
-| Name        | Type              | Required | default | Description               |
-| ----------- | ----------------- | -------- | ------- | ------------------------- |
-| message     | string, ReactNode |          |         |                           |
-| description | string, ReactNode |          |         |                           |
-| type        | `AlertTypes`      |          | neutral |                           |
-| showIcon    | boolean           |          | false   |                           |
-| banner      | boolean           |          | false   | Display Alert as a banner |
+| Name        | Type                | Required | default | Description               |
+| ----------- | ------------------- | -------- | ------- | ------------------------- |
+| message     | `string, ReactNode` |          |         |                           |
+| description | `string, ReactNode` |          |         |                           |
+| type        | `AlertTypes`        |          | neutral |                           |
+| showIcon    | `boolean`           |          | false   |                           |
+| banner      | `boolean`           |          | false   | Display Alert as a banner |
 
 ### Steps
 
 | Name  | Type         | Required | default | Description |
 | ----- | ------------ | -------- | ------- | ----------- |
 | steps | `StepItem[]` | yes      |         |             |
-| step  | string       | yes      |         |             |
+| step  | `string`     | yes      |         |             |
 
 ### Input
 
-| Name           | Type                                       | Required | default | Description |
-| -------------- | ------------------------------------------ | -------- | ------- | ----------- |
-| inputProps     | `HTMLProps<HTMLInputElement>`              |          |         |             |
-| label          | string, React.ReactNode                    |          |         |             |
-| type           | `InputTypes`                               |          |         |             |
-| required       | boolean                                    |          |         |             |
-| error          | string , boolean , React.ReactNode         |          |         |             |
-| hint           | string, React.ReactNode                    |          |         |             |
-| loading        | boolean                                    |          |         |             |
-| loadingType    | `LoadingType`                              |          |         |             |
-| placeholder    | string                                     |          |         |             |
-| tooltip        | `TooltipProps`                             |          |         |             |
-| size           | `SizeTypes`                                |          | medium  |             |
-| copyable       | `boolean or function or InputCopyableProp` |          |         |             |
-| labelClassName | string                                     |          |         |             |
+| Name                | Type                                          | Required | default | Description |
+| ------------------- | --------------------------------------------- | -------- | ------- | ----------- |
+| all `<input>` props | `React.InputHTMLAttributes<HTMLInputElement>` |          |         |             |
+| label               | `string, React.ReactNode`                     |          |         |             |
+| type                | `InputTypes`                                  |          |         |             |
+| required            | `boolean`                                     |          |         |             |
+| error               | `string , boolean , React.ReactNode`          |          |         |             |
+| hint                | `string, React.ReactNode`                     |          |         |             |
+| loading             | `boolean`                                     |          |         |             |
+| loadingType         | `LoadingType`                                 |          |         |             |
+| placeholder         | `string`                                      |          |         |             |
+| tooltip             | `TooltipProps`                                |          |         |             |
+| uiSize              | `SizeTypes`                                   |          | medium  |             |
+| copyable            | `boolean or function or InputCopyableProp`    |          |         |             |
+| labelClassName      | `string`                                      |          |         |             |
 
 ### Textarea
 
-| Name              | Type                                       | Required | default | Description |
-| ----------------- | ------------------------------------------ | -------- | ------- | ----------- |
-| id                | string                                     |          |         |             |
-| textareaProps     | `HTMLProps<HTMLTextAreaElement>`           |          |         |             |
-| textareaClassName | string                                     |          |         |             |
-| placeholder       | string                                     |          |         |             |
-| label             | string, React.ReactNode                    |          |         |             |
-| required          | boolean                                    |          |         |             |
-| error             | string, boolean, React.ReactNode           |          |         |             |
-| hint              | string , React.ReactNode                   |          |         |             |
-| type              | `InputTypes`                               |          |         |             |
-| tooltip           | `TooltipProps`                             |          |         |             |
-| size              | `SizeTypes`                                |          | medium  |             |
-| copyable          | `boolean or function or InputCopyableProp` |          |         |             |
-| labelClassName    | string                                     |          |         |             |
-| loading           | boolean                                    |          |         |             |
-| loadingType       | `LoadingType`                              |          |         |             |
+| Name | Type | Required | default | Description |
+| ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |=
+| all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` | | | |
+| textareaClassName | `string` | | | |
+| placeholder | `string` | | | |
+| label | `string, React.ReactNode` | | | |
+| required | `boolean` | | | |
+| error | `string, boolean, React.ReactNode` | | | |
+| hint | `string , React.ReactNode` | | | |
+| type | `InputTypes` | | | |
+| tooltip | `TooltipProps` | | | |
+| size | `SizeTypes` | | medium | |
+| copyable | `boolean or function or InputCopyableProp` | | | |
+| labelClassName | `string` | | | |
+| loading | `boolean` | | | |
+| loadingType | `LoadingType` | | | |
 
 ### Switcher
 
 | Name        | Type                       | Required | default | Description |
 | ----------- | -------------------------- | -------- | ------- | ----------- |
-| value       | boolean                    |          |         |             |
+| value       | `boolean`                  |          |         |             |
 | onChange    | `(value: boolean) => void` |          |         |             |
-| disabled    | boolean                    |          |         |             |
-| loading     | boolean                    |          |         |             |
+| disabled    | `boolean`                  |          |         |             |
+| loading     | `boolean`                  |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |
 | size        | `SizeTypes`                |          | medium  |             |
 
 ### Select
 
-| Name               | Type                                    | Required | Default | Description                                                                |
-| ------------------ | --------------------------------------- | -------- | ------- | -------------------------------------------------------------------------- |
-| `value`            | `T`                                     |          |         | The currently selected value.                                              |
-| `onChange`         | `(value: T or undefined) => void`       |          |         | Callback function triggered when the selected value changes.               |
-| `defaultValue`     | `T`                                     |          |         | The default value of the select component.                                 |
-| `options`          | `SelectOption<T, ET>[]`                 | ✔       |         | Array of options available for selection.                                  |
-| `className`        | `string`                                |          |         | Additional CSS classes for custom styling of the select component.         |
-| `buttonClassName`  | `string`                                |          |         | Additional CSS classes for custom styling of the select button.            |
-| `optionsClassName` | `string`                                |          |         | Additional CSS classes for custom styling of the options list.             |
-| `label`            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
-| `error`            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
-| `required`         | `boolean`                               |          |         | Indicates if the select component is required.                             |
-| `type`             | `SelectTypes`                           |          |         | The type of the select component (e.g., single select, multi-select).      |
-| `tooltip`          | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                      |
-| `hint`             | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                   |
-| `loading`          | `boolean`                               |          |         | Indicates if the select component is in a loading state.                   |
-| `loadingType`      | `LoadingType`                           |          |         | Type of loading indicator to display when the select component is loading. |
-| `emptyString`      | `string`                                |          |         | Text to display when there are no options available.                       |
-| `clearable`        | `boolean`                               |          |         | If true, allows the user to clear the selected value.                      |
-| `disabled`         | `boolean`                               |          |         | If true, disables the select component.                                    |
-| `size`             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
-| `onBlur`           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
-| `labelClassName`   | `string`                                |          |         | Additional CSS classes for custom label                                    |
+| Name             | Type                                    | Required | Default | Description                                                                |
+| ---------------- | --------------------------------------- | -------- | ------- | -------------------------------------------------------------------------- |
+| value            | `T`                                     |          |         | The currently selected value.                                              |
+| onChange         | `(value: T or undefined) => void`       |          |         | Callback function triggered when the selected value changes.               |
+| defaultValue     | `T`                                     |          |         | The default value of the select component.                                 |
+| options          | `SelectOption<T, ET>[]`                 | ✔       |         | Array of options available for selection.                                  |
+| className        | `string`                                |          |         | Additional CSS classes for custom styling of the select component.         |
+| buttonClassName  | `string`                                |          |         | Additional CSS classes for custom styling of the select button.            |
+| optionsClassName | `string`                                |          |         | Additional CSS classes for custom styling of the options list.             |
+| label            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
+| error            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
+| required         | `boolean`                               |          |         | Indicates if the select component is required.                             |
+| type             | `SelectTypes`                           |          |         | The type of the select component (e.g., single select, multi-select).      |
+| tooltip          | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                      |
+| hint             | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                   |
+| loading          | `boolean`                               |          |         | Indicates if the select component is in a loading state.                   |
+| loadingType      | `LoadingType`                           |          |         | Type of loading indicator to display when the select component is loading. |
+| emptyString      | `string`                                |          |         | Text to display when there are no options available.                       |
+| clearable        | `boolean`                               |          |         | If true, allows the user to clear the selected value.                      |
+| disabled         | `boolean`                               |          |         | If true, disables the select component.                                    |
+| size             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
+| onBlur           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
+| labelClassName   | `string`                                |          |         | Additional CSS classes for custom label                                    |
 
 ### Skeleton
 
@@ -322,29 +322,29 @@ function App() {
 
 ### SimpleTable
 
-| Name               | Type   | Required | default | Description |
-| ------------------ | ------ | -------- | ------- | ----------- |
-| className          | string |          |         |             |
-| containerClassName | string |          |         |             |
+| Name               | Type     | Required | default | Description |
+| ------------------ | -------- | -------- | ------- | ----------- |
+| className          | `string` |          |         |             |
+| containerClassName | `string` |          |         |             |
 
 #### SimpleTable.Row
 
-| Name              | Type    | Required | default | Description |
-| ----------------- | ------- | -------- | ------- | ----------- |
-| className         | string  |          |         |             |
-| withoutHoverStyle | boolean |          |         |             |
+| Name              | Type      | Required | default | Description |
+| ----------------- | --------- | -------- | ------- | ----------- |
+| className         | `string`  |          |         |             |
+| withoutHoverStyle | `boolean` |          |         |             |
 
 #### SimpleTable.TD
 
-| Name      | Type   | Required | default | Description |
-| --------- | ------ | -------- | ------- | ----------- |
-| className | string |          |         |             |
+| Name      | Type     | Required | default | Description |
+| --------- | -------- | -------- | ------- | ----------- |
+| className | `string` |          |         |             |
 
 #### SimpleTable.TH
 
-| Name  | Type              | Required | default | Description |
-| ----- | ----------------- | -------- | ------- | ----------- |
-| label | string, ReactNode |          |         |             |
+| Name  | Type                | Required | default | Description |
+| ----- | ------------------- | -------- | ------- | ----------- |
+| label | `string, ReactNode` |          |         |             |
 
 ### EmptyState
 
@@ -352,22 +352,22 @@ function App() {
 | ------------- | ----------- | -------- | ----------------------- | ----------- |
 | text          | `ReactNode` |          | No data                 |             |
 | icon          | `ReactNode` |          | PRESENTED_IMAGE_DEFAULT |             |
-| className     | string      |          |                         |             |
-| iconClassName | string      |          |                         |             |
-| textClassName | string      |          |                         |             |
-| usingIcon     | boolean     |          | true                    |             |
-| usingText     | boolean     |          | true                    |             |
+| className     | `string`    |          |                         |             |
+| iconClassName | `string`    |          |                         |             |
+| textClassName | `string`    |          |                         |             |
+| usingIcon     | `boolean`   |          | true                    |             |
+| usingText     | `boolean`   |          | true                    |             |
 
 ### Divider
 
 | Name          | Type               | Required | default | Description |
 | ------------- | ------------------ | -------- | ------- | ----------- |
 | uiType        | `DividerTypes`     |          |         |             |
-| className     | string             |          |         |             |
+| className     | `string`           |          |         |             |
 | orientation   | `OrientationTypes` |          |         |             |
-| text          | string             |          |         |             |
-| textClassName | string             |          |         |             |
-| usingText     | boolean            |          |         |             |
+| text          | `string`           |          |         |             |
+| textClassName | `string`           |          |         |             |
+| usingText     | `boolean`          |          |         |             |
 
 ### Modal
 
@@ -387,43 +387,43 @@ function App() {
 | Name            | Type                | Required | default | Description |
 | --------------- | ------------------- | -------- | ------- | ----------- |
 | menu            | `DropdownElement[]` |          |         |             |
-| title           | string              |          |         |             |
+| title           | `string`            |          |         |             |
 | type            | `DropdownTypes`     |          |         |             |
-| buttonClassName | string              |          |         |             |
-| itemsClassName  | string              |          |         |             |
+| buttonClassName | `string`            |          |         |             |
+| itemsClassName  | `string`            |          |         |             |
 
 ### SecureCopy
 
 | Name          | Type          | Required | default | Description |
 | ------------- | ------------- | -------- | ------- | ----------- |
-| text          | string        | ✔       |         |             |
-| className     | string        |          |         |             |
+| text          | `string`      | ✔       |         |             |
+| className     | `string`      |          |         |             |
 | icon          | `ReactNode`   |          |         |             |
 | type          | `ActionTypes` |          |         |             |
-| textClassName | string        |          |         |             |
-| iconClassName | string        |          |         |             |
-| showText      | boolean       |          |         |             |
-| size          | `SizeTypes`   |          | medium  |             |
+| textClassName | `string`      |          |         |             |
+| iconClassName | `string`      |          |         |             |
+| showText      | `boolean`     |          |         |             |
+| uiSize        | `SizeTypes`   |          | medium  |             |
 
 ### Accordion
 
 | Name            | Type              | Required | default | Description |
 | --------------- | ----------------- | -------- | ------- | ----------- |
 | items           | `AccordionItem[]` |          |         |             |
-| panelClassNames | string            |          |         |             |
-| loading         | boolean           |          |         |             |
+| panelClassNames | `string`          |          |         |             |
+| loading         | `boolean`         |          |         |             |
 
 ### Pagination
 
 | Name         | Type                                      | Required | default | Description |
 | ------------ | ----------------------------------------- | -------- | ------- | ----------- |
-| limit        | number                                    |          |         |             |
-| offset       | number                                    |          |         |             |
-| total        | number                                    |          |         |             |
-| siblingCount | number                                    |          |         |             |
+| limit        | `number`                                  |          |         |             |
+| offset       | `number`                                  |          |         |             |
+| total        | `number`                                  |          |         |             |
+| siblingCount | `number`                                  |          |         |             |
 | onPageChange | `(offset: number, limit: number) => void` |          |         |             |
-| className    | string                                    |          |         |             |
-| loading      | boolean                                   |          |         |             |
+| className    | `string`                                  |          |         |             |
+| loading      | `boolean`                                 |          |         |             |
 
 ### PanelLayout
 
@@ -434,8 +434,13 @@ function App() {
 | `renderSidebar`                 | `({ segments, isShowSidebar, type }: { segments: string[], isShowSidebar: boolean, type: PanelLayoutTypes }) => React.ReactNode`                                         |          |         | Function to render the sidebar, receiving segments, sidebar visibility state, and layout type. |
 | `renderHeader`                  | `({ handleHideSidebar, handleShowSidebar, isShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void, isShowSidebar: boolean }) => React.ReactNode` |          |         | Function to render the header, receiving callbacks to show or hide the sidebar.                |
 | `children`                      | `React.ReactNode`                                                                                                                                                        |          |         | The content to be displayed within the layout's main area.                                     |
-| `enableGoToTopAfterScroll`      | `boolean`                                                                                                                                                                |          |         | Showing a button to go to the top of the page after a little scrolling                         |
-| `enableGoToTopAfterChangeRoute` | `boolean`                                                                                                                                                                |          |         | Scrolling to the top after changing pathname prop.                                             |
+| `enableGoToTopAfterScroll`      | `boolean`                                                                                                                                                                |          | true    | Showing a button to go to the top of the page after a little scrolling                         |
+| `enableGoToTopAfterChangeRoute` | `boolean`                                                                                                                                                                |          | true    | Scrolling to the top after changing pathname prop.                                             |
+| `globalLoading`                 | `boolean`                                                                                                                                                                |          | false   | Controls whether the global loading state is active.                                           |
+| `globalLoadingContent`          | `React.ReactNode`                                                                                                                                                        |          |         | Custom content to display within the global loading overlay.                                   |
+| `contentLoading`                | `boolean`                                                                                                                                                                |          | false   | Controls whether the content loading state is active.                                          |
+| `contentLoadingContent`         | `React.ReactNode`                                                                                                                                                        |          |         | Custom content to display within the content loading overlay.                                  |
+| `loadingsContainerClassName`    | `string`                                                                                                                                                                 |          |         | A custom CSS class applied to the container of both global and content loading overlays.       |
 
 ### PanelSidebar
 
@@ -457,90 +462,102 @@ function App() {
 
 ### Checkbox
 
-| Name           | Type                             | Required | default | Description |
-| -------------- | -------------------------------- | -------- | ------- | ----------- |
-| id             | string                           |          |         |             |
-| inputprops     | `HTMLProps<HTMLInputElement>`    |          |         |             |
-| label          | string, React.ReactNode          |          |         |             |
-| required       | boolean                          |          | false   |             |
-| error          | string, boolean, React.ReactNode |          |         |             |
-| value          | boolean                          |          |         |             |
-| onChange       | `() => void`                     |          |         |             |
-| disabled       | boolean                          |          |         |             |
-| labelClassName | string                           |          |         |             |
+| Name           | Type                               | Required | default | Description |
+| -------------- | ---------------------------------- | -------- | ------- | ----------- |
+| label          | `string, React.ReactNode`          |          |         |             |
+| required       | `boolean`                          |          | false   |             |
+| error          | `string, boolean, React.ReactNode` |          |         |             |
+| value          | `boolean`                          |          |         |             |
+| onChange       | `() => void`                       |          |         |             |
+| disabled       | `boolean`                          |          |         |             |
+| labelClassName | `string`                           |          |         |             |
 
 ### Sidebar
 
-| Name          | Type                  | Required | Default | Description                                                     |
-| ------------- | --------------------- | -------- | ------- | --------------------------------------------------------------- |
-| `items`       | `SidebarItem[]`       | ✔       |         | List of items to be displayed in the sidebar.                   |
-| `segments`    | `string[]`            |          |         | Array of URL segments used to determine the active item.        |
-| `subItems`    | `SidebarItem[]`       |          |         | Additional items to be displayed below the main items.          |
-| `loading`     | `boolean`             |          |         | Indicates whether the sidebar is in a loading state.            |
-| `loadingMode` | `SidebarLoadingModes` |          |         | Determines the visual loading state (e.g., spinner, skeleton).  |
-| `type`        | `PanelLayoutTypes`    |          |         | Specifies the sidebar layout type (e.g., 'normal' or 'mini').   |
-| `children`    | `React.ReactNode`     |          |         | Additional content to be rendered at the bottom of the sidebar. |
+| Name        | Type                  | Required | Default | Description                                                     |
+| ----------- | --------------------- | -------- | ------- | --------------------------------------------------------------- |
+| items       | `SidebarItem[]`       | ✔       |         | List of items to be displayed in the sidebar.                   |
+| segments    | `string[]`            |          |         | Array of URL segments used to determine the active item.        |
+| subItems    | `SidebarItem[]`       |          |         | Additional items to be displayed below the main items.          |
+| loading     | `boolean`             |          |         | Indicates whether the sidebar is in a loading state.            |
+| loadingMode | `SidebarLoadingModes` |          |         | Determines the visual loading state (e.g., spinner, skeleton).  |
+| type        | `PanelLayoutTypes`    |          |         | Specifies the sidebar layout type (e.g., 'normal' or 'mini').   |
+| children    | `React.ReactNode`     |          |         | Additional content to be rendered at the bottom of the sidebar. |
 
 #### SidebarItem
 
-| Name              | Type                                                     | Required | Default | Description                                                          |
-| ----------------- | -------------------------------------------------------- | -------- | ------- | -------------------------------------------------------------------- |
-| `id`              | `string  or number`                                      | Yes      |         | Unique identifier for the sidebar item.                              |
-| `activeCondition` | `SidebarActiveItemCondition`                             |          |         | Condition to determine if the item is active.                        |
-| `serviceTypeId`   | `number`                                                 |          |         | Optional service type ID associated with the item.                   |
-| `label`           | `SidebarItemLabel`                                       |          |         | Label content for the sidebar item (can be text, node, or function). |
-| `link`            | `string`                                                 |          |         | Optional link associated with the item.                              |
-| `onClick`         | `(item?: SidebarItem) => void`                           |          |         | Click handler for the item.                                          |
-| `icon`            | `React.FunctionComponent<React.SVGProps<SVGSVGElement>>` |          |         | Icon component for the item.                                         |
-| `disabled`        | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
-| `testId`          | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
+| Name             | Type                                                     | Required | Default | Description                                                          |
+| ---------------- | -------------------------------------------------------- | -------- | ------- | -------------------------------------------------------------------- |
+| id               | `string  or number`                                      | Yes      |         | Unique identifier for the sidebar item.                              |
+| activeConditions | `SidebarActiveItemCondition[]`                           |          |         | Conditions to determine if the item is active.                       |
+| label            | `SidebarItemLabel`                                       |          |         | Label content for the sidebar item (can be text, node, or function). |
+| link             | `string`                                                 |          |         | Optional link associated with the item.                              |
+| onClick          | `(item?: SidebarItem) => void`                           |          |         | Click handler for the item.                                          |
+| icon             | `React.FunctionComponent<React.SVGProps<SVGSVGElement>>` |          |         | Icon component for the item.                                         |
+| disabled         | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
+| children         | `SidebarItem[]`                                          |          |         | Nested items to be displayed below the current item                  |
+| testId           | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
 
 ### JsonViewer
 
 | Name      | Type              | Required | default | Description |
 | --------- | ----------------- | -------- | ------- | ----------- |
-| value     | object or null    |          | {}      |             |
-| collapsed | number or boolean |          |         |             |
+| value     | `object, null`    |          | {}      |             |
+| collapsed | `number, boolean` |          |         |             |
 
 ### Tabs
 
 | Name           | Type         | Required | Default | Description |
 | -------------- | ------------ | -------- | ------- | ----------- |
 | options        | `TabOptions` |          |         |             |
-| selectedIndex  | number       |          |         |             |
+| selectedIndex  | `number`     |          |         |             |
 | onChange       | `() => void` |          |         |             |
-| useUrl         | boolean      |          |         |             |
-| listClassName  | string       |          |         |             |
-| panelClassName | string       |          |         |             |
-| tabType        | string       |          |         |             |
+| useUrl         | `boolean`    |          |         |             |
+| listClassName  | `string`     |          |         |             |
+| panelClassName | `string`     |          |         |             |
+| tabType        | `string`     |          |         |             |
 
 ### ThemeChanger , ThemeSwitcher
 
-| Name           | Type   | Required | default | Description |
-| -------------- | ------ | -------- | ------- | ----------- |
-| itemsClassName | string |          |         |             |
+| Name           | Type     | Required | default | Description |
+| -------------- | -------- | -------- | ------- | ----------- |
+| itemsClassName | `string` |          |         |             |
 
 ### Popover
 
 | Name           | Type                  | Required | default | Description |
 | -------------- | --------------------- | -------- | ------- | ----------- |
 | contentNode    | `React.ReactNode`     | ✔       |         |             |
-| `children`     | `React.ReactNode`     |          |         |             |
-| panelclassName | string                |          |         |             |
+| children       | `React.ReactNode`     |          |         |             |
+| panelclassName | `string`              |          |         |             |
 | panelStyle     | `React.CSSProperties` |          |         |             |
 
 ### Tag
 
-| Name        | Type                  | Required | Default | Description                                             |
-| ----------- | --------------------- | -------- | ------- | ------------------------------------------------------- |
-| `className` | `string`              |          |         | Additional class names to apply to the tag.             |
-| `color`     | `PresetColorNames`    |          |         | Color type of the tag (e.g., 'processing', 'success',). |
-| `style`     | `React.CSSProperties` |          |         | Inline styles for the tag.                              |
-| `children`  | `React.ReactNode`     |          |         | Content to be displayed inside the tag.                 |
-| `icon`      | `React.ReactNode`     |          |         | Icon to be displayed before the content.                |
-| `bordered`  | `boolean`             |          | `true`  | If false, the tag will not have a border.               |
-| `closable`  | `boolean`             |          | `false` | If true, the tag can be closed (disappears on click).   |
-| `onClose`   | `() => void`          |          |         | Callback function to be called when the tag is closed.  |
+| Name      | Type                  | Required | Default | Description                                             |
+| --------- | --------------------- | -------- | ------- | ------------------------------------------------------- |
+| className | `string`              |          |         | Additional class names to apply to the tag.             |
+| color     | `PresetColorNames`    |          |         | Color type of the tag (e.g., 'processing', 'success',). |
+| style     | `React.CSSProperties` |          |         | Inline styles for the tag.                              |
+| children  | `React.ReactNode`     |          |         | Content to be displayed inside the tag.                 |
+| icon      | `React.ReactNode`     |          |         | Icon to be displayed before the content.                |
+| bordered  | `boolean`             |          | `true`  | If false, the tag will not have a border.               |
+| closable  | `boolean`             |          | `false` | If true, the tag can be closed (disappears on click).   |
+| onClose   | `() => void`          |          |         | Callback function to be called when the tag is closed.  |
+
+### CodeViewer
+
+| Name               | Type                  | Required | Default   | Description                                                                                                                      |
+| ------------------ | --------------------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| code               | `string`              | ✔       |           | The code to be displayed in the viewer.                                                                                          |
+| language           | `CodeViewerLanguages` |          |           | The programming language for syntax highlighting.                                                                                |
+| showLineNumbers    | `boolean`             |          | `false`   | If true, line numbers are displayed.                                                                                             |
+| wrapLongLines      | `boolean`             |          | `false`   | If true, long lines are wrapped instead of scrolling horizontally.                                                               |
+| bgTransparent      | `boolean`             |          | `true`    | If true, the background is set to transparent.                                                                                   |
+| startingLineNumber | `number`              |          |           | The line number to start counting from if `showLineNumbers` is true.                                                             |
+| theme              | `ThemeModes`          |          |           | The theme mode for syntax highlighting (`'light'` or `'dark'`). If not provided, `DjunoDesignProvider` will determine the theme. |
+| fontSize           | `string`              |          | `0.85rem` | The font size of the code.                                                                                                       |
+| `copyable`         | `CopyableProp`        |          |           | Enables the copy-to-clipboard feature. Can be customized with tooltips and icons.                                                |
 
 ## Contributor ✨
 

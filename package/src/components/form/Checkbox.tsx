@@ -32,7 +32,6 @@ import { InfoTooltip } from '../Tooltip'
  *
  * @param {object} props - Checkbox props.
  * @param {string} [props.id] - The unique identifier for the checkbox input element.
- * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - Additional HTML props to apply to the input element.
  * @param {React.ReactNode} [props.label] - The label to display next to the checkbox.
  * @param {boolean} [props.checked] - Specifies if the checkbox is initially checked.
  * @param {Function} [props.onChangeCheckbox] - Callback function called when the checkbox state changes.
@@ -58,7 +57,6 @@ import { InfoTooltip } from '../Tooltip'
  *   return (
  *     <Checkbox
  *       id="checkbox-id"
- *       inputProps={{ 'aria-label': 'custom-checkbox' }}
  *       label="Checkbox Label"
  *       value={false}
  *       required={true}
@@ -71,7 +69,6 @@ import { InfoTooltip } from '../Tooltip'
  */
 const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   id,
-  inputProps,
   label,
   error,
   required,

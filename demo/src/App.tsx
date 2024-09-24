@@ -34,6 +34,8 @@ import {
   Texrarea,
   ThemeChanger,
   ThemeSwitcher,
+  Tag,
+  CodeViewer,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -103,6 +105,10 @@ function App() {
 
   const [open, setOpen] = useState<boolean>(false);
   const handleToggle = () => setOpen(!open);
+
+  //panelLayout
+  const [globalLoading, setGlobalLoading] = useState(false);
+  const [contentLoading, setContentLoading] = useState(false);
 
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
@@ -294,7 +300,96 @@ function App() {
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
-      <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+      <Flex
+        direction="col"
+        className="gap-7 mx-auto min-w-[500px] max-w-2xl my-10 "
+      >
+        <Card title="CodeViewer">
+          <Flex direction="col" className="gap-10 w-full">
+            <Flex direction="col" className="w-full">
+              <Divider text="default code view" usingText={true} />
+              <CodeViewer
+                copyable
+                language="javascript"
+                code={`<Popover
+  contentNode={<Input value="djuno-design" />}
+  panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
+  panelStyle={{}}
+  >
+    <div className="w-40">
+        <Button onClick={handleToggle}>Popover</Button>
+    </div>
+</Popover>`}
+              />
+            </Flex>
+
+            <Flex direction="col" className="w-full">
+              <Divider text="manual theme" usingText={true} />
+              <CodeViewer
+                theme="dark"
+                language="shell"
+                copyable
+                code={`yarn add djuno-design --save`}
+              />
+            </Flex>
+
+            <Flex direction="col" className="w-full">
+              <Divider text="transparent background" usingText={true} />
+              <CodeViewer
+                language="javascript"
+                wrapLongLines
+                showLineNumbers
+                bgTransparent
+                code={`import React from "react";
+import uniquePropHOC from "./lib/unique-prop-hoc";
+
+// this comment is here to demonstrate an extremely long line length, well beyond what you should probably allow in your own code, though sometimes you'll be highlighting code you can't refactor, which is unfortunate but should be handled gracefully
+
+class Expire extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { component: props.children }
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                component: null
+            });
+        }, this.props.time || this.props.seconds * 1000);
+    }
+    render() {
+        return this.state.component;
+    }
+}
+
+export default uniquePropHOC(["time", "seconds"])(Expire);`}
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card title="Tag">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-2 w-full">
+              <Tag>Default Tag</Tag>
+              <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
+              <Tag closable>Closable Tag</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag color="processing">processing</Tag>
+              <Tag color="success">success</Tag>
+              <Tag color="error">error</Tag>
+              <Tag color="warning">warning</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag bordered={false}>borderless tag</Tag>
+              <Tag color="processing" bordered={false}>
+                borderless tag
+              </Tag>
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Checkbox">
           <Flex direction="col" className="gap-5">
             <Flex className="gap-5 w-full">
@@ -358,7 +453,7 @@ function App() {
           </Flex>
         </Card>
         <Card title="Popover">
-          <Flex direction="col" className="gap-5 w-full  mb-10">
+          <Flex direction="col" className="gap-5 w-full mb-10">
             <Popover
               contentNode={<Input value="djuno-design" />}
               panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
@@ -650,12 +745,26 @@ function App() {
         <Card
           title="Layout"
           description="PanelLayout - PanelSidebar - PanelHeader"
+          setting={
+            <Flex items="center" className="gap-4">
+              <Flex items="center" className="gap-1">
+                <Text size="xs">global loading?</Text>
+                <Switcher onChange={setGlobalLoading} value={globalLoading} />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">content loading?</Text>
+                <Switcher onChange={setContentLoading} value={contentLoading} />
+              </Flex>
+            </Flex>
+          }
         >
           {/* <div className=""> */}
           <PanelLayout
             type="mini"
             pathname="/"
             style={{ height: 400 }}
+            globalLoading={globalLoading}
+            contentLoading={contentLoading}
             className="w-full border border-slate-500 overflow-hidden"
             renderSidebar={({ segments, ...sidebarProps }) => (
               <PanelSidebar
@@ -922,7 +1031,7 @@ function App() {
 
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="small" uiSize="small" />
               <Input label="medium" uiSize="medium" />
               <Input label="large" uiSize="large" />

@@ -24,6 +24,8 @@ import { useShow } from '../../hooks/useShow'
 import { PanelLayoutProps } from '../../types/IPanelLayouts'
 import Typography from '../Typography'
 import { AnimatePresence, motion } from 'framer-motion'
+import Loading from '../Loading'
+import Flex from '../Flex'
 
 /**
  * PanelLayout component.
@@ -38,6 +40,11 @@ import { AnimatePresence, motion } from 'framer-motion'
  * @param {({ handleHideSidebar, handleShowSidebar,isShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void, isShowSidebar: boolean }) => React.ReactNode} [props.renderHeader] - A function to render the header, receiving callbacks to show or hide the sidebar.
  * @param {boolean} [props.enableGoToTopAfterScroll] - Showing a button to go to the top of the page after a little scrolling
  * @param {boolean} [props.enableGoToTopAfterChangeRoute] - Scrolling to the top after changing pathname prop.
+ * @param {boolean} [props.globalLoading] - Controls whether the global loading state is active.
+ * @param {boolean} [props.globalLoadingContent] - Custom content to display within the global loading overlay.
+ * @param {boolean} [props.contentLoading] - Controls whether the content loading state is active.
+ * @param {boolean} [props.contentLoadingContent] - Custom content to display within the content loading overlay.
+ * @param {boolean} [props.loadingsContainerClassName] - A custom CSS class applied to the container of both global and content loading overlays.
  * @param {React.ReactNode} [props.children] - The content to be displayed within the layout's main area.
  *
  * @returns {React.ReactNode} Rendered PanelLayout component.
@@ -68,6 +75,11 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   pathname,
   renderSidebar,
   renderHeader,
+  globalLoading = false,
+  contentLoading = false,
+  loadingsContainerClassName,
+  globalLoadingContent,
+  contentLoadingContent,
   enableGoToTopAfterScroll = true,
   enableGoToTopAfterChangeRoute = true,
 }) => {
@@ -130,7 +142,9 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
           'lg:w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
+        <div className='relative z-40 w-full'>
+          {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
+        </div>
         <div className='max-w-7xl mx-auto min-w-full h-[calc(100%-4rem)] overflow-auto' ref={containerRef}>
           {children}
         </div>
@@ -152,7 +166,50 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
             )}
           </AnimatePresence>
         )}
+        <AnimatePresence>
+          {contentLoading && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={cn(
+                'w-full h-full flex justify-center items-center absolute inset-0 bg-slate-50 dark:bg-dark-900 z-30',
+                loadingsContainerClassName,
+              )}
+            >
+              {contentLoadingContent ? (
+                contentLoadingContent
+              ) : (
+                <Flex direction='col' items='center' className='gap-1'>
+                  <Loading type='elastic' />
+                </Flex>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {globalLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={cn(
+              'w-full h-full flex justify-center items-center absolute inset-0 bg-slate-50 dark:bg-dark-900 z-50',
+              loadingsContainerClassName,
+            )}
+          >
+            {globalLoadingContent ? (
+              globalLoadingContent
+            ) : (
+              <Flex direction='col' items='center' className='gap-1'>
+                <Loading type='elastic' />
+                <Typography.Text size='xs'>Just a moment</Typography.Text>
+              </Flex>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

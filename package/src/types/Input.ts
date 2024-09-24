@@ -23,7 +23,7 @@ import { TooltipProps } from './Tooltip'
 import { LoadingType } from './Loading'
 import { CopyableOptionsProp, SizeTypes } from '.'
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string | React.ReactNode
   loading?: boolean
   loadingType?: LoadingType
@@ -35,9 +35,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string | React.ReactNode | boolean
   hint?: string | React.ReactNode
   tooltip?: TooltipProps
-  uiSize?: SizeTypes
   AfterComponent?: React.ReactNode
-  copyable?: boolean | ((value: string | undefined) => string | number | null | undefined) | CopyableOptionsProp
+  copyable?: CopyableProp
+  uiSize?: SizeTypes
 }
+
+export type CopyableProp =
+  | boolean
+  | ((value: string | undefined) => string | number | null | undefined)
+  | CopyableOptionsProp
 
 export type InputTypes = 'default' | 'simple'

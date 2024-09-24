@@ -45,7 +45,7 @@ export const inputVariants = cva(
       },
       hasError: {
         yes: 'border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
-        no: 'dark:border-dark-2 dark:focus:border-slate-600 dark:text-slate-50 dark:placeholder-gray-500 border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-700 dark:focus:bg-dark-700 dark:focus:border-dark-600',
+        no: 'border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-800 dark:focus:bg-dark-700 dark:focus:border-dark-600 dark:text-slate-50 dark:placeholder-gray-500',
       },
       uiSize: {
         small: 'rounded-lg text-xs px-1',

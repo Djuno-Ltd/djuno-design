@@ -57,6 +57,7 @@ import JsonViewer from './components/JsonViewer'
 import Sidebar from './components/Sidebar'
 import ThemeChanger, { ThemeSwitcher } from './components/ThemeChanger'
 import Tag from './components/Tag'
+import CodeViewer from './components/CodeViewer'
 
 // export providers
 export * from './providers/DjunoDesignProvider'
@@ -113,4 +114,5 @@ export {
   ThemeChanger,
   ThemeSwitcher,
   Tag,
+  CodeViewer,
 }

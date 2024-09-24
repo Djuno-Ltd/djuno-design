@@ -160,6 +160,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
             readOnly={true}
             {...props}
           />
+          <Input value={text ? text : ''} readOnly={true} {...props} />
           <div className='select-none'>
             {copied ? (
               <CheckIcon // Show CheckIcon when copied
