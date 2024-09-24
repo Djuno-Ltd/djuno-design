@@ -31,7 +31,7 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   error?: string | boolean | React.ReactNode
   hint?: string | React.ReactNode
   tooltip?: TooltipProps
-  size?: SizeTypes
+  uiSize?: SizeTypes
   type?: InputTypes
   copyable?: boolean | ((value: string | undefined) => string | number | null | undefined) | CopyableOptionsProp
   loading?: boolean

@@ -24,6 +24,7 @@ import { copyToClipboard } from '../utils/copy'
 import Typography from './Typography'
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
+import { ReactComponent as CheckIcon } from '../assets/icons/check.svg'
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
 import Input, { inputVariants } from './form/Input'
 import { cva } from 'class-variance-authority'
@@ -82,22 +83,36 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   iconClassName,
   textClassName,
   type,
-  size,
+  uiSize,
+  copyable,
   ...props
 }) => {
   const [showText, setShowText] = React.useState(false)
 
+  const [copied, setCopied] = React.useState(false) // Add state for copy status
+
+  // Function to handle copying and icon change
+  const handleCopy = () => {
+    if (text) {
+      copyToClipboard(text) // Copy to clipboard
+      setCopied(true) // Set copied to true
+
+      // Reset the icon after a delay
+      setTimeout(() => setCopied(false), 2000) // Change back after 2 seconds
+    }
+  }
+
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('flex items-center gap-1', className, {})}>
+        <div className={cn('flex items-center gap-1', className)}>
           <div
             className={cn(
-              inputVariants({ size }),
+              inputVariants({ uiSize }),
               {
-                'h-7': size === 'small',
-                'h-9': size === 'medium' || size === undefined,
-                'h-11': size === 'large',
+                'h-7': uiSize === 'small',
+                'h-9': uiSize === 'medium' || uiSize === undefined,
+                'h-11': uiSize === 'large',
               },
               'relative overflow-hidden cursor-pointer text-sm dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap',
             )}
@@ -126,31 +141,36 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
           </div>
         </div>
       )}
+
       {type === 'copy' && (
         <div className={cn('flex items-center gap-1', className)}>
           <Input
             className={cn(
               inputVariants({
-                size,
+                uiSize,
               }),
               {
-                'h-7': size === 'small',
-                'h-9': size === 'medium' || size === undefined,
-                'h-11': size === 'large',
+                'h-7': uiSize === 'small',
+                'h-9': uiSize === 'medium' || uiSize === undefined,
+                'h-11': uiSize === 'large',
               },
               className,
             )}
-            inputProps={{
-              value: text ? text : '',
-              readOnly: true,
-              ...props,
-            }}
+            value={text || ''}
+            readOnly={true}
+            {...props}
           />
           <div className='select-none'>
-            <CopyIcon
-              onClick={() => copyToClipboard(text || '')}
-              className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
-            />
+            {copied ? (
+              <CheckIcon // Show CheckIcon when copied
+                className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
+              />
+            ) : (
+              <CopyIcon // Show CopyIcon initially
+                onClick={handleCopy}
+                className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
+              />
+            )}
           </div>
         </div>
       )}

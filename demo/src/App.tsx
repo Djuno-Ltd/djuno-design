@@ -360,13 +360,7 @@ function App() {
         <Card title="Popover">
           <Flex direction="col" className="gap-5 w-full  mb-10">
             <Popover
-              contentNode={
-                <Input
-                  inputProps={{
-                    value: "djuno-design",
-                  }}
-                />
-              }
+              contentNode={<Input value="djuno-design" />}
               panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
               panelStyle={{}}
             >
@@ -644,11 +638,7 @@ function App() {
                   label: "Filters",
                   panel: (
                     <div className="">
-                      <Input
-                        inputProps={{
-                          value: "djuno-design",
-                        }}
-                      />
+                      <Input value="djuno-design" />
                     </div>
                   ),
                 },
@@ -803,14 +793,14 @@ function App() {
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Flex items="end" className="gap-3 w-full flex ">
-              <SecureCopy text="Djuno Design" type="hide" size="small" />
-              <SecureCopy text="Djuno Design" type="hide" size="medium" />
-              <SecureCopy text="Djuno Design" type="hide" size="large" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="small" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="medium" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="large" />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex ">
-              <SecureCopy text="Djuno Design" type="copy" size="small" />
-              <SecureCopy text="Djuno Design" type="copy" size="medium" />
-              <SecureCopy text="Djuno Design" type="copy" size="large" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="small" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="medium" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="large" />
             </Flex>
           </Flex>
         </Card>
@@ -822,7 +812,7 @@ function App() {
             usingText={true}
           />
           <Flex direction="col" className="gap-5 w-full">
-            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+            <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
                 <Dropdown
                   title="djuno Design"
@@ -853,7 +843,7 @@ function App() {
             usingText={true}
           />
           <Flex direction="col" className="gap-5 w-full">
-            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+            <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
                 <Dropdown
                   title="djuno Design"
@@ -932,10 +922,10 @@ function App() {
 
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex ">
-              <Input label="small" size="small" />
-              <Input label="medium" size="medium" />
-              <Input label="large" size="large" />
+            <Flex items="end" className="gap-3 w-full flex">
+              <Input label="small" uiSize="small" />
+              <Input label="medium" uiSize="medium" />
+              <Input label="large" uiSize="large" />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex ">
               <Input label="loading" loading loadingType="elastic" />
@@ -944,20 +934,17 @@ function App() {
               <Input
                 label="copyable"
                 copyable={(v) => `Hi ${v}`}
-                inputProps={{
-                  value: "djuno-design",
-                }}
+                value="djuno-design"
               />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="error"
                 loadingType="elastic"
-                inputProps={{
-                  value: inputValue,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setInputValue(e.target?.value),
-                }}
+                value={inputValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
                 error={inputValue === "" ? "Field is required" : ""}
               />
             </Flex>
@@ -1224,11 +1211,7 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState
-              text="Empty state"
-              usingIcon={false}
-              className="min-h-[100px]"
-            />
+            <EmptyState text="Empty state" usingIcon={false} />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
@@ -1236,7 +1219,7 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState usingIcon={false} className="min-h-[100px]" />
+            <EmptyState usingIcon={false} />
           </Flex>
           <Divider
             text="Empty state without text"

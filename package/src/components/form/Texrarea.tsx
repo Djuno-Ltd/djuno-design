@@ -24,7 +24,9 @@ import Typography from '../Typography'
 import { InfoTooltip } from '../Tooltip'
 import { copyToClipboard } from '../../utils/copy'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
+import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import { TextareaProps } from '../../types'
+import { Tooltip } from 'react-tooltip'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation and additional styling options.
@@ -66,6 +68,91 @@ import { TextareaProps } from '../../types'
  * }
  */
 
+// const Textarea: React.FC<TextareaProps> = ({
+//   id,
+//   placeholder,
+//   className,
+//   label,
+//   error,
+//   required,
+//   hint,
+//   tooltip,
+//   size,
+//   type,
+//   copyable,
+//   ...props
+// }) => {
+//   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+
+//   const handleCopyToClipboard = () => {
+//     let textToCopy: string | number | null | undefined = ''
+//     const inputValue = textareaRef.current?.value
+
+//     if (typeof copyable === 'function') {
+//       textToCopy = copyable(inputValue)
+//     } else {
+//       textToCopy = inputValue
+//     }
+
+//     if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+//       copyToClipboard(textToCopy)
+//     }
+//   }
+
+//   return (
+//     <div className='flex flex-col'>
+//       <div
+//         className={cn('flex mb-1 items-center', {
+//           'justify-between': label,
+//           'justify-end': !label,
+//         })}
+//       >
+//         <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+//           {label && (
+//             <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+//               {label}
+//             </Typography.Text>
+//           )}
+//           {required && (
+//             <Typography.Text uiType='danger' className='h-5'>
+//               *
+//             </Typography.Text>
+//           )}
+//           <div className='flex items-center gap-1 !mt-3'>
+//             {tooltip && <InfoTooltip tooltip={tooltip} />}
+//             {typeof copyable !== 'undefined' && (
+//               <CopyIcon
+//                 onClick={handleCopyToClipboard}
+//                 className={cn(
+//                   'w-[18px] cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
+//                   { 'w-[15px]': size === 'small' },
+//                 )}
+//               />
+//             )}
+//           </div>
+//         </label>
+//         {hint && <span className='text-xs text-slate-500'>{hint}</span>}
+//       </div>
+
+//       <textarea
+//         id={id}
+//         ref={textareaRef}
+//         className={cn(
+//           inputVariants({
+//             type,
+//             hasError: error ? 'yes' : 'no',
+//             size,
+//             copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
+//           }),
+//           className,
+//         )}
+//         placeholder={placeholder}
+//       />
+
+//       <AnimatedFormError error={error} />
+//     </div>
+//   )
+// }
 const Textarea: React.FC<TextareaProps> = ({
   id,
   placeholder,
@@ -75,14 +162,43 @@ const Textarea: React.FC<TextareaProps> = ({
   required,
   hint,
   tooltip,
-  size,
+  uiSize,
   type,
   copyable,
   ...props
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
-  const handleCopyToClipboard = () => {
+  const tooltipTexts: [string, string] = React.useMemo(() => {
+    const defaultTexts: [string, string] = ['Copy', 'Copied']
+    const emptyTexts: [string, string] = ['', '']
+
+    if (typeof copyable === 'object') {
+      if (copyable?.tooltips === false) {
+        return emptyTexts
+      } else if (copyable?.tooltips) {
+        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+      }
+    }
+
+    return defaultTexts
+  }, [copyable])
+
+  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
+    const defaultIcons: [React.ReactNode, React.ReactNode] = [
+      <CopyIcon key='copy-icon' />,
+      <CheckIcon key='copied-icon' />,
+    ]
+    if (typeof copyable === 'object' && copyable?.icon) {
+      return copyable.icon
+    }
+    return defaultIcons
+  }, [copyable])
+
+  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
+  const [icon, setIcon] = React.useState(icons[0])
+
+  const handleCopyToClipboard = React.useCallback(() => {
     let textToCopy: string | number | null | undefined = ''
     const inputValue = textareaRef.current?.value
 
@@ -93,16 +209,24 @@ const Textarea: React.FC<TextareaProps> = ({
     }
 
     if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy)
+      copyToClipboard(textToCopy.toString()).then(() => {
+        setTooltipText(tooltipTexts[1])
+        setIcon(icons[1])
+
+        setTimeout(() => {
+          setTooltipText(tooltipTexts[0])
+          setIcon(icons[0])
+        }, 2000)
+      })
     }
-  }
+  }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='dj-flex dj-flex-col'>
+    <div className='flex flex-col'>
       <div
-        className={cn('dj-flex mb-1 dj-items-center', {
-          'dj-justify-between': label,
-          'dj-justify-end': !label,
+        className={cn('flex mb-1 items-center', {
+          'justify-between': label,
+          'justify-end': !label,
         })}
       >
         <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
@@ -112,25 +236,29 @@ const Textarea: React.FC<TextareaProps> = ({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
-          <div className='dj-flex dj-items-center dj-gap-1'>
-            {tooltip && <InfoTooltip tooltip={tooltip} />}
-            {typeof copyable !== 'undefined' && (
-              <CopyIcon
-                onClick={handleCopyToClipboard}
-                className={cn(
-                  'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
-                  { 'dj-w-[15px]': size === 'small' },
-                )}
-              />
-            )}
-          </div>
+          {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='dj-text-xs dj-text-slate-500'>{hint}</span>}
+
+        {typeof copyable !== 'undefined' && (
+          <div className='flex items-center ml-2'>
+            <div
+              onClick={handleCopyToClipboard}
+              className={cn(
+                'cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
+                { 'w-[15px]': uiSize === 'small' },
+              )}
+            >
+              <Tooltip content={tooltipText}>{icon}</Tooltip>
+            </div>
+          </div>
+        )}
       </div>
+
+      {hint && <span className='text-xs text-slate-500'>{hint}</span>}
 
       <textarea
         id={id}
@@ -139,7 +267,7 @@ const Textarea: React.FC<TextareaProps> = ({
           inputVariants({
             type,
             hasError: error ? 'yes' : 'no',
-            size,
+            uiSize,
             copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
           }),
           className,

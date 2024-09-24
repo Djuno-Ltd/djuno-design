@@ -19,7 +19,7 @@
  */
 
 import { PropsWithChildren } from 'react'
-import { SizeTypes } from '.'
+import { CopyableOptionsProp, SizeTypes } from '.'
 
 export interface SecureCopyProps extends PropsWithChildren {
   text: string
@@ -28,7 +28,8 @@ export interface SecureCopyProps extends PropsWithChildren {
   iconClassName?: string
   showText?: boolean
   type?: ActionTypes
-  size?: SizeTypes
+  uiSize?: SizeTypes
+  copyable?: boolean | ((value: string | undefined) => string | number | null | undefined) | CopyableOptionsProp
 }
 
 export type ActionTypes = 'copy' | 'hide'
