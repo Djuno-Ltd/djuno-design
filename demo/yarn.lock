@@ -3893,7 +3893,7 @@ dir-glob@^3.0.1:
     path-type "^4.0.0"
 
 "djuno-design@file:../package":
-  version "0.7.4"
+  version "0.7.5"
   resolved "file:../package"
 
 dlv@^1.1.3:
