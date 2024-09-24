@@ -30,7 +30,7 @@ import { ReactComponent as TooltipIcon } from './../assets/icons/question-mark-c
  * Define button variants using the `cva` utility function.
  * This function generates CSS classes for button styles based on specified variants.
  */
-const tooltipVariants = cva('text-white max-w-[250px] px-2 py-1 whitespace-normal z-40', {
+const tooltipVariants = cva('text-white max-w-[250px] !px-2 !py-1 !whitespace-normal z-40', {
   variants: {
     theme: {
       primary: '!bg-primary-500 dark:!bg-primary-400',
