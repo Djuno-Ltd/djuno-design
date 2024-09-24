@@ -52,7 +52,7 @@ import Loading from './Loading'
  * </SimpleTable>
  */
 // eslint-disable-next-line react/prop-types
-const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
+const SimpleTable: React.FC<React.PropsWithChildren<SimpletableProps>> & TableComponents = ({
   className,
   containerClassName,
   children,
@@ -92,8 +92,8 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
   return (
     <tr
       onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-3 ', {
-        'dark:hover:bg-dark-2 hover:bg-[#f8fafc] ':
+      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-850 ', {
+        'dark:hover:bg-dark-800 hover:bg-[#f8fafc] ':
           (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
         'dark:!bg-white/10 !bg-[#eff5fe] ': selected,
         'cursor-not-allowed': disabled,
