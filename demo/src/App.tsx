@@ -106,10 +106,14 @@ function App() {
   const [open, setOpen] = useState<boolean>(false);
   const handleToggle = () => setOpen(!open);
 
+  //panelLayout
+  const [globalLoading, setGlobalLoading] = useState(false);
+  const [contentLoading, setContentLoading] = useState(false);
+
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
-  const [pathname, setPathname] = useState<string>("/item1");
+  const [pathname, setPathname] = useState<string>("/sub-item1");
   const handleTogleSidebarLoading = () => {
     setSidebarLoading((prev) => !prev);
   };
@@ -117,58 +121,70 @@ function App() {
     setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
   };
   const handleChangePathname = () => {
-    setPathname((prev) => (prev === "/item1" ? "/item2-hi/item2-1" : "/item1"));
+    setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
   const sidebarItems: SidebarItem[] = [
     {
       id: 1,
       label: "item1",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item1",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item1",
+        },
+      ],
       icon: FaceSmile,
     },
     {
       id: 2,
       label: "item2",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item2",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item2",
+        },
+      ],
       children: [
         {
           id: "2-0",
           label: "item2-0",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item2-0",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-0",
+            },
+          ],
         },
         {
           id: "2-1",
           label: "item2-1",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item2-1",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-1",
+            },
+          ],
           children: [
             {
               id: "2-1-0",
               label: "item2-1-0",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-1-0",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-1-0",
+                },
+              ],
             },
             {
               id: "2-1-1",
               label: "item2-1-1",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-1-1",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-1-1",
+                },
+              ],
               children: [],
             },
           ],
@@ -176,26 +192,32 @@ function App() {
         {
           id: "2-2",
           label: "item2-2",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item2-2",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-2",
+            },
+          ],
           children: [
             {
               id: "2-2-0",
               label: "item2-2-0",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-2-0",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-2-0",
+                },
+              ],
             },
             {
               id: "2-2-1",
               label: "item2-2-1",
-              activeCondition: {
-                segmentIndex: 2,
-                activeString: "item2-2-1",
-              },
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-2-1",
+                },
+              ],
             },
           ],
         },
@@ -204,27 +226,60 @@ function App() {
     {
       id: 3,
       label: "item3",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item3",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item3",
+        },
+      ],
       link: "/item3",
       children: [
         {
           id: "3-0",
           label: "item3-0",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item3-0",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item3-0",
+            },
+          ],
         },
         {
           id: "3-1",
           label: "item3-1",
-          activeCondition: {
-            segmentIndex: 1,
-            activeString: "item3-1",
-          },
+          activeConditions: [
+            {
+              index: 1,
+              value: "item3-1",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const sidebarSubItems: SidebarItem[] = [
+    {
+      id: 1,
+      label: "item1",
+      activeConditions: [
+        {
+          index: 0,
+          value: "sub-item1",
+        },
+        {
+          index: 1,
+          value: undefined,
+        },
+      ],
+    },
+    {
+      id: 2,
+      label: "item2",
+      activeConditions: [
+        {
+          index: 1,
+          value: "sub-item2",
         },
       ],
     },
@@ -236,77 +291,78 @@ function App() {
     string[] | undefined
   >([selectOptions[0].value]);
 
+  const tabOptions = [
+    { label: "Tab 1", url: "/tab1" },
+    { label: "Tab 2", url: "/tab2" },
+    { label: "Tab 3", url: "/tab3" },
+  ];
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
-      <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+      <Flex
+        direction="col"
+        className="gap-7 mx-auto min-w-[500px] max-w-2xl my-10 "
+      >
         <Card title="CodeViewer">
-          <Flex direction="col" className="gap-5 w-full">
-            <Flex className="gap-2 w-full">
+          <Flex direction="col" className="gap-10 w-full">
+            <Flex direction="col" className="w-full">
+              <Divider text="default code view" usingText={true} />
               <CodeViewer
-                code={`        <Card title="Checkbox">
-          <Flex direction="col" className="gap-5">
-            <Flex className="gap-5 w-full">
-              <Flex direction="col">
-                <Checkbox
-                  label="Ckeckbox simple form"
-                  value={isChecked}
-                  onChange={setIsChecked}
-                />
-              </Flex>
+                copyable
+                language="javascript"
+                code={`<Popover
+  contentNode={<Input value="djuno-design" />}
+  panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
+  panelStyle={{}}
+  >
+    <div className="w-40">
+        <Button onClick={handleToggle}>Popover</Button>
+    </div>
+</Popover>`}
+              />
             </Flex>
 
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox disabled form"
-                value={isChecked}
-                onChange={setIsChecked}
-                disabled
+            <Flex direction="col" className="w-full">
+              <Divider text="manual theme" usingText={true} />
+              <CodeViewer
+                theme="dark"
+                language="shell"
+                copyable
+                code={`yarn add djuno-design --save`}
               />
             </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox required form"
-                value={isChecked}
-                onChange={setIsChecked}
-                required
-              />
-            </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with tooltip"
-                value={isChecked}
-                onChange={setIsChecked}
-                tooltip={{ content: "it's a tooltip" }}
-              />
-            </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with text error"
-                value={isChecked}
-                onChange={setIsChecked}
-                error="error"
-              />
-            </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with error"
-                value={isChecked}
-                onChange={setIsChecked}
-                error={true}
-              />
-            </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with custom label"
-                value={isChecked}
-                onChange={setIsChecked}
-                labelClassName="text-green-500 font-bold"
-              />
-            </Flex>
-          </Flex>
-        </Card>`}
-                language="tsx"
+
+            <Flex direction="col" className="w-full">
+              <Divider text="transparent background" usingText={true} />
+              <CodeViewer
+                language="javascript"
+                wrapLongLines
+                showLineNumbers
+                bgTransparent
+                code={`import React from "react";
+import uniquePropHOC from "./lib/unique-prop-hoc";
+
+// this comment is here to demonstrate an extremely long line length, well beyond what you should probably allow in your own code, though sometimes you'll be highlighting code you can't refactor, which is unfortunate but should be handled gracefully
+
+class Expire extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { component: props.children }
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                component: null
+            });
+        }, this.props.time || this.props.seconds * 1000);
+    }
+    render() {
+        return this.state.component;
+    }
+}
+
+export default uniquePropHOC(["time", "seconds"])(Expire);`}
               />
             </Flex>
           </Flex>
@@ -397,15 +453,9 @@ function App() {
           </Flex>
         </Card>
         <Card title="Popover">
-          <Flex direction="col" className="gap-5 w-full  mb-10">
+          <Flex direction="col" className="gap-5 w-full mb-10">
             <Popover
-              contentNode={
-                <Input
-                  inputProps={{
-                    value: "djuno-design",
-                  }}
-                />
-              }
+              contentNode={<Input value="djuno-design" />}
               panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
               panelStyle={{}}
             >
@@ -456,6 +506,9 @@ function App() {
               tabType="default"
             />
           </Flex>
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs options={tabOptions} selectedIndex={0} useUrl={true} />
+          </Flex>
         </Card>
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
@@ -471,7 +524,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
               hint="Djuno Design"
             />
           </Flex>
@@ -482,7 +534,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{}}
             />
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
@@ -493,13 +544,11 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{}}
               loading
               loadingType="elastic"
             />
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Input label="loading" loading loadingType="elastic" />
-            </Flex>
+
+            <Input label="loading" loading loadingType="elastic" />
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
             Replace copy text.:
@@ -508,7 +557,6 @@ function App() {
             <Texrarea
               label="Textarea"
               placeholder=""
-              textareaProps={{}}
               tooltip={{ content: "test" }}
             />
             <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
@@ -650,7 +698,7 @@ function App() {
 
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <div className="flex justify-end mt-3">
+            <div className="flex  mt-3">
               <Pagination
                 limit={3}
                 offset={offset}
@@ -658,7 +706,18 @@ function App() {
                 siblingCount={1}
                 onPageChange={handlePageChange}
                 loading={false}
-                className="my-pagination-class"
+              />
+            </div>
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex  mt-3">
+              <Pagination
+                limit={5}
+                offset={0}
+                total={100}
+                siblingCount={2}
+                onPageChange={handlePageChange}
+                loading={false}
               />
             </div>
           </Flex>
@@ -674,11 +733,7 @@ function App() {
                   label: "Filters",
                   panel: (
                     <div className="">
-                      <Input
-                        inputProps={{
-                          value: "djuno-design",
-                        }}
-                      />
+                      <Input value="djuno-design" />
                     </div>
                   ),
                 },
@@ -690,12 +745,26 @@ function App() {
         <Card
           title="Layout"
           description="PanelLayout - PanelSidebar - PanelHeader"
+          setting={
+            <Flex items="center" className="gap-4">
+              <Flex items="center" className="gap-1">
+                <Text size="xs">global loading?</Text>
+                <Switcher onChange={setGlobalLoading} value={globalLoading} />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">content loading?</Text>
+                <Switcher onChange={setContentLoading} value={contentLoading} />
+              </Flex>
+            </Flex>
+          }
         >
           {/* <div className=""> */}
           <PanelLayout
             type="mini"
             pathname="/"
             style={{ height: 400 }}
+            globalLoading={globalLoading}
+            contentLoading={contentLoading}
             className="w-full border border-slate-500 overflow-hidden"
             renderSidebar={({ segments, ...sidebarProps }) => (
               <PanelSidebar
@@ -727,6 +796,7 @@ function App() {
 
         <Card
           title="Sidebar"
+          description={`pathname: ${pathname}`}
           setting={
             <Flex items="center" className="gap-4">
               <Flex items="center" className="gap-1">
@@ -791,9 +861,11 @@ function App() {
                   <Sidebar
                     type={type}
                     items={sidebarItems}
+                    subItems={sidebarSubItems}
                     segments={segments}
                     loading={sidebarLoading}
                     loadingMode="skeleton"
+                    navItemHeight={30}
                   />
                 </PanelSidebar>
               )}
@@ -829,10 +901,16 @@ function App() {
         </Card>
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="copy" />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <SecureCopy text="Djuno Design" type="hide" uiSize="small" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="medium" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="large" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <SecureCopy text="Djuno Design" type="copy" uiSize="small" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="medium" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="large" />
+            </Flex>
           </Flex>
         </Card>
 
@@ -863,9 +941,7 @@ function App() {
                   ]}
                   type="default"
                 >
-                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                    Djuno Design
-                  </div>
+                  Djuno Design
                 </Dropdown>
               </div>
             </div>
@@ -896,9 +972,7 @@ function App() {
                   ]}
                   type="simple"
                 >
-                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                    Djuno Design
-                  </div>
+                  Djuno Design
                 </Dropdown>
               </div>
             </div>
@@ -957,36 +1031,33 @@ function App() {
 
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Input label="small" size="small" />
-              <Input label="medium" size="medium" />
-              <Input label="large" size="large" />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input label="small" uiSize="small" />
+              <Input label="medium" uiSize="medium" />
+              <Input label="large" uiSize="large" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="loading" loading loadingType="elastic" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="copyable"
                 copyable={(v) => `Hi ${v}`}
-                inputProps={{
-                  value: "djuno-design",
-                }}
+                value="djuno-design"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="error"
                 loadingType="elastic"
-                inputProps={{
-                  value: inputValue,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setInputValue(e.target?.value),
-                }}
+                value={inputValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
                 error={inputValue === "" ? "Field is required" : ""}
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="Input"
                 copyable={{
@@ -998,10 +1069,10 @@ function App() {
                 }}
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="Input" tooltip={{ content: "I'm a tooltip" }} />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="Input with custom label"
                 labelClassName="text-green-500 font-bold"
@@ -1012,7 +1083,7 @@ function App() {
 
         <Card title="Select">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="small"
                 size="small"
@@ -1033,7 +1104,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="loading"
                 loading
@@ -1041,7 +1112,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="clear"
                 clearable
@@ -1054,10 +1125,10 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select label="empty" options={[]} className="w-[200px]" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="tooltip"
                 tooltip={{ content: "This is a tooltip", clickable: true }}
@@ -1065,16 +1136,8 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Select
-                label="error"
-                error="Field is required"
-                required
-                options={[]}
-                className="w-[200px]"
-              />
-            </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="error"
                 error={true}
@@ -1082,7 +1145,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <MultiSelect
                 label="multi select"
                 clearable
@@ -1095,7 +1158,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="Select with custom label"
                 size="medium"
@@ -1121,7 +1184,7 @@ function App() {
           <Text strong size="sm">
             Simple table with data
           </Text>
-          <Flex className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
             <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
@@ -1136,13 +1199,18 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                 </SimpleTable.Row>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>
           </Flex>
           <Text strong size="sm">
             Simple table with data and dropdown
           </Text>
-          <Flex className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
             <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
@@ -1158,7 +1226,7 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                   <SimpleTable.TD>
-                    <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+                    <div className="h-full w-full inline-flex items-center  gap-1 px-4">
                       <div className=" flex justify-center items-center">
                         <Dropdown
                           title="djuno Design"
@@ -1178,9 +1246,7 @@ function App() {
                           ]}
                           type="simple"
                         >
-                          <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                            Djuno Design
-                          </div>
+                          Djuno Design
                         </Dropdown>
                       </div>
                     </div>
@@ -1202,7 +1268,7 @@ function App() {
                 </SimpleTable.Row>
               </SimpleTable.Head>
               <SimpleTable.Body>
-                <SimpleTable.Row>
+                <SimpleTable.Row withoutHoverStyle>
                   <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
                       <EmptyState
@@ -1254,7 +1320,11 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState text="Empty state" usingIcon={false} />
+            <EmptyState
+              text="Empty state"
+              usingIcon={false}
+              className="min-h-[100px]"
+            />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
@@ -1262,7 +1332,7 @@ function App() {
             usingText={true}
           />
           <Flex className="gap-3 w-full">
-            <EmptyState usingIcon={false} />
+            <EmptyState usingIcon={false} className="min-h-[100px]" />
           </Flex>
           <Divider
             text="Empty state without text"
@@ -1468,23 +1538,23 @@ function App() {
         </Card>
 
         <Card title="Flex">
-          <Flex direction="col" className="gap-2 dj-w-full">
-            <Flex items="center" className="gap-2 dj-w-full">
+          <Flex direction="col" className="gap-2 w-full">
+            <Flex items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="center" items="center" className="gap-2 dj-w-full">
+            <Flex justify="center" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="end" items="center" className="gap-2 dj-w-full">
+            <Flex justify="end" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex direction="col" items="start" className="gap-2 dj-w-full">
+            <Flex direction="col" items="start" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>

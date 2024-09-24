@@ -74,7 +74,7 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
   return (
     <div
       className={cn(
-        'dj-w-full dj-min-h-[150px] dj-flex dj-flex-col dj-gap-1 dj-justify-center dj-items-center dj-text-slate-400 dj-dark:text-gray-600',
+        'w-full  flex flex-col gap-1 justify-center items-center text-slate-400 dark:text-gray-600',
         className,
       )}
     >
@@ -87,11 +87,11 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
 }
 
 const SimpleIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxIcon className={cn('dj-w-14', className)} />
+  return <InboxIcon className={cn('w-14', className)} />
 }
 
 const DefaultIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxArrowIcon className={cn('dj-w-14', className)} />
+  return <InboxArrowIcon className={cn('w-14', className)} />
 }
 
 EmptyState.PRESENTED_IMAGE_SIMPLE = SimpleIcon

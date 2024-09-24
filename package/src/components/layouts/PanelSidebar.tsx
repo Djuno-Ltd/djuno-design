@@ -53,20 +53,18 @@ const PanelSidebar: React.FC<PanelSidebarProps> = ({ children, isShowSidebar, ty
   return (
     <div
       className={cn(
-        ' dj-bg-white dark:dj-bg-dark-900 md:dj-border-r dark:dj-border-dark-800 dj-h-full dj-absolute dj-border-r-2 dj-border-slate-200 dj-transition-all dj-duration-500 dj-ease-in-out dj-z-40',
+        ' bg-white dark:bg-dark-900 md:border-r dark:border-dark-800 h-full absolute border-r-2 border-slate-200 transition-all duration-500 ease-in-out z-40',
         {
-          'dj-w-[300px]': type === 'normal' || type === undefined,
-          'dj-w-[130px]': type === 'mini',
-          '-dj-left-[300px] lg:dj-left-0': !isShowSidebar && (type === 'normal' || type === undefined),
-          '-dj-left-[130px] lg:dj-left-0': !isShowSidebar && type === 'mini',
-          '!dj-left-0': isShowSidebar,
+          'w-[300px]': type === 'normal' || type === undefined,
+          'w-[130px]': type === 'mini',
+          '-left-[300px] lg:left-0': !isShowSidebar && (type === 'normal' || type === undefined),
+          '-left-[130px] lg:left-0': !isShowSidebar && type === 'mini',
+          '!left-0': isShowSidebar,
         },
       )}
     >
-      {sidebarHeader && (
-        <div className='dj-flex dj-w-full dj-justify-between dj-h-16 dj-items-center'>{sidebarHeader}</div>
-      )}
-      <div className='dj-flex dj-flex-col dj-flex-grow dj-justify-between dj-overflow-y-auto dj-w-full dj-transition-height dj-h-[calc(100vh-5rem)] dj-pb-3'>
+      {sidebarHeader && <div className='flex w-full justify-between h-16 items-center'>{sidebarHeader}</div>}
+      <div className='flex flex-col flex-grow justify-between overflow-y-auto w-full transition-height h-[calc(100%-4rem)] pb-3'>
         {children}
       </div>
     </div>

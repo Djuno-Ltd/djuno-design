@@ -36,31 +36,31 @@ import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
  * This function generates CSS classes for alert styles based on specified variants.
  */
 export const inputVariants = cva(
-  'dj-bg-secondary-100 focus:dj-ring-0 dj-text-sm dj-block dj-w-full dark:dj-bg-dark-800 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
+  'bg-secondary-100 focus:ring-0 text-sm block w-full dark:bg-dark-800 outline-none disabled:cursor-not-allowed disabled:bg-secondary-200 dark:disabled:bg-gray-700 dark:disabled:text-secondary-400 disabled:text-secondary-500 disabled:border-secondary-300 disabled:dark:border-gray-600',
   {
     variants: {
       type: {
-        simple: 'dj-text-secondary-600 dj-bg-transparent',
-        default: 'dj-border-2',
+        simple: 'text-secondary-600 bg-transparent',
+        default: 'border-2',
       },
       hasError: {
-        yes: 'dj-border dj-border-red-500 dj-text-red-900 dj-placeholder-red-700 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500',
-        no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200 dark:dj-border-dark-700 dark:focus:dj-bg-dark-700 dark:focus:dj-border-dark-600',
+        yes: 'border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
+        no: 'border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-800 dark:focus:bg-dark-700 dark:focus:border-dark-600 dark:text-slate-50 dark:placeholder-gray-500',
       },
-      size: {
-        small: 'dj-rounded-lg dj-text-xs dj-px-1',
-        medium: 'dj-rounded-lg dj-text-sm dj-px-2',
-        large: 'dj-rounded-xl dj-text-base dj-px-2',
+      uiSize: {
+        small: 'rounded-lg text-xs px-1',
+        medium: 'rounded-lg text-sm px-2',
+        large: 'rounded-xl text-base px-2',
       },
       copyable: {
-        yes: 'dj-pr-7',
+        yes: 'pr-7',
         no: '',
       },
     },
     defaultVariants: {
       type: 'default',
       hasError: 'no',
-      size: 'medium',
+      uiSize: 'medium',
       copyable: 'no',
     },
   },
@@ -71,18 +71,20 @@ export const inputVariants = cva(
  * This function generates CSS classes for input label styles based on specified variants.
  */
 
-export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj-whitespace-nowrap ', {
-  // dj-text-black/85 dark:dj-text-secondary-100
-  variants: {
-    hasError: {
-      yes: '!dj-text-red-700 dark:!dj-text-red-500',
-      no: '',
+export const labelVariants = cva(
+  'flex items-center gap-1 text-sm whitespace-nowrap text-black/85 dark:text-secondary-100',
+  {
+    variants: {
+      hasError: {
+        yes: '!text-red-700 dark:!text-red-500',
+        no: '',
+      },
+    },
+    defaultVariants: {
+      hasError: 'no',
     },
   },
-  defaultVariants: {
-    hasError: 'no',
-  },
-})
+)
 
 /**
  * Input component.
@@ -126,7 +128,6 @@ export const labelVariants = cva('dj-flex dj-items-center dj-gap-1 dj-text-sm dj
 
 const Input: React.FunctionComponent<InputProps> = ({
   label,
-  inputProps,
   className,
   labelClassName,
   loading,
@@ -137,14 +138,15 @@ const Input: React.FunctionComponent<InputProps> = ({
   hint,
   placeholder,
   tooltip,
-  size,
+  uiSize,
   AfterComponent,
   copyable,
+  ...props
 }) => {
   const id = uuid(10)
   const inputRef = React.useRef<HTMLInputElement>(null)
-  const value = inputProps?.value
-  const onChange = inputProps?.onChange
+  const value = props?.value
+  const onChange = props?.onChange
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -200,13 +202,13 @@ const Input: React.FunctionComponent<InputProps> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='dj-flex dj-flex-col'>
+    <div className='flex flex-col'>
       <div
-        className={cn('dj-flex dj-items-center dj-px-1', {
+        className={cn('flex items-center px-1', {
           [labelClassName || '']: labelClassName,
-          'dj-justify-between': label || required,
-          'dj-justify-end': !label && !required,
-          'dj-mb-0.5': label || required || tooltip || hint,
+          'justify-between': label || required,
+          'justify-end': !label && !required,
+          'mb-0.5': label || required || tooltip || hint,
         })}
       >
         <label
@@ -224,7 +226,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5 dj-ml-1'>
+            <Typography.Text uiType='danger' className='h-5 ml-1'>
               *
             </Typography.Text>
           )}
@@ -232,16 +234,16 @@ const Input: React.FunctionComponent<InputProps> = ({
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
 
-        {hint && <span className='dj-text-[11px] dj-text-slate-500'>{hint}</span>}
+        {hint && <span className='text-[11px] text-slate-500'>{hint}</span>}
       </div>
-      <div className='dj-w-full dj-relative dj-block dj-z-0'>
+      <div className='w-full relative block z-0'>
         {typeof copyable !== 'undefined' && !loading && (
-          <div className='dj-absolute dj-z-30 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2'>
+          <div className='absolute z-30 inset-y-0 end-0 flex items-center pe-2'>
             <div
               onClick={handleCopyToClipboard}
               className={cn(
-                'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
-                { 'dj-w-[15px]': size === 'small' },
+                'w-[18px] cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
+                { 'w-[15px]': uiSize === 'small' },
               )}
             >
               <Tooltip content={tooltipText}> {icon}</Tooltip>
@@ -251,31 +253,30 @@ const Input: React.FunctionComponent<InputProps> = ({
         <input
           id={id}
           ref={inputRef}
-          {...inputProps}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
               type,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
             {
-              'dj-h-7': size === 'small',
-              'dj-h-9': size === 'medium' || size === undefined,
-              'dj-h-11': size === 'large',
+              'h-7': uiSize === 'small',
+              'h-9': uiSize === 'medium' || uiSize === undefined,
+              'h-11': uiSize === 'large',
             },
             className,
           )}
           placeholder={placeholder}
         />
         {loading && (
-          <div className='dj-absolute dj-z-40 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2.5'>
+          <div className='absolute z-40 inset-y-0 end-0 flex items-center pe-2.5'>
             <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
           </div>
         )}
-        <div className='dj-absolute dj-inset-y-0 dj-end-0 dj-flex'>{AfterComponent}</div>
+        <div className='absolute inset-y-0 end-0 flex'>{AfterComponent}</div>
       </div>
       <AnimatedFormError error={error} />
     </div>
@@ -290,7 +291,7 @@ const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
         >
-          <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
+          <p className='mt-0.5 text-xs text-error dark:text-error px-1'>{error}</p>
         </motion.div>
       )}
     </AnimatePresence>

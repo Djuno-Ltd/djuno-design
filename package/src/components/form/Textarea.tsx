@@ -76,7 +76,6 @@ import Loading from '../Loading'
 
 const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   id,
-  textareaProps,
   placeholder,
   className,
   label,
@@ -84,7 +83,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   required,
   hint,
   tooltip,
-  size,
+  uiSize,
   type,
   copyable,
   loading,
@@ -147,11 +146,11 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='dj-flex dj-flex-col'>
+    <div className='flex flex-col'>
       <div
-        className={cn('dj-flex mb-1 dj-items-center', {
-          'dj-justify-between': label,
-          'dj-justify-end': !label,
+        className={cn('flex mb-1 items-center', {
+          'justify-between': label,
+          'justify-end': !label,
         })}
       >
         <label
@@ -169,39 +168,38 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
-          <div className='dj-flex dj-items-center dj-gap-1'>
+          <div className='flex items-center gap-1'>
             {tooltip && <InfoTooltip tooltip={tooltip} />}
             {typeof copyable !== 'undefined' && (
               <Tooltip content={tooltipText}>
                 <span
                   onClick={handleCopyToClipboard}
                   className={cn(
-                    'dj-inline-flex dj-items-center dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
-                    { 'dj-w-[15px]': size === 'small' },
+                    'inline-flex items-center cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
+                    { 'w-[15px]': uiSize === 'small' },
                   )}
                 >
-                  {icon && <span className='dj-w-4 dj-h-4'>{icon}</span>}
+                  {icon && <span className='w-4 h-4'>{icon}</span>}
                 </span>
               </Tooltip>
             )}
           </div>
         </label>
-        {hint && <span className='dj-text-xs dj-text-slate-500'>{hint}</span>}
+        {hint && <span className='text-xs text-slate-500'>{hint}</span>}
       </div>
-      <div className='dj-relative dj-w-full'>
+      <div className='relative w-full'>
         <textarea
           id={id}
           ref={textareaRef}
-          {...textareaProps}
           className={cn(
             inputVariants({
               type,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
             className,
@@ -209,7 +207,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
           placeholder={placeholder}
         />
         {loading && (
-          <div className='dj-absolute dj-top-0 dj-right-0 dj-m-2 dj-flex dj-items-center dj-justify-center'>
+          <div className='absolute top-0 right-0 m-2 flex items-center justify-center'>
             <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
           </div>
         )}

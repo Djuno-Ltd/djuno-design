@@ -1,6 +1,6 @@
 /**
- * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview SecureCopy types
+ * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
+ * @fileoverview Authentication layout types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,17 +18,10 @@
  * limitations under the License.
  */
 
-import { PropsWithChildren } from 'react'
-import { SizeTypes } from '.'
+import React from 'react'
 
-export interface SecureCopyProps extends PropsWithChildren {
-  text: string
+export interface AuthLayoutProps {
   className?: string
-  textClassName?: string
-  iconClassName?: string
-  showText?: boolean
-  type?: ActionTypes
-  uiSize?: SizeTypes
+  style?: React.CSSProperties
+  logo?: React.ReactNode
 }
-
-export type ActionTypes = 'copy' | 'hide'

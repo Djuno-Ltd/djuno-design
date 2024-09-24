@@ -95,9 +95,13 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   }, [propsSelectedIndex, useUrl])
 
   const onChangeTab = (i: number) => {
-    // if (useUrl) {
-    //   const selectedOption = getTabOptionFromIndex(i, options)
-    // }
+    if (useUrl) {
+      const selectedOption = getTabOptionFromIndex(i, options)
+      if (selectedOption?.url) {
+        // Change the URL without reloading the page
+        window.history.pushState({}, '', selectedOption.url)
+      }
+    }
 
     if (onChange) {
       onChange(i)
@@ -108,10 +112,10 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   return (
     <TabGroup selectedIndex={selectedIndex} onChange={onChangeTab}>
       <TabList
-        className={cn('dj-flex dj-overflow-x-auto', {
+        className={cn('flex overflow-x-auto', {
           [listClassName || '']: listClassName,
-          'dj-w-full md:dj-w-auto ': !tabType || tabType === 'default',
-          'dj-bg-slate-500/10 dj-p-1 dj-rounded-lg': tabType === 'creamy',
+          'w-full md:w-auto ': !tabType || tabType === 'default',
+          'bg-slate-500/10 p-1 rounded-lg': tabType === 'creamy',
         })}
       >
         {options.map((option, i) => (
@@ -120,20 +124,18 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
             disabled={option.disabled}
             data-testid={option.testId}
             className={({ selected }) =>
-              cn('hover:dark:dj-text-slate-100 hover:dj-text-gray-900 dj-outline-none disabled:dj-cursor-not-allowed', {
-                'dj-font-semibold dj-bg-primary-50 dark:dj-bg-dark-700 dj-text-blue-500 hover:!dj-text-blue-600 hover:dark:dj-text-blue-600 dj-rounded-lg':
+              cn('hover:dark:text-slate-100 hover:text-gray-900 outline-none disabled:cursor-not-allowed', {
+                'font-semibold bg-primary-50 dark:bg-dark-700 text-blue-500 hover:!text-blue-600 hover:dark:text-blue-600 rounded-lg':
                   selected && (!tabType || tabType === 'default'),
-                'dj-font-normal dj-text-xs sm:dj-text-sm dj-whitespace-nowrap dj-px-3 dj-h-9 dj-w-full':
-                  tabType === 'creamy',
-                'dj-bg-white dark:dj-bg-dark-900 dark:dj-text-slate-300 dj-rounded-lg':
-                  tabType === 'creamy' && selected,
-                'dj-text-gray-400 dark:dj-text-slate-400': !selected,
+                'font-normal text-xs sm:text-sm whitespace-nowrap px-3 h-9 w-full': tabType === 'creamy',
+                'bg-white dark:bg-dark-900 dark:text-slate-300 rounded-lg': tabType === 'creamy' && selected,
+                'text-gray-400 dark:text-slate-400': !selected,
               })
             }
           >
             {(!tabType || tabType === 'default') && (
-              <div className='dj-rounded-md dj-flex dj-items-center dj-transition-background dj-duration-150 dj-justify-center dj-text-center sm:dj-space-x-2 dj-w-full dj-px-3 dj-py-1.5 '>
-                <span className='dj-text-xs sm:dj-text-sm dj-whitespace-nowrap'>{option.label}</span>
+              <div className='rounded-md flex items-center transition-background duration-150 justify-center text-center sm:space-x-2 w-full px-3 py-1.5 '>
+                <span className='text-xs sm:text-sm whitespace-nowrap'>{option.label}</span>
               </div>
             )}
             {tabType === 'creamy' && <>{option.label}</>}
@@ -144,8 +146,8 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         {options.map((option, i) => (
           <TabPanel
             key={i}
-            className={cn('dj-bg-white dark:dj-bg-dark-700 dj-rounded-md', {
-              'dj-py-6': (!tabType || tabType === 'default') && option.element,
+            className={cn('bg-white dark:bg-dark-700 rounded-md', {
+              'py-6': (!tabType || tabType === 'default') && option.element,
               [panelClassName || '']: panelClassName,
             })}
           >

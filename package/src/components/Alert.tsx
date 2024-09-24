@@ -35,18 +35,18 @@ const { Text } = Typography
  * Define button variants using the `cva` utility function.
  * This function generates CSS classes for alert styles based on specified variants.
  */
-const alertVariants = cva('dj-w-full dj-rounded-lg dj-border', {
+const alertVariants = cva('w-full rounded-lg border', {
   variants: {
     type: {
-      neutral: 'dj-bg-white dark:dj-bg-dark-850 dj-border-secondary-200 dark:dj-border-dark-800',
-      success: 'dj-bg-success/10 dark:dj-bg-success/20 dj-border-success/30 dark:dj-border-success/30',
-      info: 'dj-bg-primary-400/10 dark:dj-bg-primary-400/20 dj-border-primary-400/30 dark:dj-border-primary-400/30',
-      warning: 'dj-bg-warning/10 dark:dj-bg-warning/20 dj-border-warning/30 dark:dj-border-warning/20',
-      error: 'dj-bg-error/10 dark:dj-bg-error/20 dj-border-error/30 dark:dj-border-error/30',
+      neutral: 'bg-white dark:bg-dark-850 border-secondary-200 dark:border-dark-800',
+      success: 'bg-success/10 dark:bg-success/20 border-success/30 dark:border-success/30',
+      info: 'bg-primary-400/10 dark:bg-primary-400/20 border-primary-400/30 dark:border-primary-400/30',
+      warning: 'bg-warning/10 dark:bg-warning/20 border-warning/30 dark:border-warning/20',
+      error: 'bg-error/10 dark:bg-error/20 border-error/30 dark:border-error/30',
     },
     paddingType: {
-      small: 'dj-px-3 dj-py-2.5',
-      large: 'dj-px-5 dj-py-4',
+      small: 'px-3 py-2.5',
+      large: 'px-5 py-4',
     },
   },
   defaultVariants: {
@@ -59,18 +59,18 @@ const alertVariants = cva('dj-w-full dj-rounded-lg dj-border', {
  * Define button variants using the `cva` utility function.
  * This function generates CSS classes for alert icons styles based on specified variants.
  */
-const alertIconVariants = cva('dj-mr-2 dj-aspect-square', {
+const alertIconVariants = cva('mr-2 aspect-square', {
   variants: {
     type: {
-      neutral: 'dj-text-secondary-400 dark:dj-text-dark-200',
-      success: 'dj-text-success/90 dark:dj-text-success/70',
-      info: 'dj-text-primary-400/90 dark:dj-text-primary-400/70',
-      warning: 'dj-text-warning/90 dark:dj-text-warning/70',
-      error: 'dj-text-error/90 dark:dj-text-error/70',
+      neutral: 'text-secondary-400 dark:text-dark-200',
+      success: 'text-success/90 dark:text-success/70',
+      info: 'text-primary-400/90 dark:text-primary-400/70',
+      warning: 'text-warning/90 dark:text-warning/70',
+      error: 'text-error/90 dark:text-error/70',
     },
     widthType: {
-      small: 'dj-w-[18px]',
-      large: 'dj-w-[24px]',
+      small: 'w-[18px]',
+      large: 'w-[24px]',
     },
   },
   defaultVariants: {
@@ -114,7 +114,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
     <Flex
       items={'center'}
       className={cn(alertVariants({ type, paddingType: description ? 'large' : 'small' }), className, {
-        'dj-rounded-none dj-border-0': banner,
+        'rounded-none border-0': banner,
       })}
     >
       <Flex items={description ? 'start' : 'center'}>
@@ -136,7 +136,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
             {typeof message !== 'string' && <>{message}</>}
           </Flex>
           {description && (
-            <Flex className='dj-mt-2'>
+            <Flex className='mt-2'>
               {typeof description === 'string' && <Text size='sm'>{description}</Text>}
               {typeof description !== 'string' && <>{description}</>}
             </Flex>

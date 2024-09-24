@@ -60,11 +60,11 @@ const SimpleTable: React.FC<SimpletableProps> & TableComponents = ({
 }) => {
   const testLoading = false
   return (
-    <div className={cn('dj-w-full dj-relative dj-min-h-[200px]', containerClassName)}>
-      <div className='dj-overflow-x-auto dj-overflow-y-hidden'>
+    <div className={cn('w-full relative ', containerClassName, {})}>
+      <div className='overflow-x-auto overflow-y-hidden'>
         <table
           className={cn(
-            'dj-rounded-md dj-border dj-border-transparent dj-border-separate dj-border-spacing-0 dj-w-full dj-space-y-4',
+            'rounded-md border border-transparent border-separate border-spacing-0 w-full space-y-4',
             className,
           )}
         >
@@ -91,19 +91,14 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
   const { className, withoutHoverStyle, selected, disabled, onClick, children, ...rest } = props
   return (
     <tr
-      {...rest}
       onClick={(e: React.MouseEvent<HTMLTableRowElement>) => (!disabled && onClick ? onClick(e) : null)}
-      className={cn(
-        'dj-group duration-200 dj-transition-colors dj-bg-white dark:dj-bg-dark-850',
-        {
-          'dark:hover:dj-bg-dark-700 hover:dj-bg-[#f8fafc]':
-            (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
-          'dark:dj-bg-white/10 dj-bg-[#eff5fe]': selected,
-          'dj-cursor-not-allowed': disabled,
-          'dj-cursor-pointer': !disabled && onClick,
-        },
-        className,
-      )}
+      className={cn(className, 'group duration-200 transition-colors bg-white dark:bg-dark-3 ', {
+        'dark:hover:bg-dark-2 hover:bg-[#f8fafc] ':
+          (withoutHoverStyle === undefined || withoutHoverStyle === false) && !selected,
+        'dark:!bg-white/10 !bg-[#eff5fe] ': selected,
+        'cursor-not-allowed': disabled,
+        'cursor-pointer': !disabled && onClick,
+      })}
     >
       {children}
     </tr>
@@ -114,8 +109,8 @@ const SimpleTableHead = (props: React.PropsWithChildren) => <thead>{props.childr
 
 const SimpleTableTH = (props: React.PropsWithChildren<{ lable?: string | React.ReactNode }>) => {
   return (
-    <th className='dj-text-left dj-bg-white dark:dj-bg-dark-850 dj-border-b dark:dj-border-dark-700 dj-p-2'>
-      <div className='dj-text-slate-400 dark:dj-text-slate-100 dj-font-light dj-overflow-hidden dj-whitespace-nowrap'>
+    <th className='text-left bg-white dark:bg-dark-850 border-b dark:border-dark-700 p-2'>
+      <div className='text-slate-400 dark:text-slate-100 font-light overflow-hidden whitespace-nowrap'>
         {props.children || props.lable}
       </div>
     </th>
@@ -129,12 +124,9 @@ const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
   return (
     <td
       {...rest}
-      className={cn(
-        'dj-text-md dj-py-3 dj-px-2 dj-text-[#475569] dark:dj-text-slate-100 dj-border-b dark:dj-border-dark-700',
-        className,
-      )}
+      className={cn('text-md py-3 px-2 text-[#475569] dark:text-slate-100 border-b dark:border-dark-700 ', className)}
     >
-      <div className='dj-h-full dj-w-full dj-flex dj-items-center'>{children}</div>
+      <div className='h-full w-full flex items-center'>{children}</div>
     </td>
   )
 }
