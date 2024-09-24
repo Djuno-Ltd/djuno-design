@@ -307,7 +307,7 @@ function App() {
         <Card title="CodeViewer">
           <Flex direction="col" className="gap-10 w-full">
             <Flex direction="col" className="w-full">
-              <Divider text="default code view" usingText={true} />
+              <Divider text="default code view" />
               <CodeViewer
                 copyable
                 language="javascript"
@@ -324,7 +324,7 @@ function App() {
             </Flex>
 
             <Flex direction="col" className="w-full">
-              <Divider text="manual theme" usingText={true} />
+              <Divider text="manual theme" />
               <CodeViewer
                 theme="dark"
                 language="shell"
@@ -334,7 +334,7 @@ function App() {
             </Flex>
 
             <Flex direction="col" className="w-full">
-              <Divider text="transparent background" usingText={true} />
+              <Divider text="transparent background" />
               <CodeViewer
                 language="javascript"
                 wrapLongLines
@@ -915,11 +915,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         </Card>
 
         <Card title="Dropdown">
-          <Divider
-            text=" Default dropdown"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text=" Default dropdown" orientation="left" />
           <Flex direction="col" className="gap-5 w-full">
             <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
@@ -946,11 +942,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               </div>
             </div>
           </Flex>
-          <Divider
-            text=" Simple dropdown"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text=" Simple dropdown" orientation="left" />
           <Flex direction="col" className="gap-5 w-full">
             <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
@@ -1284,57 +1276,36 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         </Card>
 
         <Card title="Empty State">
-          <Divider
-            text=" Empty state with simple icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text=" Empty state with simple icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
             />
           </Flex>
-          <Divider
-            text="Empty state with default icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state with default icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
             />
           </Flex>
-          <Divider
-            text="Empty state with undefined icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state with undefined icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" />
           </Flex>
-          <Divider
-            text="Empty state without icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state without icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" usingIcon={false} />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
             orientation="left"
-            usingText={true}
           />
           <Flex className="gap-3 w-full">
             <EmptyState usingIcon={false} />
           </Flex>
-          <Divider
-            text="Empty state without text"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state without text" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState usingText={false} />
           </Flex>
@@ -1342,28 +1313,25 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card title="Divider">
           <Flex className="gap-3 w-full">
-            <Divider uiType="simple" />
+            <Divider />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" />
+            <Divider uiType="simple" text="simple" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" />
+            <Divider uiType="dashed" text="dashed" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="simple" usingText={true} />
+            <Divider uiType="dotted" text="dotted" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" usingText={true} />
+            <Divider text="left" orientation="left" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" usingText={true} text="Text" />
+            <Divider text="center" orientation="center" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" usingText={true} orientation="left" />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" usingText={true} orientation="right" />
+            <Divider text="right" orientation="right" />
           </Flex>
         </Card>
 

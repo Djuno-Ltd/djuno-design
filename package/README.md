@@ -367,7 +367,6 @@ function App() {
 | orientation   | `OrientationTypes` |          |         |             |
 | text          | `string`           |          |         |             |
 | textClassName | `string`           |          |         |             |
-| usingText     | `boolean`          |          |         |             |
 
 ### Modal
 

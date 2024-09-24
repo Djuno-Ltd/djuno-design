@@ -175,17 +175,15 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
           <div className='flex items-center gap-1'>
             {tooltip && <InfoTooltip tooltip={tooltip} />}
             {typeof copyable !== 'undefined' && (
-              <Tooltip content={tooltipText}>
-                <span
-                  onClick={handleCopyToClipboard}
-                  className={cn(
-                    'inline-flex items-center cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
-                    { 'w-[15px]': uiSize === 'small' },
-                  )}
-                >
-                  {icon && <span className='w-4 h-4'>{icon}</span>}
-                </span>
-              </Tooltip>
+              <div
+                onClick={handleCopyToClipboard}
+                className={cn(
+                  'w-[18px] cursor-pointer text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300 text-xs',
+                  { 'w-[15px]': uiSize === 'small' },
+                )}
+              >
+                <Tooltip content={tooltipText}>{icon}</Tooltip>
+              </div>
             )}
           </div>
         </label>

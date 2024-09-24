@@ -51,7 +51,6 @@ const dividerVariants = cva('w-full border-secondary-400 dark:after:border-gray-
  * @param {string} [props.orientation] - Type of UI for the orientation: 'center' or 'right' or 'left'.
  * @param {string} [props.text] - text apply to the divider.
  * @param {string} [props.textClassName] - Additional classes to apply to the text.
- * @param {boolean} [props.usingText] - Additional classes to apply to the text.
  *
  * @returns {React.ReactNode} Rendered Divider component.
  *
@@ -73,7 +72,6 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   orientation = 'center', // default value for orientation
   text,
   textClassName,
-  usingText = false, // default value for usingText
   ...props
 }) => {
   const dividerClass = dividerVariants({ uiType })
@@ -83,14 +81,14 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   const rightOrientationClass = 'mr-4'
 
   const parentClassName = cn(dividerClass, className, {
-    'divider-using-text': usingText,
-    [`divider-${orientation}`]: usingText, //class based on orientation and usingText prop
+    'divider-using-text': text !== undefined,
+    [`divider-${orientation}`]: text !== undefined, //class based on orientation and usingText prop
   })
 
   return (
     <div {...props} className={parentClassName}>
       <div className='flex justify-center items-center'>
-        {usingText ? (
+        {text !== undefined ? (
           <>
             {orientation === 'left' && (
               <>
