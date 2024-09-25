@@ -142,7 +142,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
           'lg:w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        <div className='relative z-40 w-full'>
+        <div className='relative z-30 w-full'>
           {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
         </div>
         <div className='max-w-7xl mx-auto min-w-full h-[calc(100%-4rem)] overflow-auto' ref={containerRef}>
