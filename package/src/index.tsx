@@ -73,6 +73,7 @@ export * from './types'
 
 // export utils
 export * from './utils'
+export * from './utils/cn'
 export * from './utils/uuid'
 export * from './utils/localStorage'
 export * from './utils/copy'

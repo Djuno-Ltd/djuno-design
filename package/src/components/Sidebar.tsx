@@ -168,10 +168,10 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
       {!loading && (
-        <div className='d-w-full'>
+        <div className='w-full'>
           {children}
           {subItems && subItems.length && (
-            <div className='px-2 space-y-4 mb-5 mt-2'>
+            <div className='px-2 space-y-4 mt-2'>
               <div className='w-full h-[1px] bg-slate-200 dark:bg-slate-700 rounded-sm' />
               <div className='my-2 flex flex-col space-y-1'>
                 {subItems.map((item, index) => (
