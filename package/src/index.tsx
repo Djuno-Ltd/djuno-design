@@ -58,6 +58,7 @@ import Sidebar from './components/Sidebar'
 import ThemeChanger, { ThemeSwitcher } from './components/ThemeChanger'
 import Tag from './components/Tag'
 import CodeViewer from './components/CodeViewer'
+import Countdown from './components/Countdown'
 
 // export providers
 export * from './providers/DjunoDesignProvider'
@@ -116,4 +117,5 @@ export {
   ThemeSwitcher,
   Tag,
   CodeViewer,
+  Countdown,
 }

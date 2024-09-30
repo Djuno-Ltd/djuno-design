@@ -146,24 +146,26 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         <div className='flex flex-col'>
           {!loading &&
-            items.map((item, index) => (
-              <SidebarMenuItem
-                height={navItemHeight}
-                item={item}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                key={index}
-                segments={segments}
-                isActive={activeItem?.id === item.id}
-                dataTestId={item.testId}
-                expandedItems={expandedItems}
-                isExpanded={expandedItems.includes(item.id)}
-                addToExpand={addToExpand}
-                deleteFromExpand={deleteFromExpand}
-                type={type}
-                depth={0}
-              />
-            ))}
+            items
+              .filter((item) => item.active !== true)
+              .map((item, index) => (
+                <SidebarMenuItem
+                  height={navItemHeight}
+                  item={item}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  key={index}
+                  segments={segments}
+                  isActive={activeItem?.id === item.id}
+                  dataTestId={item.testId}
+                  expandedItems={expandedItems}
+                  isExpanded={expandedItems.includes(item.id)}
+                  addToExpand={addToExpand}
+                  deleteFromExpand={deleteFromExpand}
+                  type={type}
+                  depth={0}
+                />
+              ))}
           {renderLoading(loading, loadingMode)}
         </div>
       </div>

@@ -139,6 +139,7 @@ const Select = <ExtraDataType extends string>({
   onChange,
   options,
   labelClassName,
+  itemClassName,
 }: SelectProps<ExtraDataType>) => {
   const innerId = React.useMemo(() => {
     return id || uuid(10)
@@ -247,7 +248,7 @@ const Select = <ExtraDataType extends string>({
                   focus
                     ? 'bg-primary-50 dark:bg-dark-900 text-primary-600 dark:bg-dark-2 dark:text-primary-300'
                     : 'text-gray-900 dark:text-slate-300'
-                }`
+                }${itemClassName || ''}`
               }
               value={option.value}
             >
@@ -301,6 +302,7 @@ const MultiSelect = <ExtraDataType extends string>({
   defaultValues,
   onChange,
   options,
+  itemClassName,
 }: MultiSelectProps<ExtraDataType>) => {
   const innerId = React.useMemo(() => {
     return id || uuid(10)
@@ -399,7 +401,7 @@ const MultiSelect = <ExtraDataType extends string>({
                   focus
                     ? 'bg-primary-50 dark:bg-dark-900 text-primary-600 dark:bg-dark-2 dark:text-primary-300'
                     : 'text-gray-900 dark:text-slate-300'
-                }`
+                }${itemClassName || ''}`
               }
               value={option.value}
             >

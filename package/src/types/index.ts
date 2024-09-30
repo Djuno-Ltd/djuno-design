@@ -49,6 +49,7 @@ export * from './IJsonViewer'
 export * from './ITag'
 export * from './ICodeViewer'
 export * from './IAuthLayouts'
+export * from './ICountdown'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {

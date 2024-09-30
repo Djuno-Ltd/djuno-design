@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview DropdownMenu types
+ * @fileoverview Countdown Component
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,29 +18,20 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 
-export interface DropdownProps extends PropsWithChildren {
-  menu?: Array<DropdownElement>
-  title?: string | React.ReactNode
-  type?: DropdownTypes
-  buttonClassName?: string
-  itemsClassName?: string
-  itemClassName?: string
-}
-export type DropdownTypes = 'default' | 'simple'
-
-export type DropdownItem = {
-  label: string | React.ReactNode
-  key: string
-  onClick?: (item: DropdownItem, close: () => void) => void
-  disabled?: boolean
-  danger?: boolean
-  loading?: boolean
+type CountdownRenderProps = {
+  formatedTime: string
+  timeLeft: number
+  disabled: boolean
 }
 
-export type DropdownDivider = {
-  type: 'divider'
+export interface ICountdownProps {
+  seconds: number
+  children?: ReactNode | ((props: CountdownRenderProps) => ReactNode)
+  className?: string
+  showTimer?: boolean
+  timerPosition?: 'start' | 'end'
+  timerRender?: (props: CountdownRenderProps) => React.ReactNode
+  onClick?: () => void
 }
-
-export type DropdownElement = DropdownItem | DropdownDivider

@@ -67,6 +67,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
   buttonClassName,
   itemsClassName,
   children,
+  itemClassName,
 }) => {
   const itemGroups = groupArrayByDivider(menu || [])
   const { refs, floatingStyles } = useFloating({
@@ -134,14 +135,20 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
                               item.onClick(item, close)
                             }
                           }}
-                          className={cn('group flex w-full items-center rounded-md px-2 py-2 text-sm', {
-                            'bg-primary-50 dark:bg-dark-700': focus && !item.danger,
-                            'bg-red-100 dark:bg-red-600/10': focus && item.danger,
-                            'cursor-not-allowed text-dark-400 dark:text-secondary-500': item.disabled,
-                            'text-dark-900 dark:text-secondary-100': !item.disabled && !item.danger,
-                            'text-red-900 dark:text-red-600': !item.disabled && item.danger,
-                            'animate-bounce': item.loading,
-                          })}
+                          className={cn(
+                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                            {
+                              'bg-primary-50 dark:bg-dark-700': focus && !item.danger,
+                              'bg-red-100 dark:bg-red-600/10': focus && item.danger,
+                              'cursor-not-allowed text-dark-400 dark:text-secondary-500': item.disabled,
+                              'text-dark-900 dark:text-secondary-100': !item.disabled && !item.danger,
+                              'text-red-900 dark:text-red-600': !item.disabled && item.danger,
+                              'animate-bounce': item.loading,
+                            },
+                            {
+                              [itemsClassName || '']: itemsClassName,
+                            },
+                          )}
                         >
                           {item.label}
                         </button>

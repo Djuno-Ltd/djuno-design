@@ -50,6 +50,7 @@ export interface SelectBaseProps {
   size?: SizeTypes
   onBlur?: (e: FocusEvent) => void
   labelClassName?: string
+  itemClassName?: string
 }
 
 export type SelectTypes = InputTypes

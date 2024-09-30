@@ -36,6 +36,7 @@ import {
   ThemeSwitcher,
   Tag,
   CodeViewer,
+  Countdown,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -198,6 +199,7 @@ function App() {
               value: "item2-2",
             },
           ],
+
           children: [
             {
               id: "2-2-0",
@@ -297,6 +299,10 @@ function App() {
     { label: "Tab 3", url: "/tab3" },
   ];
 
+  const handleResendVerificationEmail = () => {
+    console.log("handleResendVerificationEmail");
+  };
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -364,6 +370,41 @@ class Expire extends React.Component {
 
 export default uniquePropHOC(["time", "seconds"])(Expire);`}
               />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card title="Countdown">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-2 w-full">
+              <Countdown
+                seconds={5}
+                timerPosition="end"
+                className="p-2"
+                timerRender={({ formatedTime, timeLeft }) => {
+                  if (timeLeft === 0) return null;
+                  return <Text className="text-xs">{formatedTime}</Text>;
+                }}
+              >
+                <div className="flex items-center gap-1">Resend</div>
+              </Countdown>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Countdown
+                seconds={10}
+                className="flex-col"
+                timerPosition="end"
+                timerRender={({ formatedTime, timeLeft }) => {
+                  if (timeLeft === 0) return null;
+                  return (
+                    <Text className="text-sm">
+                      Resend after {formatedTime} seconds
+                    </Text>
+                  );
+                }}
+              >
+                <Button>Resend verification email</Button>
+              </Countdown>
             </Flex>
           </Flex>
         </Card>

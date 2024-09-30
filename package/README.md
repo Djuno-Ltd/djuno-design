@@ -558,6 +558,18 @@ function App() {
 | fontSize           | `string`              |          | `0.85rem` | The font size of the code.                                                                                                       |
 | `copyable`         | `CopyableProp`        |          |           | Enables the copy-to-clipboard feature. Can be customized with tooltips and icons.                                                |
 
+### Countdown
+
+| Name          | Type                                               | Required | Default | Description |
+| ------------- | -------------------------------------------------- | -------- | ------- | ----------- |
+| seconds       | `number`                                           |          |         |             |
+| className     | `string`                                           |          |         |             |
+| showTimer     | `boolean`                                          |          |         |             |
+| children      | `React.ReactNode`                                  |          |         |             |
+| timerPosition | 'start or end'                                     |          |         |             |
+| timerRender   | `(props: CountdownRenderProps) => React.ReactNode` |          |         |             |
+| onClick       | `() => void`                                       |          |         |             |
+
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
