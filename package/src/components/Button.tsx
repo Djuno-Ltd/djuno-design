@@ -30,23 +30,23 @@ import { cva } from 'class-variance-authority'
  * This function generates CSS classes for button styles based on specified variants.
  */
 const buttonVariants = cva(
-  'focus:outline-0 transition-all disabled:cursor-not-allowed w-max flex items-center gap-1 duration-400 border-2 focus:ring-4',
+  'focus:dd-outline-0 dd-transition-all disabled:dd-cursor-not-allowed dd-w-max dd-flex dd-items-center dd-gap-1 dd-duration-400 dd-border-2 focus:dd-ring-4',
   {
     variants: {
       uiType: {
         simple:
-          'bg-transparent text-primary-400 hover:bg-primary-50 hover:text-primary-500 border-slate-200 hover:border-primary-100 dark:bg-dark-800 dark:text-dark-100 dark:hover:bg-dark-700 dark:hover:text-dark-50 dark:border-dark-700 dark:hover:border-dark-600 disabled:hover:bg-transparent disabled:text-secondary-300 disabled:border-secondary-200 disabled:dark:bg-dark-900 disabled:dark:text-dark-400 disabled:dark:hover:border-dark-700 focus:ring-primary-100/20 dark:focus:ring-dark-700/50',
+          'dd-bg-transparent dd-text-primary-400 hover:dd-bg-primary-50 hover:dd-text-primary-500 dd-border-slate-200 hover:dd-border-primary-100 dark:dd-bg-dark-800 dark:dd-text-dark-100 dark:hover:dd-bg-dark-700 dark:hover:dd-text-dark-50 dark:dd-border-dark-700 dark:hover:dd-border-dark-600 disabled:hover:dd-bg-transparent disabled:dd-text-secondary-300 disabled:dd-border-secondary-200 disabled:dark:dd-bg-dark-900 disabled:dark:dd-text-dark-400 disabled:dark:hover:dd-border-dark-700 focus:dd-ring-primary-100/20 dark:focus:dd-ring-dark-700/50',
         primary:
-          'bg-primary-400 text-white hover:bg-primary-500 border-primary-400 hover:border-primary-500 dark:bg-primary-500 dark:hover:bg-primary-600 dark:border-primary-500 dark:hover:border-primary-600 disabled:border-secondary-300 disabled:bg-secondary-200 disabled:text-secondary-400 disabled:dark:bg-primary-300 disabled:dark:text-white disabled:dark:border-primary-300 focus:ring-primary-100 dark:focus:ring-primary-600/50',
+          'dd-bg-primary-400 dd-text-white hover:dd-bg-primary-500 dd-border-primary-400 hover:dd-border-primary-500 dark:dd-bg-primary-500 dark:hover:dd-bg-primary-600 dark:dd-border-primary-500 dark:hover:dd-border-primary-600 disabled:dd-border-secondary-300 disabled:dd-bg-secondary-200 disabled:dd-text-secondary-400 disabled:dark:dd-bg-primary-300 disabled:dark:dd-text-white disabled:dark:dd-border-primary-300 focus:dd-ring-primary-100 dark:focus:dd-ring-primary-600/50',
         light:
-          'bg-primary-50 text-primary-400 hover:bg-primary-100 hover:text-primary-500 border-primary-100 hover:border-primary-100 dark:bg-primary-600/20 dark:text-dark-100 dark:hover:bg-primary-600/30 dark:hover:text-dark-50 dark:border-primary-400 dark:hover:border-primary-500 disabled:bg-transparent disabled:text-secondary-300 disabled:border-primary-100/60 disabled:dark:bg-dark-900 disabled:dark:text-dark-400 disabled:dark:border-primary-300/60 focus:ring-primary-100/20 dark:focus:ring-dark-700/50',
+          'dd-bg-primary-50 dd-text-primary-400 hover:dd-bg-primary-100 hover:dd-text-primary-500 dd-border-primary-100 hover:dd-border-primary-100 dark:dd-bg-primary-600/20 dark:dd-text-dark-100 dark:hover:dd-bg-primary-600/30 dark:hover:dd-text-dark-50 dark:dd-border-primary-400 dark:hover:dd-border-primary-500 disabled:dd-bg-transparent disabled:dd-text-secondary-300 disabled:dd-border-primary-100/60 disabled:dark:dd-bg-dark-900 disabled:dark:dd-text-dark-400 disabled:dark:dd-border-primary-300/60 focus:dd-ring-primary-100/20 dark:focus:dd-ring-dark-700/50',
         danger:
-          'bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600 dark:bg-red-500 dark:hover:bg-red-600 dark:border-red-500 dark:hover:border-red-600 disabled:border-red-400 disabled:bg-red-400 disabled:text-white disabled:dark:bg-red-400 disabled:dark:text-secondary-200 disabled:dark:border-red-400 focus:ring-red-100 dark:focus:ring-red-600/50',
+          'dd-bg-red-500 dd-text-white hover:dd-bg-red-600 dd-border-red-500 hover:dd-border-red-600 dark:dd-bg-red-500 dark:hover:dd-bg-red-600 dark:dd-border-red-500 dark:hover:dd-border-red-600 disabled:dd-border-red-400 disabled:dd-bg-red-400 disabled:dd-text-white disabled:dark:dd-bg-red-400 disabled:dark:dd-text-secondary-200 disabled:dark:dd-border-red-400 focus:dd-ring-red-100 dark:focus:dd-ring-red-600/50',
       },
       size: {
-        small: 'rounded-lg text-xs px-3 h-7',
-        medium: 'rounded-lg text-sm px-4 h-9',
-        large: 'rounded-xl text-base px-5 h-11',
+        small: 'dd-rounded-lg dd-text-xs dd-px-3 dd-h-7',
+        medium: 'dd-rounded-lg dd-text-sm dd-px-4 dd-h-9',
+        large: 'dd-rounded-xl dd-text-base dd-px-5 dd-h-11',
       },
     },
     defaultVariants: {

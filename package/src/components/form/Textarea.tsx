@@ -146,11 +146,11 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='flex flex-col'>
+    <div className='dd-flex dd-flex-col'>
       <div
-        className={cn('flex mb-1 items-center', {
-          'justify-between': label,
-          'justify-end': !label,
+        className={cn('dd-flex dd-mb-1 dd-items-center', {
+          'dd-justify-between': label,
+          'dd-justify-end': !label,
         })}
       >
         <label
@@ -168,18 +168,18 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5'>
               *
             </Typography.Text>
           )}
-          <div className='flex items-center gap-1'>
+          <div className='dd-flex dd-items-center dd-gap-1'>
             {tooltip && <InfoTooltip tooltip={tooltip} />}
             {typeof copyable !== 'undefined' && (
               <div
                 onClick={handleCopyToClipboard}
                 className={cn(
-                  'w-[18px] cursor-pointer text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300 text-xs',
-                  { 'w-[15px]': uiSize === 'small' },
+                  'dd-w-[18px] dd-cursor-pointer dd-text-slate-500 hover:dd-text-primary-300 dark:dd-text-slate-300 dark:hover:dd-text-primary-300 dd-text-xs',
+                  { 'dd-w-[15px]': uiSize === 'small' },
                 )}
               >
                 <Tooltip content={tooltipText}>{icon}</Tooltip>
@@ -187,9 +187,9 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             )}
           </div>
         </label>
-        {hint && <span className='text-xs text-slate-500'>{hint}</span>}
+        {hint && <span className='dd-text-xs dd-text-slate-500'>{hint}</span>}
       </div>
-      <div className='relative w-full'>
+      <div className='dd-relative dd-w-full'>
         <textarea
           id={id}
           ref={textareaRef}
@@ -205,7 +205,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
           placeholder={placeholder}
         />
         {loading && (
-          <div className='absolute top-0 right-0 m-2 flex items-center justify-center'>
+          <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>
             <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
           </div>
         )}

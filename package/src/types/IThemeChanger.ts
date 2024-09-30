@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+import { AnchorProps } from '@headlessui/react/dist/internal/floating'
+
 export interface ThemeChangerProps {
   itemsClassName?: string
+  anchor?: AnchorProps
 }

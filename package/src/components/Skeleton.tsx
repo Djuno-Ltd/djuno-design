@@ -27,22 +27,22 @@ import { SkeletonProps } from '../types/ISkeleton'
  * Define Skeleton variants using the `cva` utility function.
  * This function generates CSS classes for skeleton styles based on specified variants.
  */
-const skeletonVariants = cva('bg-slate-200/80 dark:bg-white/10 rounded-sm', {
+const skeletonVariants = cva('dd-bg-slate-200/80 dark:dd-bg-white/10 dd-rounded-sm', {
   variants: {
     shape: {
-      rectangle: 'w-full',
-      circle: 'rounded-full aspect-square',
-      square: 'aspect-square',
+      rectangle: 'dd-w-full',
+      circle: 'dd-rounded-full dd-aspect-square',
+      square: 'dd-aspect-square',
     },
     size: {
-      small: 'h-7',
-      medium: 'h-9',
-      large: 'h-11',
+      small: 'dd-h-7',
+      medium: 'dd-h-9',
+      large: 'dd-h-11',
     },
     animation: {
       none: '',
       wave: '',
-      pulse: 'animate-pulse',
+      pulse: 'dd-animate-pulse',
     },
   },
   defaultVariants: {
@@ -70,8 +70,8 @@ const skeletonVariants = cva('bg-slate-200/80 dark:bg-white/10 rounded-sm', {
  * // Example usage of Skeleton component:
  * <Skeleton shape="circle" size="large" />
  */
-const Skeleton: React.FunctionComponent<SkeletonProps> = ({ shape, size, animation, className }) => {
-  return <div className={cn(skeletonVariants({ shape, size, animation }), className)} />
+const Skeleton: React.FunctionComponent<SkeletonProps> = ({ shape, size, animation, className, style }) => {
+  return <div className={cn(skeletonVariants({ shape, size, animation }), className)} style={style} />
 }
 
 export default Skeleton

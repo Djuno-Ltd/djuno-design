@@ -30,13 +30,13 @@ import Input, { inputVariants } from './form/Input'
 import { cva } from 'class-variance-authority'
 const { Text } = Typography
 
-const iconVariants = cva('cursor-pointer w-5 h-5 transition-all duration-300', {
+const iconVariants = cva('dd-cursor-pointer dd-w-5 dd-h-5 dd-transition-all dd-duration-300', {
   variants: {
     state: {
-      eyelashIcon: 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-200',
-      eyeIcon: 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-200',
+      eyelashIcon: 'dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:hover:dd-text-slate-200',
+      eyeIcon: 'dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:dd-hover:text-slate-200',
       copyIcon:
-        ' hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300',
+        'hover:dd-scale-110 dd-text-slate-500 hover:dd-text-primary-300 dark:dd-text-slate-300 dark:hover:dd-text-primary-300',
     },
   },
   defaultVariants: {
@@ -84,7 +84,6 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   textClassName,
   type,
   uiSize,
-  copyable,
   ...props
 }) => {
   const [showText, setShowText] = React.useState(false)
@@ -105,28 +104,28 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('flex items-center gap-1', className)}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
           <div
             className={cn(
               inputVariants({ uiSize }),
               {
-                'h-7': uiSize === 'small',
-                'h-9': uiSize === 'medium' || uiSize === undefined,
-                'h-11': uiSize === 'large',
+                'dd-h-7': uiSize === 'small',
+                'dd-h-9': uiSize === 'medium' || uiSize === undefined,
+                'dd-h-11': uiSize === 'large',
               },
-              'relative overflow-hidden cursor-pointer text-sm dark:bg-dark-700 dark:hover:bg-dark-500 bg-gray-200/70 hover:bg-dark-200 px-2 rounded-md select-none transition-all duration-500 flex flex-col items-center justify-center whitespace-nowrap',
+              'dd-relative dd-overflow-hidden dd-cursor-pointer dd-text-sm dark:dd-bg-dark-700 dark:hover:dd-bg-dark-500 dd-bg-gray-200/70 hover:dd-bg-dark-200 dd-px-2 dd-rounded-md dd-select-none dd-transition-all dd-duration-500 dd-flex dd-flex-col dd-items-center dd-justify-center dd-whitespace-nowrap',
             )}
             onClick={() => text && copyToClipboard(text)}
           >
             {!showText && (
-              <div className='bg-white/10 dark:bg-black/10 backdrop-blur-[2.3px] absolute left-0 top-0 right-0 bottom-0 w-full h-full' />
+              <div className='dd-bg-white/10 dark:dd-bg-black/10 dd-backdrop-blur-[2.3px] dd-absolute dd-left-0 dd-top-0 dd-right-0 dd-bottom-0 dd-w-full dd-h-full' />
             )}
-            <Text className={cn('w-full overflow-hidden text-ellipsis truncate', textClassName)}>
+            <Text className={cn('dd-w-full dd-overflow-hidden dd-text-ellipsis dd-truncate', textClassName)}>
               {!text || text === undefined ? '' : text}
             </Text>
           </div>
 
-          <div className='select-none'>
+          <div className='dd-select-none'>
             {showText ? (
               <EyeIcon
                 onClick={() => setShowText(false)}
@@ -143,16 +142,16 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
       )}
 
       {type === 'copy' && (
-        <div className={cn('flex items-center gap-1', className)}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
           <Input
             className={cn(
               inputVariants({
                 uiSize,
               }),
               {
-                'h-7': uiSize === 'small',
-                'h-9': uiSize === 'medium' || uiSize === undefined,
-                'h-11': uiSize === 'large',
+                'dd-h-7': uiSize === 'small',
+                'dd-h-9': uiSize === 'medium' || uiSize === undefined,
+                'dd-h-11': uiSize === 'large',
               },
               className,
             )}
@@ -160,7 +159,6 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
             readOnly={true}
             {...props}
           />
-          <Input value={text ? text : ''} readOnly={true} {...props} />
           <div className='select-none'>
             {copied ? (
               <CheckIcon // Show CheckIcon when copied

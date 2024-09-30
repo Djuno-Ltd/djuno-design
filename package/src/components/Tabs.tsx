@@ -112,11 +112,14 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   return (
     <TabGroup selectedIndex={selectedIndex} onChange={onChangeTab}>
       <TabList
-        className={cn('flex overflow-x-auto', {
-          [listClassName || '']: listClassName,
-          'w-full md:w-auto ': !tabType || tabType === 'default',
-          'bg-slate-500/10 p-1 rounded-lg': tabType === 'creamy',
-        })}
+        className={cn(
+          'dd-flex dd-overflow-x-auto',
+          {
+            'dd-w-full md:w-auto ': !tabType || tabType === 'default',
+            'dd-bg-slate-500/10 dd-p-1 dd-rounded-lg': tabType === 'creamy',
+          },
+          listClassName,
+        )}
       >
         {options.map((option, i) => (
           <Tab
@@ -124,18 +127,20 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
             disabled={option.disabled}
             data-testid={option.testId}
             className={({ selected }) =>
-              cn('hover:dark:text-slate-100 hover:text-gray-900 outline-none disabled:cursor-not-allowed', {
-                'font-semibold bg-primary-50 dark:bg-dark-700 text-blue-500 hover:!text-blue-600 hover:dark:text-blue-600 rounded-lg':
+              cn('hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed', {
+                'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
                   selected && (!tabType || tabType === 'default'),
-                'font-normal text-xs sm:text-sm whitespace-nowrap px-3 h-9 w-full': tabType === 'creamy',
-                'bg-white dark:bg-dark-900 dark:text-slate-300 rounded-lg': tabType === 'creamy' && selected,
-                'text-gray-400 dark:text-slate-400': !selected,
+                'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
+                  tabType === 'creamy',
+                'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
+                  tabType === 'creamy' && selected,
+                'dd-text-gray-400 dark:dd-text-slate-400': !selected,
               })
             }
           >
             {(!tabType || tabType === 'default') && (
-              <div className='rounded-md flex items-center transition-background duration-150 justify-center text-center sm:space-x-2 w-full px-3 py-1.5 '>
-                <span className='text-xs sm:text-sm whitespace-nowrap'>{option.label}</span>
+              <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
+                <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
               </div>
             )}
             {tabType === 'creamy' && <>{option.label}</>}
@@ -146,8 +151,8 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         {options.map((option, i) => (
           <TabPanel
             key={i}
-            className={cn('bg-white dark:bg-dark-700 rounded-md', {
-              'py-6': (!tabType || tabType === 'default') && option.element,
+            className={cn('dd-bg-white dark:dd-bg-dark-700 dd-rounded-md', {
+              'dd-py-6': (!tabType || tabType === 'default') && option.element,
               [panelClassName || '']: panelClassName,
             })}
           >
@@ -171,13 +176,6 @@ export const getOptionIndexFromUrlString = (url: string, options: TabOptions) =>
   })
 
   return index
-}
-
-export function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  }
 }
 
 export default Tabs

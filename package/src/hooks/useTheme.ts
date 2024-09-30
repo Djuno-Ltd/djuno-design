@@ -69,10 +69,10 @@ export const useTheme = (): UseTheme => {
     const htmlTag = document.querySelector('html')
     if (mode === 'dark') {
       htmlTag?.classList.add('dark')
-      htmlTag?.classList.add('dark')
+      htmlTag?.classList.add('dd-dark')
     } else {
       htmlTag?.classList.remove('dark')
-      htmlTag?.classList.remove('dark')
+      htmlTag?.classList.remove('dd-dark')
     }
   }, [mode])
 

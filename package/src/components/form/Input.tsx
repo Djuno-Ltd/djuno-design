@@ -36,24 +36,24 @@ import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
  * This function generates CSS classes for alert styles based on specified variants.
  */
 export const inputVariants = cva(
-  'bg-secondary-100 focus:ring-0 text-sm block w-full dark:bg-dark-800 outline-none disabled:cursor-not-allowed disabled:bg-secondary-200 dark:disabled:bg-gray-700 dark:disabled:text-secondary-400 disabled:text-secondary-500 disabled:border-secondary-300 disabled:dark:border-gray-600',
+  'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:dd-disabled:bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
       type: {
-        simple: 'text-secondary-600 bg-transparent',
-        default: 'border-2',
+        simple: 'dd-text-secondary-600 dd-bg-transparent',
+        default: 'dd-border-2',
       },
       hasError: {
-        yes: 'border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
-        no: 'border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-800 dark:focus:bg-dark-700 dark:focus:border-dark-600 dark:text-slate-50 dark:placeholder-gray-500',
+        yes: 'dd-border dd-border-red-500 dd-text-red-900 dd-placeholder-red-700 focus:dd-border-red-500 dark:dd-text-red-500 dark:dd-placeholder-red-500 dark:dd-border-red-500',
+        no: 'dd-border-secondary-100 focus:dd-bg-secondary-50 focus:dd-border-secondary-200 dark:dd-border-dark-800 dark:dd-focus:bg-dark-700 dark:focus:dd-border-dark-600 dark:dd-text-slate-50 dark:dd-placeholder-gray-500',
       },
       uiSize: {
-        small: 'rounded-lg text-xs px-1',
-        medium: 'rounded-lg text-sm px-2',
-        large: 'rounded-xl text-base px-2',
+        small: 'dd-rounded-lg dd-text-xs dd-px-1',
+        medium: 'dd-rounded-lg dd-text-sm dd-px-2',
+        large: 'dd-rounded-xl dd-text-base dd-px-2',
       },
       copyable: {
-        yes: 'pr-7',
+        yes: 'dd-pr-7',
         no: '',
       },
     },
@@ -72,11 +72,11 @@ export const inputVariants = cva(
  */
 
 export const labelVariants = cva(
-  'flex items-center gap-1 text-sm whitespace-nowrap text-black/85 dark:text-secondary-100',
+  'dd-flex dd-items-center dd-gap-1 dd-text-sm dd-whitespace-nowrap dd-text-black/85 dark:dd-text-secondary-100',
   {
     variants: {
       hasError: {
-        yes: '!text-red-700 dark:!text-red-500',
+        yes: '!dd-text-red-700 dark:!dd-text-red-500',
         no: '',
       },
     },
@@ -202,14 +202,17 @@ const Input: React.FunctionComponent<InputProps> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='flex flex-col'>
+    <div className='dd-flex dd-flex-col'>
       <div
-        className={cn('flex items-center px-1', {
-          [labelClassName || '']: labelClassName,
-          'justify-between': label || required,
-          'justify-end': !label && !required,
-          'mb-0.5': label || required || tooltip || hint,
-        })}
+        className={cn(
+          'dd-flex dd-items-center dd-px-1',
+          {
+            'dd-justify-between': label || required,
+            'dd-justify-end': !label && !required,
+            'dd-mb-0.5': label || required || tooltip || hint,
+          },
+          labelClassName,
+        )}
       >
         <label
           htmlFor={id}
@@ -226,7 +229,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='h-5 ml-1'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-1'>
               *
             </Typography.Text>
           )}
@@ -234,16 +237,16 @@ const Input: React.FunctionComponent<InputProps> = ({
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
 
-        {hint && <span className='text-[11px] text-slate-500'>{hint}</span>}
+        {hint && <span className='dd-text-[11px] dd-text-slate-500'>{hint}</span>}
       </div>
-      <div className='w-full relative block z-0'>
+      <div className='dd-w-full dd-relative dd-block dd-z-0'>
         {typeof copyable !== 'undefined' && !loading && (
-          <div className='absolute z-30 inset-y-0 end-0 flex items-center pe-2'>
+          <div className='dd-absolute dd-z-30 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2'>
             <div
               onClick={handleCopyToClipboard}
               className={cn(
-                'w-[18px] cursor-pointer hover:scale-110 text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300 text-xs',
-                { 'w-[15px]': uiSize === 'small' },
+                'dd-w-[18px] dd-cursor-pointer dd-text-slate-500 hover:dd-text-primary-300 dark:dd-text-slate-300 dark:hover:dd-text-primary-300 dd-text-xs',
+                { 'dd-w-[15px]': uiSize === 'small' },
               )}
             >
               <Tooltip content={tooltipText}> {icon}</Tooltip>
@@ -263,20 +266,20 @@ const Input: React.FunctionComponent<InputProps> = ({
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
             {
-              'h-7': uiSize === 'small',
-              'h-9': uiSize === 'medium' || uiSize === undefined,
-              'h-11': uiSize === 'large',
+              'dd-h-7': uiSize === 'small',
+              'dd-h-9': uiSize === 'medium' || uiSize === undefined,
+              'dd-h-11': uiSize === 'large',
             },
             className,
           )}
           placeholder={placeholder}
         />
         {loading && (
-          <div className='absolute z-40 inset-y-0 end-0 flex items-center pe-2.5'>
+          <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
             <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
           </div>
         )}
-        <div className='absolute inset-y-0 end-0 flex'>{AfterComponent}</div>
+        <div className='dd-absolute dd-inset-y-0 dd-end-0 dd-flex'>{AfterComponent}</div>
       </div>
       <AnimatedFormError error={error} />
     </div>
@@ -291,7 +294,7 @@ const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
         >
-          <p className='mt-0.5 text-xs text-error dark:text-error px-1'>{error}</p>
+          <p className='dd-mt-0.5 dd-text-xs dd-text-error dark:dd-text-error dd-px-1'>{error}</p>
         </motion.div>
       )}
     </AnimatePresence>

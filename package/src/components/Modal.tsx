@@ -78,49 +78,49 @@ const Modal: React.FC<ModalProps> = ({
   }, [isOpen, rendered])
   return (
     <Transition appear show={isOpen || false} as={React.Fragment}>
-      <Dialog as='div' className='relative z-50' onClose={onClose && closable ? onClose : () => {}}>
+      <Dialog as='div' className='dd-relative dd-z-50' onClose={onClose && closable ? onClose : () => {}}>
         <TransitionChild
           as={React.Fragment}
-          enter='ease-out duration-300'
-          enterFrom='opacity-0'
-          enterTo='opacity-100'
-          leave='ease-in duration-200'
-          leaveFrom='opacity-100'
-          leaveTo='opacity-0'
+          enter='dd-ease-out dd-duration-300'
+          enterFrom='dd-opacity-0'
+          enterTo='dd-opacity-100'
+          leave='dd-ease-in dd-duration-200'
+          leaveFrom='dd-opacity-100'
+          leaveTo='dd-opacity-0'
         >
-          <div className='fixed inset-0 bg-black/10 backdrop-blur-sm' />
+          <div className='dd-fixed dd-inset-0 dd-bg-black/10 dd-backdrop-blur-sm' />
         </TransitionChild>
 
-        <div className='fixed inset-0 overflow-y-auto'>
+        <div className='dd-fixed dd-inset-0 dd-overflow-y-auto'>
           <div
-            className={cn('flex min-h-full items-center justify-center p-2 text-center', {
+            className={cn('dd-flex dd-min-h-full dd-items-center dd-justify-center dd-p-2 dd-text-center', {
               [containerClassName || '']: containerClassName,
             })}
           >
             <TransitionChild
               as={React.Fragment}
-              enter='ease-out duration-300'
-              enterFrom='opacity-0 scale-95'
-              enterTo='opacity-100 scale-100'
-              leave='ease-in duration-200'
-              leaveFrom='opacity-100 scale-100'
-              leaveTo='opacity-0 scale-95'
+              enter='dd-ease-out dd-duration-300'
+              enterFrom='dd-opacity-0 dd-scale-95'
+              enterTo='dd-opacity-100 dd-scale-100'
+              leave='dd-ease-in dd-duration-200'
+              leaveFrom='dd-opacity-100 dd-scale-100'
+              leaveTo='dd-opacity-0 dd-scale-95'
             >
               <DialogPanel
                 as='div'
                 className={cn(
-                  'w-full transform rounded-xl bg-white border-0 dark:bg-dark-900 dark:border-2 dark:border-dark-800 p-4 text-left align-middle shadow-xl transition-all',
+                  'dd-w-full dd-transform dd-rounded-xl dd-bg-white dd-border-0 dark:dd-bg-dark-900 dark:dd-border-2 dark:dd-border-dark-800 dd-p-4 dd-text-left dd-align-middle dd-shadow-xl dd-transition-all',
                   {
                     [contentClassName || '']: contentClassName,
                   },
                 )}
               >
-                <DialogTitle as='div' className='leading-6 flex items-center justify-between'>
+                <DialogTitle as='div' className='dd-leading-6 dd-flex dd-items-center dd-justify-between'>
                   <Typography.Text size='base'>{title}</Typography.Text>
                   {closable && (
                     <CloseIcon
                       onClick={onClose ? onClose : () => {}}
-                      className='text-gray-900 dark:text-slate-200 w-5 h-5 cursor-pointer hover:scale-110'
+                      className='dd-text-gray-900 dark:dd-text-slate-200 dd-w-5 dd-h-5 dd-cursor-pointer hover:dd-scale-110'
                     />
                   )}
                 </DialogTitle>

@@ -23,6 +23,7 @@ import { SizeTypes } from '.'
 export interface SkeletonProps {
   size?: SizeTypes
   className?: string
+  style?: React.CSSProperties
   shape?: SkeletonShapes
   animation?: SkeletonAnimations
 }
