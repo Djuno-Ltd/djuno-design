@@ -134,18 +134,21 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   }
 
   return (
-    <div className={cn('flex flex-col h-full md:flex-row relative', className)} style={style}>
+    <div className={cn('dd-flex dd-flex-col dd-h-full md:dd-flex-row dd-relative', className)} style={style}>
       {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal' })}
       <div
-        className={cn('min-h-full w-full ml-auto transition-all duration-200 relative', {
-          'lg:w-[calc(100%-300px)]': type === 'normal' || type === undefined,
-          'lg:w-[calc(100%-130px)]': type === 'mini',
+        className={cn('dd-min-h-full dd-w-full dd-ml-auto dd-transition-all dd-duration-200 dd-relative', {
+          'lg:dd-w-[calc(100%-300px)]': type === 'normal' || type === undefined,
+          'lg:dd-w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        <div className='relative z-30 w-full'>
+        <div className='dd-relative dd-z-30 dd-w-full'>
           {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
         </div>
-        <div className='max-w-7xl mx-auto min-w-full h-[calc(100%-4rem)] overflow-auto' ref={containerRef}>
+        <div
+          className='dd-max-w-7xl dd-mx-auto dd-min-w-full dd-h-[calc(100%-4rem)] dd-overflow-auto'
+          ref={containerRef}
+        >
           {children}
         </div>
 
@@ -157,7 +160,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
                 animate={{ scale: 1 }}
                 exit={{ scale: 0 }}
                 onClick={handleGoToTop}
-                className='absolute bottom-4 right-4 bg-primary-500 text-white rounded-full p-2 w-[32px] h-[32px] aspect-square shadow-lg hover:bg-primary-600 transition-colors flex items-center justify-center whitespace-nowrap'
+                className='dd-absolute dd-bottom-4 dd-right-4 dd-bg-primary-500 dd-text-white dd-rounded-full dd-p-2 dd-w-[32px] dd-h-[32px] dd-aspect-square dd-shadow-lg hover:dd-bg-primary-600 dd-transition-colors dd-flex dd-items-center dd-justify-center dd-whitespace-nowrap'
               >
                 <Typography.Text uiType='transparent' size='xs'>
                   ↑
@@ -173,14 +176,14 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className={cn(
-                'w-full h-full flex justify-center items-center absolute inset-0 bg-slate-50 dark:bg-dark-900 z-30',
+                'dd-w-full dd-h-full dd-flex dd-justify-center dd-items-center dd-absolute dd-inset-0 dd-bg-slate-50 dark:dd-bg-dark-900 dd-z-30',
                 loadingsContainerClassName,
               )}
             >
               {contentLoadingContent ? (
                 contentLoadingContent
               ) : (
-                <Flex direction='col' items='center' className='gap-1'>
+                <Flex direction='col' items='center' className='dd-gap-1'>
                   <Loading type='elastic' />
                 </Flex>
               )}
@@ -195,14 +198,14 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className={cn(
-              'w-full h-full flex justify-center items-center absolute inset-0 bg-slate-50 dark:bg-dark-900 z-50',
+              'dd-w-full dd-h-full dd-flex dd-justify-center dd-items-center dd-absolute dd-inset-0 dd-bg-slate-50 dark:dd-bg-dark-900 dd-z-50',
               loadingsContainerClassName,
             )}
           >
             {globalLoadingContent ? (
               globalLoadingContent
             ) : (
-              <Flex direction='col' items='center' className='gap-1'>
+              <Flex direction='col' items='center' className='dd-gap-1'>
                 <Loading type='elastic' />
                 <Typography.Text size='xs'>Just a moment</Typography.Text>
               </Flex>

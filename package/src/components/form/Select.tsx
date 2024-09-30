@@ -39,21 +39,21 @@ const { Text } = Typography
  * This function generates CSS classes for alert styles based on specified variants.
  */
 const listboxVariants = cva(
-  'bg-secondary-100 focus:ring-0 text-sm block w-full dark:bg-dark-800 outline-none disabled:cursor-not-allowed disabled:bg-secondary-200 dark:disabled:bg-gray-700 dark:disabled:text-secondary-400 disabled:text-secondary-500 disabled:border-secondary-300 disabled:dark:border-gray-600',
+  'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:disabled:dd-bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
       type: {
-        simple: 'text-secondary-600 bg-transparent',
-        default: 'border-2',
+        simple: 'dd-text-secondary-600 dd-bg-transparent',
+        default: 'dd-border-2',
       },
       hasError: {
-        yes: 'border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
-        no: 'dark:border-dark-2 dark:focus:border-slate-600 dark:text-slate-50 dark:placeholder-gray-500 border-secondary-100 focus:bg-secondary-50 focus:border-secondary-200 dark:border-dark-700 dark:focus:bg-dark-700 dark:focus:border-dark-600',
+        yes: 'dd-border dd-border-red-500 dd-text-red-900 dd-placeholder-red-700 focus:dd-border-red-500 dark:dd-text-red-500 dark:dd-placeholder-red-500 dark:dd-border-red-500',
+        no: 'dark:dd-border-dark-2 dark:dd-text-slate-50 dark:dd-placeholder-gray-500 dd-border-secondary-100 focus:dd-bg-secondary-50 focus:dd-border-secondary-200 dark:dd-border-dark-700 dark:focus:dd-bg-dark-700 dark:focus:dd-border-dark-600',
       },
       size: {
-        small: 'rounded-lg text-xs px-1 h-7 pr-6',
-        medium: 'rounded-lg text-sm px-2 h-9 pr-6',
-        large: 'rounded-xl text-base px-2 h-11 pr-6',
+        small: 'dd-rounded-lg dd-text-xs dd-px-1 dd-h-7 dd-pr-6',
+        medium: 'dd-rounded-lg dd-text-sm dd-px-2 dd-h-9 dd-pr-6',
+        large: 'dd-rounded-xl dd-text-base dd-px-2 dd-h-11 dd-pr-6',
       },
     },
     defaultVariants: {
@@ -79,6 +79,7 @@ const listboxVariants = cva(
  * @param {string} [props.className] - Additional CSS classes for custom styling of the select component.
  * @param {string} [props.buttonClassName] - Additional CSS classes for custom styling of the select button.
  * @param {string} [props.optionsClassName] - Additional CSS classes for custom styling of the options list.
+ * @param {string} [props.optionClassName] - Additional CSS classes for custom styling of the each option.
  * @param {string| React.ReactNode} [props.label] - The label displayed above the select component.
  * @param {string|boolean| React.ReactNode} [props.error] - Error message to display if there is a validation issue.
  * @param {boolean} [props.required] - Indicates if the select component is required.
@@ -120,8 +121,10 @@ const listboxVariants = cva(
 const Select = <ExtraDataType extends string>({
   id,
   className,
+  labelClassName,
   buttonClassName,
   optionsClassName,
+  optionClassName,
   label,
   error,
   required,
@@ -138,12 +141,10 @@ const Select = <ExtraDataType extends string>({
   defaultValue,
   onChange,
   options,
-  labelClassName,
-  itemClassName,
 }: SelectProps<ExtraDataType>) => {
-  const innerId = React.useMemo(() => {
-    return id || uuid(10)
-  }, [id])
+  // const innerId = React.useMemo(() => {
+  //   return id || uuid(10)
+  // }, [id])
 
   const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
     e.stopPropagation()
@@ -155,11 +156,11 @@ const Select = <ExtraDataType extends string>({
   }, [options, value])
 
   return (
-    <div className={cn('flex flex-col', className)}>
+    <div className={cn('dd-flex dd-flex-col', className)}>
       <div
-        className={cn('flex items-center', {
-          'justify-between': label,
-          'justify-end': !label,
+        className={cn('dd-flex dd-items-center', {
+          'dd-justify-between': label,
+          'dd-justify-end': !label,
         })}
       >
         <label
@@ -183,7 +184,7 @@ const Select = <ExtraDataType extends string>({
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='text-xs mb-1 text-slate-500'>{hint}</span>}
+        {hint && <span className='dd-text-xs dd-mb-1 dd-text-slate-500'>{hint}</span>}
       </div>
       <Listbox defaultValue={defaultValue || null} value={value || null} onChange={onChange} disabled={disabled}>
         <ListboxButton
@@ -193,19 +194,19 @@ const Select = <ExtraDataType extends string>({
               hasError: error ? 'yes' : 'no',
               size,
             }),
+            'dd-relative dd-block dd-w-full',
             buttonClassName,
-            'relative block w-full',
           )}
         >
           <span
-            className={cn('block truncate text-slate-800 dark:text-slate-200 text-start', {
-              'text-slate-300 dark:text-secondary-600': loading,
+            className={cn('dd-block dd-truncate dd-text-slate-800 dark:dd-text-slate-200 dd-text-start', {
+              'dd-text-slate-300 dark:dd-text-secondary-600': loading,
             })}
           >
             {value ? (
               selectedOption?.label
             ) : (
-              <Text className='text-sm' uiType='secondary'>
+              <Text className='dd-text-sm' uiType='secondary'>
                 {emptyString
                   ? emptyString
                   : label
@@ -214,18 +215,18 @@ const Select = <ExtraDataType extends string>({
               </Text>
             )}
           </span>
-          <span className='absolute inset-y-0 right-0 flex items-center pr-2 gap-1'>
+          <span className='dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-gap-1'>
             {clearable && value && (
               <ClearIcon
                 onClick={handleClear}
-                className='w-4 cursor-pointer hover:scale-110 duration-300 text-slate-400 hover:text-slate-800'
+                className='dd-w-4 dd-cursor-pointer hover:dd-scale-110 dd-duration-300 dd-text-slate-400 hover:dd-text-slate-800'
               />
             )}
 
-            <ChevronUpDownIcon className='h-4 w-4 text-gray-400' aria-hidden='true' />
+            <ChevronUpDownIcon className='dd-h-4 dd-w-4 dd-text-gray-400' aria-hidden='true' />
           </span>
           {loading && (
-            <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
+            <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-2'>
               <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
             </span>
           )}
@@ -234,9 +235,9 @@ const Select = <ExtraDataType extends string>({
           anchor='bottom start'
           transition
           className={cn(
-            'w-[var(--button-width)] mt-1 max-h-60 overflow-auto rounded-lg bg-white dark:bg-dark-800 p-1 text-base shadow-lg border border-dark-100 dark:border-dark-600 focus:outline-none sm:text-sm',
+            'dd-w-[var(--button-width)] dd-mt-1 dd-max-h-60 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm',
             { [optionsClassName || '']: optionsClassName },
-            'origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0',
+            'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
           )}
         >
           {options.map((option, optionIdx) => (
@@ -244,24 +245,30 @@ const Select = <ExtraDataType extends string>({
               disabled={option.disabled}
               key={optionIdx}
               className={({ focus }) =>
-                `relative cursor-default select-none py-2 pl-5 pr-4 rounded-md ${
-                  focus
-                    ? 'bg-primary-50 dark:bg-dark-900 text-primary-600 dark:bg-dark-2 dark:text-primary-300'
-                    : 'text-gray-900 dark:text-slate-300'
-                }${itemClassName || ''}`
+                cn(
+                  'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
+                  {
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
+                      focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300': !focus,
+                  },
+                  optionClassName,
+                )
               }
               value={option.value}
             >
               {({ selected, disabled }) => (
                 <div
                   className={cn({
-                    'cursor-not-allowed opacity-50': disabled,
+                    'dd-cursor-not-allowed dd-opacity-50': disabled,
                   })}
                 >
-                  <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{option.label}</span>
+                  <span className={`dd-block dd-truncate ${selected ? 'dd-font-medium' : 'dd-font-normal'}`}>
+                    {option.label}
+                  </span>
                   {selected ? (
-                    <span className='absolute inset-y-0 left-0 flex items-center pl-1 text-primary-600 dark:text-primary-300'>
-                      <CheckIcon className='h-3 w-3' aria-hidden='true' />
+                    <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-1 dd-text-primary-600 dark:dd-text-primary-300'>
+                      <CheckIcon className='dd-h-3 dd-w-3' aria-hidden='true' />
                     </span>
                   ) : null}
                 </div>
@@ -270,8 +277,8 @@ const Select = <ExtraDataType extends string>({
           ))}
           {options.length === 0 && (
             <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='w-9' />}
-              textClassName='font-normal text-xs'
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
+              textClassName='dd-font-normal dd-text-xs'
             />
           )}
         </ListboxOptions>
@@ -302,7 +309,7 @@ const MultiSelect = <ExtraDataType extends string>({
   defaultValues,
   onChange,
   options,
-  itemClassName,
+  optionClassName,
 }: MultiSelectProps<ExtraDataType>) => {
   const innerId = React.useMemo(() => {
     return id || uuid(10)
@@ -314,11 +321,11 @@ const MultiSelect = <ExtraDataType extends string>({
   }
 
   return (
-    <div className={cn('flex flex-col', className)}>
+    <div className={cn('dd-flex dd-flex-col', className)}>
       <div
-        className={cn('flex items-center', {
-          'justify-between': label,
-          'justify-end': !label,
+        className={cn('dd-flex dd-items-center', {
+          'dd-justify-between': label,
+          'dd-justify-end': !label,
         })}
       >
         <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
@@ -328,13 +335,13 @@ const MultiSelect = <ExtraDataType extends string>({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5'>
               *
             </Typography.Text>
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='text-xs mb-1 text-slate-500'>{hint}</span>}
+        {hint && <span className='dd-text-xs dd-mb-1 dd-text-slate-500'>{hint}</span>}
       </div>
       <Listbox
         defaultValue={defaultValues || null}
@@ -351,12 +358,12 @@ const MultiSelect = <ExtraDataType extends string>({
               size,
             }),
             buttonClassName,
-            'relative block w-full',
+            'dd-relative dd-block dd-w-full',
           )}
         >
           <span
-            className={cn('block truncate text-slate-800 dark:text-slate-200 text-start', {
-              'text-slate-300 dark:text-secondary-600': loading,
+            className={cn('dd-block dd-truncate dd-text-slate-800 dark:dd-text-slate-200 dd-text-start', {
+              'dd-text-slate-300 dark:dd-text-secondary-600': loading,
             })}
           >
             {values && values.length > 0 ? (
@@ -367,18 +374,18 @@ const MultiSelect = <ExtraDataType extends string>({
               </Text>
             )}
           </span>
-          <span className='absolute inset-y-0 right-0 flex items-center pr-2 gap-1'>
+          <span className='dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-gap-1'>
             {clearable && values && (
               <ClearIcon
                 onClick={handleClear}
-                className='w-4 cursor-pointer hover:scale-110 duration-300 text-slate-400 hover:text-slate-800'
+                className='dd-w-4 dd-cursor-pointer hover:dd-scale-110 dd-duration-300 dd-text-slate-400 hover:dd-text-slate-800'
               />
             )}
 
-            <ChevronUpDownIcon className='h-4 w-4 text-gray-400' aria-hidden='true' />
+            <ChevronUpDownIcon className='dd-h-4 dd-w-4 dd-text-gray-400' aria-hidden='true' />
           </span>
           {loading && (
-            <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
+            <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-2'>
               <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
             </span>
           )}
@@ -387,9 +394,9 @@ const MultiSelect = <ExtraDataType extends string>({
           anchor='bottom start'
           transition
           className={cn(
-            'w-[var(--button-width)] mt-1 max-h-60 overflow-auto rounded-lg bg-white dark:bg-dark-800 p-1 text-base shadow-lg border border-dark-100 dark:border-dark-600 focus:outline-none sm:text-sm',
-            { [optionsClassName || '']: optionsClassName },
-            'origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0',
+            'dd-w-[var(--button-width)] dd-mt-1 dd-max-h-60 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm',
+            'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
+            optionsClassName,
           )}
         >
           {options.map((option, optionIdx) => (
@@ -397,24 +404,32 @@ const MultiSelect = <ExtraDataType extends string>({
               disabled={option.disabled}
               key={optionIdx}
               className={({ focus }) =>
-                `relative cursor-default select-none py-2 pl-5 pr-4 rounded-md ${
-                  focus
-                    ? 'bg-primary-50 dark:bg-dark-900 text-primary-600 dark:bg-dark-2 dark:text-primary-300'
-                    : 'text-gray-900 dark:text-slate-300'
-                }${itemClassName || ''}`
+                cn(
+                  'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
+                  {
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
+                      focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300': !focus,
+                  },
+                  optionClassName,
+                )
               }
               value={option.value}
             >
               {({ selected, disabled }) => (
                 <div
                   className={cn({
-                    'cursor-not-allowed opacity-50': disabled,
+                    'dd-cursor-not-allowed dd-opacity-50': disabled,
                   })}
                 >
-                  <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{option.label}</span>
+                  <span
+                    className={cn('dd-block dd-truncate', { 'dd-font-medium': selected, 'dd-font-normal': !selected })}
+                  >
+                    {option.label}
+                  </span>
                   {selected ? (
-                    <span className='absolute inset-y-0 left-0 flex items-center pl-1 text-primary-600 dark:text-primary-300'>
-                      <CheckIcon className='h-3 w-3' aria-hidden='true' />
+                    <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-1 dd-text-primary-600 dark:dd-text-primary-300'>
+                      <CheckIcon className='dd-h-3 dd-w-3' aria-hidden='true' />
                     </span>
                   ) : null}
                 </div>
@@ -423,8 +438,8 @@ const MultiSelect = <ExtraDataType extends string>({
           ))}
           {options.length === 0 && (
             <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='w-9' />}
-              textClassName='font-normal text-xs'
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
+              textClassName='font-normal dd-text-xs'
             />
           )}
         </ListboxOptions>

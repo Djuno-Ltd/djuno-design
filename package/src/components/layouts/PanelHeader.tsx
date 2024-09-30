@@ -68,17 +68,17 @@ const PanelHeader: React.FC<PanelHeaderProps> = ({
   )
 
   return (
-    <div className='w-full h-16 px-6 flex items-center bg-white dark:bg-dark-900 top-0 z-30 sticky border-b-2 border-slate-200 dark:border-dark-800'>
-      <div className='w-full lg:max-w-7xl mx-auto flex items-center justify-between'>
-        <div className='lg:hidden flex items-center gap-2'>
+    <div className='dd-w-full dd-h-16 dd-px-6 dd-flex dd-items-center dd-bg-white dark:dd-bg-dark-900 dd-top-0 dd-z-30 dd-sticky dd-border-b-2 dd-border-slate-200 dark:dd-border-dark-800'>
+      <div className='dd-w-full lg:dd-max-w-7xl dd-mx-auto dd-flex dd-items-center dd-justify-between'>
+        <div className='lg:dd-hidden dd-flex dd-items-center dd-gap-2'>
           <MenuIcon
-            className='text-slate-800 dark:text-slate-200 w-7 h-7 cursor-pointer'
+            className='dd-text-slate-800 dark:dd-text-slate-200 dd-w-7 dd-h-7 dd-cursor-pointer'
             onClick={handleShowSidebar}
             test-cy='menu-icon'
           />
           {mobileIcon}
         </div>
-        <div className='flex flex-1'>{children}</div>
+        <div className='dd-flex dd-flex-1'>{children}</div>
       </div>
     </div>
   )

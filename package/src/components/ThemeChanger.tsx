@@ -33,6 +33,7 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  *
  *
  * @param {object} props - ThemeChanger props.
+ * @param {string} [props.anchor] -
  * @param {string} [props.itemsClassName] - Additional classes to apply to the items within the ThemeChanger.
  *
  * @returns {React.ReactNode} Rendered ThemeChanger component.
@@ -47,33 +48,34 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  * <ThemeChanger itemsClassName="custom-theme"/>
  *
  */
-const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
+const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName, anchor = 'bottom start' }) => {
   const {
     theme: { mode, changeMode, modeRefrence },
   } = useDjunoDesign({ stric: false })
 
   return (
-    <Menu as='div' className='relative text-left flex justify-center'>
-      <MenuButton className='inline-flex w-full justify-center items-center text-sm font-medium focus:outline-none focus-visible:ring-0 text-slate-800 dark:text-slate-200'>
-        {mode === 'light' && <SunIcon className='w-6 h-6 hover:scale-110' />}
-        {mode === 'dark' && <MoonIcon className='w-6 h-6 hover:scale-110' />}
+    <Menu as='div' className='dd-relative dd-text-left dd-flex dd-justify-center'>
+      <MenuButton className='dd-inline-flex dd-w-full dd-justify-center dd-items-center dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-slate-800 dark:dd-text-slate-200'>
+        {mode === 'light' && <SunIcon className='dd-w-6 dd-h-6 hover:dd-scale-110' />}
+        {mode === 'dark' && <MoonIcon className='dd-w-6 dd-h-6 hover:dd-scale-110' />}
       </MenuButton>
 
       <Transition
         as={React.Fragment}
-        enter='transition ease-out duration-100'
-        enterFrom='transform opacity-0 scale-95'
-        enterTo='transform opacity-100 scale-100'
-        leave='transition ease-in duration-75'
-        leaveFrom='transform opacity-100 scale-100'
-        leaveTo='transform opacity-0 scale-95'
+        enter='dd-transition dd-ease-out dd-duration-100'
+        enterFrom='dd-transform dd-opacity-0 dd-scale-95'
+        enterTo='dd-transform dd-opacity-100 dd-scale-100'
+        leave='dd-transition dd-ease-in dd-duration-75'
+        leaveFrom='dd-transform dd-opacity-100 dd-scale-100'
+        leaveTo='dd-transform dd-opacity-0 dd-scale-95'
       >
         <MenuItems
+          anchor={anchor}
           className={cn(
-            'absolute bg-white dark:bg-zinc-900 ring-slate-900/10 dark:ring-black z-50 top-full rounded-lg ring-1 shadow-lg overflow-hidden w-36 py-1 text-sm font-semibold dark:highlight-white/5 mt-1',
+            'dd-absolute dd-bg-white dark:dd-bg-zinc-900 dd-ring-slate-900/10 dark:dd-ring-black dd-z-50 dd-top-full dd-rounded-lg dd-ring-1 dd-shadow-lg dd-overflow-hidden dd-w-36 dd-py-1 dd-text-sm dd-font-semibold dark:dd-highlight-white/5 dd-mt-1',
             {
               [itemsClassName || '']: itemsClassName,
-              'left-0': !itemsClassName,
+              'dd-left-0': !itemsClassName,
             },
           )}
         >
@@ -81,14 +83,17 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
             {({ focus }) => (
               <div
                 onClick={() => changeMode('light')}
-                className={cn('group flex w-full items-center rounded-md px-2 py-1 text-sm cursor-pointer ', {
-                  'bg-slate-50 dark:bg-zinc-800': focus,
-                  'text-gray-900 dark:text-slate-300':
-                    modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'dark'),
-                  'text-sky-500 dark:text-sky-500': mode === 'light' && modeRefrence === 'manual',
-                })}
+                className={cn(
+                  'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-1 dd-text-sm dd-cursor-pointer ',
+                  {
+                    'dd-bg-slate-50 dark:dd-bg-zinc-800': focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300':
+                      modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'dark'),
+                    'dd-text-sky-500 dark:dd-text-sky-500': mode === 'light' && modeRefrence === 'manual',
+                  },
+                )}
               >
-                <SunIcon className='w-5 h-5 mr-2' />
+                <SunIcon className='dd-w-5 dd-h-5 dd-mr-2' />
                 Light
               </div>
             )}
@@ -97,14 +102,17 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
             {({ focus }) => (
               <div
                 onClick={() => changeMode('dark')}
-                className={cn('group flex w-full items-center rounded-md px-2 py-1 text-sm cursor-pointer', {
-                  'bg-slate-50 dark:bg-zinc-800': focus,
-                  'text-gray-900 dark:text-slate-300':
-                    modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'light'),
-                  'dark:text-sky-500': mode === 'dark' && modeRefrence === 'manual',
-                })}
+                className={cn(
+                  'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-1 dd-text-sm dd-cursor-pointer',
+                  {
+                    'dd-bg-slate-50 dark:dd-bg-zinc-800': focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300':
+                      modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'light'),
+                    'dark:dd-text-sky-500': mode === 'dark' && modeRefrence === 'manual',
+                  },
+                )}
               >
-                <MoonIcon className='w-5 h-5 mr-2' />
+                <MoonIcon className='dd-w-5 dd-h-5 dd-mr-2' />
                 Dark
               </div>
             )}
@@ -113,13 +121,16 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
             {({ focus }) => (
               <div
                 onClick={() => changeMode('system')}
-                className={cn('group flex w-full items-center rounded-md px-2 py-1 text-sm cursor-pointer', {
-                  'bg-slate-50 dark:bg-zinc-800': focus,
-                  'text-gray-900 dark:text-slate-300': modeRefrence !== 'system',
-                  'text-sky-500 dark:text-sky-500': modeRefrence === 'system',
-                })}
+                className={cn(
+                  'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-1 dd-text-sm dd-cursor-pointer',
+                  {
+                    'dd-bg-slate-50 dark:dd-bg-zinc-800': focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300': modeRefrence !== 'system',
+                    'dd-text-sky-500 dark:dd-text-sky-500': modeRefrence === 'system',
+                  },
+                )}
               >
-                <SystemIcon className='w-5 h-5 mr-2' />
+                <SystemIcon className='dd-w-5 dd-h-5 dd-mr-2' />
                 System
               </div>
             )}

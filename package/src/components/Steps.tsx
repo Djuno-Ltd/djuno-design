@@ -55,35 +55,35 @@ const Steps = <T extends string>({ className, ...props }: StepsProps<T>): React.
   const [activeLevels, checkedLevels] = handleSelectedSteps(step, stepsKeys)
 
   return (
-    <ol className={cn('flex items-center w-full text-center py-6', className)}>
+    <ol className={cn('dd-flex dd-items-center dd-w-full dd-text-center dd-py-6', className)}>
       {steps.map((step, i) => (
         <li
           key={i}
-          className={cn(`flex items-center`, {
-            "md:w-full md:after:content-[''] after:w-full after:h-1 after:border-b after:hidden md:after:inline-block after:mx-4 xl:after:mx-6 after:border-secondary-300 dark:after:border-gray-700":
+          className={cn(`dd-flex dd-items-center`, {
+            "md:dd-w-full md:after:dd-content-[''] after:dd-w-full after:dd-h-1 after:dd-border-b after:dd-hidden md:after:dd-inline-block after:dd-mx-4 xl:after:dd-mx-6 after:dd-border-secondary-300 dark:after:dd-border-gray-700":
               steps.length !== i + 1,
-            'cursor-pointer': checkedLevels.includes(step.value) && step.callback,
+            'dd-cursor-pointer': checkedLevels.includes(step.value) && step.callback,
           })}
           onClick={() => (step.callback && checkedLevels.includes(step.value) ? step.callback(step.value) : null)}
         >
           <span
-            className={cn('flex items-center text-dark-700 dark:text-dark-100', {
-              "after:content-['/'] md:after:hidden after:mx-1 after:text-gray-200 dark:after:text-gray-500":
+            className={cn('dd-flex dd-items-center dd-text-dark-700 dark:dd-text-dark-100', {
+              "after:dd-content-['/'] md:after:dd-hidden after:dd-mx-1 after:dd-text-gray-200 dark:after:dd-text-gray-500":
                 steps.length !== i + 1,
-              '!text-primary-500 dark:!text-primary-500 font-medium': activeLevels?.includes(step.value),
+              '!dd-text-primary-500 dark:!dd-text-primary-500 dd-font-medium': activeLevels?.includes(step.value),
             })}
           >
-            <span className='me-1'>
+            <span className='dd-me-1'>
               {checkedLevels?.includes(step.value) ? (
-                <CheckIcon className='w-[20px] aspect-square' />
+                <CheckIcon className='dd-w-[20px] dd-aspect-square' />
               ) : (
-                <Text className='whitespace-nowrap' size='base' uiType='transparent'>
+                <Text className='dd-whitespace-nowrap' size='base' uiType='transparent'>
                   {i + 1} .
                 </Text>
               )}
             </span>
 
-            <Text className='whitespace-nowrap' uiType='transparent'>
+            <Text className='dd-whitespace-nowrap' uiType='transparent'>
               {step.label}
             </Text>
           </span>

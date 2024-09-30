@@ -50,31 +50,31 @@ const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, lo
       checked={enabled}
       onChange={handleChange}
       className={cn(
-        'relative inline-flex shrink-0 cursor-pointer rounded-full border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75',
+        'dd-relative dd-inline-flex dd-shrink-0 dd-cursor-pointer dd-rounded-full dd-border-transparent dd-transition-colors dd-duration-200 dd-ease-in-out focus:dd-outline-none focus-visible:dd-ring-2 focus-visible:dd-ring-white/75',
         {
-          'h-[17px] w-[33px] border': size === 'small',
-          'h-[24px] w-[46px] border-2': size === 'medium' || size === undefined,
-          'h-[31px] w-[59px] border-[3px]': size === 'large',
-          'bg-primary-400 dark:bg-primary-500': enabled && !disabled,
-          'bg-primary-200 dark:bg-primary-200/70': enabled && disabled,
-          'bg-gray-200 dark:bg-gray-600': !enabled,
-          '!cursor-not-allowed': disabled || loading,
+          'dd-h-[17px] dd-w-[33px] dd-border': size === 'small',
+          'dd-h-[24px] dd-w-[46px] dd-border-2': size === 'medium' || size === undefined,
+          'dd-h-[31px] dd-w-[59px] dd-border-[3px]': size === 'large',
+          'dd-bg-primary-400 dark:dd-bg-primary-500': enabled && !disabled,
+          'dd-bg-primary-200 dark:dd-bg-primary-200/70': enabled && disabled,
+          'dd-bg-gray-200 dark:dd-bg-gray-600': !enabled,
+          '!dd-cursor-not-allowed': disabled || loading,
         },
       )}
     >
       <span
         aria-hidden='true'
         className={cn(
-          'pointer-events-none inline-block  transform rounded-full bg-white dark:bg-dark-2 shadow-lg ring-0 transition duration-200 ease-in-out',
-          'flex items-center justify-center',
+          'dd-pointer-events-none dd-inline-block  dd-transform dd-rounded-full dd-bg-white dark:dd-bg-dark-2 dd-shadow-lg dd-ring-0 dd-transition dd-duration-200 dd-ease-in-out',
+          'dd-flex dd-items-center dd-justify-center',
           {
-            'h-[15px] w-[15px]': size === 'small',
-            'h-[20px] w-[20px]': size === 'medium' || size === undefined,
-            'h-[25px] w-[25px]': size === 'large',
-            'translate-x-0': !enabled,
-            'translate-x-[16px]': enabled && size === 'small',
-            'translate-x-[22px]': enabled && (size === 'medium' || size === undefined),
-            'translate-x-[28px]': enabled && size === 'large',
+            'dd-h-[15px] dd-w-[15px]': size === 'small',
+            'dd-h-[20px] dd-w-[20px]': size === 'medium' || size === undefined,
+            'dd-h-[25px] dd-w-[25px]': size === 'large',
+            'dd-translate-x-0': !enabled,
+            'dd-translate-x-[16px]': enabled && size === 'small',
+            'dd-translate-x-[22px]': enabled && (size === 'medium' || size === undefined),
+            'dd-translate-x-[28px]': enabled && size === 'large',
           },
         )}
       >

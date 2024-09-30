@@ -295,8 +295,10 @@ function App() {
 | defaultValue     | `T`                                     |          |         | The default value of the select component.                                 |
 | options          | `SelectOption<T, ET>[]`                 | ✔       |         | Array of options available for selection.                                  |
 | className        | `string`                                |          |         | Additional CSS classes for custom styling of the select component.         |
+| labelClassName   | `string`                                |          |         | Additional CSS classes for custom label                                    |
 | buttonClassName  | `string`                                |          |         | Additional CSS classes for custom styling of the select button.            |
 | optionsClassName | `string`                                |          |         | Additional CSS classes for custom styling of the options list.             |
+| optionClassName  | `string`                                |          |         | Additional CSS classes for custom styling of the each option               |
 | label            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
 | error            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
 | required         | `boolean`                               |          |         | Indicates if the select component is required.                             |
@@ -310,7 +312,6 @@ function App() {
 | disabled         | `boolean`                               |          |         | If true, disables the select component.                                    |
 | size             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
 | onBlur           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
-| labelClassName   | `string`                                |          |         | Additional CSS classes for custom label                                    |
 
 ### Skeleton
 
@@ -390,6 +391,7 @@ function App() {
 | type            | `DropdownTypes`     |          |         |             |
 | buttonClassName | `string`            |          |         |             |
 | itemsClassName  | `string`            |          |         |             |
+| itemClassName   | `string`            |          |         |             |
 
 ### SecureCopy
 
@@ -495,6 +497,7 @@ function App() {
 | icon             | `React.FunctionComponent<React.SVGProps<SVGSVGElement>>` |          |         | Icon component for the item.                                         |
 | disabled         | `boolean`                                                |          |         | If true, the item is disabled and not clickable.                     |
 | children         | `SidebarItem[]`                                          |          |         | Nested items to be displayed below the current item                  |
+| active           | `boolean`                                                |          |         | Conditions to determine if the item is visible or not.               |
 | testId           | `string`                                                 |          |         | Test ID for the sidebar item (useful for testing).                   |
 
 ### JsonViewer

@@ -130,21 +130,21 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
   }
 
   return (
-    <ul className={cn('flex gap-0.5', { [className || '']: className })}>
+    <ul className={cn('dd-flex dd-gap-0.5', { [className || '']: className })}>
       {/* Left navigation arrow */}
       <li
         className={cn(
-          'w-7 h-7 flex justify-center items-center  rounded-full cursor-pointer transition-all duration-100 select-none',
+          'dd-w-7 dd-h-7 dd-flex dd-justify-center dd-items-center  dd-rounded-full dd-cursor-pointer dd-transition-all dd-duration-100 dd-select-none',
           {
-            'bg-slate-100 text-slate-500 hover:bg-primary-500 hover:text-white dark:bg-dark-800 dark:hover:bg-dark-700 dark:text-slate-100':
+            'dd-bg-slate-100 dd-text-slate-500 hover:dd-bg-primary-500 hover:dd-text-white dark:dd-bg-dark-800 dark:hover:dd-bg-dark-700 dark:dd-text-slate-100':
               currentPage !== 1, //enable
-            'bg-slate-100 text-slate-300 hover:bg-slate-100 hover:text-slate-300 dark:bg-dark-800 dark:hover:bg-dark-700 dark:text-slate-500 !cursor-not-allowed':
+            'dd-bg-slate-100 dd-text-slate-300 hover:dd-bg-slate-100 hover:dd-text-slate-300 dark:dd-bg-dark-800 dark:hover:dd-bg-dark-700 dark:dd-text-slate-500 !dd-cursor-not-allowed':
               currentPage === 1, //disable
           },
         )}
         onClick={onPrevious}
       >
-        <ArrowIcon className='w-4 rotate-180' />
+        <ArrowIcon className='dd-w-4 dd-rotate-180' />
       </li>
       {paginationRange &&
         paginationRange.map((pageNumber, i) => {
@@ -154,8 +154,8 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
               <li
                 key={`page-item-${pageNumber}-${i}`}
                 className={cn(
-                  'w-7 h-7 flex justify-center items-center rounded-full cursor-default transition-all duration-100 bg-transparent text-slate-500 select-none',
-                  { '!cursor-not-allowed': loading },
+                  'dd-w-7 dd-h-7 dd-flex dd-justify-center dd-items-center dd-rounded-full dd-cursor-default dd-transition-all dd-duration-100 dd-bg-transparent dd-text-slate-500 dd-select-none',
+                  { '!dd-cursor-not-allowed': loading },
                 )}
               >
                 &#8230;
@@ -168,12 +168,13 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
             <li
               key={`page-item-${pageNumber}`}
               className={cn(
-                'w-7 h-7 flex justify-center items-center rounded-full cursor-pointer transition-all duration-100 select-none text-sm',
+                'dd-w-7 dd-h-7 dd-flex dd-justify-center dd-items-center dd-rounded-full dd-cursor-pointer dd-transition-all dd-duration-100 dd-select-none dd-text-sm',
                 {
-                  'bg-slate-100 text-slate-500 hover:bg-primary-500 hover:text-white dark:bg-dark-800 dark:hover:bg-dark-700 dark:text-slate-300':
+                  'dd-bg-slate-100 dd-text-slate-500 hover:dd-bg-primary-500 hover:dd-text-white dark:dd-bg-dark-800 dark:hover:dd-bg-dark-700 dark:dd-text-slate-300':
                     pageNumber !== currentPage, //not-selected
-                  'bg-primary-500 text-white hover:bg-primary-500 hover:text-white': pageNumber === currentPage, //selected
-                  '!cursor-not-allowed': loading,
+                  'dd-bg-primary-500 dd-text-white hover:dd-bg-primary-500 hover:dd-text-white':
+                    pageNumber === currentPage, //selected
+                  '!dd-cursor-not-allowed': loading,
                 },
               )}
               onClick={() => onPage(Number(pageNumber))}
@@ -185,13 +186,13 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
       {/*  Right Navigation arrow */}
       <li
         className={cn(
-          'w-7 h-7 flex justify-center items-center rounded-full cursor-pointer transition-all duration-100 select-none ',
+          'dd-w-7 dd-h-7 dd-flex dd-justify-center dd-items-center dd-rounded-full dd-cursor-pointer dd-transition-all dd-duration-100 dd-select-none ',
           {
-            'bg-slate-100 text-slate-500 hover:bg-primary-500 hover:text-white dark:bg-dark-800 dark:hover:bg-dark-700 dark:text-slate-100':
+            'dd-bg-slate-100 dd-text-slate-500 hover:dd-bg-primary-500 hover:dd-text-white dark:dd-bg-dark-800 dark:hover:dd-bg-dark-700 dark:dd-text-slate-100':
               currentPage !== lastPage, //enable
-            'bg-slate-100 text-slate-300 hover:bg-slate-100 hover:text-slate-300 dark:bg-dark-800 dark:hover:bg-dark-700 dark:text-slate-500 !cursor-not-allowed':
+            'dd-bg-slate-100 dd-text-slate-300 hover:dd-bg-slate-100 hover:dd-text-slate-300 dark:dd-bg-dark-800 dark:hover:dd-bg-dark-700 dark:dd-text-slate-500 !dd-cursor-not-allowed':
               currentPage === lastPage, //disable
-            '!cursor-not-allowed': loading,
+            '!dd-cursor-not-allowed': loading,
           },
         )}
         onClick={onNext}

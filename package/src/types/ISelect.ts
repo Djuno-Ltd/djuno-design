@@ -34,8 +34,10 @@ export type SelectOption<ExtraDataType = any> = {
 
 export interface SelectBaseProps {
   className?: string
+  labelClassName?: string
   buttonClassName?: string
   optionsClassName?: string
+  optionClassName?: string
   label?: string | React.ReactNode
   error?: string | boolean | React.ReactNode
   required?: boolean
@@ -49,8 +51,6 @@ export interface SelectBaseProps {
   disabled?: boolean
   size?: SizeTypes
   onBlur?: (e: FocusEvent) => void
-  labelClassName?: string
-  itemClassName?: string
 }
 
 export type SelectTypes = InputTypes

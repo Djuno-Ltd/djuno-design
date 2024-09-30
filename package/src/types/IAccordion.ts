@@ -22,7 +22,9 @@ import React, { PropsWithChildren } from 'react'
 
 export interface AccordionProps extends PropsWithChildren {
   items?: Array<AccordionItem>
-  panelClassNames?: string
+  className?: string
+  panelClassName?: string
+  labelClassName?: string
   loading?: boolean
 }
 

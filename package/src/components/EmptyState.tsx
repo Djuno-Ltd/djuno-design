@@ -74,12 +74,12 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
   return (
     <div
       className={cn(
-        'w-full  flex flex-col gap-1 justify-center items-center text-slate-400 dark:text-gray-600',
+        'dd-w-full dd-flex dd-flex-col dd-gap-1 dd-justify-center dd-items-center dd-text-slate-400 dark:dd-text-gray-600',
         className,
       )}
     >
       {usingIcon || usingIcon === undefined ? icon || <DefaultIcon className={iconClassName} /> : null}
-      <Typography.Text uiType='transparent' size='sm' className={textClassName}>
+      <Typography.Text uiType='transparent' size='sm' className={cn('dd-text-center', textClassName)}>
         {usingText || usingText === undefined ? text || 'No data' : null}
       </Typography.Text>
     </div>
@@ -87,11 +87,11 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
 }
 
 const SimpleIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxIcon className={cn('w-14', className)} />
+  return <InboxIcon className={cn('dd-w-14', className)} />
 }
 
 const DefaultIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxArrowIcon className={cn('w-14', className)} />
+  return <InboxArrowIcon className={cn('dd-w-14', className)} />
 }
 
 EmptyState.PRESENTED_IMAGE_SIMPLE = SimpleIcon

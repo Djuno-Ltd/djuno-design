@@ -19,7 +19,6 @@
  */
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { useFloating, shift, flip } from '@floating-ui/react-dom'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import Button from './Button'
 import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '../types/IDropdown'
@@ -33,7 +32,9 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
  * @param {string} [props.menu] - menu of the DropdownMenu.
  * @param {string} [props.title] -  title of the DropdownMenu.
  * @param {string} [props.type] - type of the DropdownMenu.
+ * @param {string} [props.anchor] -
  * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the DropdownMenu.
+ * @param {string} [props.itemClassName] - Additional itemClassName to apply to the DropdownMenu item.
  * @param {string} [props.buttonClassName] - Additional buttonClassName to apply to the DropdownMenu.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the DropdownMenu, each with a label and optional panel content.
  * @param {boolean} [props.loading] - Indicates if the DropdownMenu is in a loading state.
@@ -64,22 +65,18 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
   title,
   menu,
   type,
+  anchor = 'bottom start',
   buttonClassName,
   itemsClassName,
   children,
   itemClassName,
 }) => {
   const itemGroups = groupArrayByDivider(menu || [])
-  const { refs, floatingStyles } = useFloating({
-    placement: 'bottom-end',
-    middleware: [flip(), shift()],
-  })
   return (
-    <Menu as='div' className='text-left w-full h-full inline-block justify-center items-center'>
-      <div className='flex items-center justify-center'>
+    <Menu as='div' className='dd-text-left dd-w-full dd-h-full dd-inline-block dd-justify-center dd-items-center'>
+      <div className='dd-flex dd-items-center dd-justify-center'>
         <MenuButton
           onClick={(e) => e.stopPropagation()}
-          ref={refs.setReference}
           className={cn(buttonClassName, {
             '': type === 'default' || typeof type === 'undefined',
             '': type === 'simple',
@@ -89,8 +86,8 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
           {type !== 'simple' ? (
             <Button>{children}</Button>
           ) : (
-            <div className='h-6 flex items-center ml-auto cursor-pointer'>
-              <ArrowDownIcon className='h-4 w-4 dark:text-secondary-100' />
+            <div className='dd-h-6 dd-flex dd-items-center dd-ml-auto dd-cursor-pointer'>
+              <ArrowDownIcon className='dd-h-4 dd-w-4 dark:dd-text-secondary-100' />
             </div>
           )}
         </MenuButton>
@@ -99,31 +96,31 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
       {itemGroups.length > 0 && (
         <Transition
           as={React.Fragment}
-          enter='transition-opacity duration-75'
-          enterFrom='transform opacity-0 scale-95'
-          enterTo='transform opacity-100 scale-100'
-          leave='transition ease-in duration-75'
-          leaveFrom='transform opacity-100 scale-100'
-          leaveTo='transform opacity-0 scale-95'
+          enter='dd-transition-opacity dd-duration-75'
+          enterFrom='dd-transform dd-opacity-0 dd-scale-95'
+          enterTo='dd-transform dd-opacity-100 dd-scale-100'
+          leave='dd-transition dd-ease-in dd-duration-75'
+          leaveFrom='dd-transform dd-opacity-100 dd-scale-100'
+          leaveTo='dd-transform dd-opacity-0 dd-scale-95'
         >
           <MenuItems
-            ref={refs.setFloating}
-            style={floatingStyles}
-            // style={{ clip: "rect(auto, auto, auto, auto)" }}
+            anchor={anchor}
             className={cn(
-              'absolute z-50 mt-1 max-h-60 w-48 overflow-auto rounded-lg bg-white dark:bg-dark-800 p-1 text-base shadow-lg border border-dark-100 dark:border-dark-600 focus:outline-none sm:text-sm divide-y divide-dark-100 dark:divide-dark-600',
+              'dd-absolute dd-z-50 dd-mt-1 dd-max-h-60 dd-w-48 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm dd-divide-y dd-divide-dark-100 dark:dd-divide-dark-600',
               {
                 [itemsClassName || '']: itemsClassName,
               },
             )}
           >
             {title && (
-              <div className='w-full px-3 text-xs py-2 text-secondary-600 dark:text-secondary-300'>{title}</div>
+              <div className='dd-w-full dd-px-3 dd-text-xs dd-py-2 dd-text-secondary-600 dark:dd-text-secondary-300'>
+                {title}
+              </div>
             )}
 
             {itemGroups.map((items, groupIdx) => {
               return (
-                <div key={groupIdx} className='px-1 py-1 '>
+                <div key={groupIdx} className='dd-px-1 dd-py-1 '>
                   {items.map((item, itemIdx) => (
                     <MenuItem key={itemIdx}>
                       {({ focus, close }) => (
@@ -136,18 +133,16 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
                             }
                           }}
                           className={cn(
-                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                            'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-2 dd-text-sm',
                             {
-                              'bg-primary-50 dark:bg-dark-700': focus && !item.danger,
-                              'bg-red-100 dark:bg-red-600/10': focus && item.danger,
-                              'cursor-not-allowed text-dark-400 dark:text-secondary-500': item.disabled,
-                              'text-dark-900 dark:text-secondary-100': !item.disabled && !item.danger,
-                              'text-red-900 dark:text-red-600': !item.disabled && item.danger,
-                              'animate-bounce': item.loading,
+                              'dd-bg-primary-50 dark:dd-bg-dark-700': focus && !item.danger,
+                              'dd-bg-red-100 dark:dd-bg-red-600/10': focus && item.danger,
+                              'dd-cursor-not-allowed dd-text-dark-400 dark:dd-text-secondary-500': item.disabled,
+                              'dd-text-dark-900 dark:dd-text-secondary-100': !item.disabled && !item.danger,
+                              'dd-text-red-900 dark:dd-text-red-600': !item.disabled && item.danger,
+                              'dd-animate-bounce': item.loading,
                             },
-                            {
-                              [itemsClassName || '']: itemsClassName,
-                            },
+                            itemClassName,
                           )}
                         >
                           {item.label}

@@ -71,17 +71,17 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
     <span
       ref={ref}
       className={cn(
-        'flex items-center justify-between gap-0.5 px-1 py-0.5 border rounded-md',
+        'dd-flex dd-items-center dd-justify-between dd-gap-0.5 dd-px-1 dd-py-0.5 dd-border dd-rounded-md',
         {
-          '!hidden': !visible,
-          'bg-slate-100 border-slate-300 text-slate-700 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300':
+          '!dd-hidden': !visible,
+          'dd-bg-slate-100 dd-border-slate-300 dd-text-slate-700 dark:dd-bg-slate-800 dark:dd-border-slate-700 dark:dd-text-slate-300':
             color === undefined,
-          'bg-blue-100 border-blue-500 text-blue-500 dark:bg-blue-500/30': color === 'processing',
-          'bg-green-50 border-green-400 text-green-600 dark:bg-green-500/20': color === 'success',
-          'bg-red-50 border-red-500 text-red-500 dark:bg-red-500/20': color === 'error',
-          'bg-yellow-50 border-orange-500 text-orange-500 dark:bg-orange-500/20': color === 'warning',
+          'dd-bg-blue-100 dd-border-blue-500 dd-text-blue-500 dark:dd-bg-blue-500/30': color === 'processing',
+          'dd-bg-green-50 dd-border-green-400 dd-text-green-600 dark:dd-bg-green-500/20': color === 'success',
+          'dd-bg-red-50 dd-border-red-500 dd-text-red-500 dark:dd-bg-red-500/20': color === 'error',
+          'dd-bg-yellow-50 dd-border-orange-500 dd-text-orange-500 dark:dd-bg-orange-500/20': color === 'warning',
           //
-          '!border-0': !bordered,
+          '!dd-border-0': !bordered,
         },
         className,
       )}
@@ -90,7 +90,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
       <>
         {iconNode}
         {children && (
-          <Typography.Text uiType='transparent' size='xs' className='whitespace-nowrap'>
+          <Typography.Text uiType='transparent' size='xs' className='dd-whitespace-nowrap'>
             {children}
           </Typography.Text>
         )}
@@ -98,7 +98,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
       {closable && (
         <CloseIcon
           onClick={handleCloseClick}
-          className='w-[12px] h-[12px] text-slate-600 hover:text-slate-800 dark:text-slate-400 hover:dark:text-slate-200 hover:scale-125 transition-all duration-300 cursor-pointer'
+          className='dd-w-[12px] dd-h-[12px] dd-text-slate-600 hover:dd-text-slate-800 dark:dd-text-slate-400 hover:dark:dd-text-slate-200 hover:dd-scale-125 dd-transition-all dd-duration-300 dd-cursor-pointer'
         />
       )}
     </span>

@@ -80,17 +80,22 @@ const Card: React.FunctionComponent<CardProps> = ({
       id={id ? id : typeof title === 'string' ? title : undefined}
       direction='col'
       className={cn(
-        'w-full rounded-xl bg-white dark:bg-dark-900 border border-secondary-200 dark:border-dark-800 p-6',
-        { 'pt-4': title },
+        'dd-w-full dd-rounded-xl dd-bg-white dark:dd-bg-dark-900 dd-border dd-border-secondary-200 dark:dd-border-dark-800 dd-p-6',
+        { 'dd-pt-4': title },
         className,
       )}
     >
       {(title || description || setting) && (
-        <div className={cn('w-full border-b border-secondary-200 dark:border-dark-800 mb-6', headerClassName)}>
-          <Flex items='start' justify='between' className={'w-full mb-2'}>
+        <div
+          className={cn(
+            'dd-w-full dd-border-b dd-border-secondary-200 dark:dd-border-dark-800 dd-mb-6',
+            headerClassName,
+          )}
+        >
+          <Flex items='start' justify='between' className={'dd-w-full dd-mb-2'}>
             <Flex direction='col'>
               {typeof title === 'string' ? (
-                <Typography.Title level={titleLevel || 5} className={cn(titleClassName, 'mb-0')}>
+                <Typography.Title level={titleLevel || 5} className={cn('dd-mb-0', titleClassName)}>
                   {title}
                 </Typography.Title>
               ) : (

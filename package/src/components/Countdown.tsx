@@ -112,19 +112,15 @@ const Countdown: React.FC<ICountdownProps> = ({
         timeLeft,
         disabled,
       })
-    // return (
-    //   <Text className='text-sm' type='text'>
-    //     {formatTime(timeLeft)}
-    //   </Text>
-    // )
+    return <Text className='dd-text-sm !dd-w-auto'>{formatTime(timeLeft)}</Text>
   }
 
   return (
     <div
       className={cn(
-        'flex items-center w-full h-full gap-1',
+        'dd-flex dd-items-center dd-w-full dd-h-full dd-gap-1',
         {
-          'cursor-not-allowed': disabled,
+          'dd-cursor-not-allowed': disabled,
         },
         className,
       )}

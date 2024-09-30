@@ -150,13 +150,13 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='relative w-full'>
+    <div className='dd-relative dd-w-full'>
       {typeof copyable !== 'undefined' && (
-        <div className={cn('absolute z-30 top-3 right-3')}>
+        <div className={cn('dd-absolute dd-z-30 dd-top-3 dd-right-3')}>
           <div
             onClick={handleCopyToClipboard}
             className={cn(
-              'w-[18px] h-[18px] cursor-pointer text-slate-500 hover:text-primary-300 dark:text-slate-300 dark:hover:text-primary-300 text-xs',
+              'dd-w-[18px] dd-h-[18px] dd-cursor-pointer dd-text-slate-500 hover:dd-text-primary-300 dark:dd-text-slate-300 dark:hover:dd-text-primary-300 dd-text-xs',
             )}
           >
             <Tooltip content={tooltipText}>{icon}</Tooltip>

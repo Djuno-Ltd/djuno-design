@@ -35,18 +35,18 @@ const { Text } = Typography
  * Define button variants using the `cva` utility function.
  * This function generates CSS classes for alert styles based on specified variants.
  */
-const alertVariants = cva('w-full rounded-lg border', {
+const alertVariants = cva('dd-w-full dd-rounded-lg dd-border', {
   variants: {
     type: {
-      neutral: 'bg-white dark:bg-dark-850 border-secondary-200 dark:border-dark-800',
-      success: 'bg-success/10 dark:bg-success/20 border-success/30 dark:border-success/30',
-      info: 'bg-primary-400/10 dark:bg-primary-400/20 border-primary-400/30 dark:border-primary-400/30',
-      warning: 'bg-warning/10 dark:bg-warning/20 border-warning/30 dark:border-warning/20',
-      error: 'bg-error/10 dark:bg-error/20 border-error/30 dark:border-error/30',
+      neutral: 'dd-bg-white dark:dd-bg-dark-850 dd-border-secondary-200 dark:dd-border-dark-800',
+      success: 'dd-bg-success/10 dark:dd-bg-success/20 dd-border-success/30 dark:dd-border-success/30',
+      info: 'dd-bg-primary-400/10 dark:dd-bg-primary-400/20 dd-border-primary-400/30 dark:dd-border-primary-400/30',
+      warning: 'dd-bg-warning/10 dark:dd-bg-warning/20 dd-border-warning/30 dark:dd-border-warning/20',
+      error: 'dd-bg-error/10 dark:dd-bg-error/20 dd-border-error/30 dark:dd-border-error/30',
     },
     paddingType: {
-      small: 'px-3 py-2.5',
-      large: 'px-5 py-4',
+      small: 'dd-px-3 dd-py-2.5',
+      large: 'dd-px-5 dd-py-4',
     },
   },
   defaultVariants: {
@@ -59,18 +59,18 @@ const alertVariants = cva('w-full rounded-lg border', {
  * Define button variants using the `cva` utility function.
  * This function generates CSS classes for alert icons styles based on specified variants.
  */
-const alertIconVariants = cva('mr-2 aspect-square', {
+const alertIconVariants = cva('dd-mr-2 dd-aspect-square', {
   variants: {
     type: {
-      neutral: 'text-secondary-400 dark:text-dark-200',
-      success: 'text-success/90 dark:text-success/70',
-      info: 'text-primary-400/90 dark:text-primary-400/70',
-      warning: 'text-warning/90 dark:text-warning/70',
-      error: 'text-error/90 dark:text-error/70',
+      neutral: 'dd-text-secondary-400 dark:dd-text-dark-200',
+      success: 'dd-text-success/90 dark:dd-text-success/70',
+      info: 'dd-text-primary-400/90 dark:dd-text-primary-400/70',
+      warning: 'dd-text-warning/90 dark:dd-text-warning/70',
+      error: 'dd-text-error/90 dark:dd-text-error/70',
     },
     widthType: {
-      small: 'w-[18px]',
-      large: 'w-[24px]',
+      small: 'dd-w-[18px]',
+      large: 'dd-w-[24px]',
     },
   },
   defaultVariants: {
@@ -113,9 +113,13 @@ const Alert: React.FunctionComponent<AlertProps> = ({
   return (
     <Flex
       items={'center'}
-      className={cn(alertVariants({ type, paddingType: description ? 'large' : 'small' }), className, {
-        'rounded-none border-0': banner,
-      })}
+      className={cn(
+        alertVariants({ type, paddingType: description ? 'large' : 'small' }),
+        {
+          'dd-rounded-none dd-border-0': banner,
+        },
+        className,
+      )}
     >
       <Flex items={description ? 'start' : 'center'}>
         {showIcon && type !== undefined && type !== 'neutral' && (
