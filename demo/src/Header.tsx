@@ -18,12 +18,17 @@ const Header = () => {
       className="px-8 py-4 border-b sticky top-0 bg-white dark:bg-[#161A1D] dark:border-b-[#22272B] z-50"
     >
       <Flex items="center" className="gap-1">
-        <Logo className="w-6" />
-        <Text>djuno-design lab🧪</Text>
+        <div>
+          <Logo style={{ width: "22px", height: "22px" }} />
+        </div>
+        <Text className="whitespace-nowrap" size="base">
+          djuno-design lab🧪
+        </Text>
         <Text uiType="secondary" size="xs">
-          v0.7.6
+          v0.7.7
         </Text>
       </Flex>
+
       <Flex items="center" className="gap-3">
         <Checkbox
           value={mode === "dark"}

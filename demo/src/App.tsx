@@ -37,7 +37,7 @@ import {
   Tag,
   CodeViewer,
 } from "djuno-design";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -300,9 +300,10 @@ function App() {
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
+      <div className="lg:hidden">Hi Ansar</div>
       <Flex
         direction="col"
-        className="gap-7 mx-auto min-w-[500px] max-w-2xl my-10 "
+        className="gap-7 mx-auto my-10 w-[500px] lg:w-[700px]" // min-w-[500px] max-w-2xl
       >
         <Card title="CodeViewer">
           <Flex direction="col" className="gap-10 w-full">
@@ -455,7 +456,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         <Card title="Popover">
           <Flex direction="col" className="gap-5 w-full mb-10">
             <Popover
-              contentNode={<Input value="djuno-design" />}
+              content={<Input value="djuno-design" />}
               panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
               panelStyle={{}}
             >
@@ -771,7 +772,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 {...sidebarProps}
                 sidebarHeader={
                   <div className="flex items-center gap-1 px-1">
-                    <Logo />
+                    <Logo className="w-5 h-5" />
                     <Text size="xs">djuno-design</Text>
                   </div>
                 }
@@ -853,7 +854,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   type={type}
                   sidebarHeader={
                     <div className="flex items-center gap-1 px-1">
-                      <Logo />
+                      <Logo className="w-5 h-5" />
                       <Text size="xs">djuno-design</Text>
                     </div>
                   }
@@ -899,6 +900,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
           </Flex>
         </Card>
+
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Flex items="end" className="gap-3 w-full flex ">
@@ -915,7 +917,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         </Card>
 
         <Card title="Dropdown">
-          <Divider text=" Default dropdown" orientation="left" />
+          <Divider text="Default dropdown" orientation="left" />
           <Flex direction="col" className="gap-5 w-full">
             <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
@@ -980,29 +982,19 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher
-                    value={swith}
-                    onChange={setSwitch}
-                    size="small"
-                    loading
-                  />
+                  <Switcher value={swith} onChange={setSwitch} size="small" />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     medium
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} loading />
+                  <Switcher value={swith} onChange={setSwitch} />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher
-                    value={swith}
-                    onChange={setSwitch}
-                    size="large"
-                    loading
-                  />
+                  <Switcher value={swith} onChange={setSwitch} size="large" />
                 </Flex>
               </Flex>
             </div>
