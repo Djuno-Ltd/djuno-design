@@ -19,19 +19,22 @@
  */
 
 import { TooltipProps } from './Tooltip'
-import { InputTypes, SizeTypes } from '.'
+import { CopyableOptionsProp, InputTypes, LoadingType, SizeTypes } from '.'
+import { TextareaHTMLAttributes } from 'react'
 
-export interface TextareaProps {
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id?: string
-  textareaProps?: React.HTMLProps<HTMLTextAreaElement>
   className?: string
   placeholder?: string
-  label?: string
+  label?: string | React.ReactNode
   required?: boolean
-  error?: string
-  hint?: string
+  error?: string | boolean | React.ReactNode
+  hint?: string | React.ReactNode
   tooltip?: TooltipProps
-  size?: SizeTypes
+  uiSize?: SizeTypes
   type?: InputTypes
-  copyable?: boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)
+  copyable?: boolean | ((value: string | undefined) => string | number | null | undefined) | CopyableOptionsProp
+  loading?: boolean
+  loadingType?: LoadingType
+  labelClassName?: string
 }

@@ -38,7 +38,7 @@ import React, { useEffect } from 'react'
  * @returns {React.ReactNode} Rendered Tabs component.
  *
  * @version 0.6.0
- * @see https://www.npmjs.com/package/some-ui-library#tabs
+ * @see https://www.npmjs.com/package/djuno-design#tabs
  *
  * @example
  * // Example usage of Tabs component:
@@ -95,9 +95,13 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   }, [propsSelectedIndex, useUrl])
 
   const onChangeTab = (i: number) => {
-    // if (useUrl) {
-    //   const selectedOption = getTabOptionFromIndex(i, options)
-    // }
+    if (useUrl) {
+      const selectedOption = getTabOptionFromIndex(i, options)
+      if (selectedOption?.url) {
+        // Change the URL without reloading the page
+        window.history.pushState({}, '', selectedOption.url)
+      }
+    }
 
     if (onChange) {
       onChange(i)
@@ -108,11 +112,14 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   return (
     <TabGroup selectedIndex={selectedIndex} onChange={onChangeTab}>
       <TabList
-        className={cn('dj-flex dj-overflow-x-auto', {
-          [listClassName || '']: listClassName,
-          'dj-w-full md:dj-w-auto ': !tabType || tabType === 'default',
-          'dj-bg-slate-500/10 dj-p-1 dj-rounded-lg': tabType === 'creamy',
-        })}
+        className={cn(
+          'dd-flex dd-overflow-x-auto',
+          {
+            'dd-w-full md:w-auto ': !tabType || tabType === 'default',
+            'dd-bg-slate-500/10 dd-p-1 dd-rounded-lg': tabType === 'creamy',
+          },
+          listClassName,
+        )}
       >
         {options.map((option, i) => (
           <Tab
@@ -120,20 +127,20 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
             disabled={option.disabled}
             data-testid={option.testId}
             className={({ selected }) =>
-              cn('hover:dark:dj-text-slate-100 hover:dj-text-gray-900 dj-outline-none disabled:dj-cursor-not-allowed', {
-                'dj-font-semibold dj-bg-primary-50 dark:dj-bg-dark-700 dj-text-blue-500 hover:!dj-text-blue-600 hover:dark:dj-text-blue-600 dj-rounded-lg':
+              cn('hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed', {
+                'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
                   selected && (!tabType || tabType === 'default'),
-                'dj-font-normal dj-text-xs sm:dj-text-sm dj-whitespace-nowrap dj-px-3 dj-h-9 dj-w-full':
+                'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
                   tabType === 'creamy',
-                'dj-bg-white dark:dj-bg-dark-900 dark:dj-text-slate-300 dj-rounded-lg':
+                'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
                   tabType === 'creamy' && selected,
-                'dj-text-gray-400 dark:dj-text-slate-400': !selected,
+                'dd-text-gray-400 dark:dd-text-slate-400': !selected,
               })
             }
           >
             {(!tabType || tabType === 'default') && (
-              <div className='dj-rounded-md dj-flex dj-items-center dj-transition-background dj-duration-150 dj-justify-center dj-text-center sm:dj-space-x-2 dj-w-full dj-px-3 dj-py-1.5 '>
-                <span className='dj-text-xs sm:dj-text-sm dj-whitespace-nowrap'>{option.label}</span>
+              <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
+                <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
               </div>
             )}
             {tabType === 'creamy' && <>{option.label}</>}
@@ -144,8 +151,8 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         {options.map((option, i) => (
           <TabPanel
             key={i}
-            className={cn('dj-bg-white dark:dj-bg-dark-700 dj-rounded-md', {
-              'dj-py-6': (!tabType || tabType === 'default') && option.element,
+            className={cn('dd-bg-white dark:dd-bg-dark-700 dd-rounded-md', {
+              'dd-py-6': (!tabType || tabType === 'default') && option.element,
               [panelClassName || '']: panelClassName,
             })}
           >
@@ -169,13 +176,6 @@ export const getOptionIndexFromUrlString = (url: string, options: TabOptions) =>
   })
 
   return index
-}
-
-export function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  }
 }
 
 export default Tabs

@@ -27,12 +27,12 @@ import { DividerProps } from '../types/Divider'
  * Define divider variants using the `cva` utility function.
  * This function generates CSS classes for divider styles based on specified variants.
  */
-const dividerVariants = cva('dj-w-full dj-border-secondary-400 dark:after:dj-border-gray-700 ', {
+const dividerVariants = cva('dd-w-full dd-border-secondary-400 dark:after:dd-border-gray-700 ', {
   variants: {
     uiType: {
-      simple: 'dj-my-4',
-      dotted: 'dj-border-dotted dj-my-4 ',
-      dashed: 'dj-border-dashed dj-my-4 ',
+      simple: 'dd-my-4',
+      dotted: 'dd-border-dotted dd-my-4 ',
+      dashed: 'dd-border-dashed dd-my-4 ',
     },
   },
   defaultVariants: {
@@ -51,7 +51,6 @@ const dividerVariants = cva('dj-w-full dj-border-secondary-400 dark:after:dj-bor
  * @param {string} [props.orientation] - Type of UI for the orientation: 'center' or 'right' or 'left'.
  * @param {string} [props.text] - text apply to the divider.
  * @param {string} [props.textClassName] - Additional classes to apply to the text.
- * @param {boolean} [props.usingText] - Additional classes to apply to the text.
  *
  * @returns {React.ReactNode} Rendered Divider component.
  *
@@ -73,24 +72,23 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   orientation = 'center', // default value for orientation
   text,
   textClassName,
-  usingText = false, // default value for usingText
   ...props
 }) => {
   const dividerClass = dividerVariants({ uiType })
-  const commonDividerClass = 'dj-border-t dj-w-full dj-h-0.5'
-  const textClass = 'dj-text-base dj-text-dark-700 dj-whitespace-nowrap dark:dj-text-dark-100'
-  const leftOrientationClass = 'dj-ml-4'
-  const rightOrientationClass = 'dj-mr-4'
+  const commonDividerClass = 'dd-border-t dd-w-full dd-h-0.5'
+  const textClass = 'dd-text-base dd-text-dark-700 dd-whitespace-nowrap dark:dd-text-dark-100'
+  const leftOrientationClass = 'dd-ml-4'
+  const rightOrientationClass = 'dd-mr-4'
 
   const parentClassName = cn(dividerClass, className, {
-    'dj-divider-using-text': usingText,
-    [`dj-divider-${orientation}`]: usingText, //class based on orientation and usingText prop
+    'dd-divider-using-text': text !== undefined,
+    [`dd-divider-${orientation}`]: text !== undefined, //class based on orientation and usingText prop
   })
 
   return (
     <div {...props} className={parentClassName}>
-      <div className='dj-flex dj-justify-center dj-items-center'>
-        {usingText ? (
+      <div className='dd-flex dd-justify-center dd-items-center'>
+        {text !== undefined ? (
           <>
             {orientation === 'left' && (
               <>

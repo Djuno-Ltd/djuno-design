@@ -30,11 +30,12 @@ import { ReactComponent as TooltipIcon } from './../assets/icons/question-mark-c
  * Define button variants using the `cva` utility function.
  * This function generates CSS classes for button styles based on specified variants.
  */
-const tooltipVariants = cva('dj-text-white dj-max-w-[250px] !dj-px-2 !dj-py-1 !dj-whitespace-normal dj-z-40', {
+const tooltipVariants = cva('dd-text-white dd-max-w-[250px] !dd-px-2 !dd-py-1 !dd-whitespace-normal dd-z-40', {
   variants: {
     theme: {
-      primary: '!dj-bg-primary-500 dark:dj-bg-primary-400',
-      error: '!dj-bg-red-500 dark:dj-bg-red-500',
+      primary: '!dd-bg-primary-500 dark:!dd-bg-primary-400',
+      error: '!dd-bg-red-500 dark:!dd-bg-red-500',
+      black: '!dd-bg-black dark:!dd-bg-white dark:!dd-text-black',
     },
   },
   defaultVariants: {
@@ -92,7 +93,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, cli
 const InfoTooltip: React.FC<{ tooltip?: TooltipProps }> = ({ tooltip }) => {
   return (
     <Tooltip {...tooltip}>
-      <TooltipIcon className='dj-w-4 dj-text-slate-500 dark:dj-text-slate-300 dark:hover:dj-text-slate-100' />
+      <TooltipIcon className='dd-w-4 dd-text-slate-500 dark:dd-text-slate-300 dark:hover:dd-text-slate-100' />
     </Tooltip>
   )
 }

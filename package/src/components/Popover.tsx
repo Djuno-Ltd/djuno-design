@@ -21,13 +21,13 @@ import * as React from 'react'
 import { cn } from '../utils/cn'
 import { PopoverButton, PopoverPanel, Popover as Popper, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { useFloating, shift, flip } from '@floating-ui/react-dom'
+// import { useFloating, shift, flip } from '@floating-ui/react-dom'
 import { PopoverProps } from '../types'
 /**
  * Popover component that allows for customization of the popover's appearance and behavior.
  *
  * @param {object} props - Popover props.
- * @param {React.ReactNode} props.contentNode - The content or element that triggers the popover when clicked.
+ * @param {React.ReactNode} props.content - The content or element that triggers the popover when clicked.
  * @param {React.ReactNode} [props.children] - Optional children to be rendered inside the popover.
  * @param {string} [props.panelClassName] - Additional CSS classes to apply to the popover panel.
  * @param {React.CSSProperties} [props.panelStyle] - Additional inline styles to apply to the popover panel.
@@ -41,18 +41,16 @@ import { PopoverProps } from '../types'
  * // Example usage of Popover component:
  *
  * function MyComponent() {
- *   const [open, setOpen] = useState(false);
- *    const handleToggle = () => setOpen(!open);
  *
  *   return (
  *     <div>
  *      <Popover
- *       contentNode={<div>Popover Content</div>}
+ *       content={<div>Popover Content</div>}
  *       open={open}
  *       panelClassName="custom-panel-class"
  *       panelStyle={{panelStyle}}
  *       >
- *       <button onClick={handleToggle}>Toggle Popover</button>
+ *       <button>Toggle Popover</button>
  *      </Popover>
  *     </div>
  *   );
@@ -60,46 +58,48 @@ import { PopoverProps } from '../types'
  */
 
 const Popover: React.FC<React.PropsWithChildren<PopoverProps>> = ({
-  contentNode,
+  content,
   children,
+  anchor = 'bottom start',
   panelClassName,
   panelStyle,
 }) => {
-  const { refs, floatingStyles } = useFloating({
-    placement: 'bottom-start',
-    middleware: [flip(), shift()],
-  })
+  // const { refs, floatingStyles } = useFloating({
+  //   placement: 'bottom-start',
+  //   middleware: [flip(), shift()],
+  // })
 
   return (
-    <Popper className='dj-relative'>
+    <Popper className='relative'>
       {({ open }) => (
         <>
           <PopoverButton
             as='div'
-            className={cn('focus:dj-outline-none focus:dj-ring-0', {
+            className={cn('focus:dd-outline-none focus:dd-ring-0', {
               '': open,
               '': !open,
             })}
-            ref={refs.setReference}
+            // ref={refs.setReference}
           >
             {children}
           </PopoverButton>
 
           <Transition
             as={Fragment}
-            enter='dj-transition dj-ease-out dj-duration-200'
-            enterFrom='dj-opacity-0 dj-translate-y-1'
-            enterTo='dj-opacity-100 dj-translate-y-0'
-            leave='dj-transition dj-ease-in dj-duration-150'
-            leaveFrom='dj-opacity-100 dj-translate-y-0'
-            leaveTo='dj-opacity-0 dj-translate-y-1'
+            enter='dd-transition dd-ease-out dd-duration-200'
+            enterFrom='dd-opacity-0 dd-translate-y-1'
+            enterTo='dd-opacity-100 dd-translate-y-0'
+            leave='dd-transition dd-ease-in dd-duration-150'
+            leaveFrom='dd-opacity-100 dd-translate-y-0'
+            leaveTo='dd-opacity-0 dd-translate-y-1'
           >
             <PopoverPanel
-              ref={refs.setFloating}
-              style={{ ...floatingStyles, ...panelStyle }}
-              className={cn('dj-absolute dj-left-0 dj-z-10 mt-3 dj-transform dj-px-4 sm:dj-px-0', panelClassName)}
+              // ref={refs.setFloating}
+              anchor={anchor}
+              style={panelStyle}
+              className={cn('dd-absolute dd-left-0 dd-z-10 dd-mt-3 dd-transform dd-px-4 sm:dd-px-0', panelClassName)}
             >
-              {contentNode}
+              {content}
             </PopoverPanel>
           </Transition>
         </>

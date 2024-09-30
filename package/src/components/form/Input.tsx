@@ -23,43 +23,44 @@ import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
-import { InfoTooltip } from '../Tooltip'
+import Tooltip, { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
 import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
+import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 
 /**
  * Define input variants using the `cva` utility function.
  * This function generates CSS classes for alert styles based on specified variants.
  */
 export const inputVariants = cva(
-  'dj-bg-secondary-100 focus:dj-ring-0 dj-text-sm dj-block dj-w-full dark:dj-bg-dark-800 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
+  'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:dd-disabled:bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
       type: {
-        simple: 'dj-text-secondary-600 dj-bg-transparent',
-        default: 'dj-border-2',
+        simple: 'dd-text-secondary-600 dd-bg-transparent',
+        default: 'dd-border-2',
       },
       hasError: {
-        yes: 'dj-border dj-border-red-500 dj-text-red-900 dj-placeholder-red-700 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500',
-        no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200 dark:dj-border-dark-700 dark:focus:dj-bg-dark-700 dark:focus:dj-border-dark-600',
+        yes: 'dd-border dd-border-red-500 dd-text-red-900 dd-placeholder-red-700 focus:dd-border-red-500 dark:dd-text-red-500 dark:dd-placeholder-red-500 dark:dd-border-red-500',
+        no: 'dd-border-secondary-100 focus:dd-bg-secondary-50 focus:dd-border-secondary-200 dark:dd-border-dark-800 dark:dd-focus:bg-dark-700 dark:focus:dd-border-dark-600 dark:dd-text-slate-50 dark:dd-placeholder-gray-500',
       },
-      size: {
-        small: 'dj-rounded-lg dj-text-xs dj-px-1',
-        medium: 'dj-rounded-lg dj-text-sm dj-px-2',
-        large: 'dj-rounded-xl dj-text-base dj-px-2',
+      uiSize: {
+        small: 'dd-rounded-lg dd-text-xs dd-px-1',
+        medium: 'dd-rounded-lg dd-text-sm dd-px-2',
+        large: 'dd-rounded-xl dd-text-base dd-px-2',
       },
       copyable: {
-        yes: 'dj-pr-7',
+        yes: 'dd-pr-7',
         no: '',
       },
     },
     defaultVariants: {
       type: 'default',
       hasError: 'no',
-      size: 'medium',
+      uiSize: 'medium',
       copyable: 'no',
     },
   },
@@ -69,12 +70,13 @@ export const inputVariants = cva(
  * Define label variants using the `cva` utility function.
  * This function generates CSS classes for input label styles based on specified variants.
  */
+
 export const labelVariants = cva(
-  'dj-flex dj-items-center dj-gap-1 dj-text-sm dj-text-slate-800 dark:dj-text-slate-50 dj-whitespace-nowrap',
+  'dd-flex dd-items-center dd-gap-1 dd-text-sm dd-whitespace-nowrap dd-text-black/85 dark:dd-text-secondary-100',
   {
     variants: {
       hasError: {
-        yes: 'dj-text-red-700 dark:dj-text-red-500',
+        yes: '!dd-text-red-700 dark:!dd-text-red-500',
         no: '',
       },
     },
@@ -88,25 +90,25 @@ export const labelVariants = cva(
  * Input component.
  *
  * @param {object} props - Input component props.
- * @param {React.ReactNode} [props.label] - Label of the input.
+ * @param {string | React.ReactNode} [props.label] - Label of the input.
  * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
- * @param {InputTypes} [props.type] - Type of the input field.
+ * @param {InputTypes} [props.type] - Type of the input field (e.g., 'default', 'simple').
  * @param {string} [props.placeholder] - Placeholder text for the input.
- * @param {string} [props.className] - Additional classes to apply to the input.
- * @param {string} [props.labelClassName] - Additional classes to apply to the label.
+ * @param {string} [props.className] - Additional classes to apply to the input element.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element.
  * @param {boolean} [props.required] - Indicates if the input is required.
- * @param {string | boolean} [props.error] - Error message or boolean to indicate input validity.
+ * @param {string | boolean| React.ReactNode} [props.error] - Error message or boolean to indicate input validity.
  * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the input.
  * @param {SizeTypes} [props.size] - Size of the input field.
  * @param {React.ReactNode} [props.AfterComponent] - Component to render after the input field.
- * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined)} [props.copyable] - Indicates if the input value can be copied, or a function to handle the copy operation.
+ * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined) | InputCopyableProp} [props.copyable] - Indicates if the input value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
  *
  * @returns {React.ReactNode} Rendered Input component.
  *
- * @version 0.3.5
+ * @version 0.3.6
  * @see https://www.npmjs.com/package/djuno-design#input
  *
  * @example
@@ -116,11 +118,16 @@ export const labelVariants = cva(
  *   placeholder="Enter your username"
  *   required
  *   error="Username is required"
+ *   copyable={{
+ *     text: "Copy this username",
+ *     icon: [<CustomCopyIcon />, <CustomCopiedIcon />],
+ *     tooltips: ["Click to copy", "Copied!"]
+ *   }}
  * />
  */
+
 const Input: React.FunctionComponent<InputProps> = ({
   label,
-  inputProps,
   className,
   labelClassName,
   loading,
@@ -131,16 +138,46 @@ const Input: React.FunctionComponent<InputProps> = ({
   hint,
   placeholder,
   tooltip,
-  size,
+  uiSize,
   AfterComponent,
   copyable,
+  ...props
 }) => {
   const id = uuid(10)
   const inputRef = React.useRef<HTMLInputElement>(null)
-  const value = inputProps?.value
-  const onChange = inputProps?.onChange
+  const value = props?.value
+  const onChange = props?.onChange
 
-  const handleCopyToClipboard = () => {
+  const tooltipTexts: [string, string] = React.useMemo(() => {
+    const defaultTexts: [string, string] = ['Copy', 'Copied']
+    const emptyTexts: [string, string] = ['', '']
+
+    if (typeof copyable === 'object') {
+      if (copyable?.tooltips === false) {
+        return emptyTexts
+      } else if (copyable?.tooltips) {
+        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
+      }
+    }
+
+    return defaultTexts
+  }, [copyable])
+
+  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
+    const defaultIcons: [React.ReactNode, React.ReactNode] = [
+      <CopyIcon key='copy-icon' />,
+      <CheckIcon key='copied-icon' />,
+    ]
+    if (typeof copyable === 'object' && copyable?.icon) {
+      return copyable.icon
+    }
+    return defaultIcons
+  }, [copyable])
+
+  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
+  const [icon, setIcon] = React.useState(icons[0])
+
+  const handleCopyToClipboard = React.useCallback(() => {
     let textToCopy: string | number | null | undefined = ''
     const inputValue = inputRef.current?.value
 
@@ -151,91 +188,113 @@ const Input: React.FunctionComponent<InputProps> = ({
     }
 
     if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy)
+      copyToClipboard(textToCopy.toString()).then(() => {
+        setTooltipText(tooltipTexts[1])
+        setIcon(icons[1])
+
+        // Revert back after some time
+        setTimeout(() => {
+          setTooltipText(tooltipTexts[0])
+          setIcon(icons[0])
+        }, 2000)
+      })
     }
-  }
+  }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='dj-flex dj-flex-col'>
+    <div className='dd-flex dd-flex-col'>
       <div
-        className={cn('dj-flex dj-items-center dj-px-1', {
-          [labelClassName || '']: labelClassName,
-          'dj-justify-between': label || required,
-          'dj-justify-end': !label && !required,
-          'dj-mb-0.5': label || required || tooltip || hint,
-        })}
+        className={cn(
+          'dd-flex dd-items-center dd-px-1',
+          {
+            'dd-justify-between': label || required,
+            'dd-justify-end': !label && !required,
+            'dd-mb-0.5': label || required || tooltip || hint,
+          },
+          labelClassName,
+        )}
       >
-        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+        <label
+          htmlFor={id}
+          className={cn(
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+            }),
+            labelClassName,
+          )}
+        >
           {label && (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+            <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-1'>
               *
             </Typography.Text>
           )}
+
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='dj-text-[11px] dj-text-slate-500'>{hint}</span>}
+
+        {hint && <span className='dd-text-[11px] dd-text-slate-500'>{hint}</span>}
       </div>
-      <div className='dj-w-full dj-relative dj-block dj-z-0'>
+      <div className='dd-w-full dd-relative dd-block dd-z-0'>
         {typeof copyable !== 'undefined' && !loading && (
-          <div className='dj-absolute dj-z-30 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2'>
-            <CopyIcon
+          <div className='dd-absolute dd-z-30 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2'>
+            <div
               onClick={handleCopyToClipboard}
               className={cn(
-                'dj-w-[18px] dj-cursor-pointer hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
-                { 'dj-w-[15px]': size === 'small' },
+                'dd-w-[18px] dd-cursor-pointer dd-text-slate-500 hover:dd-text-primary-300 dark:dd-text-slate-300 dark:hover:dd-text-primary-300 dd-text-xs',
+                { 'dd-w-[15px]': uiSize === 'small' },
               )}
-            />
+            >
+              <Tooltip content={tooltipText}> {icon}</Tooltip>
+            </div>
           </div>
         )}
         <input
           id={id}
           ref={inputRef}
-          {...inputProps}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
               type,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
             }),
             {
-              'dj-h-7': size === 'small',
-              'dj-h-9': size === 'medium' || size === undefined,
-              'dj-h-11': size === 'large',
+              'dd-h-7': uiSize === 'small',
+              'dd-h-9': uiSize === 'medium' || uiSize === undefined,
+              'dd-h-11': uiSize === 'large',
             },
             className,
           )}
           placeholder={placeholder}
         />
         {loading && (
-          <div className='dj-absolute dj-z-40 dj-inset-y-0 dj-end-0 dj-flex dj-items-center dj-pe-2.5'>
+          <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
             <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
           </div>
         )}
-        <div className='dj-absolute dj-inset-y-0 dj-end-0 dj-flex'>{AfterComponent}</div>
+        <div className='dd-absolute dd-inset-y-0 dd-end-0 dd-flex'>{AfterComponent}</div>
       </div>
       <AnimatedFormError error={error} />
     </div>
   )
 }
-
-const AnimatedFormError: React.FC<{ error?: string | boolean }> = ({ error }) => {
+const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }> = ({ error }) => {
   return (
     <AnimatePresence>
-      {error && typeof error === 'string' && (
+      {error && typeof error !== 'boolean' && typeof error === 'string' && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
         >
-          <p className='dj-mt-0.5 dj-text-xs dj-text-error dark:dj-text-error dj-px-1'>{error}</p>
+          <p className='dd-mt-0.5 dd-text-xs dd-text-error dark:dd-text-error dd-px-1'>{error}</p>
         </motion.div>
       )}
     </AnimatePresence>

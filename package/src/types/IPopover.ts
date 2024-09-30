@@ -18,9 +18,12 @@
  * limitations under the License.
  */
 
+import { AnchorProps } from '@headlessui/react/dist/internal/floating'
+
 export interface PopoverProps {
-  contentNode: React.ReactNode
+  content: React.ReactNode
   children?: React.ReactNode
+  anchor?: AnchorProps
   panelClassName?: string
   panelStyle?: React.CSSProperties
 }

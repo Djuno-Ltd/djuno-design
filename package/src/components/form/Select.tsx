@@ -20,10 +20,9 @@
 
 import React from 'react'
 import Typography from '../Typography'
-import { SelectProps } from '../../types/ISelect'
+import { MultiSelectProps, SelectProps } from '../../types/ISelect'
 import { cn } from '../../utils/cn'
-import { Listbox, ListboxButton, ListboxOptions, ListboxOption, Transition } from '@headlessui/react'
-import { useFloating, shift, flip } from '@floating-ui/react-dom'
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
 import Loading from '../Loading'
 import EmptyState from '../EmptyState'
 import { InfoTooltip } from '../Tooltip'
@@ -40,21 +39,21 @@ const { Text } = Typography
  * This function generates CSS classes for alert styles based on specified variants.
  */
 const listboxVariants = cva(
-  'dj-bg-secondary-100 focus:dj-ring-0 dj-text-sm dj-block dj-w-full dark:dj-bg-dark-800 dj-outline-none disabled:dj-cursor-not-allowed disabled:dj-bg-secondary-200 dark:disabled:dj-bg-gray-700 dark:disabled:dj-text-secondary-400 disabled:dj-text-secondary-500 disabled:dj-border-secondary-300 disabled:dark:dj-border-gray-600',
+  'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:disabled:dd-bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
       type: {
-        simple: 'dj-text-secondary-600 dj-bg-transparent',
-        default: 'dj-border-2',
+        simple: 'dd-text-secondary-600 dd-bg-transparent',
+        default: 'dd-border-2',
       },
       hasError: {
-        yes: 'dj-border dj-border-red-500 dj-text-red-900 dj-placeholder-red-700 focus:dj-border-red-500 dark:dj-text-red-500 dark:dj-placeholder-red-500 dark:dj-border-red-500',
-        no: 'dark:dj-border-dark-2 dark:dj-focus:border-slate-600 dark:dj-text-slate-50 dark:dj-placeholder-gray-500 dj-border-secondary-100 focus:dj-bg-secondary-50 focus:dj-border-secondary-200 dark:dj-border-dark-700 dark:focus:dj-bg-dark-700 dark:focus:dj-border-dark-600',
+        yes: 'dd-border dd-border-red-500 dd-text-red-900 dd-placeholder-red-700 focus:dd-border-red-500 dark:dd-text-red-500 dark:dd-placeholder-red-500 dark:dd-border-red-500',
+        no: 'dark:dd-border-dark-2 dark:dd-text-slate-50 dark:dd-placeholder-gray-500 dd-border-secondary-100 focus:dd-bg-secondary-50 focus:dd-border-secondary-200 dark:dd-border-dark-700 dark:focus:dd-bg-dark-700 dark:focus:dd-border-dark-600',
       },
       size: {
-        small: 'dj-rounded-lg dj-text-xs dj-px-1 dj-h-7 dj-pr-6',
-        medium: 'dj-rounded-lg dj-text-sm dj-px-2 dj-h-9 dj-pr-6',
-        large: 'dj-rounded-xl dj-text-base dj-px-2 dj-h-11 dj-pr-6',
+        small: 'dd-rounded-lg dd-text-xs dd-px-1 dd-h-7 dd-pr-6',
+        medium: 'dd-rounded-lg dd-text-sm dd-px-2 dd-h-9 dd-pr-6',
+        large: 'dd-rounded-xl dd-text-base dd-px-2 dd-h-11 dd-pr-6',
       },
     },
     defaultVariants: {
@@ -71,7 +70,7 @@ const listboxVariants = cva(
  * A customizable dropdown select component that allows users to choose from a list of options.
  * The component supports various features such as custom styling, validation states, tooltips, loading indicators, and more.
  *
- * @template T, ET
+ * @template ExtraDataType
  * @param {object} props - Select component props.
  * @param {T} [props.value] - The currently selected value.
  * @param {(value: T | undefined) => void} [props.onChange] - Callback function triggered when the selected value changes.
@@ -80,12 +79,13 @@ const listboxVariants = cva(
  * @param {string} [props.className] - Additional CSS classes for custom styling of the select component.
  * @param {string} [props.buttonClassName] - Additional CSS classes for custom styling of the select button.
  * @param {string} [props.optionsClassName] - Additional CSS classes for custom styling of the options list.
- * @param {string} [props.label] - The label displayed above the select component.
- * @param {string} [props.error] - Error message to display if there is a validation issue.
+ * @param {string} [props.optionClassName] - Additional CSS classes for custom styling of the each option.
+ * @param {string| React.ReactNode} [props.label] - The label displayed above the select component.
+ * @param {string|boolean| React.ReactNode} [props.error] - Error message to display if there is a validation issue.
  * @param {boolean} [props.required] - Indicates if the select component is required.
  * @param {SelectTypes} [props.type] - The type of the select component (e.g., single select, multi-select).
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information.
- * @param {string} [props.hint] - Hint text to provide additional context or instructions.
+ * @param {string| React.ReactNode} [props.hint] - Hint text to provide additional context or instructions.
  * @param {boolean} [props.loading] - Indicates if the select component is in a loading state.
  * @param {LoadingType} [props.loadingType] - Type of loading indicator to display when the select component is loading.
  * @param {string} [props.emptyString] - Text to display when there are no options available.
@@ -93,6 +93,7 @@ const listboxVariants = cva(
  * @param {boolean} [props.disabled] - If true, disables the select component.
  * @param {SizeTypes} [props.size] - Size of the select component (e.g., small, medium, large).
  * @param {(e: FocusEvent) => void} [props.onBlur] - Callback function triggered when the select component loses focus.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
  * @returns {React.ReactNode} Rendered Select component.
  *
@@ -117,11 +118,13 @@ const listboxVariants = cva(
  *   clearable={true}
  * />
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Select = <T extends string | number, ET = any>({
+const Select = <ExtraDataType extends string>({
+  id,
   className,
+  labelClassName,
   buttonClassName,
   optionsClassName,
+  optionClassName,
   label,
   error,
   required,
@@ -138,12 +141,10 @@ const Select = <T extends string | number, ET = any>({
   defaultValue,
   onChange,
   options,
-}: SelectProps<T, ET>) => {
-  const id = uuid(10)
-  const { refs, floatingStyles } = useFloating({
-    placement: 'bottom-start',
-    middleware: [flip(), shift()],
-  })
+}: SelectProps<ExtraDataType>) => {
+  // const innerId = React.useMemo(() => {
+  //   return id || uuid(10)
+  // }, [id])
 
   const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
     e.stopPropagation()
@@ -155,129 +156,298 @@ const Select = <T extends string | number, ET = any>({
   }, [options, value])
 
   return (
-    <div className={cn('dj-flex dj-flex-col', className)}>
+    <div className={cn('dd-flex dd-flex-col', className)}>
       <div
-        className={cn('dj-flex dj-items-center', {
-          'dj-justify-between': label,
-          'dj-justify-end': !label,
+        className={cn('dd-flex dd-items-center', {
+          'dd-justify-between': label,
+          'dd-justify-end': !label,
         })}
       >
-        <label htmlFor={id} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+        <label
+          htmlFor={id}
+          className={cn(
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+            }),
+            labelClassName,
+          )}
+        >
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </label>
-        {hint && <span className='dj-text-xs dj-mb-1 dj-text-slate-500'>{hint}</span>}
+        {hint && <span className='dd-text-xs dd-mb-1 dd-text-slate-500'>{hint}</span>}
       </div>
       <Listbox defaultValue={defaultValue || null} value={value || null} onChange={onChange} disabled={disabled}>
-        <div className='dj-relative'>
-          <ListboxButton
-            ref={refs.setReference}
-            className={cn(
-              listboxVariants({
-                type,
-                hasError: error ? 'yes' : 'no',
-                size,
-              }),
-              buttonClassName,
-            )}
+        <ListboxButton
+          className={cn(
+            listboxVariants({
+              type,
+              hasError: error ? 'yes' : 'no',
+              size,
+            }),
+            'dd-relative dd-block dd-w-full',
+            buttonClassName,
+          )}
+        >
+          <span
+            className={cn('dd-block dd-truncate dd-text-slate-800 dark:dd-text-slate-200 dd-text-start', {
+              'dd-text-slate-300 dark:dd-text-secondary-600': loading,
+            })}
           >
-            <span
-              className={cn('dj-block dj-truncate dj-text-slate-800 dark:dj-text-slate-200 dj-text-start', {
-                '!dj-text-slate-300 dark:!dj-text-secondary-600': loading,
-              })}
-            >
-              {value ? (
-                selectedOption?.label
-              ) : (
-                <Text className='dj-text-sm' uiType='secondary'>
-                  {emptyString ? emptyString : label ? `Select a ${label.toLowerCase()}` : ''}
-                </Text>
-              )}
-            </span>
-            <span className='dj-absolute dj-inset-y-0 dj-right-0 dj-flex dj-items-center dj-pr-2 dj-gap-1'>
-              {clearable && value && (
-                <ClearIcon
-                  onClick={handleClear}
-                  className='dj-w-4 dj-cursor-pointer hover:dj-scale-110 dj-duration-300 dj-text-slate-400 hover:dj-text-slate-800'
-                />
-              )}
+            {value ? (
+              selectedOption?.label
+            ) : (
+              <Text className='dd-text-sm' uiType='secondary'>
+                {emptyString
+                  ? emptyString
+                  : label
+                    ? `Select a ${typeof label === 'string' && label.toLowerCase()}`
+                    : ''}
+              </Text>
+            )}
+          </span>
+          <span className='dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-gap-1'>
+            {clearable && value && (
+              <ClearIcon
+                onClick={handleClear}
+                className='dd-w-4 dd-cursor-pointer hover:dd-scale-110 dd-duration-300 dd-text-slate-400 hover:dd-text-slate-800'
+              />
+            )}
 
-              <ChevronUpDownIcon className='dj-h-4 dj-w-4 dj-text-gray-400' aria-hidden='true' />
+            <ChevronUpDownIcon className='dd-h-4 dd-w-4 dd-text-gray-400' aria-hidden='true' />
+          </span>
+          {loading && (
+            <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-2'>
+              <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
             </span>
-            {loading && (
-              <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-2'>
-                <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
-              </span>
-            )}
-          </ListboxButton>
-          <Transition
-            as={React.Fragment}
-            leave='transition ease-in duration-100'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
-          >
-            <ListboxOptions
-              ref={refs.setFloating}
-              style={floatingStyles}
-              className={cn(
-                'dj-absolute dj-z-50 dj-mt-1 dj-max-h-60 dj-w-full dj-overflow-auto dj-rounded-lg dj-bg-white dark:dj-bg-dark-800 dj-p-1 dj-text-base dj-shadow-lg dj-border dj-border-dark-100 dark:dj-border-dark-600 focus:dj-outline-none sm:dj-text-sm',
-                { [optionsClassName || '']: optionsClassName },
-              )}
+          )}
+        </ListboxButton>
+        <ListboxOptions
+          anchor='bottom start'
+          transition
+          className={cn(
+            'dd-w-[var(--button-width)] dd-mt-1 dd-max-h-60 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm',
+            { [optionsClassName || '']: optionsClassName },
+            'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
+          )}
+        >
+          {options.map((option, optionIdx) => (
+            <ListboxOption
+              disabled={option.disabled}
+              key={optionIdx}
+              className={({ focus }) =>
+                cn(
+                  'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
+                  {
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
+                      focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300': !focus,
+                  },
+                  optionClassName,
+                )
+              }
+              value={option.value}
             >
-              {options.map((option, optionIdx) => (
-                <ListboxOption
-                  disabled={option.disabled}
-                  key={optionIdx}
-                  className={({ focus }) =>
-                    `dj-relative dj-cursor-default dj-select-none dj-py-2 dj-pl-5 dj-pr-4 dj-rounded-md ${
-                      focus
-                        ? 'dj-bg-primary-50 dark:dj-bg-dark-900 dj-text-primary-600 dark:dj-bg-dark-2 dark:dj-text-primary-300'
-                        : 'dj-text-gray-900 dark:dj-text-slate-300'
-                    }`
-                  }
-                  value={option.value}
+              {({ selected, disabled }) => (
+                <div
+                  className={cn({
+                    'dd-cursor-not-allowed dd-opacity-50': disabled,
+                  })}
                 >
-                  {({ selected, disabled }) => (
-                    <div
-                      className={cn({
-                        'dj-cursor-not-allowed dj-opacity-50': disabled,
-                      })}
-                    >
-                      <span className={`dj-block dj-truncate ${selected ? 'dj-font-medium' : 'dj-font-normal'}`}>
-                        {option.label}
-                      </span>
-                      {selected ? (
-                        <span className='dj-absolute dj-inset-y-0 dj-left-0 dj-flex dj-items-center dj-pl-1 dj-text-primary-600 dark:dj-text-primary-300'>
-                          <CheckIcon className='dj-h-3 dj-w-3' aria-hidden='true' />
-                        </span>
-                      ) : null}
-                    </div>
-                  )}
-                </ListboxOption>
-              ))}
-              {options.length === 0 && (
-                <EmptyState
-                  icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dj-w-9' />}
-                  textClassName='dj-font-normal dj-text-xs'
-                />
+                  <span className={`dd-block dd-truncate ${selected ? 'dd-font-medium' : 'dd-font-normal'}`}>
+                    {option.label}
+                  </span>
+                  {selected ? (
+                    <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-1 dd-text-primary-600 dark:dd-text-primary-300'>
+                      <CheckIcon className='dd-h-3 dd-w-3' aria-hidden='true' />
+                    </span>
+                  ) : null}
+                </div>
               )}
-            </ListboxOptions>
-          </Transition>
-        </div>
+            </ListboxOption>
+          ))}
+          {options.length === 0 && (
+            <EmptyState
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
+              textClassName='dd-font-normal dd-text-xs'
+            />
+          )}
+        </ListboxOptions>
       </Listbox>
       <AnimatedFormError error={error} />
     </div>
   )
 }
 
-//TODO: add multi-select component
+const MultiSelect = <ExtraDataType extends string>({
+  id,
+  className,
+  buttonClassName,
+  optionsClassName,
+  label,
+  error,
+  required,
+  tooltip,
+  hint,
+  loading,
+  loadingType,
+  type,
+  size,
+  emptyString,
+  clearable,
+  disabled,
+  values,
+  defaultValues,
+  onChange,
+  options,
+  optionClassName,
+}: MultiSelectProps<ExtraDataType>) => {
+  const innerId = React.useMemo(() => {
+    return id || uuid(10)
+  }, [id])
+
+  const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
+    e.stopPropagation()
+    onChange && onChange([])
+  }
+
+  return (
+    <div className={cn('dd-flex dd-flex-col', className)}>
+      <div
+        className={cn('dd-flex dd-items-center', {
+          'dd-justify-between': label,
+          'dd-justify-end': !label,
+        })}
+      >
+        <label htmlFor={innerId} className={cn(labelVariants({ hasError: error ? 'yes' : 'no' }))}>
+          {label && (
+            <Typography.Text size='sm' uiType='transparent'>
+              {label}
+            </Typography.Text>
+          )}
+          {required && (
+            <Typography.Text uiType='danger' className='dd-h-5'>
+              *
+            </Typography.Text>
+          )}
+          {tooltip && <InfoTooltip tooltip={tooltip} />}
+        </label>
+        {hint && <span className='dd-text-xs dd-mb-1 dd-text-slate-500'>{hint}</span>}
+      </div>
+      <Listbox
+        defaultValue={defaultValues || null}
+        value={values || null}
+        onChange={onChange}
+        disabled={disabled}
+        multiple
+      >
+        <ListboxButton
+          className={cn(
+            listboxVariants({
+              type,
+              hasError: error ? 'yes' : 'no',
+              size,
+            }),
+            buttonClassName,
+            'dd-relative dd-block dd-w-full',
+          )}
+        >
+          <span
+            className={cn('dd-block dd-truncate dd-text-slate-800 dark:dd-text-slate-200 dd-text-start', {
+              'dd-text-slate-300 dark:dd-text-secondary-600': loading,
+            })}
+          >
+            {values && values.length > 0 ? (
+              values.join(' , ')
+            ) : (
+              <Text size='sm' uiType='secondary'>
+                {emptyString || ''}
+              </Text>
+            )}
+          </span>
+          <span className='dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-gap-1'>
+            {clearable && values && (
+              <ClearIcon
+                onClick={handleClear}
+                className='dd-w-4 dd-cursor-pointer hover:dd-scale-110 dd-duration-300 dd-text-slate-400 hover:dd-text-slate-800'
+              />
+            )}
+
+            <ChevronUpDownIcon className='dd-h-4 dd-w-4 dd-text-gray-400' aria-hidden='true' />
+          </span>
+          {loading && (
+            <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-2'>
+              <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+            </span>
+          )}
+        </ListboxButton>
+        <ListboxOptions
+          anchor='bottom start'
+          transition
+          className={cn(
+            'dd-w-[var(--button-width)] dd-mt-1 dd-max-h-60 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm',
+            'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
+            optionsClassName,
+          )}
+        >
+          {options.map((option, optionIdx) => (
+            <ListboxOption
+              disabled={option.disabled}
+              key={optionIdx}
+              className={({ focus }) =>
+                cn(
+                  'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
+                  {
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
+                      focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300': !focus,
+                  },
+                  optionClassName,
+                )
+              }
+              value={option.value}
+            >
+              {({ selected, disabled }) => (
+                <div
+                  className={cn({
+                    'dd-cursor-not-allowed dd-opacity-50': disabled,
+                  })}
+                >
+                  <span
+                    className={cn('dd-block dd-truncate', { 'dd-font-medium': selected, 'dd-font-normal': !selected })}
+                  >
+                    {option.label}
+                  </span>
+                  {selected ? (
+                    <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-1 dd-text-primary-600 dark:dd-text-primary-300'>
+                      <CheckIcon className='dd-h-3 dd-w-3' aria-hidden='true' />
+                    </span>
+                  ) : null}
+                </div>
+              )}
+            </ListboxOption>
+          ))}
+          {options.length === 0 && (
+            <EmptyState
+              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
+              textClassName='font-normal dd-text-xs'
+            />
+          )}
+        </ListboxOptions>
+      </Listbox>
+      <AnimatedFormError error={error} />
+    </div>
+  )
+}
+
+export { MultiSelect }
 export default Select

@@ -24,18 +24,19 @@ import { copyToClipboard } from '../utils/copy'
 import Typography from './Typography'
 import { ReactComponent as EyeIcon } from '../assets/icons/eye.svg'
 import { ReactComponent as EyeSlashIcon } from '../assets/icons//eye-slash.svg'
+import { ReactComponent as CheckIcon } from '../assets/icons/check.svg'
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg'
-import Input from './form/Input'
+import Input, { inputVariants } from './form/Input'
 import { cva } from 'class-variance-authority'
 const { Text } = Typography
 
-const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-duration-300', {
+const iconVariants = cva('dd-cursor-pointer dd-w-5 dd-h-5 dd-transition-all dd-duration-300', {
   variants: {
     state: {
-      eyelashIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
-      eyeIcon: 'dj-text-slate-700 hover:dj-text-slate-900 dark:dj-text-slate-300 dark:dj-hover:text-slate-200',
+      eyelashIcon: 'dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:hover:dd-text-slate-200',
+      eyeIcon: 'dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:dd-hover:text-slate-200',
       copyIcon:
-        ' hover:dj-scale-110 dj-text-slate-500 hover:dj-text-primary-300 dark:dj-text-slate-300 dark:hover:dj-text-primary-300',
+        'hover:dd-scale-110 dd-text-slate-500 hover:dd-text-primary-300 dark:dd-text-slate-300 dark:hover:dd-text-primary-300',
     },
   },
   defaultVariants: {
@@ -76,26 +77,55 @@ const iconVariants = cva('dj-cursor-pointer dj-w-5 dj-h-5 dj-transition-all dj-d
  * }
  *
  */
-const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName, textClassName, type, ...props }) => {
+const SecureCopy: React.FC<SecureCopyProps> = ({
+  text,
+  className,
+  iconClassName,
+  textClassName,
+  type,
+  uiSize,
+  ...props
+}) => {
   const [showText, setShowText] = React.useState(false)
+
+  const [copied, setCopied] = React.useState(false) // Add state for copy status
+
+  // Function to handle copying and icon change
+  const handleCopy = () => {
+    if (text) {
+      copyToClipboard(text) // Copy to clipboard
+      setCopied(true) // Set copied to true
+
+      // Reset the icon after a delay
+      setTimeout(() => setCopied(false), 2000) // Change back after 2 seconds
+    }
+  }
 
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('dj-flex dj-items-center dj-gap-1', className, {})}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
           <div
-            className='dj-relative dj-overflow-hidden dj-cursor-pointer dj-text-sm  dj-h-7 dark:dj-bg-dark-700 dark:hover:dj-bg-dark-500 dj-bg-gray-200/70 hover:dj-bg-dark-200 dj-px-2 dj-rounded-md dj-select-none dj-transition-all dj-duration-500 dj-flex dj-flex-col dj-items-center dj-justify-center dj-dj-whitespace-nowrap'
+            className={cn(
+              inputVariants({ uiSize }),
+              {
+                'dd-h-7': uiSize === 'small',
+                'dd-h-9': uiSize === 'medium' || uiSize === undefined,
+                'dd-h-11': uiSize === 'large',
+              },
+              'dd-relative dd-overflow-hidden dd-cursor-pointer dd-text-sm dark:dd-bg-dark-700 dark:hover:dd-bg-dark-500 dd-bg-gray-200/70 hover:dd-bg-dark-200 dd-px-2 dd-rounded-md dd-select-none dd-transition-all dd-duration-500 dd-flex dd-flex-col dd-items-center dd-justify-center dd-whitespace-nowrap',
+            )}
             onClick={() => text && copyToClipboard(text)}
           >
             {!showText && (
-              <div className='dj-bg-white/10 dark:dj-bg-black/10 dj-backdrop-blur-[2.3px] dj-absolute dj-left-0 dj-top-0 dj-right-0 dj-bottom-0 dj-w-full dj-h-full' />
+              <div className='dd-bg-white/10 dark:dd-bg-black/10 dd-backdrop-blur-[2.3px] dd-absolute dd-left-0 dd-top-0 dd-right-0 dd-bottom-0 dd-w-full dd-h-full' />
             )}
-            <Text className={cn('dj-w-full dj-overflow-hidden dj-text-ellipsis dj-truncate', textClassName)}>
+            <Text className={cn('dd-w-full dd-overflow-hidden dd-text-ellipsis dd-truncate', textClassName)}>
               {!text || text === undefined ? '' : text}
             </Text>
           </div>
 
-          <div className='dj-select-none'>
+          <div className='dd-select-none'>
             {showText ? (
               <EyeIcon
                 onClick={() => setShowText(false)}
@@ -110,20 +140,36 @@ const SecureCopy: React.FC<SecureCopyProps> = ({ text, className, iconClassName,
           </div>
         </div>
       )}
+
       {type === 'copy' && (
-        <div className={cn('dj-flex dj-items-center dj-gap-1', className)}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
           <Input
-            inputProps={{
-              value: text ? text : '',
-              readOnly: true,
-              ...props,
-            }}
+            className={cn(
+              inputVariants({
+                uiSize,
+              }),
+              {
+                'dd-h-7': uiSize === 'small',
+                'dd-h-9': uiSize === 'medium' || uiSize === undefined,
+                'dd-h-11': uiSize === 'large',
+              },
+              className,
+            )}
+            value={text || ''}
+            readOnly={true}
+            {...props}
           />
-          <div className='dj-select-none'>
-            <CopyIcon
-              onClick={() => copyToClipboard(text || '')}
-              className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
-            />
+          <div className='select-none'>
+            {copied ? (
+              <CheckIcon // Show CheckIcon when copied
+                className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
+              />
+            ) : (
+              <CopyIcon // Show CopyIcon initially
+                onClick={handleCopy}
+                className={cn(iconVariants({ state: 'copyIcon' }), iconClassName)}
+              />
+            )}
           </div>
         </div>
       )}

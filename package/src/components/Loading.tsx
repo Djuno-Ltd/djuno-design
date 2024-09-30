@@ -48,65 +48,70 @@ import { LoadingProps } from '../types'
 const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size, borderSize, theme }) => {
   if (type === 'elastic') {
     return (
-      <svg
-        className={cn(className)}
-        style={{ ...(size ? { width: size, height: size } : { width: 24, height: 24 }) }}
-        viewBox='0 0 16 16'
-      >
-        <g className='dj-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
-          <path
-            className={cn({
-              'dj-fill-primary-50 dark:dj-fill-dark-800': theme === 'primary' || theme === undefined,
-              'dj-fill-red-50 dark:dj-fill-red-700/10': theme === 'error',
-              'dj-fill-transparent dark:dj-fill-transparent': theme === 'transparent' || theme === 'white',
-            })}
-            d='M8,16a8,8,0,1,1,8-8A8,8,0,0,1,8,16ZM8,2a6,6,0,1,0,6,6A6,6,0,0,0,8,2Z'
-          ></path>
-          <circle
-            className={cn('dj-animate-stroke-dash dj-fill-none', {
-              'dj-stroke-white': theme === 'white',
-              'dj-stroke-primary-500': theme === 'primary' || theme === 'transparent' || theme === undefined,
-              'dj-stroke-red-500': theme === 'error',
-            })}
-            style={{
-              ...(borderSize && { strokeWidth: borderSize }),
-              strokeLinecap: 'round',
-              strokeLinejoin: 'round',
-              strokeDasharray: '67, 100',
-              strokeDashoffset: '46',
-              transformOrigin: 'center',
-            }}
-            cx='8'
-            cy='8'
-            r='7'
-          ></circle>
-        </g>
-      </svg>
+      <div>
+        <svg
+          className={cn(className)}
+          style={{ ...(size ? { width: size, height: size } : { width: 24, height: 24 }) }}
+          viewBox='0 0 16 16'
+        >
+          <g className='dd-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
+            <path
+              className={cn({
+                'dd-fill-primary-50 dark:dd-fill-dark-800': theme === 'primary' || theme === undefined,
+                'dd-fill-red-50 dark:dd-fill-red-700/10': theme === 'error',
+                'dd-fill-transparent dark:dd-fill-transparent': theme === 'transparent' || theme === 'white',
+              })}
+              d='M8,16a8,8,0,1,1,8-8A8,8,0,0,1,8,16ZM8,2a6,6,0,1,0,6,6A6,6,0,0,0,8,2Z'
+            ></path>
+            <circle
+              className={cn('dd-animate-stroke-dash dd-fill-none', {
+                'dd-stroke-white': theme === 'white',
+                'dd-stroke-primary-500': theme === 'primary' || theme === 'transparent' || theme === undefined,
+                'dd-stroke-red-500': theme === 'error',
+              })}
+              style={{
+                ...(borderSize && { strokeWidth: borderSize }),
+                strokeLinecap: 'round',
+                strokeLinejoin: 'round',
+                strokeDasharray: '67, 100',
+                strokeDashoffset: '46',
+                transformOrigin: 'center',
+              }}
+              cx='8'
+              cy='8'
+              r='7'
+            ></circle>
+          </g>
+        </svg>
+      </div>
     )
   }
   return (
-    <div
-      style={{
-        ...(size ? { width: size, height: size } : { width: 24, height: 24 }),
-        ...(borderSize && { borderWidth: borderSize }),
-      }}
-      className={cn(
-        'dj-rounded-full dj-loading-spin  dj-border-[0.125rem]',
-        {
-          // specify animation type
-          'dj-animate-spin': type === undefined || type === 'simple',
-          'dj-animate-cutoff-spin': type === 'cutoff',
+    <div>
+      <div
+        style={{
+          ...(size ? { width: size, height: size } : { width: 24, height: 24 }),
+          ...(borderSize && { borderWidth: borderSize }),
+        }}
+        className={cn(
+          'dd-rounded-full dd-border-[0.125rem]',
+          {
+            // specify animation type
+            'dd-animate-spin': type === undefined || type === 'simple',
+            'dd-animate-cutoff-spin': type === 'cutoff',
 
-          // specify theme
-          'dj-border-transparent dj-border-t-white': theme === 'white',
-          'dj-border-primary-50 dj-border-t-primary-500 dark:dj-border-dark-800 dark:dj-border-t-primary-300':
-            theme === 'primary' || theme === undefined,
-          'dj-border-red-50 dj-border-t-red-500 dark:dj-border-red-700/10 dark:dj-border-t-red-500': theme === 'error',
-          'dj-border-transparent dj-border-t-primary-500': theme === 'transparent',
-        },
-        className,
-      )}
-    />
+            // specify theme
+            'dd-border-transparent dd-border-t-white': theme === 'white',
+            'dd-border-primary-50 dd-border-t-primary-500 dark:dd-border-dark-800 dark:dd-border-t-primary-300':
+              theme === 'primary' || theme === undefined,
+            'dd-border-red-50 dd-border-t-red-500 dark:dd-border-red-700/10 dark:dd-border-t-red-500':
+              theme === 'error',
+            'dd-border-transparent dd-border-t-primary-500': theme === 'transparent',
+          },
+          className,
+        )}
+      />
+    </div>
   )
 }
 

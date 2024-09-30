@@ -21,18 +21,19 @@
 import * as React from 'react'
 import { cn } from './../utils/cn'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import { useTheme } from '../hooks/useTheme'
 import { ReactComponent as SunIcon } from '../assets/icons/sun.svg'
 import { ReactComponent as MoonIcon } from '../assets/icons//moon.svg'
 import { ReactComponent as SystemIcon } from '../assets/icons//computer-desktop.svg'
 import { ThemeChangerProps } from '../types/IThemeChanger'
 import Switcher from './form/Switcher'
+import { useDjunoDesign } from '../hooks/useDjunoDesign'
 
 /**
  * ThemeChanger component.
  *
  *
  * @param {object} props - ThemeChanger props.
+ * @param {string} [props.anchor] -
  * @param {string} [props.itemsClassName] - Additional classes to apply to the items within the ThemeChanger.
  *
  * @returns {React.ReactNode} Rendered ThemeChanger component.
@@ -47,30 +48,34 @@ import Switcher from './form/Switcher'
  * <ThemeChanger itemsClassName="custom-theme"/>
  *
  */
-const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
-  const { mode, modeRefrence, changeMode } = useTheme()
+const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName, anchor = 'bottom start' }) => {
+  const {
+    theme: { mode, changeMode, modeRefrence },
+  } = useDjunoDesign({ stric: false })
+
   return (
-    <Menu as='div' className='dj-relative dj-text-left dj-flex dj-justify-center'>
-      <MenuButton className='dj-inline-flex dj-w-full dj-justify-center dj-items-center dj-text-sm dj-font-medium focus:dj-outline-none focus-visible:dj-ring-0 dj-text-slate-800 dark:dj-text-slate-200'>
-        {mode === 'light' && <SunIcon className='dj-w-6 dj-h-6 hover:dj-scale-110' />}
-        {mode === 'dark' && <MoonIcon className='dj-w-6 dj-h-6 hover:dj-scale-110' />}
+    <Menu as='div' className='dd-relative dd-text-left dd-flex dd-justify-center'>
+      <MenuButton className='dd-inline-flex dd-w-full dd-justify-center dd-items-center dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-slate-800 dark:dd-text-slate-200'>
+        {mode === 'light' && <SunIcon className='dd-w-6 dd-h-6 hover:dd-scale-110' />}
+        {mode === 'dark' && <MoonIcon className='dd-w-6 dd-h-6 hover:dd-scale-110' />}
       </MenuButton>
 
       <Transition
         as={React.Fragment}
-        enter='dj-transition dj-ease-out dj-duration-100'
-        enterFrom='dj-transform dj-opacity-0 dj-scale-95'
-        enterTo='dj-transform dj-opacity-100 dj-scale-100'
-        leave='dj-transition dj-ease-in dj-duration-75'
-        leaveFrom='dj-transform dj-opacity-100 dj-scale-100'
-        leaveTo='dj-transform dj-opacity-0 dj-scale-95'
+        enter='dd-transition dd-ease-out dd-duration-100'
+        enterFrom='dd-transform dd-opacity-0 dd-scale-95'
+        enterTo='dd-transform dd-opacity-100 dd-scale-100'
+        leave='dd-transition dd-ease-in dd-duration-75'
+        leaveFrom='dd-transform dd-opacity-100 dd-scale-100'
+        leaveTo='dd-transform dd-opacity-0 dd-scale-95'
       >
         <MenuItems
+          anchor={anchor}
           className={cn(
-            'dj-absolute dj-bg-white dark:dj-bg-zinc-900 dj-ring-slate-900/10 dark:dj-ring-black dj-z-50 dj-top-full dj-rounded-lg dj-ring-1 dj-shadow-lg dj-overflow-hidden dj-w-36 dj-py-1 dj-text-sm dj-font-semibold dark:dj-highlight-white/5 dj-mt-1',
+            'dd-absolute dd-bg-white dark:dd-bg-zinc-900 dd-ring-slate-900/10 dark:dd-ring-black dd-z-50 dd-top-full dd-rounded-lg dd-ring-1 dd-shadow-lg dd-overflow-hidden dd-w-36 dd-py-1 dd-text-sm dd-font-semibold dark:dd-highlight-white/5 dd-mt-1',
             {
               [itemsClassName || '']: itemsClassName,
-              'dj-left-0': !itemsClassName,
+              'dd-left-0': !itemsClassName,
             },
           )}
         >
@@ -79,16 +84,16 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
               <div
                 onClick={() => changeMode('light')}
                 className={cn(
-                  'dj-group dj-flex dj-w-full dj-items-center dj-rounded-md dj-px-2 dj-py-1 dj-text-sm dj-cursor-pointer ',
+                  'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-1 dd-text-sm dd-cursor-pointer ',
                   {
-                    'dj-bg-slate-50 dark:dj-bg-zinc-800': focus,
-                    'dj-text-gray-900 dark:dj-text-slate-300':
+                    'dd-bg-slate-50 dark:dd-bg-zinc-800': focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300':
                       modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'dark'),
-                    'dj-text-sky-500 dark:dj-text-sky-500': mode === 'light' && modeRefrence === 'manual',
+                    'dd-text-sky-500 dark:dd-text-sky-500': mode === 'light' && modeRefrence === 'manual',
                   },
                 )}
               >
-                <SunIcon className='dj-w-5 dj-h-5 dj-mr-2' />
+                <SunIcon className='dd-w-5 dd-h-5 dd-mr-2' />
                 Light
               </div>
             )}
@@ -98,16 +103,16 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
               <div
                 onClick={() => changeMode('dark')}
                 className={cn(
-                  'dj-group dj-flex w-full dj-items-center dj-rounded-md dj-px-2 dj-py-1 dj-text-sm dj-cursor-pointer',
+                  'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-1 dd-text-sm dd-cursor-pointer',
                   {
-                    'dj-bg-slate-50 dark:dj-bg-zinc-800': focus,
-                    'dj-text-gray-900 dark:dj-text-slate-300':
+                    'dd-bg-slate-50 dark:dd-bg-zinc-800': focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300':
                       modeRefrence !== 'manual' || (modeRefrence === 'manual' && mode === 'light'),
-                    'dark:dj-text-sky-500': mode === 'dark' && modeRefrence === 'manual',
+                    'dark:dd-text-sky-500': mode === 'dark' && modeRefrence === 'manual',
                   },
                 )}
               >
-                <MoonIcon className='dj-w-5 dj-h-5 dj-mr-2' />
+                <MoonIcon className='dd-w-5 dd-h-5 dd-mr-2' />
                 Dark
               </div>
             )}
@@ -117,15 +122,15 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
               <div
                 onClick={() => changeMode('system')}
                 className={cn(
-                  'dj-group dj-flex dj-w-full dj-items-center dj-rounded-md dj-px-2 dj-py-1 dj-text-sm dj-cursor-pointer',
+                  'dd-group dd-flex dd-w-full dd-items-center dd-rounded-md dd-px-2 dd-py-1 dd-text-sm dd-cursor-pointer',
                   {
-                    'dj-bg-slate-50 dark:dj-bg-zinc-800': focus,
-                    'dj-text-gray-900 dark:dj-text-slate-300': modeRefrence !== 'system',
-                    'dj-text-sky-500 dark:dj-text-sky-500': modeRefrence === 'system',
+                    'dd-bg-slate-50 dark:dd-bg-zinc-800': focus,
+                    'dd-text-gray-900 dark:dd-text-slate-300': modeRefrence !== 'system',
+                    'dd-text-sky-500 dark:dd-text-sky-500': modeRefrence === 'system',
                   },
                 )}
               >
-                <SystemIcon className='dj-w-5 dj-h-5 dj-mr-2' />
+                <SystemIcon className='dd-w-5 dd-h-5 dd-mr-2' />
                 System
               </div>
             )}
@@ -156,9 +161,11 @@ const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName }) => {
  *
  */
 const ThemeSwitcher: React.FC<ThemeChangerProps> = () => {
-  const { mode, changeMode } = useTheme()
+  const {
+    theme: { mode, changeMode },
+  } = useDjunoDesign({ stric: false })
+
   return <Switcher size='medium' value={mode === 'dark'} onChange={(v) => changeMode(v ? 'dark' : 'light')} />
-  return null
 }
 
 export { ThemeSwitcher }

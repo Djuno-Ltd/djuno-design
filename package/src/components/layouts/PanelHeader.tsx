@@ -68,17 +68,17 @@ const PanelHeader: React.FC<PanelHeaderProps> = ({
   )
 
   return (
-    <div className='dj-w-full dj-h-16 dj-px-6 dj-flex dj-items-center dj-bg-white dark:dj-bg-dark-900 dj-top-0 dj-z-30 dj-sticky dj-border-b-2 dj-border-slate-200 dark:dj-border-dark-800'>
-      <div className='dj-w-full lg:dj-max-w-7xl dj-mx-auto dj-flex dj-items-center dj-justify-between'>
-        <div className='lg:dj-hidden dj-flex dj-items-center dj-gap-2'>
+    <div className='dd-w-full dd-h-16 dd-px-6 dd-flex dd-items-center dd-bg-white dark:dd-bg-dark-900 dd-top-0 dd-z-30 dd-sticky dd-border-b-2 dd-border-slate-200 dark:dd-border-dark-800'>
+      <div className='dd-w-full lg:dd-max-w-7xl dd-mx-auto dd-flex dd-items-center dd-justify-between'>
+        <div className='lg:dd-hidden dd-flex dd-items-center dd-gap-2'>
           <MenuIcon
-            className='dj-text-slate-800 dark:dj-text-slate-200 dj-w-7 dj-h-7 dj-cursor-pointer'
+            className='dd-text-slate-800 dark:dd-text-slate-200 dd-w-7 dd-h-7 dd-cursor-pointer'
             onClick={handleShowSidebar}
             test-cy='menu-icon'
           />
           {mobileIcon}
         </div>
-        <div className='dj-flex dj-flex-1'>{children}</div>
+        <div className='dd-flex dd-flex-1'>{children}</div>
       </div>
     </div>
   )

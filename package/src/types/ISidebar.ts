@@ -28,23 +28,27 @@ export interface SidebarProps extends React.PropsWithChildren {
   loading?: boolean
   loadingMode?: SidebarLoadingModes
   type?: PanelLayoutTypes
+  navItemHeight?: number
+  active?: string
 }
 
 export type SidebarItem = {
   id: string | number
-  activeCondition?: SidebarActiveItemCondition
-  serviceTypeId?: number
+  activeConditions?: SidebarActiveItemCondition[]
   label?: SidebarItemLabel
   link?: string
   onClick?: (item?: SidebarItem) => void
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
   disabled?: boolean
   testId?: string
+  children?: SidebarItem[]
+  active?: boolean
 }
 
 export type SidebarLoadingModes = LoadingType | 'skeleton'
 export type SidebarItemLabel = string | React.ReactNode | (({ isActive }: { isActive?: boolean }) => React.ReactNode)
 export interface SidebarActiveItemCondition {
-  segmentIndex: number
-  activeString: string
+  operator?: 'and' | 'or'
+  index: number
+  value: string | undefined
 }

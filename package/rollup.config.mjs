@@ -8,6 +8,7 @@ import postcss from 'rollup-plugin-postcss'
 // import css from 'rollup-plugin-import-css'
 import svgr from '@svgr/rollup'
 import url from '@rollup/plugin-url'
+import json from '@rollup/plugin-json'
 
 const makeSourcemap = false
 const minimizeCss = true
@@ -34,6 +35,7 @@ export default [
       url(),
       svgr({ icon: true, dimensions: false }),
       peerDepsExternal(),
+      json(),
       resolve(),
       commonjs(),
       typescript(),
@@ -79,6 +81,7 @@ export default [
       url(),
       svgr({ icon: true, dimensions: false }),
       peerDepsExternal(),
+      json(),
       resolve(),
       commonjs(),
       typescript({

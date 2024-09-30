@@ -22,6 +22,10 @@ import React from 'react'
 import { cn } from '../../utils/cn'
 import { useShow } from '../../hooks/useShow'
 import { PanelLayoutProps } from '../../types/IPanelLayouts'
+import Typography from '../Typography'
+import { AnimatePresence, motion } from 'framer-motion'
+import Loading from '../Loading'
+import Flex from '../Flex'
 
 /**
  * PanelLayout component.
@@ -34,6 +38,13 @@ import { PanelLayoutProps } from '../../types/IPanelLayouts'
  * @param {string} [props.pathname] - The current pathname used to generate segments for the sidebar.
  * @param {({ segments, isShowSidebar, type }: { segments: string[], isShowSidebar: boolean, type: PanelLayoutTypes }) => React.ReactNode} [props.renderSidebar] - A function to render the sidebar, receiving segments, sidebar visibility state, and layout type.
  * @param {({ handleHideSidebar, handleShowSidebar,isShowSidebar }: { handleHideSidebar: () => void, handleShowSidebar: () => void, isShowSidebar: boolean }) => React.ReactNode} [props.renderHeader] - A function to render the header, receiving callbacks to show or hide the sidebar.
+ * @param {boolean} [props.enableGoToTopAfterScroll] - Showing a button to go to the top of the page after a little scrolling
+ * @param {boolean} [props.enableGoToTopAfterChangeRoute] - Scrolling to the top after changing pathname prop.
+ * @param {boolean} [props.globalLoading] - Controls whether the global loading state is active.
+ * @param {boolean} [props.globalLoadingContent] - Custom content to display within the global loading overlay.
+ * @param {boolean} [props.contentLoading] - Controls whether the content loading state is active.
+ * @param {boolean} [props.contentLoadingContent] - Custom content to display within the content loading overlay.
+ * @param {boolean} [props.loadingsContainerClassName] - A custom CSS class applied to the container of both global and content loading overlays.
  * @param {React.ReactNode} [props.children] - The content to be displayed within the layout's main area.
  *
  * @returns {React.ReactNode} Rendered PanelLayout component.
@@ -64,8 +75,18 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   pathname,
   renderSidebar,
   renderHeader,
+  globalLoading = false,
+  contentLoading = false,
+  loadingsContainerClassName,
+  globalLoadingContent,
+  contentLoadingContent,
+  enableGoToTopAfterScroll = true,
+  enableGoToTopAfterChangeRoute = true,
 }) => {
   const [isShowSidebar, { hide: handleHideSidebar, show: handleShowSidebar }] = useShow(false)
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const [containerParentHeight, setContainerParentHeight] = React.useState(100)
+  const [showGoTopButton, setShowGoTopButton] = React.useState(false)
 
   const segments = React.useMemo(() => {
     if (!pathname) return ['']
@@ -75,18 +96,123 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
       .filter(Boolean)
   }, [pathname])
 
+  React.useEffect(() => {
+    const container = containerRef.current
+    if (container && enableGoToTopAfterChangeRoute) {
+      setTimeout(() => {
+        container.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        })
+      }, 10)
+    }
+  }, [pathname])
+
+  const handleScroll = () => {
+    if (containerRef.current && enableGoToTopAfterScroll) {
+      setShowGoTopButton(containerRef.current.scrollTop > containerParentHeight)
+    }
+  }
+
+  React.useEffect(() => {
+    const container = containerRef.current
+    if (container && enableGoToTopAfterScroll) {
+      const cph = container.parentElement?.clientHeight
+      setContainerParentHeight(cph ? cph - 100 : 100)
+      container.addEventListener('scroll', handleScroll)
+      return () => {
+        container.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
+  const handleGoToTop = () => {
+    if (containerRef.current && enableGoToTopAfterScroll) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
-    <div className={cn('dj-flex dj-flex-col dj-h-full md:dj-flex-row dj-relative', className)} style={style}>
+    <div className={cn('dd-flex dd-flex-col dd-h-full md:dd-flex-row dd-relative', className)} style={style}>
       {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal' })}
       <div
-        className={cn('dj-min-h-full dj-w-full dj-ml-auto dj-transition-all dj-duration-200', {
-          'lg:dj-w-[calc(100%-300px)]': type === 'normal' || type === undefined,
-          'lg:dj-w-[calc(100%-130px)]': type === 'mini',
+        className={cn('dd-min-h-full dd-w-full dd-ml-auto dd-transition-all dd-duration-200 dd-relative', {
+          'lg:dd-w-[calc(100%-300px)]': type === 'normal' || type === undefined,
+          'lg:dd-w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
-        <div className='dj-max-w-7xl dj-mx-auto dj-min-w-full  dj-h-[calc(100%-4rem)] dj-overflow-auto'>{children}</div>
+        <div className='dd-relative dd-z-30 dd-w-full'>
+          {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
+        </div>
+        <div
+          className='dd-max-w-7xl dd-mx-auto dd-min-w-full dd-h-[calc(100%-4rem)] dd-overflow-auto'
+          ref={containerRef}
+        >
+          {children}
+        </div>
+
+        {enableGoToTopAfterScroll && (
+          <AnimatePresence>
+            {showGoTopButton && (
+              <motion.button
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                onClick={handleGoToTop}
+                className='dd-absolute dd-bottom-4 dd-right-4 dd-bg-primary-500 dd-text-white dd-rounded-full dd-p-2 dd-w-[32px] dd-h-[32px] dd-aspect-square dd-shadow-lg hover:dd-bg-primary-600 dd-transition-colors dd-flex dd-items-center dd-justify-center dd-whitespace-nowrap'
+              >
+                <Typography.Text uiType='transparent' size='xs'>
+                  ↑
+                </Typography.Text>
+              </motion.button>
+            )}
+          </AnimatePresence>
+        )}
+        <AnimatePresence>
+          {contentLoading && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={cn(
+                'dd-w-full dd-h-full dd-flex dd-justify-center dd-items-center dd-absolute dd-inset-0 dd-bg-slate-50 dark:dd-bg-dark-900 dd-z-30',
+                loadingsContainerClassName,
+              )}
+            >
+              {contentLoadingContent ? (
+                contentLoadingContent
+              ) : (
+                <Flex direction='col' items='center' className='dd-gap-1'>
+                  <Loading type='elastic' />
+                </Flex>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {globalLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={cn(
+              'dd-w-full dd-h-full dd-flex dd-justify-center dd-items-center dd-absolute dd-inset-0 dd-bg-slate-50 dark:dd-bg-dark-900 dd-z-50',
+              loadingsContainerClassName,
+            )}
+          >
+            {globalLoadingContent ? (
+              globalLoadingContent
+            ) : (
+              <Flex direction='col' items='center' className='dd-gap-1'>
+                <Loading type='elastic' />
+                <Typography.Text size='xs'>Just a moment</Typography.Text>
+              </Flex>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

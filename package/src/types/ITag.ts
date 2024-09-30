@@ -1,6 +1,6 @@
 /**
- * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Accordion types
+ * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
+ * @fileoverview Tag types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,17 +18,14 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
-
-export interface AccordionProps extends PropsWithChildren {
-  items?: Array<AccordionItem>
+export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   className?: string
-  panelClassName?: string
-  labelClassName?: string
-  loading?: boolean
+  color?: PresetColorNames //TODO: also string
+  style?: React.CSSProperties
+  icon?: React.ReactNode
+  bordered?: boolean
+  closable?: boolean
+  onClose?: () => void
 }
 
-export type AccordionItem = {
-  label: string | React.ReactNode
-  panel?: string | React.ReactNode
-}
+export type PresetColorNames = 'processing' | 'success' | 'error' | 'warning'

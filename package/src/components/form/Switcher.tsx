@@ -15,7 +15,7 @@ import { cn } from '../../utils/cn'
  * @param {Function} [props.onChange] - Callback function that gets called when the switch is toggled. It receives the new state as an argument.
  * @param {boolean} [props.disabled] - If true, the switch will be disabled and not clickable.
  * @param {boolean} [props.loading] - If true, the switch will show a loading indicator instead of its normal state.
- * @param {LoadingProps} [props.loadingSetting] - Configuration for the loading indicator, including size, border size, and type.
+ * @param {LoadingProps} [props.loadingType] - Type of loading indicator: 'simple' , 'cutoff' or 'elastic'.
  * @param {SizeTypes} [props.size] - Size of the switch. Options are 'small', 'medium', or 'large'.
  *
  * @returns {React.ReactNode} Rendered Switcher component.
@@ -33,7 +33,7 @@ import { cn } from '../../utils/cn'
  *   loading={false}
  * />
  */
-const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, loading, loadingSetting }) => {
+const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, loading, loadingType }) => {
   const [enabled, setEnabled] = useState<boolean>(value || false)
 
   useEffect(() => {
@@ -50,39 +50,40 @@ const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, size, lo
       checked={enabled}
       onChange={handleChange}
       className={cn(
-        'dj-relative dj-inline-flex dj-shrink-0 dj-cursor-pointer dj-rounded-full dj-border-transparent dj-transition-colors dj-duration-200 dj-ease-in-out focus:dj-outline-none focus-visible:dj-ring-2 focus-visible:dj-ring-white/75',
+        'dd-relative dd-inline-flex dd-shrink-0 dd-cursor-pointer dd-rounded-full dd-border-transparent dd-transition-colors dd-duration-200 dd-ease-in-out focus:dd-outline-none focus-visible:dd-ring-2 focus-visible:dd-ring-white/75',
         {
-          'dj-h-[17px] dj-w-[33px] dj-border': size === 'small',
-          'dj-h-[24px] dj-w-[46px] dj-border-2': size === 'medium' || size === undefined,
-          'dj-h-[31px] dj-w-[59px] dj-border-[3px]': size === 'large',
-          'dj-bg-primary-400 dark:dj-bg-primary-500': enabled && !disabled,
-          'dj-bg-primary-200 dark:dj-bg-primary-200/70': enabled && disabled,
-          'dj-bg-gray-200 dark:dj-bg-gray-600': !enabled,
-          '!dj-cursor-not-allowed': disabled || loading,
+          'dd-h-[17px] dd-w-[33px] dd-border': size === 'small',
+          'dd-h-[24px] dd-w-[46px] dd-border-2': size === 'medium' || size === undefined,
+          'dd-h-[31px] dd-w-[59px] dd-border-[3px]': size === 'large',
+          'dd-bg-primary-400 dark:dd-bg-primary-500': enabled && !disabled,
+          'dd-bg-primary-200 dark:dd-bg-primary-200/70': enabled && disabled,
+          'dd-bg-gray-200 dark:dd-bg-gray-600': !enabled,
+          '!dd-cursor-not-allowed': disabled || loading,
         },
       )}
     >
       <span
         aria-hidden='true'
         className={cn(
-          'dj-pointer-events-none dj-inline-block  dj-transform dj-rounded-full dj-bg-white dark:dj-bg-dark-2 dj-shadow-lg dj-ring-0 dj-transition dj-duration-200 dj-ease-in-out',
-          'dj-flex dj-items-center dj-justify-center',
+          'dd-pointer-events-none dd-inline-block  dd-transform dd-rounded-full dd-bg-white dark:dd-bg-dark-2 dd-shadow-lg dd-ring-0 dd-transition dd-duration-200 dd-ease-in-out',
+          'dd-flex dd-items-center dd-justify-center',
           {
-            'dj-h-[15px] dj-w-[15px]': size === 'small',
-            'dj-h-[20px] dj-w-[20px]': size === 'medium' || size === undefined,
-            'dj-h-[25px] dj-w-[25px]': size === 'large',
-            'dj-translate-x-0': !enabled,
-            'dj-translate-x-[16px]': enabled && size === 'small',
-            'dj-translate-x-[22px]': enabled && (size === 'medium' || size === undefined),
-            'dj-translate-x-[28px]': enabled && size === 'large',
+            'dd-h-[15px] dd-w-[15px]': size === 'small',
+            'dd-h-[20px] dd-w-[20px]': size === 'medium' || size === undefined,
+            'dd-h-[25px] dd-w-[25px]': size === 'large',
+            'dd-translate-x-0': !enabled,
+            'dd-translate-x-[16px]': enabled && size === 'small',
+            'dd-translate-x-[22px]': enabled && (size === 'medium' || size === undefined),
+            'dd-translate-x-[28px]': enabled && size === 'large',
           },
         )}
       >
         {loading && (
           <Loading
-            size={loadingSetting?.size || 13}
-            borderSize={loadingSetting?.borderSize || 2}
-            type={loadingSetting?.type || 'elastic'}
+            type={loadingType || 'simple'}
+            borderSize={size === 'small' ? 1 : 1.5}
+            size={size === 'large' ? 18 : 14}
+            theme={'primary'}
           />
         )}
       </span>

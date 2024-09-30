@@ -17,6 +17,7 @@ import {
   Pagination,
   Modal,
   Select,
+  MultiSelect,
   SelectOption,
   Dropdown,
   Accordion,
@@ -33,8 +34,11 @@ import {
   Texrarea,
   ThemeChanger,
   ThemeSwitcher,
+  Tag,
+  CodeViewer,
+  Countdown,
 } from "djuno-design";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -103,10 +107,14 @@ function App() {
   const [open, setOpen] = useState<boolean>(false);
   const handleToggle = () => setOpen(!open);
 
+  //panelLayout
+  const [globalLoading, setGlobalLoading] = useState(false);
+  const [contentLoading, setContentLoading] = useState(false);
+
   //sidebar
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
-  const [pathname, setPathname] = useState<string>("/item1");
+  const [pathname, setPathname] = useState<string>("/sub-item1");
   const handleTogleSidebarLoading = () => {
     setSidebarLoading((prev) => !prev);
   };
@@ -114,52 +122,314 @@ function App() {
     setPanelType((prev) => (prev === "normal" ? "mini" : "normal"));
   };
   const handleChangePathname = () => {
-    setPathname((prev) => (prev === "/item1" ? "/item2" : "/item1"));
+    setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
   const sidebarItems: SidebarItem[] = [
     {
       id: 1,
       label: "item1",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item1",
-      },
-      onClick: (item) => console.log(item),
+      activeConditions: [
+        {
+          index: 0,
+          value: "item1",
+        },
+      ],
+      icon: FaceSmile,
     },
     {
       id: 2,
       label: "item2",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item2",
-      },
-      onClick: (item) => console.log(item),
+      activeConditions: [
+        {
+          index: 0,
+          value: "item2",
+        },
+      ],
+      children: [
+        {
+          id: "2-0",
+          label: "item2-0",
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-0",
+            },
+          ],
+        },
+        {
+          id: "2-1",
+          label: "item2-1",
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-1",
+            },
+          ],
+          children: [
+            {
+              id: "2-1-0",
+              label: "item2-1-0",
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-1-0",
+                },
+              ],
+            },
+            {
+              id: "2-1-1",
+              label: "item2-1-1",
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-1-1",
+                },
+              ],
+              children: [],
+            },
+          ],
+        },
+        {
+          id: "2-2",
+          label: "item2-2",
+          activeConditions: [
+            {
+              index: 1,
+              value: "item2-2",
+            },
+          ],
+
+          children: [
+            {
+              id: "2-2-0",
+              label: "item2-2-0",
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-2-0",
+                },
+              ],
+            },
+            {
+              id: "2-2-1",
+              label: "item2-2-1",
+              activeConditions: [
+                {
+                  index: 2,
+                  value: "item2-2-1",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       id: 3,
       label: "item3",
-      activeCondition: {
-        segmentIndex: 0,
-        activeString: "item3",
-      },
+      activeConditions: [
+        {
+          index: 0,
+          value: "item3",
+        },
+      ],
       link: "/item3",
-      onClick: (item) => console.log(item?.link),
+      children: [
+        {
+          id: "3-0",
+          label: "item3-0",
+          activeConditions: [
+            {
+              index: 1,
+              value: "item3-0",
+            },
+          ],
+        },
+        {
+          id: "3-1",
+          label: "item3-1",
+          activeConditions: [
+            {
+              index: 1,
+              value: "item3-1",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const sidebarSubItems: SidebarItem[] = [
+    {
+      id: 1,
+      label: "item1",
+      activeConditions: [
+        {
+          index: 0,
+          value: "sub-item1",
+        },
+        {
+          index: 1,
+          value: undefined,
+        },
+      ],
+    },
+    {
+      id: 2,
+      label: "item2",
+      activeConditions: [
+        {
+          index: 1,
+          value: "sub-item2",
+        },
+      ],
     },
   ];
 
   const [isChecked, setIsChecked] = useState(false);
 
+  const [multiSelectValues, setMultiSelectValues] = useState<
+    string[] | undefined
+  >([selectOptions[0].value]);
+
+  const tabOptions = [
+    { label: "Tab 1", url: "/tab1" },
+    { label: "Tab 2", url: "/tab2" },
+    { label: "Tab 3", url: "/tab3" },
+  ];
+
+  const [countdownTime, setCountdownTime] = useState(5);
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
-      <Flex direction="col" className="gap-7 mx-auto min-w-[500px] my-10 ">
+      <Flex
+        direction="col"
+        className="gap-7 mx-auto my-10 w-[500px] lg:w-[700px]" // min-w-[500px] max-w-2xl
+      >
+        <Card title="CodeViewer">
+          <Flex direction="col" className="gap-10 w-full">
+            <Flex direction="col" className="w-full">
+              <Divider text="default code view" />
+              <CodeViewer
+                copyable
+                language="javascript"
+                code={`<Popover
+  contentNode={<Input value="djuno-design" />}
+  panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
+  panelStyle={{}}
+  >
+    <div className="w-40">
+        <Button onClick={handleToggle}>Popover</Button>
+    </div>
+</Popover>`}
+              />
+            </Flex>
+
+            <Flex direction="col" className="w-full">
+              <Divider text="manual theme" />
+              <CodeViewer
+                theme="dark"
+                language="shell"
+                copyable
+                code={`yarn add djuno-design --save`}
+              />
+            </Flex>
+
+            <Flex direction="col" className="w-full">
+              <Divider text="transparent background" />
+              <CodeViewer
+                language="javascript"
+                wrapLongLines
+                showLineNumbers
+                bgTransparent
+                code={`import React from "react";
+import uniquePropHOC from "./lib/unique-prop-hoc";
+
+// this comment is here to demonstrate an extremely long line length, well beyond what you should probably allow in your own code, though sometimes you'll be highlighting code you can't refactor, which is unfortunate but should be handled gracefully
+
+class Expire extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { component: props.children }
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                component: null
+            });
+        }, this.props.time || this.props.seconds * 1000);
+    }
+    render() {
+        return this.state.component;
+    }
+}
+
+export default uniquePropHOC(["time", "seconds"])(Expire);`}
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card
+          title="Countdown"
+          setting={<Button onClick={() => setCountdownTime(5)}>Reset</Button>}
+        >
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-2 w-full">
+              <Countdown seconds={countdownTime}>
+                <div className="flex items-center gap-1">Resend</div>
+              </Countdown>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Countdown
+                seconds={countdownTime}
+                className="flex-col"
+                timerPosition="end"
+                timerRender={({ formatedTime, timeLeft }) => {
+                  if (timeLeft === 0) return null;
+                  return (
+                    <Text className="text-sm">
+                      Resend after {formatedTime} seconds
+                    </Text>
+                  );
+                }}
+              >
+                <Button>Resend verification email</Button>
+              </Countdown>
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card title="Tag">
+          <Flex direction="col" className="gap-5">
+            <Flex className="gap-2 w-full">
+              <Tag>Default Tag</Tag>
+              <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
+              <Tag closable>Closable Tag</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag color="processing">processing</Tag>
+              <Tag color="success">success</Tag>
+              <Tag color="error">error</Tag>
+              <Tag color="warning">warning</Tag>
+            </Flex>
+            <Flex className="gap-2 w-full">
+              <Tag bordered={false}>borderless tag</Tag>
+              <Tag color="processing" bordered={false}>
+                borderless tag
+              </Tag>
+            </Flex>
+          </Flex>
+        </Card>
+
         <Card title="Checkbox">
           <Flex direction="col" className="gap-5">
             <Flex className="gap-5 w-full">
               <Flex direction="col">
                 <Checkbox
-                  label="Djuno Design"
+                  label="Ckeckbox simple form"
                   value={isChecked}
                   onChange={setIsChecked}
                 />
@@ -168,7 +438,7 @@ function App() {
 
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox disabled form"
                 value={isChecked}
                 onChange={setIsChecked}
                 disabled
@@ -176,7 +446,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="is required?"
+                label="Ckeckbox required form"
                 value={isChecked}
                 onChange={setIsChecked}
                 required
@@ -184,7 +454,7 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with tooltip"
                 value={isChecked}
                 onChange={setIsChecked}
                 tooltip={{ content: "it's a tooltip" }}
@@ -192,24 +462,34 @@ function App() {
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
-                label="Djuno Design"
+                label="Ckeckbox with text error"
                 value={isChecked}
                 onChange={setIsChecked}
                 error="error"
               />
             </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with error"
+                value={isChecked}
+                onChange={setIsChecked}
+                error={true}
+              />
+            </Flex>
+            <Flex items="center" className="gap-5 w-full">
+              <Checkbox
+                label="Ckeckbox with custom label"
+                value={isChecked}
+                onChange={setIsChecked}
+                labelClassName="text-green-500 font-bold"
+              />
+            </Flex>
           </Flex>
         </Card>
         <Card title="Popover">
-          <Flex direction="col" className="gap-5 w-full  mb-10">
+          <Flex direction="col" className="gap-5 w-full mb-10">
             <Popover
-              contentNode={
-                <Input
-                  inputProps={{
-                    value: "djuno-design",
-                  }}
-                />
-              }
+              content={<Input value="djuno-design" />}
               panelClassName="z-1000 min-w-600 max-w-600 whitespace-nowrap"
               panelStyle={{}}
             >
@@ -260,6 +540,9 @@ function App() {
               tabType="default"
             />
           </Flex>
+          <Flex direction="col" className="gap-5 w-full">
+            <Tabs options={tabOptions} selectedIndex={0} useUrl={true} />
+          </Flex>
         </Card>
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
@@ -268,46 +551,73 @@ function App() {
         </Card>
 
         <Card title="Textarea">
+          <Text size="sm" className="font-semibold ">
+            Have hit:
+          </Text>
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
               hint="Djuno Design"
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Simple form:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
               placeholder="Enter custom notes if any"
-              textareaProps={{}}
             />
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have loading:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Textarea"
+              placeholder="Enter custom notes if any"
+              loading
+              loadingType="elastic"
+            />
+
+            <Input label="loading" loading loadingType="elastic" />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Replace copy text.:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
               label="Textarea"
               placeholder=""
-              textareaProps={{}}
               tooltip={{ content: "test" }}
             />
             <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have error with error text:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
+              required
               error="field is required!"
             />
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
+              required
               error="field is required!"
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Copyable without function:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={true}
             />
@@ -317,9 +627,12 @@ function App() {
               copyable={true}
             />
           </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Copyable with function:
+          </Text>
           <Flex className="gap-5 w-full mt-5">
             <Texrarea
-              label="Textarea"
+              label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
             />
@@ -327,13 +640,99 @@ function App() {
               label="Input"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Have error without error text:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              error={true}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              error={true}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Custom Copy icon and replace tooltips text:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: ["Click to copy", "Text copied!"],
+              }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: ["Click to copy", "Text copied!"],
+              }}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Hide Copy tooltips:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: false,
+              }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{
+                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                tooltips: false,
+              }}
+            />
+          </Flex>
+          <Text size="sm" className="font-semibold mt-10">
+            Custom label:
+          </Text>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+          </Flex>
+          <Flex className="gap-5 w-full mt-5">
+            <Texrarea
+              error
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
+            />
+            <Input
+              error
+              label="Input"
+              placeholder="Enter custom notes if any"
+              labelClassName="text-green-500 font-bold"
             />
           </Flex>
         </Card>
 
         <Card title="Pagination">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <div className="flex justify-end mt-3">
+            <div className="flex  mt-3">
               <Pagination
                 limit={3}
                 offset={offset}
@@ -341,7 +740,18 @@ function App() {
                 siblingCount={1}
                 onPageChange={handlePageChange}
                 loading={false}
-                className="my-pagination-class"
+              />
+            </div>
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <div className="flex  mt-3">
+              <Pagination
+                limit={5}
+                offset={0}
+                total={100}
+                siblingCount={2}
+                onPageChange={handlePageChange}
+                loading={false}
               />
             </div>
           </Flex>
@@ -349,18 +759,15 @@ function App() {
 
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
-            handleChange
+            <Text>handleChange</Text>
+
             <Accordion
               items={[
                 {
                   label: "Filters",
                   panel: (
                     <div className="">
-                      <Input
-                        inputProps={{
-                          value: "djuno-design",
-                        }}
-                      />
+                      <Input value="djuno-design" />
                     </div>
                   ),
                 },
@@ -372,19 +779,33 @@ function App() {
         <Card
           title="Layout"
           description="PanelLayout - PanelSidebar - PanelHeader"
+          setting={
+            <Flex items="center" className="gap-4">
+              <Flex items="center" className="gap-1">
+                <Text size="xs">global loading?</Text>
+                <Switcher onChange={setGlobalLoading} value={globalLoading} />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">content loading?</Text>
+                <Switcher onChange={setContentLoading} value={contentLoading} />
+              </Flex>
+            </Flex>
+          }
         >
           {/* <div className=""> */}
           <PanelLayout
             type="mini"
             pathname="/"
             style={{ height: 400 }}
+            globalLoading={globalLoading}
+            contentLoading={contentLoading}
             className="w-full border border-slate-500 overflow-hidden"
             renderSidebar={({ segments, ...sidebarProps }) => (
               <PanelSidebar
                 {...sidebarProps}
                 sidebarHeader={
                   <div className="flex items-center gap-1 px-1">
-                    <Logo />
+                    <Logo className="w-5 h-5" />
                     <Text size="xs">djuno-design</Text>
                   </div>
                 }
@@ -409,6 +830,7 @@ function App() {
 
         <Card
           title="Sidebar"
+          description={`pathname: ${pathname}`}
           setting={
             <Flex items="center" className="gap-4">
               <Flex items="center" className="gap-1">
@@ -422,7 +844,7 @@ function App() {
                 <Text size="xs">change selected?</Text>
                 <Switcher
                   onChange={handleChangePathname}
-                  value={pathname === "/item2"}
+                  value={pathname === "/item1"}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
@@ -465,7 +887,7 @@ function App() {
                   type={type}
                   sidebarHeader={
                     <div className="flex items-center gap-1 px-1">
-                      <Logo />
+                      <Logo className="w-5 h-5" />
                       <Text size="xs">djuno-design</Text>
                     </div>
                   }
@@ -473,9 +895,11 @@ function App() {
                   <Sidebar
                     type={type}
                     items={sidebarItems}
+                    subItems={sidebarSubItems}
                     segments={segments}
                     loading={sidebarLoading}
                     loadingMode="skeleton"
+                    navItemHeight={30}
                   />
                 </PanelSidebar>
               )}
@@ -509,23 +933,26 @@ function App() {
             </Flex>
           </Flex>
         </Card>
+
         <Card title="SecureCopy">
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="hide" />
-          </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
-            <SecureCopy text="Djuno Design" type="copy" />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <SecureCopy text="Djuno Design" type="hide" uiSize="small" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="medium" />
+              <SecureCopy text="Djuno Design" type="hide" uiSize="large" />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <SecureCopy text="Djuno Design" type="copy" uiSize="small" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="medium" />
+              <SecureCopy text="Djuno Design" type="copy" uiSize="large" />
+            </Flex>
           </Flex>
         </Card>
 
         <Card title="Dropdown">
-          <Divider
-            text=" Default dropdown"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Default dropdown" orientation="left" />
           <Flex direction="col" className="gap-5 w-full">
-            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+            <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
                 <Dropdown
                   title="djuno Design"
@@ -545,20 +972,14 @@ function App() {
                   ]}
                   type="default"
                 >
-                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                    Djuno Design
-                  </div>
+                  Djuno Design
                 </Dropdown>
               </div>
             </div>
           </Flex>
-          <Divider
-            text=" Simple dropdown"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text=" Simple dropdown" orientation="left" />
           <Flex direction="col" className="gap-5 w-full">
-            <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+            <div className="h-full w-full inline-flex items-center  gap-1 px-4">
               <div className="w-50 flex justify-center items-center">
                 <Dropdown
                   title="djuno Design"
@@ -578,9 +999,7 @@ function App() {
                   ]}
                   type="simple"
                 >
-                  <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                    Djuno Design
-                  </div>
+                  Djuno Design
                 </Dropdown>
               </div>
             </div>
@@ -629,33 +1048,51 @@ function App() {
 
         <Card title="Inputs">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
-              <Input label="small" size="small" />
-              <Input label="medium" size="medium" />
-              <Input label="large" size="large" />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input label="small" uiSize="small" />
+              <Input label="medium" uiSize="medium" />
+              <Input label="large" uiSize="large" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input label="loading" loading loadingType="elastic" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="copyable"
                 copyable={(v) => `Hi ${v}`}
-                inputProps={{
-                  value: "djuno-design",
-                }}
+                value="djuno-design"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="error"
                 loadingType="elastic"
-                inputProps={{
-                  value: inputValue,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setInputValue(e.target?.value),
-                }}
+                value={inputValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
                 error={inputValue === "" ? "Field is required" : ""}
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input
+                label="Input"
+                copyable={{
+                  icon: [
+                    <FaceSmile />,
+                    <FaceSmile className="text-green-500" />,
+                  ],
+                  tooltips: ["Click to copy", "Text copied!"],
+                }}
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input label="Input" tooltip={{ content: "I'm a tooltip" }} />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input
+                label="Input with custom label"
+                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>
@@ -663,7 +1100,7 @@ function App() {
 
         <Card title="Select">
           <Flex direction="col" className="gap-5 w-full">
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="small"
                 size="small"
@@ -684,7 +1121,7 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="loading"
                 loading
@@ -692,20 +1129,23 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="clear"
                 clearable
                 value={clearableValue}
                 options={selectOptions}
-                onChange={setClearableValue}
+                onChange={(v) => {
+                  console.log(v);
+                  setClearableValue(v);
+                }}
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select label="empty" options={[]} className="w-[200px]" />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="tooltip"
                 tooltip={{ content: "This is a tooltip", clickable: true }}
@@ -713,13 +1153,36 @@ function App() {
                 className="w-[200px]"
               />
             </Flex>
-            <Flex items="end" className="gap-3 w-full flex justify-end">
+
+            <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="error"
-                error="Field is required"
-                required
+                error={true}
                 options={[]}
                 className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <MultiSelect
+                label="multi select"
+                clearable
+                values={multiSelectValues}
+                options={selectOptions}
+                onChange={(v) => {
+                  console.log(v);
+                  setMultiSelectValues(v);
+                }}
+                className="w-[200px]"
+              />
+            </Flex>
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Select
+                label="Select with custom label"
+                size="medium"
+                options={selectOptions}
+                className="w-[200px]"
+                emptyString="select an option"
+                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>
@@ -738,7 +1201,7 @@ function App() {
           <Text strong size="sm">
             Simple table with data
           </Text>
-          <Flex className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
             <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
@@ -753,13 +1216,18 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                 </SimpleTable.Row>
+                <SimpleTable.Row>
+                  <SimpleTable.TD>Data 1</SimpleTable.TD>
+                  <SimpleTable.TD>Data 2</SimpleTable.TD>
+                  <SimpleTable.TD>Data 3</SimpleTable.TD>
+                </SimpleTable.Row>
               </SimpleTable.Body>
             </SimpleTable>
           </Flex>
           <Text strong size="sm">
             Simple table with data and dropdown
           </Text>
-          <Flex className="gap-3 w-full">
+          <Flex className="gap-3 w-full mb-10">
             <SimpleTable className="gap-3 w-full">
               <SimpleTable.Head>
                 <SimpleTable.Row>
@@ -775,7 +1243,7 @@ function App() {
                   <SimpleTable.TD>Data 2</SimpleTable.TD>
                   <SimpleTable.TD>Data 3</SimpleTable.TD>
                   <SimpleTable.TD>
-                    <div className="h-full w-full inline-flex items-center justify-end gap-1 px-4">
+                    <div className="h-full w-full inline-flex items-center  gap-1 px-4">
                       <div className=" flex justify-center items-center">
                         <Dropdown
                           title="djuno Design"
@@ -795,9 +1263,7 @@ function App() {
                           ]}
                           type="simple"
                         >
-                          <div className=" p-2 rounded-md text-dark-900 bg-secondary-100  dark:text-secondary-100 dark:bg-dark-900 dark:hover:bg-dark-950 ">
-                            Djuno Design
-                          </div>
+                          Djuno Design
                         </Dropdown>
                       </div>
                     </div>
@@ -819,7 +1285,7 @@ function App() {
                 </SimpleTable.Row>
               </SimpleTable.Head>
               <SimpleTable.Body>
-                <SimpleTable.Row>
+                <SimpleTable.Row withoutHoverStyle>
                   <SimpleTable.TD colSpan={3} className="text-center py-10">
                     <Flex className="w-full justify-center">
                       <EmptyState
@@ -835,57 +1301,36 @@ function App() {
         </Card>
 
         <Card title="Empty State">
-          <Divider
-            text=" Empty state with simple icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text=" Empty state with simple icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_SIMPLE />}
             />
           </Flex>
-          <Divider
-            text="Empty state with default icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state with default icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState
               text="Empty state"
               icon={<EmptyState.PRESENTED_IMAGE_DEFAULT />}
             />
           </Flex>
-          <Divider
-            text="Empty state with undefined icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state with undefined icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" />
           </Flex>
-          <Divider
-            text="Empty state without icon"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state without icon" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState text="Empty state" usingIcon={false} />
           </Flex>
           <Divider
             text="Empty state without icon and with default text"
             orientation="left"
-            usingText={true}
           />
           <Flex className="gap-3 w-full">
             <EmptyState usingIcon={false} />
           </Flex>
-          <Divider
-            text="Empty state without text"
-            orientation="left"
-            usingText={true}
-          />
+          <Divider text="Empty state without text" orientation="left" />
           <Flex className="gap-3 w-full">
             <EmptyState usingText={false} />
           </Flex>
@@ -893,28 +1338,25 @@ function App() {
 
         <Card title="Divider">
           <Flex className="gap-3 w-full">
-            <Divider uiType="simple" />
+            <Divider />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" />
+            <Divider uiType="simple" text="simple" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" />
+            <Divider uiType="dashed" text="dashed" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="simple" usingText={true} />
+            <Divider uiType="dotted" text="dotted" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" usingText={true} />
+            <Divider text="left" orientation="left" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" usingText={true} text="Text" />
+            <Divider text="center" orientation="center" />
           </Flex>
           <Flex className="gap-3 w-full">
-            <Divider uiType="dashed" usingText={true} orientation="left" />
-          </Flex>
-          <Flex className="gap-3 w-full">
-            <Divider uiType="dotted" usingText={true} orientation="right" />
+            <Divider text="right" orientation="right" />
           </Flex>
         </Card>
 
@@ -987,6 +1429,21 @@ function App() {
               type="info"
               message="Djuno Design. Info Alert"
             />
+
+            <Text strong size="sm" className="mt-4">
+              wrap mode
+            </Text>
+            <Alert type="info">
+              <Flex direction="col" className="gap-2 mt-1">
+                <Button uiType="primary" className="gap-5 ">
+                  Djuno Design
+                </Button>
+
+                <Text size="sm" className="font-semibold">
+                  This is Alert wrap around button
+                </Text>
+              </Flex>
+            </Alert>
           </Flex>
         </Card>
 
@@ -1070,23 +1527,23 @@ function App() {
         </Card>
 
         <Card title="Flex">
-          <Flex direction="col" className="gap-2 dj-w-full">
-            <Flex items="center" className="gap-2 dj-w-full">
+          <Flex direction="col" className="gap-2 w-full">
+            <Flex items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="center" items="center" className="gap-2 dj-w-full">
+            <Flex justify="center" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex justify="end" items="center" className="gap-2 dj-w-full">
+            <Flex justify="end" items="center" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
             </Flex>
-            <Flex direction="col" items="start" className="gap-2 dj-w-full">
+            <Flex direction="col" items="start" className="gap-2 w-full">
               <Button>1</Button>
               <Button>2</Button>
               <Button>3</Button>
@@ -1114,6 +1571,9 @@ function App() {
         <Card title="Tooltip">
           <Flex className="gap-4 pl-3">
             <Tooltip content="I'm a tooltip">
+              <Text size="sm">Tooltip</Text>
+            </Tooltip>
+            <Tooltip content="I'm a tooltip" theme="black" place="top">
               <Text size="sm">Tooltip</Text>
             </Tooltip>
             <Tooltip

@@ -55,35 +55,35 @@ const Steps = <T extends string>({ className, ...props }: StepsProps<T>): React.
   const [activeLevels, checkedLevels] = handleSelectedSteps(step, stepsKeys)
 
   return (
-    <ol className={cn('dj-flex dj-items-center dj-w-full dj-text-center dj-py-6', className)}>
+    <ol className={cn('dd-flex dd-items-center dd-w-full dd-text-center dd-py-6', className)}>
       {steps.map((step, i) => (
         <li
           key={i}
-          className={cn(`dj-flex dj-items-center`, {
-            "md:dj-w-full md:after:dj-content-[''] after:dj-w-full after:dj-h-1 after:dj-border-b after:dj-hidden md:after:dj-inline-block after:dj-mx-4 xl:after:dj-mx-6 after:dj-border-secondary-300 dark:after:dj-border-gray-700":
+          className={cn(`dd-flex dd-items-center`, {
+            "md:dd-w-full md:after:dd-content-[''] after:dd-w-full after:dd-h-1 after:dd-border-b after:dd-hidden md:after:dd-inline-block after:dd-mx-4 xl:after:dd-mx-6 after:dd-border-secondary-300 dark:after:dd-border-gray-700":
               steps.length !== i + 1,
-            'dj-cursor-pointer': checkedLevels.includes(step.value) && step.callback,
+            'dd-cursor-pointer': checkedLevels.includes(step.value) && step.callback,
           })}
           onClick={() => (step.callback && checkedLevels.includes(step.value) ? step.callback(step.value) : null)}
         >
           <span
-            className={cn('dj-flex dj-items-center dj-text-dark-700 dark:dj-text-dark-100', {
-              "after:dj-content-['/'] md:after:dj-hidden after:dj-mx-1 after:dj-text-gray-200 dark:after:dj-text-gray-500":
+            className={cn('dd-flex dd-items-center dd-text-dark-700 dark:dd-text-dark-100', {
+              "after:dd-content-['/'] md:after:dd-hidden after:dd-mx-1 after:dd-text-gray-200 dark:after:dd-text-gray-500":
                 steps.length !== i + 1,
-              '!dj-text-primary-500 dark:!dj-text-primary-500 dj-font-medium': activeLevels?.includes(step.value),
+              '!dd-text-primary-500 dark:!dd-text-primary-500 dd-font-medium': activeLevels?.includes(step.value),
             })}
           >
-            <span className='dj-me-1'>
+            <span className='dd-me-1'>
               {checkedLevels?.includes(step.value) ? (
-                <CheckIcon className='dj-w-[20px] dj-aspect-square' />
+                <CheckIcon className='dd-w-[20px] dd-aspect-square' />
               ) : (
-                <Text className='dj-whitespace-nowrap' size='base' uiType='transparent'>
+                <Text className='dd-whitespace-nowrap' size='base' uiType='transparent'>
                   {i + 1} .
                 </Text>
               )}
             </span>
 
-            <Text className='dj-whitespace-nowrap' uiType='transparent'>
+            <Text className='dd-whitespace-nowrap' uiType='transparent'>
               {step.label}
             </Text>
           </span>

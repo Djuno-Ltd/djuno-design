@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-import { LoadingProps, SizeTypes } from '.'
+import { LoadingType, SizeTypes } from '.'
 
 export interface SwitcherProps {
   value?: boolean
   onChange?: (value: boolean) => void
   disabled?: boolean
   loading?: boolean
-  loadingSetting?: LoadingProps
+  loadingType?: LoadingType
   size?: SizeTypes
 }

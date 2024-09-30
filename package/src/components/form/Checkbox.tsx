@@ -19,7 +19,6 @@
  */
 
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { CheckboxProps } from '../../types/ICheckbox'
 import { cn } from '../../utils/cn'
 import { AnimatedFormError, labelVariants } from './Input'
@@ -33,14 +32,14 @@ import { InfoTooltip } from '../Tooltip'
  *
  * @param {object} props - Checkbox props.
  * @param {string} [props.id] - The unique identifier for the checkbox input element.
- * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - Additional HTML props to apply to the input element.
  * @param {React.ReactNode} [props.label] - The label to display next to the checkbox.
  * @param {boolean} [props.checked] - Specifies if the checkbox is initially checked.
  * @param {Function} [props.onChangeCheckbox] - Callback function called when the checkbox state changes.
  * @param {boolean} [props.required] - Specifies if the checkbox is required.
  * @param {boolean} [props.disabled] - Disables the checkbox interaction.
- * @param {string} [props.error] - An error message to display if there's an issue with the checkbox.
+ * @param {string|boolean| React.ReactNode} [props.error] - An error message to display if there's an issue with the checkbox.
  * @param {React.ReactNode} [props.tooltip] - Additional information to display in a tooltip next to the checkbox.
+ * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
  * @returns {React.ReactNode} Rendered Checkbox component.
  *
@@ -58,7 +57,6 @@ import { InfoTooltip } from '../Tooltip'
  *   return (
  *     <Checkbox
  *       id="checkbox-id"
- *       inputProps={{ 'aria-label': 'custom-checkbox' }}
  *       label="Checkbox Label"
  *       value={false}
  *       required={true}
@@ -71,7 +69,6 @@ import { InfoTooltip } from '../Tooltip'
  */
 const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   id,
-  inputProps,
   label,
   error,
   required,
@@ -79,6 +76,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   value,
   onChange,
   disabled,
+  labelClassName,
 }) => {
   const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
@@ -93,28 +91,28 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   }
 
   return (
-    <div className='dj-flex dj-flex-col dj-gap-1'>
-      <Field className='dj-flex dj-items-center dj-gap-2'>
+    <div className='dd-flex dd-flex-col dd-gap-1'>
+      <Field className='dd-flex dd-items-center dd-gap-2'>
         <HeadlessCheckbox
           checked={checkedState}
           onChange={handleChange}
           className={cn(
-            'dj-group dj-flex dj-items-center dj-justify-center dj-rounded dj-border dj-w-4 dj-h-4 dj-cursor-pointer',
+            'dd-group dd-flex dd-items-center dd-justify-center dd-rounded dd-border dd-w-4 dd-h-4 dd-cursor-pointer',
             {
-              'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2':
+              'dd-bg-white dd-border-dark-500 dark:dd-bg-dark-800 dark:dd-border-dark-700 dark:dd-border-2':
                 !checkedState,
-              'dj-bg-primary-600 dj-border-primary-600 dj-text-white': checkedState,
-              'dj-bg-primary-200 dj-border-primary-200 dark:dj-bg-dark-400 dark:dj-border-dark-700 dj-text-white dj-cursor-not-allowed':
+              'dd-bg-primary-600 dd-border-primary-600 dd-text-white': checkedState,
+              'dd-bg-primary-200 dd-border-primary-200 dark:dd-bg-dark-400 dark:dd-border-dark-700 dd-text-white dd-cursor-not-allowed':
                 checkedState && disabled,
-              'dj-bg-white dj-border-dark-500 dark:dj-bg-dark-800 dark:dj-border-dark-700 dark:dj-border-2 dj-cursor-not-allowed':
+              'dd-bg-white dd-border-dark-500 dark:dd-bg-dark-800 dark:dd-border-dark-700 dark:dd-border-2 dd-cursor-not-allowed':
                 !checkedState && disabled,
 
-              'dj-w-4 dj-h-4': true,
+              'dd-w-4 dd-h-4': true,
             },
           )}
         >
           <CheckIcon
-            className={cn('dj-hidden', { 'dj-block dj-text-white': checkedState })}
+            className={cn('dd-hidden', { 'dd-block dd-text-white': checkedState })}
             style={{
               strokeWidth: '2.5',
             }}
@@ -123,27 +121,29 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
         <Label
           htmlFor={id}
           className={cn(
-            'dj-flex dj-items-center dj-cursor-pointer',
-            labelVariants({ hasError: error ? 'yes' : 'no' }),
+            'dd-flex dd-items-center dd-cursor-pointer',
+            labelVariants({
+              hasError: error ? 'yes' : 'no',
+            }),
             {
-              ' dj-cursor-not-allowed': disabled,
+              ' dd-cursor-not-allowed': disabled,
             },
+            labelClassName,
           )}
         >
           {label && (
-            <Typography.Text size='sm' uiType={error ? 'danger' : undefined}>
+            <Typography.Text size='sm' uiType='transparent'>
               {label}
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dj-h-5'>
+            <Typography.Text uiType='danger' className='h-5'>
               *
             </Typography.Text>
           )}
           {tooltip && <InfoTooltip tooltip={tooltip} />}
         </Label>
       </Field>
-
       <AnimatedFormError error={error} />
     </div>
   )

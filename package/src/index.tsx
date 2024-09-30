@@ -37,8 +37,8 @@ import Steps from './components/Steps'
 import Skeleton from './components/Skeleton'
 import Input from './components/form/Input'
 import Switcher from './components/form/Switcher'
-import Select from './components/form/Select'
-import Texrarea from './components/form/Texrarea'
+import Select, { MultiSelect } from './components/form/Select'
+import Texrarea from './components/form/Textarea'
 import SimpleTable from './components/SimpleTable'
 import EmptyState from './components/EmptyState'
 import Divider from './components/Divider'
@@ -55,19 +55,26 @@ import Checkbox from './components/form/Checkbox'
 import Popover from './components/Popover'
 import JsonViewer from './components/JsonViewer'
 import Sidebar from './components/Sidebar'
-import ThemeChanger from './components/ThemeChanger'
-import { ThemeSwitcher } from './components/ThemeChanger'
+import ThemeChanger, { ThemeSwitcher } from './components/ThemeChanger'
+import Tag from './components/Tag'
+import CodeViewer from './components/CodeViewer'
+import Countdown from './components/Countdown'
+
+// export providers
+export * from './providers/DjunoDesignProvider'
 
 // export hooks
 export * from './hooks/useWindowOnClick'
 export * from './hooks/useShow'
-export * from './hooks/useTheme'
+export * from './hooks/useDjunoDesign'
+// export * from './hooks/useTheme'
 
 // export all types
 export * from './types'
 
 // export utils
 export * from './utils'
+export * from './utils/cn'
 export * from './utils/uuid'
 export * from './utils/localStorage'
 export * from './utils/copy'
@@ -94,6 +101,7 @@ export {
   Pagination,
   Modal,
   Select,
+  MultiSelect,
   Dropdown,
   Accordion,
   Tabs,
@@ -107,4 +115,7 @@ export {
   JsonViewer,
   ThemeChanger,
   ThemeSwitcher,
+  Tag,
+  CodeViewer,
+  Countdown,
 }

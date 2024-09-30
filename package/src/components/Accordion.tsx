@@ -29,7 +29,8 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  *
  * @param {object} props - Accordion props.
  * @param {React.ReactNode} [props.children] - The content inside the accordion.
- * @param {string} [props.panelClassNames] - Additional panelClassNames to apply to the accordion.
+ * @param {string} [props.classNames] - Additional classNames to apply to the accordion container.
+ * @param {string} [props.panelClassName] - Additional panelClassNames to apply to the accordion.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the accordion, each with a label and optional panel content.
  * @param {boolean} [props.loading] - Indicates if the accordion is in a loading state.
  *
@@ -44,7 +45,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  * function MyComponent() {
  *   return (
  *     <Accordion
- *       panelClassNames="custom-panel-class"
+ *       panelClassName="custom-panel-class"
  *       items={[
  *         { label: "Item 1", panel: "Panel content for item 1" },
  *         { label: "Item 2", panel: "Panel content for item 2" }
@@ -55,22 +56,32 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  * }
  */
 
-const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading }) => {
+const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName, panelClassName, loading }) => {
   return (
-    <div className='dj-w-full dj-bg-secondary-100 dark:dj-bg-dark-850 border dark:dj-border-dark-600 dj-rounded-lg dj-overflow-hidden '>
+    <div
+      className={cn(
+        'dd-w-full dd-bg-secondary-100 dark:dd-border-dark-600 dd-rounded-lg dd-overflow-hidden ',
+        className,
+      )}
+    >
       {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
       {items?.map((item, i) => (
         <Disclosure key={i}>
           {({ open }) => (
             <>
-              <DisclosureButton className='dj-flex dj-w-full dj-justify-between dj-items-center dj-text-dark-900 dj-bg-secondary-100 hover:dj-bg-secondary-200 dark:dj-text-secondary-100 dark:dj-bg-dark-850 dark:hover:dj-bg-dark-900 px-2 dj-py-3 md:dj-px-4 md:dj-py-4 dj-text-left dj-text-sm dj-font-medium  focus:dj-outline-none focus-visible:dj-ring-0 '>
+              <DisclosureButton
+                className={cn(
+                  'dd-flex dd-w-full dd-justify-between dd-items-center dd-text-dark-900 dd-bg-secondary-100 hover:dd-bg-secondary-200 dark:dd-text-secondary-100 dark:dd-bg-dark-850 dark:hover:dd-bg-dark-900 dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0',
+                  labelClassName,
+                )}
+              >
                 {item.label}
                 {item.panel && (
                   <ChevronDownIcon
                     className={cn(
-                      'dj-h-4 dj-w-4 dj-text-dark-500 dark:dj-text-secondary-300 dj-transform dj-transition-transform dj-duration-300',
+                      'dd-h-4 dd-w-4 dd-text-dark-500 dark:dd-text-secondary-300 dd-transform dd-transition-transform dd-duration-300',
                       {
-                        'dj-rotate-180': open,
+                        'dd-rotate-180': open,
                       },
                     )}
                   />
@@ -78,10 +89,10 @@ const Accordion: React.FC<AccordionProps> = ({ items, panelClassNames, loading }
               </DisclosureButton>
               {item.panel && (
                 <DisclosurePanel
-                  className={cn(panelClassNames, {
-                    'dark:dj-bg-dark-850 dj-p-3 dj-border-y dark:dj-border-dark-700 dark:dj-text-dark-200':
-                      panelClassNames === undefined,
-                  })}
+                  className={cn(
+                    'dark:dd-bg-dark-850 dd-p-3 dd-border-y dark:dd-border-dark-700 dark:dd-text-dark-200',
+                    panelClassName,
+                  )}
                 >
                   {item.panel}
                 </DisclosurePanel>

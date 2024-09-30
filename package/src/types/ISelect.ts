@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
  * @fileoverview Select types
@@ -23,30 +24,26 @@ import { InputTypes } from './Input'
 import { LoadingType } from './Loading'
 import { TooltipProps } from './Tooltip'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type SelectOption<T = string | number, ET = any> = {
+export type SelectOption<ExtraDataType = any> = {
   label: string | React.ReactNode
-  value: T
+  value: string
   extraElement?: React.ReactNode
-  extraData?: ET
+  extraData?: ExtraDataType
   disabled?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type SelectProps<T, ET = any> = {
-  value?: T
-  onChange?: (value: T | undefined) => void
-  defaultValue?: T
-  options: SelectOption<T, ET>[]
+export interface SelectBaseProps {
   className?: string
+  labelClassName?: string
   buttonClassName?: string
   optionsClassName?: string
-  label?: string
-  error?: string
+  optionClassName?: string
+  label?: string | React.ReactNode
+  error?: string | boolean | React.ReactNode
   required?: boolean
   type?: SelectTypes
   tooltip?: TooltipProps
-  hint?: string
+  hint?: string | React.ReactNode
   loading?: boolean
   loadingType?: LoadingType
   emptyString?: string
@@ -57,3 +54,19 @@ export type SelectProps<T, ET = any> = {
 }
 
 export type SelectTypes = InputTypes
+
+export interface SelectProps<ExtraDataType = any> extends SelectBaseProps {
+  id?: string
+  value?: string
+  onChange?: (value: string | undefined) => void
+  defaultValue?: string
+  options: SelectOption<ExtraDataType>[]
+}
+
+export interface MultiSelectProps<ExtraDataType = any> extends SelectBaseProps {
+  id?: string
+  values?: Array<string>
+  onChange?: (values: Array<string>) => void
+  defaultValues?: Array<string>
+  options: Array<SelectOption<ExtraDataType>>
+}

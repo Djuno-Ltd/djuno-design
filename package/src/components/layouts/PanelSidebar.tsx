@@ -53,20 +53,20 @@ const PanelSidebar: React.FC<PanelSidebarProps> = ({ children, isShowSidebar, ty
   return (
     <div
       className={cn(
-        ' dj-bg-white dark:dj-bg-dark-900 md:dj-border-r dark:dj-border-dark-800 dj-h-full dj-absolute dj-border-r-2 dj-border-slate-200 dj-transition-all dj-duration-500 dj-ease-in-out dj-z-40',
+        'dd-bg-white dark:dd-bg-dark-900 md:dd-border-r dark:dd-border-dark-800 dd-h-full dd-absolute dd-border-r-2 dd-border-slate-200 dd-transition-all dd-duration-500 dd-ease-in-out dd-z-40',
         {
-          'dj-w-[300px]': type === 'normal' || type === undefined,
-          'dj-w-[130px]': type === 'mini',
-          '-dj-left-[300px] lg:dj-left-0': !isShowSidebar && (type === 'normal' || type === undefined),
-          '-dj-left-[130px] lg:dj-left-0': !isShowSidebar && type === 'mini',
-          '!dj-left-0': isShowSidebar,
+          'dd-w-[300px]': type === 'normal' || type === undefined,
+          'dd-w-[130px]': type === 'mini',
+          '-dd-left-[300px] lg:dd-left-0': !isShowSidebar && (type === 'normal' || type === undefined),
+          '-dd-left-[130px] lg:dd-left-0': !isShowSidebar && type === 'mini',
+          '!dd-left-0': isShowSidebar,
         },
       )}
     >
       {sidebarHeader && (
-        <div className='dj-flex dj-w-full dj-justify-between dj-h-16 dj-items-center'>{sidebarHeader}</div>
+        <div className='dd-flex dd-w-full dd-justify-between dd-h-16 dd-items-center'>{sidebarHeader}</div>
       )}
-      <div className='dj-flex dj-flex-col dj-flex-grow dj-justify-between dj-overflow-y-auto dj-w-full dj-transition-height dj-h-[calc(100vh-5rem)] dj-pb-3'>
+      <div className='dd-flex dd-flex-col dd-flex-grow dd-justify-between dd-overflow-y-auto dd-w-full dd-transition-height dd-h-[calc(100%-4rem)] dd-pb-3'>
         {children}
       </div>
     </div>

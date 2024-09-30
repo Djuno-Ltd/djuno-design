@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { extendTailwindMerge } from 'tailwind-merge'
 
 const twMerge = extendTailwindMerge({
-  prefix: 'dj-',
+  prefix: 'dd-',
 })
 
 /**

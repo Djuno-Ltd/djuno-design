@@ -1,6 +1,6 @@
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Accordion types
+ * @fileoverview Countdown Component
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,17 +18,20 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 
-export interface AccordionProps extends PropsWithChildren {
-  items?: Array<AccordionItem>
-  className?: string
-  panelClassName?: string
-  labelClassName?: string
-  loading?: boolean
+type CountdownRenderProps = {
+  formatedTime: string
+  timeLeft: number
+  disabled: boolean
 }
 
-export type AccordionItem = {
-  label: string | React.ReactNode
-  panel?: string | React.ReactNode
+export interface ICountdownProps {
+  seconds: number
+  children?: ReactNode | ((props: CountdownRenderProps) => ReactNode)
+  className?: string
+  showTimer?: boolean
+  timerPosition?: 'start' | 'end'
+  timerRender?: (props: CountdownRenderProps) => React.ReactNode
+  onClick?: () => void
 }

@@ -1,6 +1,6 @@
 /**
- * @author Sanaz Zeraati <szeraati69@gmail.com>
- * @fileoverview Accordion types
+ * @author Ansar Mirzayi <ansarmirzayi@gmail.com>
+ * @fileoverview Authentication layout types
  * @copyright Djuno Design 2024
  *
  * Copyright 2024 Djuno Design
@@ -18,17 +18,10 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 
-export interface AccordionProps extends PropsWithChildren {
-  items?: Array<AccordionItem>
+export interface AuthLayoutProps {
   className?: string
-  panelClassName?: string
-  labelClassName?: string
-  loading?: boolean
-}
-
-export type AccordionItem = {
-  label: string | React.ReactNode
-  panel?: string | React.ReactNode
+  style?: React.CSSProperties
+  logo?: React.ReactNode
 }

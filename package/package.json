@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "0.6.1",
+  "version": "0.7.7",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -34,11 +34,13 @@
     "@floating-ui/react-dom": "^2.1.1",
     "@headlessui/react": "^2.1.2",
     "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-url": "^8.0.2",
     "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.58",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@uiw/react-json-view": "^2.0.0-alpha.27",
     "autoprefixer": "^10.4.17",
@@ -55,6 +57,7 @@
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-syntax-highlighter": "^15.5.0",
     "react-tooltip": "^5.26.3",
     "rollup": "^4.9.0",
     "rollup-plugin-filesize": "^10.0.0",
@@ -70,6 +73,5 @@
   "peerDependencies": {
     "react": "^18.x",
     "react-dom": "^18.x"
-  },
-  "dependencies": {}
+  }
 }
