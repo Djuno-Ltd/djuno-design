@@ -40,7 +40,7 @@ import { copyToClipboard } from '../utils/copy'
  * Define Typographt variants using the `cva` utility function.
  * This function generates CSS classes for text styles based on specified variants.
  */
-const textVariants = cva('dd-w-full', {
+const textVariants = cva('', {
   variants: {
     uiType: {
       default: 'dd-text-black/85 dark:dd-text-secondary-100',
@@ -193,7 +193,7 @@ const Title: React.FC<TypographyTitleProps> = ({
   return (
     <Tooltip {...tooltip}>
       <Heading
-        className={cn('dd-font-semibold', textVariants({ uiType, level: `h${level}` }), `!${className}`)}
+        className={cn('dd-font-semibold', textVariants({ uiType, level: `h${level}` }), className)}
         {...htmlProps}
       >
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
