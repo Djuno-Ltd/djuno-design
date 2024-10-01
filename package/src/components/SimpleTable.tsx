@@ -113,15 +113,17 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
 const SimpleTableHead = (props: React.PropsWithChildren) => <thead>{props.children}</thead>
 
 const SimpleTableTH = (props: React.PropsWithChildren<TableTHProps>) => {
+  const { className, children, ...rest } = props
   return (
     <th
+      {...rest}
       className={cn(
         'dd-text-left dd-bg-white dark:dd-bg-dark-850 dd-border-b dark:dd-border-dark-700 dd-p-2',
-        props.className,
+        className,
       )}
     >
       <div className='dd-text-slate-400 dark:dd-text-slate-100 dd-font-light dd-overflow-hidden dd-whitespace-nowrap'>
-        {props.children || props.lable}
+        {children || props.lable}
       </div>
     </th>
   )

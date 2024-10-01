@@ -970,7 +970,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="default"
                 >
                   Djuno Design
                 </Dropdown>
@@ -997,10 +996,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="simple"
-                >
-                  Djuno Design
-                </Dropdown>
+                />
               </div>
             </div>
           </Flex>
@@ -1261,10 +1257,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                               danger: true,
                             },
                           ]}
-                          type="simple"
-                        >
-                          Djuno Design
-                        </Dropdown>
+                        />
                       </div>
                     </div>
                   </SimpleTable.TD>

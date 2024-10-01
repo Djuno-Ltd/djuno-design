@@ -388,7 +388,6 @@ function App() {
 | --------------- | ------------------- | -------- | ------- | ----------- |
 | menu            | `DropdownElement[]` |          |         |             |
 | title           | `string`            |          |         |             |
-| type            | `DropdownTypes`     |          |         |             |
 | buttonClassName | `string`            |          |         |             |
 | itemsClassName  | `string`            |          |         |             |
 | itemClassName   | `string`            |          |         |             |
