@@ -262,7 +262,6 @@ function App() {
 | Name                   | Type                                                | Required | default | Description |
 | ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |
 | all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` |          |         |             |
-| textareaClassName      | `string`                                            |          |         |             |
 | placeholder            | `string`                                            |          |         |             |
 | label                  | `string, React.ReactNode`                           |          |         |             |
 | required               | `boolean`                                           |          |         |             |
