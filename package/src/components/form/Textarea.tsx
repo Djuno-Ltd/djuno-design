@@ -36,6 +36,7 @@ import Loading from '../Loading'
  * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, `maxLength`, etc.
  * @param {InputTypes} [props.type] - Type of the textarea field, which can be 'default' or 'simple'.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
+ * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
  * @param {string| React.ReactNode} [props.label] - Label text to display above the textarea.
  * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
@@ -62,6 +63,7 @@ import Loading from '../Loading'
  *       id="description"
  *       textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
  *       className="custom-textarea"
+ *       containerClassName="custom-containerClassName"
  *       placeholder="Enter your description here"
  *       label="Description"
  *       required={true}
@@ -89,6 +91,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   loading,
   loadingType,
   labelClassName,
+  containerClassName,
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -146,7 +149,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='dd-flex dd-flex-col'>
+    <div className={cn('dd-flex dd-flex-col', containerClassName)}>
       <div
         className={cn('dd-flex dd-mb-1 dd-items-center', {
           'dd-justify-between': label,

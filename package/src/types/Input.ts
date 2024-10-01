@@ -38,6 +38,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   AfterComponent?: React.ReactNode
   copyable?: CopyableProp
   uiSize?: SizeTypes
+  containerClassName?: string
 }
 
 export type CopyableProp =

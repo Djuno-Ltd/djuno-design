@@ -98,6 +98,7 @@ export const labelVariants = cva(
  * @param {string} [props.placeholder] - Placeholder text for the input.
  * @param {string} [props.className] - Additional classes to apply to the input element.
  * @param {string} [props.labelClassName] - Additional classes to apply to the label element.
+ * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
  * @param {boolean} [props.required] - Indicates if the input is required.
  * @param {string | boolean| React.ReactNode} [props.error] - Error message or boolean to indicate input validity.
  * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
@@ -118,6 +119,7 @@ export const labelVariants = cva(
  *   placeholder="Enter your username"
  *   required
  *   error="Username is required"
+ *    containerClassName="custom-containerClassName"
  *   copyable={{
  *     text: "Copy this username",
  *     icon: [<CustomCopyIcon />, <CustomCopiedIcon />],
@@ -141,6 +143,7 @@ const Input: React.FunctionComponent<InputProps> = ({
   uiSize,
   AfterComponent,
   copyable,
+  containerClassName,
   ...props
 }) => {
   const id = uuid(10)
@@ -202,7 +205,7 @@ const Input: React.FunctionComponent<InputProps> = ({
   }, [copyable, tooltipTexts, icons])
 
   return (
-    <div className='dd-flex dd-flex-col'>
+    <div className={cn('dd-flex dd-flex-col', containerClassName)}>
       <div
         className={cn(
           'dd-flex dd-items-center dd-px-1',

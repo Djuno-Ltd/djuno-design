@@ -60,7 +60,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName,
   return (
     <div
       className={cn(
-        'dd-w-full dd-bg-secondary-100 dark:dd-border-dark-600 dd-rounded-lg dd-overflow-hidden ',
+        'dd-w-full dd-bg-secondary-100 dark:dd-bg-dark-850 dark:dd-border-dark-600 dd-rounded-lg dd-overflow-hidden ',
         className,
       )}
     >
@@ -71,7 +71,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName,
             <>
               <DisclosureButton
                 className={cn(
-                  'dd-flex dd-w-full dd-justify-between dd-items-center dd-text-dark-900 dd-bg-secondary-100 hover:dd-bg-secondary-200 dark:dd-text-secondary-100 dark:dd-bg-dark-850 dark:hover:dd-bg-dark-900 dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0',
+                  'dd-flex dd-w-full dd-justify-between dd-items-center dd-text-dark-900 dd-bg-secondary-100 hover:dd-bg-secondary-200 dark:dd-text-secondary-100 dark:dd-bg-dark-850 dark:hover:dd-bg-dark-800 dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0',
                   labelClassName,
                 )}
               >

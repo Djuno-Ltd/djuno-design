@@ -27,7 +27,7 @@ import { DividerProps } from '../types/Divider'
  * Define divider variants using the `cva` utility function.
  * This function generates CSS classes for divider styles based on specified variants.
  */
-const dividerVariants = cva('dd-w-full dd-border-secondary-400 dark:after:dd-border-gray-700 ', {
+const dividerVariants = cva('dd-w-full dd-border-secondary-200 dark:dd-border-dark-700 ', {
   variants: {
     uiType: {
       simple: 'dd-my-4',

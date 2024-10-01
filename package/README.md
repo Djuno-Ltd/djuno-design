@@ -255,25 +255,27 @@ function App() {
 | uiSize              | `SizeTypes`                                   |          | medium  |             |
 | copyable            | `boolean or function or InputCopyableProp`    |          |         |             |
 | labelClassName      | `string`                                      |          |         |             |
+| containerClassName  | `string`                                      |          |         |             |
 
 ### Textarea
 
-| Name | Type | Required | default | Description |
-| ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |=
-| all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` | | | |
-| textareaClassName | `string` | | | |
-| placeholder | `string` | | | |
-| label | `string, React.ReactNode` | | | |
-| required | `boolean` | | | |
-| error | `string, boolean, React.ReactNode` | | | |
-| hint | `string , React.ReactNode` | | | |
-| type | `InputTypes` | | | |
-| tooltip | `TooltipProps` | | | |
-| size | `SizeTypes` | | medium | |
-| copyable | `boolean or function or InputCopyableProp` | | | |
-| labelClassName | `string` | | | |
-| loading | `boolean` | | | |
-| loadingType | `LoadingType` | | | |
+| Name                   | Type                                                | Required | default | Description |
+| ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |
+| all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` |          |         |             |
+| textareaClassName      | `string`                                            |          |         |             |
+| placeholder            | `string`                                            |          |         |             |
+| label                  | `string, React.ReactNode`                           |          |         |             |
+| required               | `boolean`                                           |          |         |             |
+| error                  | `string, boolean, React.ReactNode`                  |          |         |             |
+| hint                   | `string , React.ReactNode`                          |          |         |             |
+| type                   | `InputTypes`                                        |          |         |             |
+| tooltip                | `TooltipProps`                                      |          |         |             |
+| size                   | `SizeTypes`                                         |          | medium  |             |
+| copyable               | `boolean or function or InputCopyableProp`          |          |         |             |
+| labelClassName         | `string`                                            |          |         |             |
+| loading                | `boolean`                                           |          |         |             |
+| loadingType            | `LoadingType`                                       |          |         |             |
+| containerClassName     | `string`                                            |          |         |             |
 
 ### Switcher
 
