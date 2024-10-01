@@ -37,4 +37,5 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   loading?: boolean
   loadingType?: LoadingType
   labelClassName?: string
+  containerClassName?: string
 }

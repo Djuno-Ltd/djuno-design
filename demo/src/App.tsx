@@ -396,7 +396,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   );
                 }}
               >
-                <Button>Resend verification email</Button>
+                {({ disabled }) => (
+                  <Button disabled={disabled}>Resend verification email</Button>
+                )}
               </Countdown>
             </Flex>
           </Flex>
