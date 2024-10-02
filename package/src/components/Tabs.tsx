@@ -81,7 +81,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>(propsSelectedIndex || 0)
 
-  const { navigator } = useDjunoDesign()
+  const { navigator } = useDjunoDesign({ stric: false })
 
   useEffect(() => {
     if (propsSelectedIndex) {
