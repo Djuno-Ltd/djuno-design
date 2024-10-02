@@ -30,7 +30,6 @@ import React, { useEffect } from 'react'
  * @param {number} [props.selectedIndex] - Index of the initially selected tab. Defaults to the first tab.
  * @param {Function} [props.onChange] - Callback function triggered when the active tab changes.
  * @param {number} props.onChange.index - The index of the newly selected tab.
- * @param {boolean} [props.useUrl] - Indicates if the component should update the URL to reflect the selected tab. Defaults to false.
  * @param {string} [props.listClassName] - Additional CSS classes to apply to the tab list container.
  * @param {string} [props.panelClassName] - Additional CSS classes to apply to the tab panel container.
  * @param {'default' | 'creamy'} [props.tabType] - Type of tab style to apply. Defaults to 'default'. Options are 'default' and 'creamy'.
@@ -62,7 +61,6 @@ import React, { useEffect } from 'react'
  *       options={tabOptions}
  *       selectedIndex={0}
  *       onChange={handleTabChange}
- *       useUrl={true}
  *       listClassName="custom-tab-list"
  *       panelClassName="custom-tab-panel"
  *       tabType="creamy"
@@ -76,7 +74,6 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   options,
   selectedIndex: propsSelectedIndex,
   onChange,
-  useUrl,
   listClassName,
   panelClassName,
   tabType,
@@ -84,27 +81,18 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>(propsSelectedIndex || 0)
 
   useEffect(() => {
-    if (useUrl) {
+    if (propsSelectedIndex) {
+      setSelectedIndex(propsSelectedIndex)
+    } else {
       const si = getOptionIndexFromUrlString(location.pathname, options)
       setSelectedIndex(si)
     }
-  }, [location, options, useUrl])
-
-  useEffect(() => {
-    if (typeof useUrl === 'undefined') setSelectedIndex(propsSelectedIndex)
-  }, [propsSelectedIndex, useUrl])
+  }, [options, location.pathname, propsSelectedIndex])
 
   const onChangeTab = (i: number) => {
-    if (useUrl) {
-      const selectedOption = getTabOptionFromIndex(i, options)
-      if (selectedOption?.url) {
-        // Change the URL without reloading the page
-        window.history.pushState({}, '', selectedOption.url)
-      }
-    }
-
+    const selectedOption = getTabOptionFromIndex(i, options)
     if (onChange) {
-      onChange(i)
+      onChange(selectedOption)
     }
     setSelectedIndex(i)
   }

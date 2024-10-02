@@ -23,8 +23,7 @@ import React, { PropsWithChildren } from 'react'
 export interface TabsProps extends PropsWithChildren {
   options: TabOptions
   selectedIndex?: number
-  onChange?: (index: number) => void
-  useUrl?: boolean
+  onChange?: (option: TabOption | undefined) => void
   listClassName?: string
   panelClassName?: string
   tabType?: TabType

@@ -514,36 +514,42 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               options={[
                 {
                   label: "Djuno Design 1",
+                  element: <div>Content for Tab 1</div>,
                 },
                 {
                   label: "Djuno Design 2",
+                  element: <div>Content for Tab 2</div>,
                 },
                 {
                   label: "Djuno Design 3",
+                  element: <div>Content for Tab 3</div>,
                 },
               ]}
               tabType="creamy"
             />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full">
+          <Flex direction="col" className="gap-5 w-full mt-5">
             <Tabs
-              listClassName="w-full  mb-6"
+              listClassName="w-full  "
               options={[
                 {
                   label: "Djuno Design 1",
+                  element: <div>Content for Tab 1</div>,
                 },
                 {
                   label: "Djuno Design 2",
+                  element: <div>Content for Tab 2</div>,
                 },
                 {
                   label: "Djuno Design 3",
+                  element: <div>Content for Tab 3</div>,
                 },
               ]}
               tabType="default"
             />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full">
-            <Tabs options={tabOptions} selectedIndex={0} useUrl={true} />
+          <Flex direction="col" className="gap-5 w-full ">
+            <Tabs options={tabOptions} onChange={(i) => console.log(i)} />
           </Flex>
         </Card>
         <Card title="JsonViewer">

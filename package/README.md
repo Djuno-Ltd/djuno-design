@@ -516,7 +516,6 @@ function App() {
 | options        | `TabOptions` |          |         |             |
 | selectedIndex  | `number`     |          |         |             |
 | onChange       | `() => void` |          |         |             |
-| useUrl         | `boolean`    |          |         |             |
 | listClassName  | `string`     |          |         |             |
 | panelClassName | `string`     |          |         |             |
 | tabType        | `string`     |          |         |             |
