@@ -27,8 +27,9 @@ export interface SimpletableProps extends PropsWithChildren {
 
 export interface TableHeadProps extends React.PropsWithChildren {}
 
-export interface TableTHProps extends React.PropsWithChildren {
-  label?: string | React.ReactNode
+export interface TableTHProps {
+  lable?: string | React.ReactNode
+  className?: string
 }
 
 export interface TableBodyProps extends React.PropsWithChildren {}
@@ -44,7 +45,7 @@ export interface TableTDProps extends HTMLProps<HTMLTableCellElement> {
 
 export interface TableComponents {
   Head: React.FC<TableHeadProps>
-  TH: React.FC<TableTHProps>
+  TH: React.FC<React.PropsWithChildren<TableTHProps>>
   Body: React.FC<TableBodyProps>
   Row: React.FC<TableRowProps>
   TD: React.FC<TableTDProps>

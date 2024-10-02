@@ -32,7 +32,7 @@ export interface SidebarProps extends React.PropsWithChildren {
   active?: string
 }
 
-export type SidebarItem = {
+export type SidebarItem<T = unknown> = {
   id: string | number
   activeConditions?: SidebarActiveItemCondition[]
   label?: SidebarItemLabel
@@ -43,6 +43,7 @@ export type SidebarItem = {
   testId?: string
   children?: SidebarItem[]
   active?: boolean
+  data?: T
 }
 
 export type SidebarLoadingModes = LoadingType | 'skeleton'

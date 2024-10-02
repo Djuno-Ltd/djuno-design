@@ -27,6 +27,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   tooltip?: TooltipProps
   loading?: boolean
   loadingType?: LoadingType
+  className?: string
 }
 
 export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' //| 'icon'

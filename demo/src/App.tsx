@@ -125,7 +125,7 @@ function App() {
     setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
-  const sidebarItems: SidebarItem[] = [
+  const sidebarItems: SidebarItem<{ d: string }>[] = [
     {
       id: 1,
       label: "item1",
@@ -978,7 +978,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="default"
                 >
                   Djuno Design
                 </Dropdown>
@@ -1005,10 +1004,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="simple"
-                >
-                  Djuno Design
-                </Dropdown>
+                />
               </div>
             </div>
           </Flex>
@@ -1269,10 +1265,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                               danger: true,
                             },
                           ]}
-                          type="simple"
-                        >
-                          Djuno Design
-                        </Dropdown>
+                        />
                       </div>
                     </div>
                   </SimpleTable.TD>
