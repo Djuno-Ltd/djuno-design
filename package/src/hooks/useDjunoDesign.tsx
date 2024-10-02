@@ -30,6 +30,7 @@ interface UseDjunoDesignProps {
 interface UseDjunoDesignResponse {
   provided: boolean
   theme: UseTheme
+  navigator?: (url: string | undefined) => void
 }
 
 const initProps: UseDjunoDesignProps = { stric: true }
@@ -47,9 +48,9 @@ export const useDjunoDesign = ({ stric }: UseDjunoDesignProps = initProps): UseD
     if (stric) {
       throw new Error('DjunoDesign provider is missing.')
     } else {
-      return { provided: false, theme: ut }
+      return { provided: false, theme: ut, navigator: undefined }
     }
   }
 
-  return { provided: true, theme: context.theme }
+  return { provided: true, theme: context.theme, navigator: context.navigator }
 }

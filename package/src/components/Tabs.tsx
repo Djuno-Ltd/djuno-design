@@ -21,6 +21,7 @@ import { cn } from '../utils/cn'
 import { TabOption, TabOptions, TabsProps } from '../types/ITab'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import React, { useEffect } from 'react'
+import { useDjunoDesign } from '../hooks/useDjunoDesign'
 // import { useNavigate, useLocation } from 'react-router-dom'
 /**
  * Tabs component for managing tabbed navigation within an application.
@@ -80,6 +81,8 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>(propsSelectedIndex || 0)
 
+  const { navigator } = useDjunoDesign()
+
   useEffect(() => {
     if (propsSelectedIndex) {
       setSelectedIndex(propsSelectedIndex)
@@ -93,6 +96,9 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
     const selectedOption = getTabOptionFromIndex(i, options)
     if (onChange) {
       onChange(selectedOption)
+    }
+    if (navigator) {
+      navigator(selectedOption?.url)
     }
     setSelectedIndex(i)
   }

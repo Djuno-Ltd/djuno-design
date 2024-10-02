@@ -23,10 +23,12 @@ import { UseTheme, useTheme } from './../hooks/useTheme'
 
 export type DjunoDesignContextType = {
   theme: UseTheme
+  navigator?: (url: string | undefined) => void
 }
 
 export interface DjunoDesignProviderProps {
   children: React.ReactNode
+  navigator?: (url: string | undefined) => void
 }
 
 /**
@@ -36,15 +38,16 @@ export interface DjunoDesignProviderProps {
  *
  * @return Functional Component
  */
-const DjunoDesignProvider: React.FunctionComponent<DjunoDesignProviderProps> = ({ children }) => {
+const DjunoDesignProvider: React.FunctionComponent<DjunoDesignProviderProps> = ({ children, navigator }) => {
   const theme = useTheme()
 
   // const initialState = React.useMemo(() => {}, [])
   const contextValue = React.useMemo(
     () => ({
       theme,
+      navigator,
     }),
-    [theme],
+    [theme, navigator],
   )
 
   return (
