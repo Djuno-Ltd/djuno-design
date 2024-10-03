@@ -199,7 +199,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
           ref={textareaRef}
           className={cn(
             inputVariants({
-              type: uiType,
+              uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
@@ -211,7 +211,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
         />
         {loading && (
           <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>
-            <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+            <Loading uiType={loadingType || 'simple'} borderSize={1.5} uiSize={14} theme={'primary'} />
           </div>
         )}
       </div>

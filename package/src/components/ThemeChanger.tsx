@@ -165,7 +165,7 @@ const ThemeSwitcher: React.FC<ThemeChangerProps> = () => {
     theme: { mode, changeMode },
   } = useDjunoDesign({ stric: false })
 
-  return <Switcher size='medium' value={mode === 'dark'} onChange={(v) => changeMode(v ? 'dark' : 'light')} />
+  return <Switcher uiSize='medium' value={mode === 'dark'} onChange={(v) => changeMode(v ? 'dark' : 'light')} />
 }
 
 export { ThemeSwitcher }

@@ -79,7 +79,7 @@ const SimpleTable: React.FC<React.PropsWithChildren<SimpletableProps>> & TableCo
             exit={{ opacity: 0 }}
             className='dd-absolute dd-w-full dd-h-full dd-top-0 dd-left-0 dd-bg-gray-400/10 dark:dd-bg-gray-800/10 dd-backdrop-blur-[1.1px] dd-flex dd-justify-center dd-items-center'
           >
-            <Loading type={'simple'} borderSize={2.3} theme={'primary'} />
+            <Loading uiType={'simple'} borderSize={2.3} theme={'primary'} />
           </motion.div>
         )}
       </AnimatePresence>

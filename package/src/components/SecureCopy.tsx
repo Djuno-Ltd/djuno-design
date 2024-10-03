@@ -53,7 +53,7 @@ const iconVariants = cva('dd-cursor-pointer dd-w-5 dd-h-5 dd-transition-all dd-d
  * @param {string} [props.className] - Additional classes to apply to the SecureCopy.
  * @param {boolean} [props.iconClassName] - Indicates if the SecureCopy has the iconClassName.
  * @param {boolean} [props.textClassName] - Indicates if the SecureCopy has the textClassName.
- * @param {string} [props.type] - Type of the Action "hide" or "copy".
+ * @param {string} [props.uiType] - Type of the Action "hide" or "copy".
  *
  * @returns {React.ReactNode} Rendered SecureCopy component.
  *
@@ -82,7 +82,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   className,
   iconClassName,
   textClassName,
-  type,
+  uiType,
   uiSize,
   ...props
 }) => {
@@ -103,7 +103,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
 
   return (
     <>
-      {type === 'hide' && (
+      {uiType === 'hide' && (
         <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
           <div
             className={cn(
@@ -141,7 +141,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
         </div>
       )}
 
-      {type === 'copy' && (
+      {uiType === 'copy' && (
         <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
           <Input
             className={cn(

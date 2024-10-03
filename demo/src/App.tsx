@@ -1019,7 +1019,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="small" />
+                  <Switcher value={swith} onChange={setSwitch} uiSize="small" />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
@@ -1031,7 +1031,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="large" />
+                  <Switcher value={swith} onChange={setSwitch} uiSize="large" />
                 </Flex>
               </Flex>
             </div>
@@ -1107,20 +1107,20 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="small"
-                size="small"
+                uiSize="small"
                 options={selectOptions}
                 className="w-[200px]"
                 emptyString="select an option"
               />
               <Select
                 label="medium"
-                size="medium"
+                uiSize="medium"
                 options={selectOptions}
                 className="w-[200px]"
               />
               <Select
                 label="large"
-                size="large"
+                uiSize="large"
                 options={selectOptions}
                 className="w-[200px]"
               />
@@ -1182,7 +1182,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="Select with custom label"
-                size="medium"
+                uiSize="medium"
                 options={selectOptions}
                 className="w-[200px]"
                 emptyString="select an option"
@@ -1195,7 +1195,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         <Card title="Skeleton">
           <Flex direction="col" className="gap-5 w-full">
             <Skeleton />
-            <Skeleton size="small" />
+            <Skeleton uiSize="small" />
             <Skeleton shape="square" />
             <Skeleton shape="circle" />
           </Flex>
@@ -1387,39 +1387,43 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               basic usage
             </Text>
             <Alert message="Djuno Design. Neutral Alert" />
-            <Alert type="info" message="Djuno Design. Info Alert" />
-            <Alert type="warning" message="Djuno Design. Warning Alert" />
-            <Alert type="success" message="Djuno Design. Success Alert" />
-            <Alert type="error" message="Djuno Design. Error Alert" />
+            <Alert uiType="info" message="Djuno Design. Info Alert" />
+            <Alert uiType="warning" message="Djuno Design. Warning Alert" />
+            <Alert uiType="success" message="Djuno Design. Success Alert" />
+            <Alert uiType="error" message="Djuno Design. Error Alert" />
             <Text strong size="sm" className="mt-4">
               with description
             </Text>
             <Alert
               message={"Djuno Design. Alert with Description"}
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
-              type="info"
+              uiType="info"
             />
             <Text strong size="sm" className="mt-4">
               with icon
             </Text>
             <Alert showIcon message="Djuno Design. Neutral Alert" />
-            <Alert showIcon type="info" message="Djuno Design. Info Alert" />
+            <Alert showIcon uiType="info" message="Djuno Design. Info Alert" />
             <Alert
               showIcon
-              type="warning"
+              uiType="warning"
               message="Djuno Design. Warning Alert"
             />
             <Alert
               showIcon
-              type="success"
+              uiType="success"
               message="Djuno Design. Success Alert"
             />
-            <Alert showIcon type="error" message="Djuno Design. Error Alert" />
+            <Alert
+              showIcon
+              uiType="error"
+              message="Djuno Design. Error Alert"
+            />
             <Alert
               showIcon
               message="Djuno Design. Alert with Icon"
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
-              type="info"
+              uiType="info"
             />
             <Text strong size="sm" className="mt-4">
               banner mode
@@ -1427,14 +1431,14 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Alert
               banner
               showIcon
-              type="info"
+              uiType="info"
               message="Djuno Design. Info Alert"
             />
 
             <Text strong size="sm" className="mt-4">
               wrap mode
             </Text>
-            <Alert type="info">
+            <Alert uiType="info">
               <Flex direction="col" className="gap-2 mt-1">
                 <Button uiType="primary" className="gap-5 ">
                   Djuno Design
@@ -1560,11 +1564,11 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
             <Flex items="center" className="gap-2">
               <Text size="sm">cutoff</Text>
-              <Loading type="cutoff" />
+              <Loading uiType="cutoff" />
             </Flex>
             <Flex items="center" className="gap-2">
               <Text size="sm">elastic</Text>
-              <Loading type="elastic" borderSize={1.5} />
+              <Loading uiType="elastic" borderSize={1.5} />
             </Flex>
           </Flex>
         </Card>

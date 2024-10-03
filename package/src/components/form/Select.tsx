@@ -42,7 +42,7 @@ const listboxVariants = cva(
   'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:disabled:dd-bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
-      type: {
+      uiType: {
         simple: 'dd-text-secondary-600 dd-bg-transparent',
         default: 'dd-border-2',
       },
@@ -50,16 +50,16 @@ const listboxVariants = cva(
         yes: 'dd-border dd-border-red-500 dd-text-red-900 dd-placeholder-red-700 focus:dd-border-red-500 dark:dd-text-red-500 dark:dd-placeholder-red-500 dark:dd-border-red-500',
         no: 'dark:dd-border-dark-2 dark:dd-text-slate-50 dark:dd-placeholder-gray-500 dd-border-secondary-100 focus:dd-bg-secondary-50 focus:dd-border-secondary-200 dark:dd-border-dark-700 dark:focus:dd-bg-dark-700 dark:focus:dd-border-dark-600',
       },
-      size: {
+      uiSize: {
         small: 'dd-rounded-lg dd-text-xs dd-px-1 dd-h-7 dd-pr-6',
         medium: 'dd-rounded-lg dd-text-sm dd-px-2 dd-h-9 dd-pr-6',
         large: 'dd-rounded-xl dd-text-base dd-px-2 dd-h-11 dd-pr-6',
       },
     },
     defaultVariants: {
-      type: 'default',
+      uiType: 'default',
       hasError: 'no',
-      size: 'medium',
+      uiSize: 'medium',
     },
   },
 )
@@ -83,7 +83,7 @@ const listboxVariants = cva(
  * @param {string| React.ReactNode} [props.label] - The label displayed above the select component.
  * @param {string|boolean| React.ReactNode} [props.error] - Error message to display if there is a validation issue.
  * @param {boolean} [props.required] - Indicates if the select component is required.
- * @param {SelectTypes} [props.type] - The type of the select component (e.g., single select, multi-select).
+ * @param {SelectTypes} [props.uiType] - The type of the select component (e.g., single select, multi-select).
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information.
  * @param {string| React.ReactNode} [props.hint] - Hint text to provide additional context or instructions.
  * @param {boolean} [props.loading] - Indicates if the select component is in a loading state.
@@ -91,7 +91,7 @@ const listboxVariants = cva(
  * @param {string} [props.emptyString] - Text to display when there are no options available.
  * @param {boolean} [props.clearable] - If true, allows the user to clear the selected value.
  * @param {boolean} [props.disabled] - If true, disables the select component.
- * @param {SizeTypes} [props.size] - Size of the select component (e.g., small, medium, large).
+ * @param {SizeTypes} [props.uiSize] - Size of the select component (e.g., small, medium, large).
  * @param {(e: FocusEvent) => void} [props.onBlur] - Callback function triggered when the select component loses focus.
  * @param {string} [props.labelClassName] - Additional classes to apply to the label element
  *
@@ -132,8 +132,8 @@ const Select = <ExtraDataType extends string>({
   hint,
   loading,
   loadingType,
-  type,
-  size,
+  uiType,
+  uiSize,
   emptyString,
   clearable,
   disabled,
@@ -190,9 +190,9 @@ const Select = <ExtraDataType extends string>({
         <ListboxButton
           className={cn(
             listboxVariants({
-              type,
+              uiType,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
             }),
             'dd-relative dd-block dd-w-full',
             buttonClassName,
@@ -227,7 +227,7 @@ const Select = <ExtraDataType extends string>({
           </span>
           {loading && (
             <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-2'>
-              <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+              <Loading uiType={loadingType || 'simple'} borderSize={1.5} uiSize={14} theme={'primary'} />
             </span>
           )}
         </ListboxButton>
@@ -300,8 +300,8 @@ const MultiSelect = <ExtraDataType extends string>({
   hint,
   loading,
   loadingType,
-  type,
-  size,
+  uiType,
+  uiSize,
   emptyString,
   clearable,
   disabled,
@@ -353,9 +353,9 @@ const MultiSelect = <ExtraDataType extends string>({
         <ListboxButton
           className={cn(
             listboxVariants({
-              type,
+              uiType,
               hasError: error ? 'yes' : 'no',
-              size,
+              uiSize,
             }),
             buttonClassName,
             'dd-relative dd-block dd-w-full',
@@ -386,7 +386,7 @@ const MultiSelect = <ExtraDataType extends string>({
           </span>
           {loading && (
             <span className='dd-absolute dd-inset-y-0 dd-left-0 dd-flex dd-items-center dd-pl-2'>
-              <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+              <Loading uiType={loadingType || 'simple'} borderSize={1.5} uiSize={14} theme={'primary'} />
             </span>
           )}
         </ListboxButton>

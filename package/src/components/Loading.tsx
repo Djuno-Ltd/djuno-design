@@ -20,15 +20,15 @@
 
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { LoadingProps } from '../types'
+import { LoadingProps, LoadingType } from '../types'
 
 /**
  * Loading component that displays a loading indicator based on the specified type and theme.
  *
  * @param {object} props - Loading props.
  * @param {string} [props.className] - Additional classes to apply to the loading component.
- * @param {LoadingType} [props.type] - Type of loading indicator: 'simple' or 'elastic'.
- * @param {number} [props.size] - Size of the loading indicator.
+ * @param {LoadingType} [props.uiType] - Type of loading indicator: 'simple' or 'elastic'.
+ * @param {number} [props.uiSize] - Size of the loading indicator.
  * @param {number} [props.borderSize] - Size of the loading indicator's border.
  * @param {LoadingThemeTypes} [props.theme] - Theme of the loading indicator, defining its appearance.
  *
@@ -45,13 +45,13 @@ import { LoadingProps } from '../types'
  * // Example usage of Loading component with elastic type:
  * <Loading type="elastic" size={32} borderSize={2} theme="error" />
  */
-const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size, borderSize, theme }) => {
-  if (type === 'elastic') {
+const Loading: React.FunctionComponent<LoadingProps> = ({ className, uiType, uiSize, borderSize, theme, ...props }) => {
+  if (uiType === 'elastic') {
     return (
       <div>
         <svg
           className={cn(className)}
-          style={{ ...(size ? { width: size, height: size } : { width: 24, height: 24 }) }}
+          style={{ ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }) }}
           viewBox='0 0 16 16'
         >
           <g className='dd-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
@@ -90,15 +90,15 @@ const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size,
     <div>
       <div
         style={{
-          ...(size ? { width: size, height: size } : { width: 24, height: 24 }),
+          ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }),
           ...(borderSize && { borderWidth: borderSize }),
         }}
         className={cn(
           'dd-rounded-full dd-border-[0.125rem]',
           {
             // specify animation type
-            'dd-animate-spin': type === undefined || type === 'simple',
-            'dd-animate-cutoff-spin': type === 'cutoff',
+            'dd-animate-spin': uiType === undefined || uiType === 'simple',
+            'dd-animate-cutoff-spin': uiType === 'cutoff',
 
             // specify theme
             'dd-border-transparent dd-border-t-white': theme === 'white',
@@ -110,6 +110,7 @@ const Loading: React.FunctionComponent<LoadingProps> = ({ className, type, size,
           },
           className,
         )}
+        {...props}
       />
     </div>
   )

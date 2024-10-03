@@ -39,7 +39,7 @@ export const inputVariants = cva(
   'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:dd-disabled:bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
-      type: {
+      uiType: {
         simple: 'dd-text-secondary-600 dd-bg-transparent',
         default: 'dd-border-2',
       },
@@ -58,7 +58,7 @@ export const inputVariants = cva(
       },
     },
     defaultVariants: {
-      type: 'default',
+      uiType: 'default',
       hasError: 'no',
       uiSize: 'medium',
       copyable: 'no',
@@ -94,7 +94,7 @@ export const labelVariants = cva(
  * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
- * @param {InputTypes} [props.type] - Type of the input field (e.g., 'default', 'simple').
+ * @param {InputTypes} [props.uiType] - Type of the input field (e.g., 'default', 'simple').
  * @param {string} [props.placeholder] - Placeholder text for the input.
  * @param {string} [props.className] - Additional classes to apply to the input element.
  * @param {string} [props.labelClassName] - Additional classes to apply to the label element.
@@ -263,7 +263,7 @@ const Input: React.FunctionComponent<InputProps> = ({
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
-              type: uiType,
+              uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
@@ -280,7 +280,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
-            <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+            <Loading uiType={loadingType || 'simple'} borderSize={1.5} uiSize={14} theme={'primary'} />
           </div>
         )}
         <div className='dd-absolute dd-inset-y-0 dd-end-0 dd-flex'>{AfterComponent}</div>
