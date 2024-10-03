@@ -135,16 +135,16 @@ const Sidebar: React.FC<SidebarProps> = ({
   }
 
   return (
-    <div className='flex flex-col flex-grow justify-between overflow-y-auto w-full transition-height h-full pb-3'>
-      <div className='my-2 w-full relative'>
+    <div className='dd-flex dd-flex-col dd-flex-grow dd-justify-between dd-overflow-y-auto dd-w-full dd-transition-height dd-h-full dd-pb-3'>
+      <div className='dd-my-2 dd-w-full dd-relative'>
         {pointerPosition !== undefined && !loading && activeItem && (
           <span
-            className='w-1 block bg-primary-400 absolute transition-all top-0 rounded-r-md'
+            className='dd-w-1 dd-block dd-bg-primary-400 dd-absolute dd-transition-all dd-top-0 dd-rounded-r-md'
             style={{ top: pointerPosition, height: navItemHeight }}
           />
         )}
 
-        <div className='flex flex-col'>
+        <div className='dd-flex dd-flex-col'>
           {!loading &&
             items
               .filter((item) => item.active !== true)
@@ -166,16 +166,16 @@ const Sidebar: React.FC<SidebarProps> = ({
                   depth={0}
                 />
               ))}
-          {renderLoading(loading, loadingMode)}
+          {renderLoading(navItemHeight, loading, loadingMode)}
         </div>
       </div>
       {!loading && (
-        <div className='w-full'>
+        <div className='dd-w-full'>
           {children}
           {subItems && subItems.length && (
-            <div className='px-2 space-y-4 mt-2'>
-              <div className='w-full h-[1px] bg-slate-200 dark:bg-slate-700 rounded-sm' />
-              <div className='my-2 flex flex-col space-y-1'>
+            <div className='dd-px-2 dd-space-y-4 dd-mt-2'>
+              <div className='dd-w-full dd-h-[1px] dd-bg-slate-200 dark:dd-bg-slate-700 dd-rounded-sm' />
+              <div className='dd-my-2 dd-flex dd-flex-col dd-space-y-1'>
                 {subItems.map((item, index) => (
                   <SidebarSubMenuItem
                     height={navItemHeight}
@@ -198,24 +198,24 @@ const renderLabel = (label: SidebarItemLabel, isActive: boolean | undefined) => 
   if (typeof label === 'function') {
     return label({ isActive })
   } else {
-    return <div className='text-sm whitespace-nowrap w-full'>{label}</div>
+    return <div className='dd-text-sm dd-whitespace-nowrap dd-w-full'>{label}</div>
   }
 }
 
-const renderLoading = (loading?: boolean, loadingMode?: SidebarLoadingModes) => {
+const renderLoading = (height: number, loading?: boolean, loadingMode?: SidebarLoadingModes) => {
   if (loading && loadingMode === 'skeleton') {
     return (
-      <Flex direction='col' className='gap-1.5 '>
-        <Skeleton className='h-[33px] bg-gradient-to-t opacity-80' />
-        <Skeleton className='h-[33px] bg-gradient-to-t opacity-60' />
-        <Skeleton className='h-[33px] bg-gradient-to-t opacity-50' />
-        <Skeleton className='h-[33px] bg-gradient-to-t opacity-30' />
+      <Flex direction='col' className='dd-gap-1.5'>
+        <Skeleton style={{ height }} className='dd-bg-gradient-to-t dd-opacity-80' />
+        <Skeleton style={{ height }} className='dd-bg-gradient-to-t dd-opacity-60' />
+        <Skeleton style={{ height }} className='dd-bg-gradient-to-t dd-opacity-50' />
+        <Skeleton style={{ height }} className='dd-bg-gradient-to-t dd-opacity-30' />
       </Flex>
     )
   }
   if (loading && loadingMode !== 'skeleton') {
     return (
-      <Flex items='center' justify='center' className='min-h-[150px]'>
+      <Flex items='center' justify='center' className='dd-min-h-[150px]'>
         <Loading borderSize={2} uiType={loadingMode} />
       </Flex>
     )
@@ -282,48 +282,51 @@ const SidebarMenuItem = (props: {
     <div
       onMouseLeave={onMouseLeave}
       onMouseEnter={() => (onMouseEnter ? onMouseEnter(item.id) : {})}
-      className={cn('', { 'group/item': depth === 0 })}
+      className={cn('', { 'dd-group/item': depth === 0 })}
     >
       <div
         onClick={handleClick}
         style={{ height }}
-        className={cn('py-2 select-none flex transition duration-150 items-center gap-1 text-base font-medium', {
-          'border-l border-l-slate-200 dark:border-l-slate-600': depth !== 0,
-          //not-active
-          'group-hover/item:bg-primary-50 text-slate-400 dark:text-slate-300 group-hover/item:text-primary-500 dark:group-hover/item:bg-primary-400/10 dark:group-hover/item:text-primary-400':
-            !isActive && depth === 0,
-          'hover: text-slate-400 hover:text-slate-600 dark:text-slate-300 dark:hover: dark:hover:text-slate-200 hover:border-l-primary-400 dark:hover:border-l-primary-300':
-            !isActive && depth !== 0,
+        className={cn(
+          'dd-py-2 dd-select-none dd-flex dd-transition dd-duration-150 dd-items-center dd-gap-1 dd-text-base dd-font-medium',
+          {
+            'dd-border-l dd-border-l-slate-200 dark:dd-border-l-slate-600': depth !== 0,
+            //not-active
+            'group-hover/item:dd-bg-primary-50 dd-text-slate-400 dark:dd-text-slate-300 group-hover/item:dd-text-primary-500 dark:group-hover/item:dd-bg-primary-400/10 dark:group-hover/item:dd-text-primary-400':
+              !isActive && depth === 0,
+            'dd-text-slate-400 hover:dd-text-slate-600 dark:dd-text-slate-300 dark:hover:dd-text-slate-200 hover:dd-border-l-primary-400 dark:hover:dd-border-l-primary-300':
+              !isActive && depth !== 0,
 
-          //active
-          'bg-primary-50 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400 !font-semibold':
-            isActive && depth === 0,
-          'text-primary-400 dark:text-primary-300 !font-semibold  border-l-primary-400 dark:border-l-primary-300':
-            isActive && depth !== 0,
+            //active
+            'dd-bg-primary-50 dd-text-primary-500 dark:dd-bg-primary-400/10 dark:dd-text-primary-400 !dd-font-semibold':
+              isActive && depth === 0,
+            'dd-text-primary-400 dark:dd-text-primary-300 !dd-font-semibold  dd-border-l-primary-400 dark:dd-border-l-primary-300':
+              isActive && depth !== 0,
 
-          'cursor-pointer': !item.disabled,
-          'cursor-not-allowed': item.disabled,
-          'px-4': type === undefined || type === 'normal',
-          'px-2': type === 'mini',
-        })}
+            'dd-cursor-pointer': !item.disabled,
+            'dd-cursor-not-allowed': item.disabled,
+            'dd-px-4': type === undefined || type === 'normal',
+            'dd-px-2': type === 'mini',
+          },
+        )}
         // eslint-disable-next-line react/no-unknown-property
         test-cy={props.dataTestId}
       >
-        <div className='flex flex-1 items-center gap-1'>
+        <div className='dd-flex dd-flex-1 dd-items-center dd-gap-1'>
           {item.icon && (
             <item.icon
-              className={cn('w-6 h-6', {
-                'group-hover/item:text-primary-400': !isActive,
-                'text-primary-400': isActive,
+              className={cn('dd-w-5 dd-h-5', {
+                'group-hover/item:dd-text-primary-400': !isActive,
+                'dd-text-primary-400': isActive,
               })}
             />
           )}
-          <div className='text-sm whitespace-nowrap w-full'>{renderLabel(item.label, isActive)}</div>
+          <div className='dd-text-sm dd-whitespace-nowrap dd-w-full'>{renderLabel(item.label, isActive)}</div>
         </div>
         {item.children && item.children.length > 0 && (
           <ArrowRightIcon
-            className={cn('w-[14px] h-[14px] transition-all duration-200', {
-              'rotate-90': isExpanded,
+            className={cn('dd-w-[14px] dd-h-[14px] dd-transition-all dd-duration-200', {
+              'dd-rotate-90': isExpanded,
             })}
           />
         )}
@@ -334,7 +337,7 @@ const SidebarMenuItem = (props: {
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            className={cn('ml-1 pl-1 overflow-hidden')}
+            className={cn('dd-ml-1 dd-pl-1 dd-overflow-hidden')}
           >
             {item.children.map((child, index) => (
               <SidebarMenuItem
@@ -370,26 +373,29 @@ const SidebarSubMenuItem = (props: { height: number; item: SidebarItem; isActive
     <div
       onClick={handleClick}
       style={{ height }}
-      className={cn('px-2 rounded-md select-none flex gap-1 transition duration-150 items-center text-sm', {
-        'hover:bg-primary-50 text-slate-400 hover:text-slate-800 dark:hover:bg-primary-400/10 dark:hover:text-slate-100 ':
-          !props.isActive,
-        'bg-white dark:bg-primary-400/10 dark:text-primary-400  shadow-sm drop-shadow-md ring-1 ring-gray-200 dark:ring-0':
-          props.isActive,
-        'cursor-pointer': !item.disabled,
-        'cursor-not-allowed': item.disabled,
-      })}
+      className={cn(
+        'dd-px-2 dd-rounded-md dd-select-none dd-flex dd-gap-1 dd-transition dd-duration-150 dd-items-center dd-text-sm',
+        {
+          'hover:dd-bg-primary-50 dd-text-slate-400 hover:dd-text-slate-800 dark:hover:dd-bg-primary-400/10 dark:hover:dd-text-slate-100 ':
+            !props.isActive,
+          'dd-bg-white dark:dd-bg-primary-400/10 dark:dd-text-primary-400  dd-shadow-sm dd-drop-shadow-md dd-ring-1 dd-ring-gray-200 dark:dd-ring-0':
+            props.isActive,
+          'dd-cursor-pointer': !item.disabled,
+          'dd-cursor-not-allowed': item.disabled,
+        },
+      )}
       // eslint-disable-next-line react/no-unknown-property
       test-cy={props.dataTestId}
     >
       {item.icon && (
         <item.icon
-          className={cn('w-5 h-5', {
-            'dark:text-slate-400 hover:dark:text-slate-100': !props.isActive,
-            'text-primary-300': props.isActive,
+          className={cn('dd-w-5 dd-h-5', {
+            'dark:dd-text-slate-400 hover:dark:dd-text-slate-100': !props.isActive,
+            'dd-text-primary-300': props.isActive,
           })}
         />
       )}
-      <div className='text-sm font-medium whitespace-nowrap'>{renderLabel(item.label, props.isActive)}</div>
+      <div className='dd-text-sm dd-font-medium dd-whitespace-nowrap'>{renderLabel(item.label, props.isActive)}</div>
     </div>
   )
 }
@@ -427,26 +433,6 @@ const isActiveItem = (item: SidebarItem, segments: string[]): boolean => {
 
   return false
 }
-
-// const isActiveItem = (item: SidebarItem, segments: string[]): boolean => {
-//   if (
-//     item.activeCondition &&
-//     segments[item.activeCondition.segmentIndex] &&
-//     segments[item.activeCondition.segmentIndex] === item.activeCondition.activeString
-//   ) {
-//     return true
-//   }
-
-//   if (item.children && item.children.length > 0) {
-//     for (const child of item.children) {
-//       if (isActiveItem(child, segments)) {
-//         return true
-//       }
-//     }
-//   }
-
-//   return false
-// }
 
 const calcExpandedChilds = (item: SidebarItem | undefined, expandedItems: Array<string | number>) => {
   let count = 0
