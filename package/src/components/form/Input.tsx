@@ -27,7 +27,7 @@ import Tooltip, { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
-import { uuid } from '../../utils/uuid'
+// import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 
@@ -146,8 +146,8 @@ const Input: React.FunctionComponent<InputProps> = ({
   containerClassName,
   ...props
 }) => {
-  const id = uuid(10)
-  const inputRef = React.useRef<HTMLInputElement>(null)
+  // const id = uuid(10)
+  // const inputRef = React.useRef<HTMLInputElement>(null)
   const value = props?.value
   const onChange = props?.onChange
 
@@ -182,7 +182,8 @@ const Input: React.FunctionComponent<InputProps> = ({
 
   const handleCopyToClipboard = React.useCallback(() => {
     let textToCopy: string | number | null | undefined = ''
-    const inputValue = inputRef.current?.value
+    // const inputValue = inputRef.current?.value
+    const inputValue = props.value as string
 
     if (typeof copyable === 'function') {
       textToCopy = copyable(inputValue)
@@ -218,7 +219,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         )}
       >
         <label
-          htmlFor={id}
+          htmlFor={props.id}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
@@ -257,8 +258,8 @@ const Input: React.FunctionComponent<InputProps> = ({
           </div>
         )}
         <input
-          id={id}
-          ref={inputRef}
+          id={props.id}
+          // ref={inputRef}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
