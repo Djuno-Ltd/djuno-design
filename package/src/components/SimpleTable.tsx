@@ -18,7 +18,7 @@
 
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { SimpletableProps, TableComponents, TableRowProps, TableTDProps } from '../types/SimpleTable'
+import { SimpletableProps, TableComponents, TableRowProps, TableTDProps, TableTHProps } from '../types/SimpleTable'
 import { motion, AnimatePresence } from 'framer-motion'
 import Loading from './Loading'
 
@@ -112,11 +112,18 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
 
 const SimpleTableHead = (props: React.PropsWithChildren) => <thead>{props.children}</thead>
 
-const SimpleTableTH = (props: React.PropsWithChildren<{ lable?: string | React.ReactNode }>) => {
+const SimpleTableTH = (props: React.PropsWithChildren<TableTHProps>) => {
+  const { className, children, ...rest } = props
   return (
-    <th className='dd-text-left dd-bg-white dark:dd-bg-dark-850 dd-border-b dark:dd-border-dark-700 dd-p-2'>
+    <th
+      {...rest}
+      className={cn(
+        'dd-text-left dd-bg-white dark:dd-bg-dark-850 dd-border-b dark:dd-border-dark-700 dd-p-2',
+        className,
+      )}
+    >
       <div className='dd-text-slate-400 dark:dd-text-slate-100 dd-font-light dd-overflow-hidden dd-whitespace-nowrap'>
-        {props.children || props.lable}
+        {children || props.lable}
       </div>
     </th>
   )

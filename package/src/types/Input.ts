@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-import React, { InputHTMLAttributes } from 'react'
+import React from 'react'
 import { TooltipProps } from './Tooltip'
 import { LoadingType } from './Loading'
 import { CopyableOptionsProp, SizeTypes } from '.'
@@ -27,7 +27,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   label?: string | React.ReactNode
   loading?: boolean
   loadingType?: LoadingType
-  type?: InputTypes
+  uiType?: InputTypes
   placeholder?: string
   className?: string
   labelClassName?: string

@@ -31,7 +31,7 @@ import {
   JsonViewer,
   Sidebar,
   SidebarItem,
-  Texrarea,
+  Textarea,
   ThemeChanger,
   ThemeSwitcher,
   Tag,
@@ -125,7 +125,7 @@ function App() {
     setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
-  const sidebarItems: SidebarItem[] = [
+  const sidebarItems: SidebarItem<{ d: string }>[] = [
     {
       id: 1,
       label: "item1",
@@ -563,7 +563,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have hit:
           </Text>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
               hint="Djuno Design"
@@ -573,7 +573,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Simple form:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
             />
@@ -583,7 +583,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have loading:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
               loading
@@ -596,7 +596,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Replace copy text.:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder=""
               tooltip={{ content: "test" }}
@@ -607,7 +607,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have error with error text:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               required
@@ -624,7 +624,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Copyable without function:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={true}
@@ -639,7 +639,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Copyable with function:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
@@ -654,7 +654,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have error without error text:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               error={true}
@@ -669,7 +669,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Custom Copy icon and replace tooltips text:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
@@ -690,7 +690,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Hide Copy tooltips:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
@@ -711,7 +711,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Custom label:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               labelClassName="text-green-500 font-bold"
@@ -723,7 +723,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             />
           </Flex>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               error
               label="Texrarea"
               placeholder="Enter custom notes if any"
@@ -978,7 +978,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="default"
                 >
                   Djuno Design
                 </Dropdown>
@@ -1005,10 +1004,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="simple"
-                >
-                  Djuno Design
-                </Dropdown>
+                />
               </div>
             </div>
           </Flex>
@@ -1269,10 +1265,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                               danger: true,
                             },
                           ]}
-                          type="simple"
-                        >
-                          Djuno Design
-                        </Dropdown>
+                        />
                       </div>
                     </div>
                   </SimpleTable.TD>

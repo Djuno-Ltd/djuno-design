@@ -34,7 +34,7 @@ import Loading from '../Loading'
  * @param {object} props - Textarea component props.
  * @param {string} [props.id] - Unique identifier for the textarea element.
  * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, `maxLength`, etc.
- * @param {InputTypes} [props.type] - Type of the textarea field, which can be 'default' or 'simple'.
+ * @param {InputTypes} [props.uiType] - Type of the textarea field, which can be 'default' or 'simple'.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
  * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
@@ -86,12 +86,13 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   hint,
   tooltip,
   uiSize,
-  type,
+  uiType,
   copyable,
   loading,
   loadingType,
   labelClassName,
   containerClassName,
+  ...props
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -198,7 +199,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
           ref={textareaRef}
           className={cn(
             inputVariants({
-              type,
+              type: uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
@@ -206,6 +207,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             className,
           )}
           placeholder={placeholder}
+          {...props}
         />
         {loading && (
           <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>

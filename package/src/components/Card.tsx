@@ -113,7 +113,7 @@ const Card: React.FunctionComponent<CardProps> = ({
           </Flex>
         </div>
       )}
-      {children}
+      <div className='dd-w-full'>{children}</div>
     </Flex>
   )
 }

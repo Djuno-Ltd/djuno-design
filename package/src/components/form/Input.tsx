@@ -134,7 +134,7 @@ const Input: React.FunctionComponent<InputProps> = ({
   labelClassName,
   loading,
   loadingType,
-  type,
+  uiType,
   required,
   error,
   hint,
@@ -263,7 +263,7 @@ const Input: React.FunctionComponent<InputProps> = ({
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
-              type,
+              type: uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
@@ -276,6 +276,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             className,
           )}
           placeholder={placeholder}
+          {...props}
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
