@@ -216,7 +216,7 @@ const renderLoading = (height: number, loading?: boolean, loadingMode?: SidebarL
   if (loading && loadingMode !== 'skeleton') {
     return (
       <Flex items='center' justify='center' className='dd-min-h-[150px]'>
-        <Loading borderSize={2} type={loadingMode} />
+        <Loading borderSize={2} uiType={loadingMode} />
       </Flex>
     )
   }

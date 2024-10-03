@@ -43,7 +43,7 @@ const buttonVariants = cva(
         danger:
           'dd-bg-red-500 dd-text-white hover:dd-bg-red-600 dd-border-red-500 hover:dd-border-red-600 dark:dd-bg-red-500 dark:hover:dd-bg-red-600 dark:dd-border-red-500 dark:hover:dd-border-red-600 disabled:dd-border-red-400 disabled:dd-bg-red-400 disabled:dd-text-white disabled:dark:dd-bg-red-400 disabled:dark:dd-text-secondary-200 disabled:dark:dd-border-red-400 focus:dd-ring-red-100 dark:focus:dd-ring-red-600/50',
       },
-      size: {
+      uiSize: {
         small: 'dd-rounded-lg dd-text-xs dd-px-3 dd-h-7',
         medium: 'dd-rounded-lg dd-text-sm dd-px-4 dd-h-9',
         large: 'dd-rounded-xl dd-text-base dd-px-5 dd-h-11',
@@ -51,7 +51,7 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       uiType: 'simple',
-      size: 'medium',
+      uiSize: 'medium',
     },
   },
 )
@@ -91,7 +91,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className,
   uiType,
-  size,
+  uiSize,
   tooltip,
   loading,
   loadingType,
@@ -99,12 +99,12 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <Tooltip {...tooltip}>
-      <button {...props} className={cn(buttonVariants({ uiType, size }), className)}>
+      <button {...props} className={cn(buttonVariants({ uiType, uiSize }), className)}>
         {loading && (
           <Loading
-            type={loadingType || 'simple'}
+            uiType={loadingType || 'simple'}
             borderSize={1.5}
-            size={size === 'medium' || size === undefined ? 14 : size === 'small' ? 12 : 18}
+            uiSize={uiSize === 'medium' || uiSize === undefined ? 14 : uiSize === 'small' ? 12 : 18}
             theme={uiType === 'primary' ? 'white' : 'transparent'}
           />
         )}

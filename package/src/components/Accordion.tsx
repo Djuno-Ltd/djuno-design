@@ -33,7 +33,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  * @param {string} [props.panelClassName] - Additional panelClassNames to apply to the accordion.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the accordion, each with a label and optional panel content.
  * @param {boolean} [props.loading] - Indicates if the accordion is in a loading state.
- *
+ * @param {string} [props.labelClassName] - Additional CSS classes to apply custom styles to the label.
  * @returns {React.ReactNode} Rendered Accordion component.
  *
  * @version 0.4.8

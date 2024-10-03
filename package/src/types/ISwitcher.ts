@@ -26,5 +26,5 @@ export interface SwitcherProps {
   disabled?: boolean
   loading?: boolean
   loadingType?: LoadingType
-  size?: SizeTypes
+  uiSize?: SizeTypes
 }

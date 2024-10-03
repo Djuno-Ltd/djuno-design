@@ -18,11 +18,13 @@
  * limitations under the License.
  */
 import { HTMLProps, PropsWithChildren } from 'react'
+import { LoadingProps } from './Loading'
 
 export interface SimpletableProps extends PropsWithChildren {
   loading?: boolean
   className?: string
   containerClassName?: string
+  loadingSetting?: LoadingProps
 }
 
 export interface TableHeadProps extends React.PropsWithChildren {}

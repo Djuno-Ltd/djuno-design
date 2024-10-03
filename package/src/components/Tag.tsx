@@ -52,8 +52,9 @@ import Typography from './Typography'
  *   Success Tag
  * </Tag>
  */
+
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
-  const { className, color, style, children, icon, closable, onClose, bordered = true } = tagProps
+  const { className, color, style, children, icon, closable, onClose, bordered = true, ...props } = tagProps
   const [visible, setVisible] = React.useState(true)
 
   const handleCloseClick = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -86,6 +87,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
         className,
       )}
       style={style}
+      {...props}
     >
       <>
         {iconNode}

@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-import { AnchorProps } from '@headlessui/react/dist/internal/floating'
+import { AnchorProps } from './IDropdown'
 
 export interface PopoverProps {
   content: React.ReactNode

@@ -134,7 +134,7 @@ function App() {
 
 | Name       | Type                | Required | default | Description |
 | ---------- | ------------------- | -------- | ------- | ----------- |
-| type       | `LoadingType`       |          | simple  |             |
+| uiType     | `LoadingType`       |          | simple  |             |
 | size       | number              |          | 24px    |             |
 | borderSize | number              |          | 2px     |             |
 | theme      | `LoadingThemeTypes` |          | primary |             |
@@ -227,7 +227,7 @@ function App() {
 | ----------- | ------------------- | -------- | ------- | ------------------------- |
 | message     | `string, ReactNode` |          |         |                           |
 | description | `string, ReactNode` |          |         |                           |
-| type        | `AlertTypes`        |          | neutral |                           |
+| uiType      | `AlertTypes`        |          | neutral |                           |
 | showIcon    | `boolean`           |          | false   |                           |
 | banner      | `boolean`           |          | false   | Display Alert as a banner |
 
@@ -244,7 +244,7 @@ function App() {
 | ------------------- | --------------------------------------------- | -------- | ------- | ----------- |
 | all `<input>` props | `React.InputHTMLAttributes<HTMLInputElement>` |          |         |             |
 | label               | `string, React.ReactNode`                     |          |         |             |
-| type                | `InputTypes`                                  |          |         |             |
+| uiType              | `InputTypes`                                  |          |         |             |
 | required            | `boolean`                                     |          |         |             |
 | error               | `string , boolean , React.ReactNode`          |          |         |             |
 | hint                | `string, React.ReactNode`                     |          |         |             |
@@ -267,7 +267,7 @@ function App() {
 | required               | `boolean`                                           |          |         |             |
 | error                  | `string, boolean, React.ReactNode`                  |          |         |             |
 | hint                   | `string , React.ReactNode`                          |          |         |             |
-| type                   | `InputTypes`                                        |          |         |             |
+| uiType                 | `InputTypes`                                        |          |         |             |
 | tooltip                | `TooltipProps`                                      |          |         |             |
 | size                   | `SizeTypes`                                         |          | medium  |             |
 | copyable               | `boolean or function or InputCopyableProp`          |          |         |             |
@@ -303,7 +303,7 @@ function App() {
 | label            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
 | error            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
 | required         | `boolean`                               |          |         | Indicates if the select component is required.                             |
-| type             | `SelectTypes`                           |          |         | The type of the select component (e.g., single select, multi-select).      |
+| uiType           | `SelectTypes`                           |          |         | The uiType of the select component (e.g., single select, multi-select).    |
 | tooltip          | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                      |
 | hint             | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                   |
 | loading          | `boolean`                               |          |         | Indicates if the select component is in a loading state.                   |
@@ -319,7 +319,7 @@ function App() {
 | Name      | Type                 | Required | default   | Description |
 | --------- | -------------------- | -------- | --------- | ----------- |
 | shape     | `SkeletonShapes`     |          | rectangle |             |
-| size      | `SizeTypes`          |          | medium    |             |
+| uiSize      | `SizeTypes`          |          | medium    |             |
 | animation | `SkeletonAnimations` |          | pulse     |             |
 
 ### SimpleTable

@@ -21,7 +21,7 @@
 import { SizeTypes } from '.'
 
 export interface SkeletonProps {
-  size?: SizeTypes
+  uiSize?: SizeTypes
   className?: string
   style?: React.CSSProperties
   shape?: SkeletonShapes

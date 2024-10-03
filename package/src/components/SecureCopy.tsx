@@ -53,7 +53,7 @@ const iconVariants = cva('dd-cursor-pointer dd-w-5 dd-h-5 dd-transition-all dd-d
  * @param {string} [props.className] - Additional classes to apply to the SecureCopy.
  * @param {boolean} [props.iconClassName] - Indicates if the SecureCopy has the iconClassName.
  * @param {boolean} [props.textClassName] - Indicates if the SecureCopy has the textClassName.
- * @param {string} [props.type] - Type of the Action "hide" or "copy".
+ * @param {string} [props.uiType] - Type of the Action "hide" or "copy".
  *
  * @returns {React.ReactNode} Rendered SecureCopy component.
  *

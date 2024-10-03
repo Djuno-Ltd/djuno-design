@@ -184,7 +184,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
                 contentLoadingContent
               ) : (
                 <Flex direction='col' items='center' className='dd-gap-1'>
-                  <Loading type='elastic' />
+                  <Loading uiType='elastic' />
                 </Flex>
               )}
             </motion.div>
@@ -206,7 +206,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
               globalLoadingContent
             ) : (
               <Flex direction='col' items='center' className='dd-gap-1'>
-                <Loading type='elastic' />
+                <Loading uiType='elastic' />
                 <Typography.Text size='xs'>Just a moment</Typography.Text>
               </Flex>
             )}

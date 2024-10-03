@@ -25,8 +25,8 @@ export type LoadingThemeTypes = 'primary' | 'error' | 'transparent' | 'white'
 
 export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
-  type?: LoadingType
-  size?: number
+  uiType?: LoadingType
+  uiSize?: number
   borderSize?: number
   theme?: LoadingThemeTypes
 }

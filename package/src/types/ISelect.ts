@@ -41,7 +41,7 @@ export interface SelectBaseProps {
   label?: string | React.ReactNode
   error?: string | boolean | React.ReactNode
   required?: boolean
-  type?: SelectTypes
+  uiType?: SelectTypes
   tooltip?: TooltipProps
   hint?: string | React.ReactNode
   loading?: boolean
@@ -49,7 +49,7 @@ export interface SelectBaseProps {
   emptyString?: string
   clearable?: boolean
   disabled?: boolean
-  size?: SizeTypes
+  uiSize?: SizeTypes
   onBlur?: (e: FocusEvent) => void
 }
 
