@@ -134,7 +134,7 @@ const Input: React.FunctionComponent<InputProps> = ({
   labelClassName,
   loading,
   loadingType,
-  type,
+  uiType,
   required,
   error,
   hint,
@@ -263,7 +263,7 @@ const Input: React.FunctionComponent<InputProps> = ({
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
-              type,
+              type: uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
