@@ -134,7 +134,7 @@ function App() {
 
 | Name       | Type                | Required | default | Description |
 | ---------- | ------------------- | -------- | ------- | ----------- |
-| type       | `LoadingType`       |          | simple  |             |
+| uiType     | `LoadingType`       |          | simple  |             |
 | size       | number              |          | 24px    |             |
 | borderSize | number              |          | 2px     |             |
 | theme      | `LoadingThemeTypes` |          | primary |             |
@@ -227,7 +227,7 @@ function App() {
 | ----------- | ------------------- | -------- | ------- | ------------------------- |
 | message     | `string, ReactNode` |          |         |                           |
 | description | `string, ReactNode` |          |         |                           |
-| type        | `AlertTypes`        |          | neutral |                           |
+| uiType      | `AlertTypes`        |          | neutral |                           |
 | showIcon    | `boolean`           |          | false   |                           |
 | banner      | `boolean`           |          | false   | Display Alert as a banner |
 
@@ -267,7 +267,7 @@ function App() {
 | required               | `boolean`                                           |          |         |             |
 | error                  | `string, boolean, React.ReactNode`                  |          |         |             |
 | hint                   | `string , React.ReactNode`                          |          |         |             |
-| type                   | `InputTypes`                                        |          |         |             |
+| uiType                 | `InputTypes`                                        |          |         |             |
 | tooltip                | `TooltipProps`                                      |          |         |             |
 | size                   | `SizeTypes`                                         |          | medium  |             |
 | copyable               | `boolean or function or InputCopyableProp`          |          |         |             |
@@ -319,7 +319,7 @@ function App() {
 | Name      | Type                 | Required | default   | Description |
 | --------- | -------------------- | -------- | --------- | ----------- |
 | shape     | `SkeletonShapes`     |          | rectangle |             |
-| size      | `SizeTypes`          |          | medium    |             |
+| uiSize      | `SizeTypes`          |          | medium    |             |
 | animation | `SkeletonAnimations` |          | pulse     |             |
 
 ### SimpleTable
