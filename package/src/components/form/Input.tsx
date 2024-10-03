@@ -27,7 +27,7 @@ import Tooltip, { InfoTooltip } from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
-import { uuid } from '../../utils/uuid'
+// import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 
@@ -128,28 +128,30 @@ export const labelVariants = cva(
  * />
  */
 
-const Input: React.FunctionComponent<InputProps> = ({
-  label,
-  className,
-  labelClassName,
-  loading,
-  loadingType,
-  uiType,
-  required,
-  error,
-  hint,
-  placeholder,
-  tooltip,
-  uiSize,
-  AfterComponent,
-  copyable,
-  containerClassName,
-  ...props
-}) => {
-  const id = uuid(10)
-  const inputRef = React.useRef<HTMLInputElement>(null)
-  const value = props?.value
-  const onChange = props?.onChange
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const {
+    className,
+    containerClassName,
+    labelClassName,
+    label,
+    hint,
+    loading,
+    loadingType,
+    copyable,
+    error,
+    uiSize,
+    uiType,
+    required,
+    tooltip,
+    placeholder,
+    AfterComponent,
+    ...inputProps
+  } = props
+
+  const internalRef = React.useRef<HTMLInputElement>(null)
+
+  const value = inputProps?.value
+  const onChange = inputProps?.onChange
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -162,7 +164,6 @@ const Input: React.FunctionComponent<InputProps> = ({
         return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
       }
     }
-
     return defaultTexts
   }, [copyable])
 
@@ -181,9 +182,16 @@ const Input: React.FunctionComponent<InputProps> = ({
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
-    let textToCopy: string | number | null | undefined = ''
-    const inputValue = inputRef.current?.value
+    let inputValue: string | undefined = ''
+    if (ref && 'current' in ref && ref.current) {
+      inputValue = ref.current.value
+    } else if (internalRef.current) {
+      inputValue = internalRef.current.value
+    } else if (typeof inputProps?.value === 'string') {
+      inputValue = inputProps.value
+    }
 
+    let textToCopy: string | number | null | undefined = ''
     if (typeof copyable === 'function') {
       textToCopy = copyable(inputValue)
     } else {
@@ -202,7 +210,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         }, 2000)
       })
     }
-  }, [copyable, tooltipTexts, icons])
+  }, [copyable, tooltipTexts, icons, ref, inputProps?.value])
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
@@ -218,7 +226,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         )}
       >
         <label
-          htmlFor={id}
+          htmlFor={props.id}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
@@ -257,8 +265,8 @@ const Input: React.FunctionComponent<InputProps> = ({
           </div>
         )}
         <input
-          id={id}
-          ref={inputRef}
+          id={props.id}
+          ref={ref || internalRef}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
@@ -276,7 +284,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             className,
           )}
           placeholder={placeholder}
-          {...props}
+          {...inputProps}
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
@@ -288,7 +296,8 @@ const Input: React.FunctionComponent<InputProps> = ({
       <AnimatedFormError error={error} />
     </div>
   )
-}
+})
+
 const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }> = ({ error }) => {
   return (
     <AnimatePresence>
@@ -305,5 +314,6 @@ const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }
   )
 }
 
+Input.displayName = 'Input'
 export { AnimatedFormError }
 export default Input
