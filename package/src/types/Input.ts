@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-import React, { InputHTMLAttributes } from 'react'
+import React from 'react'
 import { TooltipProps } from './Tooltip'
 import { LoadingType } from './Loading'
 import { CopyableOptionsProp, SizeTypes } from '.'

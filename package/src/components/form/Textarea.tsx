@@ -92,6 +92,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   loadingType,
   labelClassName,
   containerClassName,
+  ...props
 }) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -206,6 +207,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             className,
           )}
           placeholder={placeholder}
+          {...props}
         />
         {loading && (
           <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>

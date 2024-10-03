@@ -276,6 +276,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             className,
           )}
           placeholder={placeholder}
+          {...props}
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
