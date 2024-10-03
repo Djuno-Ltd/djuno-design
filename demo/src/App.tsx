@@ -892,7 +892,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               renderSidebar={({ segments, isShowSidebar, type }) => (
                 <PanelSidebar
                   isShowSidebar={isShowSidebar}
-                  uiType={type}
+                  type={type}
                   sidebarHeader={
                     <div className="flex items-center gap-1 px-1">
                       <Logo className="w-5 h-5" />
