@@ -131,13 +131,13 @@ export const labelVariants = cva(
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     className,
+    containerClassName,
+    labelClassName,
     label,
     hint,
     loading,
     loadingType,
     copyable,
-    containerClassName,
-    labelClassName,
     error,
     uiSize,
     uiType,
@@ -147,6 +147,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     AfterComponent,
     ...inputProps
   } = props
+
+  const internalRef = React.useRef<HTMLInputElement>(null)
 
   const value = inputProps?.value
   const onChange = inputProps?.onChange
@@ -162,7 +164,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
       }
     }
-
     return defaultTexts
   }, [copyable])
 
@@ -181,10 +182,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
-    let textToCopy: string | number | null | undefined = ''
-    // const inputValue = inputRef.current?.value
-    const inputValue = props.value as string
+    let inputValue: string | undefined = ''
+    if (ref && 'current' in ref && ref.current) {
+      inputValue = ref.current.value
+    } else if (internalRef.current) {
+      inputValue = internalRef.current.value
+    } else if (typeof inputProps?.value === 'string') {
+      inputValue = inputProps.value
+    }
 
+    let textToCopy: string | number | null | undefined = ''
     if (typeof copyable === 'function') {
       textToCopy = copyable(inputValue)
     } else {
@@ -203,7 +210,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         }, 2000)
       })
     }
-  }, [copyable, tooltipTexts, icons])
+  }, [copyable, tooltipTexts, icons, ref, inputProps?.value])
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
@@ -259,7 +266,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         )}
         <input
           id={props.id}
-          ref={ref}
+          ref={ref || internalRef}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
@@ -277,7 +284,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             className,
           )}
           placeholder={placeholder}
-          {...props}
+          {...inputProps}
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
