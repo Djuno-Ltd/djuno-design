@@ -116,7 +116,7 @@ function App() {
 | Name        | Type           | Required | default   | Description |
 | ----------- | -------------- | -------- | --------- | ----------- |
 | uiType      | `ButtonTypes`  |          | simple    |             |
-| size        | `SizeTypes`    |          | medium    |             |
+| uiSize      | `SizeTypes`    |          | medium    |             |
 | tooltip     | `TooltipProps` |          | undefined |             |
 | loading     | boolean        |          | false     |             |
 | loadingType | `LoadingType`  |          | simple    |             |
@@ -135,7 +135,7 @@ function App() {
 | Name       | Type                | Required | default | Description |
 | ---------- | ------------------- | -------- | ------- | ----------- |
 | uiType     | `LoadingType`       |          | simple  |             |
-| size       | number              |          | 24px    |             |
+| uiSize     | number              |          | 24px    |             |
 | borderSize | number              |          | 2px     |             |
 | theme      | `LoadingThemeTypes` |          | primary |             |
 
@@ -269,7 +269,7 @@ function App() {
 | hint                   | `string , React.ReactNode`                          |          |         |             |
 | uiType                 | `InputTypes`                                        |          |         |             |
 | tooltip                | `TooltipProps`                                      |          |         |             |
-| size                   | `SizeTypes`                                         |          | medium  |             |
+| uiSize                 | `SizeTypes`                                         |          | medium  |             |
 | copyable               | `boolean or function or InputCopyableProp`          |          |         |             |
 | labelClassName         | `string`                                            |          |         |             |
 | loading                | `boolean`                                           |          |         |             |
@@ -285,7 +285,7 @@ function App() {
 | disabled    | `boolean`                  |          |         |             |
 | loading     | `boolean`                  |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |
-| size        | `SizeTypes`                |          | medium  |             |
+| uiSize      | `SizeTypes`                |          | medium  |             |
 
 ### Select
 
@@ -311,7 +311,7 @@ function App() {
 | emptyString      | `string`                                |          |         | Text to display when there are no options available.                       |
 | clearable        | `boolean`                               |          |         | If true, allows the user to clear the selected value.                      |
 | disabled         | `boolean`                               |          |         | If true, disables the select component.                                    |
-| size             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
+| uiSize           | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
 | onBlur           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
 
 ### Skeleton
@@ -319,7 +319,7 @@ function App() {
 | Name      | Type                 | Required | default   | Description |
 | --------- | -------------------- | -------- | --------- | ----------- |
 | shape     | `SkeletonShapes`     |          | rectangle |             |
-| uiSize      | `SizeTypes`          |          | medium    |             |
+| uiSize    | `SizeTypes`          |          | medium    |             |
 | animation | `SkeletonAnimations` |          | pulse     |             |
 
 ### SimpleTable

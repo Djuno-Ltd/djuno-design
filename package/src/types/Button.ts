@@ -30,4 +30,4 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
 }
 
-export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' //| 'icon'
+export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' | 'dangerLight' | 'icon'

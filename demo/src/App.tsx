@@ -1614,6 +1614,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               </Button>
               <Button uiType="light">Light</Button>
               <Button uiType="danger">Danger</Button>
+              <Button uiType="dangerLight">DangerLight</Button>
+              <Button uiType="icon">Icon</Button>
             </Flex>
             <Flex items="center" className="gap-2">
               <Button disabled>Default</Button>
@@ -1630,6 +1632,12 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               </Button>
               <Button uiType="danger" disabled>
                 Danger
+              </Button>
+              <Button uiType="dangerLight" disabled>
+                DangerLight
+              </Button>
+              <Button uiType="icon" disabled>
+                Icon
               </Button>
             </Flex>
           </Flex>
