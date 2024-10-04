@@ -113,7 +113,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
                 'dd-h-9': uiSize === 'medium' || uiSize === undefined,
                 'dd-h-11': uiSize === 'large',
               },
-              'dd-relative dd-overflow-hidden dd-cursor-pointer dd-text-sm dark:dd-bg-dark-700 dark:hover:dd-bg-dark-500 dd-bg-gray-200/70 hover:dd-bg-dark-200 dd-px-2 dd-rounded-md dd-select-none dd-transition-all dd-duration-500 dd-flex dd-flex-col dd-items-center dd-justify-center dd-whitespace-nowrap',
+              'dd-relative dd-overflow-hidden dd-cursor-pointer dd-text-sm dark:dd-bg-dark-700 dark:hover:dd-bg-white/10 dd-bg-gray-200/70 hover:dd-bg-secondary-200 dd-px-2 dd-rounded-md dd-select-none dd-transition-all dd-duration-500 dd-flex dd-flex-col dd-items-center dd-justify-center dd-whitespace-nowrap',
             )}
             onClick={() => text && copyToClipboard(text)}
           >

@@ -76,25 +76,26 @@ import Loading from '../Loading'
  * }
  */
 
-const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
-  id,
-  placeholder,
-  className,
-  label,
-  error,
-  required,
-  hint,
-  tooltip,
-  uiSize,
-  uiType,
-  copyable,
-  loading,
-  loadingType,
-  labelClassName,
-  containerClassName,
-  ...props
-}) => {
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
+  const {
+    id,
+    placeholder,
+    className,
+    label,
+    error,
+    required,
+    hint,
+    tooltip,
+    uiSize,
+    uiType,
+    copyable,
+    loading,
+    loadingType,
+    labelClassName,
+    containerClassName,
+    ...textareaProps
+  } = props
+  const internalRef = React.useRef<HTMLTextAreaElement>(null)
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -126,8 +127,16 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
+    let inputValue = internalRef.current?.value
+    if (ref && 'current' in ref && ref.current) {
+      inputValue = ref.current.value
+    } else if (internalRef.current) {
+      inputValue = internalRef.current.value
+    } else if (typeof textareaProps?.value === 'string') {
+      inputValue = textareaProps.value
+    }
+
     let textToCopy: string | number | null | undefined = ''
-    const inputValue = textareaRef.current?.value
 
     if (typeof copyable === 'function') {
       textToCopy = copyable(inputValue)
@@ -147,7 +156,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
         }, 2000)
       })
     }
-  }, [copyable, tooltipTexts, icons])
+  }, [copyable, tooltipTexts, icons, ref, textareaProps?.value])
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
@@ -196,7 +205,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
       <div className='dd-relative dd-w-full'>
         <textarea
           id={id}
-          ref={textareaRef}
+          ref={ref || internalRef}
           className={cn(
             inputVariants({
               uiType,
@@ -218,6 +227,6 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
       <AnimatedFormError error={error} />
     </div>
   )
-}
+})
 
 export default Textarea

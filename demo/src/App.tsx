@@ -523,14 +523,15 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 {
                   label: "Djuno Design 3",
                   element: <div>Content for Tab 3</div>,
+                  // active: true,
                 },
               ]}
               tabType="creamy"
             />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full mt-5">
+          <Flex direction="col" className="gap-5 w-full mt-6">
             <Tabs
-              listClassName="w-full  "
+              listClassName="w-full  mb-6"
               options={[
                 {
                   label: "Djuno Design 1",
@@ -549,7 +550,11 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             />
           </Flex>
           <Flex direction="col" className="gap-5 w-full ">
-            <Tabs options={tabOptions} onChange={(i) => console.log(i)} />
+            <Tabs
+              options={tabOptions}
+              onChange={(i) => console.log(i)}
+              listClassName="mt-6"
+            />
           </Flex>
         </Card>
         <Card title="JsonViewer">
@@ -979,7 +984,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                     },
                   ]}
                 >
-                  Djuno Design
+                  <Text> Djuno Design</Text>
                 </Dropdown>
               </div>
             </div>

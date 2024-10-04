@@ -87,11 +87,11 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
 }
 
 const SimpleIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxIcon className={cn('dd-w-14', className)} />
+  return <InboxArrowIcon className={cn('dd-w-14', className)} />
 }
 
 const DefaultIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxArrowIcon className={cn('dd-w-14', className)} />
+  return <InboxIcon className={cn('dd-w-14', className)} />
 }
 
 EmptyState.PRESENTED_IMAGE_SIMPLE = SimpleIcon

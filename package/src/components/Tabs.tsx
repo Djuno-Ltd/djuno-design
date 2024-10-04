@@ -115,31 +115,36 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
           listClassName,
         )}
       >
-        {options.map((option, i) => (
-          <Tab
-            key={i}
-            disabled={option.disabled}
-            data-testid={option.testId}
-            className={({ selected }) =>
-              cn('hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed', {
-                'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
-                  selected && (!tabType || tabType === 'default'),
-                'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
-                  tabType === 'creamy',
-                'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
-                  tabType === 'creamy' && selected,
-                'dd-text-gray-400 dark:dd-text-slate-400': !selected,
-              })
-            }
-          >
-            {(!tabType || tabType === 'default') && (
-              <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
-                <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
-              </div>
-            )}
-            {tabType === 'creamy' && <>{option.label}</>}
-          </Tab>
-        ))}
+        {options
+          .filter((option) => option.active !== true)
+          .map((option, i) => (
+            <Tab
+              key={i}
+              disabled={option.disabled}
+              data-testid={option.testId}
+              className={({ selected }) =>
+                cn(
+                  'hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed',
+                  {
+                    'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
+                      selected && (!tabType || tabType === 'default'),
+                    'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
+                      tabType === 'creamy',
+                    'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
+                      tabType === 'creamy' && selected,
+                    'dd-text-gray-400 dark:dd-text-slate-400': !selected,
+                  },
+                )
+              }
+            >
+              {(!tabType || tabType === 'default') && (
+                <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
+                  <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
+                </div>
+              )}
+              {tabType === 'creamy' && <>{option.label}</>}
+            </Tab>
+          ))}
       </TabList>
       <TabPanels>
         {options.map((option, i) => (

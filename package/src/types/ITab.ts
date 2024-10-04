@@ -38,6 +38,7 @@ export interface TabOption<T = undefined> {
   setting?: T
   disabled?: boolean
   testId?: string
+  active?: boolean
 }
 
 export type TabOptions<T = undefined> = Array<TabOption<T>>
