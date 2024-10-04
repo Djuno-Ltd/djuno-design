@@ -80,8 +80,7 @@ const Flex: React.FunctionComponent<FlexProps> = ({ children, direction, classNa
           '2xl:dd-flex-col-reverse': direction && typeof direction !== 'string' && direction['2xl'] === 'col-reverce',
 
           //justify
-          'dd-justify-start':
-            !justify || justify === 'start' || (typeof justify !== 'string' && justify?.default === 'start'),
+          'dd-justify-start': justify === 'start' || (typeof justify !== 'string' && justify?.default === 'start'),
           'dd-justify-end': justify === 'end' || (typeof justify !== 'string' && justify?.default === 'end'),
           'dd-justify-center': justify === 'center' || (typeof justify !== 'string' && justify?.default === 'center'),
           'dd-justify-between':
@@ -127,7 +126,7 @@ const Flex: React.FunctionComponent<FlexProps> = ({ children, direction, classNa
           '2xl:dd-justify-stretch': typeof justify !== 'string' && justify && justify['2xl'] === 'stretch',
 
           //items
-          'dd-items-start': !items || items === 'start' || (typeof items !== 'string' && items?.default === 'start'),
+          'dd-items-start': items === 'start' || (typeof items !== 'string' && items?.default === 'start'),
           'dd-items-end': items === 'end' || (typeof items !== 'string' && items?.default === 'end'),
           'dd-items-center': items === 'center' || (typeof items !== 'string' && items?.default === 'center'),
           'dd-items-baseline': items === 'baseline' || (typeof items !== 'string' && items?.default === 'baseline'),

@@ -30,6 +30,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 // import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -148,7 +149,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...inputProps
   } = props
 
-  const internalRef = React.useRef<HTMLInputElement>(null)
+  const innerId = React.useMemo(() => uuid(), [])
 
   const value = inputProps?.value
   const onChange = inputProps?.onChange
@@ -182,35 +183,37 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
-    let inputValue: string | undefined = ''
-    if (ref && 'current' in ref && ref.current) {
-      inputValue = ref.current.value
-    } else if (internalRef.current) {
-      inputValue = internalRef.current.value
-    } else if (typeof inputProps?.value === 'string') {
-      inputValue = inputProps.value
-    }
+    const input = window.document.getElementById(props.id || innerId) as HTMLInputElement
+    if (input) {
+      const inputValue = input.value
+      let textToCopy: string | number | null | undefined = ''
+      if (typeof copyable === 'function') {
+        textToCopy = copyable(inputValue)
+      } else {
+        textToCopy = inputValue
+      }
 
-    let textToCopy: string | number | null | undefined = ''
-    if (typeof copyable === 'function') {
-      textToCopy = copyable(inputValue)
-    } else {
-      textToCopy = inputValue
-    }
+      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+        copyToClipboard(textToCopy.toString()).then(() => {
+          setTooltipText(tooltipTexts[1])
+          setIcon(icons[1])
 
-    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy.toString()).then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-
-        // Revert back after some time
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 2000)
-      })
+          // Revert back after some time
+          setTimeout(() => {
+            setTooltipText(tooltipTexts[0])
+            setIcon(icons[0])
+          }, 2000)
+        })
+      }
     }
-  }, [copyable, tooltipTexts, icons, ref, inputProps?.value])
+    // if (ref && 'current' in ref && ref.current) {
+    //   inputValue = ref.current.value
+    // } else if (internalRef.current) {
+    //   inputValue = internalRef.current.value
+    // } else if (typeof inputProps?.value === 'string') {
+    //   inputValue = inputProps.value
+    // }
+  }, [copyable, tooltipTexts, icons, props.id, innerId])
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
@@ -265,8 +268,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </div>
         )}
         <input
-          id={props.id}
-          ref={ref || internalRef}
+          id={props.id || innerId}
+          ref={ref}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
