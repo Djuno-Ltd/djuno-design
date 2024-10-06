@@ -27,6 +27,7 @@ import { copyToClipboard } from '../../utils/copy'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import Loading from '../Loading'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation, additional styling options, and copyable functionality.
@@ -95,7 +96,11 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
     containerClassName,
     ...textareaProps
   } = props
-  const internalRef = React.useRef<HTMLTextAreaElement>(null)
+
+  const innerId = React.useMemo(() => uuid(), [])
+
+  const value = textareaProps?.value
+  const onChange = textareaProps?.onChange
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -127,36 +132,31 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
-    let inputValue = internalRef.current?.value
-    if (ref && 'current' in ref && ref.current) {
-      inputValue = ref.current.value
-    } else if (internalRef.current) {
-      inputValue = internalRef.current.value
-    } else if (typeof textareaProps?.value === 'string') {
-      inputValue = textareaProps.value
+    const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
+
+    if (input) {
+      let teatareaValue = input.value
+      let textToCopy: string | number | null | undefined = ''
+      if (typeof copyable === 'function') {
+        textToCopy = copyable(teatareaValue)
+      } else {
+        textToCopy = teatareaValue
+      }
+
+      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+        copyToClipboard(textToCopy.toString()).then(() => {
+          setTooltipText(tooltipTexts[1])
+          setIcon(icons[1])
+
+          // Revert back after some time
+          setTimeout(() => {
+            setTooltipText(tooltipTexts[0])
+            setIcon(icons[0])
+          }, 2000)
+        })
+      }
     }
-
-    let textToCopy: string | number | null | undefined = ''
-
-    if (typeof copyable === 'function') {
-      textToCopy = copyable(inputValue)
-    } else {
-      textToCopy = inputValue
-    }
-
-    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy.toString()).then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-
-        // Revert back after some time
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 2000)
-      })
-    }
-  }, [copyable, tooltipTexts, icons, ref, textareaProps?.value])
+  }, [copyable, tooltipTexts, icons, props.id, innerId])
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
@@ -204,8 +204,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
       </div>
       <div className='dd-relative dd-w-full'>
         <textarea
-          id={id}
-          ref={ref || internalRef}
+          id={props.id || innerId}
+          ref={ref}
+          value={value}
+          onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
               uiType,

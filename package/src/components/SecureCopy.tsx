@@ -104,7 +104,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
+        <div className={cn('dd-flex  dd-items-center dd-gap-1', className)}>
           <div
             className={cn(
               inputVariants({ uiSize }),
@@ -142,7 +142,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
       )}
 
       {type === 'copy' && (
-        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
+        <div className={cn('dd-flex  dd-items-center dd-gap-1', className)}>
           <Input
             className={cn(
               inputVariants({
@@ -153,8 +153,10 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
                 'dd-h-9': uiSize === 'medium' || uiSize === undefined,
                 'dd-h-11': uiSize === 'large',
               },
-              className,
+
+              textClassName,
             )}
+            containerClassName='dd-flex-1'
             value={text || ''}
             readOnly={true}
             {...props}

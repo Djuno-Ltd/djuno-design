@@ -51,6 +51,7 @@ function App() {
     setTimeout(() => setBtnLoading(false), 3000);
   };
   const [inputValue, setInputValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState("");
   const [swith, setSwitch] = useState(false);
 
   // Pagination states
@@ -613,17 +614,25 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
           </Text>
           <Flex className="gap-5 w-full mt-5">
             <Textarea
-              label="Texrarea"
-              placeholder="Enter custom notes if any"
-              required
-              error="field is required!"
+              label="Textarea"
+              loadingType="elastic"
+              value={textareaValue}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setTextareaValue(e.target.value)
+              }
+              error={textareaValue === "" ? "Field is required" : ""}
             />
-            <Input
-              label="Input"
-              placeholder="Enter custom notes if any"
-              required
-              error="field is required!"
-            />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input
+                label="Input"
+                loadingType="elastic"
+                value={inputValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
+                error={inputValue === "" ? "Field is required" : ""}
+              />
+            </Flex>
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
             Copyable without function:

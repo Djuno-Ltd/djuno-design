@@ -25,24 +25,8 @@ export interface PanelLayoutProps extends React.PropsWithChildren {
   style?: React.CSSProperties
   type?: PanelLayoutTypes
   pathname?: string
-  renderSidebar?: ({
-    segments,
-    isShowSidebar,
-    type,
-  }: {
-    segments: string[]
-    isShowSidebar: boolean
-    type: PanelLayoutTypes
-  }) => React.ReactNode
-  renderHeader?: ({
-    handleHideSidebar,
-    handleShowSidebar,
-    isShowSidebar,
-  }: {
-    handleHideSidebar: () => void
-    handleShowSidebar: () => void
-    isShowSidebar: boolean
-  }) => React.ReactNode
+  renderSidebar?: ({ segments, isShowSidebar, type }: SidebarRenderOptions) => React.ReactNode
+  renderHeader?: ({ handleHideSidebar, handleShowSidebar, isShowSidebar }: SidebarHeaderOptions) => React.ReactNode
   // containerRef?: React.MutableRefObject<HTMLDivElement>
   globalLoading?: boolean
   contentLoading?: boolean
@@ -64,4 +48,15 @@ export interface PanelSidebarProps extends React.PropsWithChildren {
   isShowSidebar?: boolean
   type?: PanelLayoutTypes
   sidebarHeader?: React.ReactNode
+}
+
+export interface SidebarRenderOptions {
+  segments: string[]
+  isShowSidebar: boolean
+  type: PanelLayoutTypes
+}
+export interface SidebarHeaderOptions {
+  handleHideSidebar: () => void
+  handleShowSidebar: () => void
+  isShowSidebar: boolean
 }

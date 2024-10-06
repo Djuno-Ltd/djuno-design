@@ -95,7 +95,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
           <MenuItems
             anchor={anchor}
             className={cn(
-              'dd-absolute dd-z-50 dd-mt-1 dd-max-h-60 dd-w-48 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm dd-divide-y dd-divide-dark-100 dark:dd-divide-dark-600',
+              'dd-absolute dd-z-50 dd-mt-1 dd-max-h-60 dd-w-48 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm dd-divide-y dd-divide-dark-100 dark:dd-divide-dark-600',
               {
                 [itemsClassName || '']: itemsClassName,
               },
