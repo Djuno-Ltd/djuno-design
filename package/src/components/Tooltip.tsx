@@ -22,7 +22,7 @@ import * as React from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { uuid } from '../utils/uuid'
 import { cn } from '../utils/cn'
-import { TooltipProps } from '../types'
+import { TooltipComponents, TooltipProps } from '../types'
 import { cva } from 'class-variance-authority'
 import { ReactComponent as TooltipIcon } from './../assets/icons/question-mark-circle.svg'
 
@@ -70,7 +70,19 @@ const tooltipVariants = cva('dd-text-white dd-max-w-[250px] !dd-px-2 !dd-py-1 !d
  *   <span>Click me</span>
  * </Tooltip>
  */
-const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, clickable, place, theme, className }) => {
+// eslint-disable-next-line react/prop-types
+const Tooltip: React.FC<TooltipProps> & TooltipComponents = ({ children, ...props }): React.ReactNode => {
+  return <BaseTooltip {...props}>{children}</BaseTooltip>
+}
+
+const BaseTooltip: React.FunctionComponent<TooltipProps> = ({
+  children,
+  content,
+  clickable,
+  place,
+  theme,
+  className,
+}) => {
   if (!content) {
     return children
   }
@@ -90,14 +102,13 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, cli
   )
 }
 
-const InfoTooltip: React.FC<{ tooltip?: TooltipProps }> = ({ tooltip }) => {
+const InfoTooltip: React.FC<TooltipProps> = (props) => {
   return (
-    <Tooltip {...tooltip}>
+    <Tooltip {...props}>
       <TooltipIcon className='dd-w-4 dd-text-slate-500 dark:dd-text-slate-300 dark:hover:dd-text-slate-100' />
     </Tooltip>
   )
 }
 
-//TODO: <Tooltip.Info />
-export { InfoTooltip }
+Tooltip.Info = InfoTooltip
 export default Tooltip

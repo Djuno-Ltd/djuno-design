@@ -407,7 +407,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card title="Tag">
           <Flex direction="col" className="gap-5">
-            <Flex className="gap-2 w-full">
+            <Flex direction="col" className="gap-2 w-full">
               <Tag>Default Tag</Tag>
               <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
               <Tag closable>Closable Tag</Tag>
@@ -1611,6 +1611,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
+            <Tooltip.Info content="I'm an info tooltip" />
           </Flex>
         </Card>
 

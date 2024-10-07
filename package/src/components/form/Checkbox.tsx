@@ -25,7 +25,7 @@ import { AnimatedFormError, labelVariants } from './Input'
 import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react'
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 import Typography from './../Typography'
-import { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
 
 /**
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
@@ -141,7 +141,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
               *
             </Typography.Text>
           )}
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          {tooltip && <Tooltip.Info {...tooltip} />}
         </Label>
       </Field>
       <AnimatedFormError error={error} />
