@@ -41,3 +41,7 @@ export interface TooltipProps extends PropsWithChildren {
   theme?: TooltipThemeTypes
   className?: string
 }
+
+export interface TooltipComponents {
+  Info: React.FC<TooltipProps>
+}

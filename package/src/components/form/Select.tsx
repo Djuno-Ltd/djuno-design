@@ -25,7 +25,7 @@ import { cn } from '../../utils/cn'
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
 import Loading from '../Loading'
 import EmptyState from '../EmptyState'
-import { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import { ReactComponent as ChevronUpDownIcon } from './../../assets/icons/chevron-up-down.svg'
 import { ReactComponent as ClearIcon } from './../../assets/icons/close.svg'
@@ -182,7 +182,7 @@ const Select = <ExtraDataType extends string>({
               *
             </Typography.Text>
           )}
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          {tooltip && <Tooltip.Info {...tooltip} />}
         </label>
         {hint && <span className='dd-text-xs dd-mb-1 dd-text-slate-500'>{hint}</span>}
       </div>
@@ -339,7 +339,7 @@ const MultiSelect = <ExtraDataType extends string>({
               *
             </Typography.Text>
           )}
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          {tooltip && <Tooltip.Info {...tooltip} />}
         </label>
         {hint && <span className='dd-text-xs dd-mb-1 dd-text-slate-500'>{hint}</span>}
       </div>
@@ -436,12 +436,7 @@ const MultiSelect = <ExtraDataType extends string>({
               )}
             </ListboxOption>
           ))}
-          {options.length === 0 && (
-            <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
-              textClassName='font-normal dd-text-xs'
-            />
-          )}
+          {options.length === 0 && <EmptyState textClassName='font-normal dd-text-xs' />}
         </ListboxOptions>
       </Listbox>
       <AnimatedFormError error={error} />

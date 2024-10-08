@@ -23,7 +23,7 @@ import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
-import Tooltip, { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -248,7 +248,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             </Typography.Text>
           )}
 
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          {tooltip && <Tooltip.Info {...tooltip} />}
         </label>
 
         {hint && <span className='dd-text-[11px] dd-text-slate-500'>{hint}</span>}

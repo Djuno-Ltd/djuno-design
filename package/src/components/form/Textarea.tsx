@@ -22,7 +22,7 @@ import { cn } from './../../utils/cn'
 import { TextareaProps } from './../../types/ITexrarea'
 import { AnimatedFormError, inputVariants, labelVariants } from './Input'
 import Typography from '../Typography'
-import Tooltip, { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
 import { copyToClipboard } from '../../utils/copy'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
@@ -135,7 +135,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
     const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
 
     if (input) {
-      let teatareaValue = input.value
+      const teatareaValue = input.value
       let textToCopy: string | number | null | undefined = ''
       if (typeof copyable === 'function') {
         textToCopy = copyable(teatareaValue)
@@ -186,7 +186,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
             </Typography.Text>
           )}
           <div className='dd-flex dd-items-center dd-gap-1'>
-            {tooltip && <InfoTooltip tooltip={tooltip} />}
+            {tooltip && <Tooltip.Info {...tooltip} />}
             {typeof copyable !== 'undefined' && (
               <div
                 onClick={handleCopyToClipboard}
@@ -231,4 +231,5 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
   )
 })
 
+Textarea.displayName = 'Textarea'
 export default Textarea

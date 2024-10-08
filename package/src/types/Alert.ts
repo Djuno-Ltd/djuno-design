@@ -28,6 +28,8 @@ export interface AlertProps {
   banner?: boolean
   className?: string
   children?: React.ReactNode
+  closable?: boolean
+  onClose?: () => void
 }
 
 export type AlertTypes = 'neutral' | 'success' | 'info' | 'warning' | 'error'

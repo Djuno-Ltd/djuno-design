@@ -42,7 +42,6 @@ import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
-import { InfoTooltip } from "djuno-design/dist/components/Tooltip";
 
 const { Text, Title, Paragraph, Link } = Typography;
 function App() {
@@ -408,7 +407,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card title="Tag">
           <Flex direction="col" className="gap-5">
-            <Flex className="gap-2 w-full">
+            <Flex direction="col" className="gap-2 w-full">
               <Tag>Default Tag</Tag>
               <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
               <Tag closable>Closable Tag</Tag>
@@ -564,12 +563,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <JsonViewer value={exampleJson} />
           </Flex>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <JsonViewer
-              value={exampleJson}
-              collapsed={1}
-              style={{ border: "1px solid gray" }}
-              copyable={true}
-            />
+            <JsonViewer value={exampleJson} collapsed={1} copyable={true} />
           </Flex>
         </Card>
 
@@ -1472,6 +1466,15 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 </Text>
               </Flex>
             </Alert>
+            <Text strong size="sm" className="mt-4">
+              closeable
+            </Text>
+            <Alert
+              uiType="info"
+              closable
+              message="closeable alert"
+              description="This is a description"
+            />
           </Flex>
         </Card>
 
@@ -1620,7 +1623,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
-            <InfoTooltip />
+            <Tooltip.Info content="I'm an info tooltip" />
           </Flex>
         </Card>
 
