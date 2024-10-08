@@ -42,6 +42,7 @@ import { useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
+import { InfoTooltip } from "djuno-design/dist/components/Tooltip";
 
 const { Text, Title, Paragraph, Link } = Typography;
 function App() {
@@ -561,6 +562,14 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <JsonViewer value={exampleJson} />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <JsonViewer
+              value={exampleJson}
+              collapsed={1}
+              style={{ border: "1px solid gray" }}
+              copyable={true}
+            />
           </Flex>
         </Card>
 
@@ -1611,6 +1620,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
+            <InfoTooltip />
           </Flex>
         </Card>
 
