@@ -1463,6 +1463,15 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 </Text>
               </Flex>
             </Alert>
+            <Text strong size="sm" className="mt-4">
+              closeable
+            </Text>
+            <Alert
+              uiType="info"
+              closable
+              message="closeable alert"
+              description="This is a description"
+            />
           </Flex>
         </Card>
 
