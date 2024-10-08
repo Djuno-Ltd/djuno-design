@@ -223,13 +223,15 @@ function App() {
 
 ### Alert
 
-| Name        | Type                | Required | default | Description               |
-| ----------- | ------------------- | -------- | ------- | ------------------------- |
-| message     | `string, ReactNode` |          |         |                           |
-| description | `string, ReactNode` |          |         |                           |
-| uiType      | `AlertTypes`        |          | neutral |                           |
-| showIcon    | `boolean`           |          | false   |                           |
-| banner      | `boolean`           |          | false   | Display Alert as a banner |
+| Name        | Type                | Required | default   | Description                                              |
+| ----------- | ------------------- | -------- | --------- | -------------------------------------------------------- |
+| message     | `string, ReactNode` |          |           |                                                          |
+| description | `string, ReactNode` |          |           |                                                          |
+| uiType      | `AlertTypes`        |          | `neutral` |                                                          |
+| showIcon    | `boolean`           |          | `false`   |                                                          |
+| banner      | `boolean`           |          | `false`   | Display Alert as a banner                                |
+| closable    | `boolean`           |          | `false`   | If true, the alert can be closed (disappears on click).  |
+| onClose     | `() => void`        |          |           | Callback function to be called when the alert is closed. |
 
 ### Steps
 

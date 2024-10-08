@@ -436,12 +436,7 @@ const MultiSelect = <ExtraDataType extends string>({
               )}
             </ListboxOption>
           ))}
-          {options.length === 0 && (
-            <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
-              textClassName='font-normal dd-text-xs'
-            />
-          )}
+          {options.length === 0 && <EmptyState textClassName='font-normal dd-text-xs' />}
         </ListboxOptions>
       </Listbox>
       <AnimatedFormError error={error} />
