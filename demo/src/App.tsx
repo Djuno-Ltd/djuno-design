@@ -562,6 +562,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
           <Flex direction="col" className="gap-5 w-full mt-5">
             <JsonViewer value={exampleJson} />
           </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <JsonViewer value={exampleJson} collapsed={1} copyable={true} />
+          </Flex>
         </Card>
 
         <Card title="Textarea">

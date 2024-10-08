@@ -57,7 +57,7 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  *
  *
  */
-const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed }) => {
+const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed, style, copyable }) => {
   const {
     theme: { mode },
   } = useDjunoDesign({ stric: false })
@@ -70,9 +70,9 @@ const JsonViewer: React.FunctionComponent<JsonViewerProps> = ({ value, collapsed
 
   return (
     <JsonView
-      style={currentTheme}
+      style={{ ...currentTheme, ...style }}
       value={value || {}}
-      enableClipboard={false}
+      enableClipboard={copyable !== undefined ? copyable : false}
       displayDataTypes={false}
       shortenTextAfterLength={20}
       collapsed={collapsed !== undefined ? collapsed : 2}
