@@ -69,59 +69,6 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  * }
  */
 
-// const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName, panelClassName, loading, uiType }) => {
-//   return (
-//     <div className={cn(accordionVariants({ uiType }), className)}>
-//       {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
-//       {items?.map((item, i) => (
-//         <Disclosure key={i}>
-//           {({ open }) => (
-//             <>
-//               <DisclosureButton
-//                 className={cn(
-//                   'dd-flex dd-w-full dd-justify-between dd-items-center dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-black dark:dd-text-white hover:dd-bg-secondary-200 dark:hover:dd-bg-dark-750',
-//                   {
-//                     'dd-bg-secondary-300 dark:dd-bg-dark-700': uiType === 'default',
-
-//                     'dd-border dark:dd-border-dark-700 dd-bg-transparent ': uiType === 'transparent',
-//                   },
-//                   labelClassName,
-//                 )}
-//               >
-//                 {item.label}
-//                 {item.panel && (
-//                   <ChevronDownIcon
-//                     className={cn(
-//                       'dd-h-4 dd-w-4 dd-text-dark-500 dark:dd-text-secondary-300 dd-transform dd-transition-transform dd-duration-300',
-//                       {
-//                         'dd-rotate-180': open,
-//                       },
-//                     )}
-//                   />
-//                 )}
-//               </DisclosureButton>
-//               {item.panel && (
-//                 <DisclosurePanel
-//                   className={cn(
-//                     'dd-p-3 dd-text-black dark:dd-text-white ',
-//                     {
-//                       'dd-bg-secondary-100 dark:dd-bg-dark-800 ': uiType === 'default',
-
-//                       'dd-border dark:dd-border-700 dd-bg-transparent': uiType === 'transparent',
-//                     },
-//                     panelClassName,
-//                   )}
-//                 >
-//                   {item.panel}
-//                 </DisclosurePanel>
-//               )}
-//             </>
-//           )}
-//         </Disclosure>
-//       ))}
-//     </div>
-//   )
-// }
 const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName, panelClassName, loading, uiType }) => {
   return (
     <div className={cn(accordionVariants({ uiType }), className)}>
