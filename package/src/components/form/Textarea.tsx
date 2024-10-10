@@ -218,7 +218,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
             className,
           )}
           placeholder={placeholder}
-          {...props}
+          {...textareaProps}
         />
         {loading && (
           <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>

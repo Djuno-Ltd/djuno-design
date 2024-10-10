@@ -61,9 +61,9 @@ function App() {
   };
   const [modal, setModal] = useState(false);
 
-  const selectOptions: SelectOption<string>[] = [
-    { label: "option 1", value: "option1" },
-    { label: "option 2", value: "option2" },
+  const selectOptions: SelectOption<{ name: string }>[] = [
+    { label: "option 1", value: "option1", extraData: { name: "1" } },
+    { label: "option 2", value: "option2", extraData: { name: "2" } },
   ];
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value

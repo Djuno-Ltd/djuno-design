@@ -118,7 +118,8 @@ const listboxVariants = cva(
  *   clearable={true}
  * />
  */
-const Select = <ExtraDataType extends string>({
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
+const Select = <ExtraDataType extends unknown>({
   id,
   className,
   labelClassName,
@@ -275,12 +276,7 @@ const Select = <ExtraDataType extends string>({
               )}
             </ListboxOption>
           ))}
-          {options.length === 0 && (
-            <EmptyState
-              icon={<EmptyState.PRESENTED_IMAGE_SIMPLE className='dd-w-9' />}
-              textClassName='dd-font-normal dd-text-xs'
-            />
-          )}
+          {options.length === 0 && <EmptyState textClassName='dd-font-normal dd-text-xs' />}
         </ListboxOptions>
       </Listbox>
       <AnimatedFormError error={error} />
@@ -288,7 +284,8 @@ const Select = <ExtraDataType extends string>({
   )
 }
 
-const MultiSelect = <ExtraDataType extends string>({
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
+const MultiSelect = <ExtraDataType extends unknown>({
   id,
   className,
   buttonClassName,
