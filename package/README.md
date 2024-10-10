@@ -415,6 +415,7 @@ function App() {
 | items           | `AccordionItem[]` |          |         |             |
 | panelClassNames | `string`          |          |         |             |
 | loading         | `boolean`         |          |         |             |
+| uiType          | `AccordinType`    |          | default |             |
 
 ### Pagination
 

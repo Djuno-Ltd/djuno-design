@@ -28,12 +28,12 @@ import { cva } from 'class-variance-authority'
 const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
   variants: {
     uiType: {
-      default: ' dd-border-0', // Default styles for the accordion
-      transparent: 'dd-border dd-border-secondary-200 dark:dd-border-dark-700 dd-bg-transparent', // Transparent with border
+      default: ' dd-border-0',
+      transparent: 'dd-border dd-border-secondary-200 dark:dd-border-dark-700 dd-bg-transparent',
     },
   },
   defaultVariants: {
-    uiType: 'default', // Default type is `default`
+    uiType: 'default',
   },
 })
 
@@ -64,6 +64,7 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  *         { label: "Item 2", panel: "Panel content for item 2" }
  *       ]}
  *       loading={false}
+ *       uiType="default"
  *     />
  *   );
  * }

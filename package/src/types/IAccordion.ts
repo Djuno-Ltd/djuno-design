@@ -26,10 +26,11 @@ export interface AccordionProps extends PropsWithChildren {
   panelClassName?: string
   labelClassName?: string
   loading?: boolean
-  uiType?: 'default' | 'transparent'
+  uiType?: AccordinType
 }
 
 export type AccordionItem = {
   label: string | React.ReactNode
   panel?: string | React.ReactNode
 }
+export type AccordinType = 'default' | 'transparent'
