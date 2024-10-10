@@ -26,6 +26,7 @@ export interface AccordionProps extends PropsWithChildren {
   panelClassName?: string
   labelClassName?: string
   loading?: boolean
+  uiType?: 'default' | 'transparent'
 }
 
 export type AccordionItem = {
