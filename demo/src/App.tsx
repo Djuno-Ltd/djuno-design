@@ -803,8 +803,10 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 { label: <Switcher />, panel: <div>Panel Content 1</div> },
                 { label: "Item 2", panel: <div>Panel Content 2</div> },
               ]}
-              uiType="transparent" // Will apply the transparent style with just a border
+              uiType="transparent"
             />
+
+            <Accordion items={[]} loading />
           </Flex>
         </Card>
 
@@ -1630,7 +1632,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
-            <Tooltip.Info content="I'm an info tooltip" />
+            <Tooltip.Info content="I'm an <Tooltip.Info/>" />
+            <Tooltip.Error content="I'm an <Tooltip.Error/>" />
           </Flex>
         </Card>
 
