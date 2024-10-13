@@ -26,6 +26,7 @@ import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react'
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 import Typography from './../Typography'
 import Tooltip from '../Tooltip'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
@@ -67,26 +68,42 @@ import Tooltip from '../Tooltip'
  *   );
  * }
  */
-const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
-  id,
-  label,
-  error,
-  required,
-  tooltip,
-  value,
-  onChange,
-  disabled,
-  labelClassName,
-}) => {
-  const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
+const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
+  const {
+    id,
+    label,
+    error,
+    required,
+    tooltip,
+    checkboxValue,
+    checkboxOnChange,
+    disabled,
+    labelClassName,
+    ...checkboxProps
+  } = props
+
+  // const innerId = React.useMemo(() => uuid(), [])
+  const innerId = React.useMemo(() => id || uuid(), [id])
+
+  const value = checkboxProps?.value
+  const onChange = checkboxProps?.onChange
+
+  const [checkedState, setCheckedState] = React.useState<boolean>(checkboxValue || false)
 
   React.useEffect(() => {
-    setCheckedState(value || false)
-  }, [value])
+    setCheckedState(checkboxValue || false)
+  }, [checkboxValue])
 
-  const handleChange = (v: boolean) => {
+  // const handleChange = (v: boolean) => {
+  //   if (!disabled) {
+  //     checkboxOnChange && checkboxOnChange(v)
+  //   }
+  // }
+  const handleChange = () => {
     if (!disabled) {
-      onChange && onChange(v)
+      const newCheckedState = !checkedState
+      setCheckedState(newCheckedState)
+      checkboxOnChange && checkboxOnChange(newCheckedState)
     }
   }
 
@@ -94,6 +111,9 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
     <div className='dd-flex dd-flex-col dd-gap-1'>
       <Field className='dd-flex dd-items-center dd-gap-2'>
         <HeadlessCheckbox
+          id={innerId}
+          ref={ref}
+          value={value}
           checked={checkedState}
           onChange={handleChange}
           className={cn(
@@ -119,7 +139,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
           />
         </HeadlessCheckbox>
         <Label
-          htmlFor={id}
+          htmlFor={innerId}
           className={cn(
             'dd-flex dd-items-center dd-cursor-pointer',
             labelVariants({
@@ -147,6 +167,6 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
       <AnimatedFormError error={error} />
     </div>
   )
-}
+})
 
 export default Checkbox
