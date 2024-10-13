@@ -92,10 +92,20 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
     }
   }, [options, location.pathname, propsSelectedIndex])
 
-  const onChangeTab = (i: number) => {
+  // const onChangeTab = (i: number, options: TabOptions) => {
+  //   const selectedOption = getTabOptionFromIndex(i, options)
+  //   if (onChange) {
+  //     onChange(selectedOption)
+  //   }
+  //   if (navigator) {
+  //     navigator(selectedOption?.url)
+  //   }
+  //   setSelectedIndex(i)
+  // }
+  const onChangeTab = (i: number, options: TabOptions) => {
     const selectedOption = getTabOptionFromIndex(i, options)
     if (onChange) {
-      onChange(selectedOption)
+      onChange({ option: selectedOption, index: i })
     }
     if (navigator) {
       navigator(selectedOption?.url)
@@ -104,7 +114,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   }
 
   return (
-    <TabGroup selectedIndex={selectedIndex} onChange={onChangeTab}>
+    <TabGroup selectedIndex={selectedIndex} onChange={(i) => onChangeTab(i, options)}>
       <TabList
         className={cn(
           'dd-flex dd-overflow-x-auto',

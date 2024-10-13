@@ -789,7 +789,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Accordion
               items={[
                 {
-                  label: "Filters",
+                  label: <Switcher />,
                   panel: (
                     <div className="">
                       <Input value="djuno-design" />
@@ -797,6 +797,13 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   ),
                 },
               ]}
+            />
+            <Accordion
+              items={[
+                { label: <Switcher />, panel: <div>Panel Content 1</div> },
+                { label: "Item 2", panel: <div>Panel Content 2</div> },
+              ]}
+              uiType="transparent" // Will apply the transparent style with just a border
             />
           </Flex>
         </Card>
@@ -1027,7 +1034,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
           </Flex>
         </Card>
 
-        <Card title="Swither">
+        <Card title="Switcher">
           <Flex direction="col" className="gap-5">
             <div>
               <Text>sizes:</Text>
