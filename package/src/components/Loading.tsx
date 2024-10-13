@@ -20,7 +20,7 @@
 
 import * as React from 'react'
 import { cn } from '../utils/cn'
-import { LoadingProps, LoadingType } from '../types'
+import { LoadingProps } from '../types'
 
 /**
  * Loading component that displays a loading indicator based on the specified type and theme.

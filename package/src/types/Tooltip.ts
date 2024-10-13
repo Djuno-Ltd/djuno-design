@@ -44,4 +44,5 @@ export interface TooltipProps extends PropsWithChildren {
 
 export interface TooltipComponents {
   Info: React.FC<TooltipProps>
+  Error: React.FC<TooltipProps>
 }

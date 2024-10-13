@@ -24,7 +24,8 @@ import { uuid } from '../utils/uuid'
 import { cn } from '../utils/cn'
 import { TooltipComponents, TooltipProps } from '../types'
 import { cva } from 'class-variance-authority'
-import { ReactComponent as TooltipIcon } from './../assets/icons/question-mark-circle.svg'
+import { ReactComponent as InfoIcon } from './../assets/icons/question-mark-circle.svg'
+import { ReactComponent as ErrorIcon } from './../assets/icons/exclamation-circle-outline.svg'
 
 /**
  * Define button variants using the `cva` utility function.
@@ -105,10 +106,20 @@ const BaseTooltip: React.FunctionComponent<TooltipProps> = ({
 const InfoTooltip: React.FC<TooltipProps> = (props) => {
   return (
     <Tooltip {...props}>
-      <TooltipIcon className='dd-w-4 dd-text-slate-500 dark:dd-text-slate-300 dark:hover:dd-text-slate-100' />
+      <InfoIcon className='dd-w-4 dd-text-slate-500 dark:dd-text-slate-300 dark:hover:dd-text-slate-100' />
+    </Tooltip>
+  )
+}
+
+const ErrorTooltip: React.FC<TooltipProps> = (props) => {
+  return (
+    <Tooltip {...props} theme='error'>
+      <ErrorIcon className='dd-w-4 dd-text-red-500 hover:dd-text-red-700 dark:dd-text-red-500 dark:hover:dd-text-red-700' />
     </Tooltip>
   )
 }
 
 Tooltip.Info = InfoTooltip
+Tooltip.Error = ErrorTooltip
+
 export default Tooltip

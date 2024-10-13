@@ -24,6 +24,7 @@ import { AccordionProps } from '../types/IAccordion'
 import Loading from './Loading'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { cva } from 'class-variance-authority'
+import Flex from './Flex'
 
 const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
   variants: {
@@ -46,6 +47,7 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  * @param {string} [props.panelClassName] - Additional panelClassNames to apply to the accordion.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the accordion, each with a label and optional panel content.
  * @param {boolean} [props.loading] - Indicates if the accordion is in a loading state.
+ * @param {boolean} [props.loadingSetting] - Loading settings.
  * @param {string} [props.labelClassName] - Additional CSS classes to apply custom styles to the label.
  * @returns {React.ReactNode} Rendered Accordion component.
  *
@@ -70,10 +72,28 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  * }
  */
 
-const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName, panelClassName, loading, uiType }) => {
+const Accordion: React.FC<AccordionProps> = ({
+  items,
+  className,
+  labelClassName,
+  panelClassName,
+  loading,
+  loadingSetting,
+  uiType,
+}) => {
   return (
     <div className={cn(accordionVariants({ uiType }), className)}>
-      {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
+      {items?.length === 0 && loading && (
+        <Flex items='center' justify='center' className='dd-min-h-[100px]'>
+          <Loading
+            borderSize={loadingSetting?.borderSize || 2}
+            uiType={loadingSetting?.uiType || 'simple'}
+            uiSize={loadingSetting?.uiSize || 24}
+            theme={loadingSetting?.theme || 'primary'}
+            className={loadingSetting?.className}
+          />
+        </Flex>
+      )}
       {items?.map((item, i) => (
         <Disclosure key={i}>
           {({ open }) => (

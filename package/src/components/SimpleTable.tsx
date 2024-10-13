@@ -57,6 +57,7 @@ const SimpleTable: React.FC<React.PropsWithChildren<SimpletableProps>> & TableCo
   containerClassName,
   children,
   loading,
+  loadingSetting,
 }) => {
   const testLoading = false
   return (
@@ -79,7 +80,13 @@ const SimpleTable: React.FC<React.PropsWithChildren<SimpletableProps>> & TableCo
             exit={{ opacity: 0 }}
             className='dd-absolute dd-w-full dd-h-full dd-top-0 dd-left-0 dd-bg-gray-400/10 dark:dd-bg-gray-800/10 dd-backdrop-blur-[1.1px] dd-flex dd-justify-center dd-items-center'
           >
-            <Loading uiType={'simple'} borderSize={2.3} theme={'primary'} />
+            <Loading
+              borderSize={loadingSetting?.borderSize || 2}
+              uiType={loadingSetting?.uiType || 'simple'}
+              uiSize={loadingSetting?.uiSize || 24}
+              theme={loadingSetting?.theme || 'primary'}
+              className={loadingSetting?.className}
+            />
           </motion.div>
         )}
       </AnimatePresence>

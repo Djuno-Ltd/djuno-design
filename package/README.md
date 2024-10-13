@@ -43,7 +43,8 @@ function App() {
 1.  Button
 2.  Tooltip
 
-    - InfoTooltip
+    - Tooltip.Info
+    - Tooltip.Error
 
 3.  Loading
 4.  Flex
@@ -122,6 +123,8 @@ function App() {
 | loadingType | `LoadingType`  |          | simple    |             |
 
 ### Tooltip
+
+#### Tooltip , Tooltip.Info , Tooltip.Error
 
 | Name      | Type                | Required | default | Description |
 | --------- | ------------------- | -------- | ------- | ----------- |
@@ -326,10 +329,12 @@ function App() {
 
 ### SimpleTable
 
-| Name               | Type     | Required | default | Description |
-| ------------------ | -------- | -------- | ------- | ----------- |
-| className          | `string` |          |         |             |
-| containerClassName | `string` |          |         |             |
+| Name               | Type           | Required | default | Description |
+| ------------------ | -------------- | -------- | ------- | ----------- |
+| className          | `string`       |          |         |             |
+| containerClassName | `string`       |          |         |             |
+| loading            | boolean        |          | false   |             |
+| loadingSetting     | `LoadingProps` |          |         |             |
 
 #### SimpleTable.Row
 
@@ -414,7 +419,8 @@ function App() {
 | --------------- | ----------------- | -------- | ------- | ----------- |
 | items           | `AccordionItem[]` |          |         |             |
 | panelClassNames | `string`          |          |         |             |
-| loading         | `boolean`         |          |         |             |
+| loading         | `boolean`         |          | false   |             |
+| loadingSetting  | `LoadingProps`    |          |         |             |
 | uiType          | `AccordinType`    |          | default |             |
 
 ### Pagination
