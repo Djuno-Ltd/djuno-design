@@ -1624,8 +1624,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
-            <Tooltip.Info content="I'm an <Tooltip.Info/>" />
-            <Tooltip.Error content="I'm an <Tooltip.Error/>" />
+            <Tooltip.Info content="I'm a <Tooltip.Info/>" />
+            <Tooltip.Error content="I'm a <Tooltip.Error/>" />
           </Flex>
         </Card>
 
