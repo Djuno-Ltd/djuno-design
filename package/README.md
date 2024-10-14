@@ -415,13 +415,13 @@ function App() {
 
 ### Accordion
 
-| Name            | Type              | Required | default | Description |
-| --------------- | ----------------- | -------- | ------- | ----------- |
-| items           | `AccordionItem[]` |          |         |             |
-| panelClassNames | `string`          |          |         |             |
-| loading         | `boolean`         |          | false   |             |
-| loadingSetting  | `LoadingProps`    |          |         |             |
-| uiType          | `AccordinType`    |          | default |             |
+| Name           | Type              | Required | default | Description |
+| -------------- | ----------------- | -------- | ------- | ----------- |
+| items          | `AccordionItem[]` |          |         |             |
+| panelClassName | `string`          |          |         |             |
+| loading        | `boolean`         |          | false   |             |
+| loadingSetting | `LoadingProps`    |          |         |             |
+| uiType         | `AccordinType`    |          | default |             |
 
 ### Pagination
 

@@ -43,8 +43,8 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  *
  * @param {object} props - Accordion props.
  * @param {React.ReactNode} [props.children] - The content inside the accordion.
- * @param {string} [props.classNames] - Additional classNames to apply to the accordion container.
- * @param {string} [props.panelClassName] - Additional panelClassNames to apply to the accordion.
+ * @param {string} [props.className] - Additional className to apply to the accordion container.
+ * @param {string} [props.panelClassName] - Additional panelClassName to apply to the accordion.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the accordion, each with a label and optional panel content.
  * @param {boolean} [props.loading] - Indicates if the accordion is in a loading state.
  * @param {boolean} [props.loadingSetting] - Loading settings.
