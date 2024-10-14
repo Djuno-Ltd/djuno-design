@@ -433,8 +433,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               <Flex direction="col">
                 <Checkbox
                   label="Ckeckbox simple form"
-                  checkboxValue={isChecked}
-                  checkboxOnChange={setIsChecked}
+                  value={isChecked}
+                  onChange={setIsChecked}
                 />
               </Flex>
             </Flex>
@@ -442,49 +442,41 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox disabled form"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 disabled
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox required form"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 required
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with tooltip"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 tooltip={{ content: "it's a tooltip" }}
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with text error"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 error="error"
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with error"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 error={true}
-              />
-            </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with custom label"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
-                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>

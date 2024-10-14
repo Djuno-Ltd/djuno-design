@@ -31,8 +31,8 @@ const Header = () => {
 
       <Flex items="center" className="gap-3">
         <Checkbox
-          checkboxValue={mode === "dark"}
-          checkboxOnChange={handleChangeTheme}
+          value={mode === "dark"}
+          onChange={handleChangeTheme}
           label="dark mode"
         />
         <Link
