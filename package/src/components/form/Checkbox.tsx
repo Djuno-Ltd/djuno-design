@@ -26,7 +26,6 @@ import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react'
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 import Typography from './../Typography'
 import Tooltip from '../Tooltip'
-import { uuid } from '../../utils/uuid'
 
 /**
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
@@ -68,44 +67,33 @@ import { uuid } from '../../utils/uuid'
  *   );
  * }
  */
-const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const {
-    id,
-    label,
-    error,
-    required,
-    tooltip,
-    checkboxValue,
-    checkboxOnChange,
-    disabled,
-    labelClassName,
-    ...checkboxProps
-  } = props
-
-  const innerId = React.useMemo(() => uuid(), [])
-  const value = checkboxProps?.value
-
-  const [checkedState, setCheckedState] = React.useState<boolean>(checkboxValue || false)
+const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
+  id,
+  label,
+  error,
+  required,
+  tooltip,
+  value,
+  onChange,
+  disabled,
+  labelClassName,
+}) => {
+  const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
   React.useEffect(() => {
-    setCheckedState(checkboxValue || false)
-  }, [checkboxValue])
+    setCheckedState(value || false)
+  }, [value])
 
-  const handleChange = () => {
+  const handleChange = (v: boolean) => {
     if (!disabled) {
-      const newCheckedState = !checkedState
-      setCheckedState(newCheckedState)
-      checkboxOnChange && checkboxOnChange(newCheckedState)
+      onChange && onChange(v)
     }
   }
 
   return (
     <div className='dd-flex dd-flex-col dd-gap-1'>
-      <Field className='dd-flex dd-items-start dd-gap-2'>
+      <Field className='dd-flex dd-items-center dd-gap-2'>
         <HeadlessCheckbox
-          id={innerId}
-          ref={ref}
-          value={value}
           checked={checkedState}
           onChange={handleChange}
           className={cn(
@@ -131,17 +119,17 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
           />
         </HeadlessCheckbox>
         <Label
-          htmlFor={innerId}
+          htmlFor={id}
           className={cn(
-            'dd-flex dd-items-start dd-cursor-pointer',
+            'dd-flex dd-items-center dd-cursor-pointer',
             labelVariants({
               hasError: error ? 'yes' : 'no',
             }),
             {
-              ' dd-cursor-not-allowed': disabled,
+              ' dd-cursor-not-allowed dd-opacity-80 dark:dd-opacity-65': disabled,
             },
-            labelClassName,
             'dd-whitespace-normal dd-break-words dd-flex-1',
+            labelClassName,
           )}
         >
           {label && (
@@ -160,6 +148,6 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
       <AnimatedFormError error={error} />
     </div>
   )
-})
+}
 
 export default Checkbox

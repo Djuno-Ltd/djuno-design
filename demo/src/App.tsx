@@ -61,9 +61,9 @@ function App() {
   };
   const [modal, setModal] = useState(false);
 
-  const selectOptions: SelectOption<{ name: string }>[] = [
-    { label: "option 1", value: "option1", extraData: { name: "1" } },
-    { label: "option 2", value: "option2", extraData: { name: "2" } },
+  const selectOptions: SelectOption<string>[] = [
+    { label: "option 1", value: "option1" },
+    { label: "option 2", value: "option2" },
   ];
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
@@ -432,9 +432,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex className="gap-5 w-full">
               <Flex direction="col">
                 <Checkbox
-                  label="Ckeckbox simple form Ckeckbox simple form Ckeckbox simple formCkeckbox simple formCkeckbox simple form formCkeckbox simple form"
-                  checkboxValue={isChecked}
-                  checkboxOnChange={setIsChecked}
+                  label="Ckeckbox simple form Ckeckbox simple form Ckeckbox simple formCkeckbox simple form Ckeckbox simple form"
+                  value={isChecked}
+                  onChange={setIsChecked}
                 />
               </Flex>
             </Flex>
@@ -442,48 +442,48 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox disabled form"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 disabled
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox required form"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 required
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with tooltip"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 tooltip={{ content: "it's a tooltip" }}
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with text error"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 error="error"
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with error"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 error={true}
               />
             </Flex>
             <Flex items="center" className="gap-5 w-full">
               <Checkbox
                 label="Ckeckbox with custom label"
-                checkboxValue={isChecked}
-                checkboxOnChange={setIsChecked}
+                value={isChecked}
+                onChange={setIsChecked}
                 labelClassName="text-green-500 font-bold"
               />
             </Flex>
@@ -798,15 +798,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 },
               ]}
             />
-            <Accordion
-              items={[
-                { label: <Switcher />, panel: <div>Panel Content 1</div> },
-                { label: "Item 2", panel: <div>Panel Content 2</div> },
-              ]}
-              uiType="transparent"
-            />
-
-            <Accordion items={[]} loading />
           </Flex>
         </Card>
 
@@ -1632,8 +1623,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
-            <Tooltip.Info content="I'm an <Tooltip.Info/>" />
-            <Tooltip.Error content="I'm an <Tooltip.Error/>" />
+            <Tooltip.Info content="I'm an info tooltip" />
           </Flex>
         </Card>
 

@@ -25,14 +25,14 @@ const Header = () => {
           djuno-design lab🧪
         </Text>
         <Text uiType="secondary" size="xs">
-          v0.9.3
+          v0.9.2
         </Text>
       </Flex>
 
       <Flex items="center" className="gap-3">
         <Checkbox
-          checkboxValue={mode === "dark"}
-          checkboxOnChange={handleChangeTheme}
+          value={mode === "dark"}
+          onChange={handleChangeTheme}
           label="dark mode"
         />
         <Link
