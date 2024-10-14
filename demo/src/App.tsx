@@ -61,9 +61,9 @@ function App() {
   };
   const [modal, setModal] = useState(false);
 
-  const selectOptions: SelectOption<string>[] = [
-    { label: "option 1", value: "option1" },
-    { label: "option 2", value: "option2" },
+  const selectOptions: SelectOption<{ name: string }>[] = [
+    { label: "option 1", value: "option1", extraData: { name: "1" } },
+    { label: "option 2", value: "option2", extraData: { name: "2" } },
   ];
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
@@ -432,7 +432,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex className="gap-5 w-full">
               <Flex direction="col">
                 <Checkbox
-                  label="Ckeckbox simple form Ckeckbox simple form Ckeckbox simple formCkeckbox simple form Ckeckbox simple form"
+                  label="Ckeckbox simple form"
                   value={isChecked}
                   onChange={setIsChecked}
                 />
@@ -477,14 +477,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 value={isChecked}
                 onChange={setIsChecked}
                 error={true}
-              />
-            </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with custom label"
-                value={isChecked}
-                onChange={setIsChecked}
-                labelClassName="text-green-500 font-bold"
               />
             </Flex>
           </Flex>
@@ -798,6 +790,15 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 },
               ]}
             />
+            <Accordion
+              items={[
+                { label: <Switcher />, panel: <div>Panel Content 1</div> },
+                { label: "Item 2", panel: <div>Panel Content 2</div> },
+              ]}
+              uiType="transparent"
+            />
+
+            <Accordion items={[]} loading />
           </Flex>
         </Card>
 
@@ -1623,7 +1624,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
-            <Tooltip.Info content="I'm an info tooltip" />
+            <Tooltip.Info content="I'm an <Tooltip.Info/>" />
+            <Tooltip.Error content="I'm an <Tooltip.Error/>" />
           </Flex>
         </Card>
 

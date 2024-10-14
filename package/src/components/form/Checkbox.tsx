@@ -26,6 +26,7 @@ import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react'
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 import Typography from './../Typography'
 import Tooltip from '../Tooltip'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
@@ -80,6 +81,8 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
 }) => {
   const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
+  const innerId = React.useMemo(() => id || uuid(), [])
+
   React.useEffect(() => {
     setCheckedState(value || false)
   }, [value])
@@ -94,6 +97,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
     <div className='dd-flex dd-flex-col dd-gap-1'>
       <Field className='dd-flex dd-items-center dd-gap-2'>
         <HeadlessCheckbox
+          id={innerId}
           checked={checkedState}
           onChange={handleChange}
           className={cn(
@@ -119,7 +123,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
           />
         </HeadlessCheckbox>
         <Label
-          htmlFor={id}
+          htmlFor={innerId}
           className={cn(
             'dd-flex dd-items-center dd-cursor-pointer',
             labelVariants({
