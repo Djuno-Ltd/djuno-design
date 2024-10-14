@@ -42,8 +42,11 @@ const buttonVariants = cva(
           'dd-bg-primary-50 dd-text-primary-400 hover:dd-bg-primary-100 hover:dd-text-primary-500 dd-border-primary-100 hover:dd-border-primary-100 dark:dd-bg-primary-600/20 dark:dd-text-dark-100 dark:hover:dd-bg-primary-600/30 dark:hover:dd-text-dark-50 dark:dd-border-primary-400 dark:hover:dd-border-primary-500 disabled:dd-bg-transparent disabled:dd-text-secondary-300 disabled:dd-border-primary-100/60 disabled:dark:dd-bg-dark-900 disabled:dark:dd-text-dark-400 disabled:dark:dd-border-primary-300/60 focus:dd-ring-primary-100/20 dark:focus:dd-ring-dark-700/50',
         danger:
           'dd-bg-red-500 dd-text-white hover:dd-bg-red-600 dd-border-red-500 hover:dd-border-red-600 dark:dd-bg-red-500 dark:hover:dd-bg-red-600 dark:dd-border-red-500 dark:hover:dd-border-red-600 disabled:dd-border-red-400 disabled:dd-bg-red-400 disabled:dd-text-white disabled:dark:dd-bg-red-400 disabled:dark:dd-text-secondary-200 disabled:dark:dd-border-red-400 focus:dd-ring-red-100 dark:focus:dd-ring-red-600/50',
+        dangerLight:
+          'dd-focus:ring-2 focus:dd-ring-primary-50 dd-rounded-xl focus:dd-outline-none dd-transition-all disabled:dd-cursor-not-allowed dark:focus:dd-ring-secondary-600  dd-w-max  dd-text-red-500 dd-bg-transparent hover:dd-bg-red-500/10 dd-border-2 dd-border-red-500 disabled:dd-border-secondary-400 disabled:hover:dd-bg-transparent disabled:dd-text-secondary-400 disabled:dark:dd-text-secondary-400 dd-font-medium dd-text-sm dd-px-4 ',
+        icon: 'focus:dd-outline-0 dd-transition-all disabled:dd-cursor-not-allowed dd-w-max dd-flex dd-items-center dd-gap-1 dd-duration-400 dd-border-0 focus:dd-ring-4 dd-bg-transparent dd-text-black hover:dd-bg-secondary-200 dark:dd-bg-transparent dark:dd-text-white dark:hover:dd-bg-dark-700  disabled:hover:dd-bg-transparent disabled:dd-text-secondary-300 disabled:dark:dd-bg-dark-900 disabled:dark:dd-text-dark-400 dark:focus:dd-ring-dark-700/50 dd-rounded-lg dd-text-sm dd-px-2 ',
       },
-      size: {
+      uiSize: {
         small: 'dd-rounded-lg dd-text-xs dd-px-3 dd-h-7',
         medium: 'dd-rounded-lg dd-text-sm dd-px-4 dd-h-9',
         large: 'dd-rounded-xl dd-text-base dd-px-5 dd-h-11',
@@ -51,7 +54,7 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       uiType: 'simple',
-      size: 'medium',
+      uiSize: 'medium',
     },
   },
 )
@@ -91,20 +94,21 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className,
   uiType,
-  size,
+  uiSize,
   tooltip,
   loading,
   loadingType,
+  type,
   ...props
 }) => {
   return (
     <Tooltip {...tooltip}>
-      <button {...props} className={cn(buttonVariants({ uiType, size }), className)}>
+      <button type={type || 'button'} {...props} className={cn(buttonVariants({ uiType, uiSize }), className)}>
         {loading && (
           <Loading
-            type={loadingType || 'simple'}
+            uiType={loadingType || 'simple'}
             borderSize={1.5}
-            size={size === 'medium' || size === undefined ? 14 : size === 'small' ? 12 : 18}
+            uiSize={uiSize === 'medium' || uiSize === undefined ? 14 : uiSize === 'small' ? 12 : 18}
             theme={uiType === 'primary' ? 'white' : 'transparent'}
           />
         )}

@@ -34,7 +34,7 @@ const skeletonVariants = cva('dd-bg-slate-200/80 dark:dd-bg-white/10 dd-rounded-
       circle: 'dd-rounded-full dd-aspect-square',
       square: 'dd-aspect-square',
     },
-    size: {
+    uiSize: {
       small: 'dd-h-7',
       medium: 'dd-h-9',
       large: 'dd-h-11',
@@ -47,7 +47,7 @@ const skeletonVariants = cva('dd-bg-slate-200/80 dark:dd-bg-white/10 dd-rounded-
   },
   defaultVariants: {
     shape: 'rectangle',
-    size: 'medium',
+    uiSize: 'medium',
     animation: 'pulse',
   },
 })
@@ -58,7 +58,7 @@ const skeletonVariants = cva('dd-bg-slate-200/80 dark:dd-bg-white/10 dd-rounded-
  * @param {object} props - Skeleton props.
  * @param {string} [props.className] - Additional classes to apply to the skeleton.
  * @param {'rectangle' | 'circle' | 'square'} [props.shape] - Shape of the skeleton.
- * @param {'small' | 'medium' | 'large'} [props.size] - Size of the skeleton.
+ * @param {'small' | 'medium' | 'large'} [props.uiSize] - Size of the skeleton.
  * @param {'none' | 'pulse'} [props.animation] - Animation type of the skleton.
  *
  * @returns {React.ReactNode} Rendered Skeleton component.
@@ -70,8 +70,8 @@ const skeletonVariants = cva('dd-bg-slate-200/80 dark:dd-bg-white/10 dd-rounded-
  * // Example usage of Skeleton component:
  * <Skeleton shape="circle" size="large" />
  */
-const Skeleton: React.FunctionComponent<SkeletonProps> = ({ shape, size, animation, className, style }) => {
-  return <div className={cn(skeletonVariants({ shape, size, animation }), className)} style={style} />
+const Skeleton: React.FunctionComponent<SkeletonProps> = ({ shape, uiSize, animation, className, style }) => {
+  return <div className={cn(skeletonVariants({ shape, uiSize, animation }), className)} style={style} />
 }
 
 export default Skeleton

@@ -20,7 +20,6 @@
 import * as React from 'react'
 import { cn } from '../utils/cn'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import Button from './Button'
 import { DropdownDivider, DropdownElement, DropdownItem, DropdownProps } from '../types/IDropdown'
 import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
 
@@ -31,7 +30,6 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
  * @param {React.ReactNode} [props.children] - The content inside the DropdownMenu.
  * @param {string} [props.menu] - menu of the DropdownMenu.
  * @param {string} [props.title] -  title of the DropdownMenu.
- * @param {string} [props.type] - type of the DropdownMenu.
  * @param {string} [props.anchor] -
  * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the DropdownMenu.
  * @param {string} [props.itemClassName] - Additional itemClassName to apply to the DropdownMenu item.
@@ -52,7 +50,6 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
  *      <DropdownMenu
  *       menu={DropdownItems}
  *       title="Options"
- *       type="default"
  *       positionClassName="custom-position-class"
  *       buttonClassName="custom-button-class"
  *       itemsClassName="custom-items-class"
@@ -64,7 +61,6 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
 const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
   title,
   menu,
-  type,
   anchor = 'bottom start',
   buttonClassName,
   itemsClassName,
@@ -75,16 +71,9 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
   return (
     <Menu as='div' className='dd-text-left dd-w-full dd-h-full dd-inline-block dd-justify-center dd-items-center'>
       <div className='dd-flex dd-items-center dd-justify-center'>
-        <MenuButton
-          onClick={(e) => e.stopPropagation()}
-          className={cn(buttonClassName, {
-            '': type === 'default' || typeof type === 'undefined',
-            '': type === 'simple',
-          })}
-          as='div'
-        >
-          {type !== 'simple' ? (
-            <Button>{children}</Button>
+        <MenuButton onClick={(e) => e.stopPropagation()} className={cn(buttonClassName)} as='div'>
+          {children ? (
+            children
           ) : (
             <div className='dd-h-6 dd-flex dd-items-center dd-ml-auto dd-cursor-pointer'>
               <ArrowDownIcon className='dd-h-4 dd-w-4 dark:dd-text-secondary-100' />
@@ -106,7 +95,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
           <MenuItems
             anchor={anchor}
             className={cn(
-              'dd-absolute dd-z-50 dd-mt-1 dd-max-h-60 dd-w-48 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-p-1 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm dd-divide-y dd-divide-dark-100 dark:dd-divide-dark-600',
+              'dd-absolute dd-z-50 dd-mt-1 dd-max-h-60 dd-w-48 dd-overflow-auto dd-rounded-lg dd-bg-white dark:dd-bg-dark-800 dd-text-base dd-shadow-lg dd-border dd-border-dark-100 dark:dd-border-dark-600 focus:dd-outline-none sm:dd-text-sm dd-divide-y dd-divide-dark-100 dark:dd-divide-dark-600',
               {
                 [itemsClassName || '']: itemsClassName,
               },

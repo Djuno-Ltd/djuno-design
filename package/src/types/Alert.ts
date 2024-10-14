@@ -23,11 +23,13 @@ import React from 'react'
 export interface AlertProps {
   message?: string | React.ReactNode
   description?: string | React.ReactNode
-  type?: AlertTypes
+  uiType?: AlertTypes
   showIcon?: boolean
   banner?: boolean
   className?: string
   children?: React.ReactNode
+  closable?: boolean
+  onClose?: () => void
 }
 
 export type AlertTypes = 'neutral' | 'success' | 'info' | 'warning' | 'error'

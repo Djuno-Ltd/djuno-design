@@ -23,13 +23,14 @@ import { cn } from './../../utils/cn'
 import Typography from './../Typography'
 import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
-import Tooltip, { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
 import Loading from '../Loading'
 import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
-import { uuid } from '../../utils/uuid'
+// import { uuid } from '../../utils/uuid'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -39,7 +40,7 @@ export const inputVariants = cva(
   'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:dd-disabled:bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {
-      type: {
+      uiType: {
         simple: 'dd-text-secondary-600 dd-bg-transparent',
         default: 'dd-border-2',
       },
@@ -58,7 +59,7 @@ export const inputVariants = cva(
       },
     },
     defaultVariants: {
-      type: 'default',
+      uiType: 'default',
       hasError: 'no',
       uiSize: 'medium',
       copyable: 'no',
@@ -94,10 +95,11 @@ export const labelVariants = cva(
  * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
- * @param {InputTypes} [props.type] - Type of the input field (e.g., 'default', 'simple').
+ * @param {InputTypes} [props.uiType] - Type of the input field (e.g., 'default', 'simple').
  * @param {string} [props.placeholder] - Placeholder text for the input.
  * @param {string} [props.className] - Additional classes to apply to the input element.
  * @param {string} [props.labelClassName] - Additional classes to apply to the label element.
+ * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
  * @param {boolean} [props.required] - Indicates if the input is required.
  * @param {string | boolean| React.ReactNode} [props.error] - Error message or boolean to indicate input validity.
  * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
@@ -118,6 +120,7 @@ export const labelVariants = cva(
  *   placeholder="Enter your username"
  *   required
  *   error="Username is required"
+ *    containerClassName="custom-containerClassName"
  *   copyable={{
  *     text: "Copy this username",
  *     icon: [<CustomCopyIcon />, <CustomCopiedIcon />],
@@ -126,27 +129,30 @@ export const labelVariants = cva(
  * />
  */
 
-const Input: React.FunctionComponent<InputProps> = ({
-  label,
-  className,
-  labelClassName,
-  loading,
-  loadingType,
-  type,
-  required,
-  error,
-  hint,
-  placeholder,
-  tooltip,
-  uiSize,
-  AfterComponent,
-  copyable,
-  ...props
-}) => {
-  const id = uuid(10)
-  const inputRef = React.useRef<HTMLInputElement>(null)
-  const value = props?.value
-  const onChange = props?.onChange
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const {
+    className,
+    containerClassName,
+    labelClassName,
+    label,
+    hint,
+    loading,
+    loadingType,
+    copyable,
+    error,
+    uiSize,
+    uiType,
+    required,
+    tooltip,
+    placeholder,
+    AfterComponent,
+    ...inputProps
+  } = props
+
+  const innerId = React.useMemo(() => uuid(), [])
+
+  const value = inputProps?.value
+  const onChange = inputProps?.onChange
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -159,7 +165,6 @@ const Input: React.FunctionComponent<InputProps> = ({
         return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
       }
     }
-
     return defaultTexts
   }, [copyable])
 
@@ -178,31 +183,40 @@ const Input: React.FunctionComponent<InputProps> = ({
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
-    let textToCopy: string | number | null | undefined = ''
-    const inputValue = inputRef.current?.value
+    const input = window.document.getElementById(props.id || innerId) as HTMLInputElement
+    if (input) {
+      const inputValue = input.value
+      let textToCopy: string | number | null | undefined = ''
+      if (typeof copyable === 'function') {
+        textToCopy = copyable(inputValue)
+      } else {
+        textToCopy = inputValue
+      }
 
-    if (typeof copyable === 'function') {
-      textToCopy = copyable(inputValue)
-    } else {
-      textToCopy = inputValue
+      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+        copyToClipboard(textToCopy.toString()).then(() => {
+          setTooltipText(tooltipTexts[1])
+          setIcon(icons[1])
+
+          // Revert back after some time
+          setTimeout(() => {
+            setTooltipText(tooltipTexts[0])
+            setIcon(icons[0])
+          }, 2000)
+        })
+      }
     }
-
-    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy.toString()).then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-
-        // Revert back after some time
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 2000)
-      })
-    }
-  }, [copyable, tooltipTexts, icons])
+    // if (ref && 'current' in ref && ref.current) {
+    //   inputValue = ref.current.value
+    // } else if (internalRef.current) {
+    //   inputValue = internalRef.current.value
+    // } else if (typeof inputProps?.value === 'string') {
+    //   inputValue = inputProps.value
+    // }
+  }, [copyable, tooltipTexts, icons, props.id, innerId])
 
   return (
-    <div className='dd-flex dd-flex-col'>
+    <div className={cn('dd-flex dd-flex-col', containerClassName)}>
       <div
         className={cn(
           'dd-flex dd-items-center dd-px-1',
@@ -215,7 +229,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         )}
       >
         <label
-          htmlFor={id}
+          htmlFor={props.id}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
@@ -234,7 +248,7 @@ const Input: React.FunctionComponent<InputProps> = ({
             </Typography.Text>
           )}
 
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          {tooltip && <Tooltip.Info {...tooltip} />}
         </label>
 
         {hint && <span className='dd-text-[11px] dd-text-slate-500'>{hint}</span>}
@@ -254,13 +268,13 @@ const Input: React.FunctionComponent<InputProps> = ({
           </div>
         )}
         <input
-          id={id}
-          ref={inputRef}
+          id={props.id || innerId}
+          ref={ref}
           value={value}
           onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
-              type,
+              uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
@@ -273,10 +287,11 @@ const Input: React.FunctionComponent<InputProps> = ({
             className,
           )}
           placeholder={placeholder}
+          {...inputProps}
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>
-            <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+            <Loading uiType={loadingType || 'simple'} borderSize={1.5} uiSize={14} theme={'primary'} />
           </div>
         )}
         <div className='dd-absolute dd-inset-y-0 dd-end-0 dd-flex'>{AfterComponent}</div>
@@ -284,7 +299,8 @@ const Input: React.FunctionComponent<InputProps> = ({
       <AnimatedFormError error={error} />
     </div>
   )
-}
+})
+
 const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }> = ({ error }) => {
   return (
     <AnimatePresence>
@@ -301,5 +317,6 @@ const AnimatedFormError: React.FC<{ error?: string | boolean | React.ReactNode }
   )
 }
 
+Input.displayName = 'Input'
 export { AnimatedFormError }
 export default Input

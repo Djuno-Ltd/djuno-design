@@ -43,7 +43,8 @@ function App() {
 1.  Button
 2.  Tooltip
 
-    - InfoTooltip
+    - Tooltip.Info
+    - Tooltip.Error
 
 3.  Loading
 4.  Flex
@@ -116,12 +117,14 @@ function App() {
 | Name        | Type           | Required | default   | Description |
 | ----------- | -------------- | -------- | --------- | ----------- |
 | uiType      | `ButtonTypes`  |          | simple    |             |
-| size        | `SizeTypes`    |          | medium    |             |
+| uiSize      | `SizeTypes`    |          | medium    |             |
 | tooltip     | `TooltipProps` |          | undefined |             |
 | loading     | boolean        |          | false     |             |
 | loadingType | `LoadingType`  |          | simple    |             |
 
 ### Tooltip
+
+#### Tooltip , Tooltip.Info , Tooltip.Error
 
 | Name      | Type                | Required | default | Description |
 | --------- | ------------------- | -------- | ------- | ----------- |
@@ -134,8 +137,8 @@ function App() {
 
 | Name       | Type                | Required | default | Description |
 | ---------- | ------------------- | -------- | ------- | ----------- |
-| type       | `LoadingType`       |          | simple  |             |
-| size       | number              |          | 24px    |             |
+| uiType     | `LoadingType`       |          | simple  |             |
+| uiSize     | number              |          | 24px    |             |
 | borderSize | number              |          | 2px     |             |
 | theme      | `LoadingThemeTypes` |          | primary |             |
 
@@ -223,13 +226,15 @@ function App() {
 
 ### Alert
 
-| Name        | Type                | Required | default | Description               |
-| ----------- | ------------------- | -------- | ------- | ------------------------- |
-| message     | `string, ReactNode` |          |         |                           |
-| description | `string, ReactNode` |          |         |                           |
-| type        | `AlertTypes`        |          | neutral |                           |
-| showIcon    | `boolean`           |          | false   |                           |
-| banner      | `boolean`           |          | false   | Display Alert as a banner |
+| Name        | Type                | Required | default   | Description                                              |
+| ----------- | ------------------- | -------- | --------- | -------------------------------------------------------- |
+| message     | `string, ReactNode` |          |           |                                                          |
+| description | `string, ReactNode` |          |           |                                                          |
+| uiType      | `AlertTypes`        |          | `neutral` |                                                          |
+| showIcon    | `boolean`           |          | `false`   |                                                          |
+| banner      | `boolean`           |          | `false`   | Display Alert as a banner                                |
+| closable    | `boolean`           |          | `false`   | If true, the alert can be closed (disappears on click).  |
+| onClose     | `() => void`        |          |           | Callback function to be called when the alert is closed. |
 
 ### Steps
 
@@ -244,7 +249,7 @@ function App() {
 | ------------------- | --------------------------------------------- | -------- | ------- | ----------- |
 | all `<input>` props | `React.InputHTMLAttributes<HTMLInputElement>` |          |         |             |
 | label               | `string, React.ReactNode`                     |          |         |             |
-| type                | `InputTypes`                                  |          |         |             |
+| uiType              | `InputTypes`                                  |          |         |             |
 | required            | `boolean`                                     |          |         |             |
 | error               | `string , boolean , React.ReactNode`          |          |         |             |
 | hint                | `string, React.ReactNode`                     |          |         |             |
@@ -255,25 +260,26 @@ function App() {
 | uiSize              | `SizeTypes`                                   |          | medium  |             |
 | copyable            | `boolean or function or InputCopyableProp`    |          |         |             |
 | labelClassName      | `string`                                      |          |         |             |
+| containerClassName  | `string`                                      |          |         |             |
 
 ### Textarea
 
-| Name | Type | Required | default | Description |
-| ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |=
-| all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` | | | |
-| textareaClassName | `string` | | | |
-| placeholder | `string` | | | |
-| label | `string, React.ReactNode` | | | |
-| required | `boolean` | | | |
-| error | `string, boolean, React.ReactNode` | | | |
-| hint | `string , React.ReactNode` | | | |
-| type | `InputTypes` | | | |
-| tooltip | `TooltipProps` | | | |
-| size | `SizeTypes` | | medium | |
-| copyable | `boolean or function or InputCopyableProp` | | | |
-| labelClassName | `string` | | | |
-| loading | `boolean` | | | |
-| loadingType | `LoadingType` | | | |
+| Name                   | Type                                                | Required | default | Description |
+| ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |
+| all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` |          |         |             |
+| placeholder            | `string`                                            |          |         |             |
+| label                  | `string, React.ReactNode`                           |          |         |             |
+| required               | `boolean`                                           |          |         |             |
+| error                  | `string, boolean, React.ReactNode`                  |          |         |             |
+| hint                   | `string , React.ReactNode`                          |          |         |             |
+| uiType                 | `InputTypes`                                        |          |         |             |
+| tooltip                | `TooltipProps`                                      |          |         |             |
+| uiSize                 | `SizeTypes`                                         |          | medium  |             |
+| copyable               | `boolean or function or InputCopyableProp`          |          |         |             |
+| labelClassName         | `string`                                            |          |         |             |
+| loading                | `boolean`                                           |          |         |             |
+| loadingType            | `LoadingType`                                       |          |         |             |
+| containerClassName     | `string`                                            |          |         |             |
 
 ### Switcher
 
@@ -284,7 +290,7 @@ function App() {
 | disabled    | `boolean`                  |          |         |             |
 | loading     | `boolean`                  |          |         |             |
 | loadingType | `LoadingProps`             |          |         |             |
-| size        | `SizeTypes`                |          | medium  |             |
+| uiSize      | `SizeTypes`                |          | medium  |             |
 
 ### Select
 
@@ -302,7 +308,7 @@ function App() {
 | label            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
 | error            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
 | required         | `boolean`                               |          |         | Indicates if the select component is required.                             |
-| type             | `SelectTypes`                           |          |         | The type of the select component (e.g., single select, multi-select).      |
+| uiType           | `SelectTypes`                           |          |         | The uiType of the select component (e.g., single select, multi-select).    |
 | tooltip          | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                      |
 | hint             | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                   |
 | loading          | `boolean`                               |          |         | Indicates if the select component is in a loading state.                   |
@@ -310,7 +316,7 @@ function App() {
 | emptyString      | `string`                                |          |         | Text to display when there are no options available.                       |
 | clearable        | `boolean`                               |          |         | If true, allows the user to clear the selected value.                      |
 | disabled         | `boolean`                               |          |         | If true, disables the select component.                                    |
-| size             | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
+| uiSize           | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
 | onBlur           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
 
 ### Skeleton
@@ -318,15 +324,17 @@ function App() {
 | Name      | Type                 | Required | default   | Description |
 | --------- | -------------------- | -------- | --------- | ----------- |
 | shape     | `SkeletonShapes`     |          | rectangle |             |
-| size      | `SizeTypes`          |          | medium    |             |
+| uiSize    | `SizeTypes`          |          | medium    |             |
 | animation | `SkeletonAnimations` |          | pulse     |             |
 
 ### SimpleTable
 
-| Name               | Type     | Required | default | Description |
-| ------------------ | -------- | -------- | ------- | ----------- |
-| className          | `string` |          |         |             |
-| containerClassName | `string` |          |         |             |
+| Name               | Type           | Required | default | Description |
+| ------------------ | -------------- | -------- | ------- | ----------- |
+| className          | `string`       |          |         |             |
+| containerClassName | `string`       |          |         |             |
+| loading            | boolean        |          | false   |             |
+| loadingSetting     | `LoadingProps` |          |         |             |
 
 #### SimpleTable.Row
 
@@ -388,7 +396,6 @@ function App() {
 | --------------- | ------------------- | -------- | ------- | ----------- |
 | menu            | `DropdownElement[]` |          |         |             |
 | title           | `string`            |          |         |             |
-| type            | `DropdownTypes`     |          |         |             |
 | buttonClassName | `string`            |          |         |             |
 | itemsClassName  | `string`            |          |         |             |
 | itemClassName   | `string`            |          |         |             |
@@ -408,11 +415,13 @@ function App() {
 
 ### Accordion
 
-| Name            | Type              | Required | default | Description |
-| --------------- | ----------------- | -------- | ------- | ----------- |
-| items           | `AccordionItem[]` |          |         |             |
-| panelClassNames | `string`          |          |         |             |
-| loading         | `boolean`         |          |         |             |
+| Name           | Type              | Required | default | Description |
+| -------------- | ----------------- | -------- | ------- | ----------- |
+| items          | `AccordionItem[]` |          |         |             |
+| panelClassName | `string`          |          |         |             |
+| loading        | `boolean`         |          | false   |             |
+| loadingSetting | `LoadingProps`    |          |         |             |
+| uiType         | `AccordinType`    |          | default |             |
 
 ### Pagination
 
@@ -514,7 +523,6 @@ function App() {
 | options        | `TabOptions` |          |         |             |
 | selectedIndex  | `number`     |          |         |             |
 | onChange       | `() => void` |          |         |             |
-| useUrl         | `boolean`    |          |         |             |
 | listClassName  | `string`     |          |         |             |
 | panelClassName | `string`     |          |         |             |
 | tabType        | `string`     |          |         |             |

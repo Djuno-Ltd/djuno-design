@@ -216,7 +216,7 @@ const renderLoading = (height: number, loading?: boolean, loadingMode?: SidebarL
   if (loading && loadingMode !== 'skeleton') {
     return (
       <Flex items='center' justify='center' className='dd-min-h-[150px]'>
-        <Loading borderSize={2} type={loadingMode} />
+        <Loading borderSize={2} uiType={loadingMode} />
       </Flex>
     )
   }
@@ -315,7 +315,7 @@ const SidebarMenuItem = (props: {
         <div className='dd-flex dd-flex-1 dd-items-center dd-gap-1'>
           {item.icon && (
             <item.icon
-              className={cn('dd-w-6 dd-h-6', {
+              className={cn('dd-w-5 dd-h-5', {
                 'group-hover/item:dd-text-primary-400': !isActive,
                 'dd-text-primary-400': isActive,
               })}

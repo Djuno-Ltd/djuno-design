@@ -22,9 +22,10 @@ import * as React from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { uuid } from '../utils/uuid'
 import { cn } from '../utils/cn'
-import { TooltipProps } from '../types'
+import { TooltipComponents, TooltipProps } from '../types'
 import { cva } from 'class-variance-authority'
-import { ReactComponent as TooltipIcon } from './../assets/icons/question-mark-circle.svg'
+import { ReactComponent as InfoIcon } from './../assets/icons/question-mark-circle.svg'
+import { ReactComponent as ErrorIcon } from './../assets/icons/exclamation-circle-outline.svg'
 
 /**
  * Define button variants using the `cva` utility function.
@@ -70,7 +71,19 @@ const tooltipVariants = cva('dd-text-white dd-max-w-[250px] !dd-px-2 !dd-py-1 !d
  *   <span>Click me</span>
  * </Tooltip>
  */
-const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, clickable, place, theme, className }) => {
+// eslint-disable-next-line react/prop-types
+const Tooltip: React.FC<TooltipProps> & TooltipComponents = ({ children, ...props }): React.ReactNode => {
+  return <BaseTooltip {...props}>{children}</BaseTooltip>
+}
+
+const BaseTooltip: React.FunctionComponent<TooltipProps> = ({
+  children,
+  content,
+  clickable,
+  place,
+  theme,
+  className,
+}) => {
   if (!content) {
     return children
   }
@@ -90,14 +103,23 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({ children, content, cli
   )
 }
 
-const InfoTooltip: React.FC<{ tooltip?: TooltipProps }> = ({ tooltip }) => {
+const InfoTooltip: React.FC<TooltipProps> = (props) => {
   return (
-    <Tooltip {...tooltip}>
-      <TooltipIcon className='dd-w-4 dd-text-slate-500 dark:dd-text-slate-300 dark:hover:dd-text-slate-100' />
+    <Tooltip {...props}>
+      <InfoIcon className='dd-w-4 dd-text-slate-500 dark:dd-text-slate-300 dark:hover:dd-text-slate-100' />
     </Tooltip>
   )
 }
 
-//TODO: <Tooltip.Info />
-export { InfoTooltip }
+const ErrorTooltip: React.FC<TooltipProps> = (props) => {
+  return (
+    <Tooltip {...props} theme='error'>
+      <ErrorIcon className='dd-w-4 dd-text-red-500 hover:dd-text-red-700 dark:dd-text-red-500 dark:hover:dd-text-red-700' />
+    </Tooltip>
+  )
+}
+
+Tooltip.Info = InfoTooltip
+Tooltip.Error = ErrorTooltip
+
 export default Tooltip

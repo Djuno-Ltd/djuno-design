@@ -31,7 +31,7 @@ import {
   JsonViewer,
   Sidebar,
   SidebarItem,
-  Texrarea,
+  Textarea,
   ThemeChanger,
   ThemeSwitcher,
   Tag,
@@ -51,6 +51,7 @@ function App() {
     setTimeout(() => setBtnLoading(false), 3000);
   };
   const [inputValue, setInputValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState("");
   const [swith, setSwitch] = useState(false);
 
   // Pagination states
@@ -60,9 +61,9 @@ function App() {
   };
   const [modal, setModal] = useState(false);
 
-  const selectOptions: SelectOption<string>[] = [
-    { label: "option 1", value: "option1" },
-    { label: "option 2", value: "option2" },
+  const selectOptions: SelectOption<{ name: string }>[] = [
+    { label: "option 1", value: "option1", extraData: { name: "1" } },
+    { label: "option 2", value: "option2", extraData: { name: "2" } },
   ];
   const [clearableValue, setClearableValue] = useState<string | undefined>(
     selectOptions[0].value
@@ -125,7 +126,7 @@ function App() {
     setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
-  const sidebarItems: SidebarItem[] = [
+  const sidebarItems: SidebarItem<{ d: string }>[] = [
     {
       id: 1,
       label: "item1",
@@ -396,7 +397,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   );
                 }}
               >
-                <Button>Resend verification email</Button>
+                {({ disabled }) => (
+                  <Button disabled={disabled}>Resend verification email</Button>
+                )}
               </Countdown>
             </Flex>
           </Flex>
@@ -404,7 +407,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card title="Tag">
           <Flex direction="col" className="gap-5">
-            <Flex className="gap-2 w-full">
+            <Flex direction="col" className="gap-2 w-full">
               <Tag>Default Tag</Tag>
               <Tag icon={<FaceSmile className="w-4 h-4" />}>Icon Tag</Tag>
               <Tag closable>Closable Tag</Tag>
@@ -476,14 +479,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 error={true}
               />
             </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with custom label"
-                value={isChecked}
-                onChange={setIsChecked}
-                labelClassName="text-green-500 font-bold"
-              />
-            </Flex>
           </Flex>
         </Card>
         <Card title="Popover">
@@ -512,41 +507,55 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               options={[
                 {
                   label: "Djuno Design 1",
+                  element: <div>Content for Tab 1</div>,
                 },
                 {
                   label: "Djuno Design 2",
+                  element: <div>Content for Tab 2</div>,
                 },
                 {
                   label: "Djuno Design 3",
+                  element: <div>Content for Tab 3</div>,
+                  // active: true,
                 },
               ]}
               tabType="creamy"
             />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full">
+          <Flex direction="col" className="gap-5 w-full mt-6">
             <Tabs
               listClassName="w-full  mb-6"
               options={[
                 {
                   label: "Djuno Design 1",
+                  element: <div>Content for Tab 1</div>,
                 },
                 {
                   label: "Djuno Design 2",
+                  element: <div>Content for Tab 2</div>,
                 },
                 {
                   label: "Djuno Design 3",
+                  element: <div>Content for Tab 3</div>,
                 },
               ]}
               tabType="default"
             />
           </Flex>
-          <Flex direction="col" className="gap-5 w-full">
-            <Tabs options={tabOptions} selectedIndex={0} useUrl={true} />
+          <Flex direction="col" className="gap-5 w-full ">
+            <Tabs
+              options={tabOptions}
+              onChange={(i) => console.log(i)}
+              listClassName="mt-6"
+            />
           </Flex>
         </Card>
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <JsonViewer value={exampleJson} />
+          </Flex>
+          <Flex direction="col" className="gap-5 w-full mt-5">
+            <JsonViewer value={exampleJson} collapsed={1} copyable={true} />
           </Flex>
         </Card>
 
@@ -555,7 +564,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have hit:
           </Text>
           <Flex direction="col" className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
               hint="Djuno Design"
@@ -565,7 +574,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Simple form:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
             />
@@ -575,7 +584,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have loading:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
               loading
@@ -588,7 +597,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Replace copy text.:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Textarea"
               placeholder=""
               tooltip={{ content: "test" }}
@@ -599,24 +608,32 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have error with error text:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
-              label="Texrarea"
-              placeholder="Enter custom notes if any"
-              required
-              error="field is required!"
+            <Textarea
+              label="Textarea"
+              loadingType="elastic"
+              value={textareaValue}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setTextareaValue(e.target.value)
+              }
+              error={textareaValue === "" ? "Field is required" : ""}
             />
-            <Input
-              label="Input"
-              placeholder="Enter custom notes if any"
-              required
-              error="field is required!"
-            />
+            <Flex items="end" className="gap-3 w-full flex ">
+              <Input
+                label="Input"
+                loadingType="elastic"
+                value={inputValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
+                error={inputValue === "" ? "Field is required" : ""}
+              />
+            </Flex>
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
             Copyable without function:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={true}
@@ -631,7 +648,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Copyable with function:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={(v) => `Hi ${v}`}
@@ -646,7 +663,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Have error without error text:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               error={true}
@@ -661,7 +678,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Custom Copy icon and replace tooltips text:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
@@ -682,7 +699,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Hide Copy tooltips:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
@@ -703,7 +720,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             Custom label:
           </Text>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               labelClassName="text-green-500 font-bold"
@@ -715,7 +732,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             />
           </Flex>
           <Flex className="gap-5 w-full mt-5">
-            <Texrarea
+            <Textarea
               error
               label="Texrarea"
               placeholder="Enter custom notes if any"
@@ -764,7 +781,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Accordion
               items={[
                 {
-                  label: "Filters",
+                  label: <Switcher />,
                   panel: (
                     <div className="">
                       <Input value="djuno-design" />
@@ -773,6 +790,15 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 },
               ]}
             />
+            <Accordion
+              items={[
+                { label: <Switcher />, panel: <div>Panel Content 1</div> },
+                { label: "Item 2", panel: <div>Panel Content 2</div> },
+              ]}
+              uiType="transparent"
+            />
+
+            <Accordion items={[]} loading />
           </Flex>
         </Card>
 
@@ -970,9 +996,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="default"
                 >
-                  Djuno Design
+                  <Text> Djuno Design</Text>
                 </Dropdown>
               </div>
             </div>
@@ -997,16 +1022,13 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                       danger: true,
                     },
                   ]}
-                  type="simple"
-                >
-                  Djuno Design
-                </Dropdown>
+                />
               </div>
             </div>
           </Flex>
         </Card>
 
-        <Card title="Swither">
+        <Card title="Switcher">
           <Flex direction="col" className="gap-5">
             <div>
               <Text>sizes:</Text>
@@ -1015,7 +1037,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   <Text uiType="secondary" size="sm">
                     small
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="small" />
+                  <Switcher value={swith} onChange={setSwitch} uiSize="small" />
                 </Flex>
                 <Flex direction="col">
                   <Text uiType="secondary" size="sm">
@@ -1027,7 +1049,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   <Text uiType="secondary" size="sm">
                     large
                   </Text>
-                  <Switcher value={swith} onChange={setSwitch} size="large" />
+                  <Switcher value={swith} onChange={setSwitch} uiSize="large" />
                 </Flex>
               </Flex>
             </div>
@@ -1103,20 +1125,20 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="small"
-                size="small"
+                uiSize="small"
                 options={selectOptions}
                 className="w-[200px]"
                 emptyString="select an option"
               />
               <Select
                 label="medium"
-                size="medium"
+                uiSize="medium"
                 options={selectOptions}
                 className="w-[200px]"
               />
               <Select
                 label="large"
-                size="large"
+                uiSize="large"
                 options={selectOptions}
                 className="w-[200px]"
               />
@@ -1178,7 +1200,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="end" className="gap-3 w-full flex ">
               <Select
                 label="Select with custom label"
-                size="medium"
+                uiSize="medium"
                 options={selectOptions}
                 className="w-[200px]"
                 emptyString="select an option"
@@ -1191,7 +1213,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         <Card title="Skeleton">
           <Flex direction="col" className="gap-5 w-full">
             <Skeleton />
-            <Skeleton size="small" />
+            <Skeleton uiSize="small" />
             <Skeleton shape="square" />
             <Skeleton shape="circle" />
           </Flex>
@@ -1261,10 +1283,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                               danger: true,
                             },
                           ]}
-                          type="simple"
-                        >
-                          Djuno Design
-                        </Dropdown>
+                        />
                       </div>
                     </div>
                   </SimpleTable.TD>
@@ -1386,39 +1405,43 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               basic usage
             </Text>
             <Alert message="Djuno Design. Neutral Alert" />
-            <Alert type="info" message="Djuno Design. Info Alert" />
-            <Alert type="warning" message="Djuno Design. Warning Alert" />
-            <Alert type="success" message="Djuno Design. Success Alert" />
-            <Alert type="error" message="Djuno Design. Error Alert" />
+            <Alert uiType="info" message="Djuno Design. Info Alert" />
+            <Alert uiType="warning" message="Djuno Design. Warning Alert" />
+            <Alert uiType="success" message="Djuno Design. Success Alert" />
+            <Alert uiType="error" message="Djuno Design. Error Alert" />
             <Text strong size="sm" className="mt-4">
               with description
             </Text>
             <Alert
               message={"Djuno Design. Alert with Description"}
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
-              type="info"
+              uiType="info"
             />
             <Text strong size="sm" className="mt-4">
               with icon
             </Text>
             <Alert showIcon message="Djuno Design. Neutral Alert" />
-            <Alert showIcon type="info" message="Djuno Design. Info Alert" />
+            <Alert showIcon uiType="info" message="Djuno Design. Info Alert" />
             <Alert
               showIcon
-              type="warning"
+              uiType="warning"
               message="Djuno Design. Warning Alert"
             />
             <Alert
               showIcon
-              type="success"
+              uiType="success"
               message="Djuno Design. Success Alert"
             />
-            <Alert showIcon type="error" message="Djuno Design. Error Alert" />
+            <Alert
+              showIcon
+              uiType="error"
+              message="Djuno Design. Error Alert"
+            />
             <Alert
               showIcon
               message="Djuno Design. Alert with Icon"
               description="Error Description Error Description Error Description Error Description Error Description Error Description"
-              type="info"
+              uiType="info"
             />
             <Text strong size="sm" className="mt-4">
               banner mode
@@ -1426,14 +1449,14 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Alert
               banner
               showIcon
-              type="info"
+              uiType="info"
               message="Djuno Design. Info Alert"
             />
 
             <Text strong size="sm" className="mt-4">
               wrap mode
             </Text>
-            <Alert type="info">
+            <Alert uiType="info">
               <Flex direction="col" className="gap-2 mt-1">
                 <Button uiType="primary" className="gap-5 ">
                   Djuno Design
@@ -1444,6 +1467,15 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 </Text>
               </Flex>
             </Alert>
+            <Text strong size="sm" className="mt-4">
+              closeable
+            </Text>
+            <Alert
+              uiType="info"
+              closable
+              message="closeable alert"
+              description="This is a description"
+            />
           </Flex>
         </Card>
 
@@ -1559,11 +1591,11 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
             <Flex items="center" className="gap-2">
               <Text size="sm">cutoff</Text>
-              <Loading type="cutoff" />
+              <Loading uiType="cutoff" />
             </Flex>
             <Flex items="center" className="gap-2">
               <Text size="sm">elastic</Text>
-              <Loading type="elastic" borderSize={1.5} />
+              <Loading uiType="elastic" borderSize={1.5} />
             </Flex>
           </Flex>
         </Card>
@@ -1592,6 +1624,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             >
               <Text size="sm">ClickableErrorTooltip</Text>
             </Tooltip>
+            <Tooltip.Info content="I'm a <Tooltip.Info/>" />
+            <Tooltip.Error content="I'm a <Tooltip.Error/>" />
           </Flex>
         </Card>
 
@@ -1609,6 +1643,8 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               </Button>
               <Button uiType="light">Light</Button>
               <Button uiType="danger">Danger</Button>
+              <Button uiType="dangerLight">DangerLight</Button>
+              <Button uiType="icon">Icon</Button>
             </Flex>
             <Flex items="center" className="gap-2">
               <Button disabled>Default</Button>
@@ -1625,6 +1661,12 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               </Button>
               <Button uiType="danger" disabled>
                 Danger
+              </Button>
+              <Button uiType="dangerLight" disabled>
+                DangerLight
+              </Button>
+              <Button uiType="icon" disabled>
+                Icon
               </Button>
             </Flex>
           </Flex>

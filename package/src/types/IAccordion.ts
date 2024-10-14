@@ -19,6 +19,7 @@
  */
 
 import React, { PropsWithChildren } from 'react'
+import { LoadingProps } from './Loading'
 
 export interface AccordionProps extends PropsWithChildren {
   items?: Array<AccordionItem>
@@ -26,9 +27,12 @@ export interface AccordionProps extends PropsWithChildren {
   panelClassName?: string
   labelClassName?: string
   loading?: boolean
+  loadingSetting?: LoadingProps
+  uiType?: AccordinType
 }
 
 export type AccordionItem = {
   label: string | React.ReactNode
   panel?: string | React.ReactNode
 }
+export type AccordinType = 'default' | 'transparent'

@@ -52,8 +52,9 @@ import Typography from './Typography'
  *   Success Tag
  * </Tag>
  */
+
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
-  const { className, color, style, children, icon, closable, onClose, bordered = true } = tagProps
+  const { className, color, style, children, icon, closable, onClose, bordered = true, ...props } = tagProps
   const [visible, setVisible] = React.useState(true)
 
   const handleCloseClick = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -68,40 +69,43 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
   const iconNode: React.ReactNode = icon || null
 
   const tagNode: React.ReactNode = (
-    <span
-      ref={ref}
-      className={cn(
-        'dd-flex dd-items-center dd-justify-between dd-gap-0.5 dd-px-1 dd-py-0.5 dd-border dd-rounded-md',
-        {
-          '!dd-hidden': !visible,
-          'dd-bg-slate-100 dd-border-slate-300 dd-text-slate-700 dark:dd-bg-slate-800 dark:dd-border-slate-700 dark:dd-text-slate-300':
-            color === undefined,
-          'dd-bg-blue-100 dd-border-blue-500 dd-text-blue-500 dark:dd-bg-blue-500/30': color === 'processing',
-          'dd-bg-green-50 dd-border-green-400 dd-text-green-600 dark:dd-bg-green-500/20': color === 'success',
-          'dd-bg-red-50 dd-border-red-500 dd-text-red-500 dark:dd-bg-red-500/20': color === 'error',
-          'dd-bg-yellow-50 dd-border-orange-500 dd-text-orange-500 dark:dd-bg-orange-500/20': color === 'warning',
-          //
-          '!dd-border-0': !bordered,
-        },
-        className,
-      )}
-      style={style}
-    >
-      <>
-        {iconNode}
-        {children && (
-          <Typography.Text uiType='transparent' size='xs' className='dd-whitespace-nowrap'>
-            {children}
-          </Typography.Text>
+    <div className='dd-inline-flex'>
+      <span
+        ref={ref}
+        className={cn(
+          'dd-flex dd-items-center dd-justify-between dd-gap-0.5 dd-px-1 dd-py-0.5 dd-border dd-rounded-md',
+          {
+            '!dd-hidden': !visible,
+            'dd-bg-slate-100 dd-border-slate-300 dd-text-slate-700 dark:dd-bg-slate-800 dark:dd-border-slate-700 dark:dd-text-slate-300':
+              color === undefined,
+            'dd-bg-blue-100 dd-border-blue-500 dd-text-blue-500 dark:dd-bg-blue-500/30': color === 'processing',
+            'dd-bg-green-50 dd-border-green-400 dd-text-green-600 dark:dd-bg-green-500/20': color === 'success',
+            'dd-bg-red-50 dd-border-red-500 dd-text-red-500 dark:dd-bg-red-500/20': color === 'error',
+            'dd-bg-yellow-50 dd-border-orange-500 dd-text-orange-500 dark:dd-bg-orange-500/20': color === 'warning',
+            //
+            '!dd-border-0': !bordered,
+          },
+          className,
         )}
-      </>
-      {closable && (
-        <CloseIcon
-          onClick={handleCloseClick}
-          className='dd-w-[12px] dd-h-[12px] dd-text-slate-600 hover:dd-text-slate-800 dark:dd-text-slate-400 hover:dark:dd-text-slate-200 hover:dd-scale-125 dd-transition-all dd-duration-300 dd-cursor-pointer'
-        />
-      )}
-    </span>
+        style={style}
+        {...props}
+      >
+        <>
+          {iconNode}
+          {children && (
+            <Typography.Text uiType='transparent' size='xs' className='dd-whitespace-nowrap'>
+              {children}
+            </Typography.Text>
+          )}
+        </>
+        {closable && (
+          <CloseIcon
+            onClick={handleCloseClick}
+            className='dd-w-[12px] dd-h-[12px] dd-text-slate-600 hover:dd-text-slate-800 dark:dd-text-slate-400 hover:dark:dd-text-slate-200 hover:dd-scale-125 dd-transition-all dd-duration-300 dd-cursor-pointer'
+          />
+        )}
+      </span>
+    </div>
   )
 
   return tagNode

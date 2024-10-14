@@ -23,17 +23,32 @@ import { ReactComponent as ChevronDownIcon } from '../assets/icons/chevron-down.
 import { AccordionProps } from '../types/IAccordion'
 import Loading from './Loading'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import { cva } from 'class-variance-authority'
+import Flex from './Flex'
+
+const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
+  variants: {
+    uiType: {
+      default: ' dd-border-0',
+      transparent: 'dd-border dd-border-secondary-200 dark:dd-border-dark-700 dd-bg-transparent',
+    },
+  },
+  defaultVariants: {
+    uiType: 'default',
+  },
+})
 
 /**
  * Accordion component that allows for customization of UI type, size, loading state, and more.
  *
  * @param {object} props - Accordion props.
  * @param {React.ReactNode} [props.children] - The content inside the accordion.
- * @param {string} [props.classNames] - Additional classNames to apply to the accordion container.
- * @param {string} [props.panelClassName] - Additional panelClassNames to apply to the accordion.
+ * @param {string} [props.className] - Additional className to apply to the accordion container.
+ * @param {string} [props.panelClassName] - Additional panelClassName to apply to the accordion.
  * @param {Array<AccordionItem>} [props.items] - The items to display in the accordion, each with a label and optional panel content.
  * @param {boolean} [props.loading] - Indicates if the accordion is in a loading state.
- *
+ * @param {boolean} [props.loadingSetting] - Loading settings.
+ * @param {string} [props.labelClassName] - Additional CSS classes to apply custom styles to the label.
  * @returns {React.ReactNode} Rendered Accordion component.
  *
  * @version 0.4.8
@@ -51,27 +66,46 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
  *         { label: "Item 2", panel: "Panel content for item 2" }
  *       ]}
  *       loading={false}
+ *       uiType="default"
  *     />
  *   );
  * }
  */
 
-const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName, panelClassName, loading }) => {
+const Accordion: React.FC<AccordionProps> = ({
+  items,
+  className,
+  labelClassName,
+  panelClassName,
+  loading,
+  loadingSetting,
+  uiType,
+}) => {
   return (
-    <div
-      className={cn(
-        'dd-w-full dd-bg-secondary-100 dark:dd-border-dark-600 dd-rounded-lg dd-overflow-hidden ',
-        className,
+    <div className={cn(accordionVariants({ uiType }), className)}>
+      {items?.length === 0 && loading && (
+        <Flex items='center' justify='center' className='dd-min-h-[100px]'>
+          <Loading
+            borderSize={loadingSetting?.borderSize || 2}
+            uiType={loadingSetting?.uiType || 'simple'}
+            uiSize={loadingSetting?.uiSize || 24}
+            theme={loadingSetting?.theme || 'primary'}
+            className={loadingSetting?.className}
+          />
+        </Flex>
       )}
-    >
-      {items?.length === 0 && loading && <Loading borderSize={2} style={{ minHeight: 100 }} />}
       {items?.map((item, i) => (
         <Disclosure key={i}>
           {({ open }) => (
             <>
               <DisclosureButton
                 className={cn(
-                  'dd-flex dd-w-full dd-justify-between dd-items-center dd-text-dark-900 dd-bg-secondary-100 hover:dd-bg-secondary-200 dark:dd-text-secondary-100 dark:dd-bg-dark-850 dark:hover:dd-bg-dark-900 dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0',
+                  ' dd-bg-secondary-100 dark:dd-bg-dark-850 dd-flex dd-w-full dd-justify-between dd-items-center dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-black dark:dd-text-white hover:dd-bg-secondary-300 dark:hover:dd-bg-dark-950',
+                  {
+                    '': uiType === 'default',
+                    'dd-border dark:dd-border-dark-700 dd-bg-transparent dark:dd-bg-transparent dark:hover:dd-bg-dark-800 hover:dd-bg-secondary-100':
+                      uiType === 'transparent',
+                  },
                   labelClassName,
                 )}
               >
@@ -90,7 +124,12 @@ const Accordion: React.FC<AccordionProps> = ({ items, className, labelClassName,
               {item.panel && (
                 <DisclosurePanel
                   className={cn(
-                    'dark:dd-bg-dark-850 dd-p-3 dd-border-y dark:dd-border-dark-700 dark:dd-text-dark-200',
+                    'dd-bg-secondary-50 dark:dd-bg-dark-800 dd-p-3 dd-text-black dark:dd-text-white',
+                    {
+                      '': uiType === 'default',
+                      'dd-border dark:dd-border-dark-700 dd-bg-transparent dark:dd-bg-transparent':
+                        uiType === 'transparent',
+                    },
                     panelClassName,
                   )}
                 >

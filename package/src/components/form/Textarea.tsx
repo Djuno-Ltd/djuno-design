@@ -22,11 +22,12 @@ import { cn } from './../../utils/cn'
 import { TextareaProps } from './../../types/ITexrarea'
 import { AnimatedFormError, inputVariants, labelVariants } from './Input'
 import Typography from '../Typography'
-import Tooltip, { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
 import { copyToClipboard } from '../../utils/copy'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import Loading from '../Loading'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation, additional styling options, and copyable functionality.
@@ -34,8 +35,9 @@ import Loading from '../Loading'
  * @param {object} props - Textarea component props.
  * @param {string} [props.id] - Unique identifier for the textarea element.
  * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, `maxLength`, etc.
- * @param {InputTypes} [props.type] - Type of the textarea field, which can be 'default' or 'simple'.
+ * @param {InputTypes} [props.uiType] - Type of the textarea field, which can be 'default' or 'simple'.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
+ * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
  * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
  * @param {string| React.ReactNode} [props.label] - Label text to display above the textarea.
  * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
@@ -62,6 +64,7 @@ import Loading from '../Loading'
  *       id="description"
  *       textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
  *       className="custom-textarea"
+ *       containerClassName="custom-containerClassName"
  *       placeholder="Enter your description here"
  *       label="Description"
  *       required={true}
@@ -74,23 +77,30 @@ import Loading from '../Loading'
  * }
  */
 
-const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
-  id,
-  placeholder,
-  className,
-  label,
-  error,
-  required,
-  hint,
-  tooltip,
-  uiSize,
-  type,
-  copyable,
-  loading,
-  loadingType,
-  labelClassName,
-}) => {
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
+  const {
+    id,
+    placeholder,
+    className,
+    label,
+    error,
+    required,
+    hint,
+    tooltip,
+    uiSize,
+    uiType,
+    copyable,
+    loading,
+    loadingType,
+    labelClassName,
+    containerClassName,
+    ...textareaProps
+  } = props
+
+  const innerId = React.useMemo(() => uuid(), [])
+
+  const value = textareaProps?.value
+  const onChange = textareaProps?.onChange
 
   const tooltipTexts: [string, string] = React.useMemo(() => {
     const defaultTexts: [string, string] = ['Copy', 'Copied']
@@ -122,31 +132,34 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
   const [icon, setIcon] = React.useState(icons[0])
 
   const handleCopyToClipboard = React.useCallback(() => {
-    let textToCopy: string | number | null | undefined = ''
-    const inputValue = textareaRef.current?.value
+    const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
 
-    if (typeof copyable === 'function') {
-      textToCopy = copyable(inputValue)
-    } else {
-      textToCopy = inputValue
+    if (input) {
+      const teatareaValue = input.value
+      let textToCopy: string | number | null | undefined = ''
+      if (typeof copyable === 'function') {
+        textToCopy = copyable(teatareaValue)
+      } else {
+        textToCopy = teatareaValue
+      }
+
+      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+        copyToClipboard(textToCopy.toString()).then(() => {
+          setTooltipText(tooltipTexts[1])
+          setIcon(icons[1])
+
+          // Revert back after some time
+          setTimeout(() => {
+            setTooltipText(tooltipTexts[0])
+            setIcon(icons[0])
+          }, 2000)
+        })
+      }
     }
-
-    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy.toString()).then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-
-        // Revert back after some time
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 2000)
-      })
-    }
-  }, [copyable, tooltipTexts, icons])
+  }, [copyable, tooltipTexts, icons, props.id, innerId])
 
   return (
-    <div className='dd-flex dd-flex-col'>
+    <div className={cn('dd-flex dd-flex-col', containerClassName)}>
       <div
         className={cn('dd-flex dd-mb-1 dd-items-center', {
           'dd-justify-between': label,
@@ -173,7 +186,7 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             </Typography.Text>
           )}
           <div className='dd-flex dd-items-center dd-gap-1'>
-            {tooltip && <InfoTooltip tooltip={tooltip} />}
+            {tooltip && <Tooltip.Info {...tooltip} />}
             {typeof copyable !== 'undefined' && (
               <div
                 onClick={handleCopyToClipboard}
@@ -191,11 +204,13 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
       </div>
       <div className='dd-relative dd-w-full'>
         <textarea
-          id={id}
-          ref={textareaRef}
+          id={props.id || innerId}
+          ref={ref}
+          value={value}
+          onChange={onChange ? onChange : () => {}}
           className={cn(
             inputVariants({
-              type,
+              uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
               copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
@@ -203,16 +218,18 @@ const Textarea: React.FC<React.PropsWithChildren<TextareaProps>> = ({
             className,
           )}
           placeholder={placeholder}
+          {...textareaProps}
         />
         {loading && (
           <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>
-            <Loading type={loadingType || 'simple'} borderSize={1.5} size={14} theme={'primary'} />
+            <Loading uiType={loadingType || 'simple'} borderSize={1.5} uiSize={14} theme={'primary'} />
           </div>
         )}
       </div>
       <AnimatedFormError error={error} />
     </div>
   )
-}
+})
 
+Textarea.displayName = 'Textarea'
 export default Textarea

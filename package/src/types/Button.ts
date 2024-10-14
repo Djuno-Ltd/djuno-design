@@ -23,10 +23,11 @@ import { LoadingType, SizeTypes, TooltipProps } from '.'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   uiType?: ButtonTypes
-  size?: SizeTypes
+  uiSize?: SizeTypes
   tooltip?: TooltipProps
   loading?: boolean
   loadingType?: LoadingType
+  className?: string
 }
 
-export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' //| 'icon'
+export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' | 'dangerLight' | 'icon'

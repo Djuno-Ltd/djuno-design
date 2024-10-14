@@ -28,7 +28,7 @@ import { ReactComponent as ErrorIcon } from './../assets/icons/x-circle.svg'
 import { ReactComponent as SuccessIcon } from './../assets/icons/check-circle.svg'
 import { ReactComponent as InfoIcon } from './../assets/icons/information-circle.svg'
 import { ReactComponent as WarningIcon } from './../assets/icons/exclamation-circle.svg'
-
+import { ReactComponent as CloseIcon } from './../assets/icons/close.svg'
 const { Text } = Typography
 
 /**
@@ -37,7 +37,7 @@ const { Text } = Typography
  */
 const alertVariants = cva('dd-w-full dd-rounded-lg dd-border', {
   variants: {
-    type: {
+    uiType: {
       neutral: 'dd-bg-white dark:dd-bg-dark-850 dd-border-secondary-200 dark:dd-border-dark-800',
       success: 'dd-bg-success/10 dark:dd-bg-success/20 dd-border-success/30 dark:dd-border-success/30',
       info: 'dd-bg-primary-400/10 dark:dd-bg-primary-400/20 dd-border-primary-400/30 dark:dd-border-primary-400/30',
@@ -45,12 +45,12 @@ const alertVariants = cva('dd-w-full dd-rounded-lg dd-border', {
       error: 'dd-bg-error/10 dark:dd-bg-error/20 dd-border-error/30 dark:dd-border-error/30',
     },
     paddingType: {
-      small: 'dd-px-3 dd-py-2.5',
-      large: 'dd-px-5 dd-py-4',
+      small: 'dd-p-2.5',
+      large: 'dd-p-4',
     },
   },
   defaultVariants: {
-    type: 'neutral',
+    uiType: 'neutral',
     paddingType: 'small',
   },
 })
@@ -61,7 +61,7 @@ const alertVariants = cva('dd-w-full dd-rounded-lg dd-border', {
  */
 const alertIconVariants = cva('dd-mr-2 dd-aspect-square', {
   variants: {
-    type: {
+    uiType: {
       neutral: 'dd-text-secondary-400 dark:dd-text-dark-200',
       success: 'dd-text-success/90 dark:dd-text-success/70',
       info: 'dd-text-primary-400/90 dark:dd-text-primary-400/70',
@@ -74,7 +74,7 @@ const alertIconVariants = cva('dd-mr-2 dd-aspect-square', {
     },
   },
   defaultVariants: {
-    type: 'neutral',
+    uiType: 'neutral',
     widthType: 'small',
   },
 })
@@ -86,7 +86,7 @@ const alertIconVariants = cva('dd-mr-2 dd-aspect-square', {
  * @param {string} [props.className] - Additional classes to apply to the allert.
  * @param {string | React.ReactNode} [props.message] - Message of the alert
  * @param {string | React.ReactNode} [props.description] - Description of the alert
- * @param {string} [props.type] - Type of UI for the alert.
+ * @param {string} [props.uiType] - Type of UI for the alert.
  * @param {boolean} [props.showIcon] - Indicates if the alert has the icon.
  * @param {boolean} [props.banner] - Indicates if the alert is a banner or not.
  *
@@ -105,32 +105,46 @@ const Alert: React.FunctionComponent<AlertProps> = ({
   message,
   description,
   className,
-  type,
+  uiType,
   showIcon,
   banner,
   children,
+  closable,
+  onClose,
 }) => {
+  const [visible, setVisible] = React.useState(true)
+
+  const handleCloseClick = (e: React.MouseEvent<SVGSVGElement>) => {
+    e.stopPropagation()
+    onClose?.()
+    if (e.defaultPrevented) {
+      return
+    }
+    setVisible(false)
+  }
+
   return (
     <Flex
       items={'center'}
       className={cn(
-        alertVariants({ type, paddingType: description ? 'large' : 'small' }),
+        alertVariants({ uiType, paddingType: description ? 'large' : 'small' }),
         {
           'dd-rounded-none dd-border-0': banner,
+          '!dd-hidden': !visible,
         },
         className,
       )}
     >
-      <Flex items={description ? 'start' : 'center'}>
-        {showIcon && type !== undefined && type !== 'neutral' && (
-          <div className={cn(alertIconVariants({ type, widthType: description ? 'large' : 'small' }))}>
-            {type === 'error' && <ErrorIcon />}
-            {type === 'success' && <SuccessIcon />}
-            {type === 'info' && <InfoIcon />}
-            {type === 'warning' && <WarningIcon />}
+      <Flex items={description ? 'start' : 'center'} className='w-full'>
+        {showIcon && uiType !== undefined && uiType !== 'neutral' && (
+          <div className={cn(alertIconVariants({ uiType, widthType: description ? 'large' : 'small' }))}>
+            {uiType === 'error' && <ErrorIcon />}
+            {uiType === 'success' && <SuccessIcon />}
+            {uiType === 'info' && <InfoIcon />}
+            {uiType === 'warning' && <WarningIcon />}
           </div>
         )}
-        <Flex direction='col'>
+        <Flex direction='col' className='dd-flex-1'>
           <Flex items='center'>
             {typeof message === 'string' && (
               <Text size='sm' strong={!!description}>
@@ -147,6 +161,12 @@ const Alert: React.FunctionComponent<AlertProps> = ({
           )}
           <Flex>{children}</Flex>
         </Flex>
+        {closable && (
+          <CloseIcon
+            onClick={handleCloseClick}
+            className='dd-w-[12px] dd-h-[12px] dd-text-slate-600 hover:dd-text-slate-800 dark:dd-text-slate-400 hover:dark:dd-text-slate-200 hover:dd-scale-125 dd-transition-all dd-duration-300 dd-cursor-pointer'
+          />
+        )}
       </Flex>
     </Flex>
   )

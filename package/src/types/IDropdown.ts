@@ -18,19 +18,16 @@
  * limitations under the License.
  */
 
-import { AnchorProps } from '@headlessui/react/dist/internal/floating'
 import React, { PropsWithChildren } from 'react'
 
 export interface DropdownProps extends PropsWithChildren {
   menu?: Array<DropdownElement>
   title?: string | React.ReactNode
-  type?: DropdownTypes
   anchor?: AnchorProps
   buttonClassName?: string
   itemsClassName?: string
   itemClassName?: string
 }
-export type DropdownTypes = 'default' | 'simple'
 
 export type DropdownItem = {
   label: string | React.ReactNode
@@ -46,3 +43,33 @@ export type DropdownDivider = {
 }
 
 export type DropdownElement = DropdownItem | DropdownDivider
+
+type Align = 'start' | 'end'
+type Placement = 'top' | 'right' | 'bottom' | 'left'
+type BaseAnchorProps = {
+  /**
+   * The `gap` is the space between the trigger and the panel.
+   */
+  gap: number | string
+  /**
+   * The `offset` is the amount the panel should be nudged from its original position.
+   */
+  offset: number | string
+  /**
+   * The `padding` is the minimum space between the panel and the viewport.
+   */
+  padding: number | string
+}
+
+export type AnchorProps =
+  | false
+  | (`${Placement}` | `${Placement} ${Align}`)
+  | Partial<
+      BaseAnchorProps & {
+        /**
+         * The `to` value defines which side of the trigger the panel should be placed on and its
+         * alignment.
+         */
+        to: `${Placement}` | `${Placement} ${Align}`
+      }
+    >

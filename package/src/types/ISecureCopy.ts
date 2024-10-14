@@ -27,7 +27,7 @@ export interface SecureCopyProps extends PropsWithChildren {
   textClassName?: string
   iconClassName?: string
   showText?: boolean
-  type?: ActionTypes
+  type: ActionTypes
   uiSize?: SizeTypes
 }
 

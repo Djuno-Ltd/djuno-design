@@ -21,6 +21,7 @@ import { cn } from '../utils/cn'
 import { TabOption, TabOptions, TabsProps } from '../types/ITab'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import React, { useEffect } from 'react'
+import { useDjunoDesign } from '../hooks/useDjunoDesign'
 // import { useNavigate, useLocation } from 'react-router-dom'
 /**
  * Tabs component for managing tabbed navigation within an application.
@@ -30,7 +31,6 @@ import React, { useEffect } from 'react'
  * @param {number} [props.selectedIndex] - Index of the initially selected tab. Defaults to the first tab.
  * @param {Function} [props.onChange] - Callback function triggered when the active tab changes.
  * @param {number} props.onChange.index - The index of the newly selected tab.
- * @param {boolean} [props.useUrl] - Indicates if the component should update the URL to reflect the selected tab. Defaults to false.
  * @param {string} [props.listClassName] - Additional CSS classes to apply to the tab list container.
  * @param {string} [props.panelClassName] - Additional CSS classes to apply to the tab panel container.
  * @param {'default' | 'creamy'} [props.tabType] - Type of tab style to apply. Defaults to 'default'. Options are 'default' and 'creamy'.
@@ -62,7 +62,6 @@ import React, { useEffect } from 'react'
  *       options={tabOptions}
  *       selectedIndex={0}
  *       onChange={handleTabChange}
- *       useUrl={true}
  *       listClassName="custom-tab-list"
  *       panelClassName="custom-tab-panel"
  *       tabType="creamy"
@@ -76,41 +75,46 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   options,
   selectedIndex: propsSelectedIndex,
   onChange,
-  useUrl,
   listClassName,
   panelClassName,
   tabType,
 }) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>(propsSelectedIndex || 0)
 
+  const { navigator } = useDjunoDesign({ stric: false })
+
   useEffect(() => {
-    if (useUrl) {
+    if (propsSelectedIndex) {
+      setSelectedIndex(propsSelectedIndex)
+    } else {
       const si = getOptionIndexFromUrlString(location.pathname, options)
       setSelectedIndex(si)
     }
-  }, [location, options, useUrl])
+  }, [options, location.pathname, propsSelectedIndex])
 
-  useEffect(() => {
-    if (typeof useUrl === 'undefined') setSelectedIndex(propsSelectedIndex)
-  }, [propsSelectedIndex, useUrl])
-
-  const onChangeTab = (i: number) => {
-    if (useUrl) {
-      const selectedOption = getTabOptionFromIndex(i, options)
-      if (selectedOption?.url) {
-        // Change the URL without reloading the page
-        window.history.pushState({}, '', selectedOption.url)
-      }
-    }
-
+  // const onChangeTab = (i: number, options: TabOptions) => {
+  //   const selectedOption = getTabOptionFromIndex(i, options)
+  //   if (onChange) {
+  //     onChange(selectedOption)
+  //   }
+  //   if (navigator) {
+  //     navigator(selectedOption?.url)
+  //   }
+  //   setSelectedIndex(i)
+  // }
+  const onChangeTab = (i: number, options: TabOptions) => {
+    const selectedOption = getTabOptionFromIndex(i, options)
     if (onChange) {
-      onChange(i)
+      onChange({ option: selectedOption, index: i })
+    }
+    if (navigator) {
+      navigator(selectedOption?.url)
     }
     setSelectedIndex(i)
   }
 
   return (
-    <TabGroup selectedIndex={selectedIndex} onChange={onChangeTab}>
+    <TabGroup selectedIndex={selectedIndex} onChange={(i) => onChangeTab(i, options)}>
       <TabList
         className={cn(
           'dd-flex dd-overflow-x-auto',
@@ -121,31 +125,36 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
           listClassName,
         )}
       >
-        {options.map((option, i) => (
-          <Tab
-            key={i}
-            disabled={option.disabled}
-            data-testid={option.testId}
-            className={({ selected }) =>
-              cn('hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed', {
-                'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
-                  selected && (!tabType || tabType === 'default'),
-                'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
-                  tabType === 'creamy',
-                'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
-                  tabType === 'creamy' && selected,
-                'dd-text-gray-400 dark:dd-text-slate-400': !selected,
-              })
-            }
-          >
-            {(!tabType || tabType === 'default') && (
-              <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
-                <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
-              </div>
-            )}
-            {tabType === 'creamy' && <>{option.label}</>}
-          </Tab>
-        ))}
+        {options
+          .filter((option) => option.active !== true)
+          .map((option, i) => (
+            <Tab
+              key={i}
+              disabled={option.disabled}
+              data-testid={option.testId}
+              className={({ selected }) =>
+                cn(
+                  'hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed',
+                  {
+                    'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
+                      selected && (!tabType || tabType === 'default'),
+                    'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
+                      tabType === 'creamy',
+                    'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
+                      tabType === 'creamy' && selected,
+                    'dd-text-gray-400 dark:dd-text-slate-400': !selected,
+                  },
+                )
+              }
+            >
+              {(!tabType || tabType === 'default') && (
+                <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
+                  <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
+                </div>
+              )}
+              {tabType === 'creamy' && <>{option.label}</>}
+            </Tab>
+          ))}
       </TabList>
       <TabPanels>
         {options.map((option, i) => (

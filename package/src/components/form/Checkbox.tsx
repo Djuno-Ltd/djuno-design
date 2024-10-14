@@ -25,7 +25,8 @@ import { AnimatedFormError, labelVariants } from './Input'
 import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react'
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 import Typography from './../Typography'
-import { InfoTooltip } from '../Tooltip'
+import Tooltip from '../Tooltip'
+import { uuid } from '../../utils/uuid'
 
 /**
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
@@ -80,6 +81,8 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
 }) => {
   const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
+  const innerId = React.useMemo(() => id || uuid(), [])
+
   React.useEffect(() => {
     setCheckedState(value || false)
   }, [value])
@@ -94,10 +97,11 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
     <div className='dd-flex dd-flex-col dd-gap-1'>
       <Field className='dd-flex dd-items-center dd-gap-2'>
         <HeadlessCheckbox
+          id={innerId}
           checked={checkedState}
           onChange={handleChange}
           className={cn(
-            'dd-group dd-flex dd-items-center dd-justify-center dd-rounded dd-border dd-w-4 dd-h-4 dd-cursor-pointer',
+            'dd-group dd-flex dd-items-center dd-justify-center dd-rounded dd-border dd-cursor-pointer',
             {
               'dd-bg-white dd-border-dark-500 dark:dd-bg-dark-800 dark:dd-border-dark-700 dark:dd-border-2':
                 !checkedState,
@@ -106,9 +110,8 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
                 checkedState && disabled,
               'dd-bg-white dd-border-dark-500 dark:dd-bg-dark-800 dark:dd-border-dark-700 dark:dd-border-2 dd-cursor-not-allowed':
                 !checkedState && disabled,
-
-              'dd-w-4 dd-h-4': true,
             },
+            'dd-w-4 dd-h-4',
           )}
         >
           <CheckIcon
@@ -119,15 +122,16 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
           />
         </HeadlessCheckbox>
         <Label
-          htmlFor={id}
+          htmlFor={innerId}
           className={cn(
             'dd-flex dd-items-center dd-cursor-pointer',
             labelVariants({
               hasError: error ? 'yes' : 'no',
             }),
             {
-              ' dd-cursor-not-allowed': disabled,
+              'dd-cursor-not-allowed dd-opacity-80 dark:dd-opacity-65': disabled,
             },
+            'dd-whitespace-normal dd-break-words dd-flex-1',
             labelClassName,
           )}
         >
@@ -141,7 +145,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
               *
             </Typography.Text>
           )}
-          {tooltip && <InfoTooltip tooltip={tooltip} />}
+          {tooltip && <Tooltip.Info {...tooltip} />}
         </Label>
       </Field>
       <AnimatedFormError error={error} />

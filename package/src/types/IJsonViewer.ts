@@ -23,4 +23,6 @@ import { PropsWithChildren } from 'react'
 export interface JsonViewerProps extends PropsWithChildren {
   value?: object | null
   collapsed?: number | boolean
+  style?: React.CSSProperties
+  copyable?: boolean
 }
