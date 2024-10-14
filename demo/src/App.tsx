@@ -479,14 +479,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 error={true}
               />
             </Flex>
-            <Flex items="center" className="gap-5 w-full">
-              <Checkbox
-                label="Ckeckbox with custom label"
-                value={isChecked}
-                onChange={setIsChecked}
-                labelClassName="text-green-500 font-bold"
-              />
-            </Flex>
           </Flex>
         </Card>
         <Card title="Popover">

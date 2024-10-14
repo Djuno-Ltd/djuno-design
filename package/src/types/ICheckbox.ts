@@ -22,7 +22,6 @@ import { TooltipProps } from './Tooltip'
 
 export interface CheckboxProps {
   id?: string
-  inputProps?: React.HTMLProps<HTMLInputElement>
   label?: string | React.ReactNode
   required?: boolean
   error?: string | boolean | React.ReactNode
