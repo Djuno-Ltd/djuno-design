@@ -82,11 +82,8 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
     ...checkboxProps
   } = props
 
-  // const innerId = React.useMemo(() => uuid(), [])
-  const innerId = React.useMemo(() => id || uuid(), [id])
-
+  const innerId = React.useMemo(() => uuid(), [])
   const value = checkboxProps?.value
-  const onChange = checkboxProps?.onChange
 
   const [checkedState, setCheckedState] = React.useState<boolean>(checkboxValue || false)
 
@@ -94,11 +91,6 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
     setCheckedState(checkboxValue || false)
   }, [checkboxValue])
 
-  // const handleChange = (v: boolean) => {
-  //   if (!disabled) {
-  //     checkboxOnChange && checkboxOnChange(v)
-  //   }
-  // }
   const handleChange = () => {
     if (!disabled) {
       const newCheckedState = !checkedState
@@ -109,7 +101,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
 
   return (
     <div className='dd-flex dd-flex-col dd-gap-1'>
-      <Field className='dd-flex dd-items-center dd-gap-2'>
+      <Field className='dd-flex dd-items-start dd-gap-2'>
         <HeadlessCheckbox
           id={innerId}
           ref={ref}
@@ -141,7 +133,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
         <Label
           htmlFor={innerId}
           className={cn(
-            'dd-flex dd-items-center dd-cursor-pointer',
+            'dd-flex dd-items-start dd-cursor-pointer',
             labelVariants({
               hasError: error ? 'yes' : 'no',
             }),
@@ -149,6 +141,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) 
               ' dd-cursor-not-allowed': disabled,
             },
             labelClassName,
+            'dd-whitespace-normal dd-break-words dd-flex-1',
           )}
         >
           {label && (

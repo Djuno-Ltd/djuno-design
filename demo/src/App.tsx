@@ -432,7 +432,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex className="gap-5 w-full">
               <Flex direction="col">
                 <Checkbox
-                  label="Ckeckbox simple form"
+                  label="Ckeckbox simple form Ckeckbox simple form Ckeckbox simple formCkeckbox simple formCkeckbox simple form formCkeckbox simple form"
                   checkboxValue={isChecked}
                   checkboxOnChange={setIsChecked}
                 />
