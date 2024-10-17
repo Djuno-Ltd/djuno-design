@@ -47,7 +47,7 @@ export interface SelectBaseProps {
   loading?: boolean
   loadingType?: LoadingType
   emptyString?: string
-  clearable?: boolean
+  clearable?: (() => void) | boolean
   disabled?: boolean
   uiSize?: SizeTypes
   onBlur?: (e: FocusEvent) => void

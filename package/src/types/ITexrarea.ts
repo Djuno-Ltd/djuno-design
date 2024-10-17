@@ -19,7 +19,7 @@
  */
 
 import { TooltipProps } from './Tooltip'
-import { CopyableOptionsProp, InputTypes, LoadingType, SizeTypes } from '.'
+import { CopyableProp, InputTypes, LoadingType, SizeTypes } from '.'
 import { TextareaHTMLAttributes } from 'react'
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -33,7 +33,7 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   tooltip?: TooltipProps
   uiSize?: SizeTypes
   uiType?: InputTypes
-  copyable?: boolean | ((value: string | undefined) => string | number | null | undefined) | CopyableOptionsProp
+  copyable?: CopyableProp
   loading?: boolean
   loadingType?: LoadingType
   labelClassName?: string
