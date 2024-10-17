@@ -31,6 +31,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import { uuid } from '../../utils/uuid'
+import { useCopyable } from '../../hooks/useCopyable'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -148,72 +149,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     AfterComponent,
     ...inputProps
   } = props
-
+  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
   const innerId = React.useMemo(() => uuid(), [])
 
   const value = inputProps?.value
   const onChange = inputProps?.onChange
 
-  const tooltipTexts: [string, string] = React.useMemo(() => {
-    const defaultTexts: [string, string] = ['Copy', 'Copied']
-    const emptyTexts: [string, string] = ['', '']
-
-    if (typeof copyable === 'object') {
-      if (copyable?.tooltips === false) {
-        return emptyTexts
-      } else if (copyable?.tooltips) {
-        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
-      }
-    }
-    return defaultTexts
-  }, [copyable])
-
-  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
-    const defaultIcons: [React.ReactNode, React.ReactNode] = [
-      <CopyIcon key='copy-icon' />,
-      <CheckIcon key='copied-icon' />,
-    ]
-    if (typeof copyable === 'object' && copyable?.icon) {
-      return copyable.icon
-    }
-    return defaultIcons
-  }, [copyable])
-
-  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
-  const [icon, setIcon] = React.useState(icons[0])
-
-  const handleCopyToClipboard = React.useCallback(() => {
+  const handleCopyToClipboard = () => {
     const input = window.document.getElementById(props.id || innerId) as HTMLInputElement
     if (input) {
       const inputValue = input.value
-      let textToCopy: string | number | null | undefined = ''
-      if (typeof copyable === 'function') {
-        textToCopy = copyable(inputValue)
+      let finalText: string | number | null | undefined = ''
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: inputValue })
       } else {
-        textToCopy = inputValue
+        finalText = inputValue
       }
-
-      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-        copyToClipboard(textToCopy.toString()).then(() => {
-          setTooltipText(tooltipTexts[1])
-          setIcon(icons[1])
-
-          // Revert back after some time
-          setTimeout(() => {
-            setTooltipText(tooltipTexts[0])
-            setIcon(icons[0])
-          }, 2000)
-        })
-      }
+      copy(finalText)
     }
-    // if (ref && 'current' in ref && ref.current) {
-    //   inputValue = ref.current.value
-    // } else if (internalRef.current) {
-    //   inputValue = internalRef.current.value
-    // } else if (typeof inputProps?.value === 'string') {
-    //   inputValue = inputProps.value
-    // }
-  }, [copyable, tooltipTexts, icons, props.id, innerId])
+  }
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
