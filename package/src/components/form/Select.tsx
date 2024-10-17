@@ -149,7 +149,11 @@ const Select = <ExtraDataType extends unknown>({
 
   const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
     e.stopPropagation()
-    onChange && onChange(undefined)
+    if (typeof clearable === 'function') {
+      clearable()
+    } else {
+      onChange && onChange(undefined)
+    }
   }
 
   const selectedOption = React.useMemo(() => {
@@ -314,7 +318,11 @@ const MultiSelect = <ExtraDataType extends unknown>({
 
   const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
     e.stopPropagation()
-    onChange && onChange([])
+    if (typeof clearable === 'function') {
+      clearable()
+    } else {
+      onChange && onChange([])
+    }
   }
 
   return (

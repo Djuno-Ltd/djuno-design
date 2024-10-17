@@ -961,16 +961,28 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         </Card>
 
         <Card title="SecureCopy">
+          <Divider text="uiSize" />
           <Flex direction="col" className="gap-5 w-full mt-5">
             <Flex items="end" className="gap-3 w-full flex ">
-              <SecureCopy text="Djuno Design" type="hide" uiSize="small" />
-              <SecureCopy text="Djuno Design" type="hide" uiSize="medium" />
-              <SecureCopy text="Djuno Design" type="hide" uiSize="large" />
+              <Typography.Text size="sm" className="whitespace-nowrap">
+                type hide:
+              </Typography.Text>
+              <SecureCopy
+                text="small"
+                type="hide"
+                uiSize="small"
+                copyable={{ tooltips: ["1", "2"], text: "" }}
+              />
+              <SecureCopy text="medium" type="hide" uiSize="medium" />
+              <SecureCopy text="large" type="hide" uiSize="large" />
             </Flex>
             <Flex items="end" className="gap-3 w-full flex ">
-              <SecureCopy text="Djuno Design" type="copy" uiSize="small" />
-              <SecureCopy text="Djuno Design" type="copy" uiSize="medium" />
-              <SecureCopy text="Djuno Design" type="copy" uiSize="large" />
+              <Typography.Text size="sm" className="whitespace-nowrap">
+                type copy:
+              </Typography.Text>
+              <SecureCopy text="small" type="copy" uiSize="small" />
+              <SecureCopy text="medium" type="copy" uiSize="medium" />
+              <SecureCopy text="large" type="copy" uiSize="large" />
             </Flex>
           </Flex>
         </Card>

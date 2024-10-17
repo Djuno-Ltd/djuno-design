@@ -19,16 +19,17 @@
  */
 
 import { PropsWithChildren } from 'react'
-import { SizeTypes } from '.'
+import { CopyableProp, SizeTypes } from '.'
 
 export interface SecureCopyProps extends PropsWithChildren {
   text: string
+  type: ActionTypes
   className?: string
   textClassName?: string
   iconClassName?: string
   showText?: boolean
-  type: ActionTypes
   uiSize?: SizeTypes
+  copyable?: CopyableProp
 }
 
 export type ActionTypes = 'copy' | 'hide'

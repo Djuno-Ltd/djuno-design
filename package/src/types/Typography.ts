@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+import { CopyableOptionsProp } from '.'
 import { TooltipProps } from './Tooltip'
 
 export type TypographtTitleLevels = 1 | 2 | 3 | 4 | 5 | 6
@@ -67,12 +68,6 @@ export interface TypographyParagraphProps extends TypographyProps, React.HtmlHTM
 
 export interface TypographyLinkProps extends TypographyProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
   size?: TypographtSizeTypes
-}
-
-export interface CopyableOptionsProp {
-  text?: string
-  icon?: [React.ReactNode, React.ReactNode]
-  tooltips?: boolean | [string, string]
 }
 
 export interface TypographyComponents {

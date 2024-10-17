@@ -34,7 +34,6 @@ import { uuid } from '../../utils/uuid'
  *
  * @param {object} props - Textarea component props.
  * @param {string} [props.id] - Unique identifier for the textarea element.
- * @param {React.HTMLProps<HTMLTextAreaElement>} [props.textareaProps] - Standard HTML textarea attributes, such as `rows`, `cols`, `maxLength`, etc.
  * @param {InputTypes} [props.uiType] - Type of the textarea field, which can be 'default' or 'simple'.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
  * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
@@ -45,7 +44,7 @@ import { uuid } from '../../utils/uuid'
  * @param {string| React.ReactNode} [props.hint] - Hint text to provide additional guidance or information to the user.
  * @param {SizeTypes} [props.size] - The size of the textarea field, which can be 'small', 'medium', or 'large'.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information or help text when the user hovers over an icon.
- * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined) | TextareaCopyableProp} [props.copyable] - Determines if the textarea value can be copied. It can be a boolean for simple copy, a function for custom copy behavior, or an object to define custom icons, tooltips, and text.
+ * @param {CopyableProp} [props.copyable] - Indicates if the textarea value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
  * @param {string} [props.labelClassName] - Additional classes to apply to the label element

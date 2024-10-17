@@ -18,8 +18,8 @@
  * limitations under the License.
  */
 
+import { CopyableProp } from '.'
 import { ThemeModes } from '../hooks/useTheme'
-import { CopyableProp } from './Input'
 
 export interface CodeViewerProps {
   code: string | string[]

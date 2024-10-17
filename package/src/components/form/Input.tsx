@@ -106,7 +106,7 @@ export const labelVariants = cva(
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the input.
  * @param {SizeTypes} [props.size] - Size of the input field.
  * @param {React.ReactNode} [props.AfterComponent] - Component to render after the input field.
- * @param {boolean | ((inputCurrentValue: string | undefined) => string | number | null | undefined) | InputCopyableProp} [props.copyable] - Indicates if the input value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
+ * @param {CopyableProp} [props.copyable] - Indicates if the input value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
  *
  * @returns {React.ReactNode} Rendered Input component.
  *
@@ -120,7 +120,7 @@ export const labelVariants = cva(
  *   placeholder="Enter your username"
  *   required
  *   error="Username is required"
- *    containerClassName="custom-containerClassName"
+ *   containerClassName="custom-containerClassName"
  *   copyable={{
  *     text: "Copy this username",
  *     icon: [<CustomCopyIcon />, <CustomCopiedIcon />],
@@ -263,7 +263,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 { 'dd-w-[15px]': uiSize === 'small' },
               )}
             >
-              <Tooltip content={tooltipText}> {icon}</Tooltip>
+              <Tooltip content={tooltipText}>{icon}</Tooltip>
             </div>
           </div>
         )}

@@ -24,7 +24,6 @@ import { cva } from 'class-variance-authority'
 import {
   TypographyBaseProps,
   TypographyComponents,
-  CopyableOptionsProp,
   TypographyLinkProps,
   TypographyParagraphProps,
   TypographyProps,
@@ -35,6 +34,7 @@ import Tooltip from './Tooltip'
 import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
 import { copyToClipboard } from '../utils/copy'
+import { CopyableOptionsProp } from '../types'
 
 /**
  * Define Typographt variants using the `cva` utility function.
