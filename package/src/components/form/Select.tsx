@@ -325,6 +325,12 @@ const MultiSelect = <ExtraDataType extends unknown>({
     }
   }
 
+  const selectedOptions = React.useMemo(() => {
+    if (values?.length && options.length) {
+      return options.filter((o) => values.includes(o.value))
+    }
+  }, [values, options])
+
   return (
     <div className={cn('dd-flex dd-flex-col', className)}>
       <div
@@ -371,8 +377,8 @@ const MultiSelect = <ExtraDataType extends unknown>({
               'dd-text-slate-300 dark:dd-text-secondary-600': loading,
             })}
           >
-            {values && values.length > 0 ? (
-              values.join(' , ')
+            {selectedOptions && selectedOptions.length > 0 ? (
+              selectedOptions.map((o) => o.label).join(' , ')
             ) : (
               <Text size='sm' uiType='secondary'>
                 {emptyString || ''}
