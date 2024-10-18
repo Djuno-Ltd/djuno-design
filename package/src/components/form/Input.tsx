@@ -25,13 +25,10 @@ import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
 import Tooltip from '../Tooltip'
 import Loading from '../Loading'
-import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
-// import { uuid } from '../../utils/uuid'
-import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
-import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import { uuid } from '../../utils/uuid'
 import { useCopyable } from '../../hooks/useCopyable'
+import { CopyableText } from '../../types'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -156,17 +153,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const onChange = inputProps?.onChange
 
   const handleCopyToClipboard = () => {
-    const input = window.document.getElementById(props.id || innerId) as HTMLInputElement
-    if (input) {
-      const inputValue = input.value
-      let finalText: string | number | null | undefined = ''
+    const input = (window.document.getElementById(props.id || innerId) as HTMLInputElement) || null
+    let finalText: CopyableText = ''
+
+    const inputValue = input ? input.value : ''
+    if (textToCopy) {
       if (typeof textToCopy === 'function') {
         finalText = textToCopy({ value: inputValue })
       } else {
-        finalText = inputValue
+        finalText = textToCopy
       }
-      copy(finalText)
+    } else {
+      finalText = inputValue
     }
+    copy(finalText)
   }
 
   return (

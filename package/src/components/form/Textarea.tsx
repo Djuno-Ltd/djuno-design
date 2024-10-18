@@ -23,11 +23,10 @@ import { TextareaProps } from './../../types/ITexrarea'
 import { AnimatedFormError, inputVariants, labelVariants } from './Input'
 import Typography from '../Typography'
 import Tooltip from '../Tooltip'
-import { copyToClipboard } from '../../utils/copy'
-import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
-import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import Loading from '../Loading'
 import { uuid } from '../../utils/uuid'
+import { useCopyable } from '../../hooks/useCopyable'
+import { CopyableText } from '../../types'
 
 /**
  * Textarea component that allows for customization of appearance and behavior, including validation, additional styling options, and copyable functionality.
@@ -96,66 +95,29 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
     ...textareaProps
   } = props
 
+  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
+
   const innerId = React.useMemo(() => uuid(), [])
 
   const value = textareaProps?.value
   const onChange = textareaProps?.onChange
 
-  const tooltipTexts: [string, string] = React.useMemo(() => {
-    const defaultTexts: [string, string] = ['Copy', 'Copied']
-    const emptyTexts: [string, string] = ['', '']
-
-    if (typeof copyable === 'object') {
-      if (copyable?.tooltips === false) {
-        return emptyTexts
-      } else if (copyable?.tooltips) {
-        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
-      }
-    }
-
-    return defaultTexts
-  }, [copyable])
-
-  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
-    const defaultIcons: [React.ReactNode, React.ReactNode] = [
-      <CopyIcon key='copy-icon' />,
-      <CheckIcon key='copied-icon' />,
-    ]
-    if (typeof copyable === 'object' && copyable?.icon) {
-      return copyable.icon
-    }
-    return defaultIcons
-  }, [copyable])
-
-  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
-  const [icon, setIcon] = React.useState(icons[0])
-
-  const handleCopyToClipboard = React.useCallback(() => {
+  const handleCopyToClipboard = () => {
     const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
+    let finalText: CopyableText = ''
+    const textAreaValue = input.value
 
-    if (input) {
-      const teatareaValue = input.value
-      let textToCopy: string | number | null | undefined = ''
-      if (typeof copyable === 'function') {
-        textToCopy = copyable(teatareaValue)
+    if (textToCopy) {
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: textAreaValue })
       } else {
-        textToCopy = teatareaValue
+        finalText = textToCopy
       }
-
-      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-        copyToClipboard(textToCopy.toString()).then(() => {
-          setTooltipText(tooltipTexts[1])
-          setIcon(icons[1])
-
-          // Revert back after some time
-          setTimeout(() => {
-            setTooltipText(tooltipTexts[0])
-            setIcon(icons[0])
-          }, 2000)
-        })
-      }
+    } else {
+      finalText = textAreaValue
     }
-  }, [copyable, tooltipTexts, icons, props.id, innerId])
+    copy(finalText)
+  }
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
