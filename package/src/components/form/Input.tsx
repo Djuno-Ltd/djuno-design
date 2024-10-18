@@ -152,21 +152,23 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const value = inputProps?.value
   const onChange = inputProps?.onChange
 
-  const handleCopyToClipboard = () => {
-    const input = (window.document.getElementById(props.id || innerId) as HTMLInputElement) || null
-    let finalText: CopyableText = ''
+  const handleCopyToClipboard = (e: React.MouseEvent) => {
+    e.stopPropagation() // Stop event propagation
 
-    const inputValue = input ? input.value : ''
-    if (textToCopy) {
-      if (typeof textToCopy === 'function') {
-        finalText = textToCopy({ value: inputValue })
-      } else {
-        finalText = textToCopy
-      }
+    const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
+    const textAreaValue = input.value // Get the current textarea value
+
+    console.log('Current textarea value:', textAreaValue) // Log the current value
+
+    // Type guard to check if copyable is an object and has a text function
+    if (typeof copyable === 'object' && copyable !== null && typeof copyable.text === 'function') {
+      const finalText = copyable.text({ value: textAreaValue }) // Call it with the current textarea value
+      console.log('Final text for copy:', finalText) // Log final text to copy
+      copy(finalText) // Perform the copy operation
     } else {
-      finalText = inputValue
+      // Fallback if it's not a function or not an object
+      copy(textAreaValue) // Directly copy the value
     }
-    copy(finalText)
   }
 
   return (

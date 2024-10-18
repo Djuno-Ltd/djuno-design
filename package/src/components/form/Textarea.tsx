@@ -102,21 +102,21 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
   const value = textareaProps?.value
   const onChange = textareaProps?.onChange
 
-  const handleCopyToClipboard = () => {
+  const handleCopyToClipboard = (e: React.MouseEvent) => {
+    e.stopPropagation()
+
     const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
-    let finalText: CopyableText = ''
     const textAreaValue = input.value
 
-    if (textToCopy) {
-      if (typeof textToCopy === 'function') {
-        finalText = textToCopy({ value: textAreaValue })
-      } else {
-        finalText = textToCopy
-      }
+    console.log('textAreaValue', textAreaValue)
+
+    if (typeof copyable === 'object' && copyable !== null && typeof copyable.text === 'function') {
+      const finalText = copyable.text({ value: textAreaValue })
+      console.log('finalText', finalText)
+      copy(finalText)
     } else {
-      finalText = textAreaValue
+      copy(textAreaValue)
     }
-    copy(finalText)
   }
 
   return (

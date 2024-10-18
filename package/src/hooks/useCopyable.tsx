@@ -19,7 +19,7 @@
  */
 
 import React, { useEffect } from 'react'
-import { CopyableProp, CopyableText } from '../types'
+import { CopyableProp, CopyableText, CopyableTextOption } from '../types'
 import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
 import { copyToClipboard } from '../utils/copy'
@@ -54,9 +54,7 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
     return defaultIcons
   }, [copyable])
 
-  const [textToCopy, setTextToCopy] = React.useState<string | ((prop: { value?: string }) => CopyableText) | undefined>(
-    undefined,
-  )
+  const [textToCopy, setTextToCopy] = React.useState<CopyableTextOption | undefined>(undefined)
   const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
   const [icon, setIcon] = React.useState(icons[0])
   const [copied, setCopied] = React.useState(false)

@@ -96,7 +96,8 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
     setCurrentTheme(style)
   }, [mode])
 
-  const handleCopyToClipboard = () => {
+  const handleCopyToClipboard = (e: React.MouseEvent) => {
+    e.stopPropagation()
     let finalText: CopyableText = ''
     const inputValue = Array.isArray(code) ? code[0] : code
     if (textToCopy) {

@@ -299,17 +299,18 @@ const CopyableText: React.FC<{ copyable: boolean | CopyableOptionsProp; textChil
       typeof copyable !== 'boolean' &&
       typeof copyable.text !== 'undefined'
     ) {
-      return copyable.text
-    } else {
-      if (typeof textChildren !== 'undefined' && textChildren !== null) {
-        return textChildren.toString()
+      if (typeof copyable.text === 'function') {
+        return copyable.text({ value: textChildren?.toString() || '' }) as string
       } else {
-        return ''
+        return copyable.text
       }
+    } else {
+      return textChildren?.toString() || ''
     }
-  }, [])
+  }, [copyable, textChildren])
 
-  const handleCopy = () => {
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation()
     let finalText: CopyableText = ''
     if (textToCopy) {
       if (typeof textToCopy === 'function') {

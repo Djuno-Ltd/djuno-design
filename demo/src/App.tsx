@@ -651,12 +651,22 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
-              copyable={(v) => `Hi ${v}`}
+              // copyable={{
+              //   text: (v) => `Hi ${v || ""}`,
+              // }}
+              copyable={{
+                text: ({ value }) => {
+                  console.log("value", value);
+                  return `Hi ${value || ""}`;
+                },
+              }}
             />
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
-              copyable={(v) => `Hi ${v}`}
+              copyable={{
+                text: (v) => `Hi ${v || ""}`,
+              }}
             />
           </Flex>
           <Text size="sm" className="font-semibold mt-10">
@@ -1093,7 +1103,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Flex items="end" className="gap-3 w-full flex ">
               <Input
                 label="copyable"
-                copyable={(v) => `Hi ${v}`}
+                copyable={{
+                  text: (v) => `Hi ${v}`,
+                }}
                 value="djuno-design"
               />
             </Flex>
