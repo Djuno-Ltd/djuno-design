@@ -27,6 +27,7 @@ import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
 import { copyToClipboard } from '../utils/copy'
 import { cn } from '../utils/cn'
 import Tooltip from './Tooltip'
+import { useCopyable } from '../hooks/useCopyable'
 
 /**
  * CodeViewer component for displaying code with syntax highlighting, line numbers, and optional copy-to-clipboard functionality.
@@ -77,6 +78,7 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
   const [currentTheme, setCurrentTheme] = React.useState<{
     [key: string]: React.CSSProperties
   }>()
+  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
 
   React.useEffect(() => {
     let style
@@ -122,32 +124,31 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
     return defaultIcons
   }, [copyable])
 
-  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
-  const [icon, setIcon] = React.useState(icons[0])
+  // const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
+  // const [icon, setIcon] = React.useState(icons[0])
 
-  const handleCopyToClipboard = React.useCallback(() => {
-    let textToCopy: string | number | null | undefined = ''
+  const handleCopyToClipboard = () => {
+    let finalText: string | number | null | undefined = ''
     const inputValue = Array.isArray(code) ? code[0] : code
 
-    if (typeof copyable === 'function') {
-      textToCopy = copyable(inputValue)
+    if (typeof textToCopy === 'function') {
+      finalText = textToCopy({ value: inputValue })
     } else {
-      textToCopy = inputValue
+      finalText = inputValue
     }
+    copy(finalText)
+    // if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
+    //   copyToClipboard(textToCopy.toString()).then(() => {
+    //     setTooltipText(tooltipTexts[1])
+    //     setIcon(icons[1])
 
-    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy.toString()).then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-
-        // Revert back after some time
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 2000)
-      })
-    }
-  }, [copyable, tooltipTexts, icons])
+    //     // Revert back after some time
+    //     setTimeout(() => {
+    //       setTooltipText(tooltipTexts[0])
+    //       setIcon(icons[0])
+    //     }, 2000)
+    //   })
+  }
 
   return (
     <div className='dd-relative dd-w-full'>
