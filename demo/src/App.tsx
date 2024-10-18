@@ -776,8 +776,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card title="Accordion">
           <Flex direction="col" className="gap-5 w-full">
-            <Text>handleChange</Text>
-
+            <Divider text="uiType default" />
             <Accordion
               items={[
                 {
@@ -788,8 +787,18 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                     </div>
                   ),
                 },
+                {
+                  label: "item2",
+                  panel: (
+                    <div className="">
+                      <Alert uiType="info">This is an Alert</Alert>
+                    </div>
+                  ),
+                },
               ]}
             />
+
+            <Divider text="uiType transparent" />
             <Accordion
               items={[
                 { label: <Switcher />, panel: <div>Panel Content 1</div> },
@@ -798,6 +807,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               uiType="transparent"
             />
 
+            <Divider text="loading" />
             <Accordion items={[]} loading />
           </Flex>
         </Card>
