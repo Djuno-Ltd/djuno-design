@@ -560,7 +560,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
         </Card>
 
         <Card title="Textarea">
-          <Text size="sm" className="font-semibold ">
+          <Text size="sm" className="font-semibold">
             Have hit:
           </Text>
           <Flex direction="col" className="gap-5 w-full mt-5">
@@ -570,44 +570,41 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               hint="Djuno Design"
             />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Simple form:
-          </Text>
-          <Flex className="gap-5 w-full mt-5">
+
+          <Divider
+            text="Simple form"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
+          <Flex className="gap-5 w-full">
             <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
             />
             <Input label="Input" placeholder="Enter custom notes if any" />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Have loading:
-          </Text>
-          <Flex className="gap-5 w-full mt-5">
+
+          <Divider
+            text="Have loading"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
+          <Flex className="gap-5 w-full">
             <Textarea
               label="Textarea"
               placeholder="Enter custom notes if any"
               loading
               loadingType="elastic"
             />
-
             <Input label="loading" loading loadingType="elastic" />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Replace copy text.:
-          </Text>
-          <Flex className="gap-5 w-full mt-5">
-            <Textarea
-              label="Textarea"
-              placeholder=""
-              tooltip={{ content: "test" }}
-            />
-            <Input label="Input" placeholder="" tooltip={{ content: "test" }} />
-          </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Have error with error text:
-          </Text>
-          <Flex className="gap-5 w-full mt-5">
+
+          <Divider
+            text="Have error with error text"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
+          <Flex className="gap-5 w-full">
             <Textarea
               label="Textarea"
               loadingType="elastic"
@@ -617,48 +614,64 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               }
               error={textareaValue === "" ? "Field is required" : ""}
             />
-            <Flex items="end" className="gap-3 w-full flex ">
-              <Input
-                label="Input"
-                loadingType="elastic"
-                value={inputValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setInputValue(e.target.value)
-                }
-                error={inputValue === "" ? "Field is required" : ""}
-              />
-            </Flex>
+            <Input
+              label="Input"
+              loadingType="elastic"
+              value={inputValue}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setInputValue(e.target.value)
+              }
+              error={inputValue === "" ? "Field is required" : ""}
+            />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Copyable without function:
-          </Text>
+
+          <Divider
+            text="Copyable (copy current value)"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
           <Flex className="gap-5 w-full mt-5">
             <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
-              copyable={true}
+              copyable
             />
             <Input
               label="Input"
               placeholder="Enter custom notes if any"
-              copyable={true}
+              copyable
             />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Copyable with function:
-          </Text>
+
+          <Divider
+            text="Copyable with custom text"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
           <Flex className="gap-5 w-full mt-5">
             <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
-              // copyable={{
-              //   text: (v) => `Hi ${v || ""}`,
-              // }}
+              copyable={{ text: "This is a custom text for textarea" }}
+            />
+            <Input
+              label="Input"
+              placeholder="Enter custom notes if any"
+              copyable={{ text: "This is a custom text for input" }}
+            />
+          </Flex>
+
+          <Divider
+            text="Copyable with custom text function"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
+          <Flex className="gap-5 w-full mt-5">
+            <Textarea
+              label="Texrarea"
+              placeholder="Enter custom notes if any"
               copyable={{
-                text: ({ value }) => {
-                  console.log("value", value);
-                  return `Hi ${value || ""}`;
-                },
+                text: ({ value }) => `Hi ${value}`,
               }}
             />
             <Input
@@ -669,9 +682,12 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               }}
             />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Have error without error text:
-          </Text>
+
+          <Divider
+            text="Have error without error text"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
           <Flex className="gap-5 w-full mt-5">
             <Textarea
               label="Texrarea"
@@ -684,15 +700,21 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               error={true}
             />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Custom Copy icon and replace tooltips text:
-          </Text>
+
+          <Divider
+            text="Custom Copy icon and replace tooltips text"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
           <Flex className="gap-5 w-full mt-5">
             <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
-                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                icons: [
+                  <FaceSmile />,
+                  <FaceSmile className="text-green-500" />,
+                ],
                 tooltips: ["Click to copy", "Text copied!"],
               }}
             />
@@ -700,20 +722,29 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               label="Input"
               placeholder="Enter custom notes if any"
               copyable={{
-                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                icons: [
+                  <FaceSmile />,
+                  <FaceSmile className="text-green-500" />,
+                ],
                 tooltips: ["Click to copy", "Text copied!"],
               }}
             />
           </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Hide Copy tooltips:
-          </Text>
+
+          <Divider
+            text="Hide Copy tooltips"
+            textClassName="!text-sm"
+            className="!mt-6 !mb-2"
+          />
           <Flex className="gap-5 w-full mt-5">
             <Textarea
               label="Texrarea"
               placeholder="Enter custom notes if any"
               copyable={{
-                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                icons: [
+                  <FaceSmile />,
+                  <FaceSmile className="text-green-500" />,
+                ],
                 tooltips: false,
               }}
             />
@@ -721,38 +752,12 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               label="Input"
               placeholder="Enter custom notes if any"
               copyable={{
-                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                icons: [
+                  <FaceSmile />,
+                  <FaceSmile className="text-green-500" />,
+                ],
                 tooltips: false,
               }}
-            />
-          </Flex>
-          <Text size="sm" className="font-semibold mt-10">
-            Custom label:
-          </Text>
-          <Flex className="gap-5 w-full mt-5">
-            <Textarea
-              label="Texrarea"
-              placeholder="Enter custom notes if any"
-              labelClassName="text-green-500 font-bold"
-            />
-            <Input
-              label="Input"
-              placeholder="Enter custom notes if any"
-              labelClassName="text-green-500 font-bold"
-            />
-          </Flex>
-          <Flex className="gap-5 w-full mt-5">
-            <Textarea
-              error
-              label="Texrarea"
-              placeholder="Enter custom notes if any"
-              labelClassName="text-green-500 font-bold"
-            />
-            <Input
-              error
-              label="Input"
-              placeholder="Enter custom notes if any"
-              labelClassName="text-green-500 font-bold"
             />
           </Flex>
         </Card>
@@ -1134,7 +1139,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               <Input
                 label="Input"
                 copyable={{
-                  icon: [
+                  icons: [
                     <FaceSmile />,
                     <FaceSmile className="text-green-500" />,
                   ],
@@ -1577,7 +1582,10 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             <Text
               copyable={{
                 tooltips: ["click here", "you clicked!!"],
-                icon: [<FaceSmile />, <FaceSmile className="text-green-500" />],
+                icons: [
+                  <FaceSmile />,
+                  <FaceSmile className="text-green-500" />,
+                ],
               }}
             >
               Custom Copy icon and replace tooltips text.

@@ -31,9 +31,7 @@ import {
   TypographyTitleProps,
 } from '../types/Typography'
 import Tooltip from './Tooltip'
-import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
-import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
-import { CopyableOptionsProp, CopyableText } from '../types'
+import { CopyableProp, CopyableText } from '../types'
 import { useCopyable } from '../hooks/useCopyable'
 
 /**
@@ -107,7 +105,7 @@ const textVariants = cva('', {
  * @param {boolean} [props.strong] - Determines if the content should be displayed as strong.
  * @param {boolean} [props.italic] - Determines if the content should be displayed in italics.
  * @param {object} [props.tooltip] - Additional props for the tooltip functionality.
- * @param {boolean | TypographyCopyableProp} [props.copyable] - Determines if the content should be copyable, with optional copyable configurations.
+ * @param {CopyableProp} [props.copyable] - Determines if the content should be copyable, with optional copyable configurations.
  *
  * @returns {React.ReactNode} Rendered Typography component.
  *
@@ -286,28 +284,15 @@ const Link: React.FC<TypographyLinkProps> = ({
   )
 }
 
-const CopyableText: React.FC<{ copyable: boolean | CopyableOptionsProp; textChildren: React.ReactNode }> = ({
+const CopyableText: React.FC<{ copyable: CopyableProp; textChildren: React.ReactNode }> = ({
   copyable,
   textChildren,
 }) => {
   const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
 
   const text: string = React.useMemo(() => {
-    if (
-      copyable &&
-      typeof copyable !== 'undefined' &&
-      typeof copyable !== 'boolean' &&
-      typeof copyable.text !== 'undefined'
-    ) {
-      if (typeof copyable.text === 'function') {
-        return copyable.text({ value: textChildren?.toString() || '' }) as string
-      } else {
-        return copyable.text
-      }
-    } else {
-      return textChildren?.toString() || ''
-    }
-  }, [copyable, textChildren])
+    return textChildren?.toString() || ''
+  }, [textChildren])
 
   const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation()

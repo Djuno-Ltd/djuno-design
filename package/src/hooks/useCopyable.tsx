@@ -19,7 +19,7 @@
  */
 
 import React, { useEffect } from 'react'
-import { CopyableProp, CopyableText, CopyableTextOption } from '../types'
+import { CopyableProp, CopyableTextOption } from '../types'
 import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
 import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
 import { copyToClipboard } from '../utils/copy'
@@ -48,8 +48,8 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
       <CopyIcon key='copy-icon' />,
       <CheckIcon key='copied-icon' />,
     ]
-    if (typeof copyable === 'object' && copyable?.icon) {
-      return copyable.icon
+    if (typeof copyable === 'object' && copyable?.icons) {
+      return copyable.icons
     }
     return defaultIcons
   }, [copyable])
@@ -80,7 +80,11 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
 
   useEffect(() => {
     if (copyable && typeof copyable === 'object' && copyable.text) {
-      setTextToCopy(copyable.text)
+      if (typeof copyable.text === 'function') {
+        setTextToCopy(() => copyable.text)
+      } else {
+        setTextToCopy(copyable.text)
+      }
     }
   }, [copyable])
 

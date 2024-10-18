@@ -95,28 +95,30 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
     ...textareaProps
   } = props
 
+  const innerId = React.useMemo(() => id || uuid(), [id])
   const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
-
-  const innerId = React.useMemo(() => uuid(), [])
 
   const value = textareaProps?.value
   const onChange = textareaProps?.onChange
 
   const handleCopyToClipboard = (e: React.MouseEvent) => {
     e.stopPropagation()
+    let finalText: CopyableText = ''
 
-    const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
-    const textAreaValue = input.value
+    const textareaElement = window.document.getElementById(innerId)
+    const element = textareaElement as HTMLTextAreaElement | null
+    const textAreaValue = element ? element.value : null
 
-    console.log('textAreaValue', textAreaValue)
-
-    if (typeof copyable === 'object' && copyable !== null && typeof copyable.text === 'function') {
-      const finalText = copyable.text({ value: textAreaValue })
-      console.log('finalText', finalText)
-      copy(finalText)
+    if (textToCopy) {
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: textAreaValue, element: textareaElement })
+      } else {
+        finalText = textToCopy
+      }
     } else {
-      copy(textAreaValue)
+      finalText = textAreaValue
     }
+    copy(finalText)
   }
 
   return (
@@ -128,7 +130,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
         })}
       >
         <label
-          htmlFor={id}
+          htmlFor={innerId}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
@@ -165,7 +167,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
       </div>
       <div className='dd-relative dd-w-full'>
         <textarea
-          id={props.id || innerId}
+          id={innerId}
           ref={ref}
           value={value}
           onChange={onChange ? onChange : () => {}}

@@ -65,10 +65,12 @@ export type CopyableText = string | number | null | undefined
 
 export type CopyableProp = boolean | CopyableOptionsProp
 
-export type CopyableTextOption = string | ((prop: { value?: string }) => CopyableText)
+export type CopyableTextOption =
+  | string
+  | ((prop: { value: string | null; element?: HTMLElement | null }) => CopyableText)
 
 export interface CopyableOptionsProp {
   text?: CopyableTextOption
-  icon?: [React.ReactNode, React.ReactNode]
+  icons?: [React.ReactNode, React.ReactNode]
   tooltips?: boolean | [string, string]
 }

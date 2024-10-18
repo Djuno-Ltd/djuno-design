@@ -129,6 +129,7 @@ export const labelVariants = cva(
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
+    id,
     className,
     containerClassName,
     labelClassName,
@@ -146,29 +147,31 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     AfterComponent,
     ...inputProps
   } = props
+
+  const innerId = React.useMemo(() => id || uuid(), [id])
   const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
-  const innerId = React.useMemo(() => uuid(), [])
 
   const value = inputProps?.value
   const onChange = inputProps?.onChange
 
   const handleCopyToClipboard = (e: React.MouseEvent) => {
-    e.stopPropagation() // Stop event propagation
+    e.stopPropagation()
+    let finalText: CopyableText = ''
 
-    const input = window.document.getElementById(props.id || innerId) as HTMLTextAreaElement
-    const textAreaValue = input.value // Get the current textarea value
+    const inputElement = window.document.getElementById(innerId)
+    const element = inputElement as HTMLTextAreaElement | null
+    const inputValue = element ? element.value : null
 
-    console.log('Current textarea value:', textAreaValue) // Log the current value
-
-    // Type guard to check if copyable is an object and has a text function
-    if (typeof copyable === 'object' && copyable !== null && typeof copyable.text === 'function') {
-      const finalText = copyable.text({ value: textAreaValue }) // Call it with the current textarea value
-      console.log('Final text for copy:', finalText) // Log final text to copy
-      copy(finalText) // Perform the copy operation
+    if (textToCopy) {
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: inputValue, element: inputElement })
+      } else {
+        finalText = textToCopy
+      }
     } else {
-      // Fallback if it's not a function or not an object
-      copy(textAreaValue) // Directly copy the value
+      finalText = inputValue
     }
+    copy(finalText)
   }
 
   return (
@@ -185,7 +188,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         )}
       >
         <label
-          htmlFor={props.id}
+          htmlFor={innerId}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
@@ -224,7 +227,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </div>
         )}
         <input
-          id={props.id || innerId}
+          id={innerId}
           ref={ref}
           value={value}
           onChange={onChange ? onChange : () => {}}
