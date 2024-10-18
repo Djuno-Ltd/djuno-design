@@ -74,7 +74,8 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   const [showText, setShowText] = React.useState(false)
   const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
 
-  const handleCopy = () => {
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation()
     let finalText: CopyableText = ''
     if (textToCopy) {
       if (typeof textToCopy === 'function') {

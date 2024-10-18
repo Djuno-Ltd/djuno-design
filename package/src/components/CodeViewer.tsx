@@ -22,11 +22,10 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
 import { CodeViewerProps } from '../types/ICodeViewer'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { tomorrow, tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
-import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
-import { copyToClipboard } from '../utils/copy'
 import { cn } from '../utils/cn'
 import Tooltip from './Tooltip'
+import { useCopyable } from '../hooks/useCopyable'
+import { CopyableText } from '../types'
 
 /**
  * CodeViewer component for displaying code with syntax highlighting, line numbers, and optional copy-to-clipboard functionality.
@@ -77,6 +76,7 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
   const [currentTheme, setCurrentTheme] = React.useState<{
     [key: string]: React.CSSProperties
   }>()
+  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
 
   React.useEffect(() => {
     let style
@@ -96,58 +96,21 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
     setCurrentTheme(style)
   }, [mode])
 
-  const tooltipTexts: [string, string] = React.useMemo(() => {
-    const defaultTexts: [string, string] = ['Copy', 'Copied']
-    const emptyTexts: [string, string] = ['', '']
-
-    if (typeof copyable === 'object') {
-      if (copyable?.tooltips === false) {
-        return emptyTexts
-      } else if (copyable?.tooltips) {
-        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
-      }
-    }
-
-    return defaultTexts
-  }, [copyable])
-
-  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
-    const defaultIcons: [React.ReactNode, React.ReactNode] = [
-      <CopyIcon key='copy-icon' />,
-      <CheckIcon key='copied-icon' />,
-    ]
-    if (typeof copyable === 'object' && copyable?.icon) {
-      return copyable.icon
-    }
-    return defaultIcons
-  }, [copyable])
-
-  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
-  const [icon, setIcon] = React.useState(icons[0])
-
-  const handleCopyToClipboard = React.useCallback(() => {
-    let textToCopy: string | number | null | undefined = ''
+  const handleCopyToClipboard = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    let finalText: CopyableText = ''
     const inputValue = Array.isArray(code) ? code[0] : code
-
-    if (typeof copyable === 'function') {
-      textToCopy = copyable(inputValue)
+    if (textToCopy) {
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: inputValue })
+      } else {
+        finalText = textToCopy
+      }
     } else {
-      textToCopy = inputValue
+      finalText = inputValue
     }
-
-    if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-      copyToClipboard(textToCopy.toString()).then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-
-        // Revert back after some time
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 2000)
-      })
-    }
-  }, [copyable, tooltipTexts, icons])
+    copy(finalText)
+  }
 
   return (
     <div className='dd-relative dd-w-full'>

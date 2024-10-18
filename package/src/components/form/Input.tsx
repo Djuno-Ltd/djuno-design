@@ -25,12 +25,10 @@ import { cva } from 'class-variance-authority'
 import { InputProps } from '../../types/Input'
 import Tooltip from '../Tooltip'
 import Loading from '../Loading'
-import { copyToClipboard } from '../../utils/copy'
 import { motion, AnimatePresence } from 'framer-motion'
-// import { uuid } from '../../utils/uuid'
-import { ReactComponent as CopyIcon } from './../../assets/icons/copy.svg'
-import { ReactComponent as CheckIcon } from './../../assets/icons/check.svg'
 import { uuid } from '../../utils/uuid'
+import { useCopyable } from '../../hooks/useCopyable'
+import { CopyableText } from '../../types'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -131,6 +129,7 @@ export const labelVariants = cva(
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
+    id,
     className,
     containerClassName,
     labelClassName,
@@ -149,71 +148,31 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...inputProps
   } = props
 
-  const innerId = React.useMemo(() => uuid(), [])
+  const innerId = React.useMemo(() => id || uuid(), [id])
+  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
 
   const value = inputProps?.value
   const onChange = inputProps?.onChange
 
-  const tooltipTexts: [string, string] = React.useMemo(() => {
-    const defaultTexts: [string, string] = ['Copy', 'Copied']
-    const emptyTexts: [string, string] = ['', '']
+  const handleCopyToClipboard = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    let finalText: CopyableText = ''
 
-    if (typeof copyable === 'object') {
-      if (copyable?.tooltips === false) {
-        return emptyTexts
-      } else if (copyable?.tooltips) {
-        return typeof copyable?.tooltips === 'boolean' ? defaultTexts : copyable.tooltips
-      }
-    }
-    return defaultTexts
-  }, [copyable])
+    const inputElement = window.document.getElementById(innerId)
+    const element = inputElement as HTMLTextAreaElement | null
+    const inputValue = element ? element.value : null
 
-  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
-    const defaultIcons: [React.ReactNode, React.ReactNode] = [
-      <CopyIcon key='copy-icon' />,
-      <CheckIcon key='copied-icon' />,
-    ]
-    if (typeof copyable === 'object' && copyable?.icon) {
-      return copyable.icon
-    }
-    return defaultIcons
-  }, [copyable])
-
-  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
-  const [icon, setIcon] = React.useState(icons[0])
-
-  const handleCopyToClipboard = React.useCallback(() => {
-    const input = window.document.getElementById(props.id || innerId) as HTMLInputElement
-    if (input) {
-      const inputValue = input.value
-      let textToCopy: string | number | null | undefined = ''
-      if (typeof copyable === 'function') {
-        textToCopy = copyable(inputValue)
+    if (textToCopy) {
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: inputValue, element: inputElement })
       } else {
-        textToCopy = inputValue
+        finalText = textToCopy
       }
-
-      if (typeof textToCopy === 'string' || typeof textToCopy === 'number') {
-        copyToClipboard(textToCopy.toString()).then(() => {
-          setTooltipText(tooltipTexts[1])
-          setIcon(icons[1])
-
-          // Revert back after some time
-          setTimeout(() => {
-            setTooltipText(tooltipTexts[0])
-            setIcon(icons[0])
-          }, 2000)
-        })
-      }
+    } else {
+      finalText = inputValue
     }
-    // if (ref && 'current' in ref && ref.current) {
-    //   inputValue = ref.current.value
-    // } else if (internalRef.current) {
-    //   inputValue = internalRef.current.value
-    // } else if (typeof inputProps?.value === 'string') {
-    //   inputValue = inputProps.value
-    // }
-  }, [copyable, tooltipTexts, icons, props.id, innerId])
+    copy(finalText)
+  }
 
   return (
     <div className={cn('dd-flex dd-flex-col', containerClassName)}>
@@ -229,7 +188,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         )}
       >
         <label
-          htmlFor={props.id}
+          htmlFor={innerId}
           className={cn(
             labelVariants({
               hasError: error ? 'yes' : 'no',
@@ -268,7 +227,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </div>
         )}
         <input
-          id={props.id || innerId}
+          id={innerId}
           ref={ref}
           value={value}
           onChange={onChange ? onChange : () => {}}

@@ -31,10 +31,8 @@ import {
   TypographyTitleProps,
 } from '../types/Typography'
 import Tooltip from './Tooltip'
-import { ReactComponent as CopyIcon } from './../assets/icons/copy.svg'
-import { ReactComponent as CheckIcon } from './../assets/icons/check.svg'
-import { copyToClipboard } from '../utils/copy'
-import { CopyableOptionsProp } from '../types'
+import { CopyableProp, CopyableText } from '../types'
+import { useCopyable } from '../hooks/useCopyable'
 
 /**
  * Define Typographt variants using the `cva` utility function.
@@ -107,7 +105,7 @@ const textVariants = cva('', {
  * @param {boolean} [props.strong] - Determines if the content should be displayed as strong.
  * @param {boolean} [props.italic] - Determines if the content should be displayed in italics.
  * @param {object} [props.tooltip] - Additional props for the tooltip functionality.
- * @param {boolean | TypographyCopyableProp} [props.copyable] - Determines if the content should be copyable, with optional copyable configurations.
+ * @param {CopyableProp} [props.copyable] - Determines if the content should be copyable, with optional copyable configurations.
  *
  * @returns {React.ReactNode} Rendered Typography component.
  *
@@ -286,86 +284,30 @@ const Link: React.FC<TypographyLinkProps> = ({
   )
 }
 
-const CopyableText: React.FC<{ copyable: boolean | CopyableOptionsProp; textChildren: React.ReactNode }> = ({
+const CopyableText: React.FC<{ copyable: CopyableProp; textChildren: React.ReactNode }> = ({
   copyable,
   textChildren,
 }) => {
+  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
+
   const text: string = React.useMemo(() => {
-    if (
-      copyable &&
-      typeof copyable !== 'undefined' &&
-      typeof copyable !== 'boolean' &&
-      typeof copyable.text !== 'undefined'
-    ) {
-      return copyable.text
-    } else {
-      if (typeof textChildren !== 'undefined' && textChildren !== null) {
-        return textChildren.toString()
-      } else {
-        return ''
-      }
-    }
-  }, [])
+    return textChildren?.toString() || ''
+  }, [textChildren])
 
-  const tooltipTexts: [string, string] = React.useMemo(() => {
-    const txts: [string, string] = ['Copy', 'Copied']
-    const empty_txts: [string, string] = ['', '']
-
-    if (typeof copyable === 'boolean') {
-      if (copyable) {
-        return txts
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    let finalText: CopyableText = ''
+    if (textToCopy) {
+      if (typeof textToCopy === 'function') {
+        finalText = textToCopy({ value: text })
       } else {
-        return empty_txts
+        finalText = textToCopy
       }
     } else {
-      if (typeof copyable.tooltips === 'undefined') {
-        return txts
-      } else {
-        if (typeof copyable.tooltips === 'boolean') {
-          if (copyable.tooltips) {
-            return txts
-          } else {
-            return empty_txts
-          }
-        } else {
-          return copyable.tooltips
-        }
-      }
+      finalText = text
     }
-  }, [copyable])
-
-  const icons: [React.ReactNode, React.ReactNode] = React.useMemo(() => {
-    const defaultIcons: [React.ReactNode, React.ReactNode] = [
-      <CopyIcon key='copy-icon' />,
-      <CheckIcon key='copied-icon' />,
-    ]
-    if (
-      copyable &&
-      typeof copyable !== 'undefined' &&
-      typeof copyable !== 'boolean' &&
-      typeof copyable.icon !== 'undefined'
-    ) {
-      return copyable.icon
-    }
-    return defaultIcons
-  }, [copyable])
-
-  // current datas
-  const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
-  const [icon, setIcon] = React.useState(icons[0])
-
-  const handleCopy = React.useCallback(() => {
-    copyToClipboard(text)
-      .then(() => {
-        setTooltipText(tooltipTexts[1])
-        setIcon(icons[1])
-        setTimeout(() => {
-          setTooltipText(tooltipTexts[0])
-          setIcon(icons[0])
-        }, 4000)
-      })
-      .catch()
-  }, [])
+    copy(finalText)
+  }
 
   return (
     <div className='dd-inline-block dd-ms-1 dd-text-sm'>

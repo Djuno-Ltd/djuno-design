@@ -26,17 +26,20 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { cva } from 'class-variance-authority'
 import Flex from './Flex'
 
-const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
-  variants: {
-    uiType: {
-      default: ' dd-border-0',
-      transparent: 'dd-border dd-border-secondary-200 dark:dd-border-dark-700 dd-bg-transparent',
+const accordionVariants = cva(
+  'dd-w-full dd-bg-secondary-50 dark:dd-bg-black/10 dd-border dark:dd-border-dark-800 dd-rounded-lg dd-overflow-hidden',
+  {
+    variants: {
+      uiType: {
+        default: '',
+        transparent: 'dd-bg-transparent',
+      },
+    },
+    defaultVariants: {
+      uiType: 'default',
     },
   },
-  defaultVariants: {
-    uiType: 'default',
-  },
-})
+)
 
 /**
  * Accordion component that allows for customization of UI type, size, loading state, and more.
@@ -49,6 +52,7 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  * @param {boolean} [props.loading] - Indicates if the accordion is in a loading state.
  * @param {boolean} [props.loadingSetting] - Loading settings.
  * @param {string} [props.labelClassName] - Additional CSS classes to apply custom styles to the label.
+ * @param {AccordinType} [props.uiType] - Type of UI for the accordion.
  * @returns {React.ReactNode} Rendered Accordion component.
  *
  * @version 0.4.8
@@ -66,7 +70,6 @@ const accordionVariants = cva('dd-w-full dd-rounded-lg dd-overflow-hidden', {
  *         { label: "Item 2", panel: "Panel content for item 2" }
  *       ]}
  *       loading={false}
- *       uiType="default"
  *     />
  *   );
  * }
@@ -100,11 +103,10 @@ const Accordion: React.FC<AccordionProps> = ({
             <>
               <DisclosureButton
                 className={cn(
-                  ' dd-bg-secondary-100 dark:dd-bg-dark-850 dd-flex dd-w-full dd-justify-between dd-items-center dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-black dark:dd-text-white hover:dd-bg-secondary-300 dark:hover:dd-bg-dark-950',
+                  'dd-bg-white dark:dd-bg-dark-850 dd-flex dd-w-full dd-justify-between dd-items-center dd-px-2 dd-py-3 md:dd-px-4 md:dd-py-4 dd-text-left dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-black dark:dd-text-white hover:dd-bg-secondary-50 dark:hover:dd-bg-dark-900',
                   {
                     '': uiType === 'default',
-                    'dd-border dark:dd-border-dark-700 dd-bg-transparent dark:dd-bg-transparent dark:hover:dd-bg-dark-800 hover:dd-bg-secondary-100':
-                      uiType === 'transparent',
+                    'dd-bg-transparent dark:dd-bg-transparent': uiType === 'transparent',
                   },
                   labelClassName,
                 )}
@@ -124,11 +126,10 @@ const Accordion: React.FC<AccordionProps> = ({
               {item.panel && (
                 <DisclosurePanel
                   className={cn(
-                    'dd-bg-secondary-50 dark:dd-bg-dark-800 dd-p-3 dd-text-black dark:dd-text-white',
+                    'dd-bg-secondary-50 dark:dd-bg-dark-900 dd-p-3 dd-text-black dark:dd-text-white',
                     {
                       '': uiType === 'default',
-                      'dd-border dark:dd-border-dark-700 dd-bg-transparent dark:dd-bg-transparent':
-                        uiType === 'transparent',
+                      'dd-bg-transparent dark:dd-bg-transparent': uiType === 'transparent',
                     },
                     panelClassName,
                   )}

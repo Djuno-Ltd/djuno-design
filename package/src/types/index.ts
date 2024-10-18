@@ -63,10 +63,14 @@ export interface IMediaQuery<T> {
 
 export type CopyableText = string | number | null | undefined
 
-export type CopyableProp = boolean | ((value: string | undefined) => CopyableText) | CopyableOptionsProp
+export type CopyableProp = boolean | CopyableOptionsProp
+
+export type CopyableTextOption =
+  | string
+  | ((prop: { value: string | null; element?: HTMLElement | null }) => CopyableText)
 
 export interface CopyableOptionsProp {
-  text?: string
-  icon?: [React.ReactNode, React.ReactNode]
+  text?: CopyableTextOption
+  icons?: [React.ReactNode, React.ReactNode]
   tooltips?: boolean | [string, string]
 }
