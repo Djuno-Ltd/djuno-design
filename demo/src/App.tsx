@@ -116,6 +116,10 @@ function App() {
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
   const [pathname, setPathname] = useState<string>("/sub-item1");
+  const [sidebarActive, setSidebarActive] = useState(true);
+  const handleTogleSidebarActive = () => {
+    setSidebarActive((prev) => !prev);
+  };
   const handleTogleSidebarLoading = () => {
     setSidebarLoading((prev) => !prev);
   };
@@ -126,7 +130,7 @@ function App() {
     setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
-  const sidebarItems: SidebarItem<{ d: string }>[] = [
+  const sidebarItems: SidebarItem[] = [
     {
       id: 1,
       label: "item1",
@@ -211,6 +215,7 @@ function App() {
                   value: "item2-2-0",
                 },
               ],
+              active: sidebarActive,
             },
             {
               id: "2-2-1",
@@ -259,12 +264,17 @@ function App() {
         },
       ],
     },
+    {
+      id: 4,
+      label: "item4",
+      active: sidebarActive,
+    },
   ];
 
   const sidebarSubItems: SidebarItem[] = [
     {
       id: 1,
-      label: "item1",
+      label: "sub-item1",
       activeConditions: [
         {
           index: 0,
@@ -278,13 +288,18 @@ function App() {
     },
     {
       id: 2,
-      label: "item2",
+      label: "sub-item2",
       activeConditions: [
         {
           index: 1,
           value: "sub-item2",
         },
       ],
+    },
+    {
+      id: 3,
+      label: "sub-item3",
+      active: false,
     },
   ];
 
@@ -903,6 +918,13 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 <Switcher
                   onChange={handleTogleSidebarLoading}
                   value={sidebarLoading}
+                />
+              </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">active?</Text>
+                <Switcher
+                  onChange={handleTogleSidebarActive}
+                  value={sidebarActive}
                 />
               </Flex>
             </Flex>

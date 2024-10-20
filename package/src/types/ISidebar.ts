@@ -21,10 +21,10 @@
 import { PanelLayoutTypes } from './IPanelLayouts'
 import { LoadingType } from './Loading'
 
-export interface SidebarProps extends React.PropsWithChildren {
-  items: SidebarItem[]
+export interface SidebarProps<T = unknown> extends React.PropsWithChildren {
+  items: SidebarItem<T>[]
   segments?: string[]
-  subItems?: SidebarItem[]
+  subItems?: SidebarItem<T>[]
   loading?: boolean
   loadingMode?: SidebarLoadingModes
   type?: PanelLayoutTypes
