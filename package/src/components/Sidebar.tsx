@@ -74,12 +74,12 @@ const Sidebar = <T extends unknown>({
   const [hover, setHover] = React.useState<string | number | undefined>()
   const [expandedItems, setExpandedItems] = React.useState<Array<string | number>>([])
 
-  const activeMainItems = useMemo(() => {
-    return items ? items.filter((item) => item.active === undefined || item.active) : []
+  const visibleMainItems = useMemo(() => {
+    return items ? items.filter((item) => item.isVisible === undefined || item.isVisible) : []
   }, [items])
 
-  const activeSubItems = useMemo(() => {
-    return subItems ? subItems.filter((item) => item.active === undefined || item.active) : []
+  const visibleSubItems = useMemo(() => {
+    return subItems ? subItems.filter((item) => item.isVisible === undefined || item.isVisible) : []
   }, [subItems])
 
   const addToExpand = (id: string | number) => {
@@ -95,7 +95,7 @@ const Sidebar = <T extends unknown>({
   const deleteFromExpand = (id: string | number) => {
     setExpandedItems((prevExpandedItems) => {
       if (prevExpandedItems.includes(id)) {
-        const item = activeMainItems.find((i) => i.id === id)
+        const item = visibleMainItems.find((i) => i.id === id)
         const { expandedChildIds } = calcExpandedChilds(item, expandedItems)
         const ids = [id, ...expandedChildIds]
         return prevExpandedItems.filter((expandedId) => !ids.includes(expandedId)) // Collapse item
@@ -106,7 +106,7 @@ const Sidebar = <T extends unknown>({
   }
 
   const activeItem = useMemo(() => {
-    return activeMainItems.find((item) => isActiveItem(item, segments || []))
+    return visibleMainItems.find((item) => isActiveItem(item, segments || []))
   }, [segments])
 
   const activeSubItem = useMemo(() => {
@@ -118,7 +118,7 @@ const Sidebar = <T extends unknown>({
   const calculatePointerPosition = React.useCallback(() => {
     let topOffset = 0
     let ended = false
-    activeMainItems.forEach((item) => {
+    visibleMainItems.forEach((item) => {
       if (item.id === hover || (hover === undefined && item.id === activeItem?.id)) {
         ended = true
       }
@@ -129,11 +129,11 @@ const Sidebar = <T extends unknown>({
       }
     })
     setPointerPosition(topOffset)
-  }, [hover, activeItem, activeMainItems, expandedItems])
+  }, [hover, activeItem, visibleMainItems, expandedItems])
 
   React.useEffect(() => {
     calculatePointerPosition()
-  }, [hover, activeItem, activeMainItems, expandedItems])
+  }, [hover, activeItem, visibleMainItems, expandedItems])
 
   const handleMouseEnter = (id: string | number) => {
     setHover(id)
@@ -155,7 +155,7 @@ const Sidebar = <T extends unknown>({
 
         <div className='dd-flex dd-flex-col'>
           {!loading &&
-            activeMainItems.map((item, index) => (
+            visibleMainItems.map((item, index) => (
               <SidebarMenuItem
                 height={navItemHeight}
                 item={item}
@@ -179,11 +179,11 @@ const Sidebar = <T extends unknown>({
       {!loading && (
         <div className='dd-w-full'>
           {children}
-          {activeSubItems.length > 0 && (
+          {visibleSubItems.length > 0 && (
             <div className='dd-px-2 dd-space-y-4 dd-mt-2'>
               <div className='dd-w-full dd-h-[1px] dd-bg-slate-200 dark:dd-bg-slate-700 dd-rounded-sm' />
               <div className='dd-my-2 dd-flex dd-flex-col dd-space-y-1'>
-                {activeSubItems.map((item, index) => (
+                {visibleSubItems.map((item, index) => (
                   <SidebarSubMenuItem
                     height={navItemHeight}
                     key={index}
@@ -260,12 +260,12 @@ const SidebarMenuItem = (props: {
     type,
   } = props
 
-  const activeChildItems = useMemo(() => {
-    return item.children ? item.children.filter((item) => item.active === undefined || item.active) : []
+  const visibleChildItems = useMemo(() => {
+    return item.children ? item.children.filter((item) => item.isVisible === undefined || item.isVisible) : []
   }, [item.children])
 
   React.useEffect(() => {
-    if (activeChildItems.length > 0) {
+    if (visibleChildItems.length > 0) {
       if (isActive && !isExpanded) addToExpand(item.id)
       if (!isActive && isExpanded) deleteFromExpand(item.id)
     }
@@ -276,7 +276,7 @@ const SidebarMenuItem = (props: {
       item.onClick(item)
     }
 
-    if (activeChildItems.length > 0) {
+    if (visibleChildItems.length > 0) {
       if (isExpanded) {
         deleteFromExpand(item.id)
       } else {
@@ -286,7 +286,7 @@ const SidebarMenuItem = (props: {
   }
 
   const activeItem = useMemo(() => {
-    return activeChildItems?.find((item) => isActiveItem(item, segments || []))
+    return visibleChildItems?.find((item) => isActiveItem(item, segments || []))
   }, [segments])
 
   return (
@@ -334,7 +334,7 @@ const SidebarMenuItem = (props: {
           )}
           <div className='dd-text-sm dd-whitespace-nowrap dd-w-full'>{renderLabel(item.label, isActive)}</div>
         </div>
-        {activeChildItems.length > 0 && (
+        {visibleChildItems.length > 0 && (
           <ArrowRightIcon
             className={cn('dd-w-[14px] dd-h-[14px] dd-transition-all dd-duration-200', {
               'dd-rotate-90': isExpanded,
@@ -343,14 +343,14 @@ const SidebarMenuItem = (props: {
         )}
       </div>
       <AnimatePresence>
-        {isExpanded && activeChildItems.length > 0 && (
+        {isExpanded && visibleChildItems.length > 0 && (
           <motion.div
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
             className={cn('dd-ml-1 dd-pl-1 dd-overflow-hidden')}
           >
-            {activeChildItems.map((child, index) => (
+            {visibleChildItems.map((child, index) => (
               <SidebarMenuItem
                 key={index}
                 height={height}
@@ -451,7 +451,7 @@ const calcExpandedChilds = (item: SidebarItem | undefined, expandedItems: Array<
 
   const getCalc = (_item: SidebarItem) => {
     const activeChildren = _item.children
-      ? _item.children.filter((item) => item.active === undefined || item.active)
+      ? _item.children.filter((item) => item.isVisible === undefined || item.isVisible)
       : []
 
     if (expandedItems.includes(_item.id) && activeChildren && activeChildren.length > 0) {

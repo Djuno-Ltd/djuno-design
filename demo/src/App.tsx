@@ -215,7 +215,7 @@ function App() {
                   value: "item2-2-0",
                 },
               ],
-              active: sidebarActive,
+              isVisible: sidebarActive,
             },
             {
               id: "2-2-1",
@@ -267,7 +267,7 @@ function App() {
     {
       id: 4,
       label: "item4",
-      active: sidebarActive,
+      isVisible: sidebarActive,
     },
   ];
 
@@ -299,7 +299,7 @@ function App() {
     {
       id: 3,
       label: "sub-item3",
-      active: false,
+      isVisible: false,
     },
   ];
 
@@ -552,6 +552,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 {
                   label: "Djuno Design 3",
                   element: <div>Content for Tab 3</div>,
+                  isVisible: false,
                 },
               ]}
               tabType="default"
@@ -921,7 +922,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 />
               </Flex>
               <Flex items="center" className="gap-1">
-                <Text size="xs">active?</Text>
+                <Text size="xs">is visible?</Text>
                 <Switcher
                   onChange={handleTogleSidebarActive}
                   value={sidebarActive}

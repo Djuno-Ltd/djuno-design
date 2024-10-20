@@ -41,7 +41,7 @@ export type SidebarItem<T = unknown> = {
   disabled?: boolean
   testId?: string
   children?: SidebarItem[]
-  active?: boolean
+  isVisible?: boolean
   data?: T
 }
 

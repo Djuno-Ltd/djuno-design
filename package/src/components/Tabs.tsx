@@ -126,7 +126,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         )}
       >
         {options
-          .filter((option) => option.active !== true)
+          .filter((option) => option.isVisible === undefined || option.isVisible === true)
           .map((option, i) => (
             <Tab
               key={i}
