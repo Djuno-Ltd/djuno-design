@@ -38,7 +38,7 @@ import {
   CodeViewer,
   Countdown,
 } from "djuno-design";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -315,7 +315,17 @@ function App() {
     { label: "Tab 3", url: "/tab3" },
   ];
 
-  const [countdownTime, setCountdownTime] = useState(5);
+  const countdownRef1 = useRef<any>();
+  const countdownRef2 = useRef<any>();
+
+  const resetCountdown = () => {
+    if (countdownRef1.current) {
+      countdownRef1.current.resetCountdown();
+    }
+    if (countdownRef2.current) {
+      countdownRef2.current.resetCountdown();
+    }
+  };
 
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
@@ -390,17 +400,18 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card
           title="Countdown"
-          setting={<Button onClick={() => setCountdownTime(5)}>Reset</Button>}
+          setting={<Button onClick={resetCountdown}>Reset</Button>}
         >
           <Flex direction="col" className="gap-5">
             <Flex className="gap-2 w-full">
-              <Countdown seconds={countdownTime}>
+              <Countdown ref={countdownRef1} seconds={5}>
                 <div className="flex items-center gap-1">Resend</div>
               </Countdown>
             </Flex>
             <Flex className="gap-2 w-full">
               <Countdown
-                seconds={countdownTime}
+                ref={countdownRef2}
+                seconds={10}
                 className="flex-col"
                 timerPosition="end"
                 timerRender={({ formatedTime, timeLeft }) => {
