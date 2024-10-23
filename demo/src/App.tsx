@@ -507,6 +507,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
           </Flex>
         </Card>
+
         <Card title="Popover">
           <Flex direction="col" className="gap-5 w-full mb-10">
             <Popover
@@ -520,12 +521,14 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Popover>
           </Flex>
         </Card>
+
         <Card title="ThemeChanger">
           <Flex className="gap-5 w-full mt-5">
             <ThemeChanger />
             <ThemeSwitcher />
           </Flex>
         </Card>
+
         <Card title="Tabs">
           <Flex direction="col" className="gap-5 w-full">
             <Tabs
@@ -577,6 +580,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             />
           </Flex>
         </Card>
+
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <JsonViewer value={exampleJson} />
@@ -1188,6 +1192,14 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               <Input
                 label="Input with custom label"
                 labelClassName="text-green-500 font-bold"
+              />
+            </Flex>
+            <Flex className="w-full">
+              <Input
+                label="mixed input"
+                copyable={false}
+                loading={false}
+                type="password"
               />
             </Flex>
           </Flex>

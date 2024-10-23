@@ -54,6 +54,7 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
     return defaultIcons
   }, [copyable])
 
+  const [isCopyable, setIsCopyable] = React.useState<boolean>(true)
   const [textToCopy, setTextToCopy] = React.useState<CopyableTextOption | undefined>(undefined)
   const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
   const [icon, setIcon] = React.useState(icons[0])
@@ -79,6 +80,10 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
   )
 
   useEffect(() => {
+    setIsCopyable(typeof copyable !== 'undefined' && copyable !== false)
+  }, [copyable])
+
+  useEffect(() => {
     if (copyable && typeof copyable === 'object' && copyable.text) {
       if (typeof copyable.text === 'function') {
         setTextToCopy(() => copyable.text)
@@ -88,5 +93,5 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
     }
   }, [copyable])
 
-  return { copy, tooltipText, icon, copied, textToCopy }
+  return { copy, tooltipText, icon, copied, textToCopy, isCopyable }
 }

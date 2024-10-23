@@ -96,7 +96,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
   } = props
 
   const innerId = React.useMemo(() => id || uuid(), [id])
-  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
+  const { copy, icon, tooltipText, textToCopy, isCopyable } = useCopyable({ copyable })
 
   const value = textareaProps?.value
   const onChange = textareaProps?.onChange
@@ -150,7 +150,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
           )}
           <div className='dd-flex dd-items-center dd-gap-1'>
             {tooltip && <Tooltip.Info {...tooltip} />}
-            {typeof copyable !== 'undefined' && (
+            {isCopyable && (
               <div
                 onClick={handleCopyToClipboard}
                 className={cn(
@@ -176,7 +176,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
               uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
-              copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
+              copyable: isCopyable ? 'no' : 'yes',
             }),
             className,
           )}

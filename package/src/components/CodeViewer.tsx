@@ -76,7 +76,7 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
   const [currentTheme, setCurrentTheme] = React.useState<{
     [key: string]: React.CSSProperties
   }>()
-  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
+  const { copy, icon, tooltipText, textToCopy, isCopyable } = useCopyable({ copyable })
 
   React.useEffect(() => {
     let style
@@ -114,7 +114,7 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
 
   return (
     <div className='dd-relative dd-w-full'>
-      {typeof copyable !== 'undefined' && (
+      {isCopyable && (
         <div className={cn('dd-absolute dd-z-30 dd-top-3 dd-right-3')}>
           <div
             onClick={handleCopyToClipboard}
