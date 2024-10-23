@@ -1195,12 +1195,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               />
             </Flex>
             <Flex className="w-full">
-              <Input
-                label="mixed input"
-                copyable={false}
-                loading={false}
-                type="password"
-              />
+              <Input label="Password" copyable type="password" />
             </Flex>
           </Flex>
         </Card>
