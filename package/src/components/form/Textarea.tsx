@@ -144,7 +144,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dd-h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}

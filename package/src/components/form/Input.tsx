@@ -213,7 +213,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-1'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}

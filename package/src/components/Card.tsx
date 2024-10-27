@@ -93,7 +93,7 @@ const Card: React.FunctionComponent<CardProps> = ({
           )}
         >
           <Flex items='start' justify='between' className={'dd-w-full dd-mb-2'}>
-            <Flex direction='col'>
+            <Flex direction='col' className='dd-w-full'>
               {typeof title === 'string' ? (
                 <Typography.Title level={titleLevel || 5} className={cn('dd-mb-0', titleClassName)}>
                   {title}
