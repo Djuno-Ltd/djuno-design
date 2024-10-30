@@ -54,7 +54,7 @@ export const useCopyable = ({ copyable }: UseCopyable) => {
     return defaultIcons
   }, [copyable])
 
-  const [isCopyable, setIsCopyable] = React.useState<boolean>(true)
+  const [isCopyable, setIsCopyable] = React.useState<boolean>(false)
   const [textToCopy, setTextToCopy] = React.useState<CopyableTextOption | undefined>(undefined)
   const [tooltipText, setTooltipText] = React.useState(tooltipTexts[0])
   const [icon, setIcon] = React.useState(icons[0])
