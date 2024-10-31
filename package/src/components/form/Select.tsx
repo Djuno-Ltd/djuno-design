@@ -183,7 +183,7 @@ const Select = <ExtraDataType extends unknown>({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}
@@ -253,8 +253,7 @@ const Select = <ExtraDataType extends unknown>({
                 cn(
                   'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
                   {
-                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
-                      focus,
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-text-primary-300': focus,
                     'dd-text-gray-900 dark:dd-text-slate-300': !focus,
                   },
                   optionClassName,
@@ -418,8 +417,7 @@ const MultiSelect = <ExtraDataType extends unknown>({
                 cn(
                   'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
                   {
-                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
-                      focus,
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-text-primary-300': focus,
                     'dd-text-gray-900 dark:dd-text-slate-300': !focus,
                   },
                   optionClassName,

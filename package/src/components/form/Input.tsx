@@ -29,6 +29,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { uuid } from '../../utils/uuid'
 import { useCopyable } from '../../hooks/useCopyable'
 import { CopyableText } from '../../types'
+import { ReactComponent as EyeIcon } from './../../assets/icons/eye.svg'
+import { ReactComponent as EyeSlashIcon } from './../../assets/icons//eye-slash.svg'
 
 /**
  * Define input variants using the `cva` utility function.
@@ -145,11 +147,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     tooltip,
     placeholder,
     AfterComponent,
-    ...inputProps
+    ...otherProps
   } = props
 
+  const { type, ...inputProps } = otherProps
+
   const innerId = React.useMemo(() => id || uuid(), [id])
-  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
+
+  const isPassword = React.useMemo(() => type === 'password', [type])
+  const [currentType, setCurrentType] = React.useState(type)
+  React.useEffect(() => {
+    setCurrentType(type)
+  }, [type])
+
+  const { copy, icon, tooltipText, textToCopy, isCopyable } = useCopyable({ copyable })
 
   const value = inputProps?.value
   const onChange = inputProps?.onChange
@@ -202,7 +213,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-1'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}
@@ -213,8 +224,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         {hint && <span className='dd-text-[11px] dd-text-slate-500'>{hint}</span>}
       </div>
       <div className='dd-w-full dd-relative dd-block dd-z-0'>
-        {typeof copyable !== 'undefined' && !loading && (
+        {isPassword && !loading && (
           <div className='dd-absolute dd-z-30 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2'>
+            <div
+              onClick={() => setCurrentType(currentType === 'password' ? 'text' : 'password')}
+              className={cn(
+                'dd-w-[18px] dd-cursor-pointer dd-text-slate-500 hover:dd-text-slate-700 dark:dd-text-slate-300 dark:hover:dd-text-slate-100 dd-text-xs',
+                { 'dd-w-[15px]': uiSize === 'small' },
+              )}
+            >
+              {currentType === 'password' ? <EyeSlashIcon /> : <EyeIcon />}
+            </div>
+          </div>
+        )}
+        {isCopyable && !loading && (
+          <div
+            className={cn('dd-absolute dd-z-30 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2', {
+              '!dd-end-7 !dd-pe-0': isPassword,
+            })}
+          >
             <div
               onClick={handleCopyToClipboard}
               className={cn(
@@ -231,17 +259,22 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           ref={ref}
           value={value}
           onChange={onChange ? onChange : () => {}}
+          type={currentType}
           className={cn(
             inputVariants({
               uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
-              copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
+              copyable: !isCopyable ? 'no' : 'yes',
             }),
             {
               'dd-h-7': uiSize === 'small',
               'dd-h-9': uiSize === 'medium' || uiSize === undefined,
               'dd-h-11': uiSize === 'large',
+            },
+            {
+              '!dd-pr-12': isCopyable && isPassword && !loading,
+              '!dd-pr-7': !isCopyable && isPassword && !loading,
             },
             className,
           )}

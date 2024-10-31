@@ -31,7 +31,7 @@ export interface ICountdownProps {
   children?: ReactNode | ((props: CountdownRenderProps) => ReactNode)
   className?: string
   showTimer?: boolean
-  timerPosition?: 'start' | 'end'
+  timerPosition?: 'start' | 'end' | 'hidden'
   timerRender?: (props: CountdownRenderProps) => React.ReactNode
   onClick?: () => void
 }

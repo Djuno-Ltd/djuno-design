@@ -141,7 +141,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}
