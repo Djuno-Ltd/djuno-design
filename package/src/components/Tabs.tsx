@@ -126,7 +126,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         )}
       >
         {options
-          .filter((option) => option.active !== true)
+          .filter((option) => option.isVisible === undefined || option.isVisible === true)
           .map((option, i) => (
             <Tab
               key={i}
@@ -157,17 +157,19 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
           ))}
       </TabList>
       <TabPanels>
-        {options.map((option, i) => (
-          <TabPanel
-            key={i}
-            className={cn('dd-bg-white dark:dd-bg-dark-700 dd-rounded-md', {
-              'dd-py-6': (!tabType || tabType === 'default') && option.element,
-              [panelClassName || '']: panelClassName,
-            })}
-          >
-            {option.element}
-          </TabPanel>
-        ))}
+        {options
+          .filter((option) => option.isVisible === undefined || option.isVisible === true)
+          .map((option, i) => (
+            <TabPanel
+              key={i}
+              className={cn('dd-bg-white dark:dd-bg-dark-700 dd-rounded-md', {
+                'dd-py-6': (!tabType || tabType === 'default') && option.element,
+                [panelClassName || '']: panelClassName,
+              })}
+            >
+              {option.element}
+            </TabPanel>
+          ))}
       </TabPanels>
     </TabGroup>
   )

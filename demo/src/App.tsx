@@ -38,7 +38,7 @@ import {
   CodeViewer,
   Countdown,
 } from "djuno-design";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { ReactComponent as FaceSmile } from "./icons/face-smile.svg";
 import { ReactComponent as Logo } from "./logo.svg";
@@ -116,6 +116,10 @@ function App() {
   const [sidebarLoading, setSidebarLoading] = useState(false);
   const [panelType, setPanelType] = useState<PanelLayoutTypes>("mini");
   const [pathname, setPathname] = useState<string>("/sub-item1");
+  const [sidebarActive, setSidebarActive] = useState(true);
+  const handleTogleSidebarActive = () => {
+    setSidebarActive((prev) => !prev);
+  };
   const handleTogleSidebarLoading = () => {
     setSidebarLoading((prev) => !prev);
   };
@@ -126,7 +130,7 @@ function App() {
     setPathname((prev) => (prev === "/sub-item1" ? "/item1" : "/sub-item1"));
   };
 
-  const sidebarItems: SidebarItem<{ d: string }>[] = [
+  const sidebarItems: SidebarItem[] = [
     {
       id: 1,
       label: "item1",
@@ -211,6 +215,7 @@ function App() {
                   value: "item2-2-0",
                 },
               ],
+              isVisible: sidebarActive,
             },
             {
               id: "2-2-1",
@@ -259,12 +264,17 @@ function App() {
         },
       ],
     },
+    {
+      id: 4,
+      label: "item4",
+      isVisible: sidebarActive,
+    },
   ];
 
   const sidebarSubItems: SidebarItem[] = [
     {
       id: 1,
-      label: "item1",
+      label: "sub-item1",
       activeConditions: [
         {
           index: 0,
@@ -278,13 +288,18 @@ function App() {
     },
     {
       id: 2,
-      label: "item2",
+      label: "sub-item2",
       activeConditions: [
         {
           index: 1,
           value: "sub-item2",
         },
       ],
+    },
+    {
+      id: 3,
+      label: "sub-item3",
+      isVisible: false,
     },
   ];
 
@@ -300,7 +315,17 @@ function App() {
     { label: "Tab 3", url: "/tab3" },
   ];
 
-  const [countdownTime, setCountdownTime] = useState(5);
+  const countdownRef1 = useRef<any>();
+  const countdownRef2 = useRef<any>();
+
+  const resetCountdown = () => {
+    if (countdownRef1.current) {
+      countdownRef1.current.resetCountdown();
+    }
+    if (countdownRef2.current) {
+      countdownRef2.current.resetCountdown();
+    }
+  };
 
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
@@ -375,17 +400,18 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
 
         <Card
           title="Countdown"
-          setting={<Button onClick={() => setCountdownTime(5)}>Reset</Button>}
+          setting={<Button onClick={resetCountdown}>Reset</Button>}
         >
           <Flex direction="col" className="gap-5">
             <Flex className="gap-2 w-full">
-              <Countdown seconds={countdownTime}>
+              <Countdown ref={countdownRef1} seconds={5}>
                 <div className="flex items-center gap-1">Resend</div>
               </Countdown>
             </Flex>
             <Flex className="gap-2 w-full">
               <Countdown
-                seconds={countdownTime}
+                ref={countdownRef2}
+                seconds={10}
                 className="flex-col"
                 timerPosition="end"
                 timerRender={({ formatedTime, timeLeft }) => {
@@ -481,6 +507,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
           </Flex>
         </Card>
+
         <Card title="Popover">
           <Flex direction="col" className="gap-5 w-full mb-10">
             <Popover
@@ -494,12 +521,14 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Popover>
           </Flex>
         </Card>
+
         <Card title="ThemeChanger">
           <Flex className="gap-5 w-full mt-5">
             <ThemeChanger />
             <ThemeSwitcher />
           </Flex>
         </Card>
+
         <Card title="Tabs">
           <Flex direction="col" className="gap-5 w-full">
             <Tabs
@@ -537,6 +566,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 {
                   label: "Djuno Design 3",
                   element: <div>Content for Tab 3</div>,
+                  isVisible: false,
                 },
               ]}
               tabType="default"
@@ -550,6 +580,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             />
           </Flex>
         </Card>
+
         <Card title="JsonViewer">
           <Flex direction="col" className="gap-5 w-full mt-5">
             <JsonViewer value={exampleJson} />
@@ -905,6 +936,13 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                   value={sidebarLoading}
                 />
               </Flex>
+              <Flex items="center" className="gap-1">
+                <Text size="xs">is visible?</Text>
+                <Switcher
+                  onChange={handleTogleSidebarActive}
+                  value={sidebarActive}
+                />
+              </Flex>
             </Flex>
           }
         >
@@ -1155,6 +1193,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 label="Input with custom label"
                 labelClassName="text-green-500 font-bold"
               />
+            </Flex>
+            <Flex className="w-full">
+              <Input label="Password" copyable type="password" />
             </Flex>
           </Flex>
         </Card>

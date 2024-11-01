@@ -73,6 +73,7 @@ const listboxVariants = cva(
  * @template ExtraDataType
  * @param {object} props - Select component props.
  * @param {T} [props.value] - The currently selected value.
+ * @param {string} [props.id] - The unique identifier.
  * @param {(value: T | undefined) => void} [props.onChange] - Callback function triggered when the selected value changes.
  * @param {T} [props.defaultValue] - The default value of the select component.
  * @param {SelectOption<T, ET>[]} props.options - Array of options available for selection.
@@ -103,19 +104,31 @@ const listboxVariants = cva(
  * @example
  * // Example usage of Select component:
  * const selectOptions: SelectOption<string>[] = [
- *     { label: "option 1", value: "option1" },
- *     { label: "option 2", value: "option2" },
- *   ];
+ *   { label: "Option 1", value: "option1" },
+ *   { label: "Option 2", value: "option2" },
+ *   { label: "Option 3", value: "option3" }
+ * ];
+ *
  * const [value, setValue] = useState<string | undefined>(selectOptions[0].value);
  *
  * <Select
+ *   id="optionId"
  *   value={value}
  *   onChange={setValue}
  *   options={selectOptions}
  *   label="Choose an option"
  *   error="This field is required"
  *   required={true}
+ *   tooltip="Select one of the options from the list"
+ *   hint="This choice will affect your settings"
  *   clearable={true}
+ *   emptyString="No option selected"
+ *   loading={false}
+ *   loadingType="spinner"
+ *   uiType="dropdown"
+ *   uiSize="medium"
+ *   disabled={false}
+ *   buttonClassName="customButtonClassName"
  * />
  */
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
@@ -183,7 +196,7 @@ const Select = <ExtraDataType extends unknown>({
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}
@@ -253,8 +266,7 @@ const Select = <ExtraDataType extends unknown>({
                 cn(
                   'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
                   {
-                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
-                      focus,
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-text-primary-300': focus,
                     'dd-text-gray-900 dark:dd-text-slate-300': !focus,
                   },
                   optionClassName,
@@ -418,8 +430,7 @@ const MultiSelect = <ExtraDataType extends unknown>({
                 cn(
                   'dd-relative dd-cursor-default dd-select-none dd-py-2 dd-pl-5 dd-pr-4 dd-rounded-md',
                   {
-                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-bg-dark-2 dark:dd-text-primary-300':
-                      focus,
+                    'dd-bg-primary-50 dark:dd-bg-dark-900 dd-text-primary-600 dark:dd-text-primary-300': focus,
                     'dd-text-gray-900 dark:dd-text-slate-300': !focus,
                   },
                   optionClassName,

@@ -33,20 +33,22 @@ import { CopyableText } from '../../types'
  *
  * @param {object} props - Textarea component props.
  * @param {string} [props.id] - Unique identifier for the textarea element.
- * @param {InputTypes} [props.uiType] - Type of the textarea field, which can be 'default' or 'simple'.
+ * @param {InputTypes} [props.uiType] - Type of the textarea field, determining its appearance, such as 'default' or 'simple'.
  * @param {string} [props.className] - Additional CSS classes to apply to the textarea for custom styling.
- * @param {string} [props.containerClassName] - Additional classes to apply to the input container.
- * @param {string} [props.placeholder] - Placeholder text to display when the textarea is empty.
- * @param {string| React.ReactNode} [props.label] - Label text to display above the textarea.
- * @param {boolean} [props.required] - Indicates if the textarea is required for form submission.
- * @param {string|boolean| React.ReactNode} [props.error] - Error message or boolean flag to indicate whether there is a validation error.
- * @param {string| React.ReactNode} [props.hint] - Hint text to provide additional guidance or information to the user.
- * @param {SizeTypes} [props.size] - The size of the textarea field, which can be 'small', 'medium', or 'large'.
- * @param {TooltipProps} [props.tooltip] - Tooltip properties to display additional information or help text when the user hovers over an icon.
- * @param {CopyableProp} [props.copyable] - Indicates if the textarea value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
- * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
- * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
- * @param {string} [props.labelClassName] - Additional classes to apply to the label element
+ * @param {string} [props.containerClassName] - Additional classes to apply to the container wrapping the textarea.
+ * @param {string} [props.placeholder] - Placeholder text displayed when the textarea is empty, providing guidance on what to enter.
+ * @param {string|React.ReactNode} [props.label] - Label text or element displayed above the textarea.
+ * @param {boolean} [props.required] - Marks the textarea as a required field for form submission.
+ * @param {string|boolean|React.ReactNode} [props.error] - Error message, boolean flag, or node to indicate a validation error.
+ * @param {string|React.ReactNode} [props.hint] - Hint text or element providing additional guidance or information to the user.
+ * @param {SizeTypes} [props.uiSize] - The size of the textarea, which can be 'small', 'medium', or 'large' for custom scaling.
+ * @param {TooltipProps} [props.tooltip] - Tooltip properties for showing additional information or help text when the user hovers over an associated icon.
+ * @param {CopyableProp} [props.copyable] - Configures copy functionality, which can be a boolean, function for handling the copy operation, or an object specifying custom copy behavior.
+ * @param {boolean} [props.loading] - Indicates if the textarea should display a loading state, often used when data is being fetched or processed.
+ * @param {LoadingType} [props.loadingType] - Type of loading indicator shown when `loading` is true, such as 'spinner'.
+ * @param {string} [props.labelClassName] - Additional CSS classes to style the label element associated with the textarea.
+ * @param {string} [props.containerClassName] - CSS classes to style the container around the textarea, useful for layout customization.
+ * @param {React.TextareaHTMLAttributes<HTMLTextAreaElement>} [textareaProps] - Additional native textarea properties such as `rows`, `cols`, and `maxLength`.
  *
  * @returns {React.ReactNode} Rendered Textarea component.
  *
@@ -57,19 +59,26 @@ import { CopyableText } from '../../types'
  * // Example usage of Textarea component:
  *
  * function MyComponent() {
+ *
  *   return (
  *     <Textarea
- *       id="description"
- *       textareaProps={{ rows: 5, cols: 50, maxLength: 500 }}
- *       className="custom-textarea"
- *       containerClassName="custom-containerClassName"
+ *       value={value}
+ *       onChange={onChange}
  *       placeholder="Enter your description here"
  *       label="Description"
  *       required={true}
  *       error="This field is required"
  *       hint="Provide a detailed description"
- *       size="large"
- *       copyable={{ text: "Copy this text", icon: [<CopyIcon />, <CheckIcon />], tooltips: ["Copy", "Copied"] }}
+ *       tooltip="Describe your item or service here"
+ *       uiSize="large"
+ *       uiType="outlined"
+ *       loading={false}
+ *       loadingType="spinner"
+ *       copyable={{
+ *         text: "Copy this text",
+ *         icon: [<CopyIcon />, <CheckIcon />],
+ *         tooltips: ["Copy", "Copied"]
+ *       }}
  *     />
  *   );
  * }
@@ -96,7 +105,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
   } = props
 
   const innerId = React.useMemo(() => id || uuid(), [id])
-  const { copy, icon, tooltipText, textToCopy } = useCopyable({ copyable })
+  const { copy, icon, tooltipText, textToCopy, isCopyable } = useCopyable({ copyable })
 
   const value = textareaProps?.value
   const onChange = textareaProps?.onChange
@@ -144,13 +153,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
             </Typography.Text>
           )}
           {required && (
-            <Typography.Text uiType='danger' className='dd-h-5'>
+            <Typography.Text uiType='danger' className='dd-h-5 dd-ml-0.5'>
               *
             </Typography.Text>
           )}
           <div className='dd-flex dd-items-center dd-gap-1'>
             {tooltip && <Tooltip.Info {...tooltip} />}
-            {typeof copyable !== 'undefined' && (
+            {isCopyable && (
               <div
                 onClick={handleCopyToClipboard}
                 className={cn(
@@ -176,7 +185,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
               uiType,
               hasError: error ? 'yes' : 'no',
               uiSize,
-              copyable: typeof copyable === 'undefined' ? 'no' : 'yes',
+              copyable: isCopyable ? 'no' : 'yes',
             }),
             className,
           )}

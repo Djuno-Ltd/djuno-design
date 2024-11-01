@@ -89,7 +89,9 @@ const alertIconVariants = cva('dd-mr-2 dd-aspect-square', {
  * @param {string} [props.uiType] - Type of UI for the alert.
  * @param {boolean} [props.showIcon] - Indicates if the alert has the icon.
  * @param {boolean} [props.banner] - Indicates if the alert is a banner or not.
- *
+ * @param {React.ReactNode} [props.children] - The content inside the alert.
+ *  @param {boolean} [props.closable] - If true, displays a close button for dismissing the alert.
+ * @param {() => void} [props.onClose] - Callback function triggered when the alert is closed, if `closable` is true.
  * @returns {React.ReactNode} Rendered Alert component.
  *
  * @version 0.1.2

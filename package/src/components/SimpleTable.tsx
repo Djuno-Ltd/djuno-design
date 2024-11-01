@@ -25,9 +25,13 @@ import Loading from './Loading'
 /**
  * SimpleTable component that renders a table structure.
  *
- * @param {object} props - SimpleTable props.
- * @param {React.ReactNode} props.children - The content to be displayed within the Typography component.
- * @returns {React.ReactNode} Rendered SimpleTable component.
+ * @param {object} props - SimpleTable component properties.
+ * @param {string} [props.className] - CSS classes for custom styling of the SimpleTable component.
+ * @param {string} [props.containerClassName] - CSS classes applied to the outer container of the SimpleTable.
+ * @param {React.ReactNode} props.children - Table rows or content displayed within the SimpleTable.
+ * @param {boolean} [props.loading] - Indicates if a loading state should be displayed over the table.
+ * @param {LoadingSetting} [props.loadingSetting] - Configuration for the loading indicator, such as type or position, when `loading` is `true`.
+ *
  *
  * @version 0.3.6
  * @see https://www.npmjs.com/package/djuno-design#simple-table

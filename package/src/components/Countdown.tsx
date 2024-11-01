@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * @author Sanaz Zeraati <szeraati69@gmail.com>
  * @fileoverview Countdown Component
@@ -18,7 +20,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import Typography from './Typography'
 import { cn } from '../utils/cn'
 import { ICountdownProps } from '../types/ICountdown'
@@ -27,7 +29,7 @@ import { ICountdownProps } from '../types/ICountdown'
  * Countdown component that allows for customization of UI type, size, loading state, and more.
  *
  * @param {object} props - Countdown props.
- * @param {React.ReactNode} [props.children] - The content inside the Countdown.r.
+ * @param {React.ReactNode} [props.children] - The content inside the Countdown.
  * @param {string} [props.seconds] - The initial time in seconds for the countdown.
  * @param {string} [props.className] - Additional className to apply custom styling to the countdown component.
  * @param {string} [props.showTimer] - Determines whether to show the timer visually.
@@ -60,85 +62,90 @@ import { ICountdownProps } from '../types/ICountdown'
 
 const { Text } = Typography
 
-const Countdown: React.FC<ICountdownProps> = ({
-  seconds,
-  children,
-  className,
-  showTimer = true,
-  timerPosition = 'start',
-  timerRender,
-  onClick,
-}) => {
-  const [timeLeft, setTimeLeft] = useState<number>(seconds)
+const Countdown: React.FC<ICountdownProps & { ref?: any }> = forwardRef(
+  ({ seconds, children, className, showTimer = true, timerPosition = 'start', timerRender, onClick }, ref) => {
+    const [timeLeft, setTimeLeft] = useState<number>(seconds)
 
-  useEffect(() => {
-    if (timeLeft <= 0) return
+    useEffect(() => {
+      setTimeLeft(seconds)
+    }, [seconds])
 
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTime) => prevTime - 1)
-    }, 1000)
+    useEffect(() => {
+      if (timeLeft <= 0) return
 
-    return () => clearInterval(intervalId)
-  }, [timeLeft])
+      const intervalId = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1)
+      }, 1000)
 
-  const formatTime = (secs: number): string => {
-    const days = Math.floor(secs / (3600 * 24))
-    const hrs = Math.floor((secs % (3600 * 24)) / 3600)
-    const mins = Math.floor((secs % 3600) / 60)
-    const secsLeft = secs % 60
+      return () => clearInterval(intervalId)
+    }, [timeLeft])
 
-    let formattedTime = ''
+    const formatTime = (secs: number): string => {
+      const days = Math.floor(secs / (3600 * 24))
+      const hrs = Math.floor((secs % (3600 * 24)) / 3600)
+      const mins = Math.floor((secs % 3600) / 60)
+      const secsLeft = secs % 60
 
-    if (days > 0) {
-      formattedTime += `${days}d `
+      let formattedTime = ''
+
+      if (days > 0) {
+        formattedTime += `${days}d `
+      }
+      if (hrs > 0 || days > 0) {
+        formattedTime += `${hrs.toString().padStart(2, '0')}:`
+      }
+
+      formattedTime += `${mins.toString().padStart(2, '0')}:`
+      formattedTime += `${secsLeft.toString().padStart(2, '0')}`
+
+      return formattedTime.trim()
     }
-    if (hrs > 0 || days > 0) {
-      formattedTime += `${hrs.toString().padStart(2, '0')}:`
+
+    const disabled = React.useMemo(() => timeLeft > 0, [timeLeft])
+
+    const timer = () => {
+      if (!showTimer) return <></>
+      if (timerRender)
+        return timerRender({
+          formatedTime: formatTime(timeLeft),
+          timeLeft,
+          disabled,
+        })
+      return <Text className='dd-text-sm !dd-w-auto'>{formatTime(timeLeft)}</Text>
     }
 
-    formattedTime += `${mins.toString().padStart(2, '0')}:`
-    formattedTime += `${secsLeft.toString().padStart(2, '0')}`
+    useImperativeHandle(ref, () => ({
+      resetCountdown: () => {
+        setTimeLeft(seconds)
+      },
+    }))
 
-    return formattedTime.trim()
-  }
+    return (
+      <div
+        className={cn(
+          'dd-flex dd-items-center dd-w-full dd-h-full dd-gap-1',
+          {
+            'dd-cursor-not-allowed': disabled,
+          },
+          className,
+        )}
+        onClick={() => {
+          if (!disabled && onClick) onClick()
+        }}
+      >
+        {timerPosition === 'start' && timer()}
+        {typeof children === 'function'
+          ? children({
+              disabled,
+              timeLeft,
+              formatedTime: formatTime(timeLeft),
+            })
+          : children}
+        {timerPosition === 'end' && timer()}
+      </div>
+    )
+  },
+)
 
-  const disabled = React.useMemo(() => timeLeft > 0, [timeLeft])
-
-  const timer = () => {
-    if (!showTimer) return <></>
-    if (timerRender)
-      return timerRender({
-        formatedTime: formatTime(timeLeft),
-        timeLeft,
-        disabled,
-      })
-    return <Text className='dd-text-sm !dd-w-auto'>{formatTime(timeLeft)}</Text>
-  }
-
-  return (
-    <div
-      className={cn(
-        'dd-flex dd-items-center dd-w-full dd-h-full dd-gap-1',
-        {
-          'dd-cursor-not-allowed': disabled,
-        },
-        className,
-      )}
-      onClick={() => {
-        if (!disabled && onClick) onClick()
-      }}
-    >
-      {timerPosition === 'start' && timer()}
-      {typeof children === 'function'
-        ? children({
-            disabled,
-            timeLeft,
-            formatedTime: formatTime(timeLeft),
-          })
-        : children}
-      {timerPosition === 'end' && timer()}
-    </div>
-  )
-}
-
+Countdown.displayName = 'Countdown'
 export default Countdown

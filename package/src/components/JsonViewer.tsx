@@ -31,6 +31,8 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  * @param {object | null} [props.value] - The JSON data to display. If null or undefined, an empty object will be rendered.
  * @param {number | boolean} [props.collapsed] - Controls how the JSON is displayed. If true, all levels will be collapsed. If a number, only the specified number of levels will be expanded.
  * @param {string} [props.theme] - The theme of the JSON viewer. Can be `'light'` or `'dark'`. (Optional)
+ * @param {CopyableProp} [props.copyable] - Enables copy functionality for JSON values.
+ * @param {React.CSSProperties} [props.style] - Inline styles to apply to the JSON viewer container for additional customization.
  *
  * @returns {React.ReactNode} Rendered JsonViewer component.
  *

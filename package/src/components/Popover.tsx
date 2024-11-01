@@ -31,6 +31,7 @@ import { PopoverProps } from '../types'
  * @param {React.ReactNode} [props.children] - Optional children to be rendered inside the popover.
  * @param {string} [props.panelClassName] - Additional CSS classes to apply to the popover panel.
  * @param {React.CSSProperties} [props.panelStyle] - Additional inline styles to apply to the popover panel.
+ * @param {AnchorProps} [props.anchor] - position of dropdown menu
  *
  * @returns {React.ReactNode} Rendered Popover component.
  *

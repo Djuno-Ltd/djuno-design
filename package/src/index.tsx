@@ -35,7 +35,7 @@ import Typography from './components/Typography'
 import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Skeleton from './components/Skeleton'
-import Input from './components/form/Input'
+import Input, { AnimatedFormError } from './components/form/Input'
 import Switcher from './components/form/Switcher'
 import Select, { MultiSelect } from './components/form/Select'
 import Textarea from './components/form/Textarea'
@@ -92,6 +92,7 @@ export {
   Alert,
   Steps,
   Input,
+  AnimatedFormError,
   Skeleton,
   SimpleTable,
   EmptyState,

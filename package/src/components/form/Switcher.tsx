@@ -29,7 +29,7 @@ import { cn } from '../../utils/cn'
  *   value={true}
  *   onChange={(value) => console.log('Switch is now:', value)}
  *   disabled={false}
- *   size="medium"
+ *   uiSize="medium"
  *   loading={false}
  * />
  */
