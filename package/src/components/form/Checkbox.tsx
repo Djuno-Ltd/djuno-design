@@ -32,10 +32,10 @@ import { uuid } from '../../utils/uuid'
  * Checkbox component that allows for customization of UI behavior, labeling, validation, and more.
  *
  * @param {object} props - Checkbox props.
- * @param {string} [props.id] - The unique identifier for the checkbox input element.
+ * @param {string} [props.id] - The unique identifier.
  * @param {React.ReactNode} [props.label] - The label to display next to the checkbox.
- * @param {boolean} [props.checked] - Specifies if the checkbox is initially checked.
- * @param {Function} [props.onChangeCheckbox] - Callback function called when the checkbox state changes.
+ * @param {boolean} [props.value] - Specifies if the checkbox is initially checked.
+ * @param {Function} [props.onChange] - Callback function called when the checkbox state changes.
  * @param {boolean} [props.required] - Specifies if the checkbox is required.
  * @param {boolean} [props.disabled] - Disables the checkbox interaction.
  * @param {string|boolean| React.ReactNode} [props.error] - An error message to display if there's an issue with the checkbox.
@@ -63,7 +63,9 @@ import { uuid } from '../../utils/uuid'
  *       required={true}
  *       onChange={handleCheckboxChange}
  *       error="This field is required."
- *       tooltip="Additional information about this checkbox."
+ *       tooltip="Additional information about this
+ *       checkbox."
+ *       labelClassName="CustomLabelClassName"
  *     />
  *   );
  * }

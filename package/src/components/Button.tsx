@@ -72,6 +72,7 @@ const buttonVariants = cva(
  * @param {React.ReactNode} [props.tooltip.content] - Content of the tooltip.
  * @param {boolean} [props.loading] - Indicates if the button is in a loading state.
  * @param {string} [props.loadingType] - Type of loading indicator: 'simple' or custom.
+ * @param {React.ButtonHTMLAttributes<HTMLButtonElement>} [props.buttonProps] - HTML properties for the button element.
  *
  * @returns {React.ReactNode} Rendered Button component.
  *

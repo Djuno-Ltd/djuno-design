@@ -33,7 +33,7 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  *
  *
  * @param {object} props - ThemeChanger props.
- * @param {string} [props.anchor] -
+ * @param {AnchorProps} [props.anchor] - position of dropdown menu
  * @param {string} [props.itemsClassName] - Additional classes to apply to the items within the ThemeChanger.
  *
  * @returns {React.ReactNode} Rendered ThemeChanger component.

@@ -93,6 +93,7 @@ export const labelVariants = cva(
  * @param {object} props - Input component props.
  * @param {string | React.ReactNode} [props.label] - Label of the input.
  * @param {React.HTMLProps<HTMLInputElement>} [props.inputProps] - HTML properties for the input element.
+ * @param {string} [props.id] - The unique identifier.
  * @param {boolean} [props.loading] - Indicates if the input should display a loading state.
  * @param {LoadingType} [props.loadingType] - The type of loading indicator to show.
  * @param {InputTypes} [props.uiType] - Type of the input field (e.g., 'default', 'simple').
@@ -104,7 +105,7 @@ export const labelVariants = cva(
  * @param {string | boolean| React.ReactNode} [props.error] - Error message or boolean to indicate input validity.
  * @param {string | React.ReactNode} [props.hint] - Hint or description for the input.
  * @param {TooltipProps} [props.tooltip] - Tooltip properties to display alongside the input.
- * @param {SizeTypes} [props.size] - Size of the input field.
+ * @param {SizeTypes} [props.uiSize] - Size of the input field.
  * @param {React.ReactNode} [props.AfterComponent] - Component to render after the input field.
  * @param {CopyableProp} [props.copyable] - Indicates if the input value can be copied. It can be a boolean, a function to handle the copy operation, or an object for custom copy functionality.
  *
@@ -116,16 +117,26 @@ export const labelVariants = cva(
  * @example
  * // Example usage of Input component:
  * <Input
+ *   id="usernameId"
  *   label="Username"
  *   placeholder="Enter your username"
  *   required
  *   error="Username is required"
- *   containerClassName="custom-containerClassName"
+ *   className="customClassName"
+ *   containerClassName="customContainerClassName"
+ *   labelClassName="custom-label"
+ *   uiSize="medium"
+ *   uiType="text"
+ *   tooltip="Enter your unique username here"
+ *   hint="Your username should be unique"
  *   copyable={{
  *     text: "Copy this username",
  *     icon: [<CustomCopyIcon />, <CustomCopiedIcon />],
  *     tooltips: ["Click to copy", "Copied!"]
  *   }}
+ *   loading={false}
+ *   loadingType="spinner"
+ *   AfterComponent={<CustomSuffixComponent />}
  * />
  */
 
