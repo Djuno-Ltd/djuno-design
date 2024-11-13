@@ -33,12 +33,16 @@ const { Text } = Typography
  * SecureCopy component that allows for customization of UI type, size, loading state, and more.
  *
  *
- * @param {object} props - SecureCopy props.
- * @param {React.ReactNode} [props.children] - The content inside the SecureCopy.
- * @param {string} [props.className] - Additional classes to apply to the SecureCopy.
- * @param {boolean} [props.iconClassName] - Indicates if the SecureCopy has the iconClassName.
- * @param {boolean} [props.textClassName] - Indicates if the SecureCopy has the textClassName.
- * @param {string} [props.uiType] - Type of the Action "hide" or "copy".
+ * @param {object} props - SecureCopy component properties.
+ * @param {React.ReactNode} [props.children] - The content displayed within the SecureCopy component.
+ * @param {string} [props.text] - Text content to be securely copied.
+ * @param {string} [props.className] - CSS classes for custom styling of the SecureCopy component container.
+ * @param {string} [props.iconClassName] - CSS classes applied to the icon within SecureCopy.
+ * @param {string} [props.textClassName] - CSS classes applied to the text within SecureCopy.
+ * @param {string} [props.type] - Type of action, such as `"hide"` or `"copy"`, defining the behavior of SecureCopy.
+ * @param {SizeTypes} [props.uiSize] - Size of the SecureCopy component, such as 'small', 'medium', or 'large'.
+ * @param {CopyableProp} [props.copyable] - Enables copying functionality
+ *
  *
  * @returns {React.ReactNode} Rendered SecureCopy component.
  *

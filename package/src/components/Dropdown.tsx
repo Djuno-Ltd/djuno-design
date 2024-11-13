@@ -30,7 +30,7 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrow-down.svg'
  * @param {React.ReactNode} [props.children] - The content inside the DropdownMenu.
  * @param {string} [props.menu] - menu of the DropdownMenu.
  * @param {string} [props.title] -  title of the DropdownMenu.
- * @param {string} [props.anchor] -
+ * @param {AnchorProps} [props.anchor] - position of dropdown menu
  * @param {string} [props.itemsClassName] - Additional itemsClassName to apply to the DropdownMenu.
  * @param {string} [props.itemClassName] - Additional itemClassName to apply to the DropdownMenu item.
  * @param {string} [props.buttonClassName] - Additional buttonClassName to apply to the DropdownMenu.

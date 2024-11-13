@@ -73,6 +73,7 @@ const listboxVariants = cva(
  * @template ExtraDataType
  * @param {object} props - Select component props.
  * @param {T} [props.value] - The currently selected value.
+ * @param {string} [props.id] - The unique identifier.
  * @param {(value: T | undefined) => void} [props.onChange] - Callback function triggered when the selected value changes.
  * @param {T} [props.defaultValue] - The default value of the select component.
  * @param {SelectOption<T, ET>[]} props.options - Array of options available for selection.
@@ -103,19 +104,31 @@ const listboxVariants = cva(
  * @example
  * // Example usage of Select component:
  * const selectOptions: SelectOption<string>[] = [
- *     { label: "option 1", value: "option1" },
- *     { label: "option 2", value: "option2" },
- *   ];
+ *   { label: "Option 1", value: "option1" },
+ *   { label: "Option 2", value: "option2" },
+ *   { label: "Option 3", value: "option3" }
+ * ];
+ *
  * const [value, setValue] = useState<string | undefined>(selectOptions[0].value);
  *
  * <Select
+ *   id="optionId"
  *   value={value}
  *   onChange={setValue}
  *   options={selectOptions}
  *   label="Choose an option"
  *   error="This field is required"
  *   required={true}
+ *   tooltip="Select one of the options from the list"
+ *   hint="This choice will affect your settings"
  *   clearable={true}
+ *   emptyString="No option selected"
+ *   loading={false}
+ *   loadingType="spinner"
+ *   uiType="dropdown"
+ *   uiSize="medium"
+ *   disabled={false}
+ *   buttonClassName="customButtonClassName"
  * />
  */
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint

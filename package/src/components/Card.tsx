@@ -28,6 +28,7 @@ import Typography from './Typography'
  * Card component renders a customizable card with optional title, description, and setting.
  *
  * @param {object} props - The properties of the Card component.
+ * @param {React.ReactNode} [props.children] - The content inside the card.
  * @param {string} [props.id] - The HTML id attribute of the card.
  * @param {string} [props.title] - The title of the card.
  * @param {string} [props.description] - The description of the card.

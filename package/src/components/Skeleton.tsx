@@ -55,11 +55,12 @@ const skeletonVariants = cva('dd-bg-slate-200/80 dark:dd-bg-white/10 dd-rounded-
 /**
  * Skeleton component for displaying loading placeholders.
  *
- * @param {object} props - Skeleton props.
- * @param {string} [props.className] - Additional classes to apply to the skeleton.
- * @param {'rectangle' | 'circle' | 'square'} [props.shape] - Shape of the skeleton.
- * @param {'small' | 'medium' | 'large'} [props.uiSize] - Size of the skeleton.
- * @param {'none' | 'pulse'} [props.animation] - Animation type of the skleton.
+ * @param {object} props - Properties for configuring the Skeleton component.
+ * @param {SizeTypes} [props.uiSize] - Size of the skeleton, such as 'small', 'medium', or 'large'.
+ * @param {string} [props.className] - CSS classes for custom styling of the skeleton component.
+ * @param {React.CSSProperties} [props.style] - Inline styles for additional customization of the skeleton's appearance.
+ * @param {SkeletonShapes} [props.shape] - Shape of the skeleton placeholder, with options of 'rectangle', 'circle', or 'square'.
+ * @param {SkeletonAnimations} [props.animation] - Animation style for the skeleton, either 'none' for no animation or 'pulse' for a pulsing effect.
  *
  * @returns {React.ReactNode} Rendered Skeleton component.
  *

@@ -114,13 +114,15 @@ function App() {
 
 ### Button
 
-| Name        | Type           | Required | default   | Description |
-| ----------- | -------------- | -------- | --------- | ----------- |
-| uiType      | `ButtonTypes`  |          | simple    |             |
-| uiSize      | `SizeTypes`    |          | medium    |             |
-| tooltip     | `TooltipProps` |          | undefined |             |
-| loading     | boolean        |          | false     |             |
-| loadingType | `LoadingType`  |          | simple    |             |
+| Name                 | Type                                            | Required | default   | Description |
+| -------------------- | ----------------------------------------------- | -------- | --------- | ----------- |
+| uiType               | `ButtonTypes`                                   |          | simple    |             |
+| uiSize               | `SizeTypes`                                     |          | medium    |             |
+| tooltip              | `TooltipProps`                                  |          | undefined |             |
+| loading              | boolean                                         |          | false     |             |
+| loadingType          | `LoadingType`                                   |          | simple    |             |
+| children             | `React.ReactNode`                               |          |           |             |
+| all `<button>` props | `React.ButtonHTMLAttributes<HTMLButtonElement>` |          |           |             |
 
 ### Tooltip
 
@@ -132,6 +134,7 @@ function App() {
 | place     | `TooltipPlaces`     |          | top     |             |
 | theme     | `TooltipThemeTypes` |          | primary |             |
 | clickable | boolean             |          | false   |             |
+| children  | `React.ReactNode`   |          |         |             |
 
 ### Loading
 
@@ -144,11 +147,12 @@ function App() {
 
 ### Flex
 
-| Name      | Type            | Required | default | Description                   |
-| --------- | --------------- | -------- | ------- | ----------------------------- |
-| direction | `FlexDirection` |          | row     | Specifies the main-axis       |
-| justify   | `FlexJustify`   |          | start   | Alignment along the main-axis |
-| items     | `FlexItems`     |          | start   | Alignment along the sub-axis  |
+| Name      | Type              | Required | default | Description                   |
+| --------- | ----------------- | -------- | ------- | ----------------------------- |
+| direction | `FlexDirection`   |          | row     | Specifies the main-axis       |
+| justify   | `FlexJustify`     |          | start   | Alignment along the main-axis |
+| items     | `FlexItems`       |          | start   | Alignment along the sub-axis  |
+| children  | `React.RaectNode` |          | start   | Alignment along the sub-axis  |
 
 ### Card
 
@@ -160,6 +164,7 @@ function App() {
 | description                   | string, ReactNode |          |         |             |
 | setting                       | string, ReactNode |          |         |             |
 | class names for main sections | string            |          |         |             |
+| children                      | ReactNode         |          |         |             |
 
 ### Typography
 
@@ -235,6 +240,7 @@ function App() {
 | banner      | `boolean`           |          | `false`   | Display Alert as a banner                                |
 | closable    | `boolean`           |          | `false`   | If true, the alert can be closed (disappears on click).  |
 | onClose     | `() => void`        |          |           | Callback function to be called when the alert is closed. |
+| children    | `React.ReactNode`   |          |           |                                                          |
 
 ### Steps
 
@@ -247,6 +253,7 @@ function App() {
 
 | Name                | Type                                          | Required | default | Description |
 | ------------------- | --------------------------------------------- | -------- | ------- | ----------- |
+| id                  | `string`                                      |          |         |             |
 | all `<input>` props | `React.InputHTMLAttributes<HTMLInputElement>` |          |         |             |
 | label               | `string, React.ReactNode`                     |          |         |             |
 | uiType              | `InputTypes`                                  |          |         |             |
@@ -258,14 +265,16 @@ function App() {
 | placeholder         | `string`                                      |          |         |             |
 | tooltip             | `TooltipProps`                                |          |         |             |
 | uiSize              | `SizeTypes`                                   |          | medium  |             |
-| copyable            | `boolean or function or InputCopyableProp`    |          |         |             |
+| copyable            | `CopyableProp`                                |          |         |             |
 | labelClassName      | `string`                                      |          |         |             |
 | containerClassName  | `string`                                      |          |         |             |
+| AfterComponent      | `React.ReactNode`                             |          |         |             |
 
 ### Textarea
 
 | Name                   | Type                                                | Required | default | Description |
 | ---------------------- | --------------------------------------------------- | -------- | ------- | ----------- |
+| id                     | `string`                                            |          |         |             |
 | all `<textarea>` props | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` |          |         |             |
 | placeholder            | `string`                                            |          |         |             |
 | label                  | `string, React.ReactNode`                           |          |         |             |
@@ -275,7 +284,7 @@ function App() {
 | uiType                 | `InputTypes`                                        |          |         |             |
 | tooltip                | `TooltipProps`                                      |          |         |             |
 | uiSize                 | `SizeTypes`                                         |          | medium  |             |
-| copyable               | `boolean or function or InputCopyableProp`          |          |         |             |
+| copyable               | `CopyableProp`                                      |          |         |             |
 | labelClassName         | `string`                                            |          |         |             |
 | loading                | `boolean`                                           |          |         |             |
 | loadingType            | `LoadingType`                                       |          |         |             |
@@ -296,6 +305,7 @@ function App() {
 
 | Name             | Type                                    | Required | Default | Description                                                                |
 | ---------------- | --------------------------------------- | -------- | ------- | -------------------------------------------------------------------------- |
+| id               | `string`                                |          |         |                                                                            |
 | value            | `T`                                     |          |         | The currently selected value.                                              |
 | onChange         | `(value: T or undefined) => void`       |          |         | Callback function triggered when the selected value changes.               |
 | defaultValue     | `T`                                     |          |         | The default value of the select component.                                 |
@@ -321,11 +331,12 @@ function App() {
 
 ### Skeleton
 
-| Name      | Type                 | Required | default   | Description |
-| --------- | -------------------- | -------- | --------- | ----------- |
-| shape     | `SkeletonShapes`     |          | rectangle |             |
-| uiSize    | `SizeTypes`          |          | medium    |             |
-| animation | `SkeletonAnimations` |          | pulse     |             |
+| Name      | Type                  | Required | default   | Description |
+| --------- | --------------------- | -------- | --------- | ----------- |
+| shape     | `SkeletonShapes`      |          | rectangle |             |
+| uiSize    | `SizeTypes`           |          | medium    |             |
+| animation | `SkeletonAnimations`  |          | pulse     |             |
+| style     | `React.CSSProperties` |          | pulse     |             |
 
 ### SimpleTable
 
@@ -357,15 +368,15 @@ function App() {
 
 ### EmptyState
 
-| Name          | Type        | Required | default                 | Description |
-| ------------- | ----------- | -------- | ----------------------- | ----------- |
-| text          | `ReactNode` |          | No data                 |             |
-| icon          | `ReactNode` |          | PRESENTED_IMAGE_DEFAULT |             |
-| className     | `string`    |          |                         |             |
-| iconClassName | `string`    |          |                         |             |
-| textClassName | `string`    |          |                         |             |
-| usingIcon     | `boolean`   |          | true                    |             |
-| usingText     | `boolean`   |          | true                    |             |
+| Name          | Type              | Required | default                 | Description |
+| ------------- | ----------------- | -------- | ----------------------- | ----------- |
+| text          | `React.ReactNode` |          | No data                 |             |
+| icon          | `React.ReactNode` |          | PRESENTED_IMAGE_DEFAULT |             |
+| className     | `string`          |          |                         |             |
+| iconClassName | `string`          |          |                         |             |
+| textClassName | `string`          |          |                         |             |
+| usingIcon     | `boolean`         |          | true                    |             |
+| usingText     | `boolean`         |          | true                    |             |
 
 ### Divider
 
@@ -376,6 +387,7 @@ function App() {
 | orientation   | `OrientationTypes` |          |         |             |
 | text          | `string`           |          |         |             |
 | textClassName | `string`           |          |         |             |
+| children      | `React.ReactNode`  |          |         |             |
 
 ### Modal
 
@@ -392,26 +404,28 @@ function App() {
 
 ### Dropdown
 
-| Name            | Type                | Required | default | Description |
-| --------------- | ------------------- | -------- | ------- | ----------- |
-| menu            | `DropdownElement[]` |          |         |             |
-| title           | `string`            |          |         |             |
-| buttonClassName | `string`            |          |         |             |
-| itemsClassName  | `string`            |          |         |             |
-| itemClassName   | `string`            |          |         |             |
+| Name            | Type                | Required     | default | Description |
+| --------------- | ------------------- | ------------ | ------- | ----------- |
+| menu            | `DropdownElement[]` |              |         |             |
+| title           | `string`            |              |         |             |
+| buttonClassName | `string`            |              |         |             |
+| itemsClassName  | `string`            |              |         |             |
+| itemClassName   | `string`            |              |         |             |
+| children        | `React.ReactNode`   |              |         |             |
+| anchor          | `AnchorProps`       | bottom start |         |             |
 
 ### SecureCopy
 
-| Name          | Type          | Required | default | Description |
-| ------------- | ------------- | -------- | ------- | ----------- |
-| text          | `string`      | ✔       |         |             |
-| className     | `string`      |          |         |             |
-| icon          | `ReactNode`   |          |         |             |
-| type          | `ActionTypes` |          |         |             |
-| textClassName | `string`      |          |         |             |
-| iconClassName | `string`      |          |         |             |
-| showText      | `boolean`     |          |         |             |
-| uiSize        | `SizeTypes`   |          | medium  |             |
+| Name          | Type           | Required | default | Description |
+| ------------- | -------------- | -------- | ------- | ----------- |
+| text          | `string`       | ✔       |         |             |
+| className     | `string`       |          |         |             |
+| type          | `ActionTypes`  |          |         |             |
+| textClassName | `string`       |          |         |             |
+| iconClassName | `string`       |          |         |             |
+| showText      | `boolean`      |          |         |             |
+| uiSize        | `SizeTypes`    |          | medium  |             |
+| copyable      | `CopyableProp` |          |         |             |
 
 ### Accordion
 
@@ -419,6 +433,7 @@ function App() {
 | -------------- | ----------------- | -------- | ------- | ----------- |
 | items          | `AccordionItem[]` |          |         |             |
 | panelClassName | `string`          |          |         |             |
+| labelClassName | `string`          |          |         |             |
 | loading        | `boolean`         |          | false   |             |
 | loadingSetting | `LoadingProps`    |          |         |             |
 | uiType         | `AccordinType`    |          | default |             |
@@ -474,9 +489,11 @@ function App() {
 
 | Name           | Type                               | Required | default | Description |
 | -------------- | ---------------------------------- | -------- | ------- | ----------- |
+| id             | `string`                           |          |         |             |
 | label          | `string, React.ReactNode`          |          |         |             |
 | required       | `boolean`                          |          | false   |             |
 | error          | `string, boolean, React.ReactNode` |          |         |             |
+| tooltip        | `TooltipProps`                     |          |         |             |
 | value          | `boolean`                          |          |         |             |
 | onChange       | `() => void`                       |          |         |             |
 | disabled       | `boolean`                          |          |         |             |
@@ -484,15 +501,16 @@ function App() {
 
 ### Sidebar
 
-| Name        | Type                  | Required | Default | Description                                                     |
-| ----------- | --------------------- | -------- | ------- | --------------------------------------------------------------- |
-| items       | `SidebarItem[]`       | ✔       |         | List of items to be displayed in the sidebar.                   |
-| segments    | `string[]`            |          |         | Array of URL segments used to determine the active item.        |
-| subItems    | `SidebarItem[]`       |          |         | Additional items to be displayed below the main items.          |
-| loading     | `boolean`             |          |         | Indicates whether the sidebar is in a loading state.            |
-| loadingMode | `SidebarLoadingModes` |          |         | Determines the visual loading state (e.g., spinner, skeleton).  |
-| type        | `PanelLayoutTypes`    |          |         | Specifies the sidebar layout type (e.g., 'normal' or 'mini').   |
-| children    | `React.ReactNode`     |          |         | Additional content to be rendered at the bottom of the sidebar. |
+| Name          | Type                  | Required | Default | Description                                                     |
+| ------------- | --------------------- | -------- | ------- | --------------------------------------------------------------- |
+| items         | `SidebarItem[]`       | ✔       |         | List of items to be displayed in the sidebar.                   |
+| segments      | `string[]`            |          |         | Array of URL segments used to determine the active item.        |
+| subItems      | `SidebarItem[]`       |          |         | Additional items to be displayed below the main items.          |
+| loading       | `boolean`             |          |         | Indicates whether the sidebar is in a loading state.            |
+| loadingMode   | `SidebarLoadingModes` |          |         | Determines the visual loading state (e.g., spinner, skeleton).  |
+| type          | `PanelLayoutTypes`    |          |         | Specifies the sidebar layout type (e.g., 'normal' or 'mini').   |
+| children      | `React.ReactNode`     |          |         | Additional content to be rendered at the bottom of the sidebar. |
+| navItemHeight | `nmber`               |          |         |                                                                 |
 
 #### SidebarItem
 
@@ -511,10 +529,12 @@ function App() {
 
 ### JsonViewer
 
-| Name      | Type              | Required | default | Description |
-| --------- | ----------------- | -------- | ------- | ----------- |
-| value     | `object, null`    |          | {}      |             |
-| collapsed | `number, boolean` |          |         |             |
+| Name      | Type                  | Required | default | Description |
+| --------- | --------------------- | -------- | ------- | ----------- |
+| value     | `object, null`        |          | {}      |             |
+| collapsed | `number, boolean`     |          |         |             |
+| style     | `React.CSSProperties` |          |         |             |
+| copyable  | `boolean`             |          |         |             |
 
 ### Tabs
 
@@ -529,18 +549,20 @@ function App() {
 
 ### ThemeChanger , ThemeSwitcher
 
-| Name           | Type     | Required | default | Description |
-| -------------- | -------- | -------- | ------- | ----------- |
-| itemsClassName | `string` |          |         |             |
+| Name           | Type          | Required | default      | Description |
+| -------------- | ------------- | -------- | ------------ | ----------- |
+| itemsClassName | `string`      |          |              |             |
+| anchor         | `AnchorProps` |          | bottom start |             |
 
 ### Popover
 
-| Name           | Type                  | Required | default | Description |
-| -------------- | --------------------- | -------- | ------- | ----------- |
-| contentNode    | `React.ReactNode`     | ✔       |         |             |
-| children       | `React.ReactNode`     |          |         |             |
-| panelclassName | `string`              |          |         |             |
-| panelStyle     | `React.CSSProperties` |          |         |             |
+| Name           | Type                  | Required     | default | Description |
+| -------------- | --------------------- | ------------ | ------- | ----------- |
+| content        | `React.ReactNode`     | ✔           |         |             |
+| children       | `React.ReactNode`     |              |         |             |
+| panelclassName | `string`              |              |         |             |
+| panelStyle     | `React.CSSProperties` |              |         |             |
+| anchor         | `AnchorProps`         | bottom start |         |             |
 
 ### Tag
 
@@ -571,16 +593,18 @@ function App() {
 
 ### Countdown
 
-| Name          | Type                                               | Required | Default | Description |
-| ------------- | -------------------------------------------------- | -------- | ------- | ----------- |
-| seconds       | `number`                                           |          |         |             |
-| className     | `string`                                           |          |         |             |
-| showTimer     | `boolean`                                          |          |         |             |
-| children      | `React.ReactNode`                                  |          |         |             |
-| timerPosition | 'start or end'                                     |          |         |             |
-| timerRender   | `(props: CountdownRenderProps) => React.ReactNode` |          |         |             |
-| onClick       | `() => void`                                       |          |         |             |
+| Name          | Type                                                        | Required | Default | Description |
+| ------------- | ----------------------------------------------------------- | -------- | ------- | ----------- |
+| seconds       | `number`                                                    |          |         |             |
+| className     | `string`                                                    |          |         |             |
+| showTimer     | `boolean`                                                   |          |         |             |
+| children      | `React.ReactNode`                                           |          |         |             |
+| timerPosition | 'start or end or hidden'                                    |          |         |             |
+| timerRender   | `(props: CountdownRenderProps) => React.ReactNode`          |          |         |             |
+| onClick       | `() => void`                                                |          |         |             |
+| children      | `ReactNode or ((props: CountdownRenderProps) => ReactNode)` |          |         |             |
 
 ## Contributor ✨
 
 [![Contributors](https://contrib.rocks/image?repo=DevAnsar/react-search-hook)](https://github.com/DevAnsar)
+(https://github.com/sanaz-git)
