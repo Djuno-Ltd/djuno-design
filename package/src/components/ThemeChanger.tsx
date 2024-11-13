@@ -34,6 +34,7 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  *
  * @param {object} props - ThemeChanger props.
  * @param {AnchorProps} [props.anchor] - position of dropdown menu
+ * @param {string} [props.buttonClassName] - Additional classes to apply to the menu button.
  * @param {string} [props.itemsClassName] - Additional classes to apply to the items within the ThemeChanger.
  *
  * @returns {React.ReactNode} Rendered ThemeChanger component.
@@ -48,14 +49,19 @@ import { useDjunoDesign } from '../hooks/useDjunoDesign'
  * <ThemeChanger itemsClassName="custom-theme"/>
  *
  */
-const ThemeChanger: React.FC<ThemeChangerProps> = ({ itemsClassName, anchor = 'bottom start' }) => {
+const ThemeChanger: React.FC<ThemeChangerProps> = ({ buttonClassName, itemsClassName, anchor = 'bottom start' }) => {
   const {
     theme: { mode, changeMode, modeRefrence },
   } = useDjunoDesign({ stric: false })
 
   return (
     <Menu as='div' className='dd-relative dd-text-left dd-flex dd-justify-center'>
-      <MenuButton className='dd-inline-flex dd-w-full dd-justify-center dd-items-center dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-slate-800 dark:dd-text-slate-200'>
+      <MenuButton
+        className={cn(
+          'dd-inline-flex dd-w-full dd-justify-center dd-items-center dd-text-sm dd-font-medium focus:dd-outline-none focus-visible:dd-ring-0 dd-text-slate-800 dark:dd-text-slate-200',
+          buttonClassName,
+        )}
+      >
         {mode === 'light' && <SunIcon className='dd-w-6 dd-h-6 hover:dd-scale-110' />}
         {mode === 'dark' && <MoonIcon className='dd-w-6 dd-h-6 hover:dd-scale-110' />}
       </MenuButton>
