@@ -21,6 +21,7 @@
 import { AnchorProps } from './IDropdown'
 
 export interface ThemeChangerProps {
+  buttonClassName?: string
   itemsClassName?: string
   anchor?: AnchorProps
 }
