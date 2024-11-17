@@ -26,6 +26,7 @@ export interface TabsProps extends PropsWithChildren {
   onChange?: ({ option, index }: { option?: TabOption; index?: number }) => void
   listClassName?: string
   panelClassName?: string
+  groupClassName?: string
   tabType?: TabType
 }
 export type TabType = 'default' | 'creamy'
