@@ -93,7 +93,6 @@ function App() {
 25. Tag
 26. CodeViewer
 
-
 ### Available hooks
 
 1. useShow
