@@ -46,7 +46,6 @@ export interface SelectBaseProps {
   hint?: string | React.ReactNode
   loading?: boolean
   loadingType?: LoadingType
-  emptyString?: string
   clearable?: (() => void) | boolean
   disabled?: boolean
   uiSize?: SizeTypes
@@ -61,6 +60,7 @@ export interface SelectProps<ExtraDataType = any> extends SelectBaseProps {
   onChange?: (value: string | undefined) => void
   defaultValue?: string
   options: SelectOption<ExtraDataType>[]
+  emptyString?: string
 }
 
 export interface MultiSelectProps<ExtraDataType = any> extends SelectBaseProps {
