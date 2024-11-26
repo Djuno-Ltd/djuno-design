@@ -37,6 +37,8 @@ import {
   Tag,
   CodeViewer,
   Countdown,
+  Combobox,
+  ComboboxOption,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -327,6 +329,24 @@ function App() {
     }
   };
 
+  const comboOptions: ComboboxOption[] = [
+    { label: "option 1", value: "option 1" },
+    {
+      label: (
+        <Flex items="center" className="gap-0.5">
+          <FaceSmile className="w-4 h-4" />
+          option 2
+        </Flex>
+      ),
+      value: "option 2",
+    },
+    { label: "city 1", value: "city 1" },
+    { label: "city 2", value: "city 2" },
+    { label: "country 1", value: "country 1" },
+  ];
+  const [comboValue, setComboValue] = useState<undefined | string>();
+  const [comboQuery, setComboQuery] = useState<undefined | string>();
+
   return (
     <div className="App min-h-screen w-screen flex flex-col bg-blue-50 dark:bg-[#101214]">
       <Header />
@@ -334,6 +354,28 @@ function App() {
         direction="col"
         className="gap-7 mx-auto my-10 w-[500px] lg:w-[700px]" // min-w-[500px] max-w-2xl
       >
+        <Card title="Combobox">
+          <Flex className="gap-5 w-full">
+            <Flex className="gap-3">
+              <Combobox
+                label="Combobox"
+                uiSize="medium"
+                options={comboOptions}
+                className="w-[200px]"
+                placeholder="Select an option"
+                loading={false}
+                clearable
+                value={comboValue}
+                onChange={setComboValue}
+                query={comboQuery}
+                onChangeQuery={setComboQuery}
+              />
+            </Flex>
+            <Typography.Text>value: {comboValue}</Typography.Text>
+            <Typography.Text>query: {comboQuery}</Typography.Text>
+          </Flex>
+        </Card>
+
         <Card title="CodeViewer">
           <Flex direction="col" className="gap-10 w-full">
             <Flex direction="col" className="w-full">

@@ -36,6 +36,7 @@ import Alert from './components/Alert'
 import Steps from './components/Steps'
 import Skeleton from './components/Skeleton'
 import Input, { AnimatedFormError } from './components/form/Input'
+import Combobox from './components/form/Combobox'
 import Switcher from './components/form/Switcher'
 import Select, { MultiSelect } from './components/form/Select'
 import Textarea from './components/form/Textarea'
@@ -119,4 +120,5 @@ export {
   Tag,
   CodeViewer,
   Countdown,
+  Combobox,
 }

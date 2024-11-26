@@ -38,7 +38,7 @@ const { Text } = Typography
  * Define input variants using the `cva` utility function.
  * This function generates CSS classes for alert styles based on specified variants.
  */
-const listboxVariants = cva(
+export const listboxVariants = cva(
   'dd-bg-secondary-100 focus:dd-ring-0 dd-text-sm dd-block dd-w-full dark:dd-bg-dark-800 dd-outline-none disabled:dd-cursor-not-allowed disabled:dd-bg-secondary-200 dark:disabled:dd-bg-gray-700 dark:disabled:dd-text-secondary-400 disabled:dd-text-secondary-500 disabled:dd-border-secondary-300 disabled:dark:dd-border-gray-600',
   {
     variants: {

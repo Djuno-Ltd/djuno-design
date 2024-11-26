@@ -50,6 +50,7 @@ export * from './ITag'
 export * from './ICodeViewer'
 export * from './IAuthLayouts'
 export * from './ICountdown'
+export * from './ICombobox'
 
 export type SizeTypes = 'small' | 'medium' | 'large'
 export interface IMediaQuery<T> {
