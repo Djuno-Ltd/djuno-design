@@ -200,6 +200,7 @@ const Combobox = <ExtraDataType extends unknown>({
               inputClassName,
             )}
             // displayValue={(option) => option}
+            value={query}
             onChange={(event) => onChangeQuery && onChangeQuery(event.target.value)}
             placeholder={placeholder}
           />
@@ -274,7 +275,7 @@ const Combobox = <ExtraDataType extends unknown>({
               )}
             </ComboboxOption>
           ))}
-          {options.length === 0 && <EmptyState textClassName='dd-font-normal dd-text-xs' />}
+          {filteredOptions.length === 0 && <EmptyState textClassName='dd-font-normal dd-text-xs' />}
         </ComboboxOptions>
       </HeadlessCombobox>
       <AnimatedFormError error={error} />

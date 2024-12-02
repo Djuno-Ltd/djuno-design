@@ -64,6 +64,7 @@ function App() {
     - Textarea
     - Switcher
     - Select
+    - Combobox
 
 10. Skeleton
 11. SimpleTable
@@ -318,7 +319,7 @@ function App() {
 | label            | `string or  React.ReactNode`            |          |         | The label displayed above the select component.                            |
 | error            | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                   |
 | required         | `boolean`                               |          |         | Indicates if the select component is required.                             |
-| uiType           | `SelectTypes`                           |          |         | The uiType of the select component (e.g., single select, multi-select).    |
+| uiType           | `SelectTypes`                           |          |         | The uiType of the select component.                                        |
 | tooltip          | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                      |
 | hint             | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                   |
 | loading          | `boolean`                               |          |         | Indicates if the select component is in a loading state.                   |
@@ -328,6 +329,36 @@ function App() {
 | disabled         | `boolean`                               |          |         | If true, disables the select component.                                    |
 | uiSize           | `SizeTypes`                             |          |         | Size of the select component (e.g., small, medium, large).                 |
 | onBlur           | `(e: FocusEvent) => void`               |          |         | Callback function triggered when the select component loses focus.         |
+
+### Combobox
+
+| Name              | Type                                    | Required | Default | Description                                                                  |
+| ----------------- | --------------------------------------- | -------- | ------- | ---------------------------------------------------------------------------- |
+| id                | `string`                                |          |         |                                                                              |
+| value             | `string`                                |          |         | The currently selected value.                                                |
+| onChange          | `(value: string or undefined) => void`  |          |         | Callback function triggered when the selected value changes.                 |
+| query             | `string`                                |          |         | The currently query value.                                                   |
+| onChangeQuery     | `(value: string or undefined) => void`  |          |         | Callback function triggered when the input value changes.                    |
+| defaultValue      | `string`                                |          |         | The default value of the combobox component.                                 |
+| options           | `ComboboxOption<T, ET>[]`               | ✔       |         | Array of options available for selection.                                    |
+| className         | `string`                                |          |         | Additional CSS classes for custom styling.                                   |
+| labelClassName    | `string`                                |          |         | Additional CSS classes for custom label.                                     |
+| buttonClassName   | `string`                                |          |         | Additional CSS classes for custom styling of the button.                     |
+| inputClassName    | `string`                                |          |         | Additional CSS classes for custom styling of the input element.              |
+| optionsClassName  | `string`                                |          |         | Additional CSS classes for custom styling of the options list.               |
+| optionClassName   | `string`                                |          |         | Additional CSS classes for custom styling of the each option                 |
+| label             | `string or  React.ReactNode`            |          |         | The label displayed above the combobox component.                            |
+| error             | `string or boolean or  React.ReactNode` |          |         | Error message to display if there is a validation issue.                     |
+| required          | `boolean`                               |          |         | Indicates if the combobox component is required.                             |
+| uiType            | `SelectTypes`                           |          |         | The uiType of the combobox component.                                        |
+| tooltip           | `TooltipProps`                          |          |         | Tooltip properties to display additional information.                        |
+| hint              | `string or  React.ReactNode`            |          |         | Hint text to provide additional context or instructions.                     |
+| loading           | `boolean`                               |          |         | Indicates if the combobox component is in a loading state.                   |
+| loadingType       | `LoadingType`                           |          |         | Type of loading indicator to display when the combobox component is loading. |
+| clearable         | `boolean`                               |          |         | If true, allows the user to clear the selected value.                        |
+| disabled          | `boolean`                               |          |         | If true, disables the combobox component.                                    |
+| uiSize            | `SizeTypes`                             |          |         | Size of the combobox component (e.g., small, medium, large).                 |
+| clearQueryOnClose | `boolean`                               |          | true    | If true, the query gets an empty string after closing the options.           |
 
 ### Skeleton
 
