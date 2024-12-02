@@ -369,6 +369,7 @@ function App() {
                 onChange={setComboValue}
                 query={comboQuery}
                 onChangeQuery={setComboQuery}
+                clearQueryOnClose={true}
               />
             </Flex>
             <Typography.Text>value: {comboValue}</Typography.Text>
