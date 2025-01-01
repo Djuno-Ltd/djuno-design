@@ -23,5 +23,7 @@ import { AnchorProps } from './IDropdown'
 export interface ThemeChangerProps {
   buttonClassName?: string
   itemsClassName?: string
+  buttonStyle?: React.CSSProperties
+  itemsStyle?: React.CSSProperties
   anchor?: AnchorProps
 }

@@ -40,6 +40,7 @@ export type TypographtSizeTypes =
 
 export interface TypographyBaseProps extends React.PropsWithChildren {
   className?: string
+  style?: React.CSSProperties
   uiType?: TypographtUiTypes
   code?: boolean
   mark?: boolean

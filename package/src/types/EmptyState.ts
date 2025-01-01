@@ -26,6 +26,9 @@ export interface EmptyStateBodyProps extends PropsWithChildren {
   className?: string
   iconClassName?: string
   textClassName?: string
+  style?: React.CSSProperties
+  iconStyle?: React.CSSProperties
+  textStyle?: React.CSSProperties
   usingIcon?: boolean
   usingText?: boolean
 }
@@ -34,6 +37,7 @@ export interface EmptyStateProps extends EmptyStateBodyProps {}
 
 export interface EmptyStateIconProps {
   className?: string
+  style?: React.CSSProperties
 }
 
 export interface EmptyStateIcons {

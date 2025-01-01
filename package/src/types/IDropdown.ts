@@ -27,6 +27,9 @@ export interface DropdownProps extends PropsWithChildren {
   buttonClassName?: string
   itemsClassName?: string
   itemClassName?: string
+  buttonStyle?: React.CSSProperties
+  itemsStyle?: React.CSSProperties
+  itemStyle?: React.CSSProperties
 }
 
 export type DropdownItem = {

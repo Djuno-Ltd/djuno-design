@@ -28,6 +28,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean
   loadingType?: LoadingType
   className?: string
+  style?: React.CSSProperties
 }
 
 export type ButtonTypes = 'simple' | 'primary' | 'light' | 'danger' | 'dangerLight' | 'icon'

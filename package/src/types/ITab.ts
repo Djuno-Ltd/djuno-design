@@ -27,6 +27,9 @@ export interface TabsProps extends PropsWithChildren {
   listClassName?: string
   panelClassName?: string
   groupClassName?: string
+  listStyle?: React.CSSProperties
+  panelStyle?: React.CSSProperties
+  groupStyle?: React.CSSProperties
   tabType?: TabType
 }
 export type TabType = 'default' | 'creamy'

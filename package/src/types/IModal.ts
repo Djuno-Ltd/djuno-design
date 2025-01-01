@@ -26,6 +26,8 @@ export interface ModalProps extends PropsWithChildren {
   onClose?: () => void
   contentClassName?: string
   containerClassName?: string
+  contentStyle?: React.CSSProperties
+  containerStyle?: React.CSSProperties
   closable?: boolean
   rendered?: () => void
 }

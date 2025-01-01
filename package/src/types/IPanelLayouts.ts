@@ -35,6 +35,7 @@ export interface PanelLayoutProps extends React.PropsWithChildren {
   globalLoading?: boolean
   contentLoading?: boolean
   loadingsContainerClassName?: string
+  loadingsContainerStyle?: React.CSSProperties
   globalLoadingContent?: React.ReactNode
   contentLoadingContent?: React.ReactNode
   enableGoToTopAfterScroll?: boolean
