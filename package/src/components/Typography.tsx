@@ -78,6 +78,7 @@ const textVariants = cva('', {
       h6: 'dd-mb-1 dd-text-sm',
     },
   },
+
   compoundVariants: [
     {
       uiType: ['secondary', 'success', 'warning', 'danger'],
