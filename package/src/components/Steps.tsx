@@ -48,14 +48,14 @@ const { Text } = Typography
  *   step="step2"
  * />
  */
-const Steps = <T extends string>({ className, ...props }: StepsProps<T>): React.JSX.Element => {
+const Steps = <T extends string>({ className, style, ...props }: StepsProps<T>): React.JSX.Element => {
   const { steps, step } = props
   const stepsKeys = steps.map((s) => s.value)
 
   const [activeLevels, checkedLevels] = handleSelectedSteps(step, stepsKeys)
 
   return (
-    <ol className={cn('dd-flex dd-items-center dd-w-full dd-text-center dd-py-6', className)}>
+    <ol className={cn('dd-flex dd-items-center dd-w-full dd-text-center dd-py-6', className)} style={style}>
       {steps.map((step, i) => (
         <li
           key={i}

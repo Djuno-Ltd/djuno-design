@@ -45,7 +45,15 @@ import { LoadingProps } from '../types'
  * // Example usage of Loading component with elastic type:
  * <Loading type="elastic" size={32} borderSize={2} theme="error" />
  */
-const Loading: React.FunctionComponent<LoadingProps> = ({ className, uiType, uiSize, borderSize, theme, ...props }) => {
+const Loading: React.FunctionComponent<LoadingProps> = ({
+  className,
+  uiType,
+  uiSize,
+  borderSize,
+  theme,
+  style,
+  ...props
+}) => {
   if (uiType === 'elastic') {
     return (
       <div>

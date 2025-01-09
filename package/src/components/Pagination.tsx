@@ -77,6 +77,7 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
   onPageChange,
   className,
   loading,
+  style,
 }) => {
   const [currentPage, setCurrentPage] = React.useState(Math.floor(offset / limit) + 1)
 
@@ -130,7 +131,7 @@ const Pagination: React.FC<React.PropsWithChildren<PaginationProps>> = ({
   }
 
   return (
-    <ul className={cn('dd-flex dd-gap-0.5', { [className || '']: className })}>
+    <ul className={cn('dd-flex dd-gap-0.5', { [className || '']: className })} style={style}>
       {/* Left navigation arrow */}
       <li
         className={cn(

@@ -38,7 +38,13 @@ export interface ComboboxProps<ExtraDataType = any> extends SelectBaseProps {
   onChangeQuery?: (value: string | undefined) => void
   options: ComboboxOption<ExtraDataType>[]
   inputClassName?: string
-  inputStyle: React.CSSProperties
+
   clearQueryOnClose?: boolean
   placeholder?: string
+  Style?: React.CSSProperties
+  labelStyle?: React.CSSProperties
+  inputStyle?: React.CSSProperties
+  buttonStyle?: React.CSSProperties
+  optionsStyle?: React.CSSProperties
+  optionStyle?: React.CSSProperties
 }

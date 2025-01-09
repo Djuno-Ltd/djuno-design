@@ -155,6 +155,11 @@ const Select = <ExtraDataType extends unknown>({
   defaultValue,
   onChange,
   options,
+  style,
+  labelStyle,
+  buttonStyle,
+  optionsStyle,
+  optionStyle,
 }: SelectProps<ExtraDataType>) => {
   // const innerId = React.useMemo(() => {
   //   return id || uuid(10)
@@ -174,7 +179,7 @@ const Select = <ExtraDataType extends unknown>({
   }, [options, value])
 
   return (
-    <div className={cn('dd-flex dd-flex-col', className)}>
+    <div className={cn('dd-flex dd-flex-col', className)} style={style}>
       <div
         className={cn('dd-flex dd-items-center', {
           'dd-justify-between': label,
@@ -189,6 +194,7 @@ const Select = <ExtraDataType extends unknown>({
             }),
             labelClassName,
           )}
+          style={labelStyle}
         >
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
@@ -215,6 +221,7 @@ const Select = <ExtraDataType extends unknown>({
             'dd-relative dd-block dd-w-full',
             buttonClassName,
           )}
+          style={buttonStyle}
         >
           <span
             className={cn('dd-block dd-truncate dd-text-slate-800 dark:dd-text-slate-200 dd-text-start', {
@@ -257,6 +264,7 @@ const Select = <ExtraDataType extends unknown>({
             { [optionsClassName || '']: optionsClassName },
             'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
           )}
+          style={optionsStyle}
         >
           {options.map((option, optionIdx) => (
             <ListboxOption
@@ -273,6 +281,7 @@ const Select = <ExtraDataType extends unknown>({
                 )
               }
               value={option.value}
+              style={optionStyle}
             >
               {({ selected, disabled }) => (
                 <div
@@ -323,6 +332,11 @@ const MultiSelect = <ExtraDataType extends unknown>({
   onChange,
   options,
   optionClassName,
+  style,
+  labelStyle,
+  buttonStyle,
+  optionsStyle,
+  optionStyle,
 }: MultiSelectProps<ExtraDataType>) => {
   const innerId = React.useMemo(() => {
     return id || uuid(10)
@@ -344,7 +358,7 @@ const MultiSelect = <ExtraDataType extends unknown>({
   }, [values, options])
 
   return (
-    <div className={cn('dd-flex dd-flex-col', className)}>
+    <div className={cn('dd-flex dd-flex-col', className)} style={style}>
       <div
         className={cn('dd-flex dd-items-center', {
           'dd-justify-between': label,
@@ -383,6 +397,7 @@ const MultiSelect = <ExtraDataType extends unknown>({
             buttonClassName,
             'dd-relative dd-block dd-w-full',
           )}
+          style={buttonStyle}
         >
           <span
             className={cn('dd-block dd-truncate dd-text-slate-800 dark:dd-text-slate-200 dd-text-start', {
@@ -421,6 +436,7 @@ const MultiSelect = <ExtraDataType extends unknown>({
             'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
             optionsClassName,
           )}
+          style={optionsStyle}
         >
           {options.map((option, optionIdx) => (
             <ListboxOption
@@ -437,6 +453,7 @@ const MultiSelect = <ExtraDataType extends unknown>({
                 )
               }
               value={option.value}
+              style={optionStyle}
             >
               {({ selected, disabled }) => (
                 <div

@@ -113,6 +113,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
   children,
   closable,
   onClose,
+  style,
 }) => {
   const [visible, setVisible] = React.useState(true)
 
@@ -136,6 +137,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
         },
         className,
       )}
+      style={style}
     >
       <Flex items={description ? 'start' : 'center'} className='w-full'>
         {showIcon && uiType !== undefined && uiType !== 'neutral' && (

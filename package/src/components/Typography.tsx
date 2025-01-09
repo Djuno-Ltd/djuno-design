@@ -177,6 +177,7 @@ const Title: React.FC<TypographyTitleProps> = ({
   strong,
   italic,
   copyable,
+  style,
   ...props
 }) => {
   const Heading = `h${level}` as keyof JSX.IntrinsicElements
@@ -194,6 +195,7 @@ const Title: React.FC<TypographyTitleProps> = ({
       <Heading
         className={cn('dd-font-semibold', textVariants({ uiType, level: `h${level}` }), className)}
         {...htmlProps}
+        style={style}
       >
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
@@ -217,11 +219,12 @@ const Text: React.FC<TypographyTextProps> = ({
   strong,
   italic,
   copyable,
+  style,
   ...props
 }) => {
   return (
     <Tooltip {...tooltip}>
-      <span {...props} className={cn(textVariants({ uiType, size }), className)}>
+      <span {...props} className={cn(textVariants({ uiType, size }), className)} style={style}>
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
           {copyable && <CopyableText copyable={copyable} textChildren={children} />}
@@ -244,11 +247,12 @@ const Paragraph: React.FC<TypographyParagraphProps> = ({
   strong,
   italic,
   copyable,
+  style,
   ...props
 }) => {
   return (
     <Tooltip {...tooltip}>
-      <div {...props} className={cn(textVariants({ uiType, size }), className)}>
+      <div {...props} className={cn(textVariants({ uiType, size }), className)} style={style}>
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
           {copyable && <CopyableText copyable={copyable} textChildren={children} />}
@@ -271,11 +275,16 @@ const Link: React.FC<TypographyLinkProps> = ({
   strong,
   italic,
   copyable,
+  style,
   ...props
 }) => {
   return (
     <Tooltip {...tooltip}>
-      <a {...props} className={cn(textVariants({ uiType, link: uiType ? 'otherUi' : 'default', size }), className)}>
+      <a
+        {...props}
+        className={cn(textVariants({ uiType, link: uiType ? 'otherUi' : 'default', size }), className)}
+        style={style}
+      >
         <Base code={code} mark={mark} underline={underline} del={del} strong={strong} italic={italic}>
           {children}
           {copyable && <CopyableText copyable={copyable} textChildren={children} />}

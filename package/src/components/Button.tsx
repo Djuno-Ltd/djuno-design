@@ -100,11 +100,17 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   loadingType,
   type,
+  style,
   ...props
 }) => {
   return (
     <Tooltip {...tooltip}>
-      <button type={type || 'button'} {...props} className={cn(buttonVariants({ uiType, uiSize }), className)}>
+      <button
+        type={type || 'button'}
+        {...props}
+        className={cn(buttonVariants({ uiType, uiSize }), className)}
+        style={style}
+      >
         {loading && (
           <Loading
             uiType={loadingType || 'simple'}

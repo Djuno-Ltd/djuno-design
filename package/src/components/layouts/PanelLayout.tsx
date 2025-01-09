@@ -82,6 +82,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   contentLoadingContent,
   enableGoToTopAfterScroll = true,
   enableGoToTopAfterChangeRoute = true,
+  loadingsContainerStyle,
 }) => {
   const [isShowSidebar, { hide: handleHideSidebar, show: handleShowSidebar }] = useShow(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -179,6 +180,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
                 'dd-w-full dd-h-full dd-flex dd-justify-center dd-items-center dd-absolute dd-inset-0 dd-bg-slate-50 dark:dd-bg-dark-900 dd-z-30',
                 loadingsContainerClassName,
               )}
+              style={loadingsContainerStyle}
             >
               {contentLoadingContent ? (
                 contentLoadingContent
@@ -201,6 +203,7 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
               'dd-w-full dd-h-full dd-flex dd-justify-center dd-items-center dd-absolute dd-inset-0 dd-bg-slate-50 dark:dd-bg-dark-900 dd-z-50',
               loadingsContainerClassName,
             )}
+            style={loadingsContainerStyle}
           >
             {globalLoadingContent ? (
               globalLoadingContent

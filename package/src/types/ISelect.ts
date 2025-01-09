@@ -39,7 +39,7 @@ export interface SelectBaseProps {
   optionsClassName?: string
   optionClassName?: string
   style?: React.CSSProperties
-  labelStyle: React.CSSProperties
+  labelStyle?: React.CSSProperties
   buttonStyle?: React.CSSProperties
   optionsStyle?: React.CSSProperties
   optionStyle?: React.CSSProperties

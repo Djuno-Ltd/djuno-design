@@ -79,6 +79,9 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   panelClassName,
   groupClassName,
   tabType,
+  listStyle,
+  panelStyle,
+  groupStyle,
 }) => {
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>(propsSelectedIndex || 0)
 
@@ -115,7 +118,12 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
   }
 
   return (
-    <TabGroup selectedIndex={selectedIndex} onChange={(i) => onChangeTab(i, options)} className={groupClassName}>
+    <TabGroup
+      selectedIndex={selectedIndex}
+      onChange={(i) => onChangeTab(i, options)}
+      className={groupClassName}
+      style={groupStyle}
+    >
       <TabList
         className={cn(
           'dd-flex dd-overflow-x-auto',
@@ -125,6 +133,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
           },
           listClassName,
         )}
+        style={listStyle}
       >
         {options
           .filter((option) => option.isVisible === undefined || option.isVisible === true)
@@ -167,6 +176,7 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
                 'dd-py-6': (!tabType || tabType === 'default') && option.element,
                 [panelClassName || '']: panelClassName,
               })}
+              style={panelStyle}
             >
               {option.element}
             </TabPanel>

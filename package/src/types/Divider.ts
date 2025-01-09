@@ -27,7 +27,7 @@ export interface DividerProps extends PropsWithChildren {
   orientation?: OrientationTypes
   text?: string
   textClassName?: string
-  textstyle?: React.CSSProperties
+  textStyle?: React.CSSProperties
   usingText?: boolean
   //   orientationMargin?:number
 }

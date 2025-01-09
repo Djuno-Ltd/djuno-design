@@ -80,6 +80,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   onChange,
   disabled,
   labelClassName,
+  labelStyle,
 }) => {
   const [checkedState, setCheckedState] = React.useState<boolean>(value || false)
 
@@ -123,7 +124,8 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             }}
           />
         </HeadlessCheckbox>
-        <Label
+
+        <label
           htmlFor={innerId}
           className={cn(
             'dd-flex dd-items-center dd-cursor-pointer',
@@ -136,6 +138,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             'dd-whitespace-normal dd-break-words dd-flex-1',
             labelClassName,
           )}
+          style={labelStyle}
         >
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
@@ -148,7 +151,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
             </Typography.Text>
           )}
           {tooltip && <Tooltip.Info {...tooltip} />}
-        </Label>
+        </label>
       </Field>
       <AnimatedFormError error={error} />
     </div>

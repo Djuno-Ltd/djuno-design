@@ -158,6 +158,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     tooltip,
     placeholder,
     AfterComponent,
+    style,
+    labelStyle,
+    containerStyle,
     ...otherProps
   } = props
 
@@ -197,17 +200,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   }
 
   return (
-    <div className={cn('dd-flex dd-flex-col', containerClassName)}>
+    <div className={cn('dd-flex dd-flex-col', containerClassName)} style={containerStyle}>
       <div
-        className={cn(
-          'dd-flex dd-items-center dd-px-1',
-          {
-            'dd-justify-between': label || required,
-            'dd-justify-end': !label && !required,
-            'dd-mb-0.5': label || required || tooltip || hint,
-          },
-          labelClassName,
-        )}
+        className={cn('dd-flex dd-items-center dd-px-1', {
+          'dd-justify-between': label || required,
+          'dd-justify-end': !label && !required,
+          'dd-mb-0.5': label || required || tooltip || hint,
+        })}
       >
         <label
           htmlFor={innerId}
@@ -217,6 +216,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             }),
             labelClassName,
           )}
+          style={labelStyle}
         >
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
@@ -291,6 +291,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           )}
           placeholder={placeholder}
           {...inputProps}
+          style={style}
         />
         {loading && (
           <div className='dd-absolute dd-z-40 dd-inset-y-0 dd-end-0 dd-flex dd-items-center dd-pe-2.5'>

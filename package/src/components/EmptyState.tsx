@@ -70,6 +70,9 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
   textClassName,
   usingIcon,
   usingText,
+  style,
+  iconStyle,
+  textStyle,
 }): React.ReactNode => {
   return (
     <div
@@ -77,21 +80,24 @@ const EmptyStateBody: React.FC<EmptyStateBodyProps> = ({
         'dd-w-full dd-flex dd-flex-col dd-gap-1 dd-justify-center dd-items-center dd-text-slate-400 dark:dd-text-gray-600',
         className,
       )}
+      style={style}
     >
-      {usingIcon || usingIcon === undefined ? icon || <DefaultIcon className={iconClassName} /> : null}
-      <Typography.Text uiType='transparent' size='sm' className={cn('dd-text-center', textClassName)}>
+      {usingIcon || usingIcon === undefined
+        ? icon || <DefaultIcon className={iconClassName} style={iconStyle} />
+        : null}
+      <Typography.Text uiType='transparent' size='sm' className={cn('dd-text-center', textClassName)} style={textStyle}>
         {usingText || usingText === undefined ? text || 'No data' : null}
       </Typography.Text>
     </div>
   )
 }
 
-const SimpleIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxArrowIcon className={cn('dd-w-14', className)} />
+const SimpleIcon: React.FC<EmptyStateIconProps> = ({ className, style }) => {
+  return <InboxArrowIcon className={cn('dd-w-14', className)} style={style} />
 }
 
-const DefaultIcon: React.FC<EmptyStateIconProps> = ({ className }) => {
-  return <InboxIcon className={cn('dd-w-14', className)} />
+const DefaultIcon: React.FC<EmptyStateIconProps> = ({ className, style }) => {
+  return <InboxIcon className={cn('dd-w-14', className)} style={style} />
 }
 
 EmptyState.PRESENTED_IMAGE_SIMPLE = SimpleIcon

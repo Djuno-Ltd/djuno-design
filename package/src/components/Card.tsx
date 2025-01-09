@@ -75,6 +75,10 @@ const Card: React.FunctionComponent<CardProps> = ({
   headerClassName,
   titleClassName,
   descriptionClassName,
+  style,
+  headerStyle,
+  titleStyle,
+  descriptionStyle,
 }) => {
   return (
     <Flex
@@ -85,6 +89,7 @@ const Card: React.FunctionComponent<CardProps> = ({
         { 'dd-pt-4': title },
         className,
       )}
+      style={style}
     >
       {(title || description || setting) && (
         <div
@@ -92,18 +97,24 @@ const Card: React.FunctionComponent<CardProps> = ({
             'dd-w-full dd-border-b dd-border-secondary-200 dark:dd-border-dark-800 dd-mb-6',
             headerClassName,
           )}
+          style={headerStyle}
         >
           <Flex items='start' justify='between' className={'dd-w-full dd-mb-2'}>
             <Flex direction='col' className='dd-w-full'>
               {typeof title === 'string' ? (
-                <Typography.Title level={titleLevel || 5} className={cn('dd-mb-0', titleClassName)}>
+                <Typography.Title level={titleLevel || 5} className={cn('dd-mb-0', titleClassName)} style={titleStyle}>
                   {title}
                 </Typography.Title>
               ) : (
                 title
               )}
               {typeof description === 'string' ? (
-                <Typography.Text uiType='secondary' size='sm' className={cn(descriptionClassName)}>
+                <Typography.Text
+                  uiType='secondary'
+                  size='sm'
+                  className={cn(descriptionClassName)}
+                  style={descriptionStyle}
+                >
                   {description}
                 </Typography.Text>
               ) : (
