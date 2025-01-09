@@ -20,12 +20,16 @@
 import * as React from 'react'
 import { useDjunoDesign } from '../hooks/useDjunoDesign'
 import { CodeViewerProps } from '../types/ICodeViewer'
-import SyntaxHighlighter from 'react-syntax-highlighter'
+import ReactSyntaxHighlighter from 'react-syntax-highlighter'
+import { SyntaxHighlighterProps } from 'react-syntax-highlighter'
 import { tomorrow, tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { cn } from '../utils/cn'
 import Tooltip from './Tooltip'
 import { useCopyable } from '../hooks/useCopyable'
 import { CopyableText } from '../types'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const SyntaxHighlighter = ReactSyntaxHighlighter as any as React.FC<SyntaxHighlighterProps>
 
 /**
  * CodeViewer component for displaying code with syntax highlighting, line numbers, and optional copy-to-clipboard functionality.
@@ -59,7 +63,7 @@ import { CopyableText } from '../types'
  * />
  *
  */
-const CodeViewer: React.FC<CodeViewerProps> = ({
+const CodeViewer = ({
   code,
   language,
   showLineNumbers = false,
@@ -69,7 +73,7 @@ const CodeViewer: React.FC<CodeViewerProps> = ({
   theme,
   fontSize,
   copyable,
-}) => {
+}: CodeViewerProps) => {
   const {
     theme: { mode },
   } = useDjunoDesign({ stric: false })

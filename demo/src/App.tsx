@@ -366,9 +366,15 @@ function App() {
                 loading={false}
                 clearable
                 value={comboValue}
-                onChange={setComboValue}
+                onChange={(v) => {
+                  setComboQuery(v);
+                  setComboValue(v);
+                }}
                 query={comboQuery}
-                onChangeQuery={setComboQuery}
+                onChangeQuery={(v) => {
+                  setComboQuery(v);
+                }}
+                clearQueryOnClose={false}
               />
             </Flex>
             <Typography.Text>value: {comboValue}</Typography.Text>

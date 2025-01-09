@@ -50,6 +50,7 @@ export interface SelectBaseProps {
   disabled?: boolean
   uiSize?: SizeTypes
   onBlur?: (e: FocusEvent) => void
+  emptyString?: string
 }
 
 export type SelectTypes = InputTypes
@@ -60,7 +61,6 @@ export interface SelectProps<ExtraDataType = any> extends SelectBaseProps {
   onChange?: (value: string | undefined) => void
   defaultValue?: string
   options: SelectOption<ExtraDataType>[]
-  emptyString?: string
 }
 
 export interface MultiSelectProps<ExtraDataType = any> extends SelectBaseProps {
