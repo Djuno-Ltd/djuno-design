@@ -99,7 +99,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('dd-flex dd-items-center dd-gap-1', className)} style={style}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1 ', className)} style={style}>
           <Tooltip content={tooltipText} className='!dd-text-xs'>
             <div
               className={cn(
@@ -136,13 +136,13 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
           </Tooltip>
           <div
             className={cn(
-              'dd-w-[18px] dd-select-none dd-cursor-pointer dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:hover:dd-text-slate-200',
+              'dd-w-[18px] dd-select-none dd-cursor-pointer dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:hover:dd-text-slate-200 !dd-flex-shrink-0',
               { 'dd-w-[17px]': uiSize === 'small' },
               iconClassName,
             )}
             style={iconStyle}
           >
-            <Tooltip>
+            <Tooltip className=''>
               {showText ? (
                 <EyeIcon onClick={() => setShowText(false)} />
               ) : (
@@ -182,7 +182,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
             )}
             style={iconStyle}
           >
-            <Tooltip content={tooltipText} className='!dd-text-xs'>
+            <Tooltip content={tooltipText} className='!dd-text-xs !dd-flex-shrink-0'>
               {icon}
             </Tooltip>
           </div>
