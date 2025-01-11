@@ -23,9 +23,11 @@ import { PropsWithChildren } from 'react'
 export interface DividerProps extends PropsWithChildren {
   uiType?: DividerTypes
   className?: string
+  style?: React.CSSProperties
   orientation?: OrientationTypes
   text?: string
   textClassName?: string
+  textStyle?: React.CSSProperties
   usingText?: boolean
   //   orientationMargin?:number
 }

@@ -40,6 +40,7 @@ export interface TooltipProps extends PropsWithChildren {
   place?: TooltipPlaces
   theme?: TooltipThemeTypes
   className?: string
+  style?: React.CSSProperties
 }
 
 export interface TooltipComponents {

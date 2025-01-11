@@ -62,16 +62,20 @@ const SimpleTable: React.FC<React.PropsWithChildren<SimpletableProps>> & TableCo
   children,
   loading,
   loadingSetting,
+  style,
+  containerStyle,
+  loadingStyle,
 }) => {
   const testLoading = false
   return (
-    <div className={cn('dd-w-full dd-relative ', containerClassName, {})}>
+    <div className={cn('dd-w-full dd-relative ', containerClassName, {})} style={containerStyle}>
       <div className='dd-overflow-x-auto dd-overflow-y-hidden'>
         <table
           className={cn(
             'dd-rounded-md dd-border dd-border-transparent dd-border-separate dd-border-spacing-0 dd-w-full dd-space-y-4',
             className,
           )}
+          style={style}
         >
           {children}
         </table>
@@ -99,7 +103,7 @@ const SimpleTable: React.FC<React.PropsWithChildren<SimpletableProps>> & TableCo
 }
 
 const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
-  const { className, withoutHoverStyle, selected, disabled, onClick, children, ...rest } = props
+  const { className, withoutHoverStyle, selected, disabled, onClick, children, style, ...rest } = props
   return (
     <tr
       {...rest}
@@ -115,6 +119,7 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
         },
         className,
       )}
+      style={style}
     >
       {children}
     </tr>
@@ -124,7 +129,7 @@ const SimpleTableRow = (props: React.PropsWithChildren<TableRowProps>) => {
 const SimpleTableHead = (props: React.PropsWithChildren) => <thead>{props.children}</thead>
 
 const SimpleTableTH = (props: React.PropsWithChildren<TableTHProps>) => {
-  const { className, children, ...rest } = props
+  const { className, children, style, ...rest } = props
   return (
     <th
       {...rest}
@@ -132,6 +137,7 @@ const SimpleTableTH = (props: React.PropsWithChildren<TableTHProps>) => {
         'dd-text-left dd-bg-white dark:dd-bg-dark-850 dd-border-b dark:dd-border-dark-700 dd-p-2',
         className,
       )}
+      style={style}
     >
       <div className='dd-text-slate-400 dark:dd-text-slate-100 dd-font-light dd-overflow-hidden dd-whitespace-nowrap'>
         {children || props.lable}
@@ -143,7 +149,7 @@ const SimpleTableTH = (props: React.PropsWithChildren<TableTHProps>) => {
 const SimpleTableBody = (props: React.PropsWithChildren) => <tbody>{props.children}</tbody>
 
 const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
-  const { className, children, ...rest } = props
+  const { className, children, style, ...rest } = props
   return (
     <td
       {...rest}
@@ -151,6 +157,7 @@ const SimpleTableTD = (props: React.PropsWithChildren<TableTDProps>) => {
         'dd-text-md dd-py-3 dd-px-2 dd-text-[#475569] dark:dd-text-slate-100 dd-border-b dark:dd-border-dark-700 ',
         className,
       )}
+      style={style}
     >
       {children}
     </td>

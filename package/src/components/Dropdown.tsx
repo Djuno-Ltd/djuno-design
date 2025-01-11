@@ -66,12 +66,15 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
   itemsClassName,
   children,
   itemClassName,
+  buttonStyle,
+  itemsStyle,
+  itemStyle,
 }) => {
   const itemGroups = groupArrayByDivider(menu || [])
   return (
     <Menu as='div' className='dd-text-left dd-w-full dd-h-full dd-inline-block dd-justify-center dd-items-center'>
       <div className='dd-flex dd-items-center dd-justify-center'>
-        <MenuButton onClick={(e) => e.stopPropagation()} className={cn(buttonClassName)} as='div'>
+        <MenuButton onClick={(e) => e.stopPropagation()} className={cn(buttonClassName)} as='div' style={buttonStyle}>
           {children ? (
             children
           ) : (
@@ -100,6 +103,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
                 [itemsClassName || '']: itemsClassName,
               },
             )}
+            style={itemsStyle}
           >
             {title && (
               <div className='dd-w-full dd-px-3 dd-text-xs dd-py-2 dd-text-secondary-600 dark:dd-text-secondary-300'>
@@ -133,6 +137,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = ({
                             },
                             itemClassName,
                           )}
+                          style={itemStyle}
                         >
                           {item.label}
                         </button>

@@ -28,4 +28,5 @@ export interface PaginationProps extends PropsWithChildren {
   onPageChange: (offset: number, limit: number) => void
   className?: string
   loading?: boolean
+  style?: React.CSSProperties
 }

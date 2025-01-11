@@ -39,7 +39,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-url": "^8.0.2",
     "@svgr/rollup": "^8.1.0",
-    "@types/react": "^18.2.58",
+    "@types/react": "^18.3.18",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@uiw/react-json-view": "^2.0.0-alpha.27",

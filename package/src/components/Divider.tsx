@@ -72,6 +72,8 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   orientation = 'center', // default value for orientation
   text,
   textClassName,
+  style,
+  textStyle,
   ...props
 }) => {
   const dividerClass = dividerVariants({ uiType })
@@ -86,32 +88,38 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   })
 
   return (
-    <div {...props} className={parentClassName}>
+    <div {...props} className={parentClassName} style={style}>
       <div className='dd-flex dd-justify-center dd-items-center'>
         {text !== undefined ? (
           <>
             {orientation === 'left' && (
               <>
-                <span className={cn(textClass, textClassName)}>{text || 'Djuno Design'}</span>
+                <span className={cn(textClass, textClassName)} style={textStyle}>
+                  {text || 'Djuno Design'}
+                </span>
                 <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)}></div>
               </>
             )}
             {orientation === 'center' && (
               <>
                 <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)}></div>
-                <span className={cn(textClass, textClassName)}>{text || 'Djuno Design'}</span>
+                <span className={cn(textClass, textClassName)} style={textStyle}>
+                  {text || 'Djuno Design'}
+                </span>
                 <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)}></div>
               </>
             )}
             {orientation === 'right' && (
               <>
                 <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)}></div>
-                <span className={cn(textClass, textClassName)}>{text || 'Djuno Design'}</span>
+                <span className={cn(textClass, textClassName)} style={textStyle}>
+                  {text || 'Djuno Design'}
+                </span>
               </>
             )}
           </>
         ) : (
-          <div className={cn(dividerClass, commonDividerClass)}></div>
+          <div className={cn(dividerClass, commonDividerClass)} style={style}></div>
         )}
       </div>
       {children}

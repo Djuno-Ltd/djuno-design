@@ -25,6 +25,9 @@ export interface SimpletableProps extends PropsWithChildren {
   className?: string
   containerClassName?: string
   loadingSetting?: LoadingProps
+  style?: React.CSSProperties
+  containerStyle?: React.CSSProperties
+  loadingStyle?: React.CSSProperties
 }
 
 export interface TableHeadProps extends React.PropsWithChildren {}
@@ -32,6 +35,7 @@ export interface TableHeadProps extends React.PropsWithChildren {}
 export interface TableTHProps {
   lable?: string | React.ReactNode
   className?: string
+  style?: React.CSSProperties
 }
 
 export interface TableBodyProps extends React.PropsWithChildren {}
@@ -39,10 +43,12 @@ export interface TableBodyProps extends React.PropsWithChildren {}
 export interface TableRowProps extends HTMLProps<HTMLTableRowElement> {
   className?: string
   withoutHoverStyle?: boolean
+  style?: React.CSSProperties
 }
 
 export interface TableTDProps extends HTMLProps<HTMLTableCellElement> {
   className?: string
+  style?: React.CSSProperties
 }
 
 export interface TableComponents {

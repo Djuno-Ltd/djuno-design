@@ -30,4 +30,5 @@ export interface CheckboxProps {
   onChange?: (checked: boolean) => void
   disabled?: boolean
   labelClassName?: string
+  labelStyle?: React.CSSProperties
 }

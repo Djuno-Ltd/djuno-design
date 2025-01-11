@@ -30,6 +30,7 @@ export interface AlertProps {
   children?: React.ReactNode
   closable?: boolean
   onClose?: () => void
+  style?: React.CSSProperties
 }
 
 export type AlertTypes = 'neutral' | 'success' | 'info' | 'warning' | 'error'

@@ -73,6 +73,9 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   type,
   uiSize,
   copyable,
+  style,
+  textStyle,
+  iconStyle,
   ...props
 }) => {
   const [showText, setShowText] = React.useState(false)
@@ -96,7 +99,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
   return (
     <>
       {type === 'hide' && (
-        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1 ', className)} style={style}>
           <Tooltip content={tooltipText} className='!dd-text-xs'>
             <div
               className={cn(
@@ -110,6 +113,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
                 textClassName,
               )}
               onClick={handleCopy}
+              style={textStyle}
             >
               {!showText && (
                 <div className='dd-bg-white/10 dark:dd-bg-black/10 dd-backdrop-blur-[2.3px] dd-absolute dd-left-0 dd-top-0 dd-right-0 dd-bottom-0 dd-w-full dd-h-full' />
@@ -124,6 +128,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
                   },
                   textClassName,
                 )}
+                style={textStyle}
               >
                 {!text || text === undefined ? '' : text}
               </Text>
@@ -131,12 +136,13 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
           </Tooltip>
           <div
             className={cn(
-              'dd-w-[18px] dd-select-none dd-cursor-pointer dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:hover:dd-text-slate-200',
+              'dd-w-[18px] dd-select-none dd-cursor-pointer dd-text-slate-700 hover:dd-text-slate-900 dark:dd-text-slate-300 dark:hover:dd-text-slate-200 !dd-flex-shrink-0',
               { 'dd-w-[17px]': uiSize === 'small' },
               iconClassName,
             )}
+            style={iconStyle}
           >
-            <Tooltip>
+            <Tooltip className=''>
               {showText ? (
                 <EyeIcon onClick={() => setShowText(false)} />
               ) : (
@@ -148,7 +154,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
       )}
 
       {type === 'copy' && (
-        <div className={cn('dd-flex dd-items-center dd-gap-1', className)}>
+        <div className={cn('dd-flex dd-items-center dd-gap-1', className)} style={style}>
           <Input
             className={cn(
               inputVariants({
@@ -165,6 +171,7 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
             value={text || ''}
             readOnly={true}
             {...props}
+            style={textStyle}
           />
           <div
             onClick={handleCopy}
@@ -173,8 +180,9 @@ const SecureCopy: React.FC<SecureCopyProps> = ({
               { 'dd-w-[15px]': uiSize === 'small' },
               iconClassName,
             )}
+            style={iconStyle}
           >
-            <Tooltip content={tooltipText} className='!dd-text-xs'>
+            <Tooltip content={tooltipText} className='!dd-text-xs !dd-flex-shrink-0'>
               {icon}
             </Tooltip>
           </div>

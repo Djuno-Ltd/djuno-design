@@ -26,6 +26,9 @@ export interface AccordionProps extends PropsWithChildren {
   className?: string
   panelClassName?: string
   labelClassName?: string
+  style?: React.CSSProperties
+  panelStyle?: React.CSSProperties
+  labelStyle?: React.CSSProperties
   loading?: boolean
   loadingSetting?: LoadingProps
   uiType?: AccordinType

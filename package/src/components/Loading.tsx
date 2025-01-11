@@ -45,13 +45,21 @@ import { LoadingProps } from '../types'
  * // Example usage of Loading component with elastic type:
  * <Loading type="elastic" size={32} borderSize={2} theme="error" />
  */
-const Loading: React.FunctionComponent<LoadingProps> = ({ className, uiType, uiSize, borderSize, theme, ...props }) => {
+const Loading: React.FunctionComponent<LoadingProps> = ({
+  className,
+  uiType,
+  uiSize,
+  borderSize,
+  theme,
+  style,
+  ...props
+}) => {
   if (uiType === 'elastic') {
     return (
       <div>
         <svg
           className={cn(className)}
-          style={{ ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }) }}
+          style={{ ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }), ...style }}
           viewBox='0 0 16 16'
         >
           <g className='dd-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
@@ -92,6 +100,7 @@ const Loading: React.FunctionComponent<LoadingProps> = ({ className, uiType, uiS
         style={{
           ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }),
           ...(borderSize && { borderWidth: borderSize }),
+          ...style,
         }}
         className={cn(
           'dd-rounded-full dd-border-[0.125rem]',

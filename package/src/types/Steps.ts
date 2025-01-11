@@ -20,6 +20,7 @@
 
 export interface StepsProps<T = string> {
   className?: string
+  style?: React.CSSProperties
   steps: Array<StepItem<T>>
   step: T
 }

@@ -25,6 +25,7 @@ import { TextareaHTMLAttributes } from 'react'
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id?: string
   className?: string
+  style?: React.CSSProperties
   placeholder?: string
   label?: string | React.ReactNode
   required?: boolean
@@ -38,4 +39,6 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   loadingType?: LoadingType
   labelClassName?: string
   containerClassName?: string
+  labelStyle?: React.CSSProperties
+  containerStyle?: React.CSSProperties
 }

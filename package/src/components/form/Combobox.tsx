@@ -126,6 +126,12 @@ const Combobox = <ExtraDataType extends unknown>({
   options,
   clearQueryOnClose = true,
   placeholder,
+  style,
+  labelStyle,
+  inputStyle,
+  buttonStyle,
+  optionsStyle,
+  optionStyle,
 }: ComboboxProps<ExtraDataType>) => {
   const handleClear = (e: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => {
     e.stopPropagation()
@@ -144,7 +150,7 @@ const Combobox = <ExtraDataType extends unknown>({
   }, [options, query])
 
   return (
-    <div className={cn('dd-flex dd-flex-col', className)}>
+    <div className={cn('dd-flex dd-flex-col', className)} style={style}>
       <div
         className={cn('dd-flex dd-items-center', {
           'dd-justify-between': label,
@@ -159,6 +165,7 @@ const Combobox = <ExtraDataType extends unknown>({
             }),
             labelClassName,
           )}
+          style={labelStyle}
         >
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
@@ -203,6 +210,7 @@ const Combobox = <ExtraDataType extends unknown>({
             value={query}
             onChange={(event) => onChangeQuery && onChangeQuery(event.target.value)}
             placeholder={placeholder}
+            style={inputStyle}
           />
 
           <span className='dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-gap-1'>
@@ -221,6 +229,7 @@ const Combobox = <ExtraDataType extends unknown>({
                 },
                 buttonClassName,
               )}
+              style={buttonStyle}
             >
               <ChevronDownIcon className='dd-h-4 dd-w-4 dd-text-gray-400' aria-hidden='true' />
             </ComboboxButton>
@@ -240,6 +249,7 @@ const Combobox = <ExtraDataType extends unknown>({
             { [optionsClassName || '']: optionsClassName },
             'dd-origin-top dd-transition dd-duration-200 dd-ease-out data-[closed]:dd-scale-95 data-[closed]:dd-opacity-0',
           )}
+          style={optionsStyle}
         >
           {filteredOptions.map((option, optionIdx) => (
             <ComboboxOption
@@ -256,6 +266,7 @@ const Combobox = <ExtraDataType extends unknown>({
                 )
               }
               value={option.value}
+              style={optionStyle}
             >
               {({ selected, disabled }) => (
                 <div

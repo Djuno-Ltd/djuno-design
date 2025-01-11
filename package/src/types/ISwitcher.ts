@@ -27,4 +27,5 @@ export interface SwitcherProps {
   loading?: boolean
   loadingType?: LoadingType
   uiSize?: SizeTypes
+  style?: React.CSSProperties
 }

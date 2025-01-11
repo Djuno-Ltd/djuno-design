@@ -63,7 +63,7 @@ import { ICountdownProps } from '../types/ICountdown'
 const { Text } = Typography
 
 const Countdown: React.FC<ICountdownProps & { ref?: any }> = forwardRef(
-  ({ seconds, children, className, showTimer = true, timerPosition = 'start', timerRender, onClick }, ref) => {
+  ({ seconds, children, className, showTimer = true, timerPosition = 'start', timerRender, onClick, style }, ref) => {
     const [timeLeft, setTimeLeft] = useState<number>(seconds)
 
     useEffect(() => {
@@ -132,6 +132,7 @@ const Countdown: React.FC<ICountdownProps & { ref?: any }> = forwardRef(
         onClick={() => {
           if (!disabled && onClick) onClick()
         }}
+        style={style}
       >
         {timerPosition === 'start' && timer()}
         {typeof children === 'function'

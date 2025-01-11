@@ -43,7 +43,15 @@ import { cn } from '../utils/cn'
  *   <div className="bg-red-500 p-4">Item 3</div>
  * </Flex>
  */
-const Flex: React.FunctionComponent<FlexProps> = ({ children, direction, className, items, justify, ...props }) => {
+const Flex: React.FunctionComponent<FlexProps> = ({
+  children,
+  direction,
+  className,
+  items,
+  justify,
+  style,
+  ...props
+}) => {
   return (
     <div
       {...props}
@@ -159,6 +167,7 @@ const Flex: React.FunctionComponent<FlexProps> = ({ children, direction, classNa
         },
         className,
       )}
+      style={style}
     >
       {children}
     </div>

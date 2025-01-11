@@ -31,6 +31,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   placeholder?: string
   className?: string
   labelClassName?: string
+  style?: React.CSSProperties
+  labelStyle?: React.CSSProperties
   required?: boolean
   error?: string | React.ReactNode | boolean
   hint?: string | React.ReactNode
@@ -39,6 +41,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   copyable?: CopyableProp
   uiSize?: SizeTypes
   containerClassName?: string
+  containerStyle?: React.CSSProperties
 }
 
 export type InputTypes = 'default' | 'simple'

@@ -31,4 +31,8 @@ export interface CardProps extends PropsWithChildren {
   headerClassName?: string
   titleClassName?: string
   descriptionClassName?: string
+  style?: React.CSSProperties
+  headerStyle?: React.CSSProperties
+  titleStyle?: React.CSSProperties
+  descriptionStyle?: React.CSSProperties
 }
