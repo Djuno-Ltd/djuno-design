@@ -59,7 +59,7 @@ const Loading: React.FunctionComponent<LoadingProps> = ({
       <div>
         <svg
           className={cn(className)}
-          style={{ ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }) }}
+          style={{ ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }), ...style }}
           viewBox='0 0 16 16'
         >
           <g className='dd-animate-rotate' style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
@@ -100,6 +100,7 @@ const Loading: React.FunctionComponent<LoadingProps> = ({
         style={{
           ...(uiSize ? { width: uiSize, height: uiSize } : { width: 24, height: 24 }),
           ...(borderSize && { borderWidth: borderSize }),
+          ...style,
         }}
         className={cn(
           'dd-rounded-full dd-border-[0.125rem]',
