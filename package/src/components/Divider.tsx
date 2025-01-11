@@ -85,11 +85,10 @@ const Divider: React.FunctionComponent<DividerProps> = ({
   const parentClassName = cn(dividerClass, className, {
     'dd-divider-using-text': text !== undefined,
     [`dd-divider-${orientation}`]: text !== undefined, //class based on orientation and usingText prop
-    ...style,
   })
 
   return (
-    <div {...props} className={parentClassName}>
+    <div {...props} className={parentClassName} style={style}>
       <div className='dd-flex dd-justify-center dd-items-center'>
         {text !== undefined ? (
           <>
@@ -98,21 +97,21 @@ const Divider: React.FunctionComponent<DividerProps> = ({
                 <span className={cn(textClass, textClassName)} style={textStyle}>
                   {text || 'Djuno Design'}
                 </span>
-                <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)} style={style}></div>
+                <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)}></div>
               </>
             )}
             {orientation === 'center' && (
               <>
-                <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)} style={style}></div>
+                <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)}></div>
                 <span className={cn(textClass, textClassName)} style={textStyle}>
                   {text || 'Djuno Design'}
                 </span>
-                <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)} style={style}></div>
+                <div className={cn(dividerClass, commonDividerClass, leftOrientationClass)}></div>
               </>
             )}
             {orientation === 'right' && (
               <>
-                <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)} style={style}></div>
+                <div className={cn(dividerClass, commonDividerClass, rightOrientationClass)}></div>
                 <span className={cn(textClass, textClassName)} style={textStyle}>
                   {text || 'Djuno Design'}
                 </span>
