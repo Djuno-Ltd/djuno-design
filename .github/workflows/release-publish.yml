@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
+          registry-url: "https://registry.npmjs.org"
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -29,7 +30,7 @@ jobs:
       - name: Build the package
         working-directory: package
         run: npm run build
-        
+
       # Step 5: Debug npm config
       - name: Debug npm config
         run: npm config ls
