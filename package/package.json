@@ -15,7 +15,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\""
   },
-  "author": "Ansar Mirzayi <ansarmirzayi@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Djuno-Ltd/djuno-design"
+  },
+  "author": "Djuno Ltd (Ansar Mirzayi) <ansar@djuno.io>",
   "license": "Apache-2.0",
   "source": "src/index.tsx",
   "main": "dist/index.js",
