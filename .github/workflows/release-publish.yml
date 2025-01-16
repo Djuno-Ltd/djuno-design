@@ -29,6 +29,12 @@ jobs:
       - name: Build the package
         working-directory: package
         run: npm run build
+        
+      # Step 5: Debug npm config
+      - name: Debug npm config
+        run: npm config ls
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # Step 5: Publish the package
       - name: Publish to npm
