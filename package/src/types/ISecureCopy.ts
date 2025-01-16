@@ -27,6 +27,9 @@ export interface SecureCopyProps extends PropsWithChildren {
   className?: string
   textClassName?: string
   iconClassName?: string
+  style?: React.CSSProperties
+  textStyle?: React.CSSProperties
+  iconStyle?: React.CSSProperties
   showText?: boolean
   uiSize?: SizeTypes
   copyable?: CopyableProp

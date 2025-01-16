@@ -70,6 +70,8 @@ const Modal: React.FC<ModalProps> = ({
   containerClassName,
   closable = true,
   rendered,
+  contentStyle,
+  containerStyle,
 }) => {
   React.useEffect(() => {
     if (rendered && isOpen) {
@@ -96,6 +98,7 @@ const Modal: React.FC<ModalProps> = ({
             className={cn('dd-flex dd-min-h-full dd-items-center dd-justify-center dd-p-2 dd-text-center', {
               [containerClassName || '']: containerClassName,
             })}
+            style={containerStyle}
           >
             <TransitionChild
               as={React.Fragment}
@@ -114,6 +117,7 @@ const Modal: React.FC<ModalProps> = ({
                     [contentClassName || '']: contentClassName,
                   },
                 )}
+                style={contentStyle}
               >
                 <DialogTitle as='div' className='dd-leading-6 dd-flex dd-items-center dd-justify-between'>
                   <Typography.Text size='base'>{title}</Typography.Text>

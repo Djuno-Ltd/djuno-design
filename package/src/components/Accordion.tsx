@@ -83,9 +83,12 @@ const Accordion: React.FC<AccordionProps> = ({
   loading,
   loadingSetting,
   uiType,
+  style,
+  panelStyle,
+  labelStyle,
 }) => {
   return (
-    <div className={cn(accordionVariants({ uiType }), className)}>
+    <div className={cn(accordionVariants({ uiType }), className)} style={style}>
       {items?.length === 0 && loading && (
         <Flex items='center' justify='center' className='dd-min-h-[100px]'>
           <Loading
@@ -110,6 +113,7 @@ const Accordion: React.FC<AccordionProps> = ({
                   },
                   labelClassName,
                 )}
+                style={labelStyle}
               >
                 {item.label}
                 {item.panel && (
@@ -133,6 +137,7 @@ const Accordion: React.FC<AccordionProps> = ({
                     },
                     panelClassName,
                   )}
+                  style={panelStyle}
                 >
                   {item.panel}
                 </DisclosurePanel>

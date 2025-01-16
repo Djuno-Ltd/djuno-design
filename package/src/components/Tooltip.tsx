@@ -83,6 +83,7 @@ const BaseTooltip: React.FunctionComponent<TooltipProps> = ({
   place,
   theme,
   className,
+  style,
 }) => {
   if (!content) {
     return children
@@ -96,6 +97,7 @@ const BaseTooltip: React.FunctionComponent<TooltipProps> = ({
         clickable={clickable}
         place={place}
         className={cn(tooltipVariants({ theme }), className)}
+        style={style}
       >
         {content}
       </ReactTooltip>

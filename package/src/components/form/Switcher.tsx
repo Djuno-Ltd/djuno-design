@@ -33,7 +33,7 @@ import { cn } from '../../utils/cn'
  *   loading={false}
  * />
  */
-const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, uiSize, loading, loadingType }) => {
+const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, uiSize, loading, loadingType, style }) => {
   const [enabled, setEnabled] = useState<boolean>(value || false)
 
   useEffect(() => {
@@ -61,6 +61,7 @@ const Switcher: React.FC<SwitcherProps> = ({ value, onChange, disabled, uiSize, 
           '!dd-cursor-not-allowed': disabled || loading,
         },
       )}
+      style={style}
     >
       <span
         aria-hidden='true'

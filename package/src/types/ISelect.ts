@@ -38,6 +38,11 @@ export interface SelectBaseProps {
   buttonClassName?: string
   optionsClassName?: string
   optionClassName?: string
+  style?: React.CSSProperties
+  labelStyle?: React.CSSProperties
+  buttonStyle?: React.CSSProperties
+  optionsStyle?: React.CSSProperties
+  optionStyle?: React.CSSProperties
   label?: string | React.ReactNode
   error?: string | boolean | React.ReactNode
   required?: boolean

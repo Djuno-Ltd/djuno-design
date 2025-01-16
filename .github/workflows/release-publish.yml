@@ -33,6 +33,6 @@ jobs:
       # Step 5: Publish the package
       - name: Publish to npm
         working-directory: package
-        run: npm publish
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}

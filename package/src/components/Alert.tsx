@@ -113,6 +113,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
   children,
   closable,
   onClose,
+  style,
 }) => {
   const [visible, setVisible] = React.useState(true)
 
@@ -136,10 +137,16 @@ const Alert: React.FunctionComponent<AlertProps> = ({
         },
         className,
       )}
+      style={style}
     >
-      <Flex items={description ? 'start' : 'center'} className='w-full'>
+      <Flex items={description ? 'start' : 'center'} className='w-full '>
         {showIcon && uiType !== undefined && uiType !== 'neutral' && (
-          <div className={cn(alertIconVariants({ uiType, widthType: description ? 'large' : 'small' }))}>
+          <div
+            className={cn(
+              alertIconVariants({ uiType, widthType: description ? 'large' : 'small' }),
+              'dd-flex-shrink-0',
+            )}
+          >
             {uiType === 'error' && <ErrorIcon />}
             {uiType === 'success' && <SuccessIcon />}
             {uiType === 'info' && <InfoIcon />}

@@ -92,6 +92,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>((tagProps, ref) => {
       >
         <>
           {iconNode}
+
           {children && (
             <Typography.Text uiType='transparent' size='xs' className='dd-whitespace-nowrap'>
               {children}

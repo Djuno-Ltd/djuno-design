@@ -101,6 +101,9 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
     loadingType,
     labelClassName,
     containerClassName,
+    style,
+    labelStyle,
+    containerStyle,
     ...textareaProps
   } = props
 
@@ -131,7 +134,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
   }
 
   return (
-    <div className={cn('dd-flex dd-flex-col', containerClassName)}>
+    <div className={cn('dd-flex dd-flex-col', containerClassName)} style={containerStyle}>
       <div
         className={cn('dd-flex dd-mb-1 dd-items-center', {
           'dd-justify-between': label,
@@ -146,6 +149,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
             }),
             labelClassName,
           )}
+          style={labelStyle}
         >
           {label && (
             <Typography.Text size='sm' uiType='transparent'>
@@ -191,6 +195,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, re
           )}
           placeholder={placeholder}
           {...textareaProps}
+          style={style}
         />
         {loading && (
           <div className='dd-absolute dd-top-0 dd-right-0 dd-m-2 dd-flex dd-items-center dd-justify-center'>

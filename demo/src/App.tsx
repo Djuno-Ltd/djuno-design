@@ -377,6 +377,28 @@ function App() {
                 clearQueryOnClose={false}
               />
             </Flex>
+            <Flex className="gap-3">
+              <Combobox
+                label="Combobox with style"
+                uiSize="medium"
+                options={comboOptions}
+                className="w-[200px]"
+                placeholder="Select an option"
+                loading={false}
+                clearable
+                value={comboValue}
+                onChange={(v) => {
+                  setComboQuery(v);
+                  setComboValue(v);
+                }}
+                query={comboQuery}
+                onChangeQuery={(v) => {
+                  setComboQuery(v);
+                }}
+                clearQueryOnClose={false}
+                inputStyle={{ backgroundColor: "yellow" }}
+              />
+            </Flex>
             <Typography.Text>value: {comboValue}</Typography.Text>
             <Typography.Text>query: {comboQuery}</Typography.Text>
           </Flex>
@@ -552,6 +574,19 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
                 onChange={setIsChecked}
                 error={true}
               />
+            </Flex>
+
+            <Flex className="gap-5 w-full">
+              <Flex direction="col">
+                <Checkbox
+                  label="Ckeckbox simple form with style"
+                  value={isChecked}
+                  onChange={setIsChecked}
+                  labelStyle={{
+                    color: "green",
+                  }}
+                />
+              </Flex>
             </Flex>
           </Flex>
         </Card>
@@ -1244,6 +1279,9 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
             <Flex className="w-full">
               <Input label="Password" copyable type="password" />
+            </Flex>
+            <Flex className="w-full">
+              <Input label="Input with style" labelStyle={{ color: "green" }} />
             </Flex>
           </Flex>
         </Card>

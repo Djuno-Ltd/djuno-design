@@ -34,4 +34,5 @@ export interface ICountdownProps {
   timerPosition?: 'start' | 'end' | 'hidden'
   timerRender?: (props: CountdownRenderProps) => React.ReactNode
   onClick?: () => void
+  style?: React.CSSProperties
 }
