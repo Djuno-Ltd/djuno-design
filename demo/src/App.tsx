@@ -1050,7 +1050,6 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               pathname={pathname}
               className="h-96 w-full border border-slate-500 overflow-hidden"
               renderSidebar={({ segments, isShowSidebar, type, ref }) => {
-                console.log("refrence=>", ref);
                 return (
                   <PanelSidebar
                     isShowSidebar={isShowSidebar}
