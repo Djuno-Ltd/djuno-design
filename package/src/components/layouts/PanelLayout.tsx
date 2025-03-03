@@ -26,6 +26,7 @@ import Typography from '../Typography'
 import { AnimatePresence, motion } from 'framer-motion'
 import Loading from '../Loading'
 import Flex from '../Flex'
+import { useWindowOnClick } from '../../hooks/useWindowOnClick'
 
 /**
  * PanelLayout component.
@@ -60,8 +61,8 @@ import Flex from '../Flex'
  *   renderSidebar={({ segments, isShowSidebar, type }) => (
  *     <Sidebar segments={segments} isShowSidebar={isShowSidebar} type={type} />
  *   )}
- *   renderHeader={({ handleHideSidebar, handleShowSidebar }) => (
- *     <Header onHideSidebar={handleHideSidebar} onShowSidebar={handleShowSidebar} />
+ *   renderHeader={({ handleShowSidebar }) => (
+ *     <Header onShowSidebar={handleShowSidebar} />
  *   )}
  * >
  *   <MainContent />
@@ -88,6 +89,9 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [containerParentHeight, setContainerParentHeight] = React.useState(100)
   const [showGoTopButton, setShowGoTopButton] = React.useState(false)
+
+  const sidebarContainerRef = React.useRef<HTMLDivElement>(null)
+  const ignoreElementsOfClosingSidebar = [sidebarContainerRef.current].filter(Boolean) as Element[]
 
   const segments = React.useMemo(() => {
     if (!pathname) return ['']
@@ -134,18 +138,24 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
     }
   }
 
+  // console.log(typeof children)
+  useWindowOnClick(
+    () => {
+      if (handleHideSidebar) handleHideSidebar()
+    },
+    { ignore: ignoreElementsOfClosingSidebar, capture: true },
+  )
+
   return (
     <div className={cn('dd-flex dd-flex-col dd-h-full md:dd-flex-row dd-relative', className)} style={style}>
-      {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal' })}
+      {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal', ref: sidebarContainerRef })}
       <div
         className={cn('dd-min-h-full dd-w-full dd-ml-auto dd-transition-all dd-duration-200 dd-relative', {
           'lg:dd-w-[calc(100%-300px)]': type === 'normal' || type === undefined,
           'lg:dd-w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        <div className='dd-relative dd-z-30 dd-w-full'>
-          {renderHeader && renderHeader({ handleHideSidebar, handleShowSidebar, isShowSidebar })}
-        </div>
+        <div className='dd-relative dd-z-30 dd-w-full'>{renderHeader && renderHeader({ handleShowSidebar })}</div>
         <div
           className='dd-max-w-7xl dd-mx-auto dd-min-w-full dd-h-[calc(100%-4rem)] dd-overflow-auto'
           ref={containerRef}

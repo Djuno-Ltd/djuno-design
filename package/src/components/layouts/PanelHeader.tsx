@@ -20,7 +20,6 @@
 
 import React from 'react'
 import { ReactComponent as MenuIcon } from './../../assets/icons/menu.svg'
-import { useWindowOnClick } from '../../hooks/useWindowOnClick'
 import { PanelHeaderProps } from '../../types/IPanelLayouts'
 
 /**
@@ -30,10 +29,8 @@ import { PanelHeaderProps } from '../../types/IPanelLayouts'
  * the sidebar to be toggled open or closed. The header can include custom content and a mobile menu icon.
  *
  * @param {object} props - PanelHeader component props.
- * @param {() => void} [props.handleHideSidebar] - Callback function to hide the sidebar.
  * @param {() => void} [props.handleShowSidebar] - Callback function to show the sidebar.
  * @param {React.ReactNode} [props.mobileIcon] - An optional icon or element to display in the mobile view.
- * @param {boolean} [props.isShowSidebar] - An optional icon or element to display in the mobile view.
  * @param {React.ReactNode} [props.children] - The content to be displayed within the header.
  *
  * @returns {React.ReactNode} Rendered PanelHeader component.
@@ -44,29 +41,13 @@ import { PanelHeaderProps } from '../../types/IPanelLayouts'
  * @example
  * // Example usage of PanelHeader component:
  * <PanelHeader
- *   handleHideSidebar={() => console.log('Hide sidebar')}
  *   handleShowSidebar={() => console.log('Show sidebar')}
  *   mobileIcon={<MobileMenuIcon />}
  * >
  *   <HeaderContent />
  * </PanelHeader>
  */
-const PanelHeader: React.FC<PanelHeaderProps> = ({
-  children,
-  handleHideSidebar,
-  handleShowSidebar,
-  mobileIcon,
-  // isShowSidebar,
-}) => {
-  // console.log(typeof children)
-  useWindowOnClick(
-    () => {
-      if (handleHideSidebar) handleHideSidebar()
-    },
-    [],
-    { capture: true },
-  )
-
+const PanelHeader: React.FC<PanelHeaderProps> = ({ children, handleShowSidebar, mobileIcon }) => {
   return (
     <div className='dd-w-full dd-h-16 dd-px-6 dd-flex dd-items-center dd-bg-white dark:dd-bg-dark-900 dd-top-0 dd-z-30 dd-sticky dd-border-b-2 dd-border-slate-200 dark:dd-border-dark-800'>
       <div className='dd-w-full lg:dd-max-w-7xl dd-mx-auto dd-flex dd-items-center dd-justify-between'>

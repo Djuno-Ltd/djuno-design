@@ -22,7 +22,6 @@ import React from 'react'
 
 export function useWindowOnClick(
   callbackFn: (ev: MouseEvent) => any,
-  deps: React.DependencyList,
   options: AddEventListenerOptions & { ignore?: Element[] } = {},
 ) {
   React.useEffect(() => {
@@ -38,5 +37,5 @@ export function useWindowOnClick(
     return () => {
       window.removeEventListener('click', listener, options)
     }
-  }, [...deps, ...(options.ignore || [])])
+  }, [callbackFn, options])
 }
