@@ -155,7 +155,9 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
           'lg:dd-w-[calc(100%-130px)]': type === 'mini',
         })}
       >
-        <div className='dd-relative dd-z-30 dd-w-full'>{renderHeader && renderHeader({ handleShowSidebar })}</div>
+        <div className='dd-relative dd-z-30 dd-w-full'>
+          {renderHeader && renderHeader({ handleShowSidebar, handleHideSidebar, isShowSidebar })}
+        </div>
         <div
           className='dd-max-w-7xl dd-mx-auto dd-min-w-full dd-h-[calc(100%-4rem)] dd-overflow-auto'
           ref={containerRef}

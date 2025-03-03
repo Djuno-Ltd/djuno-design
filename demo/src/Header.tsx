@@ -25,7 +25,7 @@ const Header = () => {
           djuno-design lab🧪
         </Text>
         <Text uiType="secondary" size="xs">
-          v1.0.0-beta
+          v1.2.1
         </Text>
       </Flex>
 
