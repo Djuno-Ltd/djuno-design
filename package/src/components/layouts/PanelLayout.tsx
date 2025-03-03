@@ -148,7 +148,8 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
 
   return (
     <div className={cn('dd-flex dd-flex-col dd-h-full md:dd-flex-row dd-relative', className)} style={style}>
-      {renderSidebar && renderSidebar({ segments, isShowSidebar, type: type || 'normal', ref: sidebarContainerRef })}
+      {renderSidebar &&
+        renderSidebar({ segments, isShowSidebar, handleHideSidebar, type: type || 'normal', ref: sidebarContainerRef })}
       <div
         className={cn('dd-min-h-full dd-w-full dd-ml-auto dd-transition-all dd-duration-200 dd-relative', {
           'lg:dd-w-[calc(100%-300px)]': type === 'normal' || type === undefined,
