@@ -984,11 +984,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               </PanelHeader>
             )}
           >
-            <iframe
-              src="https://google.com"
-              className="w-full h-96"
-              title="djuno-design"
-            />
+            <div className="w-full h-[300px]"></div>
           </PanelLayout>
           {/* </div> */}
         </Card>
@@ -1029,7 +1025,7 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
             </Flex>
           }
         >
-          <Flex className="gap-5">
+          <Flex className="gap-5" direction="col">
             <div className="h-96 w-60 border border-slate-400">
               <Sidebar
                 type={panelType}
@@ -1053,39 +1049,39 @@ export default uniquePropHOC(["time", "seconds"])(Expire);`}
               type={panelType}
               pathname={pathname}
               className="h-96 w-full border border-slate-500 overflow-hidden"
-              renderSidebar={({ segments, isShowSidebar, type }) => (
-                <PanelSidebar
-                  isShowSidebar={isShowSidebar}
-                  type={type}
-                  sidebarHeader={
-                    <div className="flex items-center gap-1 px-1">
-                      <Logo className="w-5 h-5" />
-                      <Text size="xs">djuno-design</Text>
-                    </div>
-                  }
-                >
-                  <Sidebar
+              renderSidebar={({ segments, isShowSidebar, type, ref }) => {
+                console.log("refrence=>", ref);
+                return (
+                  <PanelSidebar
+                    isShowSidebar={isShowSidebar}
                     type={type}
-                    items={sidebarItems}
-                    subItems={sidebarSubItems}
-                    segments={segments}
-                    loading={sidebarLoading}
-                    loadingMode="skeleton"
-                    navItemHeight={30}
-                  />
-                </PanelSidebar>
-              )}
+                    sidebarHeader={
+                      <div className="flex items-center gap-1 px-1">
+                        <Logo className="w-5 h-5" />
+                        <Text size="xs">djuno-design</Text>
+                      </div>
+                    }
+                    ref={ref}
+                  >
+                    <Sidebar
+                      type={type}
+                      items={sidebarItems}
+                      subItems={sidebarSubItems}
+                      segments={segments}
+                      loading={sidebarLoading}
+                      loadingMode="skeleton"
+                      navItemHeight={30}
+                    />
+                  </PanelSidebar>
+                );
+              }}
               renderHeader={(headerProps) => (
                 <PanelHeader {...headerProps} mobileIcon={<Logo />}>
                   <Text size="xs">header</Text>
                 </PanelHeader>
               )}
             >
-              <iframe
-                src="https://google.com"
-                className="w-full h-96"
-                title="djuno-design"
-              />
+              <div className="w-full h-[300px]"></div>
             </PanelLayout>
           </Flex>
         </Card>

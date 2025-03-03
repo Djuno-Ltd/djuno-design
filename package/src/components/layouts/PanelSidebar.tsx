@@ -49,27 +49,33 @@ import { PanelSidebarProps } from '../../types/IPanelLayouts'
  *   <SidebarContent />
  * </PanelSidebar>
  */
-const PanelSidebar: React.FC<PanelSidebarProps> = ({ children, isShowSidebar, type, sidebarHeader }) => {
-  return (
-    <div
-      className={cn(
-        'dd-bg-white dark:dd-bg-dark-900 md:dd-border-r dark:dd-border-dark-800 dd-h-full dd-absolute dd-border-r-2 dd-border-slate-200 dd-transition-all dd-duration-500 dd-ease-in-out dd-z-40',
-        {
-          'dd-w-[300px]': type === 'normal' || type === undefined,
-          'dd-w-[130px]': type === 'mini',
-          '-dd-left-[300px] lg:dd-left-0': !isShowSidebar && (type === 'normal' || type === undefined),
-          '-dd-left-[130px] lg:dd-left-0': !isShowSidebar && type === 'mini',
-          '!dd-left-0': isShowSidebar,
-        },
-      )}
-    >
-      {sidebarHeader && (
-        <div className='dd-flex dd-w-full dd-justify-between dd-h-16 dd-items-center'>{sidebarHeader}</div>
-      )}
-      <div className='dd-flex dd-flex-col dd-flex-grow dd-justify-between dd-overflow-y-auto dd-w-full dd-transition-height dd-h-[calc(100%-4rem)] dd-pb-3'>
-        {children}
+const PanelSidebar = React.forwardRef<HTMLDivElement, PanelSidebarProps>(
+  ({ children, isShowSidebar, type, sidebarHeader }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'dd-bg-white dark:dd-bg-dark-900 md:dd-border-r dark:dd-border-dark-800 dd-h-full dd-absolute dd-border-r-2 dd-border-slate-200 dd-transition-all dd-duration-500 dd-ease-in-out dd-z-40',
+          {
+            'dd-w-[300px]': type === 'normal' || type === undefined,
+            'dd-w-[130px]': type === 'mini',
+            '-dd-left-[300px] lg:dd-left-0': !isShowSidebar && (type === 'normal' || type === undefined),
+            '-dd-left-[130px] lg:dd-left-0': !isShowSidebar && type === 'mini',
+            '!dd-left-0': isShowSidebar,
+          },
+        )}
+      >
+        {sidebarHeader && (
+          <div className='dd-flex dd-w-full dd-justify-between dd-h-16 dd-items-center'>{sidebarHeader}</div>
+        )}
+        <div className='dd-flex dd-flex-col dd-flex-grow dd-justify-between dd-overflow-y-auto dd-w-full dd-transition-height dd-h-[calc(100%-4rem)] dd-pb-3'>
+          {children}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  },
+)
+
+PanelSidebar.displayName = 'PanelSidebar'
+
 export default PanelSidebar
