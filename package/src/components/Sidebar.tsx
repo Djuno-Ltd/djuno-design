@@ -75,11 +75,13 @@ const Sidebar = <T extends unknown>({
   const [expandedItems, setExpandedItems] = React.useState<Array<string | number>>([])
 
   const visibleMainItems = useMemo(() => {
-    return items ? items.filter((item) => item.isVisible === undefined || item.isVisible) : []
+    const itemList = typeof items === 'function' ? items() : items
+    return itemList ? itemList.filter((item) => item.isVisible === undefined || item.isVisible) : []
   }, [items])
 
   const visibleSubItems = useMemo(() => {
-    return subItems ? subItems.filter((item) => item.isVisible === undefined || item.isVisible) : []
+    const subItemList = typeof subItems === 'function' ? subItems() : subItems
+    return subItemList ? subItemList.filter((item) => item.isVisible === undefined || item.isVisible) : []
   }, [subItems])
 
   const addToExpand = (id: string | number) => {
@@ -107,11 +109,11 @@ const Sidebar = <T extends unknown>({
 
   const activeItem = useMemo(() => {
     return visibleMainItems.find((item) => isActiveItem(item, segments || []))
-  }, [segments])
+  }, [segments, visibleMainItems])
 
   const activeSubItem = useMemo(() => {
-    return subItems?.find((item) => isActiveItem(item, segments || []))
-  }, [segments])
+    return visibleSubItems?.find((item) => isActiveItem(item, segments || []))
+  }, [segments, visibleSubItems])
 
   const [pointerPosition, setPointerPosition] = React.useState<undefined | number>(undefined)
 

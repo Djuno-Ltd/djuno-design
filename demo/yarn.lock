@@ -3431,7 +3431,7 @@ dir-glob@^3.0.1:
     path-type "^4.0.0"
 
 "djuno-design@file:../package":
-  version "1.2.1"
+  version "1.2.3"
   resolved "file:../package"
 
 dlv@^1.1.3:

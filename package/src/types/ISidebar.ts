@@ -22,9 +22,9 @@ import { PanelLayoutTypes } from './IPanelLayouts'
 import { LoadingType } from './Loading'
 
 export interface SidebarProps<T = unknown> extends React.PropsWithChildren {
-  items: SidebarItem<T>[]
+  items: SidebarItem<T>[] | (() => SidebarItem<T>[])
   segments?: string[]
-  subItems?: SidebarItem<T>[]
+  subItems?: SidebarItem<T>[] | (() => SidebarItem<T>[])
   loading?: boolean
   loadingMode?: SidebarLoadingModes
   type?: PanelLayoutTypes
