@@ -190,7 +190,7 @@ export const getTabOptionFromIndex = (index: number, options: TabOptions): TabOp
 export const getOptionIndexFromUrlString = (url: string, options: TabOptions) => {
   let index = undefined
 
-  options.forEach((element, i) => {
+  visibleTabOptions(options).forEach((element, i) => {
     if (element.url && url.includes(element.url)) index = i
   })
 

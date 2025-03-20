@@ -11,7 +11,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <DjunoDesignProvider>
+    <DjunoDesignProvider
+      navigator={(url) => (window.location.href = url || "/")}
+    >
       <App />
     </DjunoDesignProvider>
   </React.StrictMode>

@@ -39,6 +39,7 @@ import {
   Countdown,
   Combobox,
   ComboboxOption,
+  TabOptions,
 } from "djuno-design";
 import { useRef, useState } from "react";
 import Header from "./Header";
@@ -311,9 +312,9 @@ function App() {
     string[] | undefined
   >([selectOptions[0].value]);
 
-  const tabOptions = [
+  const tabOptions: TabOptions = [
     { label: "Tab 1", url: "/tab1" },
-    { label: "Tab 2", url: "/tab2" },
+    { label: "Tab 2", url: "/tab2", isVisible: false },
     { label: "Tab 3", url: "/tab3" },
   ];
 
