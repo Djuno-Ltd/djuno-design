@@ -135,59 +135,56 @@ const Tabs: React.FC<React.PropsWithChildren<TabsProps>> = ({
         )}
         style={listStyle}
       >
-        {options
-          .filter((option) => option.isVisible === undefined || option.isVisible === true)
-          .map((option, i) => (
-            <Tab
-              key={i}
-              disabled={option.disabled}
-              data-testid={option.testId}
-              className={({ selected }) =>
-                cn(
-                  'hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed',
-                  {
-                    'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
-                      selected && (!tabType || tabType === 'default'),
-                    'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
-                      tabType === 'creamy',
-                    'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
-                      tabType === 'creamy' && selected,
-                    'dd-text-gray-400 dark:dd-text-slate-400': !selected,
-                  },
-                )
-              }
-            >
-              {(!tabType || tabType === 'default') && (
-                <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
-                  <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
-                </div>
-              )}
-              {tabType === 'creamy' && <>{option.label}</>}
-            </Tab>
-          ))}
+        {visibleTabOptions(options).map((option, i) => (
+          <Tab
+            key={i}
+            disabled={option.disabled}
+            data-testid={option.testId}
+            className={({ selected }) =>
+              cn('hover:dark:dd-text-slate-100 hover:dd-text-gray-900 dd-outline-none disabled:dd-cursor-not-allowed', {
+                'dd-font-semibold dd-bg-primary-50 dark:dd-bg-dark-700 dd-text-blue-500 hover:!dd-text-blue-600 hover:dark:dd-text-blue-600 dd-rounded-lg':
+                  selected && (!tabType || tabType === 'default'),
+                'dd-font-normal dd-text-xs sm:dd-text-sm dd-whitespace-nowrap dd-px-3 dd-h-9 dd-w-full':
+                  tabType === 'creamy',
+                'dd-bg-white dark:dd-bg-dark-900 dark:dd-text-slate-300 dd-rounded-lg':
+                  tabType === 'creamy' && selected,
+                'dd-text-gray-400 dark:dd-text-slate-400': !selected,
+              })
+            }
+          >
+            {(!tabType || tabType === 'default') && (
+              <div className='dd-rounded-md dd-flex dd-items-center dd-transition-background dd-duration-150 dd-justify-center dd-text-center sm:dd-space-x-2 dd-w-full dd-px-3 dd-py-1.5 '>
+                <span className='dd-text-xs sm:dd-text-sm dd-whitespace-nowrap'>{option.label}</span>
+              </div>
+            )}
+            {tabType === 'creamy' && <>{option.label}</>}
+          </Tab>
+        ))}
       </TabList>
       <TabPanels>
-        {options
-          .filter((option) => option.isVisible === undefined || option.isVisible === true)
-          .map((option, i) => (
-            <TabPanel
-              key={i}
-              className={cn('dd-bg-white dark:dd-bg-dark-700 dd-rounded-md', {
-                'dd-py-6': (!tabType || tabType === 'default') && option.element,
-                [panelClassName || '']: panelClassName,
-              })}
-              style={panelStyle}
-            >
-              {option.element}
-            </TabPanel>
-          ))}
+        {visibleTabOptions(options).map((option, i) => (
+          <TabPanel
+            key={i}
+            className={cn('dd-bg-white dark:dd-bg-dark-700 dd-rounded-md', {
+              'dd-py-6': (!tabType || tabType === 'default') && option.element,
+              [panelClassName || '']: panelClassName,
+            })}
+            style={panelStyle}
+          >
+            {option.element}
+          </TabPanel>
+        ))}
       </TabPanels>
     </TabGroup>
   )
 }
 
+export const visibleTabOptions = (options: TabOptions): TabOptions => {
+  return options.filter((option) => option.isVisible === undefined || option.isVisible === true)
+}
+
 export const getTabOptionFromIndex = (index: number, options: TabOptions): TabOption | undefined => {
-  return options[index]
+  return visibleTabOptions(options)[index]
 }
 
 export const getOptionIndexFromUrlString = (url: string, options: TabOptions) => {
