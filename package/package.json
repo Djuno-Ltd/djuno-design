@@ -1,6 +1,6 @@
 {
   "name": "djuno-design",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Djuno design lib for React projects",
   "keywords": [
     "djuno",
@@ -75,7 +75,7 @@
     "typescript-eslint": "^7.0.2"
   },
   "peerDependencies": {
-    "react": "^18.x",
-    "react-dom": "^18.x"
+    "react": ">=18.0.0 <20.0.0",
+    "react-dom": ">=18.0.0 <20.0.0"
   }
 }
