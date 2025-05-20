@@ -27,10 +27,13 @@ export interface AlertProps {
   showIcon?: boolean
   banner?: boolean
   className?: string
+  style?: React.CSSProperties
+  bodyClassName?: string
+  textContainerClassName?: string
   children?: React.ReactNode
   closable?: boolean
   onClose?: () => void
-  style?: React.CSSProperties
+  closeIconClassName?: string
 }
 
 export type AlertTypes = 'neutral' | 'success' | 'info' | 'warning' | 'error'
