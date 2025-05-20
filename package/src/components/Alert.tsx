@@ -107,13 +107,16 @@ const Alert: React.FunctionComponent<AlertProps> = ({
   message,
   description,
   className,
+  style,
+  bodyClassName,
+  textContainerClassName,
   uiType,
   showIcon,
   banner,
   children,
   closable,
   onClose,
-  style,
+  closeIconClassName,
 }) => {
   const [visible, setVisible] = React.useState(true)
 
@@ -139,7 +142,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
       )}
       style={style}
     >
-      <Flex items={description ? 'start' : 'center'} className='w-full '>
+      <Flex items={description ? 'start' : 'center'} className={cn('w-full', bodyClassName)}>
         {showIcon && uiType !== undefined && uiType !== 'neutral' && (
           <div
             className={cn(
@@ -153,7 +156,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({
             {uiType === 'warning' && <WarningIcon />}
           </div>
         )}
-        <Flex direction='col' className='dd-flex-1'>
+        <Flex direction='col' className={cn('dd-flex-1', textContainerClassName)}>
           <Flex items='center'>
             {typeof message === 'string' && (
               <Text size='sm' strong={!!description}>
@@ -173,7 +176,10 @@ const Alert: React.FunctionComponent<AlertProps> = ({
         {closable && (
           <CloseIcon
             onClick={handleCloseClick}
-            className='dd-w-[12px] dd-h-[12px] dd-text-slate-600 hover:dd-text-slate-800 dark:dd-text-slate-400 hover:dark:dd-text-slate-200 hover:dd-scale-125 dd-transition-all dd-duration-300 dd-cursor-pointer'
+            className={cn(
+              'dd-w-[12px] dd-h-[12px] dd-flex-shrink-0 dd-text-slate-600 hover:dd-text-slate-800 dark:dd-text-slate-400 hover:dark:dd-text-slate-200 hover:dd-scale-125 dd-transition-all dd-duration-300 dd-cursor-pointer',
+              closeIconClassName,
+            )}
           />
         )}
       </Flex>
