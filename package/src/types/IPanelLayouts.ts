@@ -46,6 +46,8 @@ export interface PanelLayoutProps extends React.PropsWithChildren {
   contentLoadingContent?: React.ReactNode
   enableGoToTopAfterScroll?: boolean
   enableGoToTopAfterChangeRoute?: boolean
+  contentSectionId?: string
+  contentSectionClassName?: string
 }
 
 export interface PanelHeaderProps extends React.PropsWithChildren {
