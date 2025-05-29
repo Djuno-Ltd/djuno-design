@@ -84,6 +84,8 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
   enableGoToTopAfterScroll = true,
   enableGoToTopAfterChangeRoute = true,
   loadingsContainerStyle,
+  contentSectionId,
+  contentSectionClassName,
 }) => {
   const [isShowSidebar, { hide: handleHideSidebar, show: handleShowSidebar }] = useShow(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -160,7 +162,11 @@ const PanelLayout: React.FC<PanelLayoutProps> = ({
           {renderHeader && renderHeader({ handleShowSidebar, handleHideSidebar, isShowSidebar })}
         </div>
         <div
-          className='dd-max-w-7xl dd-mx-auto dd-min-w-full dd-h-[calc(100%-4rem)] dd-overflow-auto'
+          id={contentSectionId}
+          className={cn(
+            'dd-max-w-7xl dd-mx-auto dd-min-w-full dd-h-[calc(100%-4rem)] dd-overflow-auto dd-main-content-section',
+            contentSectionClassName,
+          )}
           ref={containerRef}
         >
           {children}
